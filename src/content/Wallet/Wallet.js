@@ -2,18 +2,26 @@ import React, { useState, useEffect } from 'react';
 
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
-
-import { getStoredTokens } from '../../services/wallet.service';
 import { getToken } from '../../services/auth.service';
+import { getStoredTokens, getOauthToken } from '../../services/wallet.service';
+
 import { Accordion, AccordionItem, Button } from 'carbon-components-react';
 
+const getTwitterToken = () => {
+    getOauthToken("twitter")
+        .then(response => console.log("twitter", response));
+}
+
+const getGoogleToken = () => {
+    getOauthToken("google")
+        .then(response => console.log("google", response));
+}
 
 const Wallet = () => {
     const [googleToken, setGoogleToken] = useState()
     const [twitterToken, setTwitterToken] = useState();
 
     const AUTH_KEY = getToken()
-
     useEffect(() => {
         getStoredTokens(AUTH_KEY, 'google')
             .then(response => {
@@ -52,6 +60,7 @@ const Wallet = () => {
                                 <br />
                                 <Button
                                     size="sm"
+                                    onClick={() => getGoogleToken()}
                                 >
                                     Store
                                 </Button>
@@ -64,6 +73,7 @@ const Wallet = () => {
                                 <br />
                                 <Button
                                     size="sm"
+                                    onClick={() => getTwitterToken()}
                                 >
                                     Store
                                 </Button>
