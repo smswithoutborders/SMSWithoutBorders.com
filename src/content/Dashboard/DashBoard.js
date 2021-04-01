@@ -7,14 +7,18 @@ import {
   HeaderMenuButton,
   HeaderName,
   HeaderNavigation,
+  HeaderSideNavItems,
   HeaderMenuItem,
   HeaderGlobalBar,
   HeaderGlobalAction,
   SkipToContent,
   HeaderPanel,
   Switcher,
+  SideNav,
+  SideNavItems,
   Modal,
-  ModalBody
+  ModalBody,
+  SwitcherDivider
 } from 'carbon-components-react';
 import {
   Close20,
@@ -61,6 +65,7 @@ const DashBoard = ({ setIsLoggedIn }) => {
                   About
                 </HeaderMenuItem>
               </HeaderNavigation>
+
               <HeaderGlobalBar>
                 <HeaderGlobalAction
                   aria-label="Notifications"
@@ -73,6 +78,27 @@ const DashBoard = ({ setIsLoggedIn }) => {
                   <Logout20 />
                 </HeaderGlobalAction>
               </HeaderGlobalBar>
+              <SideNav aria-label="Side navigation"
+                expanded={isSideNavExpanded}
+                isPersistent={false}>
+                <SideNavItems>
+                  <HeaderSideNavItems>
+                    <HeaderMenuItem element={Link} to="/">
+                      Profile
+                    </HeaderMenuItem>
+                    <SwitcherDivider />
+                    <HeaderMenuItem element={Link} to="/settings">
+                      Settings
+                    </HeaderMenuItem>
+                    <SwitcherDivider />
+
+                    <HeaderMenuItem
+                      onClick={() => setIsAboutOpen(!isAboutOpen)}>
+                      About
+                    </HeaderMenuItem>
+                  </HeaderSideNavItems>
+                </SideNavItems>
+              </SideNav>
               <HeaderPanel aria-label="Header Panel" expanded={isPanelOpen}>
                 <Switcher aria-label="Switcher Container">
                 </Switcher>
