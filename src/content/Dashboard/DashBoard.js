@@ -13,12 +13,10 @@ import {
   HeaderGlobalAction,
   SkipToContent,
   HeaderPanel,
-  Switcher,
   SideNav,
   SideNavItems,
   Modal,
   ModalBody,
-  SwitcherDivider
 } from 'carbon-components-react';
 import {
   Close20,
@@ -30,7 +28,6 @@ import {
 import { Route, Switch, Link } from 'react-router-dom';
 import { logOut } from "../../services/auth.service";
 import Profile from '../Profile';
-import Settings from '../Settings';
 
 
 const DashBoard = ({ setIsLoggedIn }) => {
@@ -57,8 +54,8 @@ const DashBoard = ({ setIsLoggedIn }) => {
                 <HeaderMenuItem element={Link} to="/">
                   Profile
                 </HeaderMenuItem>
-                <HeaderMenuItem element={Link} to="/settings">
-                  Settings
+                <HeaderMenuItem element={Link} to="/wallet">
+                  Wallet
                 </HeaderMenuItem>
                 <HeaderMenuItem
                   onClick={() => setIsAboutOpen(!isAboutOpen)}>
@@ -86,12 +83,9 @@ const DashBoard = ({ setIsLoggedIn }) => {
                     <HeaderMenuItem element={Link} to="/">
                       Profile
                     </HeaderMenuItem>
-                    <SwitcherDivider />
-                    <HeaderMenuItem element={Link} to="/settings">
-                      Settings
+                    <HeaderMenuItem element={Link} to="/wallet">
+                      Wallet
                     </HeaderMenuItem>
-                    <SwitcherDivider />
-
                     <HeaderMenuItem
                       onClick={() => setIsAboutOpen(!isAboutOpen)}>
                       About
@@ -100,8 +94,6 @@ const DashBoard = ({ setIsLoggedIn }) => {
                 </SideNavItems>
               </SideNav>
               <HeaderPanel aria-label="Header Panel" expanded={isPanelOpen}>
-                <Switcher aria-label="Switcher Container">
-                </Switcher>
               </HeaderPanel>
             </Header>
 
@@ -130,7 +122,6 @@ const DashBoard = ({ setIsLoggedIn }) => {
             <Content id="main-content" className="bx--col-lg-16">
               <Switch>
                 <Route exact path="/" component={Profile} />
-                <Route exact path="/settings" component={Settings} />
               </Switch>
             </Content>
           </>
