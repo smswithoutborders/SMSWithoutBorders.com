@@ -11,7 +11,15 @@ Installs all dependencies
 
 ### Set env variables
 
+Create .env file from .env.example
+
+```bash
+cp .env.example .env
+```
+
 The .env file in project root contains all modifiable system variables.
+
+Cloud API URL address can be set here
 
 ### `npm start`
 
@@ -42,8 +50,6 @@ The build is minified and the filenames include the hashes.
 - [Carbon Design Systems](https://carbondesignsystems.com)
 
 - [Carbon Components](https://github.com/carbon-design-system/carbon)
-
-- [Carbon Charts](https://github.com/carbon-design-system/carbon-charts)
 
 - [Carbon Icons](https://github.com/carbon-design-system/carbon-*icons*)
 
