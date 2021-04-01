@@ -28,6 +28,7 @@ import {
 import { Route, Switch, Link } from 'react-router-dom';
 import { logOut } from "../../services/auth.service";
 import Profile from '../Profile';
+import Wallet from '../Wallet';
 
 
 const DashBoard = ({ setIsLoggedIn }) => {
@@ -122,6 +123,7 @@ const DashBoard = ({ setIsLoggedIn }) => {
             <Content id="main-content" className="bx--col-lg-16">
               <Switch>
                 <Route exact path="/" component={Profile} />
+                <Route exact path="/wallet" component={Wallet} />
               </Switch>
             </Content>
           </>
