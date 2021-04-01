@@ -29,7 +29,7 @@ export const setToken = (token) => {
 };
 
 export const removeToken = () => {
-    sessionStorage.removeItem('c-deck-token');
+    sessionStorage.removeItem('Deku-Auth_key');
 }
 
 //setIsLoggedIn is parsed from the app component
