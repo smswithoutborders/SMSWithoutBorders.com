@@ -4,14 +4,29 @@ import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
 import { getToken } from '../../services/auth.service';
 import { getStoredTokens, getPlatformOauthToken } from '../../services/wallet.service';
-import { Accordion, AccordionItem, AccordionSkeleton, Button } from 'carbon-components-react';
+import { Accordion, AccordionItem, AccordionSkeleton, Button, InlineNotification } from 'carbon-components-react';
 import { Save16, TrashCan16 } from "@carbon/icons-react";
 
+let notificationProps = {
+    kind: "info",
+    lowContrast: true,
+    role: 'alert',
+    title: 'Alert',
+    subtitle: 'some message',
+    iconDescription: 'Notification',
+    statusIconDescription: 'Notification status icon',
+    hideCloseButton: false
+};
 
 const Wallet = () => {
 
     const [googleToken, setGoogleToken] = useState();
-    const [alert, setAlert] = useState(true);
+    const [alert, setAlert] = useState(
+        {
+            loading: true,
+            notify: false
+        }
+    );
 
     const AUTH_KEY = getToken()
 
@@ -25,6 +40,37 @@ const Wallet = () => {
             .then(response => {
                 setGoogleToken(response.data.user_token[0]);
                 setAlert(false);
+            })
+            .catch((error) => {
+                // Error 😨
+                if (error.response) {
+                    /*
+                     * The request was made and the server responded with a
+                     * status code that falls out of the range of 2xx
+                     */
+                    notificationProps.kind = "error";
+                    notificationProps.title = "An error occurred";
+                    notificationProps.subtitle = "please try again";
+                    setAlert({ loading: false, notify: true });
+
+                } else if (error.request) {
+                    /*
+                     * The request was made but no response was received, `error.request`
+                     * is an instance of XMLHttpRequest in the browser and an instance
+                     * of http.ClientRequest in Node.js
+                     */
+                    console.log(error.request);
+                    notificationProps.kind = "error";
+                    notificationProps.title = "Network error";
+                    notificationProps.subtitle = "an error occured";
+                    setAlert({ loading: false, notify: true });
+                } else {
+                    // Something happened in setting up the request and triggered an Error
+                    notificationProps.kind = "info";
+                    notificationProps.title = "Tokens";
+                    notificationProps.subtitle = "There are currently no stored tokens";
+                    setAlert({ loading: false, notify: true });
+                }
             });
     }, [AUTH_KEY]);
 
@@ -37,6 +83,12 @@ const Wallet = () => {
                     description="Save your tokens for rainy days"
                     className="bx--col"
                 />
+                {alert.notify ?
+                    <div className="bx--col">
+                        <InlineNotification {...notificationProps} />
+                    </div>
+                    : null
+                }
             </div>
             <div className="bx--row">
                 <div className="bx--col-lg">
@@ -76,7 +128,7 @@ const Wallet = () => {
                     <DashCard>
                         <h4>Saved tokens</h4>
                         <br />
-                        {alert ?
+                        {alert.loading ?
                             <AccordionSkeleton open count={3} />
                             :
                             <>
@@ -115,7 +167,7 @@ const Wallet = () => {
                     </DashCard>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 
