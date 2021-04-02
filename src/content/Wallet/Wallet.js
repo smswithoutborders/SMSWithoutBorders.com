@@ -87,7 +87,9 @@ const Wallet = () => {
                                             <p>{googleToken.platform}</p>
                                             <br />
                                             <h5>Token</h5>
-                                            <p>{googleToken.token.access_token}</p>
+                                            <p style={{ "word-wrap": "break-word" }}>
+                                                {googleToken.token.access_token}
+                                            </p>
                                             <br />
                                             <h5>Expiry date</h5>
                                             <p>{googleToken.token.expiry_date}</p>
@@ -102,7 +104,7 @@ const Wallet = () => {
                                                 renderIcon={TrashCan16}
                                             >
                                                 Delete
-                                  </Button>
+                                            </Button>
                                         </AccordionItem>
                                     </Accordion>
                                     :
@@ -113,7 +115,7 @@ const Wallet = () => {
                     </DashCard>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
