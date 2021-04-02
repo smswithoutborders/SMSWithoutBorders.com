@@ -15,11 +15,6 @@ const Wallet = () => {
 
     const AUTH_KEY = getToken()
 
-    const getTwitterToken = () => {
-        getPlatformOauthToken(AUTH_KEY, "twitter")
-            .then(response => console.log("twitter", response));
-    }
-
     const getGoogleToken = () => {
         getPlatformOauthToken(AUTH_KEY, "google", "gmail")
             .then(response => console.log("google", response));
@@ -67,7 +62,6 @@ const Wallet = () => {
                                 <br />
                                 <Button
                                     renderIcon={Save16}
-                                    onClick={() => getTwitterToken()}
                                     disabled
                                 >
                                     Store

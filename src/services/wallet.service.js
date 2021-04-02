@@ -9,8 +9,8 @@ export const getStoredTokens = (auth_key, provider) => {
     }).then(response => response)
 };
 
-export const getPlatformOauthToken = async (auth_key, provider, platform) => {
-    return await axios.post(API_URL + "/users/tokens", {
+export const getPlatformOauthToken = (auth_key, provider, platform) => {
+    return axios.post(API_URL + "/users/tokens", {
         auth_key: auth_key,
         provider: provider,
         platform: platform
