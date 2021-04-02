@@ -4,14 +4,14 @@ import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
 import { getToken } from '../../services/auth.service';
 import { getStoredTokens, getPlatformOauthToken } from '../../services/wallet.service';
-
-import { Accordion, AccordionItem, Button } from 'carbon-components-react';
+import { Accordion, AccordionItem, AccordionSkeleton, Button } from 'carbon-components-react';
 import { Save16, TrashCan16 } from "@carbon/icons-react";
 
 
 const Wallet = () => {
 
-    const [googleToken, setGoogleToken] = useState()
+    const [googleToken, setGoogleToken] = useState();
+    const [alert, setAlert] = useState(true);
 
     const AUTH_KEY = getToken()
 
@@ -29,10 +29,9 @@ const Wallet = () => {
         getStoredTokens(AUTH_KEY, 'google')
             .then(response => {
                 setGoogleToken(response.data.user_token[0]);
+                setAlert(false);
             });
     }, [AUTH_KEY]);
-
-
 
     return (
         <div className="bx--grid">
@@ -83,34 +82,39 @@ const Wallet = () => {
                     <DashCard>
                         <h4>Saved tokens</h4>
                         <br />
-
-                        {googleToken ?
-                            <Accordion size="xl">
-                                <AccordionItem title="Google">
-                                    <h5>Platform</h5>
-                                    <p>{googleToken.platform}</p>
-                                    <br />
-                                    <h5>Token</h5>
-                                    <p>{googleToken.token.access_token}</p>
-                                    <br />
-                                    <h5>Expiry date</h5>
-                                    <p>{googleToken.token.expiry_date}</p>
-                                    <br />
-                                    <h5>Scopes</h5>
-                                    {googleToken.token.scope.map(scope => (
-                                        <p key={scope}>{scope}</p>
-                                    ))}
-                                    <br />
-                                    <Button
-                                        kind="danger"
-                                        renderIcon={TrashCan16}
-                                    >
-                                        Delete
-                                  </Button>
-                                </AccordionItem>
-                            </Accordion>
+                        {alert ?
+                            <AccordionSkeleton open count={3} />
                             :
-                            <p>No tokens stored</p>
+                            <>
+                                {googleToken ?
+                                    <Accordion size="xl">
+                                        <AccordionItem title="Google">
+                                            <h5>Platform</h5>
+                                            <p>{googleToken.platform}</p>
+                                            <br />
+                                            <h5>Token</h5>
+                                            <p>{googleToken.token.access_token}</p>
+                                            <br />
+                                            <h5>Expiry date</h5>
+                                            <p>{googleToken.token.expiry_date}</p>
+                                            <br />
+                                            <h5>Scopes</h5>
+                                            {googleToken.token.scope.map(scope => (
+                                                <p key={scope}>{scope}</p>
+                                            ))}
+                                            <br />
+                                            <Button
+                                                kind="danger"
+                                                renderIcon={TrashCan16}
+                                            >
+                                                Delete
+                                  </Button>
+                                        </AccordionItem>
+                                    </Accordion>
+                                    :
+                                    <p>No tokens stored</p>
+                                }
+                            </>
                         }
                     </DashCard>
                 </div>
