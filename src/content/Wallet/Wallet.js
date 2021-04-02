@@ -3,25 +3,26 @@ import React, { useState, useEffect } from 'react';
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
 import { getToken } from '../../services/auth.service';
-import { getStoredTokens, getOauthToken } from '../../services/wallet.service';
+import { getStoredTokens, getPlatformOauthToken } from '../../services/wallet.service';
 
 import { Accordion, AccordionItem, Button } from 'carbon-components-react';
 
+const AUTH_KEY = getToken()
+
 const getTwitterToken = () => {
-    getOauthToken("twitter")
+    getPlatformOauthToken(AUTH_KEY, "twitter")
         .then(response => console.log("twitter", response));
 }
 
 const getGoogleToken = () => {
-    getOauthToken("google")
+    getPlatformOauthToken(AUTH_KEY, "google", "gmail")
         .then(response => console.log("google", response));
 }
 
 const Wallet = () => {
     const [googleToken, setGoogleToken] = useState()
-    const [twitterToken, setTwitterToken] = useState();
 
-    const AUTH_KEY = getToken()
+
     useEffect(() => {
         getStoredTokens(AUTH_KEY, 'google')
             .then(response => {
@@ -29,12 +30,12 @@ const Wallet = () => {
                 setGoogleToken(response.data);
             });
 
-        getStoredTokens(AUTH_KEY, 'twitter')
-            .then(response => {
-                console.log('twitter', response.data)
-                setTwitterToken(response.data);
-            });
-    }, [AUTH_KEY]);
+        // getStoredTokens(AUTH_KEY, 'twitter')
+        //     .then(response => {
+        //         console.log('twitter', response.data)
+        //         setTwitterToken(response.data);
+        //     });
+    }, []);
 
     return (
         <div className="bx--grid">
@@ -74,6 +75,7 @@ const Wallet = () => {
                                 <Button
                                     size="sm"
                                     onClick={() => getTwitterToken()}
+                                    disabled
                                 >
                                     Store
                                 </Button>
