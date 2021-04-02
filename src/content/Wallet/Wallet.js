@@ -26,16 +26,12 @@ const Wallet = () => {
     useEffect(() => {
         getStoredTokens(AUTH_KEY, 'google')
             .then(response => {
-                console.log('google', response.data)
-                setGoogleToken(response.data);
+                console.log('google', response.data.user_token[0])
+                setGoogleToken(response.data.user_token[0]);
             });
-
-        // getStoredTokens(AUTH_KEY, 'twitter')
-        //     .then(response => {
-        //         console.log('twitter', response.data)
-        //         setTwitterToken(response.data);
-        //     });
     }, []);
+
+
 
     return (
         <div className="bx--grid">
@@ -88,6 +84,36 @@ const Wallet = () => {
                 <div className="bx--col-lg">
                     <DashCard>
                         <h4>Saved tokens</h4>
+                        <br />
+
+                        {googleToken ?
+                            <Accordion size="xl">
+                                <AccordionItem title={googleToken.provider}>
+                                    <h5>Platform</h5>
+                                    <p>{googleToken.platform}</p>
+                                    <br />
+                                    <h5>Token</h5>
+                                    <p>{googleToken.token.access_token}</p>
+                                    <br />
+                                    <h5>Expiry date</h5>
+                                    <p>{googleToken.token.expiry_date}</p>
+                                    <br />
+                                    <h5>Scopes</h5>
+                                    {googleToken.token.scope.map(scope => (
+                                        <p>{scope}</p>
+                                    ))}
+                                    <br />
+                                    <Button
+                                        size="sm"
+                                        kind="danger"
+                                    >
+                                        Delete
+                                  </Button>
+                                </AccordionItem>
+                            </Accordion>
+                            :
+                            <p>No tokens stored</p>
+                        }
                     </DashCard>
                 </div>
             </div>
