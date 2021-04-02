@@ -6,30 +6,31 @@ import { getToken } from '../../services/auth.service';
 import { getStoredTokens, getPlatformOauthToken } from '../../services/wallet.service';
 
 import { Accordion, AccordionItem, Button } from 'carbon-components-react';
+import { Save16, TrashCan16 } from "@carbon/icons-react";
 
-const AUTH_KEY = getToken()
-
-const getTwitterToken = () => {
-    getPlatformOauthToken(AUTH_KEY, "twitter")
-        .then(response => console.log("twitter", response));
-}
-
-const getGoogleToken = () => {
-    getPlatformOauthToken(AUTH_KEY, "google", "gmail")
-        .then(response => console.log("google", response));
-}
 
 const Wallet = () => {
+
     const [googleToken, setGoogleToken] = useState()
 
+    const AUTH_KEY = getToken()
+
+    const getTwitterToken = () => {
+        getPlatformOauthToken(AUTH_KEY, "twitter")
+            .then(response => console.log("twitter", response));
+    }
+
+    const getGoogleToken = () => {
+        getPlatformOauthToken(AUTH_KEY, "google", "gmail")
+            .then(response => console.log("google", response));
+    }
 
     useEffect(() => {
         getStoredTokens(AUTH_KEY, 'google')
             .then(response => {
-                console.log('google', response.data.user_token[0])
                 setGoogleToken(response.data.user_token[0]);
             });
-    }, []);
+    }, [AUTH_KEY]);
 
 
 
@@ -56,20 +57,17 @@ const Wallet = () => {
                                 <p>You can define how this token will be used by setting the scopes of access</p>
                                 <br />
                                 <Button
-                                    size="sm"
+                                    renderIcon={Save16}
                                     onClick={() => getGoogleToken()}
                                 >
                                     Store
                                 </Button>
                             </AccordionItem>
                             <AccordionItem title="Twitter">
-                                <p>
-                                    Store your twitter token which will be used for authentication on your behalf in the event of an internet blackout.
-
-                                </p>
+                                <p>Store your twitter token which will be used for authentication on your behalf in the event of an internet blackout.</p>
                                 <br />
                                 <Button
-                                    size="sm"
+                                    renderIcon={Save16}
                                     onClick={() => getTwitterToken()}
                                     disabled
                                 >
@@ -88,7 +86,7 @@ const Wallet = () => {
 
                         {googleToken ?
                             <Accordion size="xl">
-                                <AccordionItem title={googleToken.provider}>
+                                <AccordionItem title="Google">
                                     <h5>Platform</h5>
                                     <p>{googleToken.platform}</p>
                                     <br />
@@ -100,12 +98,12 @@ const Wallet = () => {
                                     <br />
                                     <h5>Scopes</h5>
                                     {googleToken.token.scope.map(scope => (
-                                        <p>{scope}</p>
+                                        <p key={scope}>{scope}</p>
                                     ))}
                                     <br />
                                     <Button
-                                        size="sm"
                                         kind="danger"
+                                        renderIcon={TrashCan16}
                                     >
                                         Delete
                                   </Button>
