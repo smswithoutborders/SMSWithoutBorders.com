@@ -2,6 +2,12 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+export const getProviders = (auth_key) => {
+    return axios.post(API_URL + "/users/providers", {
+        auth_key: auth_key
+    }).then(response => response)
+}
+
 export const getStoredTokens = (auth_key, provider) => {
     return axios.post(API_URL + "/users/stored_tokens", {
         auth_key: auth_key,
