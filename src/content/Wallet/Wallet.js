@@ -33,7 +33,37 @@ const Wallet = () => {
 
     const getPlatformToken = (provider, platform) => {
         getPlatformOauthToken(AUTH_KEY, provider, platform)
-            .then(response => console.log(platform, response));
+            .then(response => console.log(platform, response))
+            .catch((error) => {
+                if (error.response) {
+                    /*
+                     * The request was made and the server responded with a
+                     * status code that falls out of the range of 2xx
+                     */
+                    notificationProps.kind = "error";
+                    notificationProps.title = "An error occurred";
+                    notificationProps.subtitle = "please try again";
+                    setAlert({ loading: false, notify: true });
+
+                } else if (error.request) {
+                    /*
+                     * The request was made but no response was received, `error.request`
+                     * is an instance of XMLHttpRequest in the browser and an instance
+                     * of http.ClientRequest in Node.js
+                     */
+                    console.log(error.request);
+                    notificationProps.kind = "error";
+                    notificationProps.title = "Oops sorry";
+                    notificationProps.subtitle = "Its an issue on our end. Please try again";
+                    setAlert({ loading: false, notify: true });
+                } else {
+                    // Something happened in setting up the request and triggered an Error
+                    notificationProps.kind = "info";
+                    notificationProps.title = "Tokens";
+                    notificationProps.subtitle = "There are currently no stored tokens";
+                    setAlert({ loading: false, notify: true });
+                }
+            });
     }
 
     useEffect(() => {
@@ -83,8 +113,6 @@ const Wallet = () => {
 
     }, [AUTH_KEY]);
 
-
-
     return (
         <div className="bx--grid">
             <div className="bx--row">
@@ -127,7 +155,7 @@ const Wallet = () => {
                                                         <Button
                                                             size="sm"
                                                             renderIcon={Save16}
-                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                            onClick={() => getPlatformToken(provider.provider,)}
                                                         >
                                                             Store
                                                         </Button>
