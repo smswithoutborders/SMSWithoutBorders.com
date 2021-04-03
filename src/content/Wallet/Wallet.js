@@ -127,7 +127,7 @@ const Wallet = () => {
                                                         <Button
                                                             size="sm"
                                                             renderIcon={Save16}
-                                                            onClick={() => getPlatformToken(provider.provider,)}
+                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
                                                         >
                                                             Store
                                                         </Button>
