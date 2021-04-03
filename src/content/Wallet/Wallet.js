@@ -131,13 +131,15 @@ const Wallet = () => {
     const handleRevokeToken = (provider, platform) => {
         revokeToken(AUTH_KEY, password, provider, platform)
             .then(response => {
-                console.log(response.data);
                 if (response.status === 200) {
                     notificationProps.kind = "success";
                     notificationProps.title = "Success";
                     notificationProps.subtitle = "Token deleted successfully";
                     setTokens(0);
                     setAlert({ loading: false, notify: true });
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500)
                 }
             })
             .catch((error) => {
@@ -167,7 +169,7 @@ const Wallet = () => {
                     notificationProps.subtitle = "Its an issue on our end. Please reload this page and try again";
                     setAlert({ loading: false, notify: true });
                 } else {
-                    // Something happened in setting up the request and triggered an Error
+                    // Something hinfoappened in setting up the request and triggered an Error
                     notificationProps.kind = "error";
                     notificationProps.title = "An error occurred";
                     notificationProps.subtitle = "please try again";
