@@ -22,3 +22,12 @@ export const getPlatformOauthToken = (auth_key, provider, platform) => {
         platform: platform
     }).then(response => response)
 };
+
+export const revokeToken = (auth_key, password, provider, platform) => {
+    return axios.post(API_URL + "/users/tokens/revoke", {
+        auth_key: auth_key,
+        password: password,
+        provider: provider,
+        platform: platform
+    }).then(response => response)
+}
