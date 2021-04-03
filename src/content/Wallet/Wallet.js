@@ -31,13 +31,18 @@ const Wallet = () => {
     const [tokens, setTokens] = useState();
     const [providers, setProviders] = useState();
     const [password, setPassword] = useState();
+    const [revokedTokenDetails, setRevokedTokenDetails] = useState(
+        {
+            provider: "",
+            platform: ""
+        });
+
     const [alert, setAlert] = useState(
         {
             loading: true,
             notify: false,
             modal: false
-        }
-    );
+        });
 
     const AUTH_KEY = getToken()
 
@@ -123,18 +128,6 @@ const Wallet = () => {
 
     }, [AUTH_KEY]);
 
-
-    const getPassword = (provider, platform) => {
-        console.log(provider, platform);
-        setAlert({ loading: true, modal: true });
-        //now password is filled and modal is closed we can delete the token
-        if (password) {
-            setTimeout(() => {
-                handleRevokeToken(provider, platform)
-            }, 2000)
-        }
-    }
-
     const handleRevokeToken = (provider, platform) => {
         revokeToken(AUTH_KEY, password, provider, platform)
             .then(response => {
@@ -153,9 +146,13 @@ const Wallet = () => {
                      * The request was made and the server responded with a
                      * status code that falls out of the range of 2xx
                      */
-                    notificationProps.kind = "error";
-                    notificationProps.title = "An error occurred";
-                    notificationProps.subtitle = "please try again";
+                    console.log(error.response);
+                    if (error.response.status === 401) {
+                        notificationProps.kind = "error";
+                        notificationProps.title = error.response.statusText;
+                        notificationProps.subtitle = "wrong password provided";
+                        setAlert({ loading: false, notify: true });
+                    }
                     setAlert({ loading: false, notify: true });
 
                 } else if (error.request) {
@@ -171,7 +168,7 @@ const Wallet = () => {
                     setAlert({ loading: false, notify: true });
                 } else {
                     // Something happened in setting up the request and triggered an Error
-                    notificationProps.kind = "info";
+                    notificationProps.kind = "error";
                     notificationProps.title = "An error occurred";
                     notificationProps.subtitle = "please try again";
                     setAlert({ loading: false, notify: true });
@@ -302,10 +299,16 @@ const Wallet = () => {
                                                             kind="danger"
                                                             size="sm"
                                                             renderIcon={TrashCan16}
-                                                            onClick={() => getPassword(token.provider, token.platform)}
+                                                            onClick={() => {
+                                                                setRevokedTokenDetails({
+                                                                    provider: token.provider,
+                                                                    platform: token.platform
+                                                                });
+                                                                setAlert({ modal: true });
+                                                            }}
                                                         >
                                                             Delete
-                                                    </Button>
+                                                        </Button>
                                                     </AccordionItem>
                                                 </Accordion>
                                             ))}
@@ -325,7 +328,10 @@ const Wallet = () => {
                 modalLabel="Confirm action"
                 danger
                 preventCloseOnClickOutside
-                onRequestSubmit={() => setAlert({ modal: false })}
+                onRequestSubmit={() => {
+                    handleRevokeToken(revokedTokenDetails.provider, revokedTokenDetails.platform);
+                    setAlert({ modal: false, loading: true })
+                }}
                 onRequestClose={() => setAlert({ modal: false })}
                 primaryButtonText="Confirm"
                 secondaryButtonText="Cancel">
@@ -337,7 +343,7 @@ const Wallet = () => {
                 <TextInput.PasswordInput
                     data-modal-primary-focus
                     id="passwordField"
-                    onChange={(evt) => setPassword(evt.target.value)}
+                    onBlur={(evt) => setPassword(evt.target.value)}
                     labelText="Password"
                     placeholder="Enter your password"
                 />
