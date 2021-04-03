@@ -142,8 +142,8 @@ const Wallet = () => {
                 if (response.status === 200) {
                     notificationProps.kind = "success";
                     notificationProps.title = "Success";
-                    notificationProps.subtitle = response.data.message;
-                    setTokens([]);
+                    notificationProps.subtitle = "Token deleted successfully";
+                    setTokens(0);
                     setAlert({ loading: false, notify: true });
                 }
             })
