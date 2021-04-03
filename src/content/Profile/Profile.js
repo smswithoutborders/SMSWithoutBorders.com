@@ -7,7 +7,7 @@ const Profile = () => {
             <div className="bx--grid">
                 <div className="bx--row">
                     <DashHeader
-                        title="User"
+                        title="Your"
                         subtitle="Profile"
                         description="Here are your account details"
                         className="bx--col"
