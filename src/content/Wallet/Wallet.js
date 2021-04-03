@@ -139,7 +139,7 @@ const Wallet = () => {
                     setAlert({ loading: false, notify: true });
                     setTimeout(() => {
                         window.location.reload();
-                    }, 500)
+                    }, 1000)
                 }
             })
             .catch((error) => {
@@ -201,83 +201,90 @@ const Wallet = () => {
                         <DashCard>
                             <h4>Providers</h4>
                             <br />
-                            {providers ?
+                            {alert.loading ?
+                                <AccordionSkeleton open count={3} />
+                                :
                                 <>
-                                    {providers.map(provider => {
-                                        switch (provider.provider) {
-                                            case "google":
-                                                return (
-                                                    <Accordion size="xl" key={provider.provider}>
-                                                        <AccordionItem title={provider.provider}>
-                                                            <p>Store your Google token which will be used for authentication on your behalf in the event
+                                    {providers ?
+                                        <>
+                                            {providers.map(provider => {
+                                                switch (provider.provider) {
+                                                    case "google":
+                                                        return (
+                                                            <Accordion size="xl" key={provider.provider}>
+                                                                <AccordionItem title={provider.provider}>
+                                                                    <p>Store your Google token which will be used for authentication on your behalf in the event
                                                             of an internet shutdown.</p>
-                                                            <br />
-                                                            <p>You can define how this token will be used by setting the scopes of access</p>
-                                                            <br />
+                                                                    <br />
+                                                                    <p>You can define how this token will be used by setting the scopes of access</p>
+                                                                    <br />
 
-                                                            <h5>Platform</h5>
-                                                            <p>{provider.platform}</p>
-                                                            <br />
+                                                                    <h5>Platform</h5>
+                                                                    <p>{provider.platform}</p>
+                                                                    <br />
 
-                                                            <Button
-                                                                size="sm"
-                                                                renderIcon={Save16}
-                                                                onClick={() => getPlatformToken(provider.provider, provider.platform)}
-                                                            >
-                                                                Store
+                                                                    <Button
+                                                                        size="sm"
+                                                                        renderIcon={Save16}
+                                                                        onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                                    >
+                                                                        Store
                                                         </Button>
-                                                        </AccordionItem>
-                                                    </Accordion>
-                                                );
-                                            case "twitter":
-                                                return (
-                                                    <Accordion size="xl" key={provider.provider}>
-                                                        <AccordionItem title={provider.provider}>
-                                                            <p>Store your Twitter token which will be used for authentication on your behalf in the event
+                                                                </AccordionItem>
+                                                            </Accordion>
+                                                        );
+                                                    case "twitter":
+                                                        return (
+                                                            <Accordion size="xl" key={provider.provider}>
+                                                                <AccordionItem title={provider.provider}>
+                                                                    <p>Store your Twitter token which will be used for authentication on your behalf in the event
                                                             of an internet shutdown.</p>
-                                                            <br />
-                                                            <p>You can define how this token will be used by setting the scopes of access</p>
-                                                            <br />
+                                                                    <br />
+                                                                    <p>You can define how this token will be used by setting the scopes of access</p>
+                                                                    <br />
 
-                                                            <h5>Platform</h5>
-                                                            <p>{provider.platform}</p>
-                                                            <br />
+                                                                    <h5>Platform</h5>
+                                                                    <p>{provider.platform}</p>
+                                                                    <br />
 
-                                                            <Button
-                                                                size="sm"
-                                                                renderIcon={Save16}
-                                                                onClick={() => getPlatformToken(provider.provider, provider.platform)}
-                                                            >
-                                                                Store
+                                                                    <Button
+                                                                        size="sm"
+                                                                        renderIcon={Save16}
+                                                                        onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                                    >
+                                                                        Store
                                                         </Button>
-                                                        </AccordionItem>
-                                                    </Accordion>
-                                                );
-                                                break;
-                                            default:
-                                                return (
-                                                    <Accordion size="xl" key={provider.provider}>
-                                                        <AccordionItem title={provider.provider}>
-                                                            <h5>Platform</h5>
-                                                            <p>{provider.platform}</p>
-                                                            <br />
+                                                                </AccordionItem>
+                                                            </Accordion>
+                                                        );
+                                                        break;
+                                                    default:
+                                                        return (
+                                                            <Accordion size="xl" key={provider.provider}>
+                                                                <AccordionItem title={provider.provider}>
+                                                                    <h5>Platform</h5>
+                                                                    <p>{provider.platform}</p>
+                                                                    <br />
 
-                                                            <Button
-                                                                size="sm"
-                                                                renderIcon={Save16}
-                                                                onClick={() => getPlatformToken(provider.provider, provider.platform)}
-                                                            >
-                                                                Store
+                                                                    <Button
+                                                                        size="sm"
+                                                                        renderIcon={Save16}
+                                                                        onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                                    >
+                                                                        Store
                                                         </Button>
-                                                        </AccordionItem>
-                                                    </Accordion>
-                                                );
-                                        }
-                                    })
+                                                                </AccordionItem>
+                                                            </Accordion>
+                                                        );
+                                                }
+                                            })
+                                            }
+                                        </>
+                                        :
+                                        <p>No available providers</p>
                                     }
                                 </>
-                                :
-                                <p>No available providers</p>}
+                            }
                         </DashCard>
                     </div>
 
@@ -316,7 +323,7 @@ const Wallet = () => {
                                             ))}
                                         </>
                                         :
-                                        <p>No tokens stored</p>
+                                        <p>No stored tokens</p>
                                     }
                                 </>
                             }
