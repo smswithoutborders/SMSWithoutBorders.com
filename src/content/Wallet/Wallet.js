@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import React, { useState, useEffect } from 'react';
 
 import DashHeader from '../../components/DashHeader';
@@ -31,9 +32,9 @@ const Wallet = () => {
 
     const AUTH_KEY = getToken()
 
-    const getGoogleToken = () => {
-        getPlatformOauthToken(AUTH_KEY, "google", "gmail")
-            .then(response => console.log("google", response));
+    const getPlatformToken = (provider, platform) => {
+        getPlatformOauthToken(AUTH_KEY, provider, platform)
+            .then(response => console.log(platform, response));
     }
 
     useEffect(() => {
@@ -127,13 +128,14 @@ const Wallet = () => {
                                                         <Button
                                                             size="sm"
                                                             renderIcon={Save16}
-                                                            onClick={() => getGoogleToken()}
+                                                            onClick={() => getPlatformToken(provider.provider,)}
                                                         >
                                                             Store
                                                         </Button>
                                                     </AccordionItem>
                                                 </Accordion>
                                             );
+                                            break;
                                         default:
                                             return <p>No available providers</p>
                                     }
