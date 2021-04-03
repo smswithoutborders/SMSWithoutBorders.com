@@ -126,19 +126,26 @@ const Wallet = () => {
 
     const getPassword = (provider, platform) => {
         console.log(provider, platform);
-        setAlert({ modal: true });
+        setAlert({ loading: true, modal: true });
         //now password is filled and modal is closed we can delete the token
         if (password) {
             setTimeout(() => {
                 handleRevokeToken(provider, platform)
-            }, 3000)
+            }, 2000)
         }
     }
 
     const handleRevokeToken = (provider, platform) => {
         revokeToken(AUTH_KEY, password, provider, platform)
             .then(response => {
-                console.log(response);
+                console.log(response.data);
+                if (response.status === 200) {
+                    notificationProps.kind = "success";
+                    notificationProps.title = "Success";
+                    notificationProps.subtitle = response.data.message;
+                    setTokens([]);
+                    setAlert({ loading: false, notify: true });
+                }
             })
             .catch((error) => {
                 if (error.response) {
