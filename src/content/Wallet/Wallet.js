@@ -135,7 +135,6 @@ const Wallet = () => {
                                                 </Accordion>
                                             );
                                         case "twitter":
-                                        default:
                                             return (
                                                 <Accordion size="xl" key={provider.provider}>
                                                     <AccordionItem title={provider.provider}>
@@ -152,7 +151,26 @@ const Wallet = () => {
                                                         <Button
                                                             size="sm"
                                                             renderIcon={Save16}
-                                                            onClick={() => getPlatformToken(provider.provider,)}
+                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                        >
+                                                            Store
+                                                        </Button>
+                                                    </AccordionItem>
+                                                </Accordion>
+                                            );
+                                            break;
+                                        default:
+                                            return (
+                                                <Accordion size="xl" key={provider.provider}>
+                                                    <AccordionItem title={provider.provider}>
+                                                        <h5>Platform</h5>
+                                                        <p>{provider.platform}</p>
+                                                        <br />
+
+                                                        <Button
+                                                            size="sm"
+                                                            renderIcon={Save16}
+                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
                                                         >
                                                             Store
                                                         </Button>
