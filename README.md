@@ -14,7 +14,7 @@ Installs all dependencies
 Create .env file from .env.example
 
 ```bash
-cp .env.example .env
+cp env.example .env
 ```
 
 The .env file in project root contains all modifiable system variables.
