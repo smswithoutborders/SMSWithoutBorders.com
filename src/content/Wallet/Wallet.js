@@ -1,4 +1,3 @@
-/* eslint-disable no-unreachable */
 import React, { useState, useEffect } from 'react';
 
 import DashHeader from '../../components/DashHeader';
@@ -135,16 +134,37 @@ const Wallet = () => {
                                                     </AccordionItem>
                                                 </Accordion>
                                             );
-                                            break;
+                                        case "twitter":
                                         default:
-                                            return <p>No available providers</p>
+                                            return (
+                                                <Accordion size="xl" key={provider.provider}>
+                                                    <AccordionItem title={provider.provider}>
+                                                        <p>Store your Twitter token which will be used for authentication on your behalf in the event
+                                                            of an internet shutdown.</p>
+                                                        <br />
+                                                        <p>You can define how this token will be used by setting the scopes of access</p>
+                                                        <br />
+
+                                                        <h5>Platform</h5>
+                                                        <p>{provider.platform}</p>
+                                                        <br />
+
+                                                        <Button
+                                                            size="sm"
+                                                            renderIcon={Save16}
+                                                            onClick={() => getPlatformToken(provider.provider,)}
+                                                        >
+                                                            Store
+                                                        </Button>
+                                                    </AccordionItem>
+                                                </Accordion>
+                                            );
                                     }
                                 })
                                 }
                             </>
                             :
-                            <p>No available providers</p>
-                        }
+                            <p>No available providers</p>}
                     </DashCard>
                 </div>
 
@@ -170,7 +190,7 @@ const Wallet = () => {
                                                         renderIcon={TrashCan16}
                                                     >
                                                         Delete
-                                            </Button>
+                                                    </Button>
                                                 </AccordionItem>
                                             </Accordion>
                                         ))}
