@@ -8,8 +8,8 @@ let notificationProps = {
     kind: "info",
     lowContrast: true,
     role: 'alert',
-    title: 'Alert',
-    subtitle: 'This is something you should know about .',
+    title: 'Missing configuration',
+    subtitle: 'You do not have a cloud API specified in your .env file.',
     iconDescription: 'Notification',
     statusIconDescription: 'Notification status icon',
     hideCloseButton: false
