@@ -316,7 +316,7 @@ const Wallet = () => {
                                                                 setAlert({ modal: true });
                                                             }}
                                                         >
-                                                            Delete
+                                                            Revoke
                                                         </Button>
                                                     </AccordionItem>
                                                 </Accordion>
