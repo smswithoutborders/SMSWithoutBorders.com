@@ -257,6 +257,7 @@ const Wallet = () => {
                                                                 </AccordionItem>
                                                             </Accordion>
                                                         );
+                                                        // eslint-disable-next-line no-unreachable
                                                         break;
                                                     default:
                                                         return (
