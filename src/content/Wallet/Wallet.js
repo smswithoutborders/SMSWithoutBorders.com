@@ -81,6 +81,21 @@ const Wallet = () => {
             });
     }
 
+    const getGoogleToken = () => {
+        window.auth2.grantOfflineAccess()
+            .then(response => console.log(response));
+    }
+
+    const initGoogleAPI = () => {
+        let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+        window.gapi.load('auth2', function () {
+            window.auth2 = window.gapi.auth2.init({
+                client_id: CLIENT_ID,
+                // scope: 'gmail read'
+            });
+        });
+    }
+
     useEffect(() => {
         getProviders(AUTH_KEY)
             .then(response => {
@@ -125,6 +140,12 @@ const Wallet = () => {
                     setAlert({ loading: false, notify: true });
                 }
             });
+
+            //give the google client some time to load
+            setTimeout(() => {
+                initGoogleAPI();
+            }, 3000)
+        
 
     }, [AUTH_KEY]);
 
@@ -229,7 +250,15 @@ const Wallet = () => {
                                                                         onClick={() => getPlatformToken(provider.provider, provider.platform)}
                                                                     >
                                                                         Store
-                                                        </Button>
+                                                                    </Button>
+                                                                    <Button
+                                                                        size="sm"
+                                                                        kind="secondary"
+                                                                        renderIcon={Save16}
+                                                                        onClick={() => getGoogleToken()}
+                                                                    >
+                                                                        Store
+                                                                    </Button>
                                                                 </AccordionItem>
                                                             </Accordion>
                                                         );
