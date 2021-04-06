@@ -87,9 +87,7 @@ const Wallet = () => {
     const getGoogleToken = () => {
         window.auth2.grantOfflineAccess()
             .then(response => {
-                console.log(response)
                 let auth_data = window.auth2.currentUser.get().getAuthResponse();
-
                 getGoogleOauthToken(AUTH_KEY, auth_data)
                     .then(response => console.log(response))
             });
