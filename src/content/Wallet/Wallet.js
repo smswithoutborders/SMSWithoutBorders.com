@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
 import { getToken } from '../../services/auth.service';
-import { getProviders, getPlatformOauthToken, revokeToken } from '../../services/wallet.service';
+import { getProviders, getPlatformOauthToken, getGoogleOauthToken, revokeToken } from '../../services/wallet.service';
 import {
     Accordion,
     AccordionItem,
@@ -86,15 +86,19 @@ const Wallet = () => {
 
     const getGoogleToken = () => {
         window.auth2.grantOfflineAccess()
-            .then(response => console.log(response));
-    }
+            .then(response => {
+                console.log(response)
+                getGoogleOauthToken(AUTH_KEY, response)
+                    .then(response => console.log(response))
+            });
+    };
 
     const initGoogleAPI = () => {
         let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
         window.gapi.load('auth2', function () {
             window.auth2 = window.gapi.auth2.init({
                 client_id: CLIENT_ID,
-                // scope: 'gmail read'
+                scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile",
             });
         });
         // when auth2 is loaded, enable add token button
