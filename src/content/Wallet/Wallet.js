@@ -88,20 +88,10 @@ const Wallet = () => {
         window.auth2.grantOfflineAccess()
             .then(response => {
                 console.log(response)
-                // getGoogleOauthToken(AUTH_KEY, response)
-                //     .then(response => console.log(response))
-                if (window.auth2.isSignedIn.get()) {
-                    var profile = window.auth2.currentUser.get().getBasicProfile();
-                    console.log('ID: ' + profile.getId());
-                    console.log('Full Name: ' + profile.getName());
-                    console.log('Given Name: ' + profile.getGivenName());
-                    console.log('Family Name: ' + profile.getFamilyName());
-                    console.log('Image URL: ' + profile.getImageUrl());
-                    console.log('Email: ' + profile.getEmail());
-                }
+                let auth_data = window.auth2.currentUser.get().getAuthResponse();
 
-                let id_token = window.auth2.currentUser.get().getAuthResponse();
-                console.log("id-token", id_token);
+                getGoogleOauthToken(AUTH_KEY, auth_data)
+                    .then(response => console.log(response))
             });
     };
 
