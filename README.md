@@ -19,7 +19,8 @@ cp env.example .env
 
 The .env file in project root contains all modifiable system variables.
 
-Cloud API URL address can be set here
+Cloud API URL address and Google Client ID can be set here
+
 
 ### `npm start`
 
