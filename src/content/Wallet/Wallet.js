@@ -10,6 +10,7 @@ import {
     AccordionSkeleton,
     Button,
     InlineNotification,
+    InlineLoading,
     Modal,
     TextInput
 } from 'carbon-components-react';
@@ -43,6 +44,8 @@ const Wallet = () => {
             notify: false,
             modal: false
         });
+
+    const [isAuthLoaded, setIsAuthLoaded] = useState(false);
 
     const AUTH_KEY = getToken()
 
@@ -94,6 +97,8 @@ const Wallet = () => {
                 // scope: 'gmail read'
             });
         });
+        // when auth2 is loaded, enable add token button
+        setIsAuthLoaded(true);
     }
 
     useEffect(() => {
@@ -235,7 +240,7 @@ const Wallet = () => {
                                                             <Accordion size="xl" key={provider.provider}>
                                                                 <AccordionItem title={provider.provider}>
                                                                     <p>Store your Google token which will be used for authentication on your behalf in the event
-                                                            of an internet shutdown.</p>
+                                                                        of an internet shutdown.</p>
                                                                     <br />
                                                                     <p>You can define how this token will be used by setting the scopes of access</p>
                                                                     <br />
@@ -243,15 +248,21 @@ const Wallet = () => {
                                                                     <h5>Platform</h5>
                                                                     <p>{provider.platform}</p>
                                                                     <br />
-
-                                                                    <Button
-                                                                        size="sm"
-                                                                        kind="primary"
-                                                                        renderIcon={Save16}
-                                                                        onClick={() => getGoogleToken()}
-                                                                    >
-                                                                        Store
-                                                                    </Button>
+                                                                    {isAuthLoaded ?
+                                                                        <Button
+                                                                            size="sm"
+                                                                            kind="primary"
+                                                                            renderIcon={Save16}
+                                                                            onClick={() => getGoogleToken()}
+                                                                        >
+                                                                            Store
+                                                                        </Button>
+                                                                        :
+                                                                        <InlineLoading
+                                                                            description="Loading"
+                                                                            status="active"
+                                                                        />
+                                                                    }
                                                                 </AccordionItem>
                                                             </Accordion>
                                                         );
@@ -260,7 +271,7 @@ const Wallet = () => {
                                                             <Accordion size="xl" key={provider.provider}>
                                                                 <AccordionItem title={provider.provider}>
                                                                     <p>Store your Twitter token which will be used for authentication on your behalf in the event
-                                                            of an internet shutdown.</p>
+                                                                        of an internet shutdown.</p>
                                                                     <br />
                                                                     <p>You can define how this token will be used by setting the scopes of access</p>
                                                                     <br />
