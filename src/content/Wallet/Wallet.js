@@ -141,11 +141,11 @@ const Wallet = () => {
                 }
             });
 
-            //give the google client some time to load
-            setTimeout(() => {
-                initGoogleAPI();
-            }, 3000)
-        
+        //give the google client some time to load
+        setTimeout(() => {
+            initGoogleAPI();
+        }, 3000)
+
 
     }, [AUTH_KEY]);
 
@@ -246,14 +246,7 @@ const Wallet = () => {
 
                                                                     <Button
                                                                         size="sm"
-                                                                        renderIcon={Save16}
-                                                                        onClick={() => getPlatformToken(provider.provider, provider.platform)}
-                                                                    >
-                                                                        Store
-                                                                    </Button>
-                                                                    <Button
-                                                                        size="sm"
-                                                                        kind="secondary"
+                                                                        kind="primary"
                                                                         renderIcon={Save16}
                                                                         onClick={() => getGoogleToken()}
                                                                     >
