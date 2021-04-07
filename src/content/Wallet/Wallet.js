@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
-import { getToken } from '../../services/auth.service';
+import { getToken, setToken, removeToken } from '../../services/auth.service';
 import { getProviders, getPlatformOauthToken, saveGoogleOauthToken, revokeToken } from '../../services/wallet.service';
 import {
     Accordion,
@@ -224,11 +224,18 @@ const Wallet = () => {
         }
         const { data } = event; //extract data sent from popup
         if (data.source === 'smswithoutborders') {
-            console.log(data);
             saveGoogleOauthToken(AUTH_KEY, "google", data.code)
                 .then(response => {
                     console.log(response);
-                    setAlert({ loading: false });
+                    notificationProps.kind = "success";
+                    notificationProps.title = "Token";
+                    notificationProps.subtitle = "Token stored successfully";
+                    setAlert({ loading: false, notify: true });
+                    removeToken();
+                    setToken(response.data.auth_key);
+                    setAlert({ loading: false, notify: false });
+                    window.location.reload();
+
                 })
         }
 
