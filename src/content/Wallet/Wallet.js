@@ -51,7 +51,10 @@ const Wallet = () => {
 
     const getPlatformToken = (provider, platform) => {
         getPlatformOauthToken(AUTH_KEY, provider, platform)
-            .then(response => console.log(platform, response))
+            .then(response => {
+                console.log(platform, response)
+                window.open(response.data.url);
+            })
             .catch((error) => {
                 if (error.response) {
                     /*
@@ -260,7 +263,8 @@ const Wallet = () => {
                                                                             size="sm"
                                                                             kind="primary"
                                                                             renderIcon={Save16}
-                                                                            onClick={() => getGoogleToken()}
+                                                                            // onClick={() => getGoogleToken()}
+                                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
                                                                         >
                                                                             Store
                                                                         </Button>
