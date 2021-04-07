@@ -88,6 +88,7 @@ const Wallet = () => {
         window.auth2.grantOfflineAccess()
             .then(response => {
                 let auth_data = window.auth2.currentUser.get().getAuthResponse();
+                console.log(auth_data);
                 getGoogleOauthToken(AUTH_KEY, auth_data)
                     .then(response => console.log(response))
             });
@@ -98,6 +99,8 @@ const Wallet = () => {
         window.gapi.load('auth2', function () {
             window.auth2 = window.gapi.auth2.init({
                 client_id: CLIENT_ID,
+                access_type: 'offline',
+                prompt: 'consent',
                 scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile",
             });
         });
