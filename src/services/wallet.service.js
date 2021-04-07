@@ -38,15 +38,7 @@ export const getGoogleOauthToken = (auth_key, data) => {
         auth_key: auth_key
     }).then(response => response)
 }
-export const getGoogleOauthRefreshToken = (access_token) => {
-    return axios.get("https://www.googleapis.com/oauth2/v4/token", {
-        headers: {
-            "Authorization": `Bearer ${access_token}`
-        }
-    }).then(response => response)
-}
-
-export const sendGoogleAuthCode = (auth_key, provider, code) => {
+export const saveGoogleOauthToken = (auth_key, provider, code) => {
     return axios.post(API_URL + "/google/auth/success", {
         auth_key: auth_key,
         provider: provider,
