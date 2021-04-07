@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
 import { getToken } from '../../services/auth.service';
-import { getProviders, getPlatformOauthToken, getGoogleOauthToken, sendGoogleAuthCode, revokeToken } from '../../services/wallet.service';
+import { getProviders, getPlatformOauthToken, saveGoogleOauthToken, revokeToken } from '../../services/wallet.service';
 import {
     Accordion,
     AccordionItem,
@@ -45,63 +45,9 @@ const Wallet = () => {
             modal: false
         });
 
-    const [isAuthLoaded, setIsAuthLoaded] = useState(false);
-
     const AUTH_KEY = getToken()
 
-    const getPlatformToken = (provider, platform) => {
-        getPlatformOauthToken(AUTH_KEY, provider, platform)
-            .then(response => {
-                openSignInWindow(response.data.url, "Save token");
-                // sendGoogleAuthCode(AUTH_KEY, provider, "4/0AY0e-g7zmiIh94BTcqrOV8uHmwa5GGQ8wt5xpjA_VJXUJ6wbu5ThVzmdlSPOfc5BdLNNOw")
-                //     .then(response => console.log(response))
 
-            })
-            .catch((error) => {
-                if (error.response) {
-                    /*
-                     * The request was made and the server responded with a
-                     * status code that falls out of the range of 2xx
-                     */
-                    notificationProps.kind = "error";
-                    notificationProps.title = "An error occurred";
-                    notificationProps.subtitle = "please try again";
-                    setAlert({ loading: false, notify: true });
-
-                } else if (error.request) {
-                    /*
-                     * The request was made but no response was received, `error.request`
-                     * is an instance of XMLHttpRequest in the browser and an instance
-                     * of http.ClientRequest in Node.js
-                     */
-                    console.log(error.request);
-                    notificationProps.kind = "error";
-                    notificationProps.title = "Oops sorry";
-                    notificationProps.subtitle = "Its an issue on our end. Please try again";
-                    setAlert({ loading: false, notify: true });
-                } else {
-                    // Something happened in setting up the request and triggered an Error
-                    notificationProps.kind = "info";
-                    notificationProps.title = "Tokens";
-                    notificationProps.subtitle = "There are currently no stored tokens";
-                    setAlert({ loading: false, notify: true });
-                }
-            });
-    }
-
-    const initGoogleAPI = () => {
-        let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-        window.gapi.load('auth2', function () {
-            window.auth2 = window.gapi.auth2.init({
-                client_id: CLIENT_ID,
-                access_type: 'offline',
-                prompt: 'consent',
-                scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile",
-            });
-        });
-        // when auth2 is loaded, enable add token button
-        setIsAuthLoaded(true);
-    }
 
     useEffect(() => {
         getProviders(AUTH_KEY)
@@ -147,15 +93,45 @@ const Wallet = () => {
                     setAlert({ loading: false, notify: true });
                 }
             });
-
-        //give the google client some time to load
-        setTimeout(() => {
-            initGoogleAPI();
-        }, 3000)
-
-
     }, [AUTH_KEY]);
 
+    const getPlatformToken = (provider, platform) => {
+        setAlert({ loading: true })
+        getPlatformOauthToken(AUTH_KEY, provider, platform)
+            .then(response => {
+                openSignInWindow(response.data.url, "save-google-token");
+            })
+            .catch((error) => {
+                if (error.response) {
+                    /*
+                     * The request was made and the server responded with a
+                     * status code that falls out of the range of 2xx
+                     */
+                    notificationProps.kind = "error";
+                    notificationProps.title = "An error occurred";
+                    notificationProps.subtitle = "please try again";
+                    setAlert({ loading: false, notify: true });
+
+                } else if (error.request) {
+                    /*
+                     * The request was made but no response was received, `error.request`
+                     * is an instance of XMLHttpRequest in the browser and an instance
+                     * of http.ClientRequest in Node.js
+                     */
+                    console.log(error.request);
+                    notificationProps.kind = "error";
+                    notificationProps.title = "Oops sorry";
+                    notificationProps.subtitle = "Its an issue on our end. Please try again";
+                    setAlert({ loading: false, notify: true });
+                } else {
+                    // Something happened in setting up the request and triggered an Error
+                    notificationProps.kind = "info";
+                    notificationProps.title = "Tokens";
+                    notificationProps.subtitle = "There are currently no stored tokens";
+                    setAlert({ loading: false, notify: true });
+                }
+            });
+    }
     const handleRevokeToken = (provider, platform) => {
         revokeToken(AUTH_KEY, password, provider, platform)
             .then(response => {
@@ -242,10 +218,21 @@ const Wallet = () => {
         previousUrl = url;
     };
 
-    const receiveMessage = evt => {
-        if (evt.data) {
-            console.log(evt.data);
+    const receiveMessage = (event) => {
+        if (event.origin !== window.location.origin) {
+            return;
         }
+        const { data } = event; //extract data sent from popup
+        if (data.source === 'smswithoutborders') {
+            console.log(data);
+            saveGoogleOauthToken(AUTH_KEY, "google", data.code)
+                .then(response => {
+                    console.log(response);
+                    setAlert({ loading: false });
+                })
+        }
+
+
     };
 
     return (
@@ -291,7 +278,12 @@ const Wallet = () => {
                                                                     <h5>Platform</h5>
                                                                     <p>{provider.platform}</p>
                                                                     <br />
-                                                                    {isAuthLoaded ?
+                                                                    {alert.loading ?
+                                                                        <InlineLoading
+                                                                            description="Loading"
+                                                                            status="active"
+                                                                        />
+                                                                        :
                                                                         <Button
                                                                             size="sm"
                                                                             kind="primary"
@@ -300,11 +292,6 @@ const Wallet = () => {
                                                                         >
                                                                             Store
                                                                         </Button>
-                                                                        :
-                                                                        <InlineLoading
-                                                                            description="Loading"
-                                                                            status="active"
-                                                                        />
                                                                     }
                                                                 </AccordionItem>
                                                             </Accordion>
