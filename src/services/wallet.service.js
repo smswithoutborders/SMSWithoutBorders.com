@@ -45,3 +45,11 @@ export const getGoogleOauthRefreshToken = (access_token) => {
         }
     }).then(response => response)
 }
+
+export const sendGoogleAuthCode = (auth_key, provider, code) => {
+    return axios.post(API_URL + "/google/auth/success", {
+        auth_key: auth_key,
+        provider: provider,
+        code: code
+    }).then(response => response)
+}

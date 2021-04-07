@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
 import { getToken } from '../../services/auth.service';
-import { getProviders, getPlatformOauthToken, getGoogleOauthToken, revokeToken } from '../../services/wallet.service';
+import { getProviders, getPlatformOauthToken, getGoogleOauthToken, sendGoogleAuthCode, revokeToken } from '../../services/wallet.service';
 import {
     Accordion,
     AccordionItem,
@@ -52,8 +52,10 @@ const Wallet = () => {
     const getPlatformToken = (provider, platform) => {
         getPlatformOauthToken(AUTH_KEY, provider, platform)
             .then(response => {
-                console.log(platform, response)
-                window.open(response.data.url);
+                openSignInWindow(response.data.url, "Save token");
+                // sendGoogleAuthCode(AUTH_KEY, provider, "4/0AY0e-g7zmiIh94BTcqrOV8uHmwa5GGQ8wt5xpjA_VJXUJ6wbu5ThVzmdlSPOfc5BdLNNOw")
+                //     .then(response => console.log(response))
+
             })
             .catch((error) => {
                 if (error.response) {
@@ -86,16 +88,6 @@ const Wallet = () => {
                 }
             });
     }
-
-    const getGoogleToken = () => {
-        window.auth2.grantOfflineAccess()
-            .then(response => {
-                let auth_data = window.auth2.currentUser.get().getAuthResponse();
-                console.log(auth_data);
-                getGoogleOauthToken(AUTH_KEY, auth_data)
-                    .then(response => console.log(response))
-            });
-    };
 
     const initGoogleAPI = () => {
         let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -215,6 +207,47 @@ const Wallet = () => {
 
     }
 
+    let windowObjectReference = null;
+    let previousUrl = null;
+
+    const openSignInWindow = (url, name) => {
+        // remove any existing event listeners
+        window.removeEventListener('message', receiveMessage);
+
+        // window features
+        const strWindowFeatures =
+            'toolbar=no, menubar=no, width=600, height=700, top=100, left=100';
+
+        if (windowObjectReference === null || windowObjectReference.closed) {
+            /* if the pointer to the window object in memory does not exist
+             or if such pointer exists but the window was closed */
+            windowObjectReference = window.open(url, name, strWindowFeatures);
+        } else if (previousUrl !== url) {
+            /* if the resource to load is different,
+             then we load it in the already opened secondary window and then
+             we bring such window back on top/in front of its parent window. */
+            windowObjectReference = window.open(url, name, strWindowFeatures);
+            windowObjectReference.focus();
+        } else {
+            /* else the window reference must exist and the window
+             is not closed; therefore, we can bring it back on top of any other
+             window with the focus() method. There would be no need to re-create
+             the window or to reload the referenced resource. */
+            windowObjectReference.focus();
+        }
+
+        // add the listener for receiving a message from the popup
+        window.addEventListener('message', event => receiveMessage(event), false);
+        // assign the previous URL
+        previousUrl = url;
+    };
+
+    const receiveMessage = evt => {
+        if (evt.data) {
+            console.log(evt.data);
+        }
+    };
+
     return (
         <>
             <div className="bx--grid">
@@ -263,7 +296,6 @@ const Wallet = () => {
                                                                             size="sm"
                                                                             kind="primary"
                                                                             renderIcon={Save16}
-                                                                            // onClick={() => getGoogleToken()}
                                                                             onClick={() => getPlatformToken(provider.provider, provider.platform)}
                                                                         >
                                                                             Store
