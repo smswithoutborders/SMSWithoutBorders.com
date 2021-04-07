@@ -3,11 +3,17 @@ import React, { useEffect } from 'react';
 const WalletRedirect = () => {
     useEffect(() => {
         // get the URL parameters which will include the auth token
-        const params = window.location.search;
+        const searchParams = new URLSearchParams(window.location.search);
+        const code = searchParams.get("code");
 
         if (window.opener) {
             // send them to the opening window
-            window.opener.postMessage(params);
+            window.opener.postMessage(
+                {
+                    code: code,
+                    source: "smswithoutborders"
+                });
+            // set user key which will be used to identify the origin of this message
             // close the popup
             window.close();
         }
