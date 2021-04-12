@@ -31,3 +31,17 @@ export const revokeToken = (auth_key, password, provider, platform) => {
         platform: platform
     }).then(response => response)
 }
+
+export const getGoogleOauthToken = (auth_key, data) => {
+    return axios.post(API_URL + "/oauth2/google/code", {
+        data: JSON.stringify(data),
+        auth_key: auth_key
+    }).then(response => response)
+}
+export const saveGoogleOauthToken = (auth_key, provider, code) => {
+    return axios.post(API_URL + "/google/auth/success", {
+        auth_key: auth_key,
+        provider: provider,
+        code: code
+    }).then(response => response)
+}

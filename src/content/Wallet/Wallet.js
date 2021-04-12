@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 import DashHeader from '../../components/DashHeader';
 import { DashCard } from '../../components/Card';
-import { getToken } from '../../services/auth.service';
-import { getProviders, getPlatformOauthToken, revokeToken } from '../../services/wallet.service';
+import { getToken, setToken, removeToken } from '../../services/auth.service';
+import { getProviders, getPlatformOauthToken, saveGoogleOauthToken, revokeToken } from '../../services/wallet.service';
 import {
     Accordion,
     AccordionItem,
     AccordionSkeleton,
     Button,
     InlineNotification,
+    InlineLoading,
     Modal,
     TextInput
 } from 'carbon-components-react';
@@ -46,40 +47,7 @@ const Wallet = () => {
 
     const AUTH_KEY = getToken()
 
-    const getPlatformToken = (provider, platform) => {
-        getPlatformOauthToken(AUTH_KEY, provider, platform)
-            .then(response => console.log(platform, response))
-            .catch((error) => {
-                if (error.response) {
-                    /*
-                     * The request was made and the server responded with a
-                     * status code that falls out of the range of 2xx
-                     */
-                    notificationProps.kind = "error";
-                    notificationProps.title = "An error occurred";
-                    notificationProps.subtitle = "please try again";
-                    setAlert({ loading: false, notify: true });
 
-                } else if (error.request) {
-                    /*
-                     * The request was made but no response was received, `error.request`
-                     * is an instance of XMLHttpRequest in the browser and an instance
-                     * of http.ClientRequest in Node.js
-                     */
-                    console.log(error.request);
-                    notificationProps.kind = "error";
-                    notificationProps.title = "Oops sorry";
-                    notificationProps.subtitle = "Its an issue on our end. Please try again";
-                    setAlert({ loading: false, notify: true });
-                } else {
-                    // Something happened in setting up the request and triggered an Error
-                    notificationProps.kind = "info";
-                    notificationProps.title = "Tokens";
-                    notificationProps.subtitle = "There are currently no stored tokens";
-                    setAlert({ loading: false, notify: true });
-                }
-            });
-    }
 
     useEffect(() => {
         getProviders(AUTH_KEY)
@@ -125,9 +93,45 @@ const Wallet = () => {
                     setAlert({ loading: false, notify: true });
                 }
             });
-
     }, [AUTH_KEY]);
 
+    const getPlatformToken = (provider, platform) => {
+        setAlert({ loading: true })
+        getPlatformOauthToken(AUTH_KEY, provider, platform)
+            .then(response => {
+                openSignInWindow(response.data.url, "save-google-token");
+            })
+            .catch((error) => {
+                if (error.response) {
+                    /*
+                     * The request was made and the server responded with a
+                     * status code that falls out of the range of 2xx
+                     */
+                    notificationProps.kind = "error";
+                    notificationProps.title = "An error occurred";
+                    notificationProps.subtitle = "please try again";
+                    setAlert({ loading: false, notify: true });
+
+                } else if (error.request) {
+                    /*
+                     * The request was made but no response was received, `error.request`
+                     * is an instance of XMLHttpRequest in the browser and an instance
+                     * of http.ClientRequest in Node.js
+                     */
+                    console.log(error.request);
+                    notificationProps.kind = "error";
+                    notificationProps.title = "Oops sorry";
+                    notificationProps.subtitle = "Its an issue on our end. Please try again";
+                    setAlert({ loading: false, notify: true });
+                } else {
+                    // Something happened in setting up the request and triggered an Error
+                    notificationProps.kind = "info";
+                    notificationProps.title = "Tokens";
+                    notificationProps.subtitle = "There are currently no stored tokens";
+                    setAlert({ loading: false, notify: true });
+                }
+            });
+    }
     const handleRevokeToken = (provider, platform) => {
         revokeToken(AUTH_KEY, password, provider, platform)
             .then(response => {
@@ -179,6 +183,65 @@ const Wallet = () => {
 
     }
 
+    let windowObjectReference = null;
+    let previousUrl = null;
+
+    const openSignInWindow = (url, name) => {
+        // remove any existing event listeners
+        window.removeEventListener('message', receiveMessage);
+
+        // window features
+        const strWindowFeatures =
+            'toolbar=no, menubar=no, width=600, height=700, top=100, left=100';
+
+        if (windowObjectReference === null || windowObjectReference.closed) {
+            /* if the pointer to the window object in memory does not exist
+             or if such pointer exists but the window was closed */
+            windowObjectReference = window.open(url, name, strWindowFeatures);
+        } else if (previousUrl !== url) {
+            /* if the resource to load is different,
+             then we load it in the already opened secondary window and then
+             we bring such window back on top/in front of its parent window. */
+            windowObjectReference = window.open(url, name, strWindowFeatures);
+            windowObjectReference.focus();
+        } else {
+            /* else the window reference must exist and the window
+             is not closed; therefore, we can bring it back on top of any other
+             window with the focus() method. There would be no need to re-create
+             the window or to reload the referenced resource. */
+            windowObjectReference.focus();
+        }
+
+        // add the listener for receiving a message from the popup
+        window.addEventListener('message', event => receiveMessage(event), false);
+        // assign the previous URL
+        previousUrl = url;
+    };
+
+    const receiveMessage = (event) => {
+        if (event.origin !== window.location.origin) {
+            return;
+        }
+        const { data } = event; //extract data sent from popup
+        if (data.source === 'smswithoutborders') {
+            saveGoogleOauthToken(AUTH_KEY, "google", data.code)
+                .then(response => {
+                    console.log(response);
+                    notificationProps.kind = "success";
+                    notificationProps.title = "Token";
+                    notificationProps.subtitle = "Token stored successfully";
+                    setAlert({ loading: false, notify: true });
+                    removeToken();
+                    setToken(response.data.auth_key);
+                    setAlert({ loading: false, notify: false });
+                    window.location.reload();
+
+                })
+        }
+
+
+    };
+
     return (
         <>
             <div className="bx--grid">
@@ -214,7 +277,7 @@ const Wallet = () => {
                                                             <Accordion size="xl" key={provider.provider}>
                                                                 <AccordionItem title={provider.provider}>
                                                                     <p>Store your Google token which will be used for authentication on your behalf in the event
-                                                            of an internet shutdown.</p>
+                                                                        of an internet shutdown.</p>
                                                                     <br />
                                                                     <p>You can define how this token will be used by setting the scopes of access</p>
                                                                     <br />
@@ -222,14 +285,21 @@ const Wallet = () => {
                                                                     <h5>Platform</h5>
                                                                     <p>{provider.platform}</p>
                                                                     <br />
-
-                                                                    <Button
-                                                                        size="sm"
-                                                                        renderIcon={Save16}
-                                                                        onClick={() => getPlatformToken(provider.provider, provider.platform)}
-                                                                    >
-                                                                        Store
-                                                        </Button>
+                                                                    {alert.loading ?
+                                                                        <InlineLoading
+                                                                            description="Loading"
+                                                                            status="active"
+                                                                        />
+                                                                        :
+                                                                        <Button
+                                                                            size="sm"
+                                                                            kind="primary"
+                                                                            renderIcon={Save16}
+                                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                                        >
+                                                                            Store
+                                                                        </Button>
+                                                                    }
                                                                 </AccordionItem>
                                                             </Accordion>
                                                         );
@@ -238,7 +308,7 @@ const Wallet = () => {
                                                             <Accordion size="xl" key={provider.provider}>
                                                                 <AccordionItem title={provider.provider}>
                                                                     <p>Store your Twitter token which will be used for authentication on your behalf in the event
-                                                            of an internet shutdown.</p>
+                                                                        of an internet shutdown.</p>
                                                                     <br />
                                                                     <p>You can define how this token will be used by setting the scopes of access</p>
                                                                     <br />
@@ -257,6 +327,7 @@ const Wallet = () => {
                                                                 </AccordionItem>
                                                             </Accordion>
                                                         );
+                                                        // eslint-disable-next-line no-unreachable
                                                         break;
                                                     default:
                                                         return (
@@ -316,7 +387,7 @@ const Wallet = () => {
                                                                 setAlert({ modal: true });
                                                             }}
                                                         >
-                                                            Delete
+                                                            Revoke
                                                         </Button>
                                                     </AccordionItem>
                                                 </Accordion>

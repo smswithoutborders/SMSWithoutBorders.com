@@ -29,6 +29,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import { logOut } from "../../services/auth.service";
 import Profile from '../Profile';
 import Wallet from '../Wallet';
+import WalletRedirect from '../Wallet/WalletRedirect';
 
 
 const DashBoard = ({ setIsLoggedIn }) => {
@@ -124,6 +125,7 @@ const DashBoard = ({ setIsLoggedIn }) => {
               <Switch>
                 <Route exact path="/" component={Profile} />
                 <Route exact path="/wallet" component={Wallet} />
+                <Route exact path="/oauth2/google/Tokens/redirect/" component={WalletRedirect} />
               </Switch>
             </Content>
           </>
