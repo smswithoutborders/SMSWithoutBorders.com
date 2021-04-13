@@ -3,6 +3,8 @@
     height: 100vh;
     padding: ($spacing-07 * 2) $spacing-07;
     background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     color: $ui-01;
     @include carbon--breakpoint(md) {

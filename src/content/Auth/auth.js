@@ -100,7 +100,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     if (registered) {
         return (
-            <div className="bx--grid login-page__container">
+            <div className="bx--grid bx--grid--full-width login-page__container">
                 <div className="bx--row">
                     <div className="bx--col-lg-8">
                         {alert.notify ?
@@ -244,7 +244,7 @@ const SignUp = ({ setRegistered }) => {
     };
 
     return (
-        <div className="bx--grid login-page__container">
+        <div className="bx--grid bx--grid--full-width login-page__container">
             <div className="bx--row">
                 <div className="bx--col-lg-8">
                     {alert.notify ?
