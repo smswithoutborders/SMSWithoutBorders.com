@@ -244,7 +244,7 @@ const Wallet = () => {
 
     return (
         <>
-            <div className="bx--grid">
+            <div className="bx--grid bx--grid--full-width">
                 <div className="bx--row">
                     <DashHeader
                         title="Your"
