@@ -26,7 +26,7 @@ Cloud API URL address and Google Client ID can be set here
 
 Runs the app in the development mode.
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:18000](http://localhost:18000) to view it in the browser.
 
 The page will reload if you make edits.
 
