@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormGroup, TextInput, Button, Loading, Link, InlineNotification } from 'carbon-components-react';
 import { Login24, Information20 } from '@carbon/icons-react';
+import PasswordStrengthBar from 'react-password-strength-bar';
 import { setToken, registerUser, userLogin } from '../../services/auth.service';
 
 let notificationProps = {
@@ -100,7 +101,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     if (registered) {
         return (
-            <div className="bx--grid login-page__container">
+            <div className="bx--grid bx--grid--full-width login-page__container">
                 <div className="bx--row">
                     <div className="bx--col-lg-8">
                         {alert.notify ?
@@ -167,6 +168,9 @@ const SignUp = ({ setRegistered }) => {
 
     const [phone, setPhone] = useState();
     const [password, setPassword] = useState();
+    const [password2, setPassword2] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const [isInvalid, setIsInvalid] = useState(false);
     const [alert, setAlert] = useState(
         {
             loading: false,
@@ -177,7 +181,15 @@ const SignUp = ({ setRegistered }) => {
     const formProps = {
         onSubmit: async (e) => {
             e.preventDefault();
-            setAlert({ loading: true, notify: false });
+            setAlert({ loading: true });
+
+            if (password !== password2) {
+                setIsInvalid(true);
+                setAlert({ loading: false });
+
+                return
+            }
+
             registerUser(phone, password)
                 .then(response => {
                     if (response.status === 200) {
@@ -244,7 +256,7 @@ const SignUp = ({ setRegistered }) => {
     };
 
     return (
-        <div className="bx--grid login-page__container">
+        <div className="bx--grid bx--grid--full-width login-page__container">
             <div className="bx--row">
                 <div className="bx--col-lg-8">
                     {alert.notify ?
@@ -255,7 +267,8 @@ const SignUp = ({ setRegistered }) => {
                     <h1>Sign Up</h1>
                     <br />
                     <p>
-                        <Information20 className="login-centered-icon" /> Already have an account?
+                        <Information20 className="login
+                                disabled={btnDisabled}-centered-icon" /> Already have an account?
                         <Link onClick={() => setRegistered(true)}> Log In</Link>
                     </p>
                     <br />
@@ -271,13 +284,36 @@ const SignUp = ({ setRegistered }) => {
                             />
                             <br />
                             <TextInput.PasswordInput
-                                invalidText="Invalid error message."
+                                invalidText="Invalid password"
                                 labelText="Password"
                                 placeholder="enter password"
                                 id="password"
-                                onChange={evt => setPassword(evt.target.value)}
+                                onChange={evt => {
+                                    setPassword(evt.target.value);
+                                    setConfirmPassword(true);
+                                }}
                                 required
                             />
+                            <PasswordStrengthBar password={password} />
+
+                            {confirmPassword ?
+                                <>
+                                    <TextInput.PasswordInput
+                                        invalidText="passwords do not match"
+                                        labelText="Confirm Password"
+                                        placeholder="enter password"
+                                        id="password2"
+                                        onChange={evt => {
+                                            setPassword2(evt.target.value);
+                                            setIsInvalid(false);
+                                        }}
+                                        invalid={isInvalid}
+                                        required
+                                    />
+                                    <PasswordStrengthBar password={password2} />
+                                </>
+                                : null
+                            }
                         </FormGroup>
 
                         {alert.loading ?
