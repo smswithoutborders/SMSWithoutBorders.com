@@ -5,6 +5,8 @@
 @import "carbon-components/scss/globals/scss/colors.scss";
 @import "carbon-components/scss/globals/scss/layer.scss";
 
+// add treact font
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap");
 // Use the gray 10 theme
 $carbon--theme: $carbon--theme--g10;
 @include carbon--theme();

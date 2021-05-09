@@ -45,7 +45,7 @@ const Login = () => (
             <LogoImage src={logo} />
           </LogoLink>
           <MainContent>
-            <Heading>Sign In To SW\OB</Heading>
+            <Heading>Sign In</Heading>
             <FormContainer>
               <Form>
                 <Input type="email" placeholder="Email" />
