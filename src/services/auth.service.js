@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 let AUTH_URL = process.env.REACT_APP_API_URL;
 
 export const registerUser = (phonenumber, password) => {
@@ -33,9 +34,9 @@ export const removeToken = () => {
 }
 
 //setIsLoggedIn is parsed from the app component
-export const logOut = (setIsLoggedIn) => {
-    //log the user out by changing state
-    setIsLoggedIn(false);
+export const logOut = () => {
     //remove user token from session storage
     removeToken();
+    // return user to login
+    return <Redirect to="/login" />
 };

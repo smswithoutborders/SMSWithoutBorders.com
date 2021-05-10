@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
 import {
   Content,
   Header,
@@ -26,13 +25,13 @@ import {
 } from '@carbon/icons-react';
 
 import { Route, Switch, Link } from 'react-router-dom';
-import { logOut } from "../../services/auth.service";
-import Profile from '../Profile';
-import Wallet from '../Wallet';
-import WalletRedirect from '../Wallet/WalletRedirect';
+import { logOut } from "services/auth.service";
+import Profile from 'content/Profile';
+import Wallet from 'content/Wallet';
+import WalletRedirect from 'content/Wallet/WalletRedirect';
 
 
-const DashBoard = ({ setIsLoggedIn }) => {
+const DashBoard = () => {
   //state hook to control left panel view
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -73,7 +72,7 @@ const DashBoard = ({ setIsLoggedIn }) => {
                 </HeaderGlobalAction>
                 <HeaderGlobalAction
                   aria-label="logout"
-                  onClick={() => logOut(setIsLoggedIn)}>
+                  onClick={() => logOut()}>
                   <Logout20 />
                 </HeaderGlobalAction>
               </HeaderGlobalBar>
@@ -134,9 +133,5 @@ const DashBoard = ({ setIsLoggedIn }) => {
     </>
   );
 };
-
-DashBoard.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired
-}
 
 export default DashBoard;

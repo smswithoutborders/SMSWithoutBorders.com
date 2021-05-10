@@ -150,7 +150,7 @@ const Login = () => {
                     iconBefore={loading ? null : FiLogIn}
                     isLoading={loading}
                   >
-                    <span className="text">Sign In </span>
+                    <span className="text">{loading ? "Signing In" : "Sign In"}</span>
                   </SubmitButton>
                 </Form>
                 <p tw="mt-8 text-sm text-gray-600 text-center">
