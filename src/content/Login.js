@@ -21,7 +21,7 @@ const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto`;
 const Input = tw(TextInputField)`w-full rounded-lg`;
 const SubmitButton = tw(Button)`w-full rounded-lg`;
-const IllustrationContainer = tw.div`sm:rounded-r-lg flex-1 bg-primary-400 text-center hidden lg:flex justify-center`;
+const IllustrationContainer = tw.div`sm:rounded-r-lg flex-1 bg-primary-300 text-center hidden lg:flex justify-center`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
@@ -52,7 +52,8 @@ const Login = () => {
 
             setTimeout(() => {
               setToken(response.data.auth_key);
-            }, 3000);
+              window.location.replace("/dashboard");
+            }, 2000);
           }
         })
         .catch(error => {
