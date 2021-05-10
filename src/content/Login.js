@@ -7,9 +7,9 @@ import illustration from "images/login-illustration.svg";
 import logo from "images/logo.png";
 import { FiLogIn } from "react-icons/fi";
 import { Button, TextInputField, toaster } from 'evergreen-ui';
-
 import { setToken, userLogin } from 'services/auth.service';
 import { Link } from "react-router-dom";
+import useTitle from "helpers/useTitle";
 
 const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
@@ -27,7 +27,9 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
+
+  useTitle("Sign In")
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -42,10 +44,14 @@ const Login = ({ setIsLoggedIn }) => {
           if (response.status === 200) {
             setLoading(false);
             toaster.success('Login successful');
+
+            /*
+              potential for improving UX here if the API responds fast then
+              timeout won't be neccessary
+             */
+
             setTimeout(() => {
-              //use placeholder token value for now
               setToken(response.data.auth_key);
-              setIsLoggedIn(true);
             }, 3000);
           }
         })
