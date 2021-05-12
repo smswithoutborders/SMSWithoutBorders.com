@@ -68,12 +68,16 @@ const SignUp = () => {
         .then(response => {
           if (response.status === 200) {
             setLoading(false);
-            toaster.success("Success", {
-              description: `Your account ${phone} has been created`
+            toaster.success(`Success, Your account ${phone} has been created`, {
+              description: "You will be redirected soon"
             });
+
+            //clean the form fields
+            e.target.reset();
+
             setTimeout(() => {
-              // setRegistered(true);
-            }, 3000);
+              window.location.replace("/login")
+            }, 1000);
           }
         })
         .catch(error => {
@@ -157,7 +161,7 @@ const SignUp = () => {
                     placeholder="Password"
                     inputHeight={40}
                     required
-                    minlength="16"
+                    minLength="16"
                     onChange={evt => {
                       setPassword(evt.target.value);
                       setConfirmPassword(true);
@@ -173,12 +177,13 @@ const SignUp = () => {
                         placeholder="retype password"
                         inputHeight={40}
                         required
-                        minlength="16"
+                        minLength="16"
+                        isInvalid={isInvalid}
+                        validationMessage={isInvalid ? "Passwords do not match" : null}
                         onChange={evt => {
                           setPassword2(evt.target.value);
                           setIsInvalid(false);
                         }}
-                        isInvalid={isInvalid}
                       />
                       <PasswordStrengthBar password={password2} />
                     </>) : null
