@@ -43,7 +43,10 @@ const Login = () => {
         .then(response => {
           if (response.status === 200) {
             setLoading(false);
-            toaster.success('Login successful');
+            toaster.success('Login successful' , {
+              description: "You will be redirected shortly"
+            });
+            setToken(response.data.auth_key);
 
             /*
               potential for improving UX here if the API responds fast then
@@ -51,9 +54,8 @@ const Login = () => {
              */
 
             setTimeout(() => {
-              setToken(response.data.auth_key);
               window.location.replace("/dashboard");
-            }, 2000);
+            }, 1000);
           }
         })
         .catch(error => {
