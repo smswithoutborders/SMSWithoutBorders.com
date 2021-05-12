@@ -12,8 +12,6 @@ $carbon--theme: $carbon--theme--g10;
 @include carbon--theme();
 
 // import here so they inherit the theme g10
-@import "./content/Auth/auth.scss";
-
 @import "./components/DashHeader/dash_header.scss";
 @import "./components/Card/card.scss";
 
