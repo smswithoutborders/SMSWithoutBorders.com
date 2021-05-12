@@ -28,6 +28,19 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
+const PrivacyTerms = (
+  <p tw="text-xs mb-4">
+    <span>I agree to abide by SMSWithoutborders &nbsp;</span>
+    <a
+      href="https://smswithoutborders.com/privacy-policy"
+      target="_blank"
+      rel="noreferrer"
+      tw="border-gray-500 no-underline">
+      privacy policy
+  </a>
+  </p>
+);
+
 const SignUp = () => {
 
   useTitle("Sign Up");
@@ -144,6 +157,7 @@ const SignUp = () => {
                     placeholder="Password"
                     inputHeight={40}
                     required
+                    minlength="16"
                     onChange={evt => {
                       setPassword(evt.target.value);
                       setConfirmPassword(true);
@@ -159,6 +173,7 @@ const SignUp = () => {
                         placeholder="retype password"
                         inputHeight={40}
                         required
+                        minlength="16"
                         onChange={evt => {
                           setPassword2(evt.target.value);
                           setIsInvalid(false);
@@ -170,19 +185,11 @@ const SignUp = () => {
                   }
 
                   <Checkbox
-                    label="I agree to abide by SMSWithoutborders privacy policy"
+                    label={PrivacyTerms}
                     checked={terms}
                     onChange={(evt) => setTerms(evt.target.checked)}
                   />
 
-                  <p tw="ml-6 text-xs mb-6">
-                    <a
-                      href="https://smswithoutborders.com/privacy-policy"
-                      targe="_blank"
-                      tw="border-gray-500 no-underline">
-                      learn more
-                    </a>
-                  </p>
 
                   <SubmitButton
                     type="submit"
