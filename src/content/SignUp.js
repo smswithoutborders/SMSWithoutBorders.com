@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AnimationRevealPage from "helpers/AnimationRevealPage.js";
+import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
 import { Container as ContainerBase } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -12,9 +12,9 @@ import { registerUser } from 'services/auth.service';
 import { Link } from "react-router-dom";
 import useTitle from "helpers/useTitle";
 
-const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
-const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
-const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-2 sm:p-12`;
+const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
+const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 text-gray-900 shadow-2xl sm:rounded-lg flex justify-center flex-1 border border-primary-900`;
+const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-2 sm:p-12 sm:rounded-l-lg`;
 const LogoImage = tw.img`h-60 mx-auto block`;
 const MainContent = tw.div`flex flex-col items-center`;
 const Heading = tw.h1`text-2xl xl:text-3xl font-bold`;
@@ -22,11 +22,12 @@ const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto`;
 const Input = tw(TextInputField)`w-full rounded-lg`;
 const SubmitButton = tw(Button)`w-full rounded-lg`;
-const IllustrationContainer = tw.div`sm:rounded-r-lg flex-1 bg-primary-300 text-center hidden lg:flex justify-center`;
+const IllustrationContainer = tw.div`sm:rounded-r-lg flex-1 bg-primary-900 text-center hidden lg:flex justify-center`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
+
 
 const PrivacyTerms = (
   <p tw="text-xs mb-4">
@@ -137,7 +138,7 @@ const SignUp = () => {
   };
 
   return (
-    <AnimationRevealPage>
+    <PageAnimationWrapper>
       <Container>
         <Content>
           <MainContainer>
@@ -210,7 +211,7 @@ const SignUp = () => {
 
                 <p tw="my-8 text-sm text-gray-600 text-center">
                   Already have an account?{" "}
-                  <Link to="/" tw="border-b border-gray-500 border-dotted">
+                  <Link to="/login" tw="text-primary-900">
                     Sign In
                   </Link>
                 </p>
@@ -223,7 +224,7 @@ const SignUp = () => {
           </IllustrationContainer>
         </Content>
       </Container>
-    </AnimationRevealPage>
+    </PageAnimationWrapper>
   )
 };
 
