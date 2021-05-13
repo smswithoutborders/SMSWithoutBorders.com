@@ -15,7 +15,7 @@ import { logOut } from "services/auth.service";
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
 const NavLinks = tw.div`inline-block`;
 const NavButton = tw.button`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center`;
-const NavLink = tw(Link)`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center`;
+const NavLink = tw(Link)`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center hocus:no-underline`;
 const LogoLink = styled(NavButton)`
   ${tw`flex items-center ml-0!`};
   img {
