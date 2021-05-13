@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.scss';
-
+import "tailwindcss/dist/base.css";
 import Login from "content/Login";
 import SignUp from "content/SignUp"
 import DashBoard from "content/Dashboard";
