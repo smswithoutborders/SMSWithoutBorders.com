@@ -4,7 +4,7 @@ import './App.scss';
 import "tailwindcss/dist/base.css";
 import Login from "content/Login";
 import SignUp from "content/SignUp"
-import DashBoard from "content/Dashboard";
+import DashBoard from "content/DashBoard";
 import { getToken } from "services/auth.service";
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
         <Route exact path="/">
           {isLoggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
         </Route>
-        <Route exact path="/dashboard">
+        <Route path="/dashboard">
           {isLoggedIn ? <DashBoard /> : <Redirect to="/login" />}
         </Route>
         <Route exact path="/login">
@@ -33,6 +33,7 @@ const App = () => {
         </Route>
       </Switch>
     </Router>
+
   );
 };
 

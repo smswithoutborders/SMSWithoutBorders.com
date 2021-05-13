@@ -7,19 +7,15 @@ import { Avatar, LogOutIcon } from "evergreen-ui";
 import useAnimatedNavToggler from "helpers/useAnimatedNavToggler.js";
 import logo from "images/logo-icon-dark.png";
 import { FiMenu as MenuIcon, FiX as CloseIcon, FiBell, FiInfo } from "react-icons/fi";
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { Modal, ModalBody, } from 'carbon-components-react';
-
 import { logOut } from "services/auth.service";
 
 
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
-
 const NavLinks = tw.div`inline-block`;
-
 const NavButton = tw.button`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center`;
 const NavLink = tw(Link)`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center`;
-
 const LogoLink = styled(NavButton)`
   ${tw`flex items-center ml-0!`};
   img {
@@ -27,23 +23,19 @@ const LogoLink = styled(NavButton)`
   }
 `;
 const UserActions = tw.div`flex flex-row items-center`;
-
 const UserActionsButton = tw(NavButton)`flex flex-row items-center px-4 mx-auto`;
-
 const MobileNavLinksContainer = tw.nav`flex flex-1 items-center justify-between`;
-const NavToggle = tw(NavButton)`lg:hidden z-50 focus:outline-none transition duration-300
-`;
+const NavToggle = tw(NavButton)`lg:hidden z-50 focus:outline-none transition duration-300`;
 const MobileNavLinks = motion(styled.div`
   ${tw`lg:hidden z-50 fixed top-28 inset-x-4 p-2 border text-center rounded-lg text-white bg-gray-900 shadow-2xl`}
   ${NavLinks} {
     ${tw`flex flex-col items-center`}
   }
-`);
-
+  `);
 const DesktopNavLinks = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-gray-900`;
 
 const Navbar = () => {
-
+    const { path } = useRouteMatch();
     const [isAboutOpen, setIsAboutOpen] = useState(false);
 
     let collapseBreakpointClass = "lg"
@@ -53,8 +45,8 @@ const Navbar = () => {
     const defaultLinks = [
         <React.Fragment key="nav">
             <NavLinks key={1}>
-                <NavLink onClick={toggleNavbar} key="Profile" to="/profile">Profile</NavLink>
-                <NavLink onClick={toggleNavbar} key="Wallet" to="/wallet">Wallet</NavLink>
+                <NavLink onClick={toggleNavbar} key="Profile" to={`${path}/profile`}>Profile</NavLink>
+                <NavLink onClick={toggleNavbar} key="Wallet" to={`${path}/wallet`}>Wallet</NavLink>
             </NavLinks>
             <UserActions key={2}>
                 <UserActionsButton onClick={() => setIsAboutOpen(!isAboutOpen)}>
