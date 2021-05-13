@@ -21,6 +21,7 @@
     "react-password-strength-bar": "^0.3.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "rsuite": "^4.10.1",
     "sass": "^1.32.12",
     "styled-components": "^5.3.0",
     "twin.macro": "^2.4.1",

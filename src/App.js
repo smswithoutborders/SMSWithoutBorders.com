@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.scss';
+import "rsuite/dist/styles/rsuite-default.css";
 import "tailwindcss/dist/base.css";
 import Login from "content/Login";
 import SignUp from "content/SignUp"
