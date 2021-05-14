@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import { getToken, setToken, removeToken } from 'services/auth.service';
 import { getProviders, getPlatformOauthToken, saveGoogleOauthToken, revokeToken } from 'services/wallet.service';
-import { Modal, TextInput } from 'carbon-components-react';
-import { Button, toaster, Dialog } from 'evergreen-ui';
+import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { Panel } from "rsuite";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
@@ -18,12 +17,14 @@ const Column = tw.div`p-4 md:w-1/2 w-full`;
 const Row = tw.div`flex flex-wrap -m-4 mt-12`;
 const Container = tw.div`container px-5 mx-auto py-12  lg:p-12 text-gray-900`;
 const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
+const Input = tw(TextInputField)`w-full rounded-lg`;
 
 const Wallet = () => {
 
     const [tokens, setTokens] = useState();
     const [providers, setProviders] = useState();
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState("");
+    const [isValid, setIsValid] = useState(false);
     const [revokedTokenDetails, setRevokedTokenDetails] = useState(
         {
             provider: "",
@@ -37,6 +38,15 @@ const Wallet = () => {
         });
 
     let AUTH_KEY = getToken()
+
+    //used to check password length when user revokes token prevents error 400 from BE
+    const validatePassword = () => {
+        if (password.length >= 16) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        }
+    }
 
     useEffect(() => {
         getProviders(AUTH_KEY)
@@ -59,8 +69,8 @@ const Wallet = () => {
                      * status code that falls out of the range of 2xx
                      */
                     setAlert({ loading: false });
-                    toaster.danger("Network Error", {
-                        description: "Please check your network connection and reload this page"
+                    toaster.danger("Request Error", {
+                        description: "Sorry we could not process your request. Please check your network connection and try again"
                     });
 
                 } else if (error.request) {
@@ -72,7 +82,7 @@ const Wallet = () => {
                     console.log(error.request);
                     setAlert({ loading: false });
                     toaster.danger("Network Error", {
-                        description: "We could not process your request. Please reload this page and try again"
+                        description: "We could not fetch your tokens. Please check your network and reload this page"
                     });
                 } else {
                     // Something happened in setting up the request and triggered an Error
@@ -313,40 +323,37 @@ const Wallet = () => {
                     </Row>
                 </Container>
 
-                <Modal
-                    open={alert.modal}
-                    modalLabel="Confirm action"
-                    danger
-                    preventCloseOnClickOutside
-                    onRequestSubmit={() => {
+                <Dialog
+                    isShown={alert.modal}
+                    title="Confirm action"
+                    intent="danger"
+                    hasClose={false}
+                    shouldCloseOnOverlayClick={false}
+                    shouldCloseOnEscapePress={false}
+                    isConfirmDisabled={isValid ? false : true}
+                    onConfirm={() => {
                         handleRevokeToken(revokedTokenDetails.provider, revokedTokenDetails.platform);
-                        setAlert({ modal: false, loading: true })
+                        setAlert({ loading: true })
                     }}
-                    onRequestClose={() => setAlert({ modal: false })}
-                    primaryButtonText="Confirm"
-                    secondaryButtonText="Cancel">
-
-                    <SubHeading>Are you sure you want to delete this token from your account?</SubHeading>
+                    onCloseComplete={() => setAlert({ modal: false })}
+                    confirmLabel="confirm revoke"
+                >
+                    <h4 tw="text-xl font-medium">Are you sure you want to delete this token from your account? This cannot be reversed</h4>
                     <br />
                     <p>Please enter you password to Confirm </p>
                     <br />
-                    <TextInput.PasswordInput
-                        data-modal-primary-focus
-                        id="passwordField"
-                        onBlur={(evt) => setPassword(evt.target.value)}
-                        labelText="Password"
-                        placeholder="Enter your password"
+                    <Input
+                        type="password"
+                        label="Password"
+                        placeholder="Password"
+                        inputHeight={40}
+                        required
+                        minLength="16"
+                        onChange={(evt) => {
+                            setPassword(evt.target.value);
+                            validatePassword();
+                        }}
                     />
-                </Modal>
-
-                <Dialog
-                    isShown={alert.modal}
-                    title="Dialog title"
-                    intent="danger"
-                    onCloseComplete={() => setAlert({ modal: false })}
-                    confirmLabel="Delete"
-                >
-                    Are you sure you want to delete this item?
                 </Dialog>
             </PageAnimationWrapper>
         </>
