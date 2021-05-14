@@ -195,7 +195,7 @@ const Wallet = () => {
         }
         const { data } = event; //extract data sent from popup
         if (data.source === 'smswithoutborders') {
-            saveGoogleOauthToken(AUTH_KEY, "google", data.code)
+            saveGoogleOauthToken(AUTH_KEY, "google", "gmail", data.code)
                 .then(response => {
                     console.log(response);
                     setAlert({ loading: false });
@@ -221,79 +221,79 @@ const Wallet = () => {
                         <div tw="flex flex-wrap -m-4">
                             <div tw="p-4 md:w-1/2 w-full">
                                 <div tw="h-full bg-white shadow-md p-8 rounded-xl">
-                                        <h4>Providers</h4>
-                                        <br />
-                                        {providers ? (
-                                            <>
-                                                {providers.map(provider => {
-                                                    return (
-                                                        <Panel header={provider.provider} key={provider.provider} collapsible={true} bordered>
-                                                            <p>Store your {provider.provider} token which will be used for authentication on your behalf in the event
+                                    <h4>Providers</h4>
+                                    <br />
+                                    {providers ? (
+                                        <>
+                                            {providers.map(provider => {
+                                                return (
+                                                    <Panel header={provider.provider} key={provider.provider} collapsible={true} bordered>
+                                                        <p>Store your {provider.provider} token which will be used for authentication on your behalf in the event
                                                                         of an internet shutdown.</p>
-                                                            <br />
-                                                            <p>You can define how this token will be used by setting the scopes of access</p>
-                                                            <br />
+                                                        <br />
+                                                        <p>You can define how this token will be used by setting the scopes of access</p>
+                                                        <br />
 
-                                                            <h5>Platform</h5>
-                                                            <p>{provider.platform}</p>
-                                                            <br />
-
-                                                            <StoreButton
-                                                                type="submit"
-                                                                appearance="primary"
-                                                                height={40}
-                                                                iconBefore={FiSave}
-                                                                isLoading={alert.loading}
-                                                                onClick={() => getPlatformToken(provider.provider, provider.platform)}
-                                                            >
-                                                                <span>{alert.loading ? "Storing" : "Store"}</span>
-                                                            </StoreButton>
-                                                        </Panel>
-                                                    )
-                                                })}
-                                            </>
-                                        ) : (
-                                                <p>No available providers</p>
-                                            )
-                                        }
-                                </div>
-                            </div>
-                            <div tw="p-4 md:w-1/2 w-full">
-                                <div tw="h-full bg-white shadow-md p-8 rounded-xl">
-                                        <h4>Saved tokens</h4>
-                                        <br />
-
-                                        {tokens ? (
-                                            <>
-                                                {tokens.map(token => (
-                                                    <Panel header={token.provider} key={token.provider} collapsible bordered>
                                                         <h5>Platform</h5>
-                                                        <p>{token.platform}</p>
+                                                        <p>{provider.platform}</p>
                                                         <br />
 
                                                         <StoreButton
                                                             type="submit"
-                                                            appearance="danger"
+                                                            appearance="primary"
                                                             height={40}
-                                                            iconBefore={FiTrash2}
+                                                            iconBefore={FiSave}
                                                             isLoading={alert.loading}
-                                                            onClick={() => {
-                                                                setRevokedTokenDetails({
-                                                                    provider: token.provider,
-                                                                    platform: token.platform
-                                                                });
-                                                                setAlert({ modal: true });
-                                                            }}
+                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
                                                         >
-                                                            <span>{alert.loading ? "Revoking" : "Revoke"}</span>
+                                                            <span>{alert.loading ? "Storing" : "Store"}</span>
                                                         </StoreButton>
                                                     </Panel>
-                                                ))}
-                                            </>
-                                        ) : (
-                                                <p>No stored tokens</p>
-                                            )
-                                        }
+                                                )
+                                            })}
+                                        </>
+                                    ) : (
+                                            <p>No available providers</p>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                            <div tw="p-4 md:w-1/2 w-full">
+                                <div tw="h-full bg-white shadow-md p-8 rounded-xl">
+                                    <h4>Saved tokens</h4>
+                                    <br />
+
+                                    {tokens ? (
+                                        <>
+                                            {tokens.map(token => (
+                                                <Panel header={token.provider} key={token.provider} collapsible bordered>
+                                                    <h5>Platform</h5>
+                                                    <p>{token.platform}</p>
+                                                    <br />
+
+                                                    <StoreButton
+                                                        type="submit"
+                                                        appearance="danger"
+                                                        height={40}
+                                                        iconBefore={FiTrash2}
+                                                        isLoading={alert.loading}
+                                                        onClick={() => {
+                                                            setRevokedTokenDetails({
+                                                                provider: token.provider,
+                                                                platform: token.platform
+                                                            });
+                                                            setAlert({ modal: true });
+                                                        }}
+                                                    >
+                                                        <span>{alert.loading ? "Revoking" : "Revoke"}</span>
+                                                    </StoreButton>
+                                                </Panel>
+                                            ))}
+                                        </>
+                                    ) : (
+                                            <p>No stored tokens</p>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>
