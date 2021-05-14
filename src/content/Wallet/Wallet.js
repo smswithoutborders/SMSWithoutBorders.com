@@ -29,7 +29,7 @@ const Wallet = () => {
             modal: false
         });
 
-    const AUTH_KEY = getToken()
+    let AUTH_KEY = getToken()
 
     useEffect(() => {
         getProviders(AUTH_KEY)
@@ -81,6 +81,10 @@ const Wallet = () => {
         setAlert({ loading: true })
         getPlatformOauthToken(AUTH_KEY, provider, platform)
             .then(response => {
+                //set new token
+                AUTH_KEY = response.data.auth_key;
+                setToken(response.data.auth_key);
+                //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
             })
             .catch((error) => {
