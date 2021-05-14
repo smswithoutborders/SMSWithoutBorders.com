@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { Avatar, LogOutIcon } from "evergreen-ui";
+import { Avatar, LogOutIcon, Dialog } from "evergreen-ui";
 
 import useAnimatedNavToggler from "helpers/useAnimatedNavToggler.js";
 import logo from "images/logo-icon-dark.png";
+import swobLogo from "images/logo.png";
 import { FiMenu as MenuIcon, FiX as CloseIcon, FiBell, FiInfo } from "react-icons/fi";
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Modal, ModalBody, } from 'carbon-components-react';
 import { logOut } from "services/auth.service";
 
 
@@ -33,6 +33,9 @@ const MobileNavLinks = motion(styled.div`
   }
   `);
 const DesktopNavLinks = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-gray-900`;
+const AboutLogo = tw.img`w-60`;
+const AboutContainer = tw.div`flex flex-wrap items-center flex-col md:flex-row justify-between mx-auto p-2`;
+const AboutDetails = tw.div``;
 
 const Navbar = () => {
     const { path } = useRouteMatch();
@@ -85,27 +88,25 @@ const Navbar = () => {
                     </NavToggle>
                 </MobileNavLinksContainer>
             </MainHeader>
-            <Modal
-                open={isAboutOpen}
-                modalLabel="About"
-                modalAriaLabel="About Deku SMS Manager"
-                passiveModal
-                onRequestClose={() => setIsAboutOpen(!isAboutOpen)}>
 
-                <ModalBody>
-                    <div className="header-group">
-                        <FiBell className="dash-centered-icon" /><span>SMSwithoutBorder</span>
-                    </div>
-                    <br />
-                    <h3><strong>SMSwithoutBorders User</strong></h3>
-                    <br />
-                    <div className="version-number">
-                        <p>Version number</p>
-                        <p>1.0.0</p>
-                    </div>
-                </ModalBody>
-
-            </Modal>
+            <Dialog
+                isShown={isAboutOpen}
+                title="About"
+                onCloseComplete={() => setIsAboutOpen(false)}
+                hasFooter={false}
+            >
+                <AboutContainer>
+                    <AboutLogo src={swobLogo} alt="SMSwithoutborders logo" />
+                    <AboutDetails>
+                        <h3><strong>SMSwithoutBorders User</strong></h3>
+                        <br />
+                        <div>
+                            <p>Version number</p>
+                            <p>1.0.0</p>
+                        </div>
+                    </AboutDetails>
+                </AboutContainer>
+            </Dialog>
         </>
     );
 };
