@@ -9,8 +9,15 @@ import { Panel } from "rsuite";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
 const StoreButton = tw(Button)`rounded-md`;
-const Heading = tw.h1`font-medium sm:text-4xl text-3xl mb-4 font-medium text-gray-900`;
+const Heading = tw.h1`font-medium sm:text-4xl text-3xl mb-4 font-medium `;
 const Description = tw.p`mb-8 leading-relaxed`;
+const PlatformTitle = tw.h4`text-lg font-medium`;
+const SubHeading = tw.h3`text-lg font-bold`;
+const Card = tw.div`h-full bg-white`;
+const Column = tw.div`p-4 md:w-1/2 w-full`;
+const Row = tw.div`flex flex-wrap -m-4 mt-12`;
+const Container = tw.div`container px-5 mx-auto py-12  lg:p-12 text-gray-900`;
+const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
 
 const Wallet = () => {
 
@@ -115,7 +122,8 @@ const Wallet = () => {
                     toaster.danger("There are currently no stored Tokens",)
                 }
             });
-    }
+    };
+
     const handleRevokeToken = (provider, platform) => {
         revokeToken(AUTH_KEY, password, provider, platform)
             .then(response => {
@@ -156,7 +164,7 @@ const Wallet = () => {
                     toaster.danger("An error occured, please try again")
                 }
             });
-    }
+    };
 
     let windowObjectReference = null;
     let previousUrl = null;
@@ -215,33 +223,31 @@ const Wallet = () => {
     return (
         <>
             <PageAnimationWrapper>
+                <Container>
 
-                <section tw="text-gray-600 md:p-8">
-                    <div tw="container px-5 mx-auto py-12">
+                    <Heading>Wallet</Heading>
+                    <Description>Save your tokens for rainy days</Description>
 
-                        <Heading>Wallet</Heading>
-                        <Description>Save your tokens for rainy days</Description>
-
-                        <div tw="flex flex-wrap -m-4">
-                            <div tw="p-4 md:w-1/2 w-full">
-                                <div tw="h-full bg-white shadow-md p-8 rounded-xl">
-                                    <h4>Providers</h4>
-                                    <br />
-                                    {providers ? (
-                                        <>
-                                            {providers.map(provider => {
-                                                return (
-                                                    <Panel header={provider.provider} key={provider.provider} collapsible={true} bordered>
-                                                        <p>Store your {provider.provider} token which will be used for authentication on your behalf in the event
+                    <Row>
+                        <Column>
+                            <Card>
+                                <SubHeading>Providers</SubHeading>
+                                <br />
+                                {providers ? (
+                                    <>
+                                        {providers.map(provider => {
+                                            return (
+                                                <Panel header={<PlatformTitle>{provider.provider}</PlatformTitle>} key={provider.provider} collapsible={true} bordered>
+                                                    <p>Store your {provider.provider} token which will be used for authentication on your behalf in the event
                                                                         of an internet shutdown.</p>
-                                                        <br />
-                                                        <p>You can define how this token will be used by setting the scopes of access</p>
-                                                        <br />
-
-                                                        <h5>Platform</h5>
-                                                        <p>{provider.platform}</p>
-                                                        <br />
-
+                                                    <br />
+                                                    <p>You can define how this token will be used by setting the scopes of access</p>
+                                                    <br />
+                                                    <StoreContainer>
+                                                        <div>
+                                                            <PlatformTitle>Platform</PlatformTitle>
+                                                            <p>{provider.platform}</p>
+                                                        </div>
                                                         <StoreButton
                                                             type="submit"
                                                             appearance="primary"
@@ -252,32 +258,35 @@ const Wallet = () => {
                                                         >
                                                             <span>{alert.loading ? "Storing" : "Store"}</span>
                                                         </StoreButton>
-                                                    </Panel>
-                                                )
-                                            })}
-                                        </>
-                                    ) : (
-                                            <p>No available providers</p>
-                                        )
-                                    }
-                                </div>
-                            </div>
-                            <div tw="p-4 md:w-1/2 w-full">
-                                <div tw="h-full bg-white shadow-md p-8 rounded-xl">
-                                    <h4>Saved tokens</h4>
-                                    <br />
+                                                    </StoreContainer>
+                                                </Panel>
+                                            )
+                                        })}
+                                    </>
+                                ) : (
+                                        <p>No available providers</p>
+                                    )
+                                }
+                            </Card>
+                        </Column>
+                        <Column>
+                            <Card>
+                                <SubHeading>Saved tokens</SubHeading>
+                                <br />
 
-                                    {tokens ? (
-                                        <>
-                                            {tokens.map(token => (
-                                                <Panel header={token.provider} key={token.provider} collapsible bordered>
-                                                    <h5>Platform</h5>
-                                                    <p>{token.platform}</p>
-                                                    <br />
-
+                                {tokens ? (
+                                    <>
+                                        {tokens.map(token => (
+                                            <Panel header={<PlatformTitle>{token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
+                                                <StoreContainer>
+                                                    <div>
+                                                        <PlatformTitle>Platform</PlatformTitle>
+                                                        <p>{token.platform}</p>
+                                                    </div>
                                                     <StoreButton
                                                         type="submit"
-                                                        appearance="danger"
+                                                        appearance="primary"
+                                                        intent="danger"
                                                         height={40}
                                                         iconBefore={FiTrash2}
                                                         isLoading={alert.loading}
@@ -291,19 +300,18 @@ const Wallet = () => {
                                                     >
                                                         <span>{alert.loading ? "Revoking" : "Revoke"}</span>
                                                     </StoreButton>
-                                                </Panel>
-                                            ))}
-                                        </>
-                                    ) : (
-                                            <p>No stored tokens</p>
-                                        )
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
+                                                </StoreContainer>
+                                            </Panel>
+                                        ))}
+                                    </>
+                                ) : (
+                                        <p>No stored tokens</p>
+                                    )
+                                }
+                            </Card>
+                        </Column>
+                    </Row>
+                </Container>
 
                 <Modal
                     open={alert.modal}
@@ -318,7 +326,7 @@ const Wallet = () => {
                     primaryButtonText="Confirm"
                     secondaryButtonText="Cancel">
 
-                    <h4>Are you sure you want to delete this token from your account?</h4>
+                    <SubHeading>Are you sure you want to delete this token from your account?</SubHeading>
                     <br />
                     <p>Please enter you password to Confirm </p>
                     <br />
