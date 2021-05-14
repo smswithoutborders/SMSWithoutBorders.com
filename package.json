@@ -9,9 +9,6 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.8",
     "axios": "^0.21.1",
-    "carbon-components": "^10.33.0",
-    "carbon-components-react": "^7.33.0",
-    "carbon-icons": "^7.0.7",
     "evergreen-ui": "^5.1.2",
     "framer-motion": "^4.1.13",
     "react": "^17.0.2",
@@ -22,7 +19,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "rsuite": "^4.10.1",
-    "sass": "^1.32.12",
     "styled-components": "^5.3.0",
     "twin.macro": "^2.4.1",
     "web-vitals": "^1.1.1"
