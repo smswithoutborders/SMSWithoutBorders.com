@@ -11,3 +11,16 @@ export const getProfileInfo = () => {
         auth_key: AUTH_KEY
     }).then(response => response)
 }
+
+export const getProfile = () => {
+    return JSON.parse(sessionStorage.getItem("SWOB_USER"));
+}
+
+export const setProfile = (profile) => {
+    removeProfile()
+    sessionStorage.setItem('SWOB_USER', JSON.stringify(profile));
+}
+
+export const removeProfile = () => {
+    sessionStorage.removeItem("SWOB_USER");
+}

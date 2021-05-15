@@ -4,7 +4,7 @@ import { Button, Avatar } from "evergreen-ui";
 import { IoMdSync } from "react-icons/io";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
-import { getProfileInfo } from "services/profile.service";
+import { getProfileInfo, getProfile, setProfile } from "services/profile.service";
 
 const SyncButton = tw(Button)`rounded-md`;
 const SectionContainer = tw.section`container mx-auto flex px-5 md:px-8 py-24 md:flex-row flex-col items-center font-bold`;
@@ -17,16 +17,16 @@ const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
 
 const Profile = () => {
 
-    const [profile, setProfile] = useState();
+    const [profile, setProfileState] = useState(getProfile)
 
     useEffect(() => {
-        getProfileInfo()
-            .then(response => {
-                setProfile(response.data);
-            })
-    }, []);
-
-
+        if (!profile)
+            getProfileInfo()
+                .then(response => {
+                    setProfileState(response.data);
+                    setProfile(response.data);
+                })
+    }, [profile]);
 
     return (
         <>
