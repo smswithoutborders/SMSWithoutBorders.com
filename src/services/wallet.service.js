@@ -1,22 +1,23 @@
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = API_URL;
 
 export const getProviders = (auth_key) => {
-    return axios.post(API_URL + "/users/providers", {
+    return axios.post("/users/providers", {
         auth_key: auth_key
     }).then(response => response)
 }
 
 export const getStoredTokens = (auth_key, provider) => {
-    return axios.post(API_URL + "/users/stored_tokens", {
+    return axios.post("/users/stored_tokens", {
         auth_key: auth_key,
         provider: provider
     }).then(response => response)
 };
 
 export const getPlatformOauthToken = (auth_key, provider, platform) => {
-    return axios.post(API_URL + "/users/tokens", {
+    return axios.post("/users/tokens", {
         auth_key: auth_key,
         provider: provider,
         platform: platform
@@ -24,7 +25,7 @@ export const getPlatformOauthToken = (auth_key, provider, platform) => {
 };
 
 export const revokeToken = (auth_key, password, provider, platform) => {
-    return axios.post(API_URL + "/users/tokens/revoke", {
+    return axios.post("/users/tokens/revoke", {
         auth_key: auth_key,
         password: password,
         provider: provider,
@@ -33,13 +34,13 @@ export const revokeToken = (auth_key, password, provider, platform) => {
 }
 
 export const getGoogleOauthToken = (auth_key, data) => {
-    return axios.post(API_URL + "/oauth2/google/code", {
+    return axios.post("/oauth2/google/code", {
         data: JSON.stringify(data),
         auth_key: auth_key
     }).then(response => response)
 }
 export const savePlatformOauthToken = (auth_key, provider, platform, code) => {
-    return axios.post(API_URL + `/${provider}/auth/success`, {
+    return axios.post(`/${provider}/auth/success`, {
         auth_key: auth_key,
         provider: provider,
         platform: platform,
