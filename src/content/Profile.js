@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro"
-import { Button, Avatar } from "evergreen-ui";
+import { Button, Avatar, Spinner, Pane } from "evergreen-ui";
 import { IoMdSync } from "react-icons/io";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
@@ -17,41 +17,53 @@ const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
 
 const Profile = () => {
 
-    const [profile, setProfileState] = useState(getProfile)
+    const [profile, setProfileState] = useState(getProfile);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!profile)
+        if (!profile) {
+            setLoading(true);
             getProfileInfo()
                 .then(response => {
                     setProfileState(response.data);
                     setProfile(response.data);
+                    setLoading(false);
                 })
+        }
     }, [profile]);
 
     return (
         <>
             <PageAnimationWrapper>
-                <SectionContainer>
-                    <ImageContainer>
-                        <Image name={profile?.phone_number} size={250} />
-                    </ImageContainer>
-                    <DetailsContainer>
-                        <Heading> Welcome, {profile?.phone_number} </Heading>
-                        <Description>Join Date</Description>
-                        <Meta>{new Date(profile?.created).toLocaleString()}</Meta>
-                        <br />
-                        <Description>Last Login</Description>
-                        <Meta>{new Date(profile?.last_login).toLocaleString()}</Meta>
-                        <br />
-                        <SyncButton
-                            iconBefore={IoMdSync}
-                            appearance="primary"
-                            height="40"
-                        >
-                            Sync
-                            </SyncButton>
-                    </DetailsContainer>
-                </SectionContainer>
+
+                {loading ? (
+                    <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
+                        <Spinner />
+                    </Pane>
+                ) : (
+                        <SectionContainer>
+                            <ImageContainer>
+                                <Image name={profile?.phone_number} size={250} />
+                            </ImageContainer>
+                            <DetailsContainer>
+                                <Heading> Welcome, {profile?.phone_number} </Heading>
+                                <Description>Join Date</Description>
+                                <Meta>{new Date(profile?.created).toLocaleString()}</Meta>
+                                <br />
+                                <Description>Last Login</Description>
+                                <Meta>{new Date(profile?.last_login).toLocaleString()}</Meta>
+                                <br />
+                                <SyncButton
+                                    iconBefore={IoMdSync}
+                                    appearance="primary"
+                                    height="40"
+                                >
+                                    Sync
+                        </SyncButton>
+                            </DetailsContainer>
+                        </SectionContainer>
+                    )
+                }
             </PageAnimationWrapper>
         </>
     );
