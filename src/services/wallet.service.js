@@ -38,8 +38,8 @@ export const getGoogleOauthToken = (auth_key, data) => {
         auth_key: auth_key
     }).then(response => response)
 }
-export const saveGoogleOauthToken = (auth_key, provider, platform, code) => {
-    return axios.post(API_URL + "/google/auth/success", {
+export const savePlatformOauthToken = (auth_key, provider, platform, code) => {
+    return axios.post(API_URL + `/${provider}/auth/success`, {
         auth_key: auth_key,
         provider: provider,
         platform: platform,

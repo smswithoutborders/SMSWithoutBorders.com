@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import { getToken, setToken, removeToken } from 'services/auth.service';
-import { getProviders, getPlatformOauthToken, saveGoogleOauthToken, revokeToken } from 'services/wallet.service';
+import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { Panel } from "rsuite";
@@ -53,7 +53,7 @@ const Wallet = () => {
             .then(response => {
                 let tokens = response.data.user_provider;
                 let providers = response.data.default_provider;
-
+                console.log(response.data);
                 if (providers.length) {
                     setProviders(providers);
                 }
@@ -217,7 +217,7 @@ const Wallet = () => {
         }
         const { data } = event; //extract data sent from popup
         if (data.source === 'smswithoutborders') {
-            saveGoogleOauthToken(AUTH_KEY, "google", "gmail", data.code)
+            savePlatformOauthToken(AUTH_KEY, "google", "gmail", data.code)
                 .then(response => {
                     console.log(response);
                     setAlert({ loading: false });
