@@ -9,7 +9,8 @@ import logo from "images/logo-icon-dark.png";
 import swobLogo from "images/logo.png";
 import { FiMenu as MenuIcon, FiX as CloseIcon, FiBell, FiInfo } from "react-icons/fi";
 import { Link, useRouteMatch } from 'react-router-dom';
-import { logOut } from "services/auth.service";
+import { removeToken } from "services/auth.service";
+import { removeProfile } from "services/profile.service";
 
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
 const NavLinks = tw.div`inline-block`;
@@ -35,6 +36,14 @@ const DesktopNavLinks = tw.nav`hidden lg:flex flex-1 justify-between items-cente
 const AboutLogo = tw.img`w-60`;
 const AboutContainer = tw.div`flex flex-wrap items-center flex-col md:flex-row justify-between mx-auto p-2`;
 const AboutDetails = tw.div``;
+
+const logOut = () => {
+    //remove user token from session storage
+    removeToken();
+    removeProfile();
+    // return user to login
+    window.location.replace("/")
+};
 
 const Navbar = () => {
     const { path } = useRouteMatch();
