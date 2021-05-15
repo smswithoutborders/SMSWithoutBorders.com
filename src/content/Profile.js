@@ -28,6 +28,7 @@ const Profile = () => {
                     setProfileState(response.data);
                     setProfile(response.data);
                     setLoading(false);
+                    window.location.reload();
                 })
                 .catch((error) => {
                     if (error.response) {

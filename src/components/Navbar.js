@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -10,7 +10,7 @@ import swobLogo from "images/logo.png";
 import { FiMenu as MenuIcon, FiX as CloseIcon, FiBell, FiInfo } from "react-icons/fi";
 import { Link, useRouteMatch } from 'react-router-dom';
 import { removeToken } from "services/auth.service";
-import { removeProfile } from "services/profile.service";
+import { removeProfile, getProfile } from "services/profile.service";
 
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
 const NavLinks = tw.div`inline-block`;
@@ -48,6 +48,7 @@ const logOut = () => {
 const Navbar = () => {
     const { path } = useRouteMatch();
     const [isAboutOpen, setIsAboutOpen] = useState(false);
+    const [profile, setProfile] = useState(getProfile);
 
     let collapseBreakpointClass = "lg"
     const { showNavLinks, animation, toggleNavbar } = useAnimatedNavToggler();
@@ -64,7 +65,12 @@ const Navbar = () => {
                     <FiInfo size={20} />
                 </UserActionsButton>
                 <UserActionsButton><FiBell size={20} /></UserActionsButton>
-                <UserActionsButton><Avatar name="User Name" size={34} /></UserActionsButton>
+                {profile ? (
+                    <UserActionsButton>
+                        <Avatar name={profile?.phone_number} size={34} />
+                    </UserActionsButton>
+                ) : (null)
+                }
                 <UserActionsButton onClick={() => { toggleNavbar(); logOut() }}>
                     <LogOutIcon /> &nbsp; Logout
                 </UserActionsButton>
@@ -78,6 +84,12 @@ const Navbar = () => {
             <span>SMSwithoutborders</span>
         </LogoLink>
     );
+
+    useEffect(() => {
+        if (!profile) {
+            setProfile(getProfile);
+        }
+    }, [profile]);
 
     return (
         <>
