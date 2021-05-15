@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro"
-import { Button, Avatar, Spinner, Pane } from "evergreen-ui";
+import { Button, Avatar, toaster, Spinner, Pane } from "evergreen-ui";
 import { IoMdSync } from "react-icons/io";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
@@ -29,6 +29,36 @@ const Profile = () => {
                     setProfile(response.data);
                     setLoading(false);
                 })
+                .catch((error) => {
+                    if (error.response) {
+                        /*
+                         * The request was made and the server responded with a
+                         * status code that falls out of the range of 2xx
+                         */
+                        setLoading(false);
+                        toaster.danger("Request Error", {
+                            description: "Sorry we could not locate your profile. Please check your network connection and reload this page"
+                        });
+
+                    } else if (error.request) {
+                        /*
+                         * The request was made but no response was received, `error.request`
+                         * is an instance of XMLHttpRequest in the browser and an instance
+                         * of http.ClientRequest in Node.js
+                         */
+                        console.log(error.request);
+                        setLoading(false);
+                        toaster.danger("Network Error", {
+                            description: "We could not fetch your profile. Please check your network and reload this page"
+                        });
+                    } else {
+                        // Something happened in setting up the request and triggered an Error
+                        setLoading(false);
+                        toaster.danger("Profile Error", {
+                            description: "An internal error occured. Please log out and login again"
+                        });
+                    }
+                });
         }
     }, [profile]);
 
