@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
-import { getToken, setToken, removeToken } from 'services/auth.service';
+import { setToken, removeToken } from 'services/auth.service';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
@@ -37,8 +37,6 @@ const Wallet = () => {
             modal: false
         });
 
-    let AUTH_KEY = getToken()
-
     //used to check password length when user revokes token prevents error 400 from BE
     const validatePassword = () => {
         if (password.length >= 16) {
@@ -49,7 +47,7 @@ const Wallet = () => {
     }
 
     useEffect(() => {
-        getProviders(AUTH_KEY)
+        getProviders()
             .then(response => {
                 let tokens = response.data.user_provider;
                 let providers = response.data.default_provider;
@@ -92,14 +90,13 @@ const Wallet = () => {
                     });
                 }
             });
-    }, [AUTH_KEY]);
+    }, []);
 
     const getPlatformToken = (provider, platform) => {
         setAlert({ loading: true })
-        getPlatformOauthToken(AUTH_KEY, provider, platform)
+        getPlatformOauthToken(provider, platform)
             .then(response => {
                 //set new token
-                AUTH_KEY = response.data.auth_key;
                 setToken(response.data.auth_key);
                 //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
@@ -135,7 +132,7 @@ const Wallet = () => {
     };
 
     const handleRevokeToken = (provider, platform) => {
-        revokeToken(AUTH_KEY, password, provider, platform)
+        revokeToken(password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
@@ -217,9 +214,8 @@ const Wallet = () => {
         }
         const { data } = event; //extract data sent from popup
         if (data.source === 'smswithoutborders') {
-            savePlatformOauthToken(AUTH_KEY, "google", "gmail", data.code)
+            savePlatformOauthToken("google", "gmail", data.code)
                 .then(response => {
-                    console.log(response);
                     setAlert({ loading: false });
                     toaster.success("Token stored successfully");
                     removeToken();
