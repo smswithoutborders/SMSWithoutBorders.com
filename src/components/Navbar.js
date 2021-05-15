@@ -14,10 +14,10 @@ import { removeProfile, getProfile } from "services/profile.service";
 
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
 const NavLinks = tw.div`inline-block`;
-const NavButton = tw.button`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center`;
-const NavLink = tw(Link)`h-16 transition duration-300 focus:bg-gray-800 text-white font-medium hover:bg-gray-700 hover:text-white px-6 py-3 no-underline items-center hocus:no-underline`;
+const NavButton = tw.button`h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center appearance-none`;
+const NavLink = tw(Link)`h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const LogoLink = styled(NavButton)`
-  ${tw`flex items-center ml-0!`};
+  ${tw`flex items-center ml-0! bg-primary-900 focus:bg-primary-900`};
   img {
     ${tw`w-8 h-8 mr-3`}
   }
@@ -25,9 +25,9 @@ const LogoLink = styled(NavButton)`
 const UserActions = tw.div`flex flex-row items-center`;
 const UserActionsButton = tw(NavButton)`flex flex-row items-center px-4 mx-auto`;
 const MobileNavLinksContainer = tw.nav`flex flex-1 items-center justify-between`;
-const NavToggle = tw(NavButton)`lg:hidden z-50 focus:outline-none transition duration-300`;
+const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300`;
 const MobileNavLinks = motion(styled.div`
-  ${tw`lg:hidden z-50 fixed top-28 inset-x-4 p-2 border text-center rounded-lg text-white bg-gray-900 shadow-2xl`}
+  ${tw`lg:hidden z-40 fixed top-28 inset-x-4 p-2 border text-center rounded-lg text-white bg-gray-900 shadow-2xl`}
   ${NavLinks} {
     ${tw`flex flex-col items-center`}
   }
@@ -61,10 +61,15 @@ const Navbar = () => {
                 <NavLink onClick={toggleNavbar} key="Wallet" to={`${path}/wallet`}>Wallet</NavLink>
             </NavLinks>
             <UserActions key={2}>
-                <UserActionsButton onClick={() => setIsAboutOpen(!isAboutOpen)}>
+                <UserActionsButton onClick={() => {
+                    toggleNavbar();
+                    setIsAboutOpen(!isAboutOpen)
+                }}>
                     <FiInfo size={20} />
                 </UserActionsButton>
-                <UserActionsButton><FiBell size={20} /></UserActionsButton>
+                <UserActionsButton onClick={toggleNavbar}>
+                    <FiBell size={20} />
+                </UserActionsButton>
                 {profile ? (
                     <UserActionsButton>
                         <Avatar name={profile?.phone_number} size={34} />
