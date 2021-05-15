@@ -51,7 +51,6 @@ const Wallet = () => {
             .then(response => {
                 let tokens = response.data.user_provider;
                 let providers = response.data.default_provider;
-                console.log(response.data);
                 if (providers.length) {
                     setProviders(providers);
                 }
@@ -288,6 +287,9 @@ const Wallet = () => {
                                                     <div>
                                                         <PlatformTitle>Platform</PlatformTitle>
                                                         <p>{token.platform}</p>
+                                                        <br />
+                                                        <PlatformTitle>Email address</PlatformTitle>
+                                                        <p>{token.email}</p>
                                                     </div>
                                                     <StoreButton
                                                         type="submit"
