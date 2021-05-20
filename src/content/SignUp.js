@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 import useTitle from "helpers/useTitle";
 
 const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
-const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 text-gray-900 shadow-2xl sm:rounded-3xl md:flex justify-center flex-1`;
-const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-2 sm:p-12 sm:rounded-l-lg`;
+const Content = tw.div`max-w-screen-xl m-0 text-gray-900  md:flex justify-center flex-1`;
+const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-2 sm:p-12`;
 const LogoImage = tw.img`h-60 mx-auto block`;
 const MainContent = tw.div`flex flex-col items-center`;
 const Heading = tw.h1`text-2xl xl:text-3xl font-bold`;
@@ -22,7 +22,7 @@ const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto px-4 sm:px-3`;
 const Input = tw(TextInputField)`w-full rounded-lg`;
 const SubmitButton = tw(Button)`w-full rounded-lg`;
-const IllustrationContainer = tw.div`sm:rounded-r-3xl flex-1 bg-primary-900 text-center hidden lg:flex justify-center`;
+const IllustrationContainer = tw.div` flex-1 bg-primary-900 text-center hidden lg:flex justify-center`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
@@ -35,7 +35,7 @@ const PrivacyTerms = (
       href="https://smswithoutborders.com/privacy-policy"
       target="_blank"
       rel="noreferrer"
-      tw="border-gray-500 no-underline">
+      tw="border-gray-500 text-primary-900 no-underline">
       privacy policy
   </a>
   </p>
