@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import useTitle from "helpers/useTitle";
 
 const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
-const Content = tw.div`max-w-screen-xl m-0 text-gray-900  md:flex justify-center flex-1`;
+const Content = tw.div` m-0 text-gray-900  md:flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-2 sm:p-12`;
 const LogoImage = tw.img`h-60 mx-auto block`;
 const MainContent = tw.div`flex flex-col items-center`;
