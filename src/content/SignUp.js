@@ -161,7 +161,7 @@ const SignUp = () => {
                     placeholder="Password"
                     inputHeight={40}
                     required
-                    minLength="16"
+                    minLength="8"
                     onChange={evt => {
                       setPassword(evt.target.value);
                       setConfirmPassword(true);
@@ -177,7 +177,7 @@ const SignUp = () => {
                         placeholder="retype password"
                         inputHeight={40}
                         required
-                        minLength="16"
+                        minLength="8"
                         isInvalid={isInvalid}
                         validationMessage={isInvalid ? "Passwords do not match" : null}
                         onChange={evt => {
