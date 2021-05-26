@@ -5,12 +5,14 @@ import tw from "twin.macro";
 import styled from "styled-components";
 // import illustration from "images/signup-illustration.svg";
 import logo from "images/logo.png";
+import PasswordStrengthBar from 'react-password-strength-bar';
+import useTitle from "helpers/useTitle";
 import { FiUserPlus } from "react-icons/fi";
 import { Button, TextInputField, toaster, Checkbox } from 'evergreen-ui';
-import PasswordStrengthBar from 'react-password-strength-bar';
 import { registerUser } from 'services/auth.service';
 import { Link } from "react-router-dom";
-import useTitle from "helpers/useTitle";
+import { ToggleButton } from "components/misc/Buttons";
+
 
 const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
 const Content = tw.div`m-0 text-gray-900  md:flex justify-center flex-1`;
@@ -52,6 +54,11 @@ const SignUp = () => {
   const [terms, setTerms] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [toggle2, setToggle2] = useState(false);
+
+
+
 
   const formProps = {
     onSubmit: async (e) => {
@@ -165,36 +172,48 @@ const SignUp = () => {
                     onChange={evt => setPhone(evt.target.value)}
                   />
 
-                  <Input
-                    type="password"
-                    label="Password"
-                    placeholder="Password"
-                    inputHeight={40}
-                    required
-                    minLength="8"
-                    onChange={evt => {
-                      setPassword(evt.target.value);
-                      setConfirmPassword(true);
-                    }}
-                  />
+                  <div tw="relative">
+                    <Input
+                      type={toggle ? "text" : "password"}
+                      label="Password"
+                      placeholder="Password"
+                      inputHeight={40}
+                      required
+                      minLength="8"
+                      onChange={evt => {
+                        setPassword(evt.target.value);
+                        setConfirmPassword(true);
+                      }}
+                    />
+                    <ToggleButton
+                      toggleFunc={setToggle}
+                      value={toggle}
+                    />
+                  </div>
                   <PasswordStrengthBar password={password} />
 
                   {confirmPassword ? (
                     <>
-                      <Input
-                        type="password"
-                        label="Confirm Password"
-                        placeholder="retype password"
-                        inputHeight={40}
-                        required
-                        minLength="8"
-                        isInvalid={isInvalid}
-                        validationMessage={isInvalid ? "Passwords do not match" : null}
-                        onChange={evt => {
-                          setPassword2(evt.target.value);
-                          setIsInvalid(false);
-                        }}
-                      />
+                      <div tw="relative">
+                        <Input
+                          type={toggle2 ? "text" : "password"}
+                          label="Confirm Password"
+                          placeholder="retype password"
+                          inputHeight={40}
+                          required
+                          minLength="8"
+                          isInvalid={isInvalid}
+                          validationMessage={isInvalid ? "Passwords do not match" : null}
+                          onChange={evt => {
+                            setPassword2(evt.target.value);
+                            setIsInvalid(false);
+                          }}
+                        />
+                        <ToggleButton
+                          toggleFunc={setToggle2}
+                          value={toggle2}
+                        />
+                      </div>
                       <PasswordStrengthBar password={password2} />
                     </>) : null
                   }
