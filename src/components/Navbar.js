@@ -72,7 +72,7 @@ const Navbar = () => {
                 </UserActionsButton>
                 {profile ? (
                     <UserActionsButton>
-                        <Avatar name={profile?.phone_number} size={34} />
+                        <Avatar name={profile?.name} size={34} />
                     </UserActionsButton>
                 ) : (null)
                 }
