@@ -17,6 +17,7 @@ export const getProviders = () => {
 
 export const getStoredTokens = (provider) => {
     return axios.post("/users/stored_tokens", {
+        id: AUTH_ID,
         auth_key: AUTH_KEY,
         provider: provider
     }).then(response => response)
@@ -24,6 +25,7 @@ export const getStoredTokens = (provider) => {
 
 export const getPlatformOauthToken = (provider, platform) => {
     return axios.post("/users/tokens", {
+        id: AUTH_ID,
         auth_key: AUTH_KEY,
         provider: provider,
         platform: platform
@@ -32,6 +34,7 @@ export const getPlatformOauthToken = (provider, platform) => {
 
 export const revokeToken = (password, provider, platform) => {
     return axios.post("/users/tokens/revoke", {
+        id: AUTH_ID,
         auth_key: AUTH_KEY,
         password: password,
         provider: provider,
@@ -41,6 +44,7 @@ export const revokeToken = (password, provider, platform) => {
 
 export const getGoogleOauthToken = (data) => {
     return axios.post("/oauth2/google/code", {
+        id: AUTH_ID,
         auth_key: AUTH_KEY,
         data: JSON.stringify(data)
     }).then(response => response)
@@ -52,6 +56,7 @@ export const savePlatformOauthToken = (provider, platform, code) => {
     AUTH_ID = authObj.id;
 
     return axios.post(`/${provider}/auth/success`, {
+        id: AUTH_ID,
         auth_key: AUTH_KEY,
         provider: provider,
         platform: platform,
