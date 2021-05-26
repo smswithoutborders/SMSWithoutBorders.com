@@ -4,10 +4,13 @@ import { getToken } from "services/auth.service";
 const API_URL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = API_URL;
 
-let AUTH_KEY = getToken()
+let authObj = getToken();
+let AUTH_KEY = authObj.auth_key;
+let AUTH_ID = authObj.id;
 
 export const getProviders = () => {
     return axios.post("/users/providers", {
+        id: AUTH_ID,
         auth_key: AUTH_KEY
     }).then(response => response)
 }
@@ -43,7 +46,11 @@ export const getGoogleOauthToken = (data) => {
     }).then(response => response)
 }
 export const savePlatformOauthToken = (provider, platform, code) => {
-    AUTH_KEY = getToken();
+    //renew auth data
+    authObj = getToken();
+    AUTH_KEY = authObj.auth_key;
+    AUTH_ID = authObj.id;
+
     return axios.post(`/${provider}/auth/success`, {
         auth_key: AUTH_KEY,
         provider: provider,
