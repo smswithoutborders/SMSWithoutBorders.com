@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
+import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import { setToken, removeToken } from 'services/auth.service';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { Panel } from "rsuite";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
+import { ToggleButton } from "components/misc/Buttons";
 
 const StoreButton = tw(Button)`rounded-md`;
 const Heading = tw.h1`font-medium sm:text-4xl text-3xl mb-4 font-medium `;
@@ -25,6 +26,7 @@ const Wallet = () => {
     const [providers, setProviders] = useState();
     const [password, setPassword] = useState("");
     const [isValid, setIsValid] = useState(false);
+    const [toggle, setToggle] = useState(false);
     const [revokedTokenDetails, setRevokedTokenDetails] = useState(
         {
             provider: "",
@@ -340,18 +342,24 @@ const Wallet = () => {
                     <br />
                     <p>Please enter you password to Confirm </p>
                     <br />
-                    <Input
-                        type="password"
-                        label="Password"
-                        placeholder="Password"
-                        inputHeight={40}
-                        required
-                        minLength="8"
-                        onChange={(evt) => {
-                            setPassword(evt.target.value);
-                            validatePassword();
-                        }}
-                    />
+                    <div tw="relative">
+                        <Input
+                            type="password"
+                            label="Password"
+                            placeholder="Password"
+                            inputHeight={40}
+                            required
+                            minLength="8"
+                            onChange={(evt) => {
+                                setPassword(evt.target.value);
+                                validatePassword();
+                            }}
+                        />
+                        <ToggleButton
+                            toggleFunc={setToggle}
+                            value={toggle}
+                        />
+                    </div>
                 </Dialog>
             </PageAnimationWrapper>
         </>
