@@ -3,9 +3,10 @@ import axios from 'axios';
 let AUTH_URL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = AUTH_URL;
 
-export const registerUser = (phonenumber, password) => {
+export const registerUser = (name, phonenumber, password) => {
     return axios.post("/users/profiles/register",
         {
+            name: name,
             phone_number: phonenumber,
             password: password
         }).then(response => response)

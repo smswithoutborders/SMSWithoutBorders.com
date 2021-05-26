@@ -44,7 +44,7 @@ const PrivacyTerms = (
 const SignUp = () => {
 
   useTitle("Sign Up");
-
+  const [name, setName] = useState();
   const [phone, setPhone] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
@@ -64,11 +64,11 @@ const SignUp = () => {
         return
       }
 
-      registerUser(phone, password)
+      registerUser(name, phone, password)
         .then(response => {
           if (response.status === 200) {
             setLoading(false);
-            toaster.success(`Success, Your account ${phone} has been created`, {
+            toaster.success(`Success, Your account ${name} has been created`, {
               description: "You will be redirected soon"
             });
 
@@ -146,10 +146,20 @@ const SignUp = () => {
               <Heading>Sign Up</Heading>
               <FormContainer>
                 <Form {...formProps}>
+
+                  <Input
+                    type="text"
+                    label="Name"
+                    placeholder="Enter your name(s)"
+                    inputHeight={40}
+                    required
+                    onChange={evt => setName(evt.target.value)}
+                  />
+
                   <Input
                     type="text"
                     label="Phone number"
-                    placeholder="Phone number"
+                    placeholder="Enter your phone number"
                     inputHeight={40}
                     required
                     onChange={evt => setPhone(evt.target.value)}
