@@ -96,7 +96,7 @@ const Wallet = () => {
         getPlatformOauthToken(provider, platform)
             .then(response => {
                 //set new token
-                setToken(response.data.auth_key);
+                setToken(response.data);
                 //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
             })
