@@ -21,11 +21,11 @@ export const userLogin = async (phonenumber, password) => {
 };
 
 export const getToken = () => {
-    return sessionStorage.getItem('SWOB_KEY');
+    return JSON.parse(sessionStorage.getItem('SWOB_KEY'));
 };
 
 export const setToken = (token) => {
-    sessionStorage.setItem('SWOB_KEY', token);
+    sessionStorage.setItem('SWOB_KEY', JSON.stringify(token));
 };
 
 export const removeToken = () => {

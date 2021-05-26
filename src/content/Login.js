@@ -46,7 +46,7 @@ const Login = () => {
             toaster.success('Login successful', {
               description: "You will be redirected shortly"
             });
-            setToken(response.data.auth_key);
+            setToken(response.data);
 
             /*
               potential for improving UX here if the API responds fast then
