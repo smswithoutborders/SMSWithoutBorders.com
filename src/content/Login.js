@@ -9,6 +9,7 @@ import { FiLogIn } from "react-icons/fi";
 import { Button, TextInputField, toaster } from 'evergreen-ui';
 import { setToken, userLogin } from 'services/auth.service';
 import { Link } from "react-router-dom";
+import { ToggleButton } from "components/misc/Buttons";
 import useTitle from "helpers/useTitle";
 
 const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
@@ -34,6 +35,7 @@ const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const formProps = {
     onSubmit: async (e) => {
@@ -136,14 +138,22 @@ const Login = () => {
                     onChange={evt => setUsername(evt.target.value)}
                   />
 
-                  <Input
-                    type="password"
-                    label="Password"
-                    placeholder="Password"
-                    inputHeight={40}
-                    required
-                    onChange={evt => setPassword(evt.target.value)}
-                  />
+
+
+                  <div tw="relative">
+                    <Input
+                      type={toggle ? "text" : "password"}
+                      label="Password"
+                      placeholder="Password"
+                      inputHeight={40}
+                      required
+                      onChange={evt => setPassword(evt.target.value)}
+                    />
+                    <ToggleButton
+                      toggleFunc={setToggle}
+                      value={toggle}
+                    />
+                  </div>
 
 
                   <SubmitButton
