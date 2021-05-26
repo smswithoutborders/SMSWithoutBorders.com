@@ -3,7 +3,7 @@ import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
 import { Container as ContainerBase } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
-import illustration from "images/signup-illustration.svg";
+// import illustration from "images/signup-illustration.svg";
 import logo from "images/logo.png";
 import { FiUserPlus } from "react-icons/fi";
 import { Button, TextInputField, toaster, Checkbox } from 'evergreen-ui';
@@ -22,10 +22,10 @@ const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto px-4 sm:px-3`;
 const Input = tw(TextInputField)`w-full rounded-lg`;
 const SubmitButton = tw(Button)`w-full rounded-lg`;
-const IllustrationContainer = tw.div` flex-1 bg-primary-900 text-center hidden lg:flex justify-center`;
+const IllustrationContainer = tw.div`lg:flex flex-1 bg-primary-200 hidden`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
-  ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
+  ${tw` w-full bg-cover bg-center bg-no-repeat`}
 `;
 
 const PrivacyTerms = (
@@ -219,7 +219,8 @@ const SignUp = () => {
             </MainContent>
           </MainContainer>
           <IllustrationContainer>
-            <IllustrationImage imageSrc={illustration} />
+            {/* <IllustrationImage imageSrc={illustration} /> */}
+            <IllustrationImage imageSrc="https://source.unsplash.com/1600x900/?nature,travel,tech" />
           </IllustrationContainer>
         </Content>
       </Container>
