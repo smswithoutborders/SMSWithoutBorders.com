@@ -1,2 +1,16 @@
+import { useState } from "react";
 import tw from "twin.macro";
-export const PrimaryButton = tw.button`px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300`;
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
+const IconButton = tw.span`absolute inset-y-0 right-5 flex items-center  cursor-pointer`;
+
+const ToggleButton = () => {
+    const [toggle, setToggle] = useState(false);
+    return (
+        <IconButton onClick={() => setToggle(!toggle)}>
+            {toggle ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+        </IconButton>
+    )
+}
+
+export { ToggleButton }
