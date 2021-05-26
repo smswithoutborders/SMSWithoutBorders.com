@@ -39,7 +39,7 @@ const Wallet = () => {
 
     //used to check password length when user revokes token prevents error 400 from BE
     const validatePassword = () => {
-        if (password.length >= 16) {
+        if (password.length >= 8) {
             setIsValid(true);
         } else {
             setIsValid(false);
@@ -269,8 +269,8 @@ const Wallet = () => {
                                         })}
                                     </>
                                 ) : (
-                                        <p>No available providers</p>
-                                    )
+                                    <p>No available providers</p>
+                                )
                                 }
                             </Card>
                         </Column>
@@ -313,8 +313,8 @@ const Wallet = () => {
                                         ))}
                                     </>
                                 ) : (
-                                        <p>No stored tokens</p>
-                                    )
+                                    <p>No stored tokens</p>
+                                )
                                 }
                             </Card>
                         </Column>
@@ -346,7 +346,7 @@ const Wallet = () => {
                         placeholder="Password"
                         inputHeight={40}
                         required
-                        minLength="16"
+                        minLength="8"
                         onChange={(evt) => {
                             setPassword(evt.target.value);
                             validatePassword();
