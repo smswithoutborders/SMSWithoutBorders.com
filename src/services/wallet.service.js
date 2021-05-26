@@ -5,8 +5,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = API_URL;
 
 let authObj = getToken();
-let AUTH_KEY = authObj.auth_key;
-let AUTH_ID = authObj.id;
+let AUTH_KEY = authObj?.auth_key;
+let AUTH_ID = authObj?.id;
 
 export const getProviders = () => {
     return axios.post("/users/providers", {
