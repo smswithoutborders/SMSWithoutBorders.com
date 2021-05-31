@@ -12,6 +12,7 @@ const StoreButton = tw(Button)`rounded-md`;
 const Heading = tw.h1`font-medium sm:text-4xl text-3xl mb-4 font-medium `;
 const Description = tw.p`mb-8 leading-relaxed`;
 const PlatformTitle = tw.h4`text-lg font-medium`;
+const PlatformDescription = tw.p`mb-2`;
 const SubHeading = tw.h3`text-lg font-bold`;
 const Card = tw.div`h-full bg-white`;
 const Column = tw.div`p-4 md:w-1/2 w-full`;
@@ -244,16 +245,22 @@ const Wallet = () => {
                                     <>
                                         {providers.map(provider => {
                                             return (
-                                                <Panel header={<PlatformTitle>{provider.provider}</PlatformTitle>} key={provider.provider} collapsible={true} bordered>
-                                                    <p>Store your {provider.provider} token which will be used for authentication on your behalf in the event
+                                                <Panel header={<PlatformTitle>{provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
+                                                    <p>Store your {provider?.provider} token which will be used for authentication on your behalf in the event
                                                                         of an internet shutdown.</p>
                                                     <br />
                                                     <p>You can define how this token will be used by setting the scopes of access</p>
                                                     <br />
                                                     <StoreContainer>
                                                         <div>
+                                                            <PlatformTitle>Description</PlatformTitle>
+                                                            <PlatformDescription>{provider?.description}</PlatformDescription>
+
                                                             <PlatformTitle>Platform</PlatformTitle>
-                                                            <p>{provider.platform}</p>
+                                                            <PlatformDescription>{provider?.platforms[0].name}</PlatformDescription>
+
+                                                            <PlatformTitle>Type</PlatformTitle>
+                                                            <PlatformDescription>{provider?.platforms[0].type}</PlatformDescription>
                                                         </div>
                                                         <StoreButton
                                                             type="submit"
@@ -261,7 +268,7 @@ const Wallet = () => {
                                                             height={40}
                                                             iconBefore={FiSave}
                                                             isLoading={alert.loading}
-                                                            onClick={() => getPlatformToken(provider.provider, provider.platform)}
+                                                            onClick={() => getPlatformToken(provider?.provider, provider?.platforms[0].name)}
                                                         >
                                                             <span>{alert.loading ? "Storing" : "Store"}</span>
                                                         </StoreButton>
