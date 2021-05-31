@@ -297,11 +297,14 @@ const Wallet = () => {
                                             <Panel header={<PlatformTitle>{token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
                                                 <StoreContainer>
                                                     <div>
+                                                        <PlatformTitle>Description</PlatformTitle>
+                                                        <PlatformDescription>{token.description}</PlatformDescription>
+
                                                         <PlatformTitle>Platform</PlatformTitle>
-                                                        <p>{token.platform}</p>
-                                                        <br />
+                                                        <PlatformDescription>{token.platforms[0].name}</PlatformDescription>
+
                                                         <PlatformTitle>Email address</PlatformTitle>
-                                                        <p>{token.email}</p>
+                                                        <PlatformDescription>{token.email}</PlatformDescription>
                                                     </div>
                                                     <StoreButton
                                                         type="submit"
@@ -313,7 +316,7 @@ const Wallet = () => {
                                                         onClick={() => {
                                                             setRevokedTokenDetails({
                                                                 provider: token.provider,
-                                                                platform: token.platform
+                                                                platform: token.platforms[0].name
                                                             });
                                                             setAlert({ modal: true });
                                                         }}
@@ -354,7 +357,7 @@ const Wallet = () => {
                     <br />
                     <div tw="relative">
                         <Input
-                            type={toggle ? "text": "password"}
+                            type={toggle ? "text" : "password"}
                             label="Password"
                             placeholder="Password"
                             inputHeight={40}
