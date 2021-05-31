@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { setToken, removeToken } from 'services/auth.service';
+import { getToken, setToken, removeToken } from 'services/auth.service';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
@@ -99,7 +99,10 @@ const Wallet = () => {
         getPlatformOauthToken(provider, platform)
             .then(response => {
                 //set new token
-                setToken(response.data);
+                setToken({
+                    auth_key: response.data.auth_key,
+                    id: getToken().id
+                });
                 //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
             })
@@ -221,7 +224,7 @@ const Wallet = () => {
                     setAlert({ loading: false });
                     toaster.success("Token stored successfully");
                     removeToken();
-                    setToken(response.data.auth_key);
+                    setToken(response.data);
                     setAlert({ loading: false, notify: false });
                     window.location.reload();
                 })
@@ -351,7 +354,7 @@ const Wallet = () => {
                     <br />
                     <div tw="relative">
                         <Input
-                            type="password"
+                            type={toggle ? "text": "password"}
                             label="Password"
                             placeholder="Password"
                             inputHeight={40}
