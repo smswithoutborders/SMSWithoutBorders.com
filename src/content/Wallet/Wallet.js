@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { getToken, setToken, removeToken } from 'services/auth.service';
+import { getToken, setToken } from 'services/auth.service';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
@@ -223,8 +223,10 @@ const Wallet = () => {
                 .then(response => {
                     setAlert({ loading: false });
                     toaster.success("Token stored successfully");
-                    removeToken();
-                    setToken(response.data);
+                    setToken({
+                        auth_key: response.data.auth_key,
+                        id: getToken().id
+                    });
                     setAlert({ loading: false, notify: false });
                     window.location.reload();
                 })
