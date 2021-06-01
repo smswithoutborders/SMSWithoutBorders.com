@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro"
+import axios from "axios";
+
 import { Button, Avatar, toaster, Spinner, Pane } from "evergreen-ui";
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
 import QRCode from 'qrcode.react';
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import { getProfileInfo, getProfile, setProfile } from "services/profile.service";
+import { getToken } from "services/auth.service";
 
 const SyncButton = tw(Button)`rounded-md`;
 const SectionContainer = tw.section`container mx-auto flex px-5 md:px-4 py-24 lg:py-36 md:flex-row flex-col items-center font-bold`;
@@ -21,7 +24,10 @@ const Profile = () => {
 
     const [profile, setProfileState] = useState(getProfile);
     const [loading, setLoading] = useState(false);
-    const [sync, setSync] = useState(false);
+    const [syncState, setSyncState] = useState(false);
+    const [syncLoading, setSyncLoading] = useState(false);
+    const [qrLink, setQrLink] = useState("http://smswithoutborders.com");
+
 
     useEffect(() => {
         if (!profile) {
@@ -66,6 +72,86 @@ const Profile = () => {
         }
     }, [profile]);
 
+    const handleSync = () => {
+        setSyncState(!syncState);
+
+        let ROUTER_URL = process.env.REACT_APP_ROUTER_URL;
+
+        let authObj = getToken();
+        let AUTH_KEY = authObj?.auth_key;
+        let AUTH_ID = authObj?.id;
+
+        axios.post(ROUTER_URL + "/sync/sessions", {
+            auth_key: AUTH_KEY,
+            id: AUTH_ID
+        }).then(response => {
+
+            console.log(response.data)
+
+            let ws = new WebSocket(response.data.url);
+
+            ws.onopen = () => {
+                // on connecting, do nothing but log it to the console
+                console.log('connected')
+            }
+
+            ws.onmessage = evt => {
+                // listen to data sent from the websocket server
+
+                if (evt.data === "200- acked") {
+                    setSyncState(false);
+                } else if (evt.data === "201- Paused") {
+                    setSyncLoading(true);
+                } else {
+                    setQrLink(evt.data);
+                }
+
+            }
+
+            ws.onclose = () => {
+                console.log('disconnected');
+                setSyncState(false);
+                // automatically try to reconnect on connection loss
+            }
+
+            ws.onerror = err => {
+                console.error(
+                    "Socket encountered error: ",
+                    err.message,
+                    "Closing socket"
+                );
+            }
+        }).catch((error) => {
+            if (error.response) {
+                /*
+                 * The request was made and the server responded with a
+                 * status code that falls out of the range of 2xx
+                 */
+                setLoading(false);
+                toaster.danger("Request Error", {
+                    description: "Sorry we could not locate your profile. Please check your network connection and reload this page"
+                });
+
+            } else if (error.request) {
+                /*
+                 * The request was made but no response was received, `error.request`
+                 * is an instance of XMLHttpRequest in the browser and an instance
+                 * of http.ClientRequest in Node.js
+                 */
+                console.log(error.request);
+                setLoading(false);
+                toaster.danger("Network Error", {
+                    description: "We could not fetch your profile. Please check your network and reload this page"
+                });
+            } else {
+                // Something happened in setting up the request and triggered an Error
+                setLoading(false);
+                toaster.danger("Profile Error", {
+                    description: "An internal error occured. Please log out and login again"
+                });
+            }
+        });
+    }
 
     if (loading) {
         return (
@@ -75,13 +161,13 @@ const Profile = () => {
         )
     }
 
-    if (sync) {
+    if (syncState) {
         return (
             <PageAnimationWrapper>
                 <SectionContainer>
                     <ImageContainer>
                         <QRContainer
-                            value="http://smswithoutborders.com"
+                            value={qrLink}
                             size={250}
                         />
                     </ImageContainer>
@@ -97,7 +183,7 @@ const Profile = () => {
                             iconBefore={IoMdArrowBack}
                             appearance="default"
                             height="40"
-                            onClick={() => setSync(!sync)}
+                            onClick={() => setSyncState(!syncState)}
                         >
                             profile
                         </SyncButton>
@@ -125,7 +211,7 @@ const Profile = () => {
                         iconBefore={IoMdSync}
                         appearance="primary"
                         height="40"
-                        onClick={() => setSync(!sync)}
+                        onClick={() => handleSync()}
                     >
                         sync
                         </SyncButton>
