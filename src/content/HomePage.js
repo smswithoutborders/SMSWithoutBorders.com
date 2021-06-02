@@ -5,10 +5,10 @@ import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
 import { MainNavbar } from "components";
 
-const SectionContainer = tw.section`container mx-auto flex px-5 md:px-4 py-24 md:flex-row flex-col items-center font-bold`;
-const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`
-const DetailsContainer = tw.div`md:w-1/2 flex flex-col md:items-start md:text-left items-center text-center`;
-const Heading = tw.h1`font-bold text-3xl sm:text-5xl  mb-4 font-bold text-gray-900`;
+const SectionContainer = tw.section`container mx-auto flex px-5 py-24 md:flex-row flex-col items-center`;
+const ImageContainer = tw.div`md:w-3/6 mb-10 md:mb-0`;
+const DetailsContainer = tw.div`md:w-4/6 p-2 flex flex-col md:items-start `;
+const Heading = tw.h1`font-bold text-4xl sm:text-5xl  mb-4 font-bold text-gray-900`;
 const Description = tw.p`text-base leading-relaxed text-gray-800 font-light`;
 const DescLink = tw.p`text-base mb-2 text-gray-900 cursor-pointer hocus:text-primary-900`;
 const Image = tw.img`object-cover object-center block mx-auto shadow-lg rounded-2xl`;
@@ -34,8 +34,11 @@ const HomePage = () => {
                         <DescLink href="mailto:info@smswithoutborders.com">Email: info@smswithoutborders.com</DescLink>
                         <DescLink>IRC: freenode/#afkanerd</DescLink>
                     </DetailsContainer>
-
                 </SectionContainer>
+
+                {/* <footer>
+                    <p>&copy; {new Date().getFullYear()} Powered by <a href="https://afkanerd.io" target="_blank" rel="noreferrer">Afkanerd</a></p>
+                </footer> */}
             </PageAnimationWrapper>
         </>
     );
