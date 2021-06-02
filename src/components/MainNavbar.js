@@ -13,6 +13,7 @@ const MainHeader = tw.header`flex justify-between items-center bg-gray-900 shado
 const NavLinks = tw.div`inline-flex`;
 const NavButton = tw.button`h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center appearance-none`;
 const NavLink = tw(Link)`inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const ExtLink = tw.a`inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const LogoLink = styled(NavButton)`
   ${tw`inline-flex items-center ml-0! bg-primary-900 focus:bg-primary-900`};
   img {
@@ -41,7 +42,7 @@ const MainNavbar = () => {
         <React.Fragment key="nav">
             <NavLinks key={1}>
                 <NavLink onClick={toggleNavbar} key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
-                <NavLink onClick={toggleNavbar} key="Github" to="/github">Github</NavLink>
+                <ExtLink onClick={toggleNavbar} key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
             </NavLinks>
             <UserActions key={2}>
                 <NavLink key="login" to="/login" onClick={toggleNavbar}>
