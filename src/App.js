@@ -5,8 +5,10 @@ import "rsuite/dist/styles/rsuite-default.css";
 import "tailwindcss/dist/base.css";
 import Login from "content/Login";
 import SignUp from "content/SignUp"
+import HomePage from 'content/HomePage';
 import DashBoard from "content/DashBoard";
 import { getToken } from "services/auth.service";
+import PrivacyPage from 'content/PrivacyPage';
 
 const App = () => {
 
@@ -21,8 +23,13 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          {isLoggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+          <HomePage />
         </Route>
+
+        <Route exact path="/privacy-policy">
+          <PrivacyPage />
+        </Route>
+
         <Route path="/dashboard">
           {isLoggedIn ? <DashBoard /> : <Redirect to="/login" />}
         </Route>
@@ -34,8 +41,8 @@ const App = () => {
         </Route>
       </Switch>
     </Router>
-
   );
 };
+
 
 export default App;
