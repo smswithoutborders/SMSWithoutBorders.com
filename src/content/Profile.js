@@ -96,11 +96,11 @@ const Profile = () => {
             ws.onmessage = evt => {
                 // listen to data sent from the websocket server
 
-                if (evt.data === "200- acked") {
+                if (evt.data == "200- acked") {
                     setSyncState(false);
                     setSyncLoading(false);
                     toaster.success("Sync complete");
-                } else if (evt.data === "201- Paused") {
+                } else if (evt.data == "201- paused") {
                     setSyncLoading(true);
                 } else {
                     setQrLink(evt.data);
