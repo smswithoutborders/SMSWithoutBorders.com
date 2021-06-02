@@ -86,8 +86,6 @@ const Profile = () => {
             id: AUTH_ID
         }).then(response => {
 
-            console.log(response.data)
-
             let ws = new WebSocket(response.data.url);
 
             ws.onopen = () => {
@@ -100,6 +98,8 @@ const Profile = () => {
 
                 if (evt.data === "200- acked") {
                     setSyncState(false);
+                    setSyncLoading(false);
+                    toaster.success("Sync complete");
                 } else if (evt.data === "201- Paused") {
                     setSyncLoading(true);
                 } else {
@@ -115,11 +115,10 @@ const Profile = () => {
             }
 
             ws.onerror = err => {
-                console.error(
-                    "Socket encountered error: ",
-                    err.message,
-                    "Closing socket"
-                );
+                toaster.danger("An error occured", {
+                    description: "Please resync"
+                });
+
             }
         }).catch((error) => {
             if (error.response) {
@@ -166,10 +165,21 @@ const Profile = () => {
             <PageAnimationWrapper>
                 <SectionContainer>
                     <ImageContainer>
-                        <QRContainer
-                            value={qrLink}
-                            size={250}
-                        />
+                        {syncLoading ? (
+                            <Pane
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                                height={250}
+                                width={250}
+                                tw="border border-gray-200 mx-auto">
+                                <Spinner />
+                            </Pane> ) : (
+                                <QRContainer
+                                value={qrLink}
+                                size={250}
+                            />
+                        )}
                     </ImageContainer>
                     <DetailsContainer>
                         <Heading>Sync Mobile</Heading>
@@ -177,7 +187,7 @@ const Profile = () => {
                         <Meta>This lets you use the SW/OB secure gateway for all messages</Meta>
                         <br />
                         <Description>Status</Description>
-                        <Meta>pending</Meta>
+                        <Meta>{syncLoading ? "syncing" : "pending"}</Meta>
                         <br />
                         <SyncButton
                             iconBefore={IoMdArrowBack}
