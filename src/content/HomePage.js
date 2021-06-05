@@ -12,7 +12,7 @@ const ImageContainer = tw.div`md:w-3/6 mb-10 md:mb-0`;
 const DetailsContainer = tw.div`md:w-4/6 p-2 flex flex-col md:items-start `;
 const Heading = tw.h1`font-bold text-4xl sm:text-5xl  mb-8 font-bold text-gray-900`;
 // const Description = tw.p`text-base leading-relaxed text-gray-800 font-light`;
-const DescLink = tw.p`inline-flex items-center text-base ml-4 text-gray-900 cursor-pointer hocus:text-primary-900`;
+const DescLink = tw.a`inline-flex items-center text-base ml-4 mb-3 text-gray-900 cursor-pointer hocus:text-primary-900`;
 const Image = tw.img`object-cover object-center block mx-auto shadow-lg rounded-2xl`;
 
 const HomePage = () => {
@@ -32,9 +32,9 @@ const HomePage = () => {
                     </ImageContainer>
                     <DetailsContainer>
                         <Heading>Coming Soon ...</Heading>
-                        <DescLink href="mailto:info@smswithoutborders.com"><FiMail size={20} /> &nbsp; info@smswithoutborders.com</DescLink>
+                        <DescLink href="mailto:info@smswithoutborders.com" target="_blank" rel="noreferrer"><FiMail size={20} /> &nbsp; info@smswithoutborders.com</DescLink>
                         <DescLink><FiMessageSquare size={20} /> &nbsp; IRC: freenode/#afkanerd</DescLink>
-                        <DescLink><GoMarkGithub size={20} /> &nbsp; IRC: freenode/#afkanerd</DescLink>
+                        <DescLink href="https://github.com/smswithoutborders" target="_blank" rel="noreferrer"><GoMarkGithub size={20} /> &nbsp; @smswithoutborders</DescLink>
                     </DetailsContainer>
                 </SectionContainer>
 
