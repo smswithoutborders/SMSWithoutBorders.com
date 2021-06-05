@@ -1,7 +1,7 @@
 import React from 'react';
 import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { Text, HeadingRow, Heading, MainNavbar } from "components";
+import { Text, HeadingRow, Heading, MainNavbar, Footer } from "components";
 
 const Container = tw.div`container px-5 mx-auto py-12  lg:p-12 text-gray-900`;
 
@@ -204,6 +204,8 @@ const PrivacyPage = () => {
                     <p>&copy; {new Date().getFullYear()} Powered by <a href="https://afkanerd.io" target="_blank" rel="noreferrer">Afkanerd</a></p>
                 </footer>
             </Container>
+            <Footer />
+
         </PageAnimationWrapper>
     );
 }

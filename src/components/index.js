@@ -1,5 +1,6 @@
 import Navbar from "components/Navbar";
 import MainNavbar from "components/MainNavbar";
+import Footer from "components/Footer";
 import { Text, HeadingRow, Heading, Description, DonateButton } from "components/misc/Text";
 
 export {
@@ -9,5 +10,6 @@ export {
     Description,
     DonateButton,
     Navbar,
-    MainNavbar
+    MainNavbar,
+    Footer
 }
