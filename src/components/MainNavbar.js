@@ -14,7 +14,7 @@ const NavLinks = tw.div`inline-flex`;
 const NavButton = tw.button`h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center appearance-none`;
 const NavLink = tw(Link)`inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const ExtLink = tw.a`inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-white font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
-const LogoLink = styled(NavButton)`
+const LogoLink = styled(NavLink)`
   ${tw`inline-flex items-center ml-0! bg-primary-900 focus:bg-primary-900`};
   img {
     ${tw`w-8 h-8 mr-3`}
@@ -57,7 +57,7 @@ const MainNavbar = () => {
     ];
 
     const defaultLogoLink = (
-        <LogoLink>
+        <LogoLink to="/">
             <img src={logo} alt="logo" />
             <span>SMSwithoutborders</span>
         </LogoLink>
