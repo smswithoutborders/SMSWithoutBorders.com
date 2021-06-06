@@ -48,6 +48,7 @@ const SignUp = () => {
   useTitle("Sign Up");
   const [name, setName] = useState();
   const [phone, setPhone] = useState();
+  const [countryCode, setCountryCode] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
@@ -71,7 +72,7 @@ const SignUp = () => {
         return
       }
 
-      registerUser(name, phone, password)
+      registerUser(name, countryCode, phone, password)
         .then(response => {
           if (response.status === 200) {
             setLoading(false);
@@ -161,6 +162,15 @@ const SignUp = () => {
                     inputHeight={40}
                     required
                     onChange={evt => setName(evt.target.value)}
+                  />
+
+                  <Input
+                    type="text"
+                    label="Country code"
+                    placeholder="Enter your Country code"
+                    inputHeight={40}
+                    required
+                    onChange={evt => setCountryCode(evt.target.value)}
                   />
 
                   <Input
