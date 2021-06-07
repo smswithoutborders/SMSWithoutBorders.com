@@ -20,22 +20,21 @@ const Reducer = (state, action) => {
       return {
         ...state,
         id: action.payload.id,
-        token: action.payload
+        token: action.payload.token
       }
     }
-    case "SETUSERDATA": {
+    case "SETUSERPROFILE": {
       return {
         ...state,
-        userData: action.payload
+        userProfile: action.payload
       }
     }
     case "LOGOUT": {
-      console.log("logoutHit", state, action.payload)
       return {
         ...state,
         id: action.payload.id,
         token: action.payload.token,
-        userData: action.payload.userData
+        userProfile: action.payload.userProfile
       }
     }
     case 'loading': {
@@ -55,7 +54,7 @@ let localState = getLocalState();
 let initialState = localState || {
   id: "",
   token: "",
-  userData: {},
+  userProfile: {},
   loading: false
 }
 
@@ -64,7 +63,7 @@ const App = () => {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  const { token, userData, loading } = state;
+  const { token, loading } = state;
 
   useEffect(() => {
     setLocalState(state);
@@ -80,7 +79,7 @@ const App = () => {
       payload: {
         id: "",
         token: "",
-        userData: {}
+        userProfile: {}
       }
     });
     removeToken();
@@ -88,7 +87,6 @@ const App = () => {
     clearLocalState();
     dispatch({ type: "loading", payload: false })
   }
-
 
   if (loading) {
     return (
@@ -99,7 +97,7 @@ const App = () => {
   return (
     <AppContext.Provider
       value={{
-        userData,
+        state,
         dispatch,
         handleLogOut
       }}>
