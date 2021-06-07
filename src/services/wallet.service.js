@@ -8,10 +8,10 @@ let authObj = getLocalState();
 let AUTH_KEY = authObj?.token;
 let AUTH_ID = authObj?.id;
 
-export const getProviders = () => {
+export const getProviders = (id, token) => {
     return axios.post("/users/providers", {
-        id: AUTH_ID,
-        auth_key: AUTH_KEY
+        id: id,
+        auth_key: token
     }).then(response => response)
 }
 

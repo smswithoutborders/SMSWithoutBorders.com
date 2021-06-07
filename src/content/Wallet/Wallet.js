@@ -23,6 +23,7 @@ const Input = tw(TextInputField)`w-full rounded-lg py-3`;
 
 const Wallet = () => {
     const { state, dispatch } = useAppContext();
+    const { token, id } = state;
     const [tokens, setTokens] = useState();
     const [providers, setProviders] = useState();
     const [password, setPassword] = useState("");
@@ -50,7 +51,7 @@ const Wallet = () => {
     }
 
     useEffect(() => {
-        getProviders()
+        getProviders(id, token)
             .then(response => {
                 let tokens = response.data.user_provider;
                 let providers = response.data.default_provider;
@@ -92,7 +93,7 @@ const Wallet = () => {
                     });
                 }
             });
-    }, []);
+    }, [token, id]);
 
     const getPlatformToken = (provider, platform) => {
         setAlert({ loading: true })
@@ -102,7 +103,7 @@ const Wallet = () => {
                 dispatch({
                     type: "LOGIN",
                     payload: {
-                        id: state.id,
+                        id: id,
                         token: response.data.auth_key
                     }
                 });
@@ -229,7 +230,7 @@ const Wallet = () => {
                     dispatch({
                         type: "LOGIN",
                         payload: {
-                            id: state.id,
+                            id: id,
                             token: response.data.auth_key
                         }
                     });
