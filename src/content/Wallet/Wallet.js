@@ -100,8 +100,6 @@ const Wallet = () => {
         getPlatformOauthToken(id, token, provider, platform)
             .then(response => {
                 //set new token
-                console.log("oldstate", state)
-                console.log(response.data)
                 dispatch({
                     type: "LOGIN",
                     payload: {
@@ -109,8 +107,6 @@ const Wallet = () => {
                         token: response.data.auth_key
                     }
                 });
-
-                console.log("newstate", state);
                 //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
             })
@@ -145,7 +141,7 @@ const Wallet = () => {
     };
 
     const handleRevokeToken = (provider, platform) => {
-        revokeToken(id, token, password, provider, platform)
+        revokeToken(password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
