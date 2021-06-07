@@ -21,15 +21,3 @@ export const userLogin = async (phonenumber, password) => {
             password: password
         }).then(response => response)
 };
-
-export const getToken = () => {
-    return JSON.parse(sessionStorage.getItem('SWOB_KEY'));
-};
-
-export const setToken = (token) => {
-    sessionStorage.setItem('SWOB_KEY', JSON.stringify(token));
-};
-
-export const removeToken = () => {
-    sessionStorage.removeItem('SWOB_KEY');
-}

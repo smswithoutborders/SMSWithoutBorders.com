@@ -9,9 +9,7 @@ import DashBoard from "content/DashBoard";
 import PrivacyPage from 'content/PrivacyPage';
 import AnimateLoader from "components/Loaders/AnimateLoader";
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { getLocalState, setLocalState, clearLocalState } from "services/storage.service";
-import { removeToken } from "services/auth.service";
-import { removeProfile } from "services/profile.service";
+import { getLocalState, setLocalState, clearLocalState, removeToken, removeProfile } from "services/storage.service";
 
 const AppContext = React.createContext();
 export const useAppContext = () => React.useContext(AppContext);
