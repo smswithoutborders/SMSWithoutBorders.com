@@ -49,23 +49,18 @@ const Login = () => {
             toaster.success('Login successful', {
               description: "You will be redirected shortly"
             });
-            dispatch({
-              type: "LOGIN",
-              payload: {
-                id: response.data.id,
-                token: response.data.auth_key
-              }
-            })
-
-            /*
-              potential for improving UX here if the API responds fast then
-              timeout won't be neccessary
-             */
 
             setTimeout(() => {
-              window.location.replace("/dashboard");
+              dispatch({
+                type: "LOGIN",
+                payload: {
+                  id: response.data.id,
+                  token: response.data.auth_key
+                }
+              })
             }, 1000);
           }
+
         })
         .catch(error => {
           if (error.response) {
