@@ -27,6 +27,7 @@ const Profile = () => {
     const { userProfile, token, id } = state;
     const [loading, setLoading] = useState(false);
     const [syncState, setSyncState] = useState({
+        ws: null,
         open: false,
         connected: false,
         loading: false,
@@ -34,6 +35,7 @@ const Profile = () => {
         acked: false,
         qrLink: ""
     });
+
 
     useEffect(() => {
         if (!Object.keys(userProfile).length > 0) {
@@ -93,8 +95,11 @@ const Profile = () => {
             let ws = new WebSocket(response.data.url);
 
             ws.onopen = () => {
-                // on connecting, do nothing but log it to the console
-                console.log('connected')
+
+                //set ws reference in state
+                setSyncState(syncState => {
+                    return { ...syncState, ws: ws };
+                });
                 toaster.notify("Sync started", {
                     description: "Please scan the qr code"
                 });
@@ -102,7 +107,6 @@ const Profile = () => {
 
             ws.onmessage = evt => {
                 // listen to data sent from the websocket server
-
                 // eslint-disable-next-line eqeqeq
                 if (evt.data == "200- acked") {
                     setSyncState(syncState => {
@@ -119,16 +123,13 @@ const Profile = () => {
                         return { ...syncState, loading: false, connected: true, qrLink: evt.data };
                     });
                 }
-
             }
 
             ws.onclose = () => {
-                console.log('disconnected');
                 toaster.notify("Sync session expired", {
                     description: "Please sync again"
                 });
                 setSyncState(false);
-                // automatically try to reconnect on connection loss
             }
 
             ws.onerror = (err) => {
@@ -211,7 +212,10 @@ const Profile = () => {
                             height="40"
                             appearance="primary"
                             intent="danger"
-                            onClick={() => setSyncState(false)}
+                            onClick={() => {
+                                setSyncState(false);
+                                syncState.ws.close();
+                            }}
                         >
                             stop sync
                         </SyncButton>
