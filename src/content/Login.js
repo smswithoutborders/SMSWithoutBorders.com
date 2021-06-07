@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
-import { Container as ContainerBase } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
-// import illustration from "images/login-illustration.svg";
+import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
+import useTitle from "helpers/useTitle";
 import logo from "images/logo.png";
+import { Container as ContainerBase } from "components/misc/Layouts";
 import { FiLogIn } from "react-icons/fi";
 import { Button, TextInputField, toaster } from 'evergreen-ui';
-import { setToken, userLogin } from 'services/auth.service';
+import { userLogin } from 'services/auth.service';
 import { Link } from "react-router-dom";
 import { ToggleButton } from "components/misc/Buttons";
-import useTitle from "helpers/useTitle";
+import { useAppContext } from "App";
 
 const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
 const Content = tw.div` m-0 text-gray-900  md:flex justify-center flex-1`;
@@ -32,6 +32,7 @@ const Login = () => {
 
   useTitle("Sign In");
 
+  const { dispatch } = useAppContext()
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
@@ -48,7 +49,13 @@ const Login = () => {
             toaster.success('Login successful', {
               description: "You will be redirected shortly"
             });
-            setToken(response.data);
+            dispatch({
+              type: "LOGIN",
+              payload: {
+                id: response.data.id,
+                token: response.data.auth_key
+              }
+            })
 
             /*
               potential for improving UX here if the API responds fast then
@@ -70,7 +77,7 @@ const Login = () => {
               case 400:
                 setLoading(false);
                 toaster.danger('Something went wrong', {
-                  description: 'Its not you its Us. Please try again'
+                  description: 'We are working to resolve this. Please try again'
                 }
                 );
                 break;
@@ -86,7 +93,7 @@ const Login = () => {
               case 500:
                 setLoading(false);
                 toaster.danger('Something went wrong', {
-                  description: 'Its not you its Us. We are working to resolve this'
+                  description: 'We are working to resolve this.  Please try again'
                 }
                 );
                 break;
