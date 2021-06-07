@@ -19,7 +19,7 @@ const Column = tw.div`p-4 md:w-1/2 w-full`;
 const Row = tw.div`flex flex-wrap -m-4 mt-12`;
 const Container = tw.div`container px-5 mx-auto py-12  lg:p-12 text-gray-900`;
 const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
-const Input = tw(TextInputField)`w-full rounded-lg`;
+const Input = tw(TextInputField)`w-full rounded-lg py-3`;
 
 const Wallet = () => {
     const { state, dispatch } = useAppContext();
