@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import "rsuite/dist/styles/rsuite-default.css";
 import "tailwindcss/dist/base.css";
@@ -8,8 +7,9 @@ import SignUp from "content/SignUp"
 import HomePage from 'content/HomePage';
 import DashBoard from "content/DashBoard";
 import PrivacyPage from 'content/PrivacyPage';
+import AnimateLoader from "components/Loaders/AnimateLoader";
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { getLocalState, setLocalState, clearLocalState } from "services/storage.service";
-
 import { removeToken } from "services/auth.service";
 import { removeProfile } from "services/profile.service";
 
@@ -39,6 +39,12 @@ const Reducer = (state, action) => {
         userData: action.payload.userData
       }
     }
+    case 'loading': {
+      return {
+        ...state,
+        loading: action.payload
+      }
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
@@ -50,7 +56,8 @@ let localState = getLocalState();
 let initialState = localState || {
   id: "",
   token: "",
-  userData: {}
+  userData: {},
+  loading: false
 }
 
 
@@ -58,7 +65,7 @@ const App = () => {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  const { token, userData } = state;
+  const { token, userData, loading} = state;
 
   useEffect(() => {
     setLocalState(state);
@@ -68,11 +75,20 @@ const App = () => {
 
   const handleLogOut = () => {
     //remove user token from session storage
+    dispatch({ type: "loading", payload: true })
     removeToken();
     removeProfile();
     clearLocalState();
+    dispatch({ type: "loading", payload: false })
     // return user to login
     window.location.replace("/")
+  }
+
+
+  if (loading) {
+    return (
+      <AnimateLoader />
+    );
   }
 
   return (
