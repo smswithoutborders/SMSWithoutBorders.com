@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import useAnimatedNavToggler from "helpers/useAnimatedNavToggler.js";
@@ -9,7 +9,6 @@ import { Avatar, LogOutIcon, Dialog } from "evergreen-ui";
 import { FiMenu as MenuIcon, FiX as CloseIcon, FiBell, FiInfo } from "react-icons/fi";
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useAppContext } from "App";
-import { getProfile } from "services/profile.service";
 
 
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
@@ -42,8 +41,8 @@ const AboutDetails = tw.div``;
 const Navbar = () => {
     const { path } = useRouteMatch();
     const [isAboutOpen, setIsAboutOpen] = useState(false);
-    const [profile, setProfile] = useState(getProfile);
-    const { handleLogOut } = useAppContext();
+    const { state, handleLogOut } = useAppContext();
+    const { userProfile } = state;
 
     let collapseBreakpointClass = "lg"
     const { showNavLinks, animation, toggleNavbar } = useAnimatedNavToggler();
@@ -65,9 +64,9 @@ const Navbar = () => {
                 <UserActionsButton onClick={toggleNavbar}>
                     <FiBell size={20} />
                 </UserActionsButton>
-                {profile ? (
+                {userProfile ? (
                     <UserActionsButton>
-                        <Avatar name={profile?.name} size={34} />
+                        <Avatar name={userProfile?.name} size={34} />
                     </UserActionsButton>
                 ) : (null)
                 }
@@ -84,12 +83,6 @@ const Navbar = () => {
             <span>SMSwithoutborders</span>
         </LogoLink>
     );
-
-    useEffect(() => {
-        if (!profile) {
-            setProfile(getProfile);
-        }
-    }, [profile]);
 
     return (
         <>
