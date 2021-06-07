@@ -32,6 +32,7 @@ const Reducer = (state, action) => {
       }
     }
     case "LOGOUT": {
+      console.log("logoutHit", state, action.payload)
       return {
         ...state,
         id: action.payload.id,
@@ -65,7 +66,7 @@ const App = () => {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  const { token, userData, loading} = state;
+  const { token, userData, loading } = state;
 
   useEffect(() => {
     setLocalState(state);
@@ -76,12 +77,18 @@ const App = () => {
   const handleLogOut = () => {
     //remove user token from session storage
     dispatch({ type: "loading", payload: true })
+    dispatch({
+      type: "LOGOUT",
+      payload: {
+        id: "",
+        token: "",
+        userData: {}
+      }
+    });
     removeToken();
     removeProfile();
     clearLocalState();
     dispatch({ type: "loading", payload: false })
-    // return user to login
-    window.location.replace("/")
   }
 
 
