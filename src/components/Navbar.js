@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { Avatar, LogOutIcon, Dialog } from "evergreen-ui";
-
 import useAnimatedNavToggler from "helpers/useAnimatedNavToggler.js";
 import logo from "images/logo-icon-dark.png";
 import swobLogo from "images/logo.png";
+import { motion } from "framer-motion";
+import { Avatar, LogOutIcon, Dialog } from "evergreen-ui";
 import { FiMenu as MenuIcon, FiX as CloseIcon, FiBell, FiInfo } from "react-icons/fi";
 import { Link, useRouteMatch } from 'react-router-dom';
-import { removeToken } from "services/auth.service";
-import { removeProfile, getProfile } from "services/profile.service";
+import { useAppContext } from "App";
+import { getProfile } from "services/profile.service";
+
 
 const MainHeader = tw.header`flex justify-between items-center bg-gray-900`;
 const NavLinks = tw.div`inline-block`;
@@ -37,18 +37,13 @@ const AboutLogo = tw.img`w-60`;
 const AboutContainer = tw.div`flex flex-wrap items-center flex-col md:flex-row justify-between mx-auto p-2`;
 const AboutDetails = tw.div``;
 
-const logOut = () => {
-    //remove user token from session storage
-    removeToken();
-    removeProfile();
-    // return user to login
-    window.location.replace("/")
-};
+
 
 const Navbar = () => {
     const { path } = useRouteMatch();
     const [isAboutOpen, setIsAboutOpen] = useState(false);
     const [profile, setProfile] = useState(getProfile);
+    const { handleLogOut } = useAppContext();
 
     let collapseBreakpointClass = "lg"
     const { showNavLinks, animation, toggleNavbar } = useAnimatedNavToggler();
@@ -76,7 +71,7 @@ const Navbar = () => {
                     </UserActionsButton>
                 ) : (null)
                 }
-                <UserActionsButton onClick={() => { toggleNavbar(); logOut() }}>
+                <UserActionsButton onClick={() => { toggleNavbar(); handleLogOut() }}>
                     <LogOutIcon /> &nbsp; Logout
                 </UserActionsButton>
             </UserActions>
