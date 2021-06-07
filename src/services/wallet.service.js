@@ -23,10 +23,10 @@ export const getStoredTokens = (provider) => {
     }).then(response => response)
 };
 
-export const getPlatformOauthToken = (provider, platform) => {
+export const getPlatformOauthToken = (id, token, provider, platform) => {
     return axios.post("/users/tokens", {
-        id: AUTH_ID,
-        auth_key: AUTH_KEY,
+        id: id,
+        auth_key: token,
         provider: provider,
         platform: platform
     }).then(response => response)
@@ -49,7 +49,7 @@ export const getGoogleOauthToken = (data) => {
         data: JSON.stringify(data)
     }).then(response => response)
 }
-export const savePlatformOauthToken = (provider, platform, code) => {
+export const savePlatformOauthToken = (id, token, provider, platform, code) => {
     //renew auth data
     authObj = getLocalState();
     AUTH_KEY = authObj.token;

@@ -97,9 +97,11 @@ const Wallet = () => {
 
     const getPlatformToken = (provider, platform) => {
         setAlert({ loading: true })
-        getPlatformOauthToken(provider, platform)
+        getPlatformOauthToken(id, token, provider, platform)
             .then(response => {
                 //set new token
+                console.log("oldstate", state)
+                console.log(response.data)
                 dispatch({
                     type: "LOGIN",
                     payload: {
@@ -107,6 +109,8 @@ const Wallet = () => {
                         token: response.data.auth_key
                     }
                 });
+
+                console.log("newstate", state);
                 //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
             })
@@ -141,7 +145,7 @@ const Wallet = () => {
     };
 
     const handleRevokeToken = (provider, platform) => {
-        revokeToken(password, provider, platform)
+        revokeToken(id, token, password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
@@ -223,7 +227,7 @@ const Wallet = () => {
         }
         const { data } = event; //extract data sent from popup
         if (data.source === 'smswithoutborders') {
-            savePlatformOauthToken("google", "gmail", data.code)
+            savePlatformOauthToken(id, token, "google", "gmail", data.code)
                 .then(response => {
                     setAlert({ loading: false });
                     toaster.success("Token stored successfully");
