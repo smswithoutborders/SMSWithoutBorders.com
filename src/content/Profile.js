@@ -6,8 +6,10 @@ import { Button, Avatar, toaster, Spinner, Pane } from "evergreen-ui";
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
 import QRCode from 'qrcode.react';
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { getProfileInfo, getProfile, setProfile } from "services/profile.service";
-import { getToken } from "services/auth.service";
+import { getProfileInfo } from "services/profile.service";
+import { getLocalState } from "services/storage.service";
+import { useAppContext } from 'App';
+import AnimateLoader from 'components/Loaders/AnimateLoader';
 
 const SyncButton = tw(Button)`rounded-md`;
 const SectionContainer = tw.section`container mx-auto flex px-5 md:px-4 py-24 lg:py-36 md:flex-row flex-col items-center font-bold`;
@@ -21,8 +23,8 @@ const QRContainer = tw(QRCode)`object-cover object-center block mx-auto`;
 const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
 
 const Profile = () => {
-
-    const [profile, setProfileState] = useState(getProfile);
+    const { dispatch, state } = useAppContext();
+    const { userProfile, token, id } = state;
     const [loading, setLoading] = useState(false);
     const [syncState, setSyncState] = useState(false);
     const [syncLoading, setSyncLoading] = useState(false);
@@ -30,14 +32,12 @@ const Profile = () => {
 
 
     useEffect(() => {
-        if (!profile) {
+        if (!Object.keys(userProfile).length > 0) {
             setLoading(true);
-            getProfileInfo()
+            getProfileInfo(id, token)
                 .then(response => {
-                    setProfileState(response.data);
-                    setProfile(response.data);
+                    dispatch({ type: "SETUSERPROFILE", payload: response.data });
                     setLoading(false);
-                    window.location.reload();
                 })
                 .catch((error) => {
                     if (error.response) {
@@ -70,15 +70,15 @@ const Profile = () => {
                     }
                 });
         }
-    }, [profile]);
+    }, [userProfile, token, id, dispatch]);
 
     const handleSync = () => {
         setSyncState(!syncState);
 
         let ROUTER_URL = process.env.REACT_APP_ROUTER_URL;
 
-        let authObj = getToken();
-        let AUTH_KEY = authObj?.auth_key;
+        let authObj = getLocalState();
+        let AUTH_KEY = authObj?.token;
         let AUTH_ID = authObj?.id;
 
         axios.post(ROUTER_URL + "/sync/sessions", {
@@ -154,9 +154,7 @@ const Profile = () => {
 
     if (loading) {
         return (
-            <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
-                <Spinner />
-            </Pane>
+            <AnimateLoader />
         )
     }
 
@@ -174,8 +172,8 @@ const Profile = () => {
                                 width={250}
                                 tw="border border-gray-200 mx-auto">
                                 <Spinner />
-                            </Pane> ) : (
-                                <QRContainer
+                            </Pane>) : (
+                            <QRContainer
                                 value={qrLink}
                                 size={250}
                             />
@@ -207,15 +205,15 @@ const Profile = () => {
         <PageAnimationWrapper>
             <SectionContainer>
                 <ImageContainer>
-                    <Image name={profile?.name} size={250} />
+                    <Image name={userProfile?.name} size={250} />
                 </ImageContainer>
                 <DetailsContainer>
-                    <Heading> Welcome, <ProfileName>{profile?.name}</ProfileName> </Heading>
+                    <Heading> Welcome, <ProfileName>{userProfile?.name}</ProfileName> </Heading>
                     <Description>Join Date</Description>
-                    <Meta>{new Date(profile?.created).toLocaleString()}</Meta>
+                    <Meta>{new Date(userProfile?.created).toLocaleString()}</Meta>
                     <br />
                     <Description>Last Login</Description>
-                    <Meta>{new Date(profile?.last_login).toLocaleString()}</Meta>
+                    <Meta>{new Date(userProfile?.last_login).toLocaleString()}</Meta>
                     <br />
                     <SyncButton
                         iconBefore={IoMdSync}
