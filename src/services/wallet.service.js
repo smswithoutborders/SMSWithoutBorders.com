@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { getToken } from "services/auth.service";
+import { getLocalState } from "services/storage.service";
 
 const API_URL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = API_URL;
 
-let authObj = getToken();
-let AUTH_KEY = authObj?.auth_key;
+let authObj = getLocalState();
+let AUTH_KEY = authObj?.token;
 let AUTH_ID = authObj?.id;
 
 export const getProviders = () => {
@@ -51,8 +51,8 @@ export const getGoogleOauthToken = (data) => {
 }
 export const savePlatformOauthToken = (provider, platform, code) => {
     //renew auth data
-    authObj = getToken();
-    AUTH_KEY = authObj.auth_key;
+    authObj = getLocalState();
+    AUTH_KEY = authObj.token;
     AUTH_ID = authObj.id;
 
     return axios.post(`/${provider}/auth/success`, {

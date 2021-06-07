@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { getToken, setToken } from 'services/auth.service';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { Panel } from "rsuite";
 import { ToggleButton } from "components/misc/Buttons";
+import { useAppContext } from 'App';
 
 const StoreButton = tw(Button)`rounded-md`;
 const Heading = tw.h1`font-medium sm:text-4xl text-3xl mb-4 font-medium `;
@@ -22,7 +22,7 @@ const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
 const Input = tw(TextInputField)`w-full rounded-lg`;
 
 const Wallet = () => {
-
+    const { state, dispatch } = useAppContext();
     const [tokens, setTokens] = useState();
     const [providers, setProviders] = useState();
     const [password, setPassword] = useState("");
@@ -99,9 +99,12 @@ const Wallet = () => {
         getPlatformOauthToken(provider, platform)
             .then(response => {
                 //set new token
-                setToken({
-                    auth_key: response.data.auth_key,
-                    id: getToken().id
+                dispatch({
+                    type: "LOGIN",
+                    payload: {
+                        id: state.id,
+                        token: response.data.auth_key
+                    }
                 });
                 //open authorization window
                 openSignInWindow(response.data.url, "save-google-token");
@@ -223,9 +226,12 @@ const Wallet = () => {
                 .then(response => {
                     setAlert({ loading: false });
                     toaster.success("Token stored successfully");
-                    setToken({
-                        auth_key: response.data.auth_key,
-                        id: getToken().id
+                    dispatch({
+                        type: "LOGIN",
+                        payload: {
+                            id: state.id,
+                            token: response.data.auth_key
+                        }
                     });
                     setAlert({ loading: false, notify: false });
                     window.location.reload();
