@@ -185,7 +185,7 @@ const Wallet = () => {
     let windowObjectReference = null;
     let previousUrl = null;
 
-    const openSignInWindow = (url, name) => {
+    const openSignInWindow = (url) => {
         // remove any existing event listeners
         window.removeEventListener('message', receiveMessage);
 
@@ -232,7 +232,11 @@ const Wallet = () => {
                     });
                     setAlert({ loading: false, notify: false });
                     window.location.reload();
-                })
+                }).catch((error) => {
+                    toaster.danger("An error occured", {
+                        description: "Please Check your network connection and try again"
+                    })
+                });
         }
     };
 
