@@ -108,7 +108,7 @@ const Wallet = () => {
                     }
                 });
                 //open authorization window
-                openSignInWindow(response.data.url, "save-google-token");
+                openSignInWindow(response.data.url);
             })
             .catch((error) => {
                 if (error.response) {
@@ -189,19 +189,15 @@ const Wallet = () => {
         // remove any existing event listeners
         window.removeEventListener('message', receiveMessage);
 
-        // window features
-        const strWindowFeatures =
-            'toolbar=no, menubar=no, width=600, height=700, top=100, left=100';
-
         if (windowObjectReference === null || windowObjectReference.closed) {
             /* if the pointer to the window object in memory does not exist
              or if such pointer exists but the window was closed */
-            windowObjectReference = window.open(url, name, strWindowFeatures);
+            windowObjectReference = window.open(url, '_blank');
         } else if (previousUrl !== url) {
             /* if the resource to load is different,
              then we load it in the already opened secondary window and then
              we bring such window back on top/in front of its parent window. */
-            windowObjectReference = window.open(url, name, strWindowFeatures);
+            windowObjectReference = window.open(url, '_blank');
             windowObjectReference.focus();
         } else {
             /* else the window reference must exist and the window
