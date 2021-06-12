@@ -7,7 +7,7 @@ import { MainNavbar, Footer } from "components";
 import { FiMail, FiMessageSquare, FiUserPlus, FiLogIn, FiDownload } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 
-const SectionContainer = tw.section`container mx-auto flex px-5 py-24 md:flex-row flex-col items-center h-screen`;
+const SectionContainer = tw.section`container mx-auto flex px-5 py-24 md:flex-row flex-col items-center`;
 const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:items-start `;
 const Heading = tw.h1`font-bold text-4xl sm:text-5xl  mb-8 font-bold text-gray-900`;
@@ -19,7 +19,7 @@ const HomePage = () => {
 
     return (
         <>
-            <PageAnimationWrapper>
+            <PageAnimationWrapper tw="h-screen">
                 <MainNavbar />
                 <SectionContainer>
                     <ImageContainer>
@@ -42,7 +42,7 @@ const HomePage = () => {
                 </SectionContainer>
 
                 <section tw="text-gray-600">
-                    <div tw="container px-5 py-24 mx-auto">
+                    <div tw="container px-5 py-12 mx-auto">
                         <Heading tw="text-center mb-20">How it works</Heading>
                         <div tw="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
                             <div tw="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-primary-100 text-primary-900 flex-shrink-0">
@@ -61,7 +61,6 @@ const HomePage = () => {
                             </div>
                             <div tw="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-primary-100 text-primary-900 flex-shrink-0">
                                 <FiDownload tw="sm:w-16 sm:h-16 w-10 h-10" />
-
                             </div>
                         </div>
                         <div tw="flex items-center lg:w-3/5 mx-auto sm:flex-row flex-col">
