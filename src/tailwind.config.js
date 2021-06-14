@@ -293,6 +293,7 @@ module.exports = {
         },
         fontFamily: {
             display: ['Inter', 'system-ui'],
+            heading: ['"Exo 2"'],
             sans: [
                 'ui-sans-serif',
                 'system-ui',
