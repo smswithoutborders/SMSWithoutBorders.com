@@ -5,8 +5,7 @@ import swobflow from "images/swobflow.gif";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
 import { MainNavbar, Footer } from "components";
-import { FiMail, FiMessageSquare, FiUserPlus, FiLogIn, FiDownload, FiShield, FiSave } from "react-icons/fi";
-import { GoMarkGithub } from "react-icons/go";
+import { FiUserPlus, FiLogIn, FiDownload, FiShield, FiSave } from "react-icons/fi";
 import { DiOpensource } from "react-icons/di";
 import { IoAccessibility } from "react-icons/io5";
 import { GiCheckboxTree } from "react-icons/gi";
@@ -18,11 +17,10 @@ const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:-ml-20 mb-12 items-start order-first md:order-last`;
 const Heading = tw.h1`font-black text-4xl sm:text-5xl mb-8  text-gray-900`;
 const SubHeading = tw.h2`text-gray-900 text-base md:text-xl font-bold mb-2 leading-relaxed`;
-const DescLink = tw.a`inline-flex items-center text-base mb-3 text-gray-900 cursor-pointer hocus:text-primary-900`;
 const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-5`;
 const Image = tw.img`block mx-auto shadow-lg rounded-2xl transform md:-rotate-25  md:mt-8 md:-mb-24 shadow-2xl`;
 const Button = tw.button`inline-flex items-center transition duration-300 bg-white hocus:outline-none text-primary-900 font-bold px-6 py-3  no-underline items-center
-appearance-none shadow hocus:shadow-2xl rounded-3xl `;
+appearance-none shadow hocus:shadow-2xl rounded-3xl`;
 const DescItem = tw.div`flex items-center mx-auto pb-10 border-gray-200 sm:flex-row flex-col`;
 const IconBlock = tw.div`sm:w-32 sm:h-32 h-24 w-24 inline-flex items-center justify-center rounded-full bg-white shadow-xl text-primary-900 flex-shrink-0`;
 const Text = tw.p`leading-relaxed text-base`;
@@ -46,14 +44,10 @@ const HomePage = () => {
                     </ImageContainer>
                     <DetailsContainer>
                         <Heading>Stay Productive</Heading>
-                        {/* <Description>Our project idea is to provide an Android app which securely allows users to use SMS capable phones to send out email messages and communicate with other online platforms in the event of an internet shutdown; where tools for circumventing censorship will not work, as most of these tools rely on some internet connection.</Description> */}
+
                         <Description>In this age of communication, keep in touch with your contacts across the internet without
                             access to an active internet connection. Store your access to your favourite communications
                             platforms while online, use them while offline.</Description>
-                        {/*
-                        <DescLink href="mailto:info@smswithoutborders.com" target="_blank" rel="noreferrer"><FiMail size={20} /> &nbsp; info@smswithoutborders.com</DescLink>
-                        <DescLink><FiMessageSquare size={20} /> &nbsp; IRC: freenode/#afkanerd</DescLink>
-                        <DescLink href="https://github.com/smswithoutborders" target="_blank" rel="noreferrer"><GoMarkGithub size={20} /> &nbsp; @smswithoutborders</DescLink> */}
                         <Button><FiDownload size={16} /> &nbsp; Get SWOB</Button>
                     </DetailsContainer>
                 </SectionContainer>
