@@ -3,26 +3,25 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import useAnimatedNavToggler from "helpers/useAnimatedNavToggler.js";
 import logo from "images/logo-icon-light.png";
-import { FiMenu, FiX, FiLogIn, FiUserPlus } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { FiMenu, FiLogIn, FiUserPlus } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 import { SideSheet } from "evergreen-ui";
 
-const MainHeader = tw.header`flex justify-between items-center bg-gray-100`;
+const MainHeader = tw.header`flex justify-between items-center bg-white`;
 const NavLinks = tw.div`block md:inline-flex`;
 const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
 const NavLink = tw(Link)`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const ExtLink = tw.a`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const LogoLink = styled(NavLink)`
-  ${tw`inline-flex items-center ml-0! hocus:bg-gray-100 hocus:text-gray-900 font-bold text-xl`};
+  ${tw`inline-flex items-center ml-0! hocus:bg-white hocus:text-gray-900 font-bold text-xl`};
   img {
     ${tw`w-8 h-8 mr-3`}
   }
 `;
 const UserActions = tw.div`flex flex-col md:flex-row items-center`;
 const MobileNav = tw.nav`lg:hidden flex flex-1 items-center justify-between`;
-const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300 hocus:bg-gray-100 hocus:text-gray-900`;
-const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-gray-100`;
+const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
+const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
 const Divider = tw.span`hidden lg:block text-gray-900`;
 
 const MainNavbar = () => {
@@ -68,7 +67,6 @@ const MainNavbar = () => {
                 <MobileNav>
                     {defaultLogoLink}
                     <NavToggle onClick={toggleNavbar}>
-                        {/* {showNavLinks ? <FiMenu size={24} /> : <FiX size={24} />} */}
                         <FiMenu size={24} />
                     </NavToggle>
                 </MobileNav>
