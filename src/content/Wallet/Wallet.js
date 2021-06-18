@@ -245,7 +245,7 @@ const Wallet = () => {
             <PageAnimationWrapper>
                 <Container>
 
-                    <Heading>Wallet</Heading>
+                    <Heading>Wallet(Store Access)</Heading>
                     <Description>Save your tokens for rainy days</Description>
 
                     <Row>
@@ -259,7 +259,7 @@ const Wallet = () => {
                                             return (
                                                 <Panel header={<PlatformTitle>{provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
                                                     <p>Store your {provider?.provider} token which will be used for authentication on your behalf in the event
-                                                                        of an internet shutdown.</p>
+                                                        of an internet shutdown.</p>
                                                     <br />
                                                     <p>You can define how this token will be used by setting the scopes of access</p>
                                                     <br />
