@@ -39,7 +39,7 @@ const PrivacyTerms = (
       rel="noreferrer"
       tw="border-gray-500 text-primary-900 no-underline">
       privacy policy
-  </a>
+    </a>
   </p>
 );
 
@@ -157,8 +157,8 @@ const SignUp = () => {
 
                   <Input
                     type="text"
-                    label="Name"
-                    placeholder="Enter your name(s)"
+                    label="Username"
+                    placeholder="Enter your username"
                     inputHeight={40}
                     required
                     onChange={evt => setName(evt.target.value)}
