@@ -11,16 +11,19 @@ import { getProfileInfo } from "services/profile.service";
 import { getLocalState } from "services/storage.service";
 import { useAppContext } from 'App';
 
-const SyncButton = tw(Button)`rounded-md`;
-const SectionContainer = tw.section`container mx-auto flex px-4 py-24 lg:py-36 md:flex-row flex-col font-bold`;
-const ImageContainer = tw.div`md:w-1/2 mb-4 md:mb-0`
-const DetailsContainer = tw.div`md:w-1/2 flex flex-col md:items-start text-center p-4`;
-const Image = tw(Avatar)`block mx-auto md:ml-auto shadow-lg`;
-const Heading = tw.h1`font-bold sm:text-4xl text-3xl mb-4 font-bold text-gray-900`;
+
+const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap content-center md:flex-row bg-primary-600 h-screen`;
+const ImageContainer = tw.div`md:w-1/2 mb-4 md:mb-0`;
+const DetailsContainer = tw.div`md:w-1/2 flex flex-col text-center md:text-left p-4 lg:-ml-16`;
+const Image = tw(Avatar)`block mx-auto md:ml-auto `;
+const Heading = tw.h1`font-bold sm:text-4xl text-2xl mb-4 font-bold text-gray-900`;
 const ProfileName = tw.span`font-light`;
-const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-1`;
+const Description = tw.h3`text-lg font-bold leading-relaxed text-gray-800 mb-1`;
 const QRContainer = tw(QRCode)`block mx-auto border shadow-lg rounded-xl p-4`;
 const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
+const SyncButton = tw(Button)`rounded-md w-2/3 lg:w-1/3 md:h-12 mb-4 md:mb-0`;
+const ButtonGroup = tw.div`flex flex-col md:flex-row items-center mt-4`;
+
 
 const Profile = () => {
     const { dispatch, state } = useAppContext();
@@ -47,33 +50,20 @@ const Profile = () => {
                 })
                 .catch((error) => {
                     if (error.response) {
-                        /*
-                         * The request was made and the server responded with a
-                         * status code that falls out of the range of 2xx
-                         */
-                        setLoading(false);
                         toaster.danger("Request Error", {
                             description: "Sorry we could not locate your profile. Please check your network connection and try again"
                         });
 
                     } else if (error.request) {
-                        /*
-                         * The request was made but no response was received, `error.request`
-                         * is an instance of XMLHttpRequest in the browser and an instance
-                         * of http.ClientRequest in Node.js
-                         */
-                        console.log(error.request);
-                        setLoading(false);
                         toaster.danger("Network Error", {
                             description: "We could not fetch your profile. Please check your network and reload this page"
                         });
                     } else {
-                        // Something happened in setting up the request and triggered an Error
-                        setLoading(false);
                         toaster.danger("Profile Error", {
                             description: "An internal error occured. Please log out and login again"
                         });
                     }
+                    setLoading(false);
                 });
         }
     }, [userProfile, token, id, dispatch]);
@@ -229,24 +219,38 @@ const Profile = () => {
         <PageAnimationWrapper>
             <SectionContainer>
                 <ImageContainer>
-                    <Image name={userProfile?.name} size={250} />
+                    <Image tw="hidden md:block" name={userProfile?.name} size={250} />
+                    <Image tw="md:hidden" name={userProfile?.name} size={180} />
                 </ImageContainer>
                 <DetailsContainer>
                     <Heading> Welcome, <ProfileName>{userProfile?.name}</ProfileName> </Heading>
                     <Description>Join Date</Description>
+                    <br />
                     <Meta>{new Date(userProfile?.created).toLocaleString()}</Meta>
                     <br />
                     <Description>Last Login</Description>
                     <Meta>{new Date(userProfile?.last_login).toLocaleString()}</Meta>
                     <br />
-                    <SyncButton
-                        iconBefore={IoMdSync}
-                        appearance="primary"
-                        height="40"
-                        onClick={() => handleSync()}
-                    >
-                        sync
-                    </SyncButton>
+
+                    <ButtonGroup>
+                        <SyncButton
+                            iconBefore={IoMdSync}
+                            appearance="primary"
+                            height="40"
+                            onClick={() => handleSync()}
+                        >
+                            sync with app
+                        </SyncButton>
+
+                        <SyncButton
+                            iconBefore={IoMdSync}
+                            appearance="default"
+                            height="40"
+                            tw="md:ml-4"
+                        >
+                            reset password
+                        </SyncButton>
+                    </ButtonGroup>
                 </DetailsContainer>
             </SectionContainer>
         </PageAnimationWrapper>
