@@ -6,8 +6,8 @@ import { FiMenu, FiLogIn, FiUserPlus } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 import { SideSheet } from "evergreen-ui";
 
-const MainHeader = tw.header`flex justify-between items-center bg-white`;
-const NavLinks = tw.div`block md:inline-flex`;
+const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
+const NavContainer = tw.div`block md:inline-flex`;
 const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
 const NavLink = tw(Link)`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const ExtLink = tw.a`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
@@ -30,10 +30,10 @@ const MainNavbar = () => {
 
     const defaultLinks = (
         <React.Fragment key="nav">
-            <NavLinks key={1}>
+            <NavContainer key={1}>
                 <NavLink key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
                 <ExtLink key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
-            </NavLinks>
+            </NavContainer>
         </React.Fragment>
     );
 
@@ -47,7 +47,7 @@ const MainNavbar = () => {
                 <FiUserPlus size={20} /> &nbsp; Sign Up
             </NavLink>
         </UserActions>
-    )
+    );
 
     const defaultLogoLink = (
         <LogoLink to="/">
