@@ -12,7 +12,7 @@ import { getLocalState } from "services/storage.service";
 import { useAppContext } from 'App';
 
 
-const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap content-center md:flex-row bg-primary-600 h-screen`;
+const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap content-center md:flex-row bg-gray-100 h-screen`;
 const ImageContainer = tw.div`md:w-1/2 mb-4 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 flex flex-col text-center md:text-left p-4 lg:-ml-16`;
 const Image = tw(Avatar)`block mx-auto md:ml-auto `;

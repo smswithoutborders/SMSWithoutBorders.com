@@ -10,17 +10,18 @@ import { ToggleButton } from "components/misc/Buttons";
 import { useAppContext } from 'App';
 
 const StoreButton = tw(Button)`rounded-md`;
-const Heading = tw.h1`font-medium sm:text-4xl text-3xl mb-4 font-medium `;
-const Description = tw.p`mb-8 leading-relaxed`;
+const Heading = tw.h1`font-bold sm:text-5xl text-3xl mb-4`;
+const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
 const PlatformTitle = tw.h4`text-lg font-medium`;
 const PlatformDescription = tw.p`mb-2`;
 const SubHeading = tw.h3`text-lg font-bold`;
-const Card = tw.div`h-full bg-white`;
+const Card = tw.div`h-full`;
 const Column = tw.div`p-4 md:w-1/2 w-full`;
 const Row = tw.div`flex flex-wrap -m-4 mt-12`;
-const Container = tw.div`container px-5 mx-auto py-12  lg:p-12 text-gray-900`;
+const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 h-screen`;
 const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
 const Input = tw(TextInputField)`w-full rounded-lg py-3`;
+const Accordion = tw(Panel)`border border-gray-200 shadow-md`;
 
 const Wallet = () => {
 
@@ -261,7 +262,7 @@ const Wallet = () => {
                                     <>
                                         {providers.map(provider => {
                                             return (
-                                                <Panel header={<PlatformTitle>{provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
+                                                <Accordion header={< PlatformTitle > {provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
                                                     <p>Store your {provider?.provider} token which will be used for authentication on your behalf in the event
                                                         of an internet shutdown.</p>
                                                     <br />
@@ -289,7 +290,7 @@ const Wallet = () => {
                                                             <span>{alert.loading ? "Storing" : "Store"}</span>
                                                         </StoreButton>
                                                     </StoreContainer>
-                                                </Panel>
+                                                </Accordion>
                                             )
                                         })}
                                     </>
@@ -307,7 +308,7 @@ const Wallet = () => {
                                 {tokens ? (
                                     <>
                                         {tokens.map(token => (
-                                            <Panel header={<PlatformTitle>{token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
+                                            <Accordion header={< PlatformTitle > {token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
                                                 <StoreContainer>
                                                     <div>
                                                         <PlatformTitle>Description</PlatformTitle>
@@ -337,7 +338,7 @@ const Wallet = () => {
                                                         <span>{alert.loading ? "Revoking" : "Revoke"}</span>
                                                     </StoreButton>
                                                 </StoreContainer>
-                                            </Panel>
+                                            </Accordion>
                                         ))}
                                     </>
                                 ) : (
