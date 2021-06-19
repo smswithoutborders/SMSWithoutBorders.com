@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import useAnimatedNavToggler from "helpers/useAnimatedNavToggler.js";
 import logo from "images/logo-icon-light.png";
 import { FiMenu, FiLogIn, FiUserPlus } from "react-icons/fi";
 import { Link } from 'react-router-dom';
@@ -26,24 +25,25 @@ const Divider = tw.span`hidden lg:block text-gray-900`;
 
 const MainNavbar = () => {
 
-    const { showNavLinks, toggleNavbar } = useAnimatedNavToggler();
+
+    const [open, setOpen] = useState(false);
 
     const defaultLinks = (
         <React.Fragment key="nav">
             <NavLinks key={1}>
-                <NavLink onClick={toggleNavbar} key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
-                <ExtLink onClick={toggleNavbar} key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
+                <NavLink key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
+                <ExtLink key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
             </NavLinks>
         </React.Fragment>
     );
 
     const actionLinks = (
         <UserActions key={2}>
-            <NavLink key="login" to="/login" onClick={toggleNavbar}>
+            <NavLink key="login" to="/login">
                 <FiLogIn size={20} /> &nbsp; Log In
             </NavLink>
             <Divider>|</Divider>
-            <NavLink key="sign-up" to="/sign-up" onClick={toggleNavbar}>
+            <NavLink key="sign-up" to="/sign-up">
                 <FiUserPlus size={20} /> &nbsp; Sign Up
             </NavLink>
         </UserActions>
@@ -66,7 +66,7 @@ const MainNavbar = () => {
                 </DesktopNav>
                 <MobileNav>
                     {defaultLogoLink}
-                    <NavToggle onClick={toggleNavbar}>
+                    <NavToggle onClick={() => setOpen(!open)}>
                         <FiMenu size={24} />
                     </NavToggle>
                 </MobileNav>
@@ -75,8 +75,8 @@ const MainNavbar = () => {
 
             <SideSheet
                 width={300}
-                isShown={showNavLinks}
-                onCloseComplete={() => toggleNavbar()}
+                isShown={open}
+                onCloseComplete={() => setOpen(!open)}
             >
                 {defaultLinks}
                 {actionLinks}
