@@ -8,9 +8,9 @@ import { SideSheet } from "evergreen-ui";
 
 const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
 const NavContainer = tw.div`block md:inline-flex`;
-const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
-const NavLink = tw(Link)`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
-const ExtLink = tw.a`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-gray-700 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
+const NavLink = tw(Link)`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const ExtLink = tw.a`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const LogoLink = styled(NavLink)`
   ${tw`inline-flex items-center ml-0! hocus:bg-white hocus:text-gray-900 font-bold text-xl`};
   img {
