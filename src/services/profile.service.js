@@ -9,3 +9,12 @@ export const getProfileInfo = (id, token) => {
         auth_key: token
     }).then(response => response)
 }
+
+export const changePassword = (id, token, password, new_password) => {
+    return axios.post("users/password/new", {
+        id: id,
+        auth_key: token,
+        password: password,
+        new_password: new_password
+    }).then(response => response)
+}

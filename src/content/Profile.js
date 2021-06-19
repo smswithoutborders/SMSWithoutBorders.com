@@ -4,10 +4,10 @@ import axios from "axios";
 import QRCode from 'qrcode.react';
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import AnimateLoader from 'components/Loaders/AnimateLoader';
-
-import { Button, Avatar, toaster, Spinner, Pane } from "evergreen-ui";
+import { ToggleButton } from "components/misc/Buttons";
+import { Button, Avatar, toaster, Spinner, Pane, Dialog, TextInputField } from 'evergreen-ui';
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
-import { getProfileInfo } from "services/profile.service";
+import { getProfileInfo, changePassword } from "services/profile.service";
 import { getLocalState } from "services/storage.service";
 import { useAppContext } from 'App';
 
@@ -23,10 +23,10 @@ const QRContainer = tw(QRCode)`block mx-auto border shadow-lg rounded-xl p-4`;
 const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
 const SyncButton = tw(Button)`rounded-md w-2/3 lg:w-1/3 md:h-12 mb-4 md:mb-0`;
 const ButtonGroup = tw.div`flex flex-col md:flex-row items-center mt-4`;
-
+const Input = tw(TextInputField)`w-full rounded-lg py-3`;
 
 const Profile = () => {
-    const { dispatch, state } = useAppContext();
+    const { dispatch, state, handleLogOut } = useAppContext();
     const { userProfile, token, id } = state;
     const [loading, setLoading] = useState(false);
     const [syncState, setSyncState] = useState({
@@ -38,6 +38,44 @@ const Profile = () => {
         acked: false,
         qrLink: ""
     });
+    const [modal, setModal] = useState(false);
+    const [password, setPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [isValid, setIsValid] = useState(false);
+    const [toggle, setToggle] = useState(false);
+    const [toggle2, setToggle2] = useState(false);
+    //used to check password length when user revokes token prevents error 400 from BE
+    const validatePassword = () => {
+        if (newPassword.length >= 8) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        }
+    }
+    const handleChangePassword = () => {
+        setLoading(true);
+        changePassword(id, token, password, newPassword)
+            .then(response => {
+                toaster.success("Password Changed successfully please login");
+                setTimeout(() => { handleLogOut() }, 1000);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    toaster.danger("Request Error", {
+                        description: "Sorry we could not change your password. Please check your network connection and try again"
+                    });
+                } else if (error.request) {
+                    toaster.danger("Network Error", {
+                        description: "We could not change your password. Please check your network and reload this page"
+                    });
+                } else {
+                    toaster.danger("Profile Error", {
+                        description: "An internal error occured. Please log out and login again"
+                    });
+                }
+                setLoading(false);
+            });
+    }
 
 
     useEffect(() => {
@@ -247,12 +285,63 @@ const Profile = () => {
                             appearance="default"
                             height="40"
                             tw="md:ml-4"
+                            onClick={() => setModal(true)}
                         >
                             reset password
                         </SyncButton>
                     </ButtonGroup>
                 </DetailsContainer>
             </SectionContainer>
+
+            <Dialog
+                isShown={modal}
+                title="Change your password"
+                hasClose={false}
+                shouldCloseOnOverlayClick={false}
+                shouldCloseOnEscapePress={false}
+                isConfirmDisabled={isValid ? false : true}
+                onConfirm={() => { handleChangePassword(); setModal(false) }}
+                onCloseComplete={() => setModal(false)}
+                confirmLabel="confirm change"
+            >
+                <div tw="relative">
+                    <Input
+                        type={toggle ? "text" : "password"}
+                        label="Current Password"
+                        placeholder="Enter current password"
+                        inputHeight={40}
+                        required
+                        minLength="8"
+                        onChange={(evt) => {
+                            setPassword(evt.target.value);
+                        }}
+                    />
+                    <ToggleButton
+                        toggleFunc={setToggle}
+                        value={toggle}
+                    />
+                </div>
+                <div tw="relative">
+                    <Input
+                        type={toggle2 ? "text" : "password"}
+                        label="New Password"
+                        placeholder="Enter new password"
+                        inputHeight={40}
+                        required
+                        minLength="8"
+                        onChange={(evt) => {
+                            setNewPassword(evt.target.value);
+                            validatePassword();
+                        }}
+                    />
+
+                    <ToggleButton
+                        toggleFunc={setToggle2}
+                        value={toggle2}
+                    />
+                </div>
+
+            </Dialog>
         </PageAnimationWrapper>
     );
 };
