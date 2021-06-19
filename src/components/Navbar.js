@@ -24,8 +24,8 @@ const MobileNav = tw.nav`lg:hidden flex flex-1 items-center justify-between`;
 const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
 const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
 const AboutLogo = tw.img`w-60`;
-const AboutContainer = tw.div`flex flex-wrap items-center flex-col md:flex-row justify-between mx-auto p-2`;
-const AboutDetails = tw.div``;
+const AboutContainer = tw.div`flex flex-wrap items-center flex-col md:flex-row`;
+const AboutDetails = tw.div`text-gray-900`;
 
 
 
@@ -121,12 +121,9 @@ const Navbar = () => {
                 <AboutContainer>
                     <AboutLogo src={swobLogo} alt="SMSwithoutborders logo" />
                     <AboutDetails>
-                        <h3><strong>SMSwithoutBorders User</strong></h3>
-                        <br />
-                        <div>
-                            <p>Version number</p>
-                            <p>1.0.0</p>
-                        </div>
+                        <h3 tw="text-xl font-bold mb-2">SMSwithoutBorders</h3>
+                        <p tw="text-base">Version number</p>
+                        <p tw="text-base">1.0.0</p>
                     </AboutDetails>
                 </AboutContainer>
             </Dialog>
