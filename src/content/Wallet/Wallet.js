@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
+import useTitle from 'helpers/useTitle';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
@@ -22,6 +23,7 @@ const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
 const Input = tw(TextInputField)`w-full rounded-lg py-3`;
 
 const Wallet = () => {
+
     const { state, dispatch } = useAppContext();
     const { token, id } = state;
     const [tokens, setTokens] = useState();
@@ -49,6 +51,8 @@ const Wallet = () => {
             setIsValid(false);
         }
     }
+
+    useTitle("Wallet (Store Access)");
 
     useEffect(() => {
         getProviders(id, token)
@@ -245,7 +249,7 @@ const Wallet = () => {
             <PageAnimationWrapper>
                 <Container>
 
-                    <Heading>Wallet(Store Access)</Heading>
+                    <Heading>Wallet</Heading>
                     <Description>Save your tokens for rainy days</Description>
 
                     <Row>
