@@ -263,13 +263,9 @@ const Profile = () => {
                 <DetailsContainer>
                     <Heading> Welcome, <ProfileName>{userProfile?.name}</ProfileName> </Heading>
                     <Description>Join Date</Description>
-                    <br />
                     <Meta>{new Date(userProfile?.created).toLocaleString()}</Meta>
-                    <br />
                     <Description>Last Login</Description>
                     <Meta>{new Date(userProfile?.last_login).toLocaleString()}</Meta>
-                    <br />
-
                     <ButtonGroup>
                         <SyncButton
                             iconBefore={IoMdSync}
