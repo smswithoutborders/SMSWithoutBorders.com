@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "components";
+import { Navbar, Footer } from "components";
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
@@ -21,6 +21,7 @@ const DashBoard = () => {
           <Route exact path={`${path}/wallet`} component={Wallet} />
           <Route exact path={`${path}/oauth2/google/Tokens/redirect/`} component={WalletRedirect} />
         </Switch>
+        <Footer />
       </PageAnimationWrapper>
     </>
   );
