@@ -8,6 +8,7 @@ import { FiSave, FiTrash2 } from "react-icons/fi";
 import { Panel } from "rsuite";
 import { ToggleButton } from "components/misc/Buttons";
 import { useAppContext } from 'App';
+import AnimateLoader from 'components/Loaders/AnimateLoader';
 
 const StoreButton = tw(Button)`rounded-md`;
 const Heading = tw.h1`font-bold sm:text-5xl text-3xl mb-4`;
@@ -244,6 +245,10 @@ const Wallet = () => {
                 });
         }
     };
+
+    if (alert.loading) {
+        return <AnimateLoader />
+    }
 
     return (
         <>
