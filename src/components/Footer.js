@@ -9,7 +9,7 @@ const Container = tw.footer`flex flex-col md:flex-row md:justify-between bg-gray
 const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
 const FooterLink = tw.p`text-gray-100 pl-14`;
 const FooterNavLink = tw(Link)`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
-const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer md:mb-4 hocus:no-underline hocus:text-primary-700`;
+const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-primary-700`;
 const NavContainer = tw.div`flex flex-col p-4 items-start`;
 
 const Footer = () => {
@@ -30,7 +30,7 @@ const Footer = () => {
 
                 <NavContainer>
                     <DescLink href="https://smswithoutborders.github.io" target="_blank" rel="noreferrer"><FiGlobe size={20} /> &nbsp; SWOB Blog</DescLink>
-                    <FooterNavLink tw="md:mb-4 hocus:text-primary-700" to="/privacy-policy"><FiLink2 size={20} /> &nbsp; Privacy Policy</FooterNavLink>
+                    <FooterNavLink tw="mb-2 md:mb-4 hocus:text-primary-700" to="/privacy-policy"><FiLink2 size={20} /> &nbsp; Privacy Policy</FooterNavLink>
                     <DescLink href="mailto:info@smswithoutborders.com" target="_blank" rel="noreferrer"><FiMail size={20} /> &nbsp; info@smswithoutborders.com</DescLink>
                 </NavContainer>
 
