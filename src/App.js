@@ -7,6 +7,7 @@ import SignUp from "content/SignUp"
 import HomePage from 'content/HomePage';
 import DashBoard from "content/DashBoard";
 import PrivacyPage from 'content/PrivacyPage';
+import ContactPage from 'content/ContactPage';
 import AnimateLoader from "components/Loaders/AnimateLoader";
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { getLocalState, setLocalState, clearLocalState, removeToken, removeProfile } from "services/storage.service";
@@ -109,6 +110,9 @@ const App = () => {
 
           <Route exact path="/privacy-policy">
             <PrivacyPage />
+          </Route>
+          <Route exact path="/contact-us">
+            <ContactPage />
           </Route>
 
           <Route path="/dashboard">

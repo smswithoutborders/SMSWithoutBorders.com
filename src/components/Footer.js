@@ -31,7 +31,7 @@ const Footer = () => {
                 <NavContainer>
                     <DescLink href="https://smswithoutborders.github.io" target="_blank" rel="noreferrer"><FiGlobe size={20} /> &nbsp; SWOB Blog</DescLink>
                     <FooterNavLink tw="mb-2 md:mb-4 hocus:text-primary-700" to="/privacy-policy"><FiLink2 size={20} /> &nbsp; Privacy Policy</FooterNavLink>
-                    <DescLink href="mailto:info@smswithoutborders.com" target="_blank" rel="noreferrer"><FiMail size={20} /> &nbsp; info@smswithoutborders.com</DescLink>
+                    <DescLink href="mailto:developers@smswithoutborders.com" target="_blank" rel="noreferrer"><FiMail size={20} /> &nbsp; developers@smswithoutborders.com</DescLink>
                 </NavContainer>
 
                 <NavContainer>

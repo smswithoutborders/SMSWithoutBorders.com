@@ -34,6 +34,7 @@ const MainNavbar = () => {
                 <NavLink key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
                 <ExtLink key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
                 <ExtLink key="Blog" href="https://smswithoutborders.github.io" target="_blank">Blog</ExtLink>
+                <NavLink key="contact-us" to="/contact-us">Contact Us</NavLink>
             </NavContainer>
         </React.Fragment>
     );
