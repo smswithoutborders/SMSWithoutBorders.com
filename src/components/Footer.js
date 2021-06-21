@@ -2,14 +2,14 @@ import React from 'react';
 import tw from "twin.macro";
 import Logo from "images/logo-icon-light.png";
 import { Link } from "react-router-dom";
-import { FiMail, FiMessageSquare, FiLink2 } from "react-icons/fi";
+import { FiMail, FiMessageSquare, FiLink2, FiGlobe } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 
-const Container = tw.footer`flex flex-col md:flex-row md:justify-between bg-white p-8`;
+const Container = tw.footer`flex flex-col md:flex-row md:justify-between bg-gray-800 text-white p-8`;
 const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
-const FooterLink = tw.p`text-gray-900 pl-6`;
-const FooterNavLink = tw(Link)`font-medium inline-flex items-center text-gray-900 hocus:no-underline hocus:text-gray-900`;
-const DescLink = tw.a`inline-flex items-center text-base text-gray-900 cursor-pointer md:mb-4`;
+const FooterLink = tw.p`text-gray-100 pl-14`;
+const FooterNavLink = tw(Link)`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
+const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer md:mb-4 hocus:no-underline hocus:text-primary-700`;
 const NavContainer = tw.div`flex flex-col p-4 items-start`;
 
 const Footer = () => {
@@ -23,13 +23,14 @@ const Footer = () => {
                     </FooterNavLink>
 
                     <FooterLink>
-                        &copy; {new Date().getFullYear()} Powered by &nbsp; <a href="https://afkanerd.io" target="_blank" rel="noreferrer">Afkanerd</a>
+                        &copy; {new Date().getFullYear()} Powered by <DescLink tw="text-sm" href="https://afkanerd.io" target="_blank" rel="noreferrer">Afkanerd</DescLink>
                     </FooterLink>
 
                 </NavContainer>
 
                 <NavContainer>
-                    <DescLink to="/privacy-policy"><FiLink2 size={20} /> &nbsp; Privacy Policy</DescLink>
+                    <DescLink href="https://smswithoutborders.github.io" target="_blank" rel="noreferrer"><FiGlobe size={20} /> &nbsp; SWOB Blog</DescLink>
+                    <FooterNavLink tw="md:mb-4 hocus:text-primary-700" to="/privacy-policy"><FiLink2 size={20} /> &nbsp; Privacy Policy</FooterNavLink>
                     <DescLink href="mailto:info@smswithoutborders.com" target="_blank" rel="noreferrer"><FiMail size={20} /> &nbsp; info@smswithoutborders.com</DescLink>
                 </NavContainer>
 
