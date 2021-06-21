@@ -3,7 +3,7 @@ import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import { Text, HeadingRow, Heading, MainNavbar, Footer } from "components";
 
-const Container = tw.div`container px-5 mx-auto py-12  lg:p-12 text-gray-900`;
+const Container = tw.div`container px-5 mx-auto py-12  lg:p-24 text-gray-900 bg-gray-100`;
 
 const PrivacyPage = () => {
 
@@ -197,12 +197,9 @@ const PrivacyPage = () => {
                     <h1>Contact Us</h1>
                     <p>If you have any questions about this Privacy Policy, You can contact us:</p>
                     <ul>
-                        <li>By visiting this page on our website: <a href="smswithoutborders.com/contact-us" rel="external nofollow noopener noreferrer" target="_blank">contact-us</a></li>
+                        <li>By visiting this page on our website: <a href="smswithoutborders.com/contact-us" rel="external nofollow noopener noreferrer" target="_blank">Contact Us</a></li>
                     </ul>
                 </Text>
-                <footer>
-                    <p>&copy; {new Date().getFullYear()} Powered by <a href="https://afkanerd.io" target="_blank" rel="noreferrer">Afkanerd</a></p>
-                </footer>
             </Container>
             <Footer />
 
