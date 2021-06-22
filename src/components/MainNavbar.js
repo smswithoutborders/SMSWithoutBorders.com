@@ -32,10 +32,10 @@ const MainNavbar = () => {
     const defaultLinks = (
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <NavLink key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
-                <ExtLink key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
-                <ExtLink key="Blog" href="https://smswithoutborders.github.io" target="_blank">Blog</ExtLink>
-                <NavLink key="contact-us" to="/contact-us">Contact Us</NavLink>
+                <NavLink onClick={()=> setOpen(false)} key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
+                <ExtLink onClick={()=> setOpen(false)} key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
+                <ExtLink onClick={()=> setOpen(false)} key="Blog" href="https://smswithoutborders.github.io" target="_blank">Blog</ExtLink>
+                <NavLink onClick={()=> setOpen(false)} key="contact-us" to="/contact-us">Contact Us</NavLink>
             </NavContainer>
         </React.Fragment>
     );
@@ -78,7 +78,7 @@ const MainNavbar = () => {
             <SideSheet
                 width={300}
                 isShown={open}
-                onCloseComplete={() => setOpen(!open)}
+                onCloseComplete={() => setOpen(false)}
             >
                 {defaultLinks}
                 {actionLinks}
