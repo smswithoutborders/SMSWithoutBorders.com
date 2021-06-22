@@ -9,17 +9,17 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { useAppContext } from "App";
 
 const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
-const NavContainer = tw.div`block md:inline-flex`;
+const NavContainer = tw.div`block lg:inline-flex`;
 const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
-const NavLink = tw(Link)`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const NavLink = tw(Link)`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const LogoLink = styled(NavLink)`
   ${tw`inline-flex items-center ml-0! hocus:bg-white hocus:text-gray-900 font-bold text-xl`};
   img {
     ${tw`w-8 h-8 mr-3`}
   }
 `;
-const UserActions = tw.div`flex flex-col md:flex-row items-center`;
-const UserActionsButton = tw(NavButton)`w-full md:w-max flex flex-row items-center px-6 py-3 md:px-4 `;
+const UserActions = tw.div`flex flex-col lg:flex-row items-center`;
+const UserActionsButton = tw(NavButton)`w-full lg:w-max flex flex-row items-center px-6 py-3 md:px-4 `;
 const MobileNav = tw.nav`lg:hidden flex flex-1 items-center justify-between`;
 const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
 const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
@@ -69,7 +69,7 @@ const Navbar = () => {
                 <FiInfo size={20} /> &nbsp; About
             </UserActionsButton>
             {userProfile ? (
-                <UserActionsButton tw="px-5">
+                <UserActionsButton tw="px-5 md:px-3">
                     <Avatar name={userProfile?.name} size={30} /> &nbsp; {userProfile?.name}
                 </UserActionsButton>
             ) : (null)
