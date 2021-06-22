@@ -84,7 +84,7 @@ const Navbar = () => {
 
 
     const defaultLogoLink = (
-        <LogoLink>
+        <LogoLink to="/dashboard">
             <img src={logo} alt="logo" />
             <span>SMSwithoutborders</span>
         </LogoLink>
