@@ -7,24 +7,25 @@ import { Link } from 'react-router-dom';
 import { SideSheet } from "evergreen-ui";
 
 const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
-const NavContainer = tw.div`block md:inline-flex`;
-const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
-const NavLink = tw(Link)`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
-const ExtLink = tw.a`w-full md:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const NavContainer = tw.div`block lg:inline-flex`;
+const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-primary-300 hocus:outline-none text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
+const NavLink = tw(Link)`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-300 hocus:outline-none hocus:text-primary-900 text-gray-900 font-medium hocus:font-bold px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const ExtLink = tw.a`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-300 hocus:outline-none text-gray-900 font-medium hocus:font-bold px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
 const LogoLink = styled(NavLink)`
   ${tw`inline-flex items-center ml-0! hocus:bg-white hocus:text-gray-900 font-bold text-xl`};
   img {
     ${tw`w-8 h-8 mr-3`}
   }
 `;
+
+const SignUpLink = tw(NavLink)`bg-primary-900 text-white font-bold`;
+const LogInLink = tw(NavLink)`text-primary-900 font-bold`;
 const UserActions = tw.div`flex flex-col md:flex-row items-center`;
 const MobileNav = tw.nav`lg:hidden flex flex-1 items-center justify-between`;
 const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
 const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
-const Divider = tw.span`hidden lg:block text-gray-900`;
 
 const MainNavbar = () => {
-
 
     const [open, setOpen] = useState(false);
 
@@ -41,13 +42,12 @@ const MainNavbar = () => {
 
     const actionLinks = (
         <UserActions key={2}>
-            <NavLink key="login" to="/login">
+            <LogInLink key="login" to="/login">
                 <FiLogIn size={20} /> &nbsp; Log In
-            </NavLink>
-            <Divider>|</Divider>
-            <NavLink key="sign-up" to="/sign-up">
+            </LogInLink>
+            <SignUpLink key="sign-up" to="/sign-up">
                 <FiUserPlus size={20} /> &nbsp; Sign Up
-            </NavLink>
+            </SignUpLink>
         </UserActions>
     );
 

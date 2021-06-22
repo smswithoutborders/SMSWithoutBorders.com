@@ -49,7 +49,7 @@ const HomePage = () => {
                             access to an active internet connection. Store your access to your favourite communications
                             platforms while online, use them while offline.</Description>
                         <Button href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b" target="_blank">
-                            <PlayStore size={16} /> &nbsp; Get SWOB
+                            <PlayStore size={24} /> &nbsp; Get SWOB
                         </Button>
                     </DetailsContainer>
                 </SectionContainer>
