@@ -30,7 +30,7 @@ const IllustrationImage = styled.div`
 
 const Login = () => {
 
-  useTitle("Sign In");
+  useTitle("SWOB LogIn");
 
   const { dispatch } = useAppContext()
   const [username, setUsername] = useState();

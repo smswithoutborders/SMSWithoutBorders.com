@@ -4,6 +4,7 @@ import axios from "axios";
 import QRCode from 'qrcode.react';
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import AnimateLoader from 'components/Loaders/AnimateLoader';
+import useTitle from "helpers/useTitle";
 import { ToggleButton } from "components/misc/Buttons";
 import { Button, Avatar, toaster, Spinner, Pane, Dialog, TextInputField } from 'evergreen-ui';
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
@@ -26,6 +27,7 @@ const ButtonGroup = tw.div`flex flex-col md:flex-row items-center mt-4`;
 const Input = tw(TextInputField)`w-full rounded-lg py-3`;
 
 const Profile = () => {
+    useTitle("Your Profile")
     const { dispatch, state, handleLogOut } = useAppContext();
     const { userProfile, token, id } = state;
     const [loading, setLoading] = useState(false);

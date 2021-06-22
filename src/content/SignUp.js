@@ -45,7 +45,7 @@ const PrivacyTerms = (
 
 const SignUp = () => {
 
-  useTitle("Sign Up");
+  useTitle("SWOB Sign Up");
   const [name, setName] = useState();
   const [phone, setPhone] = useState();
   const [countryCode, setCountryCode] = useState();
