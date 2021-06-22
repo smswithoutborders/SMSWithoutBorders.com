@@ -40,8 +40,8 @@ const Navbar = () => {
     const defaultLinks = [
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <NavLink key="Profile" to={`${path}/profile`}>Profile</NavLink>
-                <NavLink key="Wallet" to={`${path}/wallet`}>Wallet(Store Access)</NavLink>
+                <NavLink onClick={()=> setOpen(false)} key="Profile" to={`${path}/profile`}>Profile</NavLink>
+                <NavLink onClick={()=> setOpen(false)} key="Wallet" to={`${path}/wallet`}>Wallet(Store Access)</NavLink>
             </NavContainer>
         </React.Fragment>
     ];
@@ -52,7 +52,7 @@ const Navbar = () => {
                 <FiInfo size={20} />
             </UserActionsButton>
             {userProfile ? (
-                <UserActionsButton>
+                <UserActionsButton onClick={()=> setOpen(false)}>
                     <Avatar name={userProfile?.name} size={34} />
                 </UserActionsButton>
             ) : (null)
@@ -65,11 +65,13 @@ const Navbar = () => {
 
     const mobileActionLinks = (
         <UserActions key={2}>
-            <UserActionsButton onClick={() => setIsAboutOpen(!isAboutOpen)}>
+            <UserActionsButton onClick={() => { setOpen(false); setIsAboutOpen(!isAboutOpen) }}>
                 <FiInfo size={20} /> &nbsp; About
             </UserActionsButton>
             {userProfile ? (
-                <UserActionsButton tw="px-5 md:px-3">
+                <UserActionsButton tw="px-5 md:px-3"
+                    onClick={() => setOpen(false)}
+                >
                     <Avatar name={userProfile?.name} size={30} /> &nbsp; {userProfile?.name}
                 </UserActionsButton>
             ) : (null)
@@ -106,7 +108,7 @@ const Navbar = () => {
             <SideSheet
                 width={300}
                 isShown={open}
-                onCloseComplete={() => setOpen(!open)}
+                onCloseComplete={() => setOpen(false)}
             >
                 {defaultLinks}
                 {mobileActionLinks}
