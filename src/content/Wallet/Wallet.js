@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
+import AnimateLoader from 'components/Loaders/AnimateLoader';
 import useTitle from 'helpers/useTitle';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
-import { Panel } from "rsuite";
+import { Panel, Placeholder } from "rsuite";
 import { ToggleButton } from "components/misc/Buttons";
 import { useAppContext } from 'App';
-import AnimateLoader from 'components/Loaders/AnimateLoader';
 
 const StoreButton = tw(Button)`rounded-md`;
 const Heading = tw.h1`font-bold sm:text-5xl text-3xl mb-4`;
@@ -23,6 +23,7 @@ const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gra
 const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
 const Input = tw(TextInputField)`w-full rounded-lg py-3`;
 const Accordion = tw(Panel)`border border-gray-200 shadow-md`;
+const { Paragraph } = Placeholder;
 
 const Wallet = () => {
 
@@ -41,7 +42,8 @@ const Wallet = () => {
 
     const [alert, setAlert] = useState(
         {
-            loading: true,
+            loading: false,
+            platforms: true,
             modal: false
         });
 
@@ -67,37 +69,25 @@ const Wallet = () => {
                 if (tokens.length) {
                     setTokens(tokens);
                 }
-                setAlert({ loading: false });
+                setAlert({ platforms: false });
             })
             .catch((error) => {
                 if (error.response) {
-                    /*
-                     * The request was made and the server responded with a
-                     * status code that falls out of the range of 2xx
-                     */
-                    setAlert({ loading: false });
                     toaster.danger("Request Error", {
                         description: "Sorry we could not process your request. Please check your network connection and try again"
                     });
 
                 } else if (error.request) {
-                    /*
-                     * The request was made but no response was received, `error.request`
-                     * is an instance of XMLHttpRequest in the browser and an instance
-                     * of http.ClientRequest in Node.js
-                     */
-                    console.log(error.request);
                     setAlert({ loading: false });
                     toaster.danger("Network Error", {
                         description: "We could not fetch your tokens. Please check your network and reload this page"
                     });
                 } else {
-                    // Something happened in setting up the request and triggered an Error
-                    setAlert({ loading: false });
                     toaster.danger("No Tokens", {
                         description: "You haven't stored any tokens. Please add them"
                     });
                 }
+                setAlert({ platforms: false });
             });
     }, [token, id]);
 
@@ -260,97 +250,102 @@ const Wallet = () => {
 
                     <Row>
                         <Column>
-                            <Card>
-                                <SubHeading>Providers</SubHeading>
-                                <br />
-                                {providers ? (
-                                    <>
-                                        {providers.map(provider => {
-                                            return (
-                                                <Accordion header={< PlatformTitle > {provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
-                                                    <p>Store your {provider?.provider} token which will be used for authentication on your behalf in the event
-                                                        of an internet shutdown.</p>
-                                                    <br />
-                                                    <p>You can define how this token will be used by setting the scopes of access</p>
-                                                    <br />
+                            {alert.platforms ? (
+                                <Paragraph style={{ marginTop: 30 }} rows={5} active />
+                            ) : (
+                                <Card>
+                                    <SubHeading>Providers</SubHeading>
+                                    <br />
+                                    {providers ? (
+                                        <>
+                                            {providers.map(provider => {
+                                                return (
+                                                    <Accordion header={< PlatformTitle > {provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
+                                                        <p>Store your {provider?.provider} token which will be used for authentication on your behalf in the event
+                                                            of an internet shutdown.</p>
+                                                        <br />
+                                                        <p>You can define how this token will be used by setting the scopes of access</p>
+                                                        <br />
+                                                        <StoreContainer>
+                                                            <div>
+                                                                <PlatformTitle>Description</PlatformTitle>
+                                                                <PlatformDescription>{provider?.description}</PlatformDescription>
+
+                                                                <PlatformTitle>Platform</PlatformTitle>
+                                                                <PlatformDescription>{provider?.platforms[0].name}</PlatformDescription>
+
+                                                                <PlatformTitle>Type</PlatformTitle>
+                                                                <PlatformDescription>{provider?.platforms[0].type}</PlatformDescription>
+                                                            </div>
+                                                            <StoreButton
+                                                                type="submit"
+                                                                appearance="primary"
+                                                                height={40}
+                                                                iconBefore={FiSave}
+                                                                isLoading={alert.loading}
+                                                                onClick={() => getPlatformToken(provider?.provider, provider?.platforms[0].name)}
+                                                            >
+                                                                <span>{alert.loading ? "Storing" : "Store"}</span>
+                                                            </StoreButton>
+                                                        </StoreContainer>
+                                                    </Accordion>
+                                                )
+                                            })}
+                                        </>
+                                    ) : (
+                                        <p>No available providers</p>
+                                    )}
+                                </Card>
+                            )}
+                        </Column>
+                        <Column>
+                            {alert.platforms ? (
+                                <Paragraph style={{ marginTop: 30 }} rows={5} active />
+                            ) : (
+                                <Card>
+                                    <SubHeading>Saved tokens</SubHeading>
+                                    <br />
+                                    {tokens ? (
+                                        <>
+                                            {tokens.map(token => (
+                                                <Accordion header={< PlatformTitle > {token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
                                                     <StoreContainer>
                                                         <div>
                                                             <PlatformTitle>Description</PlatformTitle>
-                                                            <PlatformDescription>{provider?.description}</PlatformDescription>
+                                                            <PlatformDescription>{token.description}</PlatformDescription>
 
                                                             <PlatformTitle>Platform</PlatformTitle>
-                                                            <PlatformDescription>{provider?.platforms[0].name}</PlatformDescription>
+                                                            <PlatformDescription>{token.platforms[0].name}</PlatformDescription>
 
-                                                            <PlatformTitle>Type</PlatformTitle>
-                                                            <PlatformDescription>{provider?.platforms[0].type}</PlatformDescription>
+                                                            <PlatformTitle>Email address</PlatformTitle>
+                                                            <PlatformDescription>{token.email}</PlatformDescription>
                                                         </div>
                                                         <StoreButton
                                                             type="submit"
                                                             appearance="primary"
+                                                            intent="danger"
                                                             height={40}
-                                                            iconBefore={FiSave}
+                                                            iconBefore={FiTrash2}
                                                             isLoading={alert.loading}
-                                                            onClick={() => getPlatformToken(provider?.provider, provider?.platforms[0].name)}
+                                                            onClick={() => {
+                                                                setRevokedTokenDetails({
+                                                                    provider: token.provider,
+                                                                    platform: token.platforms[0].name
+                                                                });
+                                                                setAlert({ modal: true });
+                                                            }}
                                                         >
-                                                            <span>{alert.loading ? "Storing" : "Store"}</span>
+                                                            <span>{alert.loading ? "Revoking" : "Revoke"}</span>
                                                         </StoreButton>
                                                     </StoreContainer>
                                                 </Accordion>
-                                            )
-                                        })}
-                                    </>
-                                ) : (
-                                    <p>No available providers</p>
-                                )
-                                }
-                            </Card>
-                        </Column>
-                        <Column>
-                            <Card>
-                                <SubHeading>Saved tokens</SubHeading>
-                                <br />
-
-                                {tokens ? (
-                                    <>
-                                        {tokens.map(token => (
-                                            <Accordion header={< PlatformTitle > {token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
-                                                <StoreContainer>
-                                                    <div>
-                                                        <PlatformTitle>Description</PlatformTitle>
-                                                        <PlatformDescription>{token.description}</PlatformDescription>
-
-                                                        <PlatformTitle>Platform</PlatformTitle>
-                                                        <PlatformDescription>{token.platforms[0].name}</PlatformDescription>
-
-                                                        <PlatformTitle>Email address</PlatformTitle>
-                                                        <PlatformDescription>{token.email}</PlatformDescription>
-                                                    </div>
-                                                    <StoreButton
-                                                        type="submit"
-                                                        appearance="primary"
-                                                        intent="danger"
-                                                        height={40}
-                                                        iconBefore={FiTrash2}
-                                                        isLoading={alert.loading}
-                                                        onClick={() => {
-                                                            setRevokedTokenDetails({
-                                                                provider: token.provider,
-                                                                platform: token.platforms[0].name
-                                                            });
-                                                            setAlert({ modal: true });
-                                                        }}
-                                                    >
-                                                        <span>{alert.loading ? "Revoking" : "Revoke"}</span>
-                                                    </StoreButton>
-                                                </StoreContainer>
-                                            </Accordion>
-                                        ))}
-                                    </>
-                                ) : (
-                                    <p>No stored tokens</p>
-                                )
-                                }
-                            </Card>
+                                            ))}
+                                        </>
+                                    ) : (
+                                        <p>No stored tokens</p>
+                                    )}
+                                </Card>
+                            )}
                         </Column>
                     </Row>
                 </Container>
