@@ -325,6 +325,7 @@ const Wallet = () => {
                                                             appearance="primary"
                                                             intent="danger"
                                                             height={40}
+                                                            disabled={id ? false : true}
                                                             iconBefore={FiTrash2}
                                                             isLoading={alert.loading}
                                                             onClick={() => {
