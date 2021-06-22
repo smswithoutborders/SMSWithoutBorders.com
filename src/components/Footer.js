@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FiMail, FiMessageSquare, FiLink2, FiGlobe } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 
-const Container = tw.footer`flex flex-col md:flex-row md:justify-between bg-gray-800 text-white p-8`;
+const Container = tw.footer`flex flex-col lg:flex-row md:justify-between bg-gray-800 text-white py-8 px-2 md:p-8`;
 const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
 const FooterLink = tw.p`text-gray-100 pl-14`;
 const FooterNavLink = tw(Link)`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
