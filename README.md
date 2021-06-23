@@ -5,13 +5,13 @@
 
 Quick start guide to get the dashboard *running*:
 
-### `npm install`
+### `yarn install`
 
 Installs all dependencies
 
 ### Set env variables
 
-Create .env file from .env.example
+Create .env file from env.example
 
 ```bash
 cp env.example .env
@@ -22,7 +22,7 @@ The .env file in project root contains all modifiable system variables.
 Cloud API URL address and Google Client ID can be set here
 
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.
 
@@ -32,7 +32,7 @@ The page will reload if you make edits.
 
 You will also see any lint errors in the console.
 
-### `npm run build`
+### `yarn run build`
 
 Builds the app for production to the `build` folder using webpack and Babel.
 
@@ -48,11 +48,11 @@ The build is minified and the filenames include the hashes.
 
 ## Built With
 
-- [Carbon Design Systems](https://carbondesignsystems.com)
+- [treact components](https://owaiskhan.me/post/free-tailwindcss-react-ui-kit)
 
-- [Carbon Components](https://github.com/carbon-design-system/carbon)
-
-- [Carbon Icons](https://github.com/carbon-design-system/carbon-*icons*)
+- [Evergreen UI](https://github.com/segmentio/evergreen)
+- 
+- [Tail Blocks](https://tailblocks.cc/)
 
 - [React Icons](https://react-icons.github.io)
 

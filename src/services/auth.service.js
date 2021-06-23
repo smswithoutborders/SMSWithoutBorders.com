@@ -1,41 +1,23 @@
 import axios from 'axios';
-let AUTH_URL = process.env.REACT_APP_API_URL;
 
-export const registerUser = (phonenumber, password) => {
-    return axios.post(AUTH_URL + "/users/profiles/register",
+let AUTH_URL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = AUTH_URL;
+
+export const registerUser = (name, country_code, phonenumber, password) => {
+    return axios.post("/users/profiles/register",
         {
+            name: name,
+            country_code: country_code,
             phone_number: phonenumber,
-            password: password
-        })
-        .then(response => response)
+            password: password,
+
+        }).then(response => response)
 }
 
 export const userLogin = async (phonenumber, password) => {
-    return axios.post(AUTH_URL + "/users/profiles/login",
+    return axios.post("/users/profiles/login",
         {
             phone_number: phonenumber,
             password: password
-        })
-        .then(response => response)
-};
-
-export const getToken = () => {
-    const token = sessionStorage.getItem('Deku-Auth_key');
-    return token;
-};
-
-export const setToken = (token) => {
-    sessionStorage.setItem('Deku-Auth_key', token);
-};
-
-export const removeToken = () => {
-    sessionStorage.removeItem('Deku-Auth_key');
-}
-
-//setIsLoggedIn is parsed from the app component
-export const logOut = (setIsLoggedIn) => {
-    //log the user out by changing state
-    setIsLoggedIn(false);
-    //remove user token from session storage
-    removeToken();
+        }).then(response => response)
 };
