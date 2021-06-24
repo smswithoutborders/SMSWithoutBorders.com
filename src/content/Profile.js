@@ -20,7 +20,7 @@ const Image = tw(Avatar)`block mx-auto md:ml-auto `;
 const Heading = tw.h1`font-bold sm:text-4xl text-2xl mb-4 font-bold text-gray-900`;
 const ProfileName = tw.span`font-light`;
 const Description = tw.h3`text-lg font-bold leading-relaxed text-gray-800 mb-1`;
-const QRContainer = tw(QRCode)`block mx-auto border shadow-lg rounded-xl p-4`;
+const QRContainer = tw(QRCode)`block mx-auto border shadow-lg rounded-xl p-4 bg-white`;
 const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
 const SyncButton = tw(Button)`rounded-md w-2/3 lg:w-1/3 md:h-12 mb-4 md:mb-0`;
 const ButtonGroup = tw.div`flex flex-col md:flex-row items-center mt-4`;
@@ -125,13 +125,9 @@ const Profile = () => {
             let ws = new WebSocket(response.data.url);
 
             ws.onopen = () => {
-
                 //set ws reference in state
                 setSyncState(syncState => {
                     return { ...syncState, ws: ws };
-                });
-                toaster.notify("Sync started", {
-                    description: "Please scan the qr code"
                 });
             }
 
@@ -140,13 +136,13 @@ const Profile = () => {
                 // eslint-disable-next-line eqeqeq
                 if (evt.data == "200- acked") {
                     setSyncState(syncState => {
-                        return { ...syncState, acked: true }
+                        return { ...syncState, acked: true, open: false }
                     });
                     toaster.success("Sync complete");
                     // eslint-disable-next-line eqeqeq
                 } else if (evt.data == "201- paused") {
                     setSyncState(syncState => {
-                        return { ...syncState, paused: true };
+                        return { ...syncState, paused: true, connected: false };
                     });
                 } else {
                     setSyncState(syncState => {
@@ -156,9 +152,6 @@ const Profile = () => {
             }
 
             ws.onclose = () => {
-                toaster.notify("Sync session expired", {
-                    description: "Please sync again"
-                });
                 setSyncState(false);
             }
 
@@ -169,27 +162,16 @@ const Profile = () => {
             }
         }).catch((error) => {
             if (error.response) {
-                /*
-                 * The request was made and the server responded with a
-                 * status code that falls out of the range of 2xx
-                 */
                 toaster.danger("Request Error", {
                     description: "Sorry we could not sync your profile. Please check your network connection and try again"
                 });
 
             } else if (error.request) {
-                /*
-                 * The request was made but no response was received, `error.request`
-                 * is an instance of XMLHttpRequest in the browser and an instance
-                 * of http.ClientRequest in Node.js
-                 */
-                console.log(error.request);
                 toaster.danger("Network Error", {
                     description: "We could not sync your profile. Please check your network and try again"
                 });
 
             } else {
-                // Something happened in setting up the request and triggered an Error
                 toaster.danger("Profile Error", {
                     description: "We could not sync your profile. Please check your network, log out and login again"
                 });
@@ -221,9 +203,9 @@ const Profile = () => {
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
-                                height={275}
-                                width={275}
-                                tw="border border-gray-100 shadow-lg rounded-lg p-4 mx-auto">
+                                height={300}
+                                width={300}
+                                tw="bg-white border border-gray-100 shadow-lg rounded-lg p-4 mx-auto">
                                 <Spinner />
                             </Pane>
                         )}
@@ -245,6 +227,7 @@ const Profile = () => {
                             onClick={() => {
                                 setSyncState(false);
                                 syncState.ws.close();
+                                toaster.notify("Sync session closed");
                             }}
                         >
                             stop sync
