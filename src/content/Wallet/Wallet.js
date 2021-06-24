@@ -137,7 +137,7 @@ const Wallet = () => {
     };
 
     const handleRevokeToken = (provider, platform) => {
-        revokeToken(password, provider, platform)
+        revokeToken(id, token, password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
