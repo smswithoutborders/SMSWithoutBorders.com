@@ -172,14 +172,14 @@ const Login = () => {
                   Dont have an account?{" "}
                   <Link to="/sign-up" tw="text-primary-900">
                     Sign Up
-                 </Link>
+                  </Link>
                 </p>
               </FormContainer>
             </MainContent>
           </MainContainer>
           <IllustrationContainer>
             {/* <IllustrationImage imageSrc={illustration} /> */}
-            <IllustrationImage imageSrc="https://source.unsplash.com/1600x900/?random" />
+            <IllustrationImage imageSrc="https://source.unsplash.com/1600x900/?humanitarian,revolution,research,books,STEM,science" />
           </IllustrationContainer>
         </Content>
       </Container>

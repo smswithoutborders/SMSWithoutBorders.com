@@ -259,7 +259,7 @@ const SignUp = () => {
           </MainContainer>
           <IllustrationContainer>
             {/* <IllustrationImage imageSrc={illustration} /> */}
-            <IllustrationImage imageSrc="https://source.unsplash.com/1600x900/?random" />
+            <IllustrationImage imageSrc="https://source.unsplash.com/1600x900/?humanitarian,revolution,research,books,STEM,science" />
           </IllustrationContainer>
         </Content>
       </Container>
