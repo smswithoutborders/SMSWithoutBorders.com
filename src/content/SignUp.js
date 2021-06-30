@@ -274,7 +274,6 @@ const SignUp = () => {
                     placeholder="2FA CODE"
                     onChange={(evt) => setCode(evt.target.value)}
                   />
-                  {errors.code && <ErrorMessage>{errors.code.message}</ErrorMessage>}
                 </FormGroup>
 
                 <button

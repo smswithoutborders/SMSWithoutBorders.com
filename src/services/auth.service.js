@@ -23,10 +23,10 @@ export const verifyCode = (code, session_id, svid) => {
         }).then(response => response)
 }
 
-export const userLogin = async (phonenumber, password) => {
+export const userLogin = async (phone_number, password) => {
     return axios.post("/users/profiles/login",
         {
-            phone_number: phonenumber,
+            phone_number: phone_number,
             password: password
         }).then(response => response)
 };
