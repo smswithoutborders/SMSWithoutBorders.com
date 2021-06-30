@@ -199,7 +199,7 @@ const SignUp = () => {
               });
               break;
 
-              case 401:
+            case 401:
               toaster.danger("Invalid code provided", {
                 description: "please try again"
               });
@@ -326,6 +326,8 @@ const SignUp = () => {
                           placeholder="Enter your phone number"
                           defaultCountry="CM"
                           value={value}
+                          type="tel"
+                          autoComplete
                           onChange={onChange}
                         />
                       )}

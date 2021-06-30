@@ -79,7 +79,7 @@ const Login = () => {
     userLogin(data.phone_number, data.password)
       .then(response => {
         if (response.status === 200) {
-          setLoading(false);
+
           toaster.success('Login successful', {
             description: "You will be redirected shortly"
           });
@@ -106,32 +106,24 @@ const Login = () => {
             case 400:
               toaster.danger('Something went wrong', {
                 description: 'We are working to resolve this. Please try again'
-              }
-              );
+              });
               break;
-
             case 401:
               toaster.danger('Forbidden', {
                 description: 'Account is unauthorized. Sign Up to create account'
-              }
-              );
+              });
               break;
-
             case 500:
               toaster.danger('Something went wrong', {
                 description: 'We are working to resolve this.  Please try again'
-              }
-              );
+              });
               break;
-
             default:
               toaster.danger('Something went wrong', {
                 description: 'We are working to resolve this.  Please try again'
               });
           }
           setLoading(false);
-
-
         } else if (error.request) {
           /*
            * The request was made but no response was received, `error.request`
@@ -141,16 +133,13 @@ const Login = () => {
           setLoading(false);
           toaster.danger('Network error', {
             description: 'Please check your network and try again'
-          }
-          );
-
+          });
         } else {
           // Something happened in setting up the request and triggered an Error
           setLoading(false);
           toaster.danger('Network error', {
             description: 'Please check your network and try again'
-          }
-          );
+          });
         }
       })
   };
@@ -180,6 +169,8 @@ const Login = () => {
                           placeholder="Enter your phone number"
                           defaultCountry="CM"
                           value={value}
+                          type="tel"
+                          autoComplete
                           onChange={onChange}
                         />
                       )}
