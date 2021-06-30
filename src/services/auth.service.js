@@ -14,12 +14,12 @@ export const registerUser = ({ username, country_code, phone_number, password })
         }).then(response => response)
 }
 
-export const verifyCode = (code, session_id, auth_key) => {
+export const verifyCode = (code, session_id, svid) => {
     return axios.post("/users/profiles/register/2fa",
         {
             code: code,
             session_id: session_id,
-            auth_key: auth_key
+            svid: svid
         }).then(response => response)
 }
 

@@ -170,7 +170,7 @@ const SignUp = () => {
 
     const session = getToken();
 
-    verifyCode(code, session.session_id, session.auth_key)
+    verifyCode(code, session.session_id, session.svid)
       .then(response => {
         if (response.status === 200) {
 
