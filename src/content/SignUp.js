@@ -6,12 +6,14 @@ import logo from "images/logo.png";
 import PasswordStrengthBar from 'react-password-strength-bar';
 import useTitle from "helpers/useTitle";
 import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
+import AnimateLoader from "components/Loaders/AnimateLoader";
 import flags from 'react-phone-number-input/flags'
 import 'react-phone-number-input/style.css'
 import { FiUserPlus } from "react-icons/fi";
 import { Button, toaster, Checkbox } from 'evergreen-ui';
-import { registerUser } from 'services/auth.service';
-import { Link } from "react-router-dom";
+import { registerUser, verifyCode } from 'services/auth.service';
+import { getToken, setToken, removeToken } from "services/storage.service";
+import { Link, useHistory } from "react-router-dom";
 import { ToggleButton } from "components/misc/Buttons";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,7 +27,7 @@ const MainContent = tw.div`flex flex-col items-center`;
 const Heading = tw.h1`text-2xl xl:text-3xl font-bold`;
 const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto px-4 sm:px-3`;
-const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 border border-gray-400 hocus:border-primary-900`;
+const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
@@ -74,36 +76,113 @@ const SignUpSchema = yup.object().shape({
   acceptTerms: yup.bool().oneOf([true], 'Please review and accept terms and conditions to proceed')
 });
 
+
 const SignUp = () => {
-  
+
   useTitle("SWOB Sign Up");
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [stage, setStage] = useState(0);
+  const [code, setCode] = useState();
   const [toggle, setToggle] = useState(false);
   const [toggle2, setToggle2] = useState(false);
+
   const { register, control, handleSubmit, watch, formState: { errors } } = useForm({
     resolver: yupResolver(SignUpSchema)
   });
-
 
   const handleSignUp = (data) => {
 
     let splitNumber = parsePhoneNumber(data.phone_number);
     data.phone_number = splitNumber.nationalNumber;
     data.country_code = "+" + splitNumber.countryCallingCode;
-    console.log(data);
 
     setLoading(true);
 
     registerUser(data)
       .then(response => {
         if (response.status === 200) {
-          setLoading(false);
-          toaster.success(`Success, Your account ${data.username} has been created`, {
-            description: "You will be redirected soon"
+          setToken(response.data);
+          toaster.success(`A verification code has been sent to ${data.country_code + data.phone_number}`, {
+            description: "Please check and enter it to verify your account"
           });
 
+          setStage(2);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          /*
+           * The request was made and the server responded with a
+           * status code that falls out of the range of 2xx
+           */
+          switch (error.response.status) {
+            case 400:
+              toaster.danger("An error occured", {
+                description: "Please try again"
+              });
+              break;
+
+            case 409:
+              toaster.danger("An error occured", {
+                description: "An account with this number already exists.Please Log In instead"
+              });
+              break;
+
+            case 500:
+              toaster.danger("An error occured", {
+                description: " We are working to resolve it. Please try again"
+              });
+              break;
+
+            default:
+              toaster.danger("Something went wrong", {
+                description: "Please try again"
+              });
+          }
+          setLoading(false);
+
+        } else if (error.request) {
+          /*
+           * The request was made but no response was received, `error.request`
+           * is an instance of XMLHttpRequest in the browser and an instance
+           * of http.ClientRequest in Node.js
+           */
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+          setLoading(false);
+        } else {
+          // Something happened in setting up the request and triggered an Error
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+          setLoading(false);
+        }
+      });
+  }
+
+  const handleCodeVerification = (evt) => {
+    evt.preventDefault();
+
+    setLoading(true);
+
+    const session = getToken();
+
+    verifyCode(code, session.session_id, session.auth_key)
+      .then(response => {
+        if (response.status === 200) {
+
+          toaster.success(`Success, Your account has been created`, {
+            description: "You will be redirected to login soon"
+          });
+
+          //clear the session tokens from localstorage
+          removeToken();
           setTimeout(() => {
-            window.location.replace("/login")
+            setLoading(false);
+            history.push("/login")
           }, 1000);
         }
       })
@@ -115,32 +194,42 @@ const SignUp = () => {
            */
           switch (error.response.status) {
             case 400:
-              setLoading(false);
-              toaster.danger("Something went wrong", {
+              toaster.danger("An error occured", {
                 description: "Its not your its Us. Please try again"
               });
               break;
 
+              case 401:
+              toaster.danger("Invalid code provided", {
+                description: "please try again"
+              });
+              break;
+
+            case 403:
+              toaster.notify("Account already verified", {
+                description: "Please login"
+              });
+              history.push("/login");
+              break;
+
             case 409:
-              setLoading(false);
-              toaster.danger("Something went wrong", {
+              toaster.danger("An error occured", {
                 description: "An account with this number already exists.Please Log In instead"
               });
               break;
 
             case 500:
-              setLoading(false);
-              toaster.danger("Something went wrong", {
+              toaster.danger("An error occured", {
                 description: "Its not you its Us. We are working to resolve it. Please try again"
               });
               break;
 
             default:
-              setLoading(false);
               toaster.danger("Something went wrong", {
                 description: "Please try again"
               });
           }
+          setLoading(false);
 
         } else if (error.request) {
           /*
@@ -148,18 +237,59 @@ const SignUp = () => {
            * is an instance of XMLHttpRequest in the browser and an instance
            * of http.ClientRequest in Node.js
            */
-          setLoading(false);
           toaster.danger("Network error", {
             description: "Please check your network and try again"
           });
+          setLoading(false);
         } else {
           // Something happened in setting up the request and triggered an Error
-          setLoading(false);
           toaster.danger("Network error", {
             description: "Please check your network and try again"
           });
+          setLoading(false);
         }
       });
+  }
+
+
+  if (loading) return <AnimateLoader />
+
+  if (stage === 2) {
+
+    return (
+      <PageAnimationWrapper>
+        <div tw="grid place-items-center h-screen">
+          <div tw=" h-56 lg:w-1/3 mx-auto">
+            <Heading tw="text-gray-700 text-center">Enter verification code</Heading>
+
+            <FormContainer>
+              <Form onSubmit={(evt) => handleCodeVerification(evt)}>
+                <FormGroup>
+                  <Input
+                    tw="p-3"
+                    type="number"
+                    name="code"
+                    minLenght={6}
+                    min={0}
+                    placeholder="2FA CODE"
+                    onChange={(evt) => setCode(evt.target.value)}
+                  />
+                  {errors.code && <ErrorMessage>{errors.code.message}</ErrorMessage>}
+                </FormGroup>
+
+                <button
+                  tw="block text-center rounded-md w-1/2 lg:w-1/3 mx-auto px-3 py-2  text-lg bg-primary-900"
+                  type="submit"
+                >
+                  verify
+                </button>
+              </Form>
+            </FormContainer>
+          </div>
+
+        </div>
+      </PageAnimationWrapper>
+    )
   }
 
   return (
@@ -185,8 +315,7 @@ const SignUp = () => {
                   </FormGroup>
 
                   <FormGroup>
-                    <Label>Phone number</Label>
-
+                    <Label>Phone Number</Label>
                     <Controller
                       control={control}
                       name="phone_number"
@@ -274,8 +403,8 @@ const SignUp = () => {
             <IllustrationImage imageSrc="https://source.unsplash.com/1600x900/?humanitarian,revolution,research,books,STEM,science" />
           </IllustrationContainer>
         </Content>
-      </Container >
-    </PageAnimationWrapper >
+      </Container>
+    </PageAnimationWrapper>
   )
 };
 
