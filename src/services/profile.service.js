@@ -18,3 +18,13 @@ export const changePassword = (id, token, password, new_password) => {
         new_password: new_password
     }).then(response => response)
 }
+
+export const deleteAccount = (id, token, password) => {
+    return axios.delete("users/profiles/delete", {
+        data: {
+            id: id,
+            auth_key: token,
+            password: password
+        }
+    }).then(response => response)
+}
