@@ -5,14 +5,14 @@ import QRCode from 'qrcode.react';
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import AnimateLoader from 'components/Loaders/AnimateLoader';
 import useTitle from "helpers/useTitle";
-import { Button, Avatar, toaster, Spinner, Pane } from 'evergreen-ui';
+import { Avatar, toaster, Spinner, Pane } from 'evergreen-ui';
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
 import { getProfileInfo } from "services/profile.service";
 import { getLocalState } from "services/storage.service";
 import { useAppContext } from 'App';
 
 
-const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap content-center md:flex-row bg-gray-100 h-screen`;
+const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap content-center md:flex-row bg-gray-100 md:h-screen`;
 const ImageContainer = tw.div`md:w-1/2 mb-4 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 flex flex-col text-center md:text-left p-4 lg:-ml-16`;
 const Image = tw(Avatar)`block mx-auto md:ml-auto `;
@@ -21,7 +21,7 @@ const ProfileName = tw.span`font-light`;
 const Description = tw.h3`text-lg font-bold leading-relaxed text-gray-800 mb-1`;
 const QRContainer = tw(QRCode)`block mx-auto border shadow-lg rounded-xl p-4 bg-white`;
 const Meta = tw.p`font-light leading-relaxed text-gray-700 mb-4`;
-const SyncButton = tw(Button)`rounded-md w-2/3 lg:w-1/3 md:h-12 mb-4 md:mb-0`;
+const SyncButton = tw.button`inline-flex items-center text-center rounded-md text-white p-4 mb-4 md:mb-0 bg-primary-900 font-bold`;
 const ButtonGroup = tw.div`flex flex-col md:flex-row items-center mt-4`;
 
 const Profile = () => {
@@ -179,19 +179,18 @@ const Profile = () => {
                         <Description>Status</Description>
                         <Meta>{syncState.paused ? "syncing" : "pending"}</Meta>
                         <br />
-                        <SyncButton
-                            iconBefore={IoMdArrowBack}
-                            height="40"
-                            appearance="primary"
-                            intent="danger"
-                            onClick={() => {
-                                setSyncState(false);
-                                syncState.ws.close();
-                                toaster.notify("Sync session closed");
-                            }}
-                        >
-                            stop sync
-                        </SyncButton>
+                        <ButtonGroup>
+                            <SyncButton
+                                tw="bg-red-900"
+                                onClick={() => {
+                                    setSyncState(false);
+                                    syncState.ws.close();
+                                    toaster.notify("Sync session closed");
+                                }}
+                            >
+                                <IoMdArrowBack size={24} /> &nbsp; stop sync
+                            </SyncButton>
+                        </ButtonGroup>
                     </DetailsContainer>
                 </SectionContainer>
             </PageAnimationWrapper>
@@ -212,13 +211,8 @@ const Profile = () => {
                     <Description>Last Login</Description>
                     <Meta>{new Date(userProfile?.last_login).toLocaleString()}</Meta>
                     <ButtonGroup>
-                        <SyncButton
-                            iconBefore={IoMdSync}
-                            appearance="primary"
-                            height="40"
-                            onClick={() => handleSync()}
-                        >
-                            sync with app
+                        <SyncButton onClick={() => handleSync()}>
+                            <IoMdSync size={24} /> &nbsp; sync with app
                         </SyncButton>
                     </ButtonGroup>
                 </DetailsContainer>
