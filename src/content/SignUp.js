@@ -327,7 +327,6 @@ const SignUp = () => {
                           defaultCountry="CM"
                           value={value}
                           type="tel"
-                          autoComplete
                           onChange={onChange}
                         />
                       )}
