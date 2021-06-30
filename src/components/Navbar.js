@@ -40,8 +40,9 @@ const Navbar = () => {
     const defaultLinks = [
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <NavLink onClick={()=> setOpen(false)} key="Profile" to={`${path}/profile`}>Profile</NavLink>
-                <NavLink onClick={()=> setOpen(false)} key="Wallet" to={`${path}/wallet`}>Wallet(Store Access)</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Profile" to={`${path}/profile`}>Profile</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Wallet" to={`${path}/wallet`}>Wallet(Store Access)</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Settings" to={`${path}/settings`}>Settings</NavLink>
             </NavContainer>
         </React.Fragment>
     ];
@@ -52,7 +53,7 @@ const Navbar = () => {
                 <FiInfo size={20} />
             </UserActionsButton>
             {userProfile ? (
-                <UserActionsButton onClick={()=> setOpen(false)}>
+                <UserActionsButton onClick={() => setOpen(false)}>
                     <Avatar name={userProfile?.name} size={34} />
                 </UserActionsButton>
             ) : (null)

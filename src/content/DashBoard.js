@@ -6,6 +6,7 @@ import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import Profile from 'content/Profile';
 import Wallet from 'content/Wallet';
 import WalletRedirect from 'content/Wallet/WalletRedirect';
+import NotFoundPage from "content/NotFoundPage";
 
 
 const DashBoard = () => {
@@ -20,6 +21,7 @@ const DashBoard = () => {
           <Route exact path={`${path}/profile`} component={Profile} />
           <Route exact path={`${path}/wallet`} component={Wallet} />
           <Route exact path={`${path}/oauth2/google/Tokens/redirect/`} component={WalletRedirect} />
+          <Route component={NotFoundPage} />
         </Switch>
         <Footer />
       </PageAnimationWrapper>
