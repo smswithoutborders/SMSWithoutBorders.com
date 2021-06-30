@@ -1,7 +1,7 @@
 import tw from "twin.macro";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const IconButton = tw.span`absolute top-9 right-3 flex items-center  cursor-pointer`;
+const IconButton = tw.span`absolute top-3 right-3 flex items-center  cursor-pointer`;
 
 const ToggleButton = (props) => {
     return (
