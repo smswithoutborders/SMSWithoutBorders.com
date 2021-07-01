@@ -6,12 +6,13 @@ import useTitle from 'helpers/useTitle';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
+import { IoWalletOutline } from "react-icons/io5";
 import { Panel, Placeholder } from "rsuite";
 import { ToggleButton } from "components/misc/Buttons";
 import { useAppContext } from 'App';
 
 const StoreButton = tw(Button)`rounded-md`;
-const Heading = tw.h1`font-bold sm:text-5xl text-3xl mb-4`;
+const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;
 const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
 const PlatformTitle = tw.h4`text-lg font-medium`;
 const PlatformDescription = tw.p`mb-2`;
@@ -245,7 +246,7 @@ const Wallet = () => {
             <PageAnimationWrapper>
                 <Container>
 
-                    <Heading>Wallet</Heading>
+                    <Heading><IoWalletOutline /> &nbsp; Wallet</Heading>
                     <Description>Save your tokens for rainy days</Description>
 
                     <Row>

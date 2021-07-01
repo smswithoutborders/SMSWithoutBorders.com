@@ -37,7 +37,7 @@ const SettingsPage = () => {
         <PageAnimationWrapper>
             <Container>
                 <div tw="text-center md:text-left">
-                    <Heading>Settings &nbsp; <FiSettings /></Heading>
+                    <Heading><FiSettings /> &nbsp; Settings </Heading>
                     <Description>Manage your account</Description>
                 </div>
                 <div tw="flex flex-col md:flex-row flex-wrap">
