@@ -70,8 +70,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [page, setPage] = useState(0);
-  const [number, setNumber] = useState();
-  const [code, setCode] = useState();
 
   const { register, control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(LogInSchema)
@@ -148,218 +146,13 @@ const Login = () => {
       })
   };
 
-  const handlePhoneVerify = (evt) => {
-
-    evt.preventDefault();
-
-    setLoading(true);
-
-    resetPassword(number)
-      .then(response => {
-        if (response.status === 200) {
-          toaster.success(`Success, We found your account`, {
-            description: "A verification code has been sent to your phone"
-          });
-          setToken(response.data);
-          setPage(2);
-          setLoading(false);
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          switch (error.response.status) {
-            case 400:
-              toaster.danger("An error occured", {
-                description: "Its not your its Us. Please try again"
-              });
-              break;
-
-            case 401:
-              toaster.danger("Sorry We did not find your account", {
-                description: "please sign up to create one"
-              });
-              break;
-
-            case 403:
-              toaster.notify("Account already verified", {
-                description: "Please login"
-              });
-              break;
-
-            case 409:
-              toaster.danger("An error occured", {
-                description: "An account with this number already exists.Please Log In instead"
-              });
-              break;
-
-            case 500:
-              toaster.danger("An error occured", {
-                description: "Its not you its Us. We are working to resolve it. Please try again"
-              });
-              break;
-
-            default:
-              toaster.danger("Something went wrong", {
-                description: "Please try again"
-              });
-          }
-          setLoading(false);
-
-        } else if (error.request) {
-          toaster.danger("Network error", {
-            description: "Please check your network and try again"
-          });
-          setLoading(false);
-        } else {
-          toaster.danger("Network error", {
-            description: "Please check your network and try again"
-          });
-          setLoading(false);
-        }
-      });
-  }
-
-  const handleCodeVerification = (evt) => {
-
-    evt.preventDefault();
-
-    setLoading(true);
-
-    const session = getToken();
-
-    verifyResetCode(code, session.session_id, session.svid)
-      .then(response => {
-        if (response.status === 200) {
-          toaster.success(`Success, Code Verified`);
-          setToken(response.data);
-          setPage(3);
-          setLoading(false);
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          switch (error.response.status) {
-            case 400:
-              toaster.danger("An error occured", {
-                description: "Its not your its Us. Please try again"
-              });
-              break;
-
-            case 401:
-              toaster.danger("Invalid code provided", {
-                description: "please try again"
-              });
-              break;
-
-            case 403:
-              toaster.notify("Account already verified", {
-                description: "Please login"
-              });
-              break;
-
-            case 409:
-              toaster.danger("An error occured", {
-                description: "An account with this number already exists.Please Log In instead"
-              });
-              break;
-
-            case 500:
-              toaster.danger("An error occured", {
-                description: "Its not you its Us. We are working to resolve it. Please try again"
-              });
-              break;
-
-            default:
-              toaster.danger("Something went wrong", {
-                description: "Please try again"
-              });
-          }
-
-        } else if (error.request) {
-          toaster.danger("Network error", {
-            description: "Please check your network and try again"
-          });
-        } else {
-          toaster.danger("Network error", {
-            description: "Please check your network and try again"
-          })
-        }
-        setLoading(false);
-      })
-  }
-
   if (loading) return <AnimateLoader />;
 
-  if (page === 1) {
-    return (
-      <PageAnimationWrapper>
-        <div tw="grid place-items-center h-screen">
-          <div tw=" h-56 lg:w-1/3 mx-auto">
-            <Heading tw="text-gray-700 text-center">Phone Number</Heading>
-            <FormContainer>
-              <Form onSubmit={(evt) => handlePhoneVerify(evt)}>
-                <FormGroup>
-                  <PhoneNumberInput
-                    tw="text-gray-700 p-3"
-                    flags={flags}
-                    international
-                    countryCallingCodeEditable={false}
-                    placeholder="Enter your phone number"
-                    defaultCountry="CM"
-                    value={number}
-                    type="tel"
-                    onChange={setNumber}
-                  />
-                </FormGroup>
+  if (page === 1) return <PhoneNumberPage setLoading={setLoading} setPage={setPage} />
 
-                <VerifyButton type="submit">
-                  continue
-                </VerifyButton>
-              </Form>
-            </FormContainer>
-          </div>
+  if (page === 2) return <CodeVerifyPage setLoading={setLoading} setPage={setPage} />
 
-        </div>
-      </PageAnimationWrapper>
-    )
-  }
-
-  if (page === 2) {
-
-    return (
-      <PageAnimationWrapper>
-        <div tw="grid place-items-center h-screen">
-          <div tw=" h-56 lg:w-1/3 mx-auto">
-            <Heading tw="text-gray-700 text-center">Enter verification code</Heading>
-
-            <FormContainer>
-              <Form onSubmit={(evt) => handleCodeVerification(evt)}>
-                <FormGroup>
-                  <Input
-                    tw="p-3"
-                    type="number"
-                    name="code"
-                    min={0}
-                    required
-                    placeholder="2FA CODE"
-                    onChange={(evt) => setCode(evt.target.value)}
-                  />
-                </FormGroup>
-
-                <VerifyButton type="submit">
-                  continue
-                </VerifyButton>
-
-              </Form>
-            </FormContainer>
-          </div>
-
-        </div>
-      </PageAnimationWrapper>
-    )
-  }
-
-  if (page === 3) return <ResetPassword />;
+  if (page === 3) return <ResetPasswordPage setLoading={setLoading} setPage={setPage} />;
 
   return (
     <PageAnimationWrapper>
@@ -454,10 +247,222 @@ const ResetPasswordSchema = yup.object().shape({
 });
 
 
-const ResetPassword = () => {
+const PhoneNumberPage = ({ setLoading, setPage }) => {
+
+  const [number, setNumber] = useState();
+  const handlePhoneVerify = (evt) => {
+
+    evt.preventDefault();
+
+    setLoading(true);
+
+    resetPassword(number)
+      .then(response => {
+        if (response.status === 200) {
+          toaster.success(`Success, We found your account`, {
+            description: "A verification code has been sent to your phone"
+          });
+          setToken(response.data);
+          setPage(2);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              toaster.danger("An error occured", {
+                description: "Its not your its Us. Please try again"
+              });
+              break;
+
+            case 401:
+              toaster.danger("Sorry We did not find your account", {
+                description: "please sign up to create one"
+              });
+              break;
+
+            case 403:
+              toaster.notify("Account already verified", {
+                description: "Please login"
+              });
+              break;
+
+            case 409:
+              toaster.danger("An error occured", {
+                description: "An account with this number already exists.Please Log In instead"
+              });
+              break;
+
+            case 500:
+              toaster.danger("An error occured", {
+                description: "Its not you its Us. We are working to resolve it. Please try again"
+              });
+              break;
+
+            default:
+              toaster.danger("Something went wrong", {
+                description: "Please try again"
+              });
+          }
+          setLoading(false);
+
+        } else if (error.request) {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+          setLoading(false);
+        } else {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+          setLoading(false);
+        }
+      });
+  }
+
+  return (
+    <PageAnimationWrapper>
+      <div tw="grid place-items-center h-screen">
+        <div tw=" h-56 lg:w-1/3 mx-auto">
+          <Heading tw="text-gray-700 text-center">Phone Number</Heading>
+          <FormContainer>
+            <Form onSubmit={(evt) => handlePhoneVerify(evt)}>
+              <FormGroup>
+                <PhoneNumberInput
+                  tw="text-gray-700 p-3"
+                  flags={flags}
+                  international
+                  countryCallingCodeEditable={false}
+                  placeholder="Enter your phone number"
+                  defaultCountry="CM"
+                  value={number}
+                  type="tel"
+                  onChange={setNumber}
+                />
+              </FormGroup>
+
+              <VerifyButton type="submit">
+                continue
+              </VerifyButton>
+            </Form>
+          </FormContainer>
+        </div>
+
+      </div>
+    </PageAnimationWrapper>
+  )
+}
+
+const CodeVerifyPage = ({ setLoading, setPage }) => {
+
+  const [code, setCode] = useState();
+  const handleCodeVerification = (evt) => {
+
+    evt.preventDefault();
+
+    setLoading(true);
+
+    const session = getToken();
+
+    verifyResetCode(code, session.session_id, session.svid)
+      .then(response => {
+        if (response.status === 200) {
+          toaster.success(`Success, Code Verified`);
+          setToken(response.data);
+          setPage(3);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              toaster.danger("An error occured", {
+                description: "Its not your its Us. Please try again"
+              });
+              break;
+
+            case 401:
+              toaster.danger("Invalid code provided", {
+                description: "please try again"
+              });
+              break;
+
+            case 403:
+              toaster.notify("Account already verified", {
+                description: "Please login"
+              });
+              break;
+
+            case 409:
+              toaster.danger("An error occured", {
+                description: "An account with this number already exists.Please Log In instead"
+              });
+              break;
+
+            case 500:
+              toaster.danger("An error occured", {
+                description: "Its not you its Us. We are working to resolve it. Please try again"
+              });
+              break;
+
+            default:
+              toaster.danger("Something went wrong", {
+                description: "Please try again"
+              });
+          }
+
+        } else if (error.request) {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+        } else {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          })
+        }
+        setLoading(false);
+      })
+  }
+
+
+  return (
+    <PageAnimationWrapper>
+      <div tw="grid place-items-center h-screen">
+        <div tw=" h-56 lg:w-1/3 mx-auto">
+          <Heading tw="text-gray-700 text-center">Enter verification code</Heading>
+
+          <FormContainer>
+            <Form onSubmit={(evt) => handleCodeVerification(evt)}>
+              <FormGroup>
+                <Input
+                  tw="p-3"
+                  type="number"
+                  name="code"
+                  min={0}
+                  required
+                  placeholder="2FA CODE"
+                  onChange={(evt) => setCode(evt.target.value)}
+                />
+              </FormGroup>
+
+              <VerifyButton type="submit">
+                continue
+              </VerifyButton>
+
+            </Form>
+          </FormContainer>
+        </div>
+
+      </div>
+    </PageAnimationWrapper>
+  )
+}
+
+const ResetPasswordPage = ({ setLoading, setPage }) => {
 
   useTitle("Reset Password");
-  const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [toggle2, setToggle2] = useState(false);
 
@@ -472,10 +477,8 @@ const ResetPassword = () => {
       .then(response => {
         toaster.success("Password Changed successfully please login");
         removeToken();
-        setTimeout(() => {
-          window.location.reload();
-          setLoading(false);
-        }, 1500);
+        setPage(0);
+        setLoading(false);
       })
       .catch((error) => {
         if (error.response) {
@@ -495,7 +498,6 @@ const ResetPassword = () => {
       });
   }
 
-  if (loading) return <AnimateLoader />;
 
   return (
     <PageAnimationWrapper>
