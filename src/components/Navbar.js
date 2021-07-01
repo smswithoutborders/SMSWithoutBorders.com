@@ -4,7 +4,8 @@ import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
 import swobLogo from "images/logo.png";
 import { Avatar, LogOutIcon, Dialog, SideSheet } from "evergreen-ui";
-import { FiMenu, FiInfo } from "react-icons/fi";
+import { FiMenu, FiInfo, FiSettings, FiUser, FiExternalLink } from "react-icons/fi";
+import { IoWalletOutline } from "react-icons/io5";
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useAppContext } from "App";
 
@@ -42,10 +43,10 @@ const Navbar = () => {
     const defaultLinks = [
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/getting_started.html" target="_blank">Get Started</StartedExtLink>
-                <NavLink onClick={() => setOpen(false)} key="Profile" to={`${path}/profile`}>Profile</NavLink>
-                <NavLink onClick={() => setOpen(false)} key="Wallet" to={`${path}/wallet`}>Wallet(Store Access)</NavLink>
-                <NavLink onClick={() => setOpen(false)} key="Settings" to={`${path}/settings`}>Settings</NavLink>
+                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/getting_started.html" target="_blank"><FiExternalLink size={20} /> &nbsp; Get Started</StartedExtLink>
+                <NavLink onClick={() => setOpen(false)} key="Profile" to={`${path}/profile`}><FiUser size={20} /> &nbsp; Profile</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Wallet" to={`${path}/wallet`}><IoWalletOutline size={20} /> &nbsp; Wallet(Store Access)</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Settings" to={`${path}/settings`}><FiSettings size={20} /> &nbsp; Settings</NavLink>
             </NavContainer>
         </React.Fragment>
     ];
