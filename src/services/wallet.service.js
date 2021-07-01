@@ -50,7 +50,9 @@ export const getGoogleOauthToken = (data) => {
     }).then(response => response)
 }
 export const savePlatformOauthToken = (id, token, provider, platform, code) => {
-    //renew auth data
+    let authObj = getLocalState();
+    let AUTH_KEY = authObj?.token;
+    let AUTH_ID = authObj?.id;
     return axios.post(`/${provider}/auth/success`, {
         id: AUTH_ID,
         auth_key: AUTH_KEY,
