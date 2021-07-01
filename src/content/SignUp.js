@@ -10,7 +10,7 @@ import AnimateLoader from "components/Loaders/AnimateLoader";
 import flags from 'react-phone-number-input/flags'
 import 'react-phone-number-input/style.css'
 import { FiUserPlus } from "react-icons/fi";
-import { Button, toaster, Checkbox } from 'evergreen-ui';
+import { Button, toaster } from 'evergreen-ui';
 import { registerUser, verifyCode } from 'services/auth.service';
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { Link, useHistory } from "react-router-dom";
@@ -28,6 +28,7 @@ const Heading = tw.h1`text-2xl xl:text-3xl font-bold`;
 const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto px-4 sm:px-3`;
 const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
+const CheckBox = tw.input`h-5 w-5 bg-primary-900 text-primary-900 mr-2`;
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
@@ -54,18 +55,6 @@ const PhoneNumberInput = styled(PhoneInput)`
   }
 `;
 
-const PrivacyTerms = (
-  <p tw="text-xs mb-4">
-    <span>I agree to abide by SMSWithoutborders &nbsp;</span>
-    <a
-      href="https://smswithoutborders.com/privacy-policy"
-      target="_blank"
-      rel="noreferrer"
-      tw="border-gray-500 text-primary-900 no-underline">
-      privacy policy
-    </a>
-  </p>
-);
 
 const SignUpSchema = yup.object().shape({
   username: yup.string().required('User Name is required'),
@@ -370,11 +359,28 @@ const SignUp = () => {
                     <PasswordStrengthBar password={watch("confirmPassword")} />
                   </FormGroup>
 
-                  <Checkbox
-                    label={PrivacyTerms}
-                    checked={watch("acceptTerms")}
-                    {...register('acceptTerms')}
-                  />
+                  <FormGroup tw="inline-flex">
+                    <Controller
+                      control={control}
+                      name="acceptTerms"
+                      render={({ field: { value, onChange } }) => (
+                        <CheckBox type="checkbox"
+                          value={value}
+                          onChange={onChange}
+                        />
+                      )}
+                    />
+                    <p tw="text-sm mb-4 font-light text-gray-600">
+                      <span>I agree to abide by SMSWithoutborders &nbsp;</span>
+                      <a
+                        href="https://smswithoutborders.com/privacy-policy"
+                        target="_blank"
+                        rel="noreferrer"
+                        tw="border-gray-500 text-primary-900 no-underline">
+                        privacy policy
+                      </a>
+                    </p>
+                  </FormGroup>
 
                   <SubmitButton
                     type="submit"
