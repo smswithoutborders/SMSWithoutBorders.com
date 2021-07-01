@@ -30,3 +30,26 @@ export const userLogin = async (phone_number, password) => {
             password: password
         }).then(response => response)
 };
+
+export const recoverPassword = (phone_number) => {
+    return axios.post("users/profiles/password/recovery", {
+        phone_number: phone_number,
+    }).then(response => response)
+}
+
+export const verifyResetCode = (code, session_id, svid) => {
+    return axios.post("/users/profiles/password/recovery/2fa",
+        {
+            code: code,
+            session_id: session_id,
+            svid: svid
+        }).then(response => response)
+}
+
+export const changePassword = (auth_key, password) => {
+    return axios.post("users/password/new", {
+        auth_key: auth_key,
+        password: password,
+    }).then(response => response)
+}
+

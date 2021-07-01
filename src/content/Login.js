@@ -4,23 +4,23 @@ import styled from "styled-components";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
 import useTitle from "helpers/useTitle";
 import logo from "images/logo.png";
-import { Container as ContainerBase } from "components/misc/Layouts";
-import { FiLogIn } from "react-icons/fi";
-import { Button, toaster } from 'evergreen-ui';
-import { userLogin } from 'services/auth.service';
-import { Link } from "react-router-dom";
-import { ToggleButton } from "components/misc/Buttons";
-import { useAppContext } from "App";
 import PhoneInput from "react-phone-number-input";
 import AnimateLoader from "components/Loaders/AnimateLoader";
+import PasswordStrengthBar from "react-password-strength-bar";
 import flags from 'react-phone-number-input/flags'
 import 'react-phone-number-input/style.css'
+import { FiLogIn } from "react-icons/fi";
+import { Button, toaster } from 'evergreen-ui';
+import { userLogin, resetPassword, verifyResetCode, changePassword } from 'services/auth.service';
+import { Link, useHistory } from "react-router-dom";
+import { ToggleButton } from "components/misc/Buttons";
+import { useAppContext } from "App";
+import { getToken, setToken, removeToken } from "services/storage.service";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-
-const Container = tw(ContainerBase)`min-h-screen bg-white text-white font-medium flex justify-center `;
+const Container = tw.div`relative min-h-screen bg-white text-white font-medium flex justify-center `;
 const Content = tw.div` m-0 text-gray-900  md:flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-1/3 2xl:w-1/4 p-2 sm:p-12`;
 const LogoImage = tw.img`h-60 mx-auto block`;
@@ -33,6 +33,7 @@ const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
 const SubmitButton = tw(Button)`w-full rounded-lg py-2`;
+const VerifyButton = tw.button`block font-bold text-white text-center rounded-md w-1/2 lg:w-1/3 mx-auto px-3 py-2  text-base bg-primary-900`;
 const IllustrationContainer = tw.div`lg:flex flex-1 bg-primary-200 hidden`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
@@ -68,6 +69,9 @@ const Login = () => {
   const { dispatch } = useAppContext()
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [page, setPage] = useState(3);
+  const [number, setNumber] = useState();
+  const [code, setCode] = useState();
 
   const { register, control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(LogInSchema)
@@ -144,7 +148,216 @@ const Login = () => {
       })
   };
 
+  const handlePhoneVerify = (evt) => {
+
+    evt.preventDefault();
+
+    setLoading(true);
+
+    resetPassword(number)
+      .then(response => {
+        if (response.status === 200) {
+          toaster.success(`Success, We found your account`);
+          setToken(response.data);
+          setPage(2);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              toaster.danger("An error occured", {
+                description: "Its not your its Us. Please try again"
+              });
+              break;
+
+            case 401:
+              toaster.danger("Sorry We did not find your account", {
+                description: "please sign up to create one"
+              });
+              break;
+
+            case 403:
+              toaster.notify("Account already verified", {
+                description: "Please login"
+              });
+              break;
+
+            case 409:
+              toaster.danger("An error occured", {
+                description: "An account with this number already exists.Please Log In instead"
+              });
+              break;
+
+            case 500:
+              toaster.danger("An error occured", {
+                description: "Its not you its Us. We are working to resolve it. Please try again"
+              });
+              break;
+
+            default:
+              toaster.danger("Something went wrong", {
+                description: "Please try again"
+              });
+          }
+          setLoading(false);
+
+        } else if (error.request) {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+          setLoading(false);
+        } else {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+          setLoading(false);
+        }
+      });
+  }
+
+  const handleCodeVerification = (evt) => {
+
+    evt.preventDefault();
+
+    setLoading(true);
+
+    const session = getToken();
+
+    verifyResetCode(code, session.session_id, session.svid)
+      .then(response => {
+        if (response.status === 200) {
+          toaster.success(`Success, Code Verified`);
+          setToken(response.data);
+          setPage(3);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              toaster.danger("An error occured", {
+                description: "Its not your its Us. Please try again"
+              });
+              break;
+
+            case 401:
+              toaster.danger("Invalid code provided", {
+                description: "please try again"
+              });
+              break;
+
+            case 403:
+              toaster.notify("Account already verified", {
+                description: "Please login"
+              });
+              break;
+
+            case 409:
+              toaster.danger("An error occured", {
+                description: "An account with this number already exists.Please Log In instead"
+              });
+              break;
+
+            case 500:
+              toaster.danger("An error occured", {
+                description: "Its not you its Us. We are working to resolve it. Please try again"
+              });
+              break;
+
+            default:
+              toaster.danger("Something went wrong", {
+                description: "Please try again"
+              });
+          }
+
+        } else if (error.request) {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          });
+        } else {
+          toaster.danger("Network error", {
+            description: "Please check your network and try again"
+          })
+        }
+        setLoading(false);
+      })
+  }
+
   if (loading) return <AnimateLoader />;
+
+  if (page === 1) {
+    return (
+      <PageAnimationWrapper>
+        <div tw="grid place-items-center h-screen">
+          <div tw=" h-56 lg:w-1/3 mx-auto">
+            <Heading tw="text-gray-700 text-center">Phone Number</Heading>
+            <FormContainer>
+              <Form onSubmit={(evt) => handlePhoneVerify(evt)}>
+                <FormGroup>
+                  <PhoneNumberInput
+                    tw="text-gray-700 p-3"
+                    flags={flags}
+                    international
+                    countryCallingCodeEditable={false}
+                    placeholder="Enter your phone number"
+                    defaultCountry="CM"
+                    value={number}
+                    type="tel"
+                    onChange={setNumber}
+                  />
+                </FormGroup>
+
+                <VerifyButton type="submit">
+                  continue
+                </VerifyButton>
+              </Form>
+            </FormContainer>
+          </div>
+
+        </div>
+      </PageAnimationWrapper>
+    )
+  }
+
+  if (page === 2) {
+
+    return (
+      <PageAnimationWrapper>
+        <div tw="grid place-items-center h-screen">
+          <div tw=" h-56 lg:w-1/3 mx-auto">
+            <Heading tw="text-gray-700 text-center">Enter verification code</Heading>
+
+            <FormContainer>
+              <Form onSubmit={(evt) => handleCodeVerification(evt)}>
+                <FormGroup>
+                  <Input
+                    tw="p-3"
+                    type="number"
+                    name="code"
+                    min={0}
+                    required
+                    placeholder="2FA CODE"
+                    onChange={(evt) => setCode(evt.target.value)}
+                  />
+                </FormGroup>
+
+                <VerifyButton type="submit">
+                  continue
+                </VerifyButton>
+
+              </Form>
+            </FormContainer>
+          </div>
+
+        </div>
+      </PageAnimationWrapper>
+    )
+  }
+
+  if (page === 3) return <ResetPassword />;
 
   return (
     <PageAnimationWrapper>
@@ -204,7 +417,15 @@ const Login = () => {
                     <span className="text">"Sign In"</span>
                   </SubmitButton>
                 </Form>
-                <p tw="mt-8 text-sm text-gray-600 text-center">
+
+                <p
+                  onClick={() => setPage(1)}
+                  tw="text-primary-900 text-center my-4 cursor-pointer"
+                >
+                  Forgot Password
+                </p>
+
+                <p tw="mt-4 text-sm text-gray-600 text-center">
                   Dont have an account? &nbsp;
                   <Link to="/sign-up" tw="text-primary-900">
                     Sign Up
@@ -222,5 +443,111 @@ const Login = () => {
     </PageAnimationWrapper>
   )
 };
+
+
+const ResetPasswordSchema = yup.object().shape({
+  password: yup.string().min(8, 'Password must be at least 8 characters').required('Please enter password'),
+  confirmPassword: yup.string().min(8, 'Password must be at least 8 characters').required('Please confirm your password')
+    .oneOf([yup.ref('password'), null], 'Passwords do not match')
+});
+
+
+const ResetPassword = () => {
+
+  useTitle("Change Password");
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [toggle2, setToggle2] = useState(false);
+
+  const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    resolver: yupResolver(ResetPasswordSchema)
+  });
+
+  const handleResetPassword = (data) => {
+    setLoading(true);
+    const session = getToken();
+    changePassword(session.auth_key, data.password)
+      .then(response => {
+        toaster.success("Password Changed successfully please login");
+        removeToken()
+        history.push("/login");
+      })
+      .catch((error) => {
+        if (error.response) {
+          toaster.danger("Request Error", {
+            description: "Sorry we could not change your password. Please check your network connection and try again"
+          });
+        } else if (error.request) {
+          toaster.danger("Network Error", {
+            description: "We could not change your password. Please check your network and reload this page"
+          });
+        } else {
+          toaster.danger("Profile Error", {
+            description: "An internal error occured. Please log out and login again"
+          });
+        }
+        setLoading(false);
+      });
+  }
+
+  if (loading) return <AnimateLoader />;
+
+  return (
+    <PageAnimationWrapper>
+      <div tw="md:border p-4 md:p-12 m-2">
+        <div tw="w-full text-gray-800 text-center">
+          <Heading>Reset Password</Heading>
+          <p tw="my-2">Please use the form below to change your password</p>
+        </div>
+
+        <FormContainer tw="md:w-1/2 lg:w-1/3 mx-auto text-gray-900">
+          <Form onSubmit={handleSubmit(handleResetPassword)}>
+            <FormGroup>
+              <Label>New Password</Label>
+              <div tw="relative">
+                <Input
+                  tw="mb-2"
+                  type={toggle ? "text" : "password"}
+                  placeholder="Password"
+                  {...register("password")}
+                />
+                <ToggleButton
+                  toggleFunc={setToggle}
+                  value={toggle}
+                />
+              </div>
+              {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+              <PasswordStrengthBar password={watch("password")} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>Confirm Password</Label>
+              <div tw="relative">
+                <Input
+                  tw="mb-2"
+                  type={toggle2 ? "text" : "password"}
+                  placeholder="retype password"
+                  {...register("confirmPassword")}
+                />
+                <ToggleButton
+                  toggleFunc={setToggle2}
+                  value={toggle2}
+                />
+              </div>
+              {errors.confirmPassword && <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>}
+              <PasswordStrengthBar password={watch("confirmPassword")} />
+            </FormGroup>
+
+            <VerifyButton tw="lg:w-1/2" type="submit">
+              Change Password
+            </VerifyButton>
+          </Form>
+        </FormContainer>
+      </div>
+    </PageAnimationWrapper>
+  );
+}
 
 export default Login;
