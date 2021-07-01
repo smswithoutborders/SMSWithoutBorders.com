@@ -33,6 +33,7 @@ const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
 const SubmitButton = tw(Button)`w-full rounded-md py-2`;
+const VerifyButton = tw.button`block font-bold text-white text-center rounded-md w-1/2 lg:w-1/3 mx-auto px-3 py-2  text-base bg-primary-900`;
 const IllustrationContainer = tw.div`lg:flex flex-1 bg-primary-200 hidden`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
@@ -258,19 +259,16 @@ const SignUp = () => {
                     tw="p-3"
                     type="number"
                     name="code"
-                    minLenght={6}
                     min={0}
+                    required
                     placeholder="2FA CODE"
                     onChange={(evt) => setCode(evt.target.value)}
                   />
                 </FormGroup>
 
-                <button
-                  tw="block text-center rounded-md w-1/2 lg:w-1/3 mx-auto px-3 py-2  text-lg bg-primary-900"
-                  type="submit"
-                >
+                <VerifyButton type="submit" >
                   verify
-                </button>
+                </VerifyButton>
               </Form>
             </FormContainer>
           </div>
