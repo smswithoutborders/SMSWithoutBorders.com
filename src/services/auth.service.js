@@ -23,7 +23,7 @@ export const verifyCode = (code, session_id, svid) => {
         }).then(response => response)
 }
 
-export const userLogin = async (phone_number, password) => {
+export const userLogin = (phone_number, password) => {
     return axios.post("/users/profiles/login",
         {
             phone_number: phone_number,
@@ -38,8 +38,7 @@ export const resetPassword = (phone_number) => {
 }
 
 export const verifyResetCode = (code, session_id, svid) => {
-    return axios.post("/users/profiles/password/recovery/2fa",
-        {
+    return axios.post("/users/profiles/password/recovery/2fa", {
             code: code,
             session_id: session_id,
             svid: svid
@@ -47,9 +46,9 @@ export const verifyResetCode = (code, session_id, svid) => {
 }
 
 export const changePassword = (auth_key, password) => {
-    return axios.post("users/password/new", {
+    return axios.post("/users/profiles/password/recovery/new", {
         auth_key: auth_key,
-        password: password,
+        new_password: password,
     }).then(response => response)
 }
 

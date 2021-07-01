@@ -12,7 +12,7 @@ import 'react-phone-number-input/style.css'
 import { FiLogIn } from "react-icons/fi";
 import { Button, toaster } from 'evergreen-ui';
 import { userLogin, resetPassword, verifyResetCode, changePassword } from 'services/auth.service';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToggleButton } from "components/misc/Buttons";
 import { useAppContext } from "App";
 import { getToken, setToken, removeToken } from "services/storage.service";
@@ -157,7 +157,9 @@ const Login = () => {
     resetPassword(number)
       .then(response => {
         if (response.status === 200) {
-          toaster.success(`Success, We found your account`);
+          toaster.success(`Success, We found your account`, {
+            description: "A verification code has been sent to your phone"
+          });
           setToken(response.data);
           setPage(2);
           setLoading(false);
@@ -414,7 +416,7 @@ const Login = () => {
                     height={40}
                     iconBefore={loading ? null : FiLogIn}
                   >
-                    <span className="text">"Sign In"</span>
+                    Sign In
                   </SubmitButton>
                 </Form>
 
@@ -454,8 +456,7 @@ const ResetPasswordSchema = yup.object().shape({
 
 const ResetPassword = () => {
 
-  useTitle("Change Password");
-  const history = useHistory();
+  useTitle("Reset Password");
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [toggle2, setToggle2] = useState(false);
@@ -470,8 +471,11 @@ const ResetPassword = () => {
     changePassword(session.auth_key, data.password)
       .then(response => {
         toaster.success("Password Changed successfully please login");
-        removeToken()
-        history.push("/login");
+        removeToken();
+        setTimeout(() => {
+          window.location.reload();
+          setLoading(false);
+        }, 1500);
       })
       .catch((error) => {
         if (error.response) {
