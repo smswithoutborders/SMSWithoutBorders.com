@@ -69,7 +69,7 @@ const Login = () => {
   const { dispatch } = useAppContext()
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(0);
   const [number, setNumber] = useState();
   const [code, setCode] = useState();
 

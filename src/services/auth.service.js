@@ -31,7 +31,7 @@ export const userLogin = async (phone_number, password) => {
         }).then(response => response)
 };
 
-export const recoverPassword = (phone_number) => {
+export const resetPassword = (phone_number) => {
     return axios.post("users/profiles/password/recovery", {
         phone_number: phone_number,
     }).then(response => response)
