@@ -27,10 +27,10 @@ const Input = tw.input`relative w-full rounded-md p-3 mb-2 text-gray-700 border 
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
-const SubmitButton = tw.button`inline-flex items-center justify-center text-center rounded-md md:w-1/2 mx-auto p-3  bg-primary-900 text-white font-medium`
+const SubmitButton = tw.button`inline-flex items-center justify-center text-center rounded-md w-full md:w-1/2 mx-auto p-3  bg-primary-900 text-white font-medium`
 
 const NavButton = styled.button`
-  ${tw`inline-flex w-full h-16 items-center transition duration-300 bg-gray-100 hover:bg-primary-800 hocus:outline-none hocus:text-white text-gray-900 font-medium p-4 no-underline appearance-none mb-2`}
+  ${tw`inline-flex w-full h-16 items-center transition duration-300 bg-gray-100 hover:bg-primary-800 hocus:outline-none hocus:text-white text-xs md:text-sm text-gray-900 font-medium p-2 md:p-4 no-underline appearance-none mb-2`}
   ${({ active }) => active && tw`bg-primary-900 text-white`}
 `;
 
@@ -323,8 +323,6 @@ const NewNumber = () => {
     const { state } = useAppContext();
     const { token, id } = state;
     const [page, setPage] = useState(0);
-    const [code, setCode] = useState();
-
     const [loading, setLoading] = useState(false);
 
     const { control, handleSubmit, formState: { errors } } = useForm({
@@ -400,109 +398,7 @@ const NewNumber = () => {
             });
     }
 
-    const handleCodeVerification = (evt) => {
-
-        evt.preventDefault();
-
-        setLoading(true);
-
-        const session = getToken();
-
-        verifyPhoneNumber(code, session.session_id, session.svid)
-            .then(response => {
-                if (response.status === 200) {
-                    toaster.success("Success, Code Verified", {
-                        description: "Your new phone number has been added"
-                    });
-                    removeToken()
-                    setPage(0);
-                    setLoading(false);
-                }
-            })
-            .catch(error => {
-                if (error.response) {
-                    switch (error.response.status) {
-                        case 400:
-                            toaster.danger("An error occured", {
-                                description: "Its not your its Us. Please try again"
-                            });
-                            break;
-
-                        case 401:
-                            toaster.danger("Invalid code provided", {
-                                description: "please try again"
-                            });
-                            break;
-
-                        case 403:
-                            toaster.notify("Account already verified", {
-                                description: "Please login"
-                            });
-                            break;
-
-                        case 409:
-                            toaster.danger("An error occured", {
-                                description: "An account with this number already exists.Please Log In instead"
-                            });
-                            break;
-
-                        case 500:
-                            toaster.danger("An error occured", {
-                                description: "Its not you its Us. We are working to resolve it. Please try again"
-                            });
-                            break;
-
-                        default:
-                            toaster.danger("Something went wrong", {
-                                description: "Please try again"
-                            });
-                    }
-
-                } else if (error.request) {
-                    toaster.danger("Network error", {
-                        description: "Please check your network and try again"
-                    });
-                } else {
-                    toaster.danger("Network error", {
-                        description: "Please check your network and try again"
-                    })
-                }
-                setLoading(false);
-            })
-    }
-
-    if (page === 2) {
-        return (
-            <PageAnimationWrapper>
-                <div tw="md:border p-4 m-2">
-                    <div tw="w-full text-gray-800 text-center">
-                        <Title>Enter Verification Code</Title>
-                        <p tw="my-2">Please enter the code sent to you to confirm this operation</p>
-                    </div>
-                    <FormContainer>
-                        <Form onSubmit={(evt) => handleCodeVerification(evt)}>
-                            <FormGroup>
-                                <Input
-                                    tw="p-3"
-                                    type="number"
-                                    name="code"
-                                    min={0}
-                                    required
-                                    placeholder="2FA CODE"
-                                    onChange={(evt) => setCode(evt.target.value)}
-                                />
-                            </FormGroup>
-
-                            <SubmitButton type="submit">
-                                continue
-                            </SubmitButton>
-
-                        </Form>
-                    </FormContainer>
-                </div>
-            </PageAnimationWrapper>
-        )
-    }
+    if (page === 2) return <CodeVerifyPage />
 
     if (loading) return <InlineLoader />;
 
@@ -547,6 +443,119 @@ const NewNumber = () => {
     );
 }
 
+
+const CodeVerifyPage = ({ setPage }) => {
+
+    const [code, setCode] = useState();
+    const [loading, setLoading] = useState(false);
+
+    const handleCodeVerification = (evt) => {
+
+        evt.preventDefault();
+
+        setLoading(true);
+
+        const session = getToken();
+
+        verifyPhoneNumber(code, session.session_id, session.svid)
+            .then(response => {
+                if (response.status === 200) {
+                    toaster.success("Success, Code Verified", {
+                        description: "Your new phone number has been added"
+                    });
+                    removeToken()
+                    setTimeout(() => {
+                        window.location.reload();
+                        setLoading(false);
+                    }, 1000);
+
+                }
+            })
+            .catch(error => {
+                if (error.response) {
+                    switch (error.response.status) {
+                        case 400:
+                            toaster.danger("An error occured", {
+                                description: "Its not your its Us. Please try again"
+                            });
+                            break;
+
+                        case 401:
+                            toaster.danger("Invalid code provided", {
+                                description: "please try again"
+                            });
+                            break;
+
+                        case 403:
+                            toaster.notify("Account already verified", {
+                                description: "Please login"
+                            });
+                            break;
+
+                        case 409:
+                            toaster.danger("An error occured", {
+                                description: "An account with this number already exists.Please Log In instead"
+                            });
+                            break;
+
+                        case 500:
+                            toaster.danger("An error occured", {
+                                description: "Its not you its Us. We are working to resolve it. Please try again"
+                            });
+                            break;
+
+                        default:
+                            toaster.danger("Something went wrong", {
+                                description: "Please try again"
+                            });
+                    }
+                    setLoading(false);
+                } else if (error.request) {
+                    toaster.danger("Network error", {
+                        description: "Please check your network and try again"
+                    });
+                } else {
+                    toaster.danger("Network error", {
+                        description: "Please check your network and try again"
+                    })
+                }
+                setLoading(false);
+            })
+    }
+
+    if (loading) return <InlineLoader />;
+
+    return (
+        <PageAnimationWrapper>
+            <div tw="md:border p-4 m-2">
+                <div tw="w-full text-gray-800 text-center">
+                    <Title>Enter Verification Code</Title>
+                    <p tw="my-2">Please enter the code sent to you to confirm this operation</p>
+                </div>
+                <FormContainer>
+                    <Form onSubmit={(evt) => handleCodeVerification(evt)}>
+                        <FormGroup>
+                            <Input
+                                tw="p-3"
+                                type="number"
+                                name="code"
+                                min={0}
+                                required
+                                placeholder="2FA CODE"
+                                onChange={(evt) => setCode(evt.target.value)}
+                            />
+                        </FormGroup>
+
+                        <SubmitButton type="submit">
+                            continue
+                        </SubmitButton>
+
+                    </Form>
+                </FormContainer>
+            </div>
+        </PageAnimationWrapper>
+    )
+}
 
 
 
