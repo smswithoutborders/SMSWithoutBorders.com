@@ -3,12 +3,16 @@ import tw, { styled } from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import PasswordStrengthBar from 'react-password-strength-bar';
 import useTitle from 'helpers/useTitle';
+import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
+import flags from 'react-phone-number-input/flags'
+import 'react-phone-number-input/style.css'
 import { InlineLoader } from 'components/Loaders/AnimateLoader';
 import { toaster } from 'evergreen-ui';
-import { FiUser, FiTrash2, FiSettings } from 'react-icons/fi';
-import { changePassword, deleteAccount } from 'services/profile.service';
+import { FiUser, FiTrash2, FiSettings, FiPlusCircle } from 'react-icons/fi';
+import { changePassword, deleteAccount, addPhoneNumber, verifyPhoneNumber } from 'services/profile.service';
+import { getToken, setToken, removeToken } from "services/storage.service";
 import { ToggleButton } from "components/misc/Buttons";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAppContext } from 'App';
@@ -28,7 +32,24 @@ const SubmitButton = tw.button`inline-flex items-center justify-center text-cent
 const NavButton = styled.button`
   ${tw`inline-flex w-full h-16 items-center transition duration-300 bg-gray-100 hover:bg-primary-800 hocus:outline-none hocus:text-white text-gray-900 font-medium p-4 no-underline appearance-none mb-2`}
   ${({ active }) => active && tw`bg-primary-900 text-white`}
-`
+`;
+
+const PhoneNumberInput = styled(PhoneInput)`
+    ${tw`p-3 border border-gray-400 hocus:border-primary-900 rounded-md mb-2`}
+  .PhoneInputCountrySelect {
+    ${tw`border-none hocus:border-none mr-8 p-4`}
+  }
+  .PhoneInputCountryIcon {
+    ${tw`border-none hocus:border-none h-5 w-7`}
+  }
+  .PhoneInputInput {
+    ${tw`focus:border-none focus:outline-none appearance-none placeholder-gray-400`}
+  }
+  .PhoneInputCountryIcon {
+    ${tw``}
+  }
+`;
+
 
 const SettingsPage = () => {
     useTitle("Settings");
@@ -46,11 +67,17 @@ const SettingsPage = () => {
                             active={page === 1}
                             onClick={() => setPage(1)}
                         >
-                            <FiUser size={20} tw="mr-2" /> Change Password
+                            <FiPlusCircle size={20} tw="mr-2" /> Add Phone Number
                         </NavButton>
                         <NavButton
                             active={page === 2}
                             onClick={() => setPage(2)}
+                        >
+                            <FiUser size={20} tw="mr-2" /> Change Password
+                        </NavButton>
+                        <NavButton
+                            active={page === 3}
+                            onClick={() => setPage(3)}
                         >
                             <FiTrash2 size={20} tw="mr-2" /> Delete Account
                         </NavButton>
@@ -65,8 +92,10 @@ const SettingsPage = () => {
                                 </div>
                             </div>
                         )}
-                        {page === 1 && <ChangePassword />}
-                        {page === 2 && <DeleteAccount />}
+                        {page === 1 && <NewNumber />}
+                        {page === 2 && <ChangePassword />}
+                        {page === 3 && <DeleteAccount />}
+
                     </div>
                 </div>
             </Container>
@@ -74,14 +103,12 @@ const SettingsPage = () => {
     );
 }
 
-
 const ChangePasswordSchema = yup.object().shape({
     password: yup.string().required('Password is required'),
     new_password: yup.string().min(8, 'Password must be at least 8 characters').required('Please enter password'),
     confirmPassword: yup.string().min(8, 'Password must be at least 8 characters').required('Please confirm your password')
         .oneOf([yup.ref('new_password'), null], 'Passwords do not match')
 });
-
 
 const ChangePassword = () => {
 
@@ -199,7 +226,6 @@ const ChangePassword = () => {
     );
 }
 
-
 const DeleteAccountSchema = yup.object().shape({
     password: yup.string().required('Password is required')
 });
@@ -285,6 +311,243 @@ const DeleteAccount = () => {
         </PageAnimationWrapper>
     );
 }
+
+
+const NewNumberSchema = yup.object().shape({
+    phone_number: yup.string().required('Please enter a valid phone number')
+});
+
+const NewNumber = () => {
+
+    useTitle("Add Phone Number");
+    const { state } = useAppContext();
+    const { token, id } = state;
+    const [page, setPage] = useState(0);
+    const [code, setCode] = useState();
+
+    const [loading, setLoading] = useState(false);
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(NewNumberSchema)
+    });
+
+    const handleAddNumber = (data) => {
+        setLoading(true);
+
+        let splitNumber = parsePhoneNumber(data.phone_number);
+        data.phone_number = splitNumber.nationalNumber;
+        data.country_code = "+" + splitNumber.countryCallingCode;
+
+        addPhoneNumber(id, token, data.country_code, data.phone_number)
+            .then(response => {
+                if (response.status === 200) {
+                    toaster.success("Success", {
+                        description: "A verification code has been sent to your phone"
+                    });
+                    setToken(response.data);
+                    setPage(2);
+                    setLoading(false);
+                }
+            })
+            .catch((error) => {
+                if (error.response) {
+                    switch (error.response.status) {
+                        case 400:
+                            toaster.danger("An error occured", {
+                                description: "Its not your its Us. Please try again"
+                            });
+                            break;
+
+                        case 401:
+                            toaster.danger("Invalid code provided", {
+                                description: "please try again"
+                            });
+                            break;
+
+                        case 403:
+                            toaster.notify("Account already verified", {
+                                description: "Please login"
+                            });
+                            break;
+
+                        case 409:
+                            toaster.danger("An error occured", {
+                                description: "An account with this number already exists"
+                            });
+                            break;
+
+                        case 500:
+                            toaster.danger("An error occured", {
+                                description: "Its not you its Us. We are working to resolve it. Please try again"
+                            });
+                            break;
+
+                        default:
+                            toaster.danger("Something went wrong", {
+                                description: "Please try again"
+                            });
+                    }
+                } else if (error.request) {
+                    toaster.danger("Network Error", {
+                        description: "We could not change your password. Please check your network and reload this page"
+                    });
+                } else {
+                    toaster.danger("Profile Error", {
+                        description: "An internal error occured. Please log out and login again"
+                    });
+                }
+                setLoading(false);
+            });
+    }
+
+    const handleCodeVerification = (evt) => {
+
+        evt.preventDefault();
+
+        setLoading(true);
+
+        const session = getToken();
+
+        verifyPhoneNumber(code, session.session_id, session.svid)
+            .then(response => {
+                if (response.status === 200) {
+                    toaster.success("Success, Code Verified", {
+                        description: "Your new phone number has been added"
+                    });
+                    removeToken()
+                    setPage(0);
+                    setLoading(false);
+                }
+            })
+            .catch(error => {
+                if (error.response) {
+                    switch (error.response.status) {
+                        case 400:
+                            toaster.danger("An error occured", {
+                                description: "Its not your its Us. Please try again"
+                            });
+                            break;
+
+                        case 401:
+                            toaster.danger("Invalid code provided", {
+                                description: "please try again"
+                            });
+                            break;
+
+                        case 403:
+                            toaster.notify("Account already verified", {
+                                description: "Please login"
+                            });
+                            break;
+
+                        case 409:
+                            toaster.danger("An error occured", {
+                                description: "An account with this number already exists.Please Log In instead"
+                            });
+                            break;
+
+                        case 500:
+                            toaster.danger("An error occured", {
+                                description: "Its not you its Us. We are working to resolve it. Please try again"
+                            });
+                            break;
+
+                        default:
+                            toaster.danger("Something went wrong", {
+                                description: "Please try again"
+                            });
+                    }
+
+                } else if (error.request) {
+                    toaster.danger("Network error", {
+                        description: "Please check your network and try again"
+                    });
+                } else {
+                    toaster.danger("Network error", {
+                        description: "Please check your network and try again"
+                    })
+                }
+                setLoading(false);
+            })
+    }
+
+    if (page === 2) {
+        return (
+            <PageAnimationWrapper>
+                <div tw="md:border p-4 m-2">
+                    <div tw="w-full text-gray-800 text-center">
+                        <Title>Enter Verification Code</Title>
+                        <p tw="my-2">Please enter the code sent to you to confirm this operation</p>
+                    </div>
+                    <FormContainer>
+                        <Form onSubmit={(evt) => handleCodeVerification(evt)}>
+                            <FormGroup>
+                                <Input
+                                    tw="p-3"
+                                    type="number"
+                                    name="code"
+                                    min={0}
+                                    required
+                                    placeholder="2FA CODE"
+                                    onChange={(evt) => setCode(evt.target.value)}
+                                />
+                            </FormGroup>
+
+                            <SubmitButton type="submit">
+                                continue
+                            </SubmitButton>
+
+                        </Form>
+                    </FormContainer>
+                </div>
+            </PageAnimationWrapper>
+        )
+    }
+
+    if (loading) return <InlineLoader />;
+
+    return (
+        <PageAnimationWrapper>
+            <div tw="md:border p-4 m-2">
+                <div tw="w-full text-gray-800 text-center">
+                    <Title>Add Phone Number</Title>
+                    <p tw="my-2">Here, you can add a new phone number to your account</p>
+                </div>
+
+                <FormContainer>
+                    <Form onSubmit={handleSubmit(handleAddNumber)}>
+                        <FormGroup>
+                            <Label>Phone Number</Label>
+                            <Controller
+                                control={control}
+                                name="phone_number"
+                                render={({ field: { value, onChange } }) => (
+                                    <PhoneNumberInput
+                                        flags={flags}
+                                        international
+                                        countryCallingCodeEditable={false}
+                                        placeholder="Enter your phone number"
+                                        defaultCountry="CM"
+                                        value={value}
+                                        type="tel"
+                                        onChange={onChange}
+                                    />
+                                )}
+                            />
+                            {errors.phone_number && <ErrorMessage>{errors.phone_number.message}</ErrorMessage>}
+                        </FormGroup>
+
+                        <SubmitButton type="submit">
+                            <FiPlusCircle size={20} /> &nbsp; Add Number
+                        </SubmitButton>
+                    </Form>
+                </FormContainer>
+            </div>
+        </PageAnimationWrapper>
+    );
+}
+
+
 
 
 export default SettingsPage;
