@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^2.6.0",
     "@owaiswiz/use-in-view": "^1.0.16",
     "@tailwindcss/forms": "^0.3.2",
     "@testing-library/jest-dom": "^5.12.0",
@@ -15,14 +16,17 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.9.0",
     "react-icons": "^4.2.0",
     "react-password-strength-bar": "^0.3.3",
+    "react-phone-number-input": "^3.1.23",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "rsuite": "^4.10.1",
     "styled-components": "^5.3.0",
     "twin.macro": "^2.4.1",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",

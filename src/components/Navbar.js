@@ -4,7 +4,8 @@ import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
 import swobLogo from "images/logo.png";
 import { Avatar, LogOutIcon, Dialog, SideSheet } from "evergreen-ui";
-import { FiMenu, FiInfo } from "react-icons/fi";
+import { FiMenu, FiInfo, FiSettings, FiUser, FiExternalLink } from "react-icons/fi";
+import { IoWalletOutline } from "react-icons/io5";
 import { Link, useRouteMatch } from 'react-router-dom';
 import { useAppContext } from "App";
 
@@ -12,6 +13,8 @@ const MainHeader = tw.header`flex justify-between items-center bg-white shadow-l
 const NavContainer = tw.div`block lg:inline-flex`;
 const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
 const NavLink = tw(Link)`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-900 hocus:outline-none hocus:text-white text-gray-900 font-medium  px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const ExtLink = tw.a`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-300 hocus:outline-none text-gray-900 font-medium hocus:font-bold px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
+const StartedExtLink = tw(ExtLink)`text-primary-900 bg-primary-300 font-bold`;
 const LogoLink = styled(NavLink)`
   ${tw`inline-flex items-center ml-0! hocus:bg-white hocus:text-gray-900 font-bold text-xl`};
   img {
@@ -40,8 +43,10 @@ const Navbar = () => {
     const defaultLinks = [
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <NavLink onClick={()=> setOpen(false)} key="Profile" to={`${path}/profile`}>Profile</NavLink>
-                <NavLink onClick={()=> setOpen(false)} key="Wallet" to={`${path}/wallet`}>Wallet(Store Access)</NavLink>
+                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/getting_started.html" target="_blank"><FiExternalLink size={20} /> &nbsp; Get Started</StartedExtLink>
+                <NavLink onClick={() => setOpen(false)} key="Profile" to={`${path}/profile`}><FiUser size={20} /> &nbsp; Profile</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Wallet" to={`${path}/wallet`}><IoWalletOutline size={20} /> &nbsp; Wallet(Store Access)</NavLink>
+                <NavLink onClick={() => setOpen(false)} key="Settings" to={`${path}/settings`}><FiSettings size={20} /> &nbsp; Settings</NavLink>
             </NavContainer>
         </React.Fragment>
     ];
@@ -52,7 +57,7 @@ const Navbar = () => {
                 <FiInfo size={20} />
             </UserActionsButton>
             {userProfile ? (
-                <UserActionsButton onClick={()=> setOpen(false)}>
+                <UserActionsButton onClick={() => setOpen(false)}>
                     <Avatar name={userProfile?.name} size={34} />
                 </UserActionsButton>
             ) : (null)

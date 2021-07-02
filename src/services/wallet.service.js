@@ -32,10 +32,10 @@ export const getPlatformOauthToken = (id, token, provider, platform) => {
     }).then(response => response)
 };
 
-export const revokeToken = (password, provider, platform) => {
+export const revokeToken = (id, token, password, provider, platform) => {
     return axios.post("/users/tokens/revoke", {
-        id: AUTH_ID,
-        auth_key: AUTH_KEY,
+        id: id,
+        auth_key: token,
         password: password,
         provider: provider,
         platform: platform
@@ -50,11 +50,9 @@ export const getGoogleOauthToken = (data) => {
     }).then(response => response)
 }
 export const savePlatformOauthToken = (id, token, provider, platform, code) => {
-    //renew auth data
-    authObj = getLocalState();
-    AUTH_KEY = authObj.token;
-    AUTH_ID = authObj.id;
-
+    let authObj = getLocalState();
+    let AUTH_KEY = authObj?.token;
+    let AUTH_ID = authObj?.id;
     return axios.post(`/${provider}/auth/success`, {
         id: AUTH_ID,
         auth_key: AUTH_KEY,

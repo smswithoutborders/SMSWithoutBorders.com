@@ -4,14 +4,15 @@ import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import AnimateLoader from 'components/Loaders/AnimateLoader';
 import useTitle from 'helpers/useTitle';
 import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
-import { Button, toaster, Dialog, TextInputField } from 'evergreen-ui';
+import { Button, toaster, Dialog } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
+import { IoWalletOutline } from "react-icons/io5";
 import { Panel, Placeholder } from "rsuite";
 import { ToggleButton } from "components/misc/Buttons";
 import { useAppContext } from 'App';
 
 const StoreButton = tw(Button)`rounded-md`;
-const Heading = tw.h1`font-bold sm:text-5xl text-3xl mb-4`;
+const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;
 const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
 const PlatformTitle = tw.h4`text-lg font-medium`;
 const PlatformDescription = tw.p`mb-2`;
@@ -19,9 +20,10 @@ const SubHeading = tw.h3`text-lg font-bold`;
 const Card = tw.div`h-full`;
 const Column = tw.div`p-4 md:w-1/2 w-full`;
 const Row = tw.div`flex flex-wrap -m-4 mt-12`;
-const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 h-screen`;
+const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 h-screen lg:mb-36`;
 const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
-const Input = tw(TextInputField)`w-full rounded-lg py-3`;
+const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
+const Label = tw.label`block font-light mb-2`;
 const Accordion = tw(Panel)`border border-gray-200 shadow-md`;
 const { Paragraph } = Placeholder;
 
@@ -137,7 +139,7 @@ const Wallet = () => {
     };
 
     const handleRevokeToken = (provider, platform) => {
-        revokeToken(password, provider, platform)
+        revokeToken(id, token, password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
@@ -245,7 +247,7 @@ const Wallet = () => {
             <PageAnimationWrapper>
                 <Container>
 
-                    <Heading>Wallet</Heading>
+                    <Heading><IoWalletOutline /> &nbsp; Wallet</Heading>
                     <Description>Save your tokens for rainy days</Description>
 
                     <Row>
@@ -370,10 +372,10 @@ const Wallet = () => {
                     <br />
                     <p>Please enter you password to Confirm </p>
                     <br />
+                    <Label>Password</Label>
                     <div tw="relative">
                         <Input
                             type={toggle ? "text" : "password"}
-                            label="Password"
                             placeholder="Password"
                             inputHeight={40}
                             required
