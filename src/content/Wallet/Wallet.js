@@ -219,17 +219,13 @@ const Wallet = () => {
         if (data.source === 'smswithoutborders') {
             savePlatformOauthToken(id, token, "google", "gmail", data.code)
                 .then(response => {
-                    setAlert({ loading: false });
-                    toaster.success("Token stored successfully");
-                    dispatch({
-                        type: "LOGIN",
-                        payload: {
-                            id: id,
-                            token: response.data.auth_key
-                        }
+                    toaster.success("Token stored successfully", {
+                        description: "Please wait while we refresh your page"
                     });
-                    setAlert({ loading: false, notify: false });
-                    window.location.reload();
+                    setTimeout(() => {
+                        window.location.reload();
+                        setAlert({ loading: false, notify: false });
+                    }, 1500);
                 }).catch((error) => {
                     toaster.danger("An error occured", {
                         description: "Please Check your network connection and try again"
