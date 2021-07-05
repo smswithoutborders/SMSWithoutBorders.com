@@ -34,7 +34,6 @@ const Wallet = () => {
     const [tokens, setTokens] = useState();
     const [providers, setProviders] = useState();
     const [password, setPassword] = useState("");
-    const [isValid, setIsValid] = useState(false);
     const [toggle, setToggle] = useState(false);
     const [revokedTokenDetails, setRevokedTokenDetails] = useState(
         {
@@ -48,15 +47,6 @@ const Wallet = () => {
             platforms: true,
             modal: false
         });
-
-    //used to check password length when user revokes token prevents error 400 from BE
-    const validatePassword = () => {
-        if (password.length >= 8) {
-            setIsValid(true);
-        } else {
-            setIsValid(false);
-        }
-    }
 
     useTitle("Wallet (Store Access)");
 
@@ -139,15 +129,18 @@ const Wallet = () => {
     };
 
     const handleRevokeToken = (provider, platform) => {
+        setAlert({ loading: true })
         revokeToken(id, token, password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
-                    setAlert({ loading: false });
-                    toaster.success('Token deleted successfully');
+                    toaster.success('Token deleted successfully', {
+                        description: "Please wait while we update your information"
+                    });
                     setTimeout(() => {
                         window.location.reload();
-                    }, 1000)
+                        setAlert({ loading: false });
+                    }, 1500)
                 }
             })
             .catch((error) => {
@@ -220,14 +213,14 @@ const Wallet = () => {
             savePlatformOauthToken(id, token, "google", "gmail", data.code)
                 .then(response => {
                     toaster.success("Token stored successfully", {
-                        description: "Please wait while we refresh your page"
+                        description: "Please wait while we update your information"
                     });
                     setTimeout(() => {
                         window.location.reload();
-                        setAlert({ loading: false, notify: false });
+                        setAlert({ loading: false });
                     }, 1500);
                 }).catch((error) => {
-                    toaster.danger("An error occured", {
+                    toaster.danger("We could not store your token", {
                         description: "Please Check your network connection and try again"
                     })
                 });
@@ -356,11 +349,8 @@ const Wallet = () => {
                     hasClose={false}
                     shouldCloseOnOverlayClick={false}
                     shouldCloseOnEscapePress={false}
-                    isConfirmDisabled={isValid ? false : true}
-                    onConfirm={() => {
-                        handleRevokeToken(revokedTokenDetails.provider, revokedTokenDetails.platform);
-                        setAlert({ loading: true })
-                    }}
+                    isConfirmDisabled={password.length > 8 ? false : true}
+                    onConfirm={() => handleRevokeToken(revokedTokenDetails.provider, revokedTokenDetails.platform)}
                     onCloseComplete={() => setAlert({ modal: false })}
                     confirmLabel="confirm revoke"
                 >
@@ -376,10 +366,7 @@ const Wallet = () => {
                             inputHeight={40}
                             required
                             minLength="8"
-                            onChange={(evt) => {
-                                setPassword(evt.target.value);
-                                validatePassword();
-                            }}
+                            onChange={(evt) => setPassword(evt.target.value)}
                         />
                         <ToggleButton
                             toggleFunc={setToggle}
