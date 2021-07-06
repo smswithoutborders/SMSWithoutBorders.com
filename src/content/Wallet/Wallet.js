@@ -3,7 +3,7 @@ import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import AnimateLoader from 'components/Loaders/AnimateLoader';
 import useTitle from 'helpers/useTitle';
-import { getProviders, getPlatformOauthToken, savePlatformOauthToken, revokeToken } from 'services/wallet.service';
+import { getProviders, getPlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
@@ -29,12 +29,11 @@ const { Paragraph } = Placeholder;
 
 const Wallet = () => {
 
-    const { state, dispatch } = useAppContext();
+    const { state } = useAppContext();
     const { token, id } = state;
     const [tokens, setTokens] = useState();
     const [providers, setProviders] = useState();
     const [password, setPassword] = useState("");
-    const [isValid, setIsValid] = useState(false);
     const [toggle, setToggle] = useState(false);
     const [revokedTokenDetails, setRevokedTokenDetails] = useState(
         {
@@ -48,15 +47,6 @@ const Wallet = () => {
             platforms: true,
             modal: false
         });
-
-    //used to check password length when user revokes token prevents error 400 from BE
-    const validatePassword = () => {
-        if (password.length >= 8) {
-            setIsValid(true);
-        } else {
-            setIsValid(false);
-        }
-    }
 
     useTitle("Wallet (Store Access)");
 
@@ -97,16 +87,8 @@ const Wallet = () => {
         setAlert({ loading: true })
         getPlatformOauthToken(id, token, provider, platform)
             .then(response => {
-                //set new token
-                dispatch({
-                    type: "LOGIN",
-                    payload: {
-                        id: id,
-                        token: response.data.auth_key
-                    }
-                });
                 //open authorization window
-                openSignInWindow(response.data.url);
+                window.open(response.data.url, '_self');
             })
             .catch((error) => {
                 if (error.response) {
@@ -114,40 +96,39 @@ const Wallet = () => {
                      * The request was made and the server responded with a
                      * status code that falls out of the range of 2xx
                      */
-                    setAlert({ loading: false });
                     toaster.danger("An error occurred", {
                         description: "Please try again"
                     })
-
                 } else if (error.request) {
                     /*
                      * The request was made but no response was received, `error.request`
                      * is an instance of XMLHttpRequest in the browser and an instance
                      * of http.ClientRequest in Node.js
                      */
-                    console.log(error.request);
-                    setAlert({ loading: false });
                     toaster.danger("Network Error", {
                         description: "Please Check your network connection and try again"
                     })
                 } else {
                     // Something happened in setting up the request and triggered an Error
-                    setAlert({ loading: false });
                     toaster.danger("There are currently no stored Tokens",)
                 }
+                setAlert({ loading: false });
             });
     };
 
     const handleRevokeToken = (provider, platform) => {
+        setAlert({ loading: true })
         revokeToken(id, token, password, provider, platform)
             .then(response => {
                 if (response.status === 200) {
                     setTokens(0);
-                    setAlert({ loading: false });
-                    toaster.success('Token deleted successfully');
+                    toaster.success('Token deleted successfully', {
+                        description: "Please wait while we update your information"
+                    });
                     setTimeout(() => {
                         window.location.reload();
-                    }, 1000)
+                        setAlert({ loading: false });
+                    }, 1500)
                 }
             })
             .catch((error) => {
@@ -178,64 +159,6 @@ const Wallet = () => {
                     toaster.danger("An error occured, please try again")
                 }
             });
-    };
-
-    let windowObjectReference = null;
-    let previousUrl = null;
-
-    const openSignInWindow = (url) => {
-        // remove any existing event listeners
-        window.removeEventListener('message', receiveMessage);
-
-        if (windowObjectReference === null || windowObjectReference.closed) {
-            /* if the pointer to the window object in memory does not exist
-             or if such pointer exists but the window was closed */
-            windowObjectReference = window.open(url, '_blank');
-        } else if (previousUrl !== url) {
-            /* if the resource to load is different,
-             then we load it in the already opened secondary window and then
-             we bring such window back on top/in front of its parent window. */
-            windowObjectReference = window.open(url, '_blank');
-            windowObjectReference.focus();
-        } else {
-            /* else the window reference must exist and the window
-             is not closed; therefore, we can bring it back on top of any other
-             window with the focus() method. There would be no need to re-create
-             the window or to reload the referenced resource. */
-            windowObjectReference.focus();
-        }
-
-        // add the listener for receiving a message from the popup
-        window.addEventListener('message', event => receiveMessage(event), false);
-        // assign the previous URL
-        previousUrl = url;
-    };
-
-    const receiveMessage = (event) => {
-        if (event.origin !== window.location.origin) {
-            return;
-        }
-        const { data } = event; //extract data sent from popup
-        if (data.source === 'smswithoutborders') {
-            savePlatformOauthToken(id, token, "google", "gmail", data.code)
-                .then(response => {
-                    setAlert({ loading: false });
-                    toaster.success("Token stored successfully");
-                    dispatch({
-                        type: "LOGIN",
-                        payload: {
-                            id: id,
-                            token: response.data.auth_key
-                        }
-                    });
-                    setAlert({ loading: false, notify: false });
-                    window.location.reload();
-                }).catch((error) => {
-                    toaster.danger("An error occured", {
-                        description: "Please Check your network connection and try again"
-                    })
-                });
-        }
     };
 
     if (alert.loading) {
@@ -360,11 +283,8 @@ const Wallet = () => {
                     hasClose={false}
                     shouldCloseOnOverlayClick={false}
                     shouldCloseOnEscapePress={false}
-                    isConfirmDisabled={isValid ? false : true}
-                    onConfirm={() => {
-                        handleRevokeToken(revokedTokenDetails.provider, revokedTokenDetails.platform);
-                        setAlert({ loading: true })
-                    }}
+                    isConfirmDisabled={password.length > 8 ? false : true}
+                    onConfirm={() => handleRevokeToken(revokedTokenDetails.provider, revokedTokenDetails.platform)}
                     onCloseComplete={() => setAlert({ modal: false })}
                     confirmLabel="confirm revoke"
                 >
@@ -380,10 +300,7 @@ const Wallet = () => {
                             inputHeight={40}
                             required
                             minLength="8"
-                            onChange={(evt) => {
-                                setPassword(evt.target.value);
-                                validatePassword();
-                            }}
+                            onChange={(evt) => setPassword(evt.target.value)}
                         />
                         <ToggleButton
                             toggleFunc={setToggle}
