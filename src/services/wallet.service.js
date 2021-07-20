@@ -38,3 +38,14 @@ export const savePlatformOauthToken = (id, token, provider, platform, code) => {
         code: code
     }).then(response => response)
 }
+
+export const saveTwitterOauthToken = (id, token, provider, platform, oauth_token, oauth_verifier) => {
+    return axios.post(`/${provider}/auth/success`, {
+        id: id,
+        auth_key: token,
+        provider: provider,
+        platform: platform,
+        oauth_token: oauth_token,
+        oauth_verifier: oauth_verifier
+    }).then(response => response)
+}
