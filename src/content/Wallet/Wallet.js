@@ -20,11 +20,11 @@ const SubHeading = tw.h3`text-lg font-bold`;
 const Card = tw.div`h-full`;
 const Column = tw.div`p-4 md:w-1/2 w-full`;
 const Row = tw.div`flex flex-wrap -m-4 mt-12`;
-const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 h-screen lg:mb-36`;
+const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 md:mb-48`;
 const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
 const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
 const Label = tw.label`block font-light mb-2`;
-const Accordion = tw(Panel)`border border-gray-200 shadow-md`;
+const Accordion = tw(Panel)`shadow-md mb-3`;
 const { Paragraph } = Placeholder;
 
 const Wallet = () => {
@@ -53,6 +53,7 @@ const Wallet = () => {
     useEffect(() => {
         getProviders(id, token)
             .then(response => {
+                console.log(response.data);
                 let tokens = response.data.user_provider;
                 let providers = response.data.default_provider;
                 if (providers.length) {
@@ -161,9 +162,7 @@ const Wallet = () => {
             });
     };
 
-    if (alert.loading) {
-        return <AnimateLoader />
-    }
+    if (alert.loading) return <AnimateLoader />;
 
     return (
         <>
@@ -242,8 +241,20 @@ const Wallet = () => {
                                                             <PlatformTitle>Platform</PlatformTitle>
                                                             <PlatformDescription>{token.platforms[0].name}</PlatformDescription>
 
-                                                            <PlatformTitle>Email address</PlatformTitle>
-                                                            <PlatformDescription>{token.email}</PlatformDescription>
+                                                            {token.email && (
+                                                                <>
+                                                                    <PlatformTitle>Email address</PlatformTitle>
+                                                                    <PlatformDescription>{token.email}</PlatformDescription>
+                                                                </>
+                                                            )}
+
+                                                            {token.screen_name && (
+                                                                <>
+                                                                    <PlatformTitle>Screen Name</PlatformTitle>
+                                                                    <PlatformDescription>{token.screen_name}</PlatformDescription>
+                                                                </>
+                                                            )}
+
                                                         </div>
                                                         <StoreButton
                                                             type="submit"
