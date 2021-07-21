@@ -3,6 +3,8 @@ import tw from "twin.macro";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import AnimateLoader from 'components/Loaders/AnimateLoader';
 import useTitle from 'helpers/useTitle';
+import gmailIcon from 'images/gmail-icon.svg';
+import twitterIcon from 'images/twitter-icon.svg';
 import { getProviders, getPlatformOauthToken, revokeToken } from 'services/wallet.service';
 import { Button, toaster, Dialog } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
@@ -53,7 +55,6 @@ const Wallet = () => {
     useEffect(() => {
         getProviders(id, token)
             .then(response => {
-                console.log(response.data);
                 let tokens = response.data.user_provider;
                 let providers = response.data.default_provider;
                 if (providers.length) {
@@ -182,10 +183,24 @@ const Wallet = () => {
                                     <br />
                                     {providers ? (
                                         <>
-                                            {providers.map(provider => {
+                                            {providers.map(item => {
                                                 return (
-                                                    <Accordion header={< PlatformTitle > {provider?.provider}</PlatformTitle>} key={provider?.provider} collapsible={true} bordered>
-                                                        <p>Store your {provider?.provider} token which will be used for authentication on your behalf in the event
+                                                    <Accordion
+                                                        key={item?.provider} collapsible={true}
+                                                        header={
+                                                            <div tw="flex flex-row items-center">
+                                                                <img
+                                                                    src={item?.provider === "google" ? gmailIcon : twitterIcon} alt={`${item.provider} logo`}
+                                                                    height={28}
+                                                                    width={28}
+                                                                    tw="mr-2"
+                                                                />
+                                                                <PlatformTitle> {item?.provider}</PlatformTitle>
+                                                            </div>
+                                                        }
+                                                        bordered
+                                                    >
+                                                        <p>Store your {item?.provider} token which will be used for authentication on your behalf in the event
                                                             of an internet shutdown.</p>
                                                         <br />
                                                         <p>You can define how this token will be used by setting the scopes of access</p>
@@ -193,13 +208,13 @@ const Wallet = () => {
                                                         <StoreContainer>
                                                             <div>
                                                                 <PlatformTitle>Description</PlatformTitle>
-                                                                <PlatformDescription>{provider?.description}</PlatformDescription>
+                                                                <PlatformDescription>{item?.description}</PlatformDescription>
 
                                                                 <PlatformTitle>Platform</PlatformTitle>
-                                                                <PlatformDescription>{provider?.platforms[0].name}</PlatformDescription>
+                                                                <PlatformDescription>{item?.platforms[0].name}</PlatformDescription>
 
                                                                 <PlatformTitle>Type</PlatformTitle>
-                                                                <PlatformDescription>{provider?.platforms[0].type}</PlatformDescription>
+                                                                <PlatformDescription>{item?.platforms[0].type}</PlatformDescription>
                                                             </div>
                                                             <StoreButton
                                                                 type="submit"
@@ -207,7 +222,7 @@ const Wallet = () => {
                                                                 height={40}
                                                                 iconBefore={FiSave}
                                                                 isLoading={alert.loading}
-                                                                onClick={() => getPlatformToken(provider?.provider, provider?.platforms[0].name)}
+                                                                onClick={() => getPlatformToken(item?.provider, item?.platforms[0].name)}
                                                             >
                                                                 <span>{alert.loading ? "Storing" : "Store"}</span>
                                                             </StoreButton>
@@ -231,27 +246,41 @@ const Wallet = () => {
                                     <br />
                                     {tokens ? (
                                         <>
-                                            {tokens.map(token => (
-                                                <Accordion header={< PlatformTitle > {token.provider}</PlatformTitle>} key={token.provider} collapsible bordered>
+                                            {tokens.map(item => (
+                                                <Accordion
+                                                    key={item?.provider} collapsible={true}
+                                                    header={
+                                                        <div tw="flex flex-row items-center">
+                                                            <img
+                                                                src={item?.provider === "google" ? gmailIcon : twitterIcon} alt={`${item.provider} logo`}
+                                                                height={28}
+                                                                width={28}
+                                                                tw="mr-2"
+                                                            />
+                                                            <PlatformTitle> {item?.provider}</PlatformTitle>
+                                                        </div>
+                                                    }
+                                                    bordered
+                                                >
                                                     <StoreContainer>
                                                         <div>
                                                             <PlatformTitle>Description</PlatformTitle>
-                                                            <PlatformDescription>{token.description}</PlatformDescription>
+                                                            <PlatformDescription>{item?.description}</PlatformDescription>
 
                                                             <PlatformTitle>Platform</PlatformTitle>
-                                                            <PlatformDescription>{token.platforms[0].name}</PlatformDescription>
+                                                            <PlatformDescription>{item?.platforms[0].name}</PlatformDescription>
 
-                                                            {token.email && (
+                                                            {item?.email && (
                                                                 <>
                                                                     <PlatformTitle>Email address</PlatformTitle>
-                                                                    <PlatformDescription>{token.email}</PlatformDescription>
+                                                                    <PlatformDescription>{item?.email}</PlatformDescription>
                                                                 </>
                                                             )}
 
-                                                            {token.screen_name && (
+                                                            {item?.screen_name && (
                                                                 <>
                                                                     <PlatformTitle>Screen Name</PlatformTitle>
-                                                                    <PlatformDescription>{token.screen_name}</PlatformDescription>
+                                                                    <PlatformDescription>{item?.screen_name}</PlatformDescription>
                                                                 </>
                                                             )}
 
@@ -266,8 +295,8 @@ const Wallet = () => {
                                                             isLoading={alert.loading}
                                                             onClick={() => {
                                                                 setRevokedTokenDetails({
-                                                                    provider: token.provider,
-                                                                    platform: token.platforms[0].name
+                                                                    provider: item?.provider,
+                                                                    platform: item?.platforms[0].name
                                                                 });
                                                                 setAlert({ modal: true });
                                                             }}
