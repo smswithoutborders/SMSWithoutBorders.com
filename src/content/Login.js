@@ -33,7 +33,7 @@ const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
 const SubmitButton = tw(Button)`w-full rounded-lg py-2`;
-const VerifyButton = tw.button`block font-bold text-white text-center rounded-md w-1/2 lg:w-1/3 mx-auto px-3 py-2  text-base bg-primary-900`;
+const VerifyButton = tw.button`block font-bold text-white text-center rounded-md w-2/3 lg:w-1/3 mx-auto px-3 py-2  text-base bg-primary-900`;
 const IllustrationContainer = tw.div`lg:flex flex-1 bg-primary-200 hidden`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
@@ -357,6 +357,13 @@ const PhoneNumberPage = ({ setLoading, setPage }) => {
 const CodeVerifyPage = ({ setLoading, setPage }) => {
 
   const [code, setCode] = useState();
+  const [resend, setResend] = useState(false);
+
+  //enable reset code button after sometime
+  setTimeout(() => {
+    setResend(true)
+  }, 30000);
+
   const handleCodeVerification = (evt) => {
 
     evt.preventDefault();
@@ -429,9 +436,10 @@ const CodeVerifyPage = ({ setLoading, setPage }) => {
 
   return (
     <PageAnimationWrapper>
-      <div tw="grid place-items-center h-screen">
+      <div tw="grid place-items-center h-screen text-center">
         <div tw=" h-56 lg:w-1/3 mx-auto">
-          <Heading tw="text-gray-700 text-center">Enter verification code</Heading>
+          <Heading tw="text-gray-700">Enter verification code</Heading>
+          <p tw="text-gray-700 my-2">A verification code has been sent to your phone</p>
 
           <FormContainer>
             <Form onSubmit={(evt) => handleCodeVerification(evt)}>
@@ -446,11 +454,21 @@ const CodeVerifyPage = ({ setLoading, setPage }) => {
                   onChange={(evt) => setCode(evt.target.value)}
                 />
               </FormGroup>
+              <div tw="flex flex-col md:flex-row">
 
-              <VerifyButton type="submit">
-                continue
-              </VerifyButton>
+                {resend && (
+                  <VerifyButton
+                    tw="bg-white text-primary-900 mt-3 md:mt-0 order-1 md:order-none"
+                    onClick={() => setPage(1)}
+                  >
+                    resend code
+                  </VerifyButton>
+                )}
 
+                <VerifyButton type="submit">
+                  continue
+                </VerifyButton>
+              </div>
             </Form>
           </FormContainer>
         </div>

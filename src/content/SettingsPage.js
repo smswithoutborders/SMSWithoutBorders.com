@@ -22,12 +22,13 @@ const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
 const Title = tw.h2`text-2xl font-bold`;
 const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 lg:mb-36`;
 const FormContainer = tw.div`w-full lg:w-2/3 mx-auto items-center justify-center mt-8 text-gray-900`;
-const Form = tw.form`mx-auto sm:px-3`;
-const Input = tw.input`relative w-full rounded-md p-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
+const Form = tw.form`mx-auto flex flex-col sm:px-3`;
+const Input = tw.input`relative w-full rounded-md p-2.5 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
-const SubmitButton = tw.button`inline-flex items-center justify-center text-center rounded-md w-full md:w-1/2 mx-auto p-3  bg-primary-900 text-white font-medium`
+const SubmitButton = tw.button`inline-flex items-center justify-center text-center rounded-md w-2/3 md:w-1/2 mx-auto p-3  bg-primary-900 text-white font-bold`
+
 
 const NavButton = styled.button`
   ${tw`inline-flex w-full h-16 items-center transition duration-300 bg-gray-100 hover:bg-primary-800 hocus:outline-none hocus:text-white text-xs md:text-sm text-gray-900 font-medium p-2 md:p-4 no-underline appearance-none mb-2`}
@@ -83,7 +84,7 @@ const SettingsPage = () => {
                         </NavButton>
                     </div>
 
-                    <div tw="w-full md:w-2/3">
+                    <div tw="w-full my-20 md:my-0 md:w-2/3">
                         {page === 0 && (
                             <div tw="grid place-items-center">
                                 <div tw="p-8 text-center h-80">
@@ -398,7 +399,7 @@ const NewNumber = () => {
             });
     }
 
-    if (page === 2) return <CodeVerifyPage />
+    if (page === 2) return <CodeVerifyPage setPage={setPage} />
 
     if (loading) return <InlineLoader />;
 
@@ -448,6 +449,12 @@ const CodeVerifyPage = ({ setPage }) => {
 
     const [code, setCode] = useState();
     const [loading, setLoading] = useState(false);
+    const [resend, setResend] = useState(false);
+
+    //enable reset code button after sometime
+    setTimeout(() => {
+        setResend(true)
+    }, 30000);
 
     const handleCodeVerification = (evt) => {
 
@@ -546,10 +553,20 @@ const CodeVerifyPage = ({ setPage }) => {
                             />
                         </FormGroup>
 
-                        <SubmitButton type="submit">
-                            continue
-                        </SubmitButton>
+                        <div tw="flex flex-col md:flex-row">
+                            {resend && (
+                                <SubmitButton
+                                    tw="bg-white text-primary-900 mt-3 md:mt-0 order-1 md:order-none"
+                                    onClick={() => setPage(0)}
+                                >
+                                    Resend Code
+                                </SubmitButton>
+                            )}
 
+                            <SubmitButton type="submit">
+                                Continue
+                            </SubmitButton>
+                        </div>
                     </Form>
                 </FormContainer>
             </div>
