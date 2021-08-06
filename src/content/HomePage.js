@@ -5,7 +5,7 @@ import swobflow from "images/swobflow.gif";
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 
 import { MainNavbar, Footer } from "components";
-import { FiUserPlus, FiLogIn, FiDownload, FiShield, FiSave } from "react-icons/fi";
+import { FiUserPlus, FiLogIn, FiDownload, FiShield, FiSave, FiGithub } from "react-icons/fi";
 import { DiOpensource } from "react-icons/di";
 import { IoAccessibility, IoLogoGooglePlaystore as PlayStore } from "react-icons/io5";
 import { GiCheckboxTree } from "react-icons/gi";
@@ -15,17 +15,18 @@ const TextContainer = tw.div`flex-grow sm:text-left text-center mt-6 sm:mt-0`;
 const SectionContainer = tw.section`mx-auto flex px-8 md:px-8 py-12 md:flex-row flex-col items-center bg-primary-600`;
 const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:-ml-20 mb-12 items-start order-first md:order-last`;
-const Heading = tw.h1`font-black text-4xl sm:text-5xl mb-8  text-gray-900`;
+const Heading = tw.h1`font-black text-3xl sm:text-5xl mb-8  text-gray-900 tracking-wide leading-relaxed`;
 const SubHeading = tw.h2`text-gray-900 text-base md:text-xl font-bold mb-2 leading-relaxed`;
 const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-5`;
 const Image = tw.img`block mx-auto shadow-lg rounded-2xl transform md:-rotate-25  md:mt-8 md:-mb-24 shadow-2xl`;
-const Button = tw.a`inline-flex items-center transition duration-300 bg-white hocus:outline-none text-primary-900 font-bold px-6 py-3  no-underline items-center
-appearance-none shadow hocus:shadow-2xl rounded-3xl hocus:no-underline`;
 const DescItem = tw.div`flex items-center mx-auto pb-10 border-gray-200 sm:flex-row flex-col`;
 const IconBlock = tw.div`sm:w-32 sm:h-32 h-24 w-24 inline-flex items-center justify-center rounded-full bg-white shadow-xl text-primary-900 flex-shrink-0`;
 const Text = tw.p`leading-relaxed text-base`;
 const Column = tw.div`w-full`;
 const Row = tw.div`w-full`;
+const ButtonGroup = tw.div`flex flex-col md:flex-row md:flex-row w-full mt-4`;
+const Button = tw.a`inline-flex items-center justify-center  w-full md:w-1/2 lg:w-1/3 p-3 mb-4 md:mr-4 rounded-lg bg-white text-gray-800 font-bold hocus:shadow-xl hocus:no-underline appearance-none`;
+
 
 const HomePage = () => {
 
@@ -48,9 +49,14 @@ const HomePage = () => {
                         <Description>In this age of communication, keep in touch with your contacts across the internet without
                             access to an active internet connection. Store your access to your favourite communications
                             platforms while online, use them while offline.</Description>
-                        <Button href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b" target="_blank">
-                            <PlayStore size={24} /> &nbsp; Get SWOB
-                        </Button>
+                        <ButtonGroup>
+                            <Button href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b" target="_blank">
+                                <PlayStore size={24} /> &nbsp; Play Store
+                            </Button>
+                            <Button href="https://github.com/smswithoutborders/SMSwithoutBorders-Android/releases" target="_blank">
+                                <FiGithub size={24} /> &nbsp; Github
+                            </Button>
+                        </ButtonGroup>
                     </DetailsContainer>
                 </SectionContainer>
 
