@@ -4,10 +4,11 @@ import phone from "images/phone.png";
 import swobflow from "images/swobflow.gif";
 
 import { MainNavbar, Footer, PageAnimationWrapper } from "components";
-import { FiUserPlus, FiLogIn, FiDownload, FiShield, FiSave, FiGithub } from "react-icons/fi";
+import { FiUserPlus, FiLogIn, FiDownload, FiShield, FiSave } from "react-icons/fi";
 import { DiOpensource } from "react-icons/di";
 import { IoAccessibility, IoLogoGooglePlaystore as PlayStore } from "react-icons/io5";
 import { GiCheckboxTree } from "react-icons/gi";
+import { GoMarkGithub } from "react-icons/go";
 
 const Container = tw.section`px-8 mx-auto text-gray-900`;
 const TextContainer = tw.div`flex-grow sm:text-left text-center mt-6 sm:mt-0`;
@@ -16,7 +17,7 @@ const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:-ml-20 mb-12 items-start order-first md:order-last`;
 const Heading = tw.h1`font-black text-3xl sm:text-5xl mb-8  text-gray-900 tracking-wide leading-relaxed`;
 const SubHeading = tw.h2`text-gray-900 text-base md:text-xl font-bold mb-2 leading-relaxed`;
-const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-5`;
+const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-5 font-normal`;
 const Image = tw.img`block mx-auto shadow-lg rounded-2xl transform md:-rotate-25  md:mt-8 md:-mb-24`;
 const DescItem = tw.div`flex items-center mx-auto pb-10 border-gray-200 sm:flex-row flex-col`;
 const IconBlock = tw.div`sm:w-32 sm:h-32 h-24 w-24 inline-flex items-center justify-center rounded-full bg-white shadow-xl text-primary-900 flex-shrink-0`;
@@ -38,22 +39,31 @@ const HomePage = () => {
                         <Image
                             src={phone}
                             alt="SMSWithoutBorders Logo"
-                            height={250}
-                            width={250}
+                            height={600}
+                            width={300}
                         />
                     </ImageContainer>
                     <DetailsContainer>
                         <Heading>Stay Productive</Heading>
-
-                        <Description>In this age of communication, keep in touch with your contacts across the internet without
+                        <Description>
+                            In this age of communication, keep in touch with your contacts across the internet without
                             access to an active internet connection. Store your access to your favourite communications
-                            platforms while online, use them while offline.</Description>
+                            platforms while online, use them while offline.
+                        </Description>
                         <ButtonGroup>
                             <Button href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b" target="_blank">
-                                <PlayStore size={24} /> &nbsp; Play Store
+                                <PlayStore size={28} />
+                                <div tw="ml-2">
+                                    <small tw="font-light">Get SWOB</small>
+                                    <p tw="tracking-wide">Play Store</p>
+                                </div>
                             </Button>
                             <Button href="https://github.com/smswithoutborders/SMSwithoutBorders-Android/releases" target="_blank">
-                                <FiGithub size={24} /> &nbsp; Github
+                                <GoMarkGithub size={28} />
+                                <div tw="ml-2">
+                                    <small tw="font-light">Get SWOB</small>
+                                    <p tw="tracking-wide">Github</p>
+                                </div>
                             </Button>
                         </ButtonGroup>
                     </DetailsContainer>
@@ -122,7 +132,7 @@ const HomePage = () => {
                     <div tw="py-16">
                         <Heading tw="text-center">Why use SWOB?</Heading>
                     </div>
-                    <Column tw="lg:w-3/5  mx-auto">
+                    <Column tw="lg:w-3/5 mx-auto">
                         <DescItem>
                             <IconBlock tw="sm:mr-10">
                                 <IoAccessibility size={48} />

@@ -2,7 +2,7 @@ import React from "react";
 import tw from "twin.macro";
 import { motion } from "framer-motion";
 
-const Container = tw.div`font-display min-h-screen text-secondary-500 overflow-hidden`;
+const Container = tw.div`font-display min-h-screen text-gray-500 overflow-hidden`;
 
 export const PageAnimationWrapper = ({ children }) => {
 

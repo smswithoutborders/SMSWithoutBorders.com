@@ -1,7 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import './App.css';
 import "rsuite/dist/styles/rsuite-default.css";
-import "tailwindcss/dist/base.css";
 import 'react-phone-number-input/style.css'
 import Login from "content/Login";
 import SignUp from "content/SignUp"
@@ -90,7 +88,7 @@ const App = () => {
     dispatch({ type: "loading", payload: false })
   }
 
-  if (loading) return  <Loader />
+  if (loading) return <Loader />
 
   return (
     <AppContext.Provider
