@@ -4,11 +4,7 @@
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^2.6.0",
-    "@owaiswiz/use-in-view": "^1.0.16",
     "@tailwindcss/forms": "^0.3.2",
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^13.1.8",
     "axios": "^0.21.1",
     "evergreen-ui": "^5.1.2",
     "framer-motion": "^4.1.13",
