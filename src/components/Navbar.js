@@ -32,7 +32,7 @@ const AboutDetails = tw.div`text-gray-900`;
 
 
 
-const Navbar = () => {
+export const Navbar = () => {
     const { path } = useRouteMatch();
     const [isAboutOpen, setIsAboutOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -137,6 +137,3 @@ const Navbar = () => {
         </>
     );
 };
-
-
-export default Navbar;

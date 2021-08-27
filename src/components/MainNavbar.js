@@ -26,7 +26,7 @@ const MobileNav = tw.nav`lg:hidden flex flex-1 items-center justify-between`;
 const NavToggle = tw(NavButton)`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
 const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
 
-const MainNavbar = () => {
+export const MainNavbar = () => {
 
     const [open, setOpen] = useState(false);
 
@@ -88,7 +88,3 @@ const MainNavbar = () => {
         </>
     );
 };
-
-
-
-export default MainNavbar;

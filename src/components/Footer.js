@@ -12,7 +12,7 @@ const FooterNavLink = tw(Link)`font-medium inline-flex items-center text-gray-10
 const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-primary-700`;
 const NavContainer = tw.div`flex flex-col p-4 items-start`;
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <>
             <Container>
@@ -43,5 +43,3 @@ const Footer = () => {
         </>
     )
 }
-
-export default Footer;
