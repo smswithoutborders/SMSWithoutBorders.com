@@ -5,7 +5,7 @@ import { Spinner } from "evergreen-ui";
 
 const LoadingContainer = tw.div`grid place-items-center text-gray-700`;
 
-const AnimateLoader = ({ message }) => {
+export const Loader = ({ message }) => {
     return (
         <LoadingContainer tw="h-screen">
             <div>
@@ -27,12 +27,10 @@ export const InlineLoader = ({ message }) => {
     );
 }
 
-AnimateLoader.propTypes = {
+Loader.propTypes = {
     message: PropTypes.string
 }
 
 InlineLoader.propTypes = {
     message: PropTypes.string
 }
-
-export default AnimateLoader;

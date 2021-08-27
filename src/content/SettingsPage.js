@@ -6,12 +6,11 @@ import useTitle from 'helpers/useTitle';
 import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
 import flags from 'react-phone-number-input/flags'
 import 'react-phone-number-input/style.css'
-import { InlineLoader } from 'components/Loaders/AnimateLoader';
 import { toaster } from 'evergreen-ui';
 import { FiUser, FiTrash2, FiSettings, FiPlusCircle } from 'react-icons/fi';
 import { changePassword, deleteAccount, addPhoneNumber, verifyPhoneNumber } from 'services/profile.service';
 import { getToken, setToken, removeToken } from "services/storage.service";
-import { ToggleButton } from "components/misc/Buttons";
+import { ToggleButton, InlineLoader } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

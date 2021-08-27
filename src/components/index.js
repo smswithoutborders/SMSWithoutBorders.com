@@ -1,15 +1,18 @@
-import Navbar from "components/Navbar";
-import MainNavbar from "components/MainNavbar";
-import Footer from "components/Footer";
-import { Text, HeadingRow, Heading, Description, DonateButton } from "components/misc/Text";
-
+import Navbar from "./Navbar";
+import MainNavbar from "./MainNavbar";
+import Footer from "./Footer";
+import ToggleButton from "./ToggleButton";
+import { Text, HeadingRow, Heading, Description } from "./Typography";
+import { Loader, InlineLoader } from "./Loader";
 export {
     Text,
     HeadingRow,
     Heading,
     Description,
-    DonateButton,
     Navbar,
     MainNavbar,
-    Footer
+    Footer,
+    Loader,
+    InlineLoader,
+    ToggleButton
 }

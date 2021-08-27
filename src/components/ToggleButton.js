@@ -11,4 +11,4 @@ const ToggleButton = (props) => {
     )
 }
 
-export { ToggleButton }
+export default ToggleButton;

@@ -6,7 +6,6 @@ import logo from "images/logo.png";
 import PasswordStrengthBar from 'react-password-strength-bar';
 import useTitle from "helpers/useTitle";
 import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
-import AnimateLoader from "components/Loaders/AnimateLoader";
 import flags from 'react-phone-number-input/flags'
 import 'react-phone-number-input/style.css'
 import { FiUserPlus } from "react-icons/fi";
@@ -14,7 +13,7 @@ import { Button, toaster } from 'evergreen-ui';
 import { registerUser, verifyCode } from 'services/auth.service';
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { Link, useHistory } from "react-router-dom";
-import { ToggleButton } from "components/misc/Buttons";
+import { ToggleButton, Loader } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -242,7 +241,7 @@ const SignUp = () => {
   }
 
 
-  if (loading) return <AnimateLoader />
+  if (loading) return <Loader />
 
   if (stage === 2) {
 

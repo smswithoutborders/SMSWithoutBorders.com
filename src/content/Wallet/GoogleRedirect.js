@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import AnimateLoader from 'components/Loaders/AnimateLoader';
 import { toaster } from "evergreen-ui";
+import { Loader } from "components";
 import { savePlatformOauthToken } from 'services/wallet.service';
 import { useAppContext } from 'App';
 
@@ -83,6 +83,6 @@ const WalletRedirect = () => {
         }
     }, [state]);
     // some text to show the user
-    return <AnimateLoader message={message} />;
+    return <Loader message={message} />;
 };
 export default WalletRedirect;

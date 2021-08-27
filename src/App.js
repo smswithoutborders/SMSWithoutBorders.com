@@ -8,7 +8,7 @@ import HomePage from 'content/HomePage';
 import DashBoard from "content/DashBoard";
 import PrivacyPage from 'content/PrivacyPage';
 import ContactPage from 'content/ContactPage';
-import AnimateLoader from "components/Loaders/AnimateLoader";
+import { Loader } from 'components';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { getLocalState, setLocalState, clearLocalState, removeToken, removeProfile } from "services/storage.service";
 
@@ -89,11 +89,7 @@ const App = () => {
     dispatch({ type: "loading", payload: false })
   }
 
-  if (loading) {
-    return (
-      <AnimateLoader />
-    );
-  }
+  if (loading) return  <Loader />
 
   return (
     <AppContext.Provider

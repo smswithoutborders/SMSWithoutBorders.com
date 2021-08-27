@@ -3,7 +3,7 @@ import tw from "twin.macro"
 import axios from "axios";
 import QRCode from 'qrcode.react';
 import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import AnimateLoader from 'components/Loaders/AnimateLoader';
+import { Loader } from 'components';
 import useTitle from "helpers/useTitle";
 import { Avatar, toaster, Spinner, Pane } from 'evergreen-ui';
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
@@ -142,7 +142,7 @@ const Profile = () => {
 
     if (loading) {
         return (
-            <AnimateLoader />
+            <Loader />
         )
     }
 

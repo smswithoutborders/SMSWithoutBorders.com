@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AnimateLoader from 'components/Loaders/AnimateLoader';
+import { Loader } from 'components';
 import { toaster } from "evergreen-ui";
 import { saveTwitterOauthToken } from 'services/wallet.service';
 import { useAppContext } from 'App';
@@ -84,6 +84,6 @@ const TwitterRedirect = () => {
     }
 }, [state]);
 // some text to show the user
-return <AnimateLoader message={message} />;
+return <Loader message={message} />;
 };
 export default TwitterRedirect;
