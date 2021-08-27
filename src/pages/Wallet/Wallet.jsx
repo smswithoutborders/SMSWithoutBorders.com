@@ -8,7 +8,7 @@ import { FiSave, FiTrash2 } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 import { Panel, Placeholder } from "rsuite";
 import { ToggleButton, Loader, PageAnimationWrapper, useTitle } from "components";
-import { useAppContext } from 'App';
+import { useAppContext } from '~/App';
 
 const StoreButton = tw(Button)`rounded-md`;
 const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;

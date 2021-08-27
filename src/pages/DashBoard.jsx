@@ -1,14 +1,12 @@
 import React from "react";
-import { Navbar, Footer } from "components";
+import { Navbar, Footer, PageAnimationWrapper } from "components";
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
-import { PageAnimationWrapper } from "components";
-import Profile from 'content/Profile';
-import Wallet from 'content/Wallet';
-import GoogleRedirect from 'content/Wallet/GoogleRedirect';
-import TwitterRedirect from "content/Wallet/TwitterRedirect";
-import NotFoundPage from "content/NotFoundPage";
-import SettingsPage from "content/SettingsPage";
+import Profile from 'pages/Profile';
+import Wallet from 'pages/Wallet';
+import GoogleRedirect from 'pages/Wallet/GoogleRedirect';
+import TwitterRedirect from "pages/Wallet/TwitterRedirect";
+import NotFoundPage from "pages/NotFoundPage";
+import SettingsPage from "pages/SettingsPage";
 
 
 const DashBoard = () => {

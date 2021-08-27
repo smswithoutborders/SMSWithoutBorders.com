@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let AUTH_URL = process.env.REACT_APP_API_URL;
+let AUTH_URL = import.meta.env.VITE_API_URL;
 axios.defaults.baseURL = AUTH_URL;
 
 export const getProfileInfo = (id, token) => {

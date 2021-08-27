@@ -10,7 +10,7 @@ import { getToken, setToken, removeToken } from "services/storage.service";
 import { ToggleButton, InlineLoader, PageAnimationWrapper, useTitle } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAppContext } from 'App';
+import { useAppContext } from '~/App';
 import * as yup from "yup";
 
 const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { toaster } from "evergreen-ui";
 import { Loader } from "components";
 import { savePlatformOauthToken } from 'services/wallet.service';
-import { useAppContext } from 'App';
+import { useAppContext } from '~/App';
 
 const WalletRedirect = () => {
 

@@ -1,14 +1,14 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from "react";
 import "rsuite/dist/styles/rsuite-default.css";
-import 'react-phone-number-input/style.css'
-import Login from "content/Login";
-import SignUp from "content/SignUp"
-import HomePage from 'content/HomePage';
-import DashBoard from "content/DashBoard";
-import PrivacyPage from 'content/PrivacyPage';
-import ContactPage from 'content/ContactPage';
-import { Loader } from 'components';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import "react-phone-number-input/style.css"
+import Login from "pages/Login";
+import SignUp from "pages/SignUp"
+import HomePage from "pages/HomePage";
+import DashBoard from "pages/DashBoard";
+import PrivacyPage from "pages/PrivacyPage";
+import ContactPage from "pages/ContactPage";
+import { Loader } from "components";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { getLocalState, setLocalState, clearLocalState, removeToken, removeProfile } from "services/storage.service";
 
 const AppContext = React.createContext();
@@ -37,7 +37,7 @@ const Reducer = (state, action) => {
         userProfile: action.payload.userProfile
       }
     }
-    case 'loading': {
+    case "loading": {
       return {
         ...state,
         loading: action.payload

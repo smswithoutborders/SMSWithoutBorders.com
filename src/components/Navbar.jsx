@@ -7,7 +7,7 @@ import { Avatar, LogOutIcon, Dialog, SideSheet } from "evergreen-ui";
 import { FiMenu, FiInfo, FiSettings, FiUser, FiExternalLink } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 import { Link, useRouteMatch } from 'react-router-dom';
-import { useAppContext } from "App";
+import { useAppContext } from '~/App';
 
 const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
 const NavContainer = tw.div`block lg:inline-flex`;
