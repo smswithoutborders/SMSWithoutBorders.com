@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import './App.css';
 import "rsuite/dist/styles/rsuite-default.css";
 import "tailwindcss/dist/base.css";
+import 'react-phone-number-input/style.css'
 import Login from "content/Login";
 import SignUp from "content/SignUp"
 import HomePage from 'content/HomePage';

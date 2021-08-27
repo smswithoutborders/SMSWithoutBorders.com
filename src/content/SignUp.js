@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
 import tw from "twin.macro";
 import styled from "styled-components";
 import logo from "images/logo.png";
 import PasswordStrengthBar from 'react-password-strength-bar';
-import useTitle from "helpers/useTitle";
 import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
-import flags from 'react-phone-number-input/flags'
-import 'react-phone-number-input/style.css'
+import flags from 'react-phone-number-input/flags';
 import { FiUserPlus } from "react-icons/fi";
 import { Button, toaster } from 'evergreen-ui';
 import { registerUser, verifyCode } from 'services/auth.service';
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { Link, useHistory } from "react-router-dom";
-import { ToggleButton, Loader } from "components";
+import { ToggleButton, Loader, PageAnimationWrapper, useTitle } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Footer } from "components";
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
+import { PageAnimationWrapper } from "components";
 import Profile from 'content/Profile';
 import Wallet from 'content/Wallet';
 import GoogleRedirect from 'content/Wallet/GoogleRedirect';

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import tw from "twin.macro";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import useTitle from 'helpers/useTitle';
 import gmailIcon from 'images/gmail-icon.svg';
 import twitterIcon from 'images/twitter-icon.svg';
 import { getProviders, getPlatformOauthToken, revokeToken } from 'services/wallet.service';
@@ -9,7 +7,7 @@ import { Button, toaster, Dialog } from 'evergreen-ui';
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 import { Panel, Placeholder } from "rsuite";
-import { ToggleButton, Loader } from "components";
+import { ToggleButton, Loader, PageAnimationWrapper, useTitle } from "components";
 import { useAppContext } from 'App';
 
 const StoreButton = tw(Button)`rounded-md`;

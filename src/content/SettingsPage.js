@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import tw, { styled } from "twin.macro";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import PasswordStrengthBar from 'react-password-strength-bar';
-import useTitle from 'helpers/useTitle';
 import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
 import flags from 'react-phone-number-input/flags'
-import 'react-phone-number-input/style.css'
 import { toaster } from 'evergreen-ui';
 import { FiUser, FiTrash2, FiSettings, FiPlusCircle } from 'react-icons/fi';
 import { changePassword, deleteAccount, addPhoneNumber, verifyPhoneNumber } from 'services/profile.service';
 import { getToken, setToken, removeToken } from "services/storage.service";
-import { ToggleButton, InlineLoader } from "components";
+import { ToggleButton, InlineLoader, PageAnimationWrapper, useTitle } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useAppContext } from 'App';
+import * as yup from "yup";
 
 const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;
 const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;

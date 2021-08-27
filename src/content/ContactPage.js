@@ -1,8 +1,7 @@
 import React from "react";
 import tw from "twin.macro";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
 import { FiMail, FiGlobe, FiMessageSquare } from "react-icons/fi";
-import { MainNavbar, Footer } from "components";
+import { MainNavbar, Footer, PageAnimationWrapper } from "components";
 
 const Container = tw.section`md:px-8 mx-auto text-gray-900 h-screen md:pt-24`;
 const TextContainer = tw.div`flex-grow text-left mt-6 sm:mt-0`;

@@ -1,7 +1,6 @@
 import React from 'react';
 import tw from "twin.macro";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import useTitle from 'helpers/useTitle';
+import { PageAnimationWrapper, useTitle } from "components";
 import { Link } from "react-router-dom";
 
 const Heading = tw.h1`text-9xl font-black mb-8 tracking-wider`;

@@ -1,7 +1,6 @@
 import React from 'react';
 import tw from "twin.macro";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { Text, HeadingRow, Heading, MainNavbar, Footer } from "components";
+import { Text, HeadingRow, Heading, MainNavbar, Footer, PageAnimationWrapper } from "components";
 import { Link } from 'react-router-dom';
 
 const Container = tw.div`px-5 mx-auto py-12  lg:p-24 text-gray-900 bg-gray-100`;

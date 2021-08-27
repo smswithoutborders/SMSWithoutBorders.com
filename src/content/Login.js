@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import PageAnimationWrapper from "helpers/PageAnimationWrapper.js";
-import useTitle from "helpers/useTitle";
 import logo from "images/logo.png";
 import PhoneInput from "react-phone-number-input";
 import PasswordStrengthBar from "react-password-strength-bar";
-import flags from 'react-phone-number-input/flags'
-import 'react-phone-number-input/style.css'
+import flags from 'react-phone-number-input/flags';
 import { FiLogIn } from "react-icons/fi";
 import { Button, toaster } from 'evergreen-ui';
 import { userLogin, resetPassword, verifyResetCode, changePassword } from 'services/auth.service';
 import { Link } from "react-router-dom";
-import { ToggleButton, Loader } from "components";
+import { ToggleButton, Loader, PageAnimationWrapper, useTitle } from "components";
 import { useAppContext } from "App";
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { useForm, Controller } from "react-hook-form";

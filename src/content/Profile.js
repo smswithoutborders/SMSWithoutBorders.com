@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import tw from "twin.macro"
 import axios from "axios";
 import QRCode from 'qrcode.react';
-import PageAnimationWrapper from "helpers/PageAnimationWrapper";
-import { Loader } from 'components';
-import useTitle from "helpers/useTitle";
+import { Loader, PageAnimationWrapper, useTitle } from 'components';
 import { Avatar, toaster, Spinner, Pane } from 'evergreen-ui';
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
 import { getProfileInfo } from "services/profile.service";
@@ -16,7 +14,7 @@ const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap conte
 const ImageContainer = tw.div`md:w-1/2 mb-4 md:mb-0`;
 const DetailsContainer = tw.div`md:w-1/2 flex flex-col text-center md:text-left p-4 lg:-ml-16`;
 const Image = tw(Avatar)`block mx-auto md:ml-auto `;
-const Heading = tw.h1`font-bold sm:text-4xl text-2xl mb-4 font-bold text-gray-900`;
+const Heading = tw.h1`font-bold sm:text-4xl text-2xl mb-4 text-gray-900`;
 const ProfileName = tw.span`font-light`;
 const Description = tw.h3`text-lg font-bold leading-relaxed text-gray-800 mb-1`;
 const QRContainer = tw(QRCode)`block mx-auto border shadow-lg rounded-xl p-4 bg-white`;
