@@ -26,6 +26,9 @@ export default ({ mode }) => {
       port: process.env.VITE_PORT,
       host: true,
       open: true
+    },
+    build: {
+      outDir: "build"
     }
   })
 }

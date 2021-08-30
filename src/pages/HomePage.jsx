@@ -14,18 +14,18 @@ const Container = tw.section`px-8 mx-auto text-gray-900`;
 const TextContainer = tw.div`flex-grow sm:text-left text-center mt-6 sm:mt-0`;
 const SectionContainer = tw.section`mx-auto flex px-8 md:px-8 py-12 md:flex-row flex-col items-center bg-primary-600`;
 const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`;
-const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:-ml-20 mb-12 items-start order-first md:order-last`;
+const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:-ml-10 mb-12 items-start order-first md:order-last`;
 const Heading = tw.h1`font-black text-3xl sm:text-5xl mb-8  text-gray-900 tracking-wide leading-relaxed`;
 const SubHeading = tw.h2`text-gray-900 text-base md:text-xl font-bold mb-2 leading-relaxed`;
 const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-5 font-normal`;
-const Image = tw.img`block mx-auto shadow-lg rounded-2xl transform md:-rotate-25  md:mt-8 md:-mb-24`;
+const Image = tw.img`block mx-auto shadow-lg rounded-2xl transform h-[500px] w-[280px] md:(-rotate-25 mt-8 -mb-24 w-[300px] h-[580px])`;
 const DescItem = tw.div`flex items-center mx-auto pb-10 border-gray-200 sm:flex-row flex-col`;
 const IconBlock = tw.div`sm:w-32 sm:h-32 h-24 w-24 inline-flex items-center justify-center rounded-full bg-white shadow-xl text-primary-900 flex-shrink-0`;
 const Text = tw.p`leading-relaxed text-base`;
 const Column = tw.div`w-full`;
 const Row = tw.div`w-full`;
-const ButtonGroup = tw.div`flex flex-col md:flex-row w-full mt-4`;
-const Button = tw.a`inline-flex items-center justify-center  w-full md:w-1/2 lg:w-1/3 p-3 mb-4 md:mr-4 rounded-lg bg-white text-gray-800 font-bold hocus:shadow-xl hocus:no-underline appearance-none`;
+const ButtonGroup = tw.div`flex flex-row w-full mt-4`;
+const Button = tw.a`inline-flex items-center justify-center mr-2 px-6 py-2 mb-4 md:mr-4 rounded-lg bg-white text-gray-800 font-bold hocus:(shadow-xl no-underline text-gray-900) appearance-none`;
 
 
 const HomePage = () => {
@@ -38,9 +38,7 @@ const HomePage = () => {
                     <ImageContainer>
                         <Image
                             src={phone}
-                            alt="SMSWithoutBorders Logo"
-                            height={600}
-                            width={300}
+                            alt="SWOB mobile"
                         />
                     </ImageContainer>
                     <DetailsContainer>
@@ -118,11 +116,10 @@ const HomePage = () => {
                         </Column>
 
                         <Column tw="md:w-1/2 grid place-items-center ">
-                            <img
+                            <Image
+                                tw="md:rotate-0"
                                 src={swobflow}
-                                alt="SMSWithoutBorders Logo"
-                                width={310}
-                                height={600}
+                                alt="How swob works"
                             />
                         </Column>
                     </Row>
