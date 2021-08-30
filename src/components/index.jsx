@@ -6,3 +6,4 @@ export * from "./Typography";
 export * from "./Loader";
 export * from "./PageAnimationWrapper";
 export * from "./useTitle";
+export * from "./PhoneNumberInput";

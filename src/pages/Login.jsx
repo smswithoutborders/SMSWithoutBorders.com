@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw, { styled } from "twin.macro";
 import logo from "images/logo.png";
-import PhoneInput from "react-phone-number-input";
 import PasswordStrengthBar from "react-password-strength-bar";
 import flags from 'react-phone-number-input/flags';
 import { FiLogIn } from "react-icons/fi";
 import { Button, toaster } from 'evergreen-ui';
 import { userLogin, resetPassword, verifyResetCode, changePassword } from 'services/auth.service';
 import { Link } from "react-router-dom";
-import { ToggleButton, Loader, PageAnimationWrapper, useTitle } from "components";
+import { ToggleButton, Loader, PageAnimationWrapper, useTitle, PhoneNumberInput } from "components";
 import { useAppContext } from '~/App';
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { useForm, Controller } from "react-hook-form";
@@ -24,7 +22,7 @@ const MainContent = tw.div`flex flex-col items-center`;
 const Heading = tw.h1`text-2xl xl:text-3xl font-bold`;
 const FormContainer = tw.div`w-full flex-1 mt-8`;
 const Form = tw.form`mx-auto px-4 sm:px-3`;
-const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
+const Input = tw.input`relative w-full rounded-md! py-2 px-3 mb-2 text-gray-700 border border-gray-400 focus:(border-0 border-primary-900 ring-0 outline-none)`;
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
@@ -33,25 +31,8 @@ const VerifyButton = tw.button`block font-bold text-white text-center rounded-md
 const IllustrationContainer = tw.div`lg:flex flex-1 bg-primary-200 hidden`;
 const IllustrationImage = styled.div`
   ${props => `background-image: url("${props.imageSrc}");`}
-  ${tw` w-full bg-cover bg-center bg-no-repeat`}
+  ${tw`w-full bg-center bg-no-repeat bg-cover `}
 `;
-
-const PhoneNumberInput = styled(PhoneInput)`
-    ${tw`p-2 border border-gray-400 hocus:border-primary-900 rounded-md mb-2`}
-  .PhoneInputCountrySelect {
-    ${tw`border-none hocus:border-none mr-8 p-4`}
-  }
-  .PhoneInputCountryIcon {
-    ${tw`border-none hocus:border-none h-5 w-7`}
-  }
-  .PhoneInputInput {
-    ${tw`focus:border-none focus:outline-none appearance-none placeholder-gray-400`}
-  }
-  .PhoneInputCountryIcon {
-    ${tw``}
-  }
-`;
-
 
 const LogInSchema = yup.object().shape({
   phone_number: yup.string().required('Please Enter your Phone Number'),
