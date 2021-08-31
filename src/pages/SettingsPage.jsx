@@ -7,7 +7,7 @@ import { toaster } from 'evergreen-ui';
 import { FiUser, FiTrash2, FiSettings, FiPlusCircle } from 'react-icons/fi';
 import { changePassword, deleteAccount, addPhoneNumber, verifyPhoneNumber } from 'services/profile.service';
 import { getToken, setToken, removeToken } from "services/storage.service";
-import { ToggleButton, InlineLoader, PageAnimationWrapper, useTitle } from "components";
+import { ToggleButton, InlineLoader, PageAnimationWrapper, useTitle, PhoneNumberInput } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppContext } from '~/App';
@@ -19,7 +19,7 @@ const Title = tw.h2`text-2xl font-bold`;
 const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 lg:mb-36`;
 const FormContainer = tw.div`w-full lg:w-2/3 mx-auto items-center justify-center mt-8 text-gray-900`;
 const Form = tw.form`mx-auto flex flex-col sm:px-3`;
-const Input = tw.input`relative w-full rounded-md p-2.5 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
+const Input = tw.input`relative w-full rounded-md! py-2 px-3 mb-2 text-gray-700 border border-gray-400 focus:(border-0 border-primary-900 ring-0 outline-none)`;
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
@@ -27,24 +27,8 @@ const SubmitButton = tw.button`inline-flex items-center justify-center text-cent
 
 
 const NavButton = styled.button`
-  ${tw`inline-flex w-full h-16 items-center transition duration-300 bg-gray-100 hover:bg-primary-800 hocus:outline-none hocus:text-white text-xs md:text-sm text-gray-900 font-medium p-2 md:p-4 no-underline appearance-none mb-2`}
-  ${({ active }) => active && tw`bg-primary-900 text-white`}
-`;
-
-const PhoneNumberInput = styled(PhoneInput)`
-    ${tw`p-3 border border-gray-400 hocus:border-primary-900 rounded-md mb-2`}
-  .PhoneInputCountrySelect {
-    ${tw`border-none hocus:border-none mr-8 p-4`}
-  }
-  .PhoneInputCountryIcon {
-    ${tw`border-none hocus:border-none h-5 w-7`}
-  }
-  .PhoneInputInput {
-    ${tw`focus:border-none focus:outline-none appearance-none placeholder-gray-400`}
-  }
-  .PhoneInputCountryIcon {
-    ${tw``}
-  }
+  ${tw`inline-flex items-center w-full h-16 p-2 mb-2 text-xs font-medium text-gray-900 no-underline transition duration-300 bg-gray-100 appearance-none hover:bg-primary-800 hocus:outline-none hocus:text-white md:text-sm md:p-4`}
+  ${({ active }) => active && tw`text-white bg-primary-900`}
 `;
 
 
