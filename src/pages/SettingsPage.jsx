@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import tw, { styled } from "twin.macro";
 import PasswordStrengthBar from 'react-password-strength-bar';
-import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
-import flags from 'react-phone-number-input/flags'
+import { parsePhoneNumber } from "react-phone-number-input";
 import { toaster } from 'evergreen-ui';
 import { FiUser, FiTrash2, FiSettings, FiPlusCircle } from 'react-icons/fi';
 import { changePassword, deleteAccount, addPhoneNumber, verifyPhoneNumber } from 'services/profile.service';

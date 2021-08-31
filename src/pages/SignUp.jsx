@@ -3,7 +3,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import logo from "images/logo.png";
 import PasswordStrengthBar from 'react-password-strength-bar';
-import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
+import { parsePhoneNumber } from "react-phone-number-input";
 import flags from 'react-phone-number-input/flags';
 import { FiUserPlus } from "react-icons/fi";
 import { Button, toaster } from 'evergreen-ui';

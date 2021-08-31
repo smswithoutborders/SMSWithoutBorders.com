@@ -5,9 +5,11 @@ import tw, { theme, GlobalStyles as BaseStyles } from 'twin.macro'
 
 const CustomStyles = createGlobalStyle`
     html{
-        scroll-behaviour: smooth
+        scroll-behaviour: smooth;
+        height: 100%
     }
     body {
+        min-height: 100%;
         ${tw`antialiased`}
     }
 `
