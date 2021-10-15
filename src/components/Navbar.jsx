@@ -43,7 +43,7 @@ export const Navbar = () => {
     const defaultLinks = [
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/getting_started.html" target="_blank"><FiExternalLink size={20} /> &nbsp; Get Started</StartedExtLink>
+                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/docs/intro" target="_blank"><FiExternalLink size={20} /> &nbsp; Get Started</StartedExtLink>
                 <NavLink onClick={() => setOpen(false)} key="Profile" to={`${path}/profile`}><FiUser size={20} /> &nbsp; Profile</NavLink>
                 <NavLink onClick={() => setOpen(false)} key="Wallet" to={`${path}/wallet`}><IoWalletOutline size={20} /> &nbsp; Wallet(Store Access)</NavLink>
                 <NavLink onClick={() => setOpen(false)} key="Settings" to={`${path}/settings`}><FiSettings size={20} /> &nbsp; Settings</NavLink>

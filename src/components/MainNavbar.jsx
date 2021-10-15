@@ -33,7 +33,7 @@ export const MainNavbar = () => {
     const defaultLinks = (
         <React.Fragment key="nav">
             <NavContainer key={1}>
-                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/getting_started.html" target="_blank">Get Started</StartedExtLink>
+                <StartedExtLink onClick={() => setOpen(false)} key="Get Started" href="https://smswithoutborders.github.io/docs/intro" target="_blank">Get Started</StartedExtLink>
                 <NavLink onClick={() => setOpen(false)} key="privacy-policy" to="/privacy-policy">Privacy Policy</NavLink>
                 <ExtLink onClick={() => setOpen(false)} key="Github" href="https://github.com/orgs/smswithoutborders/" target="_blank">Github</ExtLink>
                 <ExtLink onClick={() => setOpen(false)} key="Blog" href="https://smswithoutborders.github.io" target="_blank">Blog</ExtLink>
