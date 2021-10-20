@@ -28,7 +28,6 @@ const TwitterRedirect = () => {
                     }, 2500);
                 }
             }).catch((error) => {
-                console.log(error);
                 if (error.response) {
                     switch (error.response.status) {
                         case 400:
