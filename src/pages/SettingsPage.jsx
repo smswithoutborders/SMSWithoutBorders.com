@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import tw, { styled } from "twin.macro";
 import PasswordStrengthBar from 'react-password-strength-bar';
+import flags from 'react-phone-number-input/flags';
 import { parsePhoneNumber } from "react-phone-number-input";
 import { toaster } from 'evergreen-ui';
 import { FiUser, FiTrash2, FiSettings, FiPlusCircle } from 'react-icons/fi';
@@ -106,7 +107,6 @@ const ChangePassword = () => {
 
     const handleChangePassword = (data) => {
         setLoading(true);
-        console.log(data)
         changePassword(id, token, data.password, data.new_password)
             .then(response => {
                 toaster.success("Password Changed successfully please login");

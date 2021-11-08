@@ -42,7 +42,13 @@ const Profile = () => {
             setLoading(true);
             getProfileInfo(id, token)
                 .then(response => {
-                    dispatch({ type: "SETUSERPROFILE", payload: response.data });
+                    dispatch({
+                        type: "SETUSERPROFILE", payload: {
+                            name: response.data.name,
+                            last_login: response.data.last_login,
+                            created: response.data.created
+                        }
+                    });
                     setLoading(false);
                 })
                 .catch((error) => {

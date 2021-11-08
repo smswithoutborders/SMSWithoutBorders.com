@@ -136,7 +136,6 @@ const Wallet = () => {
                      * The request was made and the server responded with a
                      * status code that falls out of the range of 2xx
                      */
-                    console.log(error.response);
                     if (error.response.status === 401) {
                         setAlert({ loading: false });
                         toaster.danger('wrong password provided');
