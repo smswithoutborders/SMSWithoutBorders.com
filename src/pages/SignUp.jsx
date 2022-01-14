@@ -18,7 +18,7 @@ import * as yup from "yup";
 const Container = tw.div`relative min-h-screen bg-white text-white font-medium flex justify-center `;
 const Content = tw.div` m-0 text-gray-900  md:flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-1/3 2xl:w-1/4 p-2 sm:p-12`;
-const LogoImage = tw.img`h-60 mx-auto block`;
+const LogoImage = tw.img`h-40 mx-auto block mb-10`;
 const MainContent = tw.div`flex flex-col items-center`;
 const Heading = tw.h1`text-2xl xl:text-3xl font-bold`;
 const FormContainer = tw.div`w-full flex-1 mt-8`;
