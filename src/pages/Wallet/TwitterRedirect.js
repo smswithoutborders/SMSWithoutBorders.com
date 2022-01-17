@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from 'components';
 import { toaster } from "evergreen-ui";
 import { saveTwitterOauthToken } from 'services/wallet.service';
-import { useAppContext } from '~/App';
+import { useAppContext } from 'App';
 
 const TwitterRedirect = () => {
 

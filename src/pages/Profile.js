@@ -7,7 +7,7 @@ import { Avatar, toaster, Spinner, Pane } from 'evergreen-ui';
 import { IoMdSync, IoMdArrowBack } from "react-icons/io";
 import { getProfileInfo } from "services/profile.service";
 import { getLocalState } from "services/storage.service";
-import { useAppContext } from '~/App';
+import { useAppContext } from 'App';
 
 const SectionContainer = tw.section`p-8 mx-auto flex flex-col lg:flex-wrap content-center md:flex-row bg-gray-100 md:h-screen`;
 const ImageContainer = tw.div`md:w-1/2 mb-4 md:mb-0`;

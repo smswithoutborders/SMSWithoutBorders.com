@@ -10,7 +10,7 @@ import { getToken, setToken, removeToken } from "services/storage.service";
 import { ToggleButton, InlineLoader, PageAnimationWrapper, useTitle, PhoneNumberInput } from "components";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAppContext } from '~/App';
+import { useAppContext } from 'App';
 import * as yup from "yup";
 
 const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;
@@ -32,7 +32,7 @@ const NavButton = styled.button`
 `;
 
 
-const SettingsPage = () => {
+const Settings = () => {
     useTitle("Settings");
     const [page, setPage] = useState(0);
     return (
@@ -555,4 +555,4 @@ const CodeVerifyPage = ({ setPage }) => {
 
 
 
-export default SettingsPage;
+export default Settings;

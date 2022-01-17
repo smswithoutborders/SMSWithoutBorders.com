@@ -8,7 +8,7 @@ import { Button, toaster } from 'evergreen-ui';
 import { userLogin, resetPassword, verifyResetCode, changePassword } from 'services/auth.service';
 import { Link } from "react-router-dom";
 import { ToggleButton, Loader, PageAnimationWrapper, useTitle, PhoneNumberInput } from "components";
-import { useAppContext } from '~/App';
+import { useAppContext } from 'App';
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -41,7 +41,7 @@ const LogInSchema = yup.object().shape({
 
 const Login = () => {
 
-  useTitle("SWOB LogIn");
+  useTitle("login");
 
   const { dispatch } = useAppContext()
   const [loading, setLoading] = useState(false);
