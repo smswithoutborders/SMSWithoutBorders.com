@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect } from "react";
-import "rsuite/dist/styles/rsuite-default.css";
 import "react-phone-number-input/style.css"
 import Login from "pages/Login";
 import SignUp from "pages/SignUp"
