@@ -20,9 +20,15 @@ export const API = createApi({
         body: credentials,
       }),
     }),
+    getDocs: builder.query({
+      query: () => ({
+        url: process.env.REACT_APP_DOCS_URL,
+        responseHandler: (response) => response.text(), // expect response type to be text/plain
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useSignupMutation } = API;
+export const { useLoginMutation, useSignupMutation, useGetDocsQuery } = API;

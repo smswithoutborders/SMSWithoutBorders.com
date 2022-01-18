@@ -16,7 +16,7 @@ export const Loader = ({ message }) => {
     <LoadingContainer className="h-screen">
       <div>
         <Spinner className="mx-auto" />
-        <p className="mt-2">{message || "Loading please wait"}</p>
+        <p className="mt-2">{message || "processing please wait"}</p>
       </div>
     </LoadingContainer>
   );
@@ -27,7 +27,7 @@ export const InlineLoader = ({ message }) => {
     <LoadingContainer className="h-80">
       <div>
         <Spinner className="mx-auto" />
-        <p className="mt-2">{message || "Loading please wait"}</p>
+        <p className="mt-2">{message || "processing please wait"}</p>
       </div>
     </LoadingContainer>
   );

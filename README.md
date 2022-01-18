@@ -21,9 +21,19 @@ cp example.env .env.production.local
 
 ```
 
-The .env file in project root contains all modifiable system variables.
+The .env file(s) contains all modifiable system variables. Below are the defaults
 
-Cloud API URL address and Google Client ID can be set here
+```bash
+PORT=18900  /* local development port */
+REACT_APP_API_URL=http://localhost:9000 /* Backend API URL */
+REACT_APP_ROUTER_URL="http://localhost:6969" /* Router URL */
+REACT_APP_DOCS_URL= "" /* docs markdown file url */
+
+HTTPS=false /* specify HTTPS */
+SSL_CRT_FILE=
+SSL_KEY_FILE=
+
+
 
 ### Start development server
 
