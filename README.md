@@ -50,17 +50,3 @@ Builds the app for production to the `build` folder using esbuild and Babel.
 - Signup for a new account
 
 - Login with created account details
-
-## Built With
-
-Some awesome components we used:
-
-- [treact components](https://owaiskhan.me/post/free-tailwindcss-react-ui-kit)
-
-- [Evergreen UI](https://github.com/segmentio/evergreen)
-
-- [Tail Blocks](https://tailblocks.cc/)
-
-- [React Icons](https://react-icons.github.io)
-
-- [React Router](https://reactrouter.com)

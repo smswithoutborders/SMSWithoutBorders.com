@@ -6,7 +6,7 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import { parsePhoneNumber } from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 import { FiUserPlus } from "react-icons/fi";
-import { Button, toaster } from "evergreen-ui";
+// import { Button, toaster } from "evergreen-ui";
 import { registerUser, verifyCode } from "services/auth.service";
 import { getToken, setToken, removeToken } from "services/storage.service";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import toast from "react-hot-toast";
 
 const Container = tw.div`relative min-h-screen bg-white text-white font-medium flex justify-center `;
 const Content = tw.div` m-0 text-gray-900  md:flex justify-center flex-1`;
@@ -34,7 +35,8 @@ const CheckBox = tw.input`h-5 w-5 text-primary-900 mr-2`;
 const Label = tw.label`block font-light mb-2`;
 const FormGroup = tw.div`relative mb-4`;
 const ErrorMessage = tw.p`text-sm text-red-900 mb-4`;
-const SubmitButton = tw(Button)`w-full rounded-md py-2`;
+// const SubmitButton = tw(Button)`w-full rounded-md py-2`;
+const SubmitButton = tw.button`w-full rounded-md py-2`;
 const VerifyButton = tw.button`block font-bold text-white text-center rounded-md w-1/2 lg:w-1/3 mx-auto px-3 py-2  text-base bg-primary-900`;
 const IllustrationContainer = tw.div`lg:flex flex-1 bg-primary-200 hidden`;
 const IllustrationImage = styled.div`
@@ -89,13 +91,10 @@ const Signup = () => {
       .then((response) => {
         if (response.status === 200) {
           setToken(response.data);
-          toaster.success(
+          toast.success(
             `A verification code has been sent to ${
               data.country_code + data.phone_number
-            }`,
-            {
-              description: "Please check and enter it to verify your account",
-            }
+            } \n Please check and enter it to verify your account`
           );
 
           setStage(2);
@@ -110,28 +109,23 @@ const Signup = () => {
            */
           switch (error.response.status) {
             case 400:
-              toaster.danger("An error occured", {
-                description: "Please try again",
-              });
+              toast.error("An error occured \n Please try again");
               break;
 
             case 409:
-              toaster.danger("An error occured", {
-                description:
-                  "An account with this number already exists.Please Log In instead",
-              });
+              toast.error(
+                "An error occured \n An account with this number already exists.Please Log In instead"
+              );
               break;
 
             case 500:
-              toaster.danger("An error occured", {
-                description: " We are working to resolve it. Please try again",
-              });
+              toast.error(
+                "An error occured \n  We are working to resolve it. Please try again"
+              );
               break;
 
             default:
-              toaster.danger("Something went wrong", {
-                description: "Please try again",
-              });
+              toast.error("Something went wrong \n Please try again");
           }
           setLoading(false);
         } else if (error.request) {
@@ -140,13 +134,13 @@ const Signup = () => {
            * is an instance of XMLHttpRequest in the browser and an instance
            * of http.ClientRequest in Node.js
            */
-          toaster.danger("Network error", {
+          toast.error("Network error", {
             description: "Please check your network and try again",
           });
           setLoading(false);
         } else {
           // Something happened in setting up the request and triggered an Error
-          toaster.danger("Network error", {
+          toast.error("Network error", {
             description: "Please check your network and try again",
           });
           setLoading(false);
@@ -164,9 +158,9 @@ const Signup = () => {
     verifyCode(code, session.session_id, session.svid)
       .then((response) => {
         if (response.status === 200) {
-          toaster.success(`Success, Your account has been created`, {
-            description: "You will be redirected to login soon",
-          });
+          toast.success(
+            "Success, Your account has been created \n You will be redirected to login soon"
+          );
 
           //clear the session tokens from localstorage
           removeToken();
@@ -184,42 +178,34 @@ const Signup = () => {
            */
           switch (error.response.status) {
             case 400:
-              toaster.danger("An error occured", {
-                description: "Its not your its Us. Please try again",
-              });
+              toast.error(
+                "An error occured \n Its not your its Us. Please try again"
+              );
               break;
 
             case 401:
-              toaster.danger("Invalid code provided", {
-                description: "please try again",
-              });
+              toast.error("Invalid code provided, please try again");
               break;
 
             case 403:
-              toaster.notify("Account already verified", {
-                description: "Please login",
-              });
+              toast("Account already verified ,Please login");
               navigate("/login");
               break;
 
             case 409:
-              toaster.danger("An error occured", {
-                description:
-                  "An account with this number already exists.Please Log In instead",
-              });
+              toast.error(
+                "An error occured \n An account with this number already exists.Please Log In instead"
+              );
               break;
 
             case 500:
-              toaster.danger("An error occured", {
-                description:
-                  "Its not you its Us. We are working to resolve it. Please try again",
-              });
+              toast.error(
+                "An error occured \n Its not you its Us. We are working to resolve it. Please try again"
+              );
               break;
 
             default:
-              toaster.danger("Something went wrong", {
-                description: "Please try again",
-              });
+              toast.error("Something went wrong \n Please try again");
           }
           setLoading(false);
         } else if (error.request) {
@@ -228,15 +214,15 @@ const Signup = () => {
            * is an instance of XMLHttpRequest in the browser and an instance
            * of http.ClientRequest in Node.js
            */
-          toaster.danger("Network error", {
-            description: "Please check your network and try again",
-          });
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
           setLoading(false);
         } else {
           // Something happened in setting up the request and triggered an Error
-          toaster.danger("Network error", {
-            description: "Please check your network and try again",
-          });
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
           setLoading(false);
         }
       });

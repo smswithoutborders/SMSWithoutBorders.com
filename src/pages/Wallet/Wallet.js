@@ -7,7 +7,7 @@ import {
   getPlatformOauthToken,
   revokeToken,
 } from "services/wallet.service";
-import { Button, toaster, Dialog } from "evergreen-ui";
+// import { Button, toaster, Dialog } from "evergreen-ui";
 import { FiSave, FiTrash2, FiChevronUp } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 // import { Panel, Placeholder } from "rsuite";
@@ -20,8 +20,10 @@ import {
 } from "components";
 import { useAppContext } from "App";
 import clsx from "clsx";
+import toast from "react-hot-toast";
 
-const StoreButton = tw(Button)`rounded-md`;
+// const StoreButton = tw(Button)`rounded-md`;
+const StoreButton = tw.button`rounded-md`;
 const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;
 const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
 const PlatformTitle = tw.h4`text-lg font-medium`;
@@ -70,20 +72,18 @@ const Wallet = () => {
       })
       .catch((error) => {
         if (error.response) {
-          toaster.danger("Request Error", {
-            description:
-              "Sorry we could not process your request. Please check your network connection and try again",
-          });
+          toast.error(
+            "Request Error \n Sorry we could not process your request. Please check your network connection and try again"
+          );
         } else if (error.request) {
           setAlert({ loading: false });
-          toaster.danger("Network Error", {
-            description:
-              "We could not fetch your tokens. Please check your network and reload this page",
-          });
+          toast.error(
+            "Network Error \n We could not fetch your tokens. Please check your network and reload this page"
+          );
         } else {
-          toaster.danger("No Tokens", {
-            description: "You haven't stored any tokens. Please add them",
-          });
+          toast.error(
+            "No Tokens \n You haven't stored any tokens. Please add them"
+          );
         }
         setAlert({ platforms: false });
       });
@@ -102,21 +102,19 @@ const Wallet = () => {
            * The request was made and the server responded with a
            * status code that falls out of the range of 2xx
            */
-          toaster.danger("An error occurred", {
-            description: "Please try again",
-          });
+          toast.error("An error occurred \n Please try again");
         } else if (error.request) {
           /*
            * The request was made but no response was received, `error.request`
            * is an instance of XMLHttpRequest in the browser and an instance
            * of http.ClientRequest in Node.js
            */
-          toaster.danger("Network Error", {
-            description: "Please Check your network connection and try again",
-          });
+          toast.error(
+            "Network Error \n Please Check your network connection and try again"
+          );
         } else {
           // Something happened in setting up the request and triggered an Error
-          toaster.danger("There are currently no stored Tokens");
+          toast.error("There are currently no stored Tokens");
         }
         setAlert({ loading: false });
       });
@@ -128,9 +126,9 @@ const Wallet = () => {
       .then((response) => {
         if (response.status === 200) {
           setTokens(0);
-          toaster.success("Token deleted successfully", {
-            description: "Please wait while we update your information",
-          });
+          toast.success(
+            "Token deleted successfully \n Please wait while we update your information"
+          );
           setTimeout(() => {
             window.location.reload();
             setAlert({ loading: false });
@@ -145,7 +143,7 @@ const Wallet = () => {
            */
           if (error.response.status === 401) {
             setAlert({ loading: false });
-            toaster.danger("wrong password provided");
+            toast.error("wrong password provided");
           }
         } else if (error.request) {
           /*
@@ -154,14 +152,13 @@ const Wallet = () => {
            * of http.ClientRequest in Node.js
            */
           setAlert({ loading: false });
-          toaster.danger("Network Error", {
-            description:
-              "Its an issue on our end. Please check your network and reload this page and try again",
-          });
+          toast.error(
+            "Network Error \n Its an issue on our end. Please check your network and reload this page and try again"
+          );
         } else {
           // Something hinfoappened in setting up the request and triggered an Error
           setAlert({ loading: false });
-          toaster.danger("An error occured, please try again");
+          toast.error("An error occured, please try again");
         }
       });
   };
@@ -378,7 +375,7 @@ const Wallet = () => {
         </Row>
       </Container>
 
-      <Dialog
+      {/* <Dialog
         isShown={alert.modal}
         title="Confirm action"
         intent="danger"
@@ -414,7 +411,7 @@ const Wallet = () => {
           />
           <ToggleButton toggleFunc={setToggle} value={toggle} />
         </div>
-      </Dialog>
+      </Dialog> */}
     </PageAnimationWrapper>
   );
 };

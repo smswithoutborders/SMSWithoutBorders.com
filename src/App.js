@@ -23,7 +23,7 @@ import {
   removeProfile,
 } from "services/storage.service";
 import { Loader } from "components";
-import Toaster from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const AppContext = React.createContext();
 export const useAppContext = () => React.useContext(AppContext);

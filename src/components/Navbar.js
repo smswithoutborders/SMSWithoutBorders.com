@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
-import swobLogo from "images/logo.png";
-import { Avatar, LogOutIcon, Dialog, SideSheet } from "evergreen-ui";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
-import { Link, useRouteMatch } from "react-router-dom";
-import { useAppContext } from "~/App";
+import { Link } from "react-router-dom";
+import { useAppContext } from "App";
 import {
   FiMenu,
   FiInfo,
   FiSettings,
   FiUser,
+  FiLogOut,
   FiExternalLink,
-  FiRefreshCcw,
 } from "react-icons/fi";
-
 
 const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
 const NavContainer = tw.div`block lg:inline-flex`;
@@ -41,50 +38,38 @@ const NavToggle = tw(
   NavButton
 )`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
 const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
-const AboutLogo = tw.img`w-60`;
-const AboutContainer = tw.div`flex flex-wrap items-center flex-col md:flex-row`;
-const AboutDetails = tw.div`text-gray-900`;
 
 export const Navbar = () => {
-  const { path } = useRouteMatch();
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const { state, handleLogOut } = useAppContext();
   const { userProfile } = state;
 
+  function toggleMenu() {
+    setOpen(!open);
+  }
+
   const defaultLinks = [
     <React.Fragment key="nav">
       <NavContainer key={1}>
         <StartedExtLink
-          onClick={() => setOpen(false)}
+          onClick={() => toggleMenu()}
           key="Get Started"
           href="https://smswithoutborders.github.io/docs/intro"
           target="_blank"
         >
           <FiExternalLink size={20} /> &nbsp; Get Started
         </StartedExtLink>
-        <NavLink
-          onClick={() => setOpen(false)}
-          key="Profile"
-          to={`${path}/profile`}
-        >
+        <NavLink onClick={() => toggleMenu()} key="Profile" to="profile">
           <FiUser size={20} /> &nbsp; Profile
         </NavLink>
-        <NavLink onClick={() => setOpen(false)} key="Sync" to={`${path}/profile`}>
+        <NavLink onClick={() => toggleMenu()} key="Sync" to="profile">
           <IoMdSync size={20} /> &nbsp; Sync
         </NavLink>
-        <NavLink
-          onClick={() => setOpen(false)}
-          key="Wallet"
-          to={`${path}/wallet`}
-        >
+        <NavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">
           <IoWalletOutline size={20} /> &nbsp; Wallet(Store Access)
         </NavLink>
-        <NavLink
-          onClick={() => setOpen(false)}
-          key="Settings"
-          to={`${path}/settings`}
-        >
+        <NavLink onClick={() => toggleMenu()} key="Settings" to="settings">
           <FiSettings size={20} /> &nbsp; Settings
         </NavLink>
       </NavContainer>
@@ -96,13 +81,19 @@ export const Navbar = () => {
       <UserActionsButton onClick={() => setIsAboutOpen(!isAboutOpen)}>
         <FiInfo size={20} />
       </UserActionsButton>
-      {userProfile ? (
-        <UserActionsButton onClick={() => setOpen(false)}>
-          <Avatar name={userProfile?.name} size={34} />
+      {userProfile && (
+        <UserActionsButton onClick={() => toggleMenu()}>
+          <div className="flex items-center">
+            <div className="flex items-center justify-center mr-2 bg-blue-100 rounded-full w-7 h-7">
+              <p className="font-bold text-center text-gray-800">
+                {userProfile?.name.charAt(0)}
+              </p>
+            </div>
+          </div>
         </UserActionsButton>
-      ) : null}
+      )}
       <UserActionsButton onClick={() => handleLogOut()}>
-        <LogOutIcon /> &nbsp; Logout
+        <FiLogOut /> &nbsp; Logout
       </UserActionsButton>
     </UserActions>
   );
@@ -117,14 +108,21 @@ export const Navbar = () => {
       >
         <FiInfo size={20} /> &nbsp; About
       </UserActionsButton>
-      {userProfile ? (
-        <UserActionsButton tw="px-5 md:px-3" onClick={() => setOpen(false)}>
-          <Avatar name={userProfile?.name} size={30} /> &nbsp;{" "}
+      {userProfile && (
+        <UserActionsButton tw="px-5 md:px-3" onClick={() => toggleMenu()}>
           {userProfile?.name}
+          <div className="flex items-center">
+            <div className="flex items-center justify-center mr-2 bg-blue-100 rounded-full w-7 h-7">
+              <p className="font-bold text-center text-gray-800">
+                {userProfile?.name.charAt(0)}
+              </p>
+            </div>
+            <p className="mr-4 text-sm">{userProfile?.name}</p>
+          </div>
         </UserActionsButton>
-      ) : null}
+      )}
       <UserActionsButton onClick={() => handleLogOut()}>
-        <LogOutIcon /> &nbsp; Logout
+        <FiLogOut /> &nbsp; Logout
       </UserActionsButton>
     </UserActions>
   );
@@ -137,7 +135,7 @@ export const Navbar = () => {
   );
 
   return (
-    <>
+    <Fragment>
       <MainHeader>
         <DesktopNav>
           {defaultLogoLink}
@@ -146,35 +144,15 @@ export const Navbar = () => {
         </DesktopNav>
         <MobileNav>
           {defaultLogoLink}
-          <NavToggle onClick={() => setOpen(!open)}>
+          <NavToggle onClick={() => toggleMenu()}>
             <FiMenu size={24} />
           </NavToggle>
+          <Fragment>
+            {defaultLinks}
+            {mobileActionLinks}
+          </Fragment>
         </MobileNav>
       </MainHeader>
-      <SideSheet
-        width={300}
-        isShown={open}
-        onCloseComplete={() => setOpen(false)}
-      >
-        {defaultLinks}
-        {mobileActionLinks}
-      </SideSheet>
-
-      <Dialog
-        isShown={isAboutOpen}
-        title="About"
-        onCloseComplete={() => setIsAboutOpen(false)}
-        hasFooter={false}
-      >
-        <AboutContainer>
-          <AboutLogo src={swobLogo} alt="SMSwithoutborders logo" />
-          <AboutDetails>
-            <h3 tw="text-xl font-bold mb-2">SMSwithoutBorders</h3>
-            <p tw="text-base">Version number</p>
-            <p tw="text-base">1.0.0</p>
-          </AboutDetails>
-        </AboutContainer>
-      </Dialog>
-    </>
+    </Fragment>
   );
 };
