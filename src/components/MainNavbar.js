@@ -3,32 +3,27 @@ import tw from "twin.macro";
 import "styled-components/macro";
 import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
-import { FiMenu, FiLogIn, FiUserPlus } from "react-icons/fi";
+import { FiMenu, FiLogIn, FiUserPlus, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { Transition } from "@headlessui/react";
 
-const MainHeader = tw.header`flex justify-between items-center bg-white shadow-lg`;
-const NavContainer = tw.div`block lg:inline-flex`;
-const NavButton = tw.button`h-16 items-center transition duration-300 hocus:bg-primary-300 hocus:outline-none text-gray-900 font-medium  px-6 py-3 no-underline appearance-none`;
 const NavLink = tw(
   Link
-)`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-300 hocus:outline-none hocus:text-primary-900 text-gray-900 font-medium hocus:font-bold px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
-const ExtLink = tw.a`w-full lg:w-max inline-flex h-16 transition duration-300 hocus:bg-primary-300 hocus:outline-none text-gray-900 font-medium hocus:font-bold px-6 py-3 no-underline items-center hocus:no-underline appearance-none`;
-const StartedExtLink = tw(ExtLink)`text-primary-900 bg-primary-300 font-bold`;
-const LogoLink = styled(NavLink)`
-  ${tw`inline-flex items-center ml-0! hocus:bg-white hocus:text-gray-900 font-bold text-xl`};
+)`flex hocus:outline-none text-gray-900 font-medium hocus:font-bold p-5 items-center appearance-none`;
+const ExtLink = tw.a`flex hocus:outline-none text-gray-900 font-medium hocus:font-bold p-5 items-center appearance-none`;
+const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
+const LogoLink = styled(Link)`
+  ${tw`flex items-center text-xl font-bold lg:ml-4`};
   img {
-    ${tw`w-8 h-8 mr-3`}
+    ${tw`w-10 h-10 mr-3`}
   }
 `;
-
-const SignUpLink = tw(NavLink)`bg-primary-900 text-white font-bold`;
-const LogInLink = tw(NavLink)`text-primary-900 font-bold`;
-const UserActions = tw.div`flex flex-col md:flex-row items-center`;
-const MobileNav = tw.nav`lg:hidden flex flex-1 items-center justify-between`;
-const NavToggle = tw(
-  NavButton
-)`lg:hidden focus:outline-none transition duration-300 hocus:bg-white hocus:text-gray-900`;
-const DesktopNav = tw.nav`hidden lg:flex flex-1 justify-between items-center bg-white`;
+const SignUpLink = tw(NavLink)`bg-primary-800 text-white`;
+const LogInLink = tw(NavLink)`text-primary-800`;
+const UserActions = tw.div`lg:(flex items-center)`;
+const NavContainer = tw.div`lg:flex`;
+const MobileNav = tw.nav`lg:hidden z-50 bg-white sticky top-0`;
+const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white h-16`;
 
 export const MainNavbar = () => {
   const [open, setOpen] = useState(false);
@@ -36,44 +31,45 @@ export const MainNavbar = () => {
     setOpen(!open);
   }
   const defaultLinks = (
-    <React.Fragment key="nav">
-      <NavContainer key={1}>
-        <StartedExtLink
-          onClick={() => toggleMenu()}
-          key="Get Started"
-          href="https://smswithoutborders.github.io/docs/intro"
-          target="_blank"
-        >
-          Get Started
-        </StartedExtLink>
-        <NavLink
-          onClick={() => toggleMenu()}
-          key="privacy-policy"
-          to="/privacy-policy"
-        >
-          Privacy Policy
-        </NavLink>
-        <ExtLink
-          onClick={() => toggleMenu()}
-          key="Github"
-          href="https://github.com/orgs/smswithoutborders/"
-          target="_blank"
-        >
-          Github
-        </ExtLink>
-        <ExtLink
-          onClick={() => toggleMenu()}
-          key="Blog"
-          href="https://smswithoutborders.github.io"
-          target="_blank"
-        >
-          Blog
-        </ExtLink>
-        <NavLink onClick={() => toggleMenu()} key="contact-us" to="/contact-us">
-          Contact Us
-        </NavLink>
-      </NavContainer>
-    </React.Fragment>
+    <NavContainer>
+      <StartedExtLink
+        onClick={() => toggleMenu()}
+        key="Get Started"
+        href="https://smswithoutborders.github.io/docs/intro"
+        target="_blank"
+      >
+        Get Started
+      </StartedExtLink>
+      <NavLink onClick={() => toggleMenu()} key="/" to="/">
+        Home
+      </NavLink>
+      <NavLink
+        onClick={() => toggleMenu()}
+        key="privacy-policy"
+        to="/privacy-policy"
+      >
+        Privacy Policy
+      </NavLink>
+      <ExtLink
+        onClick={() => toggleMenu()}
+        key="Github"
+        href="https://github.com/orgs/smswithoutborders/"
+        target="_blank"
+      >
+        Github
+      </ExtLink>
+      <ExtLink
+        onClick={() => toggleMenu()}
+        key="Blog"
+        href="https://smswithoutborders.github.io"
+        target="_blank"
+      >
+        Blog
+      </ExtLink>
+      <NavLink onClick={() => toggleMenu()} key="contact-us" to="/contact-us">
+        Contact Us
+      </NavLink>
+    </NavContainer>
   );
 
   const actionLinks = (
@@ -95,23 +91,37 @@ export const MainNavbar = () => {
   );
 
   return (
-    <MainHeader>
+    <Fragment>
       <DesktopNav>
         {defaultLogoLink}
         {defaultLinks}
         {actionLinks}
       </DesktopNav>
       <MobileNav>
-        {defaultLogoLink}
-        <NavToggle onClick={() => setOpen(!open)}>
-          <FiMenu size={24} />
-        </NavToggle>
+        <div className="flex items-center justify-between p-4">
+          {defaultLogoLink}
+          <button className="appearance-none" onClick={() => toggleMenu()}>
+            {open ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
 
-        <Fragment>
-          {defaultLinks}
-          {actionLinks}
-        </Fragment>
+        {open && (
+          <Transition
+            show={open}
+            appear={true}
+            enter="transition-opacity duration-500"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-500"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            className="flex flex-col w-full h-screen bg-white"
+          >
+            {defaultLinks}
+            {actionLinks}
+          </Transition>
+        )}
       </MobileNav>
-    </MainHeader>
+    </Fragment>
   );
 };
