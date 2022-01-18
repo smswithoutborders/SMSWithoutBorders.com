@@ -1,5 +1,6 @@
 import React from "react";
 import tw from "twin.macro";
+import "styled-components/macro";
 import { PageAnimationWrapper, useTitle } from "components";
 import { Link } from "react-router-dom";
 

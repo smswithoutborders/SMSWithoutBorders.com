@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
+import styled from "styled-components";
+import "styled-components/macro";
 import PasswordStrengthBar from "react-password-strength-bar";
 import flags from "react-phone-number-input/flags";
 import { parsePhoneNumber } from "react-phone-number-input";
@@ -248,12 +250,17 @@ const DeleteAccount = () => {
       })
       .catch((error) => {
         if (error.response) {
-          toast.error("Request Error \n Sorry we could not delete your account. Please check your network connection and try again"
+          toast.error(
+            "Request Error \n Sorry we could not delete your account. Please check your network connection and try again"
           );
         } else if (error.request) {
-          toast.error("Network Error \n We could not delete your account. Please check your network and reload this page" );
+          toast.error(
+            "Network Error \n We could not delete your account. Please check your network and reload this page"
+          );
         } else {
-          toast.error("Profile Error \n We could not delete your account. Please check your network and reload this page");
+          toast.error(
+            "Profile Error \n We could not delete your account. Please check your network and reload this page"
+          );
         }
         setLoading(false);
       });
@@ -329,7 +336,9 @@ const NewNumber = () => {
     addPhoneNumber(id, token, data.country_code, data.phone_number)
       .then((response) => {
         if (response.status === 200) {
-          toast.success("Success \n A verification code has been sent to your phone");
+          toast.success(
+            "Success \n A verification code has been sent to your phone"
+          );
           setToken(response.data);
           setPage(2);
           setLoading(false);
@@ -339,7 +348,9 @@ const NewNumber = () => {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              toast.error("An error occured \n Its not your its Us. Please try again");
+              toast.error(
+                "An error occured \n Its not your its Us. Please try again"
+              );
               break;
 
             case 401:
@@ -351,20 +362,28 @@ const NewNumber = () => {
               break;
 
             case 409:
-              toast.error("An error occured \n An account with this number already exists");
+              toast.error(
+                "An error occured \n An account with this number already exists"
+              );
               break;
 
             case 500:
-              toast.error("An error occured \n Its not you its Us. We are working to resolve it. Please try again");
+              toast.error(
+                "An error occured \n Its not you its Us. We are working to resolve it. Please try again"
+              );
               break;
 
             default:
               toast.error("Something went wrong \n Please try again");
           }
         } else if (error.request) {
-          toast.error("Network Error \n We could not change your password. Please check your network and reload this page");
+          toast.error(
+            "Network Error \n We could not change your password. Please check your network and reload this page"
+          );
         } else {
-          toast.error("Profile Error \n An internal error occured. Please log out and login again");
+          toast.error(
+            "Profile Error \n An internal error occured. Please log out and login again"
+          );
         }
         setLoading(false);
       });
@@ -437,7 +456,9 @@ const CodeVerifyPage = ({ setPage }) => {
     verifyPhoneNumber(code, session.session_id, session.svid)
       .then((response) => {
         if (response.status === 200) {
-          toast.success("Success, Code Verified \n Your new phone number has been added");
+          toast.success(
+            "Success, Code Verified \n Your new phone number has been added"
+          );
           removeToken();
           setTimeout(() => {
             window.location.reload();
@@ -449,7 +470,9 @@ const CodeVerifyPage = ({ setPage }) => {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              toast.error("An error occured \n Its not your its Us. Please try again");
+              toast.error(
+                "An error occured \n Its not your its Us. Please try again"
+              );
               break;
 
             case 401:
@@ -461,11 +484,15 @@ const CodeVerifyPage = ({ setPage }) => {
               break;
 
             case 409:
-              toast.error("An error occured \n An account with this number already exists.Please Log In instead");
+              toast.error(
+                "An error occured \n An account with this number already exists.Please Log In instead"
+              );
               break;
 
             case 500:
-              toast.error("An error occured \n Its not you its Us. We are working to resolve it. Please try again");
+              toast.error(
+                "An error occured \n Its not you its Us. We are working to resolve it. Please try again"
+              );
               break;
 
             default:
@@ -473,9 +500,13 @@ const CodeVerifyPage = ({ setPage }) => {
           }
           setLoading(false);
         } else if (error.request) {
-          toast.error("Network error \n Please check your network and try again");
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
         } else {
-          toast.error("Network error \n Please check your network and try again");
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
         }
         setLoading(false);
       });

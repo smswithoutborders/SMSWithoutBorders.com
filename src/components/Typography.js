@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import tw from "twin.macro";
+import "styled-components/macro";
 
 export const HeadingRow = tw.div`flex`;
 export const Heading = tw.h2`text-3xl sm:text-5xl font-bold tracking-wide leading-tight mb-5`;
@@ -9,7 +10,7 @@ export const Text = styled.div`
   ${tw`text-lg  text-gray-700`}
   p {
     ${tw`mt-2 leading-loose`}
-  } 
+  }
   h1 {
     ${tw`text-3xl font-bold mt-10 `}
   }

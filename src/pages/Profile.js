@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import tw from "twin.macro";
+import "styled-components/macro";
 import axios from "axios";
 import QRCode from "qrcode.react";
 import { Loader, PageAnimationWrapper, useTitle } from "components";
@@ -76,7 +77,7 @@ const Profile = () => {
   const handleSync = () => {
     setSyncState({ open: true, loading: true });
 
-    let ROUTER_URL = import.meta.env.VITE_ROUTER_URL;
+    let ROUTER_URL = process.env.REACT_APP_ROUTER_URL;
 
     let authObj = getLocalState();
     let AUTH_KEY = authObj?.token;

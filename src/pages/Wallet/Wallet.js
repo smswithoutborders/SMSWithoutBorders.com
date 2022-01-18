@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import tw from "twin.macro";
+import "styled-components/macro";
 import gmailIcon from "images/gmail-icon.svg";
 import twitterIcon from "images/twitter-icon.svg";
 import {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
+import "styled-components/macro";
 import logo from "images/logo.png";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { parsePhoneNumber } from "react-phone-number-input";

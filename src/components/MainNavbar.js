@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import tw from "twin.macro";
+import "styled-components/macro";
 import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
 import { FiMenu, FiLogIn, FiUserPlus } from "react-icons/fi";

@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import tw from "twin.macro";
+import "styled-components/macro";
 import { FiMail, FiGlobe, FiMessageSquare } from "react-icons/fi";
 import { MainNavbar, Footer, PageAnimationWrapper } from "components";
 

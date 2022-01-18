@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
+import styled from "styled-components";
+import "styled-components/macro";
 import logo from "images/logo.png";
 import PasswordStrengthBar from "react-password-strength-bar";
 import flags from "react-phone-number-input/flags";
@@ -75,9 +77,7 @@ const Login = () => {
     userLogin(data.phone_number, data.password)
       .then((response) => {
         if (response.status === 200) {
-          toast.success("Login successful", {
-            description: "You will be redirected shortly",
-          });
+          toast.success("Login successful \n You will be redirected shortly");
 
           setTimeout(() => {
             dispatch({
@@ -98,27 +98,24 @@ const Login = () => {
            */
           switch (error.response.status) {
             case 400:
-              toast.danger("Something went wrong", {
-                description: "We are working to resolve this. Please try again",
-              });
+              toast.error(
+                "Something went wrong \n We are working to resolve this. Please try again"
+              );
               break;
             case 401:
-              toast.danger("Forbidden", {
-                description:
-                  "Account is unauthorized. Sign Up to create account",
-              });
+              toast.error(
+                "Forbidden, Account is unauthorized. \n Sign Up to create account"
+              );
               break;
             case 500:
-              toast.danger("Something went wrong", {
-                description:
-                  "We are working to resolve this.  Please try again",
-              });
+              toast.error(
+                "Something went wrong \n We are working to resolve this.  Please try again"
+              );
               break;
             default:
-              toast.danger("Something went wrong", {
-                description:
-                  "We are working to resolve this.  Please try again",
-              });
+              toast.error(
+                "Something went wrong \n We are working to resolve this.  Please try again"
+              );
           }
           setLoading(false);
         } else if (error.request) {
@@ -128,15 +125,15 @@ const Login = () => {
            * of http.ClientRequest in Node.js
            */
           setLoading(false);
-          toast.danger("Network error", {
-            description: "Please check your network and try again",
-          });
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
         } else {
           // Something happened in setting up the request and triggered an Error
           setLoading(false);
-          toast.danger("Network error", {
-            description: "Please check your network and try again",
-          });
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
         }
       });
   };
@@ -271,50 +268,44 @@ const PhoneNumberPage = ({ setLoading, setPage }) => {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              toast.danger("An error occured", {
-                description: "Its not your its Us. Please try again",
-              });
+              toast.error(
+                "An error occured \n Its not your its Us. Please try again"
+              );
               break;
 
             case 401:
-              toast.danger("Sorry We did not find your account", {
-                description: "please sign up to create one",
-              });
+              toast.error(
+                "Sorry We did not find your account \n please sign up to create one"
+              );
               break;
 
             case 403:
-              toast.notify("Account already verified", {
-                description: "Please login",
-              });
+              toast("Account already verified \n Please login");
               break;
 
             case 409:
-              toast.danger("An error occured", {
-                description:
-                  "An account with this number already exists.Please Log In instead",
-              });
+              toast.error(
+                "An error occured \n An account with this number already exists.Please Log In instead"
+              );
               break;
 
             case 500:
-              toast.danger("An error occured", {
-                description:
-                  "Its not you its Us. We are working to resolve it. Please try again",
-              });
+              toast.error(
+                "An error occured \n Its not you its Us. We are working to resolve it. Please try again"
+              );
               break;
 
             default:
-              toast.danger("Something went wrong", {
-                description: "Please try again",
-              });
+              toast.error("Something went wrong \n Please try again");
           }
           setLoading(false);
         } else if (error.request) {
-          toast.danger("Network error", {
+          toast.error("Network error", {
             description: "Please check your network and try again",
           });
           setLoading(false);
         } else {
-          toast.danger("Network error", {
+          toast.error("Network error", {
             description: "Please check your network and try again",
           });
           setLoading(false);
@@ -381,50 +372,42 @@ const CodeVerifyPage = ({ setLoading, setPage }) => {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              toast.danger("An error occured", {
-                description: "Its not your its Us. Please try again",
-              });
+              toast.error(
+                "An error occured \n Its not your its Us. Please try again"
+              );
               break;
 
             case 401:
-              toast.danger("Invalid code provided", {
-                description: "please try again",
-              });
+              toast.error("Invalid code provided \n please try again");
               break;
 
             case 403:
-              toast.notify("Account already verified", {
-                description: "Please login",
-              });
+              toast("Account already verified \n Please login");
               break;
 
             case 409:
-              toast.danger("An error occured", {
-                description:
-                  "An account with this number already exists.Please Log In instead",
-              });
+              toast.error(
+                "An error occured \n An account with this number already exists.Please Log In instead"
+              );
               break;
 
             case 500:
-              toast.danger("An error occured", {
-                description:
-                  "Its not you its Us. We are working to resolve it. Please try again",
-              });
+              toast.error(
+                "An error occured \n Its not you its Us. We are working to resolve it. Please try again"
+              );
               break;
 
             default:
-              toast.danger("Something went wrong", {
-                description: "Please try again",
-              });
+              toast.error("Something went wrong \n Please try again");
           }
         } else if (error.request) {
-          toast.danger("Network error", {
-            description: "Please check your network and try again",
-          });
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
         } else {
-          toast.danger("Network error", {
-            description: "Please check your network and try again",
-          });
+          toast.error(
+            "Network error \n Please check your network and try again"
+          );
         }
         setLoading(false);
       });
@@ -498,17 +481,17 @@ const ResetPasswordPage = ({ setLoading, setPage }) => {
       })
       .catch((error) => {
         if (error.response) {
-          toast.danger("Request Error", {
+          toast.error("Request Error", {
             description:
               "Sorry we could not change your password. Please check your network connection and try again",
           });
         } else if (error.request) {
-          toast.danger("Network Error", {
+          toast.error("Network Error", {
             description:
               "We could not change your password. Please check your network and reload this page",
           });
         } else {
-          toast.danger("Profile Error", {
+          toast.error("Profile Error", {
             description:
               "An internal error occured. Please log out and login again",
           });
