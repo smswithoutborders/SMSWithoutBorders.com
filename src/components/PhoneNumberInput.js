@@ -1,20 +1,28 @@
+import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import "styled-components/macro";
+import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import flags from "react-phone-number-input/flags";
 
-export const PhoneNumberInput = styled(PhoneInput)`
-  ${tw`border border-gray-400 hocus:border-primary-900 rounded-md mb-2 px-3`}
+const StyledInput = styled(PhoneInput)`
+  ${tw`border border-gray-400 hocus:(border-2 border-blue-800) rounded-md mb-2 px-3`}
+  ${(props) => props.error && tw`border-red-500`}
   .PhoneInputCountrySelect {
-    ${tw`border-0 hocus:border-0 mr-8`}
+    ${tw`border-none hocus:border-none mr-8`}
   }
   .PhoneInputCountryIcon {
-    ${tw`border-0 hocus:border-none h-5 w-7`}
+    ${tw`border-none hocus:border-none h-5 w-7`}
   }
   .PhoneInputInput {
-    ${tw`border-0 focus:(border-0 outline-none ring-0) appearance-none placeholder-gray-400`}
+    ${tw`border-none focus:(border-none outline-none ring-0) appearance-none placeholder-gray-400`}
   }
   .PhoneInputCountryIcon {
     ${tw``}
   }
 `;
+
+export const PhoneNumberInput = (props) => {
+  return <StyledInput flags={flags} {...props} />;
+};

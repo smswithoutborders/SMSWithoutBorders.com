@@ -6,4 +6,5 @@ export * from "./Loader";
 export * from "./PageAnimationWrapper";
 export * from "./useTitle";
 export * from "./PhoneNumberInput";
+export * from "./PasswordInput";
 export * from "./shared";
