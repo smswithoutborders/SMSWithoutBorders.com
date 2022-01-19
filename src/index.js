@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import GlobalStyles from "./styles/GlobalStyles";
 import "./styles/index.css";
 import App from "./App";
 import { Loader } from "./components";
@@ -11,7 +10,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={<Loader />}>
       <Provider store={store}>
-        <GlobalStyles />
         <App />
       </Provider>
     </Suspense>
