@@ -9,27 +9,24 @@ import { GoMarkGithub } from "react-icons/go";
 const Container = tw.footer`flex flex-col lg:flex-row md:justify-between bg-gray-800 text-white py-8 px-2 md:p-8`;
 const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
 const FooterLink = tw.p`text-gray-100 pl-14`;
-const FooterNavLink = tw(
-  Link
-)`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
-const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-primary-700`;
+const FooterNavLink = tw(Link)`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
+const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-blue-200`;
 const NavContainer = tw.div`flex flex-col p-4 items-start`;
 
 export const Footer = () => {
   return (
-    <>
       <Container>
         <NavContainer tw="p-0 mb-4 md:mb-0">
           <FooterNavLink to="/">
             <LogoIcon src={Logo} alt="SMSwithoutborders" />
-            <span tw="ml-2 text-xl font-bold">SMSwithoutborders</span>
+            <span className="ml-2 text-xl font-bold">SMSwithoutborders</span>
           </FooterNavLink>
 
           <FooterLink>
             &copy; {new Date().getFullYear()} Powered by{" "}
             <DescLink
               tw="text-sm"
-              href="https://afkanerd.io"
+              href="https://afkanerd.com"
               target="_blank"
               rel="noreferrer"
             >
@@ -47,7 +44,7 @@ export const Footer = () => {
             <FiGlobe size={20} /> &nbsp; SWOB Blog
           </DescLink>
           <FooterNavLink
-            tw="mb-2 md:mb-4 hocus:text-primary-700"
+            tw="mb-2 md:mb-4 hocus:text-blue-200"
             to="/privacy-policy"
           >
             <FiLink2 size={20} /> &nbsp; Privacy Policy
@@ -74,6 +71,5 @@ export const Footer = () => {
           </DescLink>
         </NavContainer>
       </Container>
-    </>
   );
 };
