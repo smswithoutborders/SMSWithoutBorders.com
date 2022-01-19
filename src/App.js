@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect, Fragment } from "react";
-import "react-phone-number-input/style.css";
 import {
   Contact,
   Privacy,
@@ -143,7 +142,7 @@ const App = () => {
                 element={<TwitterRedirect />}
               />
             </Route>
-            <Route element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </Fragment>

@@ -1,29 +1,26 @@
 import React from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
-import { PageAnimationWrapper, useTitle } from "components";
-import { Link } from "react-router-dom";
+import { PageAnimationWrapper, useTitle, Button } from "components";
+import { useNavigate } from "react-router-dom";
 
-const Heading = tw.h1`text-9xl font-black mb-8 tracking-wider`;
-const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
-const Container = tw.div`container grid place-items-center px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 h-screen lg:mb-36 text-center`;
-const Button = tw(
-  Link
-)`block w-1/2 mx-auto my-8 px-6 py-4 text-lg text-white bg-primary-900 appearance-none hocus:text-white hocus:no-underline rounded-md`;
-
+// 404 page, uses react-router to move the user back 1 step
 const NotFound = () => {
   useTitle("404 Not Found");
+  const navigate = useNavigate();
   return (
     <PageAnimationWrapper>
-      <Container>
-        <div tw="p-8">
-          <Heading>
-            4<span tw="text-primary-900">0</span>4
-          </Heading>
-          <Description>Sorry this page is unavailable right now</Description>
-          <Button to="/dashboard">Back</Button>
+      <div className="container grid h-screen px-5 py-12 mx-auto text-center text-gray-900 place-items-center lg:px-16 lg:py-24 lg:mb-36">
+        <div className="p-8">
+          <h1 className="mb-8 font-black tracking-wider text-8xl">
+            4<span className="text-blue-800">0</span>4
+          </h1>
+          <p className="mb-8 text-base leading-relaxed md:text-lg">
+            Sorry this page is unavailable right now
+          </p>
+          <Button className="mx-auto" onClick={() => navigate(-1)}>
+            Back
+          </Button>
         </div>
-      </Container>
+      </div>
     </PageAnimationWrapper>
   );
 };
