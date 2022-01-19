@@ -13,6 +13,7 @@ import {
   TwitterRedirect,
   GoogleRedirect,
   NotFound,
+  Website,
 } from "pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
@@ -118,14 +119,18 @@ const App = () => {
         />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="login" element={<Login />} />
-            <Route path="sign-up" element={<Signup />} />
-            <Route path="privacy-policy" element={<Privacy />} />
-            <Route path="contact-us" element={<Contact />} />
+            <Route path="/" element={<Website />}>
+              <Route index element={<Landing />} />
+              <Route path="login" element={<Login />} />
+              <Route path="sign-up" element={<Signup />} />
+              <Route path="privacy-policy" element={<Privacy />} />
+              <Route path="contact-us" element={<Contact />} />
+            </Route>
+
             <Route path="dashboard" element={<Dashboard />}>
               {/* {token ? <Dashboard /> : <Navigate to="/login" />}
                */}
+              <Route index element={<Profile />} />
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />
               <Route path="wallet" element={<Wallet />} />

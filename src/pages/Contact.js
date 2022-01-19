@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import tw from "twin.macro";
 import "styled-components/macro";
 import { FiMail, FiGlobe, FiMessageSquare } from "react-icons/fi";
-import { MainNavbar, Footer, PageAnimationWrapper } from "components";
+import { PageAnimationWrapper } from "components";
 
 const Container = tw.section`md:px-8 mx-auto text-gray-900 h-screen md:pt-24`;
 const TextContainer = tw.div`flex-grow text-left mt-6 sm:mt-0`;
@@ -16,51 +16,47 @@ const Row = tw.div`w-full`;
 
 const Contact = () => {
   return (
-    <Fragment>
-      <MainNavbar />
-      <PageAnimationWrapper>
-        <Container>
-          <Row tw="pt-20 pb-12">
-            <Heading tw="text-center">Contact Us</Heading>
-            <SubHeading tw="text-center font-normal">
-              Using SWOB is as easy as authenticating your credentials
-            </SubHeading>
-          </Row>
+    <PageAnimationWrapper>
+      <Container>
+        <Row tw="pt-20 pb-12">
+          <Heading tw="text-center">Contact Us</Heading>
+          <SubHeading tw="text-center font-normal">
+            Using SWOB is as easy as authenticating your credentials
+          </SubHeading>
+        </Row>
 
-          <Column>
-            <DescItem>
-              <IconBlock>
-                <FiMail size={28} />
-              </IconBlock>
+        <Column>
+          <DescItem>
+            <IconBlock>
+              <FiMail size={28} />
+            </IconBlock>
 
-              <TextContainer>
-                <Text>Email</Text>
-                <SubHeading>developers@smswithoutborders.com </SubHeading>
-              </TextContainer>
-            </DescItem>
-            <DescItem>
-              <IconBlock>
-                <FiMessageSquare size={28} />
-              </IconBlock>
-              <TextContainer>
-                <Text>IRC</Text>
-                <SubHeading>freenode/#afkanerd</SubHeading>
-              </TextContainer>
-            </DescItem>
-            <DescItem>
-              <IconBlock>
-                <FiGlobe size={28} />
-              </IconBlock>
-              <TextContainer>
-                <Text>website</Text>
-                <SubHeading>https://smswithoutborders.com</SubHeading>
-              </TextContainer>
-            </DescItem>
-          </Column>
-        </Container>
-      </PageAnimationWrapper>
-      <Footer />
-    </Fragment>
+            <TextContainer>
+              <Text>Email</Text>
+              <SubHeading>developers@smswithoutborders.com </SubHeading>
+            </TextContainer>
+          </DescItem>
+          <DescItem>
+            <IconBlock>
+              <FiMessageSquare size={28} />
+            </IconBlock>
+            <TextContainer>
+              <Text>IRC</Text>
+              <SubHeading>freenode/#afkanerd</SubHeading>
+            </TextContainer>
+          </DescItem>
+          <DescItem>
+            <IconBlock>
+              <FiGlobe size={28} />
+            </IconBlock>
+            <TextContainer>
+              <Text>website</Text>
+              <SubHeading>https://smswithoutborders.com</SubHeading>
+            </TextContainer>
+          </DescItem>
+        </Column>
+      </Container>
+    </PageAnimationWrapper>
   );
 };
 

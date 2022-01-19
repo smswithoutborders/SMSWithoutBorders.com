@@ -18,7 +18,7 @@ const Privacy = () => {
 
   if (isError) {
     return (
-      <div className="p-6 prose">
+      <div className="p-8 py-12 prose">
         <h3>An error occured</h3>
         <p className="">
           Sorry we could not get the latest docs. If error persists, please
@@ -30,7 +30,7 @@ const Privacy = () => {
   }
   return (
     <PageAnimationWrapper>
-      <div className="p-6 prose max-w-max">
+      <div className="p-8 py-12 mx-auto prose max-w-max">
         <ReactMarkdown>{data}</ReactMarkdown>
       </div>
     </PageAnimationWrapper>
