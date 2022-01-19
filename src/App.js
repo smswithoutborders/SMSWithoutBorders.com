@@ -22,7 +22,7 @@ import {
   removeToken,
   removeProfile,
 } from "services/storage.service";
-import { Loader } from "components";
+import { Loader, PrivateRoute } from "components";
 import { Toaster } from "react-hot-toast";
 
 const AppContext = React.createContext();
@@ -126,9 +126,14 @@ const App = () => {
               <Route path="contact-us" element={<Contact />} />
             </Route>
 
-            <Route path="dashboard" element={<Dashboard />}>
-              {/* {token ? <Dashboard /> : <Navigate to="/login" />}
-               */}
+            <Route
+              path="dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            >
               <Route index element={<Profile />} />
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />

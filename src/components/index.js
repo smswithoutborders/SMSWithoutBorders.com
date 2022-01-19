@@ -8,3 +8,4 @@ export * from "./useTitle";
 export * from "./PhoneNumberInput";
 export * from "./PasswordInput";
 export * from "./shared";
+export * from "./PrivateRoute";
