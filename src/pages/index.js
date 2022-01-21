@@ -1,5 +1,4 @@
 export { default as Dashboard } from "./Dashboard";
-export { default as Signup } from "./Signup";
 export { default as Login } from "./Login";
 export { default as NotFound } from "./NotFound";
 export { default as Privacy } from "./Privacy";
@@ -9,3 +8,4 @@ export { default as Landing } from "./Landing";
 export { default as Settings } from "./Settings";
 export { default as Website } from "./Website";
 export * from "./Wallet";
+export * from "./signup";

@@ -1,4 +1,7 @@
 import React, { useReducer, useEffect, Fragment } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Loader, PrivateRoute } from "components";
+import { Toaster } from "react-hot-toast";
 import {
   Contact,
   Privacy,
@@ -9,12 +12,12 @@ import {
   Settings,
   Profile,
   Wallet,
-  TwitterRedirect,
-  GoogleRedirect,
   NotFound,
   Website,
+  TwitterRedirect,
+  GoogleRedirect,
+  SignupCodeVerification,
 } from "pages";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   getLocalState,
   setLocalState,
@@ -22,8 +25,6 @@ import {
   removeToken,
   removeProfile,
 } from "services/storage.service";
-import { Loader, PrivateRoute } from "components";
-import { Toaster } from "react-hot-toast";
 
 const AppContext = React.createContext();
 export const useAppContext = () => React.useContext(AppContext);
@@ -121,9 +122,12 @@ const App = () => {
             <Route path="/" element={<Website />}>
               <Route index element={<Landing />} />
               <Route path="login" element={<Login />} />
-              <Route path="sign-up" element={<Signup />} />
               <Route path="privacy-policy" element={<Privacy />} />
               <Route path="contact-us" element={<Contact />} />
+              <Route path="sign-up">
+                <Route index element={<Signup />} />
+                <Route path="verify" element={<SignupCodeVerification />} />
+              </Route>
             </Route>
 
             <Route

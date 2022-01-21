@@ -15,7 +15,14 @@ export const API = createApi({
     }),
     signup: builder.mutation({
       query: (credentials) => ({
-        url: "/signup",
+        url: "/users/profiles/register",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    verifySignup: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/profiles/register/2fa",
         method: "POST",
         body: credentials,
       }),
@@ -31,4 +38,9 @@ export const API = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useSignupMutation, useGetDocsQuery } = API;
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useVerifySignupMutation,
+  useGetDocsQuery,
+} = API;

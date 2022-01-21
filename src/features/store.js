@@ -3,11 +3,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { API } from "../services/api";
 import authReducer from "./auth";
+import validationReducer from "./validation";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     auth: authReducer,
+    validation: validationReducer,
     [API.reducerPath]: API.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,

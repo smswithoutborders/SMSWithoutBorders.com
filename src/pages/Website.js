@@ -1,14 +1,14 @@
-import React from "react";
-import { MainNavbar, Footer, PageAnimationWrapper } from "components";
+import React, { Fragment } from "react";
+import { MainNavbar, Footer } from "components";
 import { Outlet } from "react-router-dom";
 
 const Website = () => {
   return (
-    <PageAnimationWrapper>
+    <Fragment>
       <MainNavbar />
       <Outlet />
       <Footer />
-    </PageAnimationWrapper>
+    </Fragment>
   );
 };
 
