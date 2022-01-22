@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   id: "",
-  authKey: "",
+  auth_key: "",
 };
 
 export const authSlice = createSlice({
@@ -15,7 +15,7 @@ export const authSlice = createSlice({
       return {
         ...state,
         id,
-        authKey: auth_key,
+        auth_key,
       };
     },
     clearAuth: (state) => {

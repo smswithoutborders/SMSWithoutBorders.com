@@ -3,11 +3,12 @@ import { authSelector } from "features";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
 
-export const PrivateRoute = ({ children }) => {
+// HOC to check user authorization status
+export const RequireAuth = ({ children }) => {
   const auth = useSelector(authSelector);
   const location = useLocation();
 
-  return auth.authKey ? (
+  return auth.auth_key ? (
     children
   ) : (
     <Navigate to="/login" replace state={{ path: location.pathname }} />

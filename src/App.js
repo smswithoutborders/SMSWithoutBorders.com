@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, Fragment } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Loader, PrivateRoute } from "components";
+import { Loader, RequireAuth } from "components";
 import { Toaster } from "react-hot-toast";
 import {
   Contact,
@@ -133,9 +133,9 @@ const App = () => {
             <Route
               path="dashboard"
               element={
-                <PrivateRoute>
+                <RequireAuth>
                   <Dashboard />
-                </PrivateRoute>
+                </RequireAuth>
               }
             >
               <Route index element={<Profile />} />
