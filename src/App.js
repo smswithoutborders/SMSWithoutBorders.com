@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, Fragment } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Loader, RequireAuth } from "components";
+import { Loader, RequireAuth, RequireSession } from "components";
 import { Toaster } from "react-hot-toast";
 import {
   Contact,
@@ -133,8 +133,22 @@ const App = () => {
               </Route>
               <Route path="password-reset">
                 <Route index element={<PhoneNumberVerification />} />
-                <Route path="verify" element={<PasswordChangeVerification />} />
-                <Route path="reset" element={<PasswordReset />} />
+                <Route
+                  path="verify"
+                  element={
+                    <RequireSession>
+                      <PasswordChangeVerification />
+                    </RequireSession>
+                  }
+                />
+                <Route
+                  path="reset"
+                  element={
+                    <RequireSession>
+                      <PasswordReset />
+                    </RequireSession>
+                  }
+                />
               </Route>
             </Route>
 
@@ -151,7 +165,7 @@ const App = () => {
               <Route path="settings" element={<Settings />} />
               <Route path="wallet" element={<Wallet />} />
               <Route
-                path="oauth2/google/Tokens/redirect"
+                path="oauth2/google/Tok<PasswordChangeVerification />ens/redirect"
                 element={<GoogleRedirect />}
               />
               <Route
