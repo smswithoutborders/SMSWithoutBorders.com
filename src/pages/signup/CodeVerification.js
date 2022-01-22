@@ -31,24 +31,22 @@ const CodeVerification = () => {
 
     try {
       await verifySignup(data).unwrap();
-      toast.success(
-        "Success, Your account has been created \n You will be redirected to login soon"
-      );
+      toast.success("Success, Your account has been created \n please login");
       // remove any cached data
       clearCache();
       // clear validation creds in state
       dispatch(clearValidationCreds());
-
       // redirect user to login page
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
+      navigate("/login");
     } catch (error) {
       switch (error.status) {
         case 400:
           toast.error(
             "Something went wrong \n We are working to resolve this. Please try again"
           );
+          break;
+        case 401:
+          toast.error("Invalid code provided \n please try again");
           break;
         case 409:
           toast.error(
