@@ -27,6 +27,13 @@ export const API = createApi({
         body: credentials,
       }),
     }),
+    getProfile: builder.query({
+      query: (credentials) => ({
+        url: "/users/profiles/info",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     getDocs: builder.query({
       query: () => ({
         url: process.env.REACT_APP_DOCS_URL,
@@ -42,5 +49,6 @@ export const {
   useLoginMutation,
   useSignupMutation,
   useVerifySignupMutation,
+  useGetProfileQuery,
   useGetDocsQuery,
 } = API;
