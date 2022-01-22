@@ -34,6 +34,27 @@ export const API = createApi({
         body: credentials,
       }),
     }),
+    recoverPassword: builder.mutation({
+      query: (data) => ({
+        url: "/users/profiles/password/recovery",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    verifyRecoveryCode: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/profiles/password/recovery/2fa",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    newPassword: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/profiles/password/recovery/new",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     getDocs: builder.query({
       query: () => ({
         url: process.env.REACT_APP_DOCS_URL,
@@ -46,9 +67,12 @@ export const API = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
+  useGetDocsQuery,
   useLoginMutation,
   useSignupMutation,
-  useVerifySignupMutation,
   useGetProfileQuery,
-  useGetDocsQuery,
+  useNewPasswordMutation,
+  useVerifySignupMutation,
+  useRecoverPasswordMutation,
+  useVerifyRecoveryCodeMutation,
 } = API;

@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   svid: "",
   session_id: "",
+  auth_key: "",
 };
 
 export const validationSlice = createSlice({
@@ -11,11 +12,9 @@ export const validationSlice = createSlice({
   initialState,
   reducers: {
     saveValidationCreds: (state, action) => {
-      const { svid, session_id } = action.payload;
       return {
         ...state,
-        svid,
-        session_id,
+        ...action.payload,
       };
     },
     clearValidationCreds: (state) => {

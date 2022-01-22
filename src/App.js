@@ -17,6 +17,9 @@ import {
   TwitterRedirect,
   GoogleRedirect,
   SignupCodeVerification,
+  PhoneNumberVerification,
+  PasswordChangeVerification,
+  PasswordReset,
 } from "pages";
 import {
   getLocalState,
@@ -127,6 +130,11 @@ const App = () => {
               <Route path="sign-up">
                 <Route index element={<Signup />} />
                 <Route path="verify" element={<SignupCodeVerification />} />
+              </Route>
+              <Route path="password-reset">
+                <Route index element={<PhoneNumberVerification />} />
+                <Route path="verify" element={<PasswordChangeVerification />} />
+                <Route path="reset" element={<PasswordReset />} />
               </Route>
             </Route>
 

@@ -9,3 +9,4 @@ export { default as Settings } from "./Settings";
 export { default as Website } from "./Website";
 export * from "./Wallet";
 export * from "./signup";
+export * from "./password-reset";
