@@ -15,8 +15,10 @@ import {
   Wallet,
   NotFound,
   Website,
+  AccountDeletion,
   TwitterRedirect,
   GoogleRedirect,
+  PasswordChange,
   SignupCodeVerification,
   PhoneNumberVerification,
   PasswordChangeVerification,
@@ -81,7 +83,6 @@ const App = () => {
           >
             <Route index element={<Profile />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} />
             <Route path="wallet" element={<Wallet />} />
             <Route
               path="oauth2/google/Tokens/redirect"
@@ -91,6 +92,11 @@ const App = () => {
               path="oauth2/twitter/Tokens/redirect"
               element={<TwitterRedirect />}
             />
+            <Route path="settings" element={<Settings />}>
+              <Route index element={<PasswordChange />} />
+              <Route path="change-password" element={<PasswordChange />} />
+              <Route path="delete-account" element={<AccountDeletion />} />
+            </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

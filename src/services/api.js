@@ -55,6 +55,20 @@ export const API = createApi({
         body: credentials,
       }),
     }),
+    changePassword: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/password/new",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    deleteAccount: builder.mutation({
+      query: (credentials) => ({
+        url: "users/profiles/delete",
+        method: "DELETE",
+        body: credentials,
+      }),
+    }),
     storeToken: builder.mutation({
       query: (credentials) => ({
         url: "/users/tokens",
@@ -97,6 +111,8 @@ export const {
   useNewPasswordMutation,
   useTokenRevokeMutation,
   useVerifySignupMutation,
+  useDeleteAccountMutation,
+  useChangePasswordMutation,
   useRecoverPasswordMutation,
   useVerifyRecoveryCodeMutation,
 } = API;
