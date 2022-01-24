@@ -55,6 +55,27 @@ export const API = createApi({
         body: credentials,
       }),
     }),
+    storeToken: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/tokens",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    tokenRevoke: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/tokens/revoke",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    getProviders: builder.query({
+      query: (credentials) => ({
+        url: "/users/providers",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     getDocs: builder.query({
       query: () => ({
         url: process.env.REACT_APP_DOCS_URL,
@@ -71,7 +92,10 @@ export const {
   useLoginMutation,
   useSignupMutation,
   useGetProfileQuery,
+  useGetProvidersQuery,
+  useStoreTokenMutation,
   useNewPasswordMutation,
+  useTokenRevokeMutation,
   useVerifySignupMutation,
   useRecoverPasswordMutation,
   useVerifyRecoveryCodeMutation,

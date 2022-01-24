@@ -165,7 +165,7 @@ const App = () => {
               <Route path="settings" element={<Settings />} />
               <Route path="wallet" element={<Wallet />} />
               <Route
-                path="oauth2/google/Tok<PasswordChangeVerification />ens/redirect"
+                path="oauth2/google/Tokens/redirect"
                 element={<GoogleRedirect />}
               />
               <Route

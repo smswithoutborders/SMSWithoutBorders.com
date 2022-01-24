@@ -1,418 +1,372 @@
-import React, { useState, useEffect, Fragment } from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
-import gmailIcon from "images/gmail-icon.svg";
-import twitterIcon from "images/twitter-icon.svg";
-import {
-  getProviders,
-  getPlatformOauthToken,
-  revokeToken,
-} from "services/wallet.service";
-// import { Button, toaster, Dialog } from "evergreen-ui";
-import { FiSave, FiTrash2, FiChevronUp } from "react-icons/fi";
-import { IoWalletOutline } from "react-icons/io5";
-// import { Panel, Placeholder } from "rsuite";
-import { Disclosure } from "@headlessui/react";
-import {
-  ToggleButton,
-  Loader,
-  PageAnimationWrapper,
-  useTitle,
-} from "components";
-import { useAppContext } from "App";
+import React, { useState, Fragment } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-
-// const StoreButton = tw(Button)`rounded-md`;
-const StoreButton = tw.button`rounded-md`;
-const Heading = tw.h1`font-bold text-4xl mb-4 inline-flex items-center`;
-const Description = tw.p`mb-8 text-base md:text-lg leading-relaxed`;
-const PlatformTitle = tw.h4`text-lg font-medium`;
-const PlatformDescription = tw.p`mb-2`;
-const SubHeading = tw.h3`text-lg font-bold`;
-const Card = tw.div`h-full`;
-const Column = tw.div`p-4 md:w-1/2 w-full`;
-const Row = tw.div`flex flex-wrap -m-4 mt-12`;
-const Container = tw.div`container px-5 mx-auto py-12 lg:px-16 lg:py-24 text-gray-900 md:mb-48`;
-const StoreContainer = tw.div`flex flex-wrap items-center justify-between`;
-const Input = tw.input`relative w-full rounded-md py-2 px-3 mb-2 text-gray-700 border border-gray-400 hocus:border-primary-900`;
-const Label = tw.label`block font-light mb-2`;
+import gmailIcon from "images/gmail-icon.svg";
+import twitterIcon from "images/twitter-icon.svg";
+// import { Button, toaster, Dialog } from "evergreen-ui";
+import { FiSave, FiTrash2, FiChevronDown } from "react-icons/fi";
+import { IoWalletOutline } from "react-icons/io5";
+import { Disclosure } from "@headlessui/react";
+import {
+  Loader,
+  useTitle,
+  Button,
+  PageAnimationWrapper,
+  PasswordInput,
+} from "components";
+import { useSelector } from "react-redux";
+import { authSelector } from "features";
+import {
+  useGetProvidersQuery,
+  useStoreTokenMutation,
+  useTokenRevokeMutation,
+} from "services";
+import { Dialog } from "@headlessui/react";
 
 const Wallet = () => {
-  const { state } = useAppContext();
-  const { token, id } = state;
-  const [tokens, setTokens] = useState();
-  const [providers, setProviders] = useState();
+  useTitle("Wallet (Store Access)");
+
+  // used for token revoke
+  const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [revokedTokenDetails, setRevokedTokenDetails] = useState({
+  // save the platform to be revoked
+  const [details, setDetails] = useState({
     provider: "",
     platform: "",
   });
 
-  const [alert, setAlert] = useState({
-    loading: false,
-    platforms: true,
-    modal: false,
+  const auth = useSelector(authSelector);
+  // fetch providers with rtk query
+  const {
+    providers = {},
+    storedTokens = {},
+    isLoading,
+    isFetching,
+    isError,
+    refetch,
+  } = useGetProvidersQuery(auth, {
+    selectFromResult: ({ data }) => ({
+      providers: data?.default_provider,
+      storedTokens: data?.user_provider,
+    }),
   });
 
-  useTitle("Wallet (Store Access)");
+  // store token
+  const [storeToken, { isLoading: loadingB, isSuccess: successB }] =
+    useStoreTokenMutation();
+  // token revoke
+  const [tokenRevoke, { isLoading: loadingC, isSuccess: successC }] =
+    useTokenRevokeMutation();
 
-  useEffect(() => {
-    getProviders(id, token)
-      .then((response) => {
-        let tokens = response.data.user_provider;
-        let providers = response.data.default_provider;
-        if (providers.length) {
-          setProviders(providers);
-        }
-        if (tokens.length) {
-          setTokens(tokens);
-        }
-        setAlert({ platforms: false });
-      })
-      .catch((error) => {
-        if (error.response) {
-          toast.error(
-            "Request Error \n Sorry we could not process your request. Please check your network connection and try again"
-          );
-        } else if (error.request) {
-          setAlert({ loading: false });
-          toast.error(
-            "Network Error \n We could not fetch your tokens. Please check your network and reload this page"
-          );
-        } else {
-          toast.error(
-            "No Tokens \n You haven't stored any tokens. Please add them"
-          );
-        }
-        setAlert({ platforms: false });
-      });
-  }, [token, id]);
+  /*
+    when making requests show loading indicator
+    Also maintain after request is successfull to update background state
+  */
+  if (isLoading || isFetching || loadingB || successB || loadingC || successC) {
+    return <Loader />;
+  }
 
-  const getPlatformToken = (provider, platform) => {
-    setAlert({ loading: true });
-    getPlatformOauthToken(id, token, provider, platform)
-      .then((response) => {
-        //open authorization window
-        window.open(response.data.url, "_self");
-      })
-      .catch((error) => {
-        if (error.response) {
-          /*
-           * The request was made and the server responded with a
-           * status code that falls out of the range of 2xx
-           */
-          toast.error("An error occurred \n Please try again");
-        } else if (error.request) {
-          /*
-           * The request was made but no response was received, `error.request`
-           * is an instance of XMLHttpRequest in the browser and an instance
-           * of http.ClientRequest in Node.js
-           */
-          toast.error(
-            "Network Error \n Please Check your network connection and try again"
-          );
-        } else {
-          // Something happened in setting up the request and triggered an Error
-          toast.error("There are currently no stored Tokens");
-        }
-        setAlert({ loading: false });
-      });
-  };
+  if (isError) {
+    return (
+      <div className="p-8 my-24 prose">
+        <h2>An error occured</h2>
+        <p className="">
+          Sorry we could not get your providers and platforms. If error
+          persists, please contact support
+        </p>
+        <Button onClick={() => refetch()}>try again</Button>
+      </div>
+    );
+  }
 
-  const handleRevokeToken = (provider, platform) => {
-    setAlert({ loading: true });
-    revokeToken(id, token, password, provider, platform)
-      .then((response) => {
-        if (response.status === 200) {
-          setTokens(0);
-          toast.success(
-            "Token deleted successfully \n Please wait while we update your information"
-          );
-          setTimeout(() => {
-            window.location.reload();
-            setAlert({ loading: false });
-          }, 1500);
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          /*
-           * The request was made and the server responded with a
-           * status code that falls out of the range of 2xx
-           */
-          if (error.response.status === 401) {
-            setAlert({ loading: false });
-            toast.error("wrong password provided");
-          }
-        } else if (error.request) {
-          /*
-           * The request was made but no response was received, `error.request`
-           * is an instance of XMLHttpRequest in the browser and an instance
-           * of http.ClientRequest in Node.js
-           */
-          setAlert({ loading: false });
+  async function handleTokenStorage(provider, platform) {
+    // build request body
+    let data = {
+      ...auth,
+      provider,
+      platform,
+    };
+
+    try {
+      const response = await storeToken(data).unwrap();
+      //open authorization window
+      window.open(response.url, "_self");
+    } catch (error) {
+      switch (error.status) {
+        case 400:
           toast.error(
-            "Network Error \n Its an issue on our end. Please check your network and reload this page and try again"
+            "Something went wrong \n We are working to resolve this. Please try again"
           );
-        } else {
-          // Something hinfoappened in setting up the request and triggered an Error
-          setAlert({ loading: false });
+          break;
+        case 401:
+          toast.error(
+            "Forbidden, Account is unauthorized. \n check your phonenumber and password"
+          );
+          break;
+        case 409:
+          toast.error(
+            "There is a possible duplicate of this account please contact support"
+          );
+          break;
+        case 429:
+          toast.error(
+            "Too many failed attempts please wait a while and try again"
+          );
+          break;
+        case 500:
+          toast.error("A critical error occured. Please contact support");
+          break;
+        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
+        case "FETCH_ERROR":
+          toast.error("An error occured, please check your network try again");
+          break;
+        default:
           toast.error("An error occured, please try again");
-        }
-      });
-  };
+      }
+    }
+  }
 
-  if (alert.loading) return <Loader />;
+  async function handleTokenRevoke() {
+    // build request body
+    let data = {
+      ...auth,
+      ...details,
+      password: password,
+    };
+
+    try {
+      await tokenRevoke(data).unwrap();
+      toast.success(
+        "Token deleted successfully \n Please wait while we update your information"
+      );
+      // reload providers
+      refetch();
+    } catch (error) {
+      switch (error.status) {
+        case 400:
+          toast.error(
+            "Something went wrong \n We are working to resolve this. Please try again"
+          );
+          break;
+        case 401:
+          toast.error("wrong password provided");
+          break;
+        case 409:
+          toast.error(
+            "There is a possible duplicate of this account please contact support"
+          );
+          break;
+        case 429:
+          toast.error(
+            "Too many failed attempts please wait a while and try again"
+          );
+          break;
+        case 500:
+          toast.error("A critical error occured. Please contact support");
+          break;
+        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
+        case "FETCH_ERROR":
+          toast.error("An error occured, please check your network try again");
+          break;
+        default:
+          toast.error("An error occured, please try again");
+      }
+    }
+  }
 
   return (
     <PageAnimationWrapper>
-      <Container>
-        <Heading>
+      <div className="max-w-screen-xl p-8 mx-auto my-20 prose text-gray-900">
+        <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
           <IoWalletOutline /> &nbsp; Wallet
-        </Heading>
-        <Description>Save your tokens for rainy days</Description>
+        </h1>
+        <p className="my-0 text-lg">Save your tokens for rainy days</p>
 
-        <Row>
-          <Column>
-            {alert.platforms ? (
-              //   <Paragraph style={{ marginTop: 30 }} rows={5} active />
-              <p>Loading platforms ...</p>
+        <div className="flex flex-col lg:flex-row justify-evenly">
+          <div className="w-full p-4 lg:w-1/2">
+            <h2>Providers</h2>
+            {Object.keys(providers).length ? (
+              <Fragment>
+                {providers.map((item) => (
+                  <Disclosure key={item?.provider}>
+                    {({ open }) => (
+                      <Fragment>
+                        <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
+                          <div className="flex flex-row items-center">
+                            <img
+                              src={
+                                item?.provider === "google"
+                                  ? gmailIcon
+                                  : twitterIcon
+                              }
+                              alt={`${item.provider} logo`}
+                              className="w-8 h-8 my-0 mr-4"
+                            />
+                            <h3 className="my-0 font-normal capitalize">
+                              {item?.provider}
+                            </h3>
+                          </div>
+                          <FiChevronDown
+                            className={clsx(
+                              "w-5 h-5 text-blue-800",
+                              open && "transform rotate-180"
+                            )}
+                          />
+                        </Disclosure.Button>
+                        <Disclosure.Panel className="p-4 mb-4 shadow">
+                          <p>
+                            Store your {item?.provider} token which will be used
+                            for authentication on your behalf in the event of an
+                            internet shutdown.
+                          </p>
+                          <p>
+                            You can define how this token will be used by
+                            setting the scopes of access
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h4>Description</h4>
+                              <p>{item?.description}</p>
+
+                              <h4>Platform</h4>
+                              <p>{item?.platforms[0].name}</p>
+
+                              <h4>Type</h4>
+                              <p>{item?.platforms[0].type}</p>
+                            </div>
+                            <Button
+                              onClick={() =>
+                                handleTokenStorage(
+                                  item?.provider,
+                                  item?.platforms[0].name
+                                )
+                              }
+                            >
+                              <FiSave /> &nbsp; store
+                            </Button>
+                          </div>
+                        </Disclosure.Panel>
+                      </Fragment>
+                    )}
+                  </Disclosure>
+                ))}
+              </Fragment>
             ) : (
-              <Card>
-                <SubHeading>Providers</SubHeading>
-                <br />
-                {providers ? (
-                  <Fragment>
-                    {providers.map((item) => (
-                      <Disclosure key={item?.provider}>
-                        {({ open }) => (
-                          <Fragment>
-                            <Disclosure.Button className="flex justify-between w-full px-4 py-2 mb-3 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg shadow-md hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <div className="flex flex-row items-center">
-                                <img
-                                  src={
-                                    item?.provider === "google"
-                                      ? gmailIcon
-                                      : twitterIcon
-                                  }
-                                  alt={`${item.provider} logo`}
-                                  height={28}
-                                  width={28}
-                                  className="mr-2"
-                                />
-                                <PlatformTitle> {item?.provider}</PlatformTitle>
-                              </div>
-                              <FiChevronUp
-                                className={clsx(
-                                  "w-5 h-5 text-blue-800",
-                                  open && "transform rotate-180"
-                                )}
-                              />
-                            </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                              <p>
-                                Store your {item?.provider} token which will be
-                                used for authentication on your behalf in the
-                                event of an internet shutdown.
-                              </p>
-                              <br />
-                              <p>
-                                You can define how this token will be used by
-                                setting the scopes of access
-                              </p>
-                              <br />
-                              <StoreContainer>
-                                <div>
-                                  <PlatformTitle>Description</PlatformTitle>
-                                  <PlatformDescription>
-                                    {item?.description}
-                                  </PlatformDescription>
-
-                                  <PlatformTitle>Platform</PlatformTitle>
-                                  <PlatformDescription>
-                                    {item?.platforms[0].name}
-                                  </PlatformDescription>
-
-                                  <PlatformTitle>Type</PlatformTitle>
-                                  <PlatformDescription>
-                                    {item?.platforms[0].type}
-                                  </PlatformDescription>
-                                </div>
-                                <StoreButton
-                                  type="submit"
-                                  appearance="primary"
-                                  height={40}
-                                  iconBefore={FiSave}
-                                  isLoading={alert.loading}
-                                  onClick={() =>
-                                    getPlatformToken(
-                                      item?.provider,
-                                      item?.platforms[0].name
-                                    )
-                                  }
-                                >
-                                  <span>
-                                    {alert.loading ? "Storing" : "Store"}
-                                  </span>
-                                </StoreButton>
-                              </StoreContainer>
-                            </Disclosure.Panel>
-                          </Fragment>
-                        )}
-                      </Disclosure>
-                    ))}
-                  </Fragment>
-                ) : (
-                  <p>No available providers</p>
-                )}
-              </Card>
+              <p>No available providers</p>
             )}
-          </Column>
-          <Column>
-            {alert.platforms ? (
-              //   <Paragraph style={{ marginTop: 30 }} rows={5} active />
-              <p>Loading platforms ...</p>
+          </div>
+          <div className="w-full p-4 lg:w-1/2">
+            <h2>Stored tokens</h2>
+            {Object.keys(storedTokens).length ? (
+              <Fragment>
+                {storedTokens.map((item) => (
+                  <Disclosure key={item?.provider}>
+                    {({ open }) => (
+                      <Fragment>
+                        <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
+                          <div className="flex flex-row items-center">
+                            <img
+                              src={
+                                item?.provider === "google"
+                                  ? gmailIcon
+                                  : twitterIcon
+                              }
+                              alt={`${item.provider} logo`}
+                              className="w-8 h-8 my-0 mr-4"
+                            />
+                            <h3 className="my-0 font-normal capitalize">
+                              {item?.provider}
+                            </h3>
+                          </div>
+                          <FiChevronDown
+                            className={clsx(
+                              "w-5 h-5 text-blue-800",
+                              open && "transform rotate-180"
+                            )}
+                          />
+                        </Disclosure.Button>
+                        <Disclosure.Panel className="p-4 mb-4 shadow">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h4>Description</h4>
+                              <p>{item?.description}</p>
+                              <h4>Platform</h4>
+                              <p>{item?.platforms[0].name}</p>
+                              {item?.email && (
+                                <Fragment>
+                                  <h4>Email address</h4>
+                                  <p>{item?.email}</p>
+                                </Fragment>
+                              )}
+                              {item?.screen_name && (
+                                <Fragment>
+                                  <h4>Screen Name</h4>
+                                  <p>{item?.screen_name}</p>
+                                </Fragment>
+                              )}
+                            </div>
+                            <Button
+                              className="bg-red-500 hover:bg-red-700"
+                              onClick={() => {
+                                setDetails({
+                                  provider: item?.provider,
+                                  platform: item?.platforms[0].name,
+                                });
+                                setIsOpen(true);
+                              }}
+                            >
+                              <FiTrash2 /> &nbsp; revoke
+                            </Button>
+                          </div>
+                        </Disclosure.Panel>
+                      </Fragment>
+                    )}
+                  </Disclosure>
+                ))}
+              </Fragment>
             ) : (
-              <Card>
-                <SubHeading>Saved tokens</SubHeading>
-                <br />
-                {tokens ? (
-                  <Fragment>
-                    {tokens.map((item) => (
-                      <Disclosure key={item?.provider}>
-                        {({ open }) => (
-                          <Fragment>
-                            <Disclosure.Button className="flex justify-between w-full px-4 py-2 mb-3 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg shadow-md hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                              <div tw="flex flex-row items-center">
-                                <img
-                                  src={
-                                    item?.provider === "google"
-                                      ? gmailIcon
-                                      : twitterIcon
-                                  }
-                                  alt={`${item.provider} logo`}
-                                  height={28}
-                                  width={28}
-                                  tw="mr-2"
-                                />
-                                <PlatformTitle> {item?.provider}</PlatformTitle>
-                              </div>
-
-                              <FiChevronUp
-                                className={clsx(
-                                  "w-5 h-5 text-blue-800",
-                                  open && "transform rotate-180"
-                                )}
-                              />
-                            </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                              <StoreContainer>
-                                <div>
-                                  <PlatformTitle>Description</PlatformTitle>
-                                  <PlatformDescription>
-                                    {item?.description}
-                                  </PlatformDescription>
-
-                                  <PlatformTitle>Platform</PlatformTitle>
-                                  <PlatformDescription>
-                                    {item?.platforms[0].name}
-                                  </PlatformDescription>
-
-                                  {item?.email && (
-                                    <>
-                                      <PlatformTitle>
-                                        Email address
-                                      </PlatformTitle>
-                                      <PlatformDescription>
-                                        {item?.email}
-                                      </PlatformDescription>
-                                    </>
-                                  )}
-
-                                  {item?.screen_name && (
-                                    <>
-                                      <PlatformTitle>Screen Name</PlatformTitle>
-                                      <PlatformDescription>
-                                        {item?.screen_name}
-                                      </PlatformDescription>
-                                    </>
-                                  )}
-                                </div>
-                                <StoreButton
-                                  type="submit"
-                                  appearance="primary"
-                                  intent="danger"
-                                  height={40}
-                                  disabled={id ? false : true}
-                                  iconBefore={FiTrash2}
-                                  isLoading={alert.loading}
-                                  onClick={() => {
-                                    setRevokedTokenDetails({
-                                      provider: item?.provider,
-                                      platform: item?.platforms[0].name,
-                                    });
-                                    setAlert({ modal: true });
-                                  }}
-                                >
-                                  <span>
-                                    {alert.loading ? "Revoking" : "Revoke"}
-                                  </span>
-                                </StoreButton>
-                              </StoreContainer>
-                            </Disclosure.Panel>
-                          </Fragment>
-                        )}
-                      </Disclosure>
-                    ))}
-                  </Fragment>
-                ) : (
-                  <p>No stored tokens</p>
-                )}
-              </Card>
+              <p>No stored tokens</p>
             )}
-          </Column>
-        </Row>
-      </Container>
-
-      {/* <Dialog
-        isShown={alert.modal}
-        title="Confirm action"
-        intent="danger"
-        hasClose={false}
-        shouldCloseOnOverlayClick={false}
-        shouldCloseOnEscapePress={false}
-        isConfirmDisabled={password.length > 8 ? false : true}
-        onConfirm={() =>
-          handleRevokeToken(
-            revokedTokenDetails.provider,
-            revokedTokenDetails.platform
-          )
-        }
-        onCloseComplete={() => setAlert({ modal: false })}
-        confirmLabel="confirm revoke"
-      >
-        <h4 tw="text-xl font-medium">
-          Are you sure you want to delete this token from your account? This
-          cannot be reversed
-        </h4>
-        <br />
-        <p>Please enter you password to Confirm </p>
-        <br />
-        <Label>Password</Label>
-        <div tw="relative">
-          <Input
-            type={toggle ? "text" : "password"}
-            placeholder="Password"
-            inputHeight={40}
-            required
-            minLength="8"
-            onChange={(evt) => setPassword(evt.target.value)}
-          />
-          <ToggleButton toggleFunc={setToggle} value={toggle} />
+          </div>
         </div>
-      </Dialog> */}
+      </div>
+
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="absolute inset-0 z-10 p-4 overflow-y-auto"
+      >
+        <div className="flex items-center justify-center min-h-screen">
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+
+          <div className="relative max-w-xl p-6 mx-auto prose bg-white rounded-lg">
+            <Dialog.Title>Revoke Token</Dialog.Title>
+            <Dialog.Description>
+              This will permanently remove this token from your account and
+              cannot be reversed. Enter your password to Confirm
+            </Dialog.Description>
+
+            <PasswordInput
+              placeholder="Password"
+              minLength="8"
+              onChange={(evt) => setPassword(evt.target.value)}
+            />
+
+            <div className="flex items-center justify-end mt-8">
+              <Button outline onClick={() => setIsOpen(false)}>
+                cancel
+              </Button>
+              <Button
+                className="ml-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300"
+                disabled={password.length > 8 ? false : true}
+                onClick={() => handleTokenRevoke()}
+              >
+                confirm revoke
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Dialog>
     </PageAnimationWrapper>
   );
 };
