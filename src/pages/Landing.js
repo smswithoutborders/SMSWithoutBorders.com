@@ -1,10 +1,11 @@
 import React from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
 import phone from "images/phone.png";
 import swobflow from "images/swobflow.gif";
-
 import { PageAnimationWrapper } from "components";
+import { DiOpensource } from "react-icons/di";
+import { IoAccessibility, IoLogoGooglePlaystore } from "react-icons/io5";
+import { GiCheckboxTree } from "react-icons/gi";
+import { GoMarkGithub } from "react-icons/go";
 import {
   FiUserPlus,
   FiLogIn,
@@ -12,193 +13,194 @@ import {
   FiShield,
   FiSave,
 } from "react-icons/fi";
-import { DiOpensource } from "react-icons/di";
-import {
-  IoAccessibility,
-  IoLogoGooglePlaystore as PlayStore,
-} from "react-icons/io5";
-import { GiCheckboxTree } from "react-icons/gi";
-import { GoMarkGithub } from "react-icons/go";
-
-const Container = tw.section`px-8 mx-auto text-gray-900`;
-const TextContainer = tw.div`flex-grow sm:text-left text-center mt-6 sm:mt-0`;
-const SectionContainer = tw.section`mx-auto flex px-8 py-12 md:flex-row flex-col items-center bg-primary-200`;
-const ImageContainer = tw.div`md:w-1/2 mb-10 md:mb-0`;
-const DetailsContainer = tw.div`md:w-1/2 p-2 flex flex-col md:-ml-10 mb-12 items-start order-first md:order-last`;
-const Heading = tw.h1`font-black text-3xl sm:text-5xl mb-8  text-gray-900 tracking-wide leading-relaxed`;
-const SubHeading = tw.h2`text-gray-900 text-base md:text-xl font-bold mb-2 leading-relaxed`;
-const Description = tw.h3`text-lg leading-relaxed text-gray-800 mb-5 font-normal`;
-const Image = tw.img`block mx-auto shadow-lg rounded-2xl transform h-[500px] w-[280px] md:(-rotate-25 mt-8 -mb-24 w-[300px] h-[580px])`;
-const DescItem = tw.div`flex items-center mx-auto pb-10 border-gray-200 sm:flex-row flex-col`;
-const IconBlock = tw.div`sm:w-32 sm:h-32 h-24 w-24 inline-flex items-center justify-center rounded-full bg-white shadow-xl text-primary-800 flex-shrink-0`;
-const Text = tw.p`leading-relaxed text-base`;
-const Column = tw.div`w-full`;
-const Row = tw.div`w-full`;
-const ButtonGroup = tw.div`flex flex-row w-full mt-4`;
-const Button = tw.a`inline-flex items-center justify-center mr-2 px-4 py-2 mb-4 md:mr-4 rounded-lg bg-white text-gray-800 font-bold hocus:(shadow-xl no-underline text-gray-900) appearance-none`;
 
 const Landing = () => {
   return (
     <PageAnimationWrapper>
-      <SectionContainer>
-        <ImageContainer>
-          <Image src={phone} alt="SWOB mobile" />
-        </ImageContainer>
-        <DetailsContainer>
-          <Heading>Stay Productive</Heading>
-          <Description>
-            In this age of communication, keep in touch with your contacts
-            across the internet without access to an active internet connection.
-            Store your access to your favourite communications platforms while
-            online, use them while offline.
-          </Description>
-          <ButtonGroup>
-            <Button
-              href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b"
-              target="_blank"
-            >
-              <PlayStore size={28} />
-              <div tw="ml-2">
-                <small tw="font-light text-xs md:text-base">Get SWOB</small>
-                <p>Play Store</p>
-              </div>
-            </Button>
-            <Button
-              href="https://github.com/smswithoutborders/SMSwithoutBorders-Android/releases"
-              target="_blank"
-            >
-              <GoMarkGithub size={28} />
-              <div tw="ml-2">
-                <small tw="font-light text-xs md:text-base">Get SWOB</small>
-                <p>Github</p>
-              </div>
-            </Button>
-          </ButtonGroup>
-        </DetailsContainer>
-      </SectionContainer>
+      <div className="w-full bg-primary-200 lg:py-10">
+        <div className="container grid max-w-screen-xl grid-cols-2 mx-auto prose place-items-center">
+          <div className="col-span-full lg:col-span-1">
+            <img
+              src={phone}
+              className="h-[550px] w-[280px] mx-auto lg:-rotate-25"
+              alt="SMSwithoutborders App"
+            />
+          </div>
+          <div className="order-first p-8 col-span-full lg:col-span-1 md:order-last">
+            <h1>Stay Productive</h1>
+            <p>
+              In this age of communication, keep in touch with your contacts
+              across the internet without access to an active internet
+              connection. Store your access to your favourite communications
+              platforms while online, use them while offline.
+            </p>
+            <div className="flex flex-row justify-start w-full mt-4">
+              <a
+                className="inline-flex items-center justify-center px-4 py-2 mb-4 mr-2 font-bold no-underline bg-white rounded-lg appearance-none md:mr-4 hover:shadow-xl"
+                href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IoLogoGooglePlaystore size={28} />
+                <div className="ml-2">
+                  <small className="my-0 text-xs font-light md:text-base">
+                    Get SWOB
+                  </small>
+                  <p className="my-0">Play Store</p>
+                </div>
+              </a>
+              <a
+                className="inline-flex items-center justify-center px-4 py-2 mb-4 font-bold no-underline bg-white rounded-lg appearance-none md:mr-4 hover:shadow-xl"
+                href="https://github.com/smswithoutborders/SMSwithoutBorders-Android/releases"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <GoMarkGithub size={28} />
+                <div className="ml-2">
+                  <small className="my-0 text-xs font-light md:text-base">
+                    Get SWOB
+                  </small>
+                  <p className="my-0">Github</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <Container>
-        <Row tw="pt-20 pb-12">
-          <Heading tw="text-center">How it works</Heading>
-          <SubHeading tw="text-center font-normal">
-            Using SWOB is as easy as authenticating your credentials
-          </SubHeading>
-        </Row>
-
-        <Row tw="flex flex-col md:flex-row mb-16">
-          <Column tw="md:w-1/2 md:pl-20">
-            <DescItem>
-              <IconBlock tw="sm:mr-10">
-                <FiUserPlus size={48} />
-              </IconBlock>
-              <TextContainer>
-                <SubHeading>Sign Up </SubHeading>
-                <Text>Signup for a SWOB account</Text>
-              </TextContainer>
-            </DescItem>
-            <DescItem>
-              <IconBlock tw="sm:mr-10">
-                <FiSave size={48} />
-              </IconBlock>
-              <TextContainer>
-                <SubHeading>Goto Wallet, </SubHeading>
-                <Text>
+      <div className="w-full bg-white">
+        <div className="container grid max-w-screen-xl grid-cols-2 mx-auto prose place-items-center">
+          <div className="px-8 text-center col-span-full">
+            <h2 className="text-4xl font-black">How it works</h2>
+            <p className="">
+              Using SWOB is as easy as authenticating your credentials
+            </p>
+          </div>
+          <div className="p-8 col-span-full lg:col-span-1">
+            <div className="flex items-center ml-auto">
+              <div className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl">
+                <FiUserPlus className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+              <div className="">
+                <h3>Sign Up </h3>
+                <p>Signup for a SWOB account</p>
+              </div>
+            </div>
+            <div className="flex items-center ml-auto">
+              <div className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl">
+                <FiSave className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+              <div className="">
+                <h3>Goto Wallet, </h3>
+                <p>
                   select and store the platform for which you want access for
                   later offline uses
-                </Text>
-              </TextContainer>
-            </DescItem>
-            <DescItem>
-              <IconBlock tw="sm:mr-10">
-                <FiDownload size={48} />
-              </IconBlock>
-              <TextContainer>
-                <SubHeading>Get the SWOB app from the Playstore</SubHeading>
-                <Text>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center ml-auto">
+              <div className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl">
+                <FiDownload className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+              <div className="">
+                <h3>Get the SWOB app from the Playstore</h3>
+                <p>
                   Goto your SWOB profile online and click on Sync. Use your SWOB
                   app to scan your QR code
-                </Text>
-              </TextContainer>
-            </DescItem>
-            <DescItem>
-              <IconBlock tw="sm:mr-10">
-                <FiLogIn size={48} />
-              </IconBlock>
-              <TextContainer>
-                <SubHeading>Use App</SubHeading>
-                <Text>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center ml-auto">
+              <div className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl">
+                <FiLogIn className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+              <div className="">
+                <h3>Use App</h3>
+                <p>
                   Enter your password in the app and begin transmitting messages
                   while offline using SMS messages
-                </Text>
-              </TextContainer>
-            </DescItem>
-          </Column>
-
-          <Column tw="md:w-1/2 grid place-items-center ">
-            <Image tw="md:rotate-0" src={swobflow} alt="How swob works" />
-          </Column>
-        </Row>
-      </Container>
-
-      <Container tw="bg-gray-100">
-        <div tw="py-16">
-          <Heading tw="text-center">Why use SWOB?</Heading>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-span-full lg:col-span-1">
+            <img
+              src={swobflow}
+              className="h-[550px] w-[280px] mx-auto"
+              alt="How swob works"
+            />
+          </div>
         </div>
-        <Column tw="lg:w-3/5 mx-auto">
-          <DescItem>
-            <IconBlock tw="sm:mr-10">
-              <IoAccessibility size={48} />
-            </IconBlock>
-            <TextContainer>
-              <SubHeading>Accessibility </SubHeading>
-              <Text>
-                SWOB’s mobile app allows users to have offline communication
-                wherever they are. With as simple as having an SMS message
-                smartphone you can maintain communications with your online
-                platforms
-              </Text>
-            </TextContainer>
-          </DescItem>
-          <DescItem>
-            <TextContainer>
-              <SubHeading>Security</SubHeading>
-              <Text>
-                SWOB transmits messages in securely encrypted formats. This
-                secures every communication from being accessed by intermediate
-                parties while in transit.
-              </Text>
-            </TextContainer>
-            <IconBlock tw="sm:ml-10 sm:order-none order-first  ">
-              <FiShield size={48} />
-            </IconBlock>
-          </DescItem>
-          <DescItem>
-            <IconBlock tw="sm:mr-10">
-              <DiOpensource size={64} />
-            </IconBlock>
-            <TextContainer>
-              <SubHeading>Open source</SubHeading>
-              <Text>
-                Every component of SWOB is open sourced! From the mobile app to
-                the routing mechanisms we use to get your SMS messages to reach
-                your intended platforms.
-              </Text>
-            </TextContainer>
-          </DescItem>
-          <DescItem>
-            <TextContainer>
-              <SubHeading>Decentralized</SubHeading>
-              <Text>
-                SWOB is built to work in decentralized models. Anyone can host a
-                SWOB server. It’s as easy as understanding how to use it
-              </Text>
-            </TextContainer>
-            <IconBlock tw="sm:ml-10 sm:order-none order-first  ">
-              <GiCheckboxTree size={48} />
-            </IconBlock>
-          </DescItem>
-        </Column>
-      </Container>
+      </div>
+
+      <div className="w-full py-10 bg-gray-100">
+        <div className="container max-w-screen-xl p-8 mx-auto prose">
+          <h2 className="text-4xl font-black text-center">Why use SWOB?</h2>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <div
+                className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:mr-10"
+              >
+                <IoAccessibility className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+              <div className="">
+                <h3>Accessibility</h3>
+                <p>
+                  SWOB’s mobile app allows users to have offline communication
+                  wherever they are. With as simple as having an SMS message
+                  smartphone you can maintain communications with your online
+                  platforms
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="">
+                <h3>Security</h3>
+                <p>
+                  SWOB transmits messages in securely encrypted formats. This
+                  secures every communication from being accessed by
+                  intermediate parties while in transit.
+                </p>
+              </div>
+              <div
+                className="order-first p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:ml-10 sm:order-none"
+              >
+                <FiShield className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div
+                className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:mr-10"
+              >
+                <DiOpensource className="w-7 h-7 lg:w-12 lg:h-12" />
+              </div>
+              <div className="">
+                <h3>Open source</h3>
+                <p>
+                  Every component of SWOB is open sourced! From the mobile app
+                  to the routing mechanisms we use to get your SMS messages to
+                  reach your intended platforms.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="">
+                <h3>Decentralized</h3>
+                <p>
+                  SWOB is built to work in decentralized models. Anyone can host
+                  a SWOB server. It’s as easy as understanding how to use it
+                </p>
+              </div>
+              <div
+                className="order-first p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:ml-10 sm:order-none"
+              >
+                <GiCheckboxTree className="w-7 h-7 lg:w-10 lg:h-10" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </PageAnimationWrapper>
   );
 };

@@ -22,8 +22,8 @@ const SignUpLink = tw(NavLink)`bg-primary-800 text-white`;
 const LogInLink = tw(NavLink)`text-primary-800`;
 const UserActions = tw.div`lg:(flex items-center)`;
 const NavContainer = tw.div`lg:flex`;
-const MobileNav = tw.nav`lg:hidden z-50 bg-white sticky top-0`;
-const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white h-16`;
+const MobileNav = tw.nav`lg:hidden z-50 bg-white sticky top-0 shadow-lg`;
+const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white h-16 shadow-lg`;
 
 export const MainNavbar = () => {
   const [open, setOpen] = useState(false);

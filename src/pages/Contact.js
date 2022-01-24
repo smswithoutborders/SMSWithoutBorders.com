@@ -1,61 +1,60 @@
 import React from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
 import { FiMail, FiGlobe, FiMessageSquare } from "react-icons/fi";
 import { PageAnimationWrapper } from "components";
-
-const Container = tw.section`md:px-8 mx-auto text-gray-900 h-screen md:pt-24`;
-const TextContainer = tw.div`flex-grow text-left mt-6 sm:mt-0`;
-const Heading = tw.h1`font-black text-4xl sm:text-5xl mb-8  text-gray-900`;
-const SubHeading = tw.h2`text-gray-900 text-sm md:text-base mb-2 leading-relaxed font-bold`;
-const DescItem = tw.div`flex flex-row items-center pb-5 border-gray-200 lg:mx-auto `;
-const IconBlock = tw.div`h-16 w-16 mr-2 sm:mr-4 inline-flex items-center justify-center rounded-full bg-white shadow-xl text-primary-900 flex-shrink-0`;
-const Text = tw.p`leading-relaxed text-sm md:text-base`;
-const Column = tw.div`mx-auto h-full flex flex-col lg:flex-row items-start px-4`;
-const Row = tw.div`w-full`;
 
 const Contact = () => {
   return (
     <PageAnimationWrapper>
-      <Container>
-        <Row tw="pt-20 pb-12">
-          <Heading tw="text-center">Contact Us</Heading>
-          <SubHeading tw="text-center font-normal">
+      <div className="max-w-screen-xl p-6 mx-auto my-10 prose text-gray-900 lg:mt-20 md:p-8">
+        <div className="lg:text-center">
+          <h1 className="">Contact Us</h1>
+          <p className="">
             Using SWOB is as easy as authenticating your credentials
-          </SubHeading>
-        </Row>
+          </p>
+        </div>
 
-        <Column>
-          <DescItem>
-            <IconBlock>
-              <FiMail size={28} />
-            </IconBlock>
-
-            <TextContainer>
-              <Text>Email</Text>
-              <SubHeading>developers@smswithoutborders.com </SubHeading>
-            </TextContainer>
-          </DescItem>
-          <DescItem>
-            <IconBlock>
-              <FiMessageSquare size={28} />
-            </IconBlock>
-            <TextContainer>
-              <Text>IRC</Text>
-              <SubHeading>freenode/#afkanerd</SubHeading>
-            </TextContainer>
-          </DescItem>
-          <DescItem>
-            <IconBlock>
-              <FiGlobe size={28} />
-            </IconBlock>
-            <TextContainer>
-              <Text>website</Text>
-              <SubHeading>https://smswithoutborders.com</SubHeading>
-            </TextContainer>
-          </DescItem>
-        </Column>
-      </Container>
+        <div className="w-full my-10 lg:flex lg:justify-evenly lg:items-center">
+          <div className="flex items-center my-8">
+            <div className="mr-2 text-blue-800 lg:mr-4">
+              <FiMail className="w-7 h-7 lg:w-10 lg:h-10" />
+            </div>
+            <div className="">
+              <p className="my-0">Email</p>
+              <h4 className="my-0">
+                <a href="mailto:developers@smswithoutborders.com">
+                  developers@smswithoutborders.com
+                </a>
+              </h4>
+            </div>
+          </div>
+          <div className="flex items-center my-8">
+            <div className="mr-2 text-blue-800 lg:mr-4">
+              <FiMessageSquare className="w-7 h-7 lg:w-10 lg:h-10" />
+            </div>
+            <div className="">
+              <p className="my-0">IRC</p>
+              <h4 className="my-0">freenode/#afkanerd</h4>
+            </div>
+          </div>
+          <div className="flex items-center my-8">
+            <div className="mr-2 text-blue-800 lg:mr-4">
+              <FiGlobe className="w-7 h-7 lg:w-10 lg:h-10" />
+            </div>
+            <div className="">
+              <p className="my-0">website</p>
+              <h4 className="my-0">
+                <a
+                  href="https://smswithoutborders.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  https://smswithoutborders.com
+                </a>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
     </PageAnimationWrapper>
   );
 };

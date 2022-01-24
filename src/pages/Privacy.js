@@ -13,7 +13,7 @@ const Privacy = () => {
   } = useGetDocsQuery();
 
   if (isLoading || isFetching) {
-    return <Loader message="fetching docs ..." />;
+    return <Loader />;
   }
 
   if (isError) {
@@ -21,8 +21,8 @@ const Privacy = () => {
       <div className="p-8 py-12 prose">
         <h3>An error occured</h3>
         <p className="">
-          Sorry we could not get the latest docs. If error persists, please
-          contact support
+          Sorry we could not load the most recent privacy page. If error
+          persists, please contact support
         </p>
         <Button onClick={() => refetch()}>reload</Button>
       </div>
@@ -30,7 +30,7 @@ const Privacy = () => {
   }
   return (
     <PageAnimationWrapper>
-      <div className="p-8 py-12 mx-auto prose max-w-max">
+      <div className="max-w-screen-xl p-6 mx-auto my-10 prose text-gray-900 md:p-8">
         <ReactMarkdown>{data}</ReactMarkdown>
       </div>
     </PageAnimationWrapper>

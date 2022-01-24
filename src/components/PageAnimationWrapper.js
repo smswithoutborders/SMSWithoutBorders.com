@@ -5,7 +5,7 @@ export const PageAnimationWrapper = ({ children }) => {
   const x = { target: "0%", initial: "-150%" };
   return (
     <motion.div
-      className="min-h-screen font-display"
+      className="font-display"
       initial={{ x: x.initial }}
       animate={{
         x: x.target,
