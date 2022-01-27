@@ -15,15 +15,15 @@ export const API = createApi({
     }),
     signup: builder.mutation({
       query: (credentials) => ({
-        url: "/users/profiles/register",
+        url: "/signup",
         method: "POST",
         body: credentials,
       }),
     }),
     verifySignup: builder.mutation({
       query: (credentials) => ({
-        url: "/users/profiles/register/2fa",
-        method: "POST",
+        url: "/signup",
+        method: "PUT",
         body: credentials,
       }),
     }),
