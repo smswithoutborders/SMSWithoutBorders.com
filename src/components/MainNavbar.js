@@ -74,10 +74,10 @@ export const MainNavbar = () => {
 
   const actionLinks = (
     <UserActions key={2}>
-      <LogInLink key="login" to="/login">
+      <LogInLink key="login" to="/login" onClick={() => toggleMenu()}>
         <FiLogIn size={20} /> &nbsp; Log In
       </LogInLink>
-      <SignUpLink key="sign-up" to="/sign-up">
+      <SignUpLink key="sign-up" to="/sign-up" onClick={() => toggleMenu()}>
         <FiUserPlus size={20} /> &nbsp; Sign Up
       </SignUpLink>
     </UserActions>
