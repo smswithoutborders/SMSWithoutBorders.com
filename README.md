@@ -12,12 +12,12 @@ npm install
 
 ### Set env variables
 
-Create dev and production .env configs from the example.env template
+Create dev and production .env configs from the env.example template
 
 ```bash
-cp example.env .env.development.local
+cp env.example .env.development.local
 
-cp example.env .env.production.local
+cp env.example .env.production.local
 
 ```
 
