@@ -10,7 +10,7 @@ import { profileSelector, resetStore } from "features";
 import { useSelector, useDispatch } from "react-redux";
 import { FiMenu, FiX, FiLogOut, FiUser, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
-import { clearCache } from "services";
+import { clearCache, clearPersistedState } from "services";
 import toast from "react-hot-toast";
 
 const NavLink = tw(
@@ -45,6 +45,7 @@ export const Navbar = () => {
     dispatch(resetStore());
     // clear local cache if any
     clearCache();
+    clearPersistedState();
     toast.success("Logout successfull");
   }
 

@@ -14,17 +14,30 @@ export const clearCache = () => {
 };
 
 /*
- used for persisting state after window refresh
-check utils/persist for implementation
+ used for persisting state with sessionStorage
+ https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage
 */
-export const setLocalState = (state) => {
-  sessionStorage.setItem("SWOBSTORE", JSON.stringify(state));
+export const persistState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    sessionStorage.setItem("SWOBSTORE", serializedState);
+  } catch (err) {
+    // do nothing with this error just catching for safety
+  }
 };
 
-export const getLocalState = () => {
-  return JSON.parse(sessionStorage.getItem("SWOBSTORE"));
+export const getPersistedState = () => {
+  try {
+    const serializedState = sessionStorage.getItem("SWOBSTORE");
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
 };
 
-export const clearLocalState = () => {
+export const clearPersistedState = () => {
   sessionStorage.removeItem("SWOBSTORE");
 };

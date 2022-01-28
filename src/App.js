@@ -1,7 +1,6 @@
-import React, { useEffect, Fragment } from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RequireAuth, RequireSession } from "components";
-import { persistState, hydrateState } from "utils";
 import { Toaster } from "react-hot-toast";
 import {
   Contact,
@@ -26,11 +25,6 @@ import {
 } from "pages";
 
 const App = () => {
-  // persist state
-  useEffect(() => {
-    persistState();
-    hydrateState();
-  }, []);
 
   return (
     <Fragment>
@@ -81,7 +75,7 @@ const App = () => {
               </RequireAuth>
             }
           >
-            <Route index element={<Profile />} />
+            <Route index element={<Wallet />} />
             <Route path="profile" element={<Profile />} />
             <Route path="wallet" element={<Wallet />} />
             <Route
