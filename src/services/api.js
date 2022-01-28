@@ -79,6 +79,26 @@ export const API = createApi({
         body: phone_number ? { phone_number } : {}, // if theres a phone number then send it
       }),
     }),
+    verifyTokenStorage: builder.mutation({
+      query: ({
+        uid,
+        code,
+        platform,
+        protocol,
+        oauth_token,
+        oauth_verifier,
+        phone_number,
+      }) => ({
+        url: `/users/${uid}/platforms/${platform}/protocols/${protocol}`,
+        method: "PUT",
+        body: {
+          code,
+          oauth_token,
+          oauth_verifier,
+          phone_number,
+        },
+      }),
+    }),
     tokenRevoke: builder.mutation({
       query: (credentials) => ({
         url: "/users/tokens/revoke",
@@ -119,4 +139,5 @@ export const {
   useChangePasswordMutation,
   useRecoverPasswordMutation,
   useVerifyRecoveryCodeMutation,
+  useVerifyTokenStorageMutation,
 } = API;

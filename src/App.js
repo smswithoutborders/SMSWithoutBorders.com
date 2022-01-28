@@ -15,8 +15,7 @@ import {
   NotFound,
   Website,
   AccountDeletion,
-  TwitterRedirect,
-  GoogleRedirect,
+  WalletRedirect,
   PasswordChange,
   SignupCodeVerification,
   PhoneNumberVerification,
@@ -25,7 +24,6 @@ import {
 } from "pages";
 
 const App = () => {
-
   return (
     <Fragment>
       <Toaster
@@ -78,20 +76,16 @@ const App = () => {
             <Route index element={<Wallet />} />
             <Route path="profile" element={<Profile />} />
             <Route path="wallet" element={<Wallet />} />
-            <Route
-              path="oauth2/google/Tokens/redirect"
-              element={<GoogleRedirect />}
-            />
-            <Route
-              path="oauth2/twitter/Tokens/redirect"
-              element={<TwitterRedirect />}
-            />
             <Route path="settings" element={<Settings />}>
               <Route index element={<PasswordChange />} />
               <Route path="change-password" element={<PasswordChange />} />
               <Route path="delete-account" element={<AccountDeletion />} />
             </Route>
           </Route>
+          <Route
+            path="platforms/:platform/protocols/:protocol/redirect_codes"
+            element={<WalletRedirect />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
