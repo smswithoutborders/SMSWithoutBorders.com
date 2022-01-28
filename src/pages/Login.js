@@ -52,7 +52,7 @@ const Login = () => {
 
   useEffect(() => {
     // if logged in then redirect to dashboard
-    if (auth.authKey) {
+    if (auth.uid) {
       navigate("/dashboard");
     }
     // get the stored cache to repopulate
@@ -69,7 +69,7 @@ const Login = () => {
       });
       clearCache();
     }
-  }, [setValue, dispatch, navigate, auth.authKey]);
+  }, [setValue, dispatch, navigate, auth.uid]);
 
   const handleLogin = async (data) => {
     // cache the data in case we need it later
@@ -84,15 +84,12 @@ const Login = () => {
       /*
         redirect users if they initially tried to access a private route
         without permission
-        using setTimeOut to make sure state gets updated before redirects
       */
-      setTimeout(() => {
-        if (location.state && location.state.path) {
-          navigate(location.state.path);
-        } else {
-          navigate("/dashboard");
-        }
-      }, 1000);
+      if (location.state && location.state.path) {
+        navigate(location.state.path);
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
       switch (error.status) {
         case 400:
@@ -138,70 +135,66 @@ const Login = () => {
 
   return (
     <PageAnimationWrapper>
-      <AuthContainer className="grid h-screen bg-gray-100 place-items-center">
-        <div className="container flex flex-wrap items-center mx-auto">
-          <div className="flex flex-col w-full p-8 m-4 mt-10 bg-white shadow-lg lg:w-2/6 md:w-1/2 rounded-xl md:mx-auto md:mt-0">
-            <div className="mb-8">
-              <img src={logo} alt="logo" className="h-32 mx-auto my-4" />
-              <h1 className="text-2xl font-bold text-center">
-                SMSWithoutBorders
-              </h1>
-            </div>
-            <form onSubmit={handleSubmit(handleLogin)}>
-              <FormGroup>
-                <Label>Phone Number</Label>
-                <Controller
-                  control={control}
-                  name="phone_number"
-                  render={({ field: { value, onChange } }) => (
-                    <PhoneNumberInput
-                      international
-                      countryCallingCodeEditable={false}
-                      placeholder="Enter your phone number"
-                      defaultCountry="CM"
-                      value={value}
-                      type="tel"
-                      onChange={onChange}
-                      error={errors.phone_number}
-                    />
-                  )}
-                />
-                {errors.phone_number && (
-                  <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
-                )}
-              </FormGroup>
-
-              <FormGroup>
-                <Label htmlFor="password">Password</Label>
-                <PasswordInput
-                  name="password"
-                  {...register("password")}
-                  error={errors.password}
-                />
-                {errors.password && (
-                  <ErrorMessage>{errors.password?.message}</ErrorMessage>
-                )}
-              </FormGroup>
-
-              <Button className="w-full">
-                <FiLogIn /> &nbsp; login
-              </Button>
-            </form>
-
-            <Link
-              to="/password-reset"
-              className="mt-4 text-center cursor-pointer text-primary-800"
-            >
-              Forgot Password
-            </Link>
-
-            <p className="mt-4 text-sm text-center text-gray-600">
-              Dont have an account? &nbsp;
-              <Link to="/sign-up" className="text-blue-800">
-                Sign Up
-              </Link>
-            </p>
+      <AuthContainer className="bg-gray-100 md:py-20 2xl:py-0 2xl:h-screen lg:grid lg:place-items-center">
+        <div className="container max-w-md p-8 mx-auto bg-white shadow-lg md:rounded-xl lg:my-10">
+          <div className="mb-8">
+            <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
+            <h1 className="text-2xl font-bold text-center">
+              SMSWithoutBorders
+            </h1>
           </div>
+          <form onSubmit={handleSubmit(handleLogin)}>
+            <FormGroup>
+              <Label>Phone Number</Label>
+              <Controller
+                control={control}
+                name="phone_number"
+                render={({ field: { value, onChange } }) => (
+                  <PhoneNumberInput
+                    international
+                    countryCallingCodeEditable={false}
+                    placeholder="Enter your phone number"
+                    defaultCountry="CM"
+                    value={value}
+                    type="tel"
+                    onChange={onChange}
+                    error={errors.phone_number}
+                  />
+                )}
+              />
+              {errors.phone_number && (
+                <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
+              )}
+            </FormGroup>
+
+            <FormGroup>
+              <Label htmlFor="password">Password</Label>
+              <PasswordInput
+                name="password"
+                {...register("password")}
+                error={errors.password}
+              />
+              {errors.password && (
+                <ErrorMessage>{errors.password?.message}</ErrorMessage>
+              )}
+            </FormGroup>
+
+            <Button className="w-full">
+              <FiLogIn /> &nbsp; login
+            </Button>
+          </form>
+          <Link
+            to="/password-reset"
+            className="block mt-4 text-center appearance-none cursor-pointer text-primary-800"
+          >
+            Forgot Password
+          </Link>
+          <p className="mt-4 text-sm text-center text-gray-600">
+            Dont have an account? &nbsp;
+            <Link to="/sign-up" className="text-blue-800">
+              Sign Up
+            </Link>
+          </p>
         </div>
       </AuthContainer>
     </PageAnimationWrapper>

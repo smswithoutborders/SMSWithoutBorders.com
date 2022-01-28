@@ -8,7 +8,7 @@ export const RequireAuth = ({ children }) => {
   const auth = useSelector(authSelector);
   const location = useLocation();
 
-  return auth.auth_key ? (
+  return auth.uid ? (
     children
   ) : (
     <Navigate to="/login" replace state={{ path: location.pathname }} />

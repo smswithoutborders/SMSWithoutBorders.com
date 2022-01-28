@@ -2,8 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: "",
-  auth_key: "",
+  uid: "",
 };
 
 export const authSlice = createSlice({
@@ -11,11 +10,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     saveAuth: (state, action) => {
-      const { id, auth_key } = action.payload;
       return {
         ...state,
-        id,
-        auth_key,
+        ...action.payload,
       };
     },
     clearAuth: (state) => {

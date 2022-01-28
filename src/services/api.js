@@ -4,11 +4,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a service using a base URL and expected endpoints
 export const API = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_API_URL,
+    credentials: "same-origin",
+  }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
-        url: "/users/profiles/login",
+        url: "/login",
         method: "POST",
         body: credentials,
       }),
