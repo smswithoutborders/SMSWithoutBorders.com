@@ -1,10 +1,7 @@
 import React, { useState, Fragment } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-import gmailIcon from "images/gmail-icon.svg";
-import twitterIcon from "images/twitter-icon.svg";
-// import { Button, toaster, Dialog } from "evergreen-ui";
-import { FiSave, FiTrash2, FiChevronDown } from "react-icons/fi";
+import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 import { Disclosure } from "@headlessui/react";
 import {
@@ -17,7 +14,7 @@ import {
 import { useSelector } from "react-redux";
 import { authSelector } from "features";
 import {
-  useGetProvidersQuery,
+  useGetPlatformsQuery,
   useStoreTokenMutation,
   useTokenRevokeMutation,
 } from "services";
@@ -31,23 +28,23 @@ const Wallet = () => {
   const [password, setPassword] = useState("");
   // save the platform to be revoked
   const [details, setDetails] = useState({
-    provider: "",
-    platform: "",
+    id: "",
+    name: "",
   });
 
   const auth = useSelector(authSelector);
-  // fetch providers with rtk query
+  // fetch platforms with rtk query
   const {
-    providers = {},
-    storedTokens = {},
+    unSavedPlatforms = {},
+    savedPlatforms = {},
     isLoading,
     isFetching,
     isError,
     refetch,
-  } = useGetProvidersQuery(auth, {
+  } = useGetPlatformsQuery(auth, {
     selectFromResult: ({ data }) => ({
-      providers: data?.default_provider,
-      storedTokens: data?.user_provider,
+      unSavedPlatforms: data?.unsaved_platforms,
+      savedPlatforms: data?.saved_platforms,
     }),
   });
 
@@ -57,6 +54,9 @@ const Wallet = () => {
   // token revoke
   const [tokenRevoke, { isLoading: loadingC, isSuccess: successC }] =
     useTokenRevokeMutation();
+
+  // where logos are stored
+  const LOGO_HOST = process.env.REACT_APP_API_URL;
 
   /*
     when making requests show loading indicator
@@ -71,20 +71,19 @@ const Wallet = () => {
       <div className="p-8 my-24 prose">
         <h2>An error occured</h2>
         <p className="">
-          Sorry we could not get your providers and platforms. If error
-          persists, please contact support
+          Sorry we could not load platforms. If error persists, please contact
+          support
         </p>
         <Button onClick={() => refetch()}>try again</Button>
       </div>
     );
   }
 
-  async function handleTokenStorage(provider, platform) {
+  async function handleTokenStorage(url) {
     // build request body
     let data = {
-      ...auth,
-      provider,
-      platform,
+      uid: auth.uid,
+      url,
     };
 
     try {
@@ -176,34 +175,46 @@ const Wallet = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-xl p-8 mx-auto my-20 prose text-gray-900">
-        <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
-          <IoWalletOutline /> &nbsp; Wallet
-        </h1>
-        <p className="my-0 text-lg">Save your tokens for rainy days</p>
+      <div className="max-w-screen-xl p-8 mx-auto my-16 prose text-gray-900">
+        <div className="">
+          <h1 className="inline-flex items-center text-4xl font-bold mb">
+            <IoWalletOutline /> &nbsp; Wallet
+          </h1>
+          <p className="my-0 text-lg">
+            Store your token which will be used for authentication on your
+            behalf in the event of an internet shutdown.
+          </p>
+          <p className="my-0 text-lg">
+            You can define how this token will be used by setting the scopes of
+            access
+          </p>
+        </div>
 
-        <div className="flex flex-col lg:flex-row justify-evenly">
-          <div className="w-full p-4 lg:w-1/2">
-            <h2>Providers</h2>
-            {Object.keys(providers).length ? (
+        <div className="grid grid-cols-2 gap-4 lg:gap-8">
+          <div className="col-span-full md:col-span-1">
+            <h2>Available Platforms</h2>
+            {Object.keys(unSavedPlatforms).length ? (
               <Fragment>
-                {providers.map((item) => (
-                  <Disclosure key={item?.provider}>
+                {unSavedPlatforms.map((item) => (
+                  <Disclosure key={item.name}>
                     {({ open }) => (
                       <Fragment>
                         <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
                           <div className="flex flex-row items-center">
-                            <img
-                              src={
-                                item?.provider === "google"
-                                  ? gmailIcon
-                                  : twitterIcon
-                              }
-                              alt={`${item.provider} logo`}
-                              className="w-8 h-8 my-0 mr-4"
-                            />
+                            {item.logo ? (
+                              <img
+                                src={`${LOGO_HOST}${item.logo}`}
+                                alt={`${item.name} logo`}
+                                className="w-8 h-8 my-0 mr-4"
+                              />
+                            ) : (
+                              <FiGrid
+                                title={`${item.name} logo`}
+                                className="w-8 h-8 my-0 mr-4"
+                              />
+                            )}
                             <h3 className="my-0 font-normal capitalize">
-                              {item?.provider}
+                              {item.name}
                             </h3>
                           </div>
                           <FiChevronDown
@@ -214,32 +225,14 @@ const Wallet = () => {
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 shadow">
-                          <p>
-                            Store your {item?.provider} token which will be used
-                            for authentication on your behalf in the event of an
-                            internet shutdown.
-                          </p>
-                          <p>
-                            You can define how this token will be used by
-                            setting the scopes of access
-                          </p>
                           <div className="flex items-center justify-between">
                             <div>
                               <h4>Description</h4>
-                              <p>{item?.description}</p>
-
-                              <h4>Platform</h4>
-                              <p>{item?.platforms[0].name}</p>
-
-                              <h4>Type</h4>
-                              <p>{item?.platforms[0].type}</p>
+                              <p>{item.description}</p>
                             </div>
                             <Button
                               onClick={() =>
-                                handleTokenStorage(
-                                  item?.provider,
-                                  item?.platforms[0].name
-                                )
+                                handleTokenStorage(item.initialization_url)
                               }
                             >
                               <FiSave /> &nbsp; store
@@ -252,30 +245,33 @@ const Wallet = () => {
                 ))}
               </Fragment>
             ) : (
-              <p>No available providers</p>
+              <p>No available platforms</p>
             )}
           </div>
-          <div className="w-full p-4 lg:w-1/2">
-            <h2>Stored tokens</h2>
-            {Object.keys(storedTokens).length ? (
+          <div className="col-span-full md:col-span-1">
+            <h2>Saved Platforms</h2>
+            {Object.keys(savedPlatforms).length ? (
               <Fragment>
-                {storedTokens.map((item) => (
-                  <Disclosure key={item?.provider}>
+                {savedPlatforms.map((item) => (
+                  <Disclosure key={item.name}>
                     {({ open }) => (
                       <Fragment>
                         <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
                           <div className="flex flex-row items-center">
-                            <img
-                              src={
-                                item?.provider === "google"
-                                  ? gmailIcon
-                                  : twitterIcon
-                              }
-                              alt={`${item.provider} logo`}
-                              className="w-8 h-8 my-0 mr-4"
-                            />
+                            {item.logo ? (
+                              <img
+                                src={`${LOGO_HOST}${item.logo}`}
+                                alt={`${item.name} logo`}
+                                className="w-8 h-8 my-0 mr-4"
+                              />
+                            ) : (
+                              <FiGrid
+                                title={`${item.name} logo`}
+                                className="w-8 h-8 my-0 mr-4"
+                              />
+                            )}
                             <h3 className="my-0 font-normal capitalize">
-                              {item?.provider}
+                              {item.name}
                             </h3>
                           </div>
                           <FiChevronDown
@@ -289,28 +285,14 @@ const Wallet = () => {
                           <div className="flex items-center justify-between">
                             <div>
                               <h4>Description</h4>
-                              <p>{item?.description}</p>
-                              <h4>Platform</h4>
-                              <p>{item?.platforms[0].name}</p>
-                              {item?.email && (
-                                <Fragment>
-                                  <h4>Email address</h4>
-                                  <p>{item?.email}</p>
-                                </Fragment>
-                              )}
-                              {item?.screen_name && (
-                                <Fragment>
-                                  <h4>Screen Name</h4>
-                                  <p>{item?.screen_name}</p>
-                                </Fragment>
-                              )}
+                              <p>{item.description}</p>
                             </div>
                             <Button
                               className="bg-red-500 hover:bg-red-700"
                               onClick={() => {
                                 setDetails({
-                                  provider: item?.provider,
-                                  platform: item?.platforms[0].name,
+                                  id: item.id,
+                                  name: item.name,
                                 });
                                 setIsOpen(true);
                               }}
@@ -325,7 +307,7 @@ const Wallet = () => {
                 ))}
               </Fragment>
             ) : (
-              <p>No stored tokens</p>
+              <p>No saved platforms</p>
             )}
           </div>
         </div>

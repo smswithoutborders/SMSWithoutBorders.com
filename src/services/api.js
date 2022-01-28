@@ -6,7 +6,7 @@ export const API = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_URL,
-    credentials: "same-origin",
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -73,10 +73,10 @@ export const API = createApi({
       }),
     }),
     storeToken: builder.mutation({
-      query: (credentials) => ({
-        url: "/users/tokens",
+      query: ({ uid, url, phone_number }) => ({
+        url: `/users/${uid}${url}`,
         method: "POST",
-        body: credentials,
+        body: phone_number ? { phone_number } : {}, // if theres a phone number then send it
       }),
     }),
     tokenRevoke: builder.mutation({
@@ -86,16 +86,17 @@ export const API = createApi({
         body: credentials,
       }),
     }),
-    getProviders: builder.query({
-      query: (credentials) => ({
-        url: "/users/providers",
-        method: "POST",
-        body: credentials,
+    getPlatforms: builder.query({
+      query: ({ uid }) => ({
+        url: `/users/${uid}/platforms`,
+        method: "GET",
       }),
     }),
     getDocs: builder.query({
       query: () => ({
         url: process.env.REACT_APP_DOCS_URL,
+        method: "GET",
+        credentials: "omit",
         responseHandler: (response) => response.text(), // expect response type to be text/plain
       }),
     }),
@@ -109,7 +110,7 @@ export const {
   useLoginMutation,
   useSignupMutation,
   useGetProfileQuery,
-  useGetProvidersQuery,
+  useGetPlatformsQuery,
   useStoreTokenMutation,
   useNewPasswordMutation,
   useTokenRevokeMutation,
