@@ -91,36 +91,43 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (error) {
-      switch (error.status) {
-        case 400:
-          toast.error(
-            "Something went wrong \n We are working to resolve this. Please try again"
-          );
-          break;
-        case 401:
-          toast.error(
-            "Forbidden, Account is unauthorized. \n check your phonenumber and password"
-          );
-          break;
-        case 409:
-          toast.error(
-            "There is a possible duplicate of this account please contact support"
-          );
-          break;
-        case 429:
-          toast.error(
-            "Too many failed attempts please wait a while and try again"
-          );
-          break;
-        case 500:
-          toast.error("A critical error occured. Please contact support");
-          break;
-        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
-        case "FETCH_ERROR":
-          toast.error("An error occured, please check your network try again");
-          break;
-        default:
-          toast.error("An error occured, please try again");
+      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
+      const { status, originalStatus } = error;
+      if (originalStatus) {
+        switch (originalStatus) {
+          case 400:
+            toast.error(
+              "Something went wrong \n We are working to resolve this. Please try again"
+            );
+            break;
+          case 401:
+            toast.error(
+              "Forbidden, Account is unauthorized. \n check your phonenumber and password"
+            );
+            break;
+          case 403:
+            toast.error("Forbidden, check your phonenumber and password");
+            break;
+          case 409:
+            toast.error(
+              "There is a possible duplicate of this account please contact support"
+            );
+            break;
+          case 429:
+            toast.error(
+              "Too many failed attempts please wait a while and try again"
+            );
+            break;
+          case 500:
+            toast.error("A critical error occured. Please contact support");
+            break;
+          default:
+            toast.error(
+              "An error occured, please check your network try again"
+            );
+        }
+      } else if (status === "FETCH_ERROR") {
+        toast.error("An error occured, please check your network try again");
       }
     }
   };

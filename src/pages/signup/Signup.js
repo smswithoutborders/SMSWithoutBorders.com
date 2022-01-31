@@ -92,26 +92,37 @@ const Signup = () => {
       // redirect user to code confirmation page
       navigate("verify");
     } catch (error) {
-      switch (error.status) {
-        case 400:
-          toast.error(
-            "Something went wrong \n We are working to resolve this. Please try again"
-          );
-          break;
-        case 409:
-          toast.error(
-            "An account with this number already exists.Please Log In instead"
-          );
-          break;
-        case 500:
-          toast.error("A critical error occured. Please contact support");
-          break;
-        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
-        case "FETCH_ERROR":
-          toast.error("An error occured, please check your network try again");
-          break;
-        default:
-          toast.error("An error occured, please try again");
+      const { status, originalStatus } = error;
+      if (originalStatus) {
+        switch (originalStatus) {
+          case 400:
+            toast.error(
+              "Something went wrong \n We are working to resolve this. Please try again"
+            );
+            break;
+          case 401:
+            toast.error(
+              "Forbidden, Account is unauthorized. \n check your phonenumber and password"
+            );
+            break;
+          case 403:
+            toast.error("Forbidden, check your phonenumber and password");
+            break;
+          case 409:
+            toast.error(
+              "An account with this number already exists"
+            );
+            break;
+          case 500:
+            toast.error("A critical error occured. Please contact support");
+            break;
+          default:
+            toast.error(
+              "An error occured, please check your network try again"
+            );
+        }
+      } else if (status === "FETCH_ERROR") {
+        toast.error("An error occured, please check your network try again");
       }
     }
   };
