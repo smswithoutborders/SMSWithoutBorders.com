@@ -23,7 +23,7 @@ const WalletRedirect = () => {
     let data = {
       uid: auth.uid,
       code: code,
-      platform: "gmail",
+      platform: platform,
       protocol: protocol,
       oauth_token: oauth_token,
       oauth_verifier: oauth_verifier,

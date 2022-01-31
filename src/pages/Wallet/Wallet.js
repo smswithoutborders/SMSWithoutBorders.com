@@ -91,36 +91,41 @@ const Wallet = () => {
       //open authorization window
       window.open(response.url, "_self");
     } catch (error) {
-      switch (error.status) {
-        case 400:
-          toast.error(
-            "Something went wrong \n We are working to resolve this. Please try again"
-          );
-          break;
-        case 401:
-          toast.error(
-            "Forbidden, Account is unauthorized. \n check your phonenumber and password"
-          );
-          break;
-        case 409:
-          toast.error(
-            "There is a possible duplicate of this account please contact support"
-          );
-          break;
-        case 429:
-          toast.error(
-            "Too many failed attempts please wait a while and try again"
-          );
-          break;
-        case 500:
-          toast.error("A critical error occured. Please contact support");
-          break;
-        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
-        case "FETCH_ERROR":
-          toast.error("An error occured, please check your network try again");
-          break;
-        default:
-          toast.error("An error occured, please try again");
+      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
+      const { status, originalStatus } = error;
+      if (originalStatus) {
+        switch (originalStatus) {
+          case 400:
+            toast.error(
+              "Something went wrong \n We are working to resolve this. Please try again"
+            );
+            break;
+          case 401:
+            toast.error("Forbidden, Account is unauthorized.");
+            break;
+          case 403:
+            toast.error("Forbidden, check your phonenumber and password");
+            break;
+          case 409:
+            toast.error(
+              "There is a possible duplicate of this account please contact support"
+            );
+            break;
+          case 429:
+            toast.error(
+              "Too many failed attempts please wait a while and try again"
+            );
+            break;
+          case 500:
+            toast.error("A critical error occured. Please contact support");
+            break;
+          default:
+            toast.error(
+              "An error occured, please check your network try again"
+            );
+        }
+      } else if (status === "FETCH_ERROR") {
+        toast.error("An error occured, please check your network try again");
       }
     }
   }
@@ -141,41 +146,48 @@ const Wallet = () => {
       // reload providers
       refetch();
     } catch (error) {
-      switch (error.status) {
-        case 400:
-          toast.error(
-            "Something went wrong \n We are working to resolve this. Please try again"
-          );
-          break;
-        case 401:
-          toast.error("wrong password provided");
-          break;
-        case 409:
-          toast.error(
-            "There is a possible duplicate of this account please contact support"
-          );
-          break;
-        case 429:
-          toast.error(
-            "Too many failed attempts please wait a while and try again"
-          );
-          break;
-        case 500:
-          toast.error("A critical error occured. Please contact support");
-          break;
-        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
-        case "FETCH_ERROR":
-          toast.error("An error occured, please check your network try again");
-          break;
-        default:
-          toast.error("An error occured, please try again");
+      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
+      const { status, originalStatus } = error;
+      if (originalStatus) {
+        switch (originalStatus) {
+          case 400:
+            toast.error(
+              "Something went wrong \n We are working to resolve this. Please try again"
+            );
+            break;
+          case 401:
+            toast.error("Forbidden, Account is unauthorized.");
+            break;
+          case 403:
+            toast.error("Forbidden, check your phonenumber and password");
+            break;
+          case 409:
+            toast.error(
+              "There is a possible duplicate of this account please contact support"
+            );
+            break;
+          case 429:
+            toast.error(
+              "Too many failed attempts please wait a while and try again"
+            );
+            break;
+          case 500:
+            toast.error("A critical error occured. Please contact support");
+            break;
+          default:
+            toast.error(
+              "An error occured, please check your network try again"
+            );
+        }
+      } else if (status === "FETCH_ERROR") {
+        toast.error("An error occured, please check your network try again");
       }
     }
   }
 
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-xl p-8 mx-auto my-16 prose text-gray-900">
+      <div className="max-w-screen-xl min-h-screen p-8 mx-auto my-10 prose text-gray-900">
         <div className="">
           <h1 className="inline-flex items-center text-4xl font-bold mb">
             <IoWalletOutline /> &nbsp; Wallet
@@ -225,7 +237,7 @@ const Wallet = () => {
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 shadow">
-                          <div className="flex items-center justify-between">
+                          <div className="items-center justify-between md:flex">
                             <div>
                               <h4>Description</h4>
                               <p>{item.description}</p>
@@ -282,7 +294,7 @@ const Wallet = () => {
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 shadow">
-                          <div className="flex items-center justify-between">
+                          <div className="items-center justify-between md:flex">
                             <div>
                               <h4>Description</h4>
                               <p>{item.description}</p>
