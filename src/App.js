@@ -23,14 +23,17 @@ import {
   PasswordReset,
 } from "pages";
 
+// toast notifications: https://uxdesign.cc/toasts-or-snack-bars-design-organic-system-notifications-1236f2883023
+
 const App = () => {
   return (
     <Fragment>
       <Toaster
-        position="bottom-right"
+        position="top-right"
         reverseOrder={false}
         toastOptions={{
           duration: 5000,
+          className: 'mt-20',
         }}
       />
       <BrowserRouter>
