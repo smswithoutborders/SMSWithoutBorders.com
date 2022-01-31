@@ -1,9 +1,12 @@
 import React, { useState, Fragment } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { authSelector } from "features";
+import { useNavigate } from "react-router-dom";
 import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Dialog } from "@headlessui/react";
 import {
   Loader,
   useTitle,
@@ -11,14 +14,11 @@ import {
   PageAnimationWrapper,
   PasswordInput,
 } from "components";
-import { useSelector } from "react-redux";
-import { authSelector } from "features";
 import {
   useGetPlatformsQuery,
   useStoreTokenMutation,
   useTokenRevokeMutation,
 } from "services";
-import { Dialog } from "@headlessui/react";
 
 const Wallet = () => {
   useTitle("Wallet (Store Access)");
@@ -31,7 +31,7 @@ const Wallet = () => {
     id: "",
     name: "",
   });
-
+  const navigate = useNavigate();
   const auth = useSelector(authSelector);
   // fetch platforms with rtk query
   const {
@@ -58,28 +58,11 @@ const Wallet = () => {
   // where logos are stored
   const LOGO_HOST = process.env.REACT_APP_API_URL;
 
-  /*
-    when making requests show loading indicator
-    Also maintain after request is successfull to update background state
-  */
-  if (isLoading || isFetching || loadingB || successB || loadingC || successC) {
-    return <Loader />;
-  }
-
-  if (isError) {
-    return (
-      <div className="p-8 my-24 prose">
-        <h2>An error occured</h2>
-        <p className="">
-          Sorry we could not load platforms. If error persists, please contact
-          support
-        </p>
-        <Button onClick={() => refetch()}>try again</Button>
-      </div>
-    );
-  }
-
-  async function handleTokenStorage(url) {
+  async function handleTokenStorage(name, url) {
+    if (name === "telegram") {
+      navigate("/dashboard/wallet/telegram", { state: { url: url } });
+      return;
+    }
     // build request body
     let data = {
       uid: auth.uid,
@@ -185,6 +168,29 @@ const Wallet = () => {
     }
   }
 
+
+  /*
+    when making requests show loading indicator
+    Also maintain after request is successfull to update background state
+  */
+  if (isLoading || isFetching || loadingB || successB || loadingC || successC) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    return (
+      <div className="p-8 my-24 prose">
+        <h2>An error occured</h2>
+        <p className="">
+          Sorry we could not load platforms. If error persists, please contact
+          support
+        </p>
+        <Button onClick={() => refetch()}>try again</Button>
+      </div>
+    );
+  }
+
+
   return (
     <PageAnimationWrapper>
       <div className="max-w-screen-xl min-h-screen p-8 mx-auto my-10 prose text-gray-900">
@@ -244,7 +250,10 @@ const Wallet = () => {
                             </div>
                             <Button
                               onClick={() =>
-                                handleTokenStorage(item.initialization_url)
+                                handleTokenStorage(
+                                  item.name,
+                                  item.initialization_url
+                                )
                               }
                             >
                               <FiSave /> &nbsp; store

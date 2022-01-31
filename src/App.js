@@ -19,6 +19,8 @@ import {
   PasswordChange,
   SignupCodeVerification,
   PhoneNumberVerification,
+  TelegramCodeVerification,
+  TelegramNumberVerification,
   PasswordChangeVerification,
   PasswordReset,
 } from "pages";
@@ -30,10 +32,10 @@ const App = () => {
     <Fragment>
       <Toaster
         position="top-right"
+        containerClassName="mt-20"
         reverseOrder={false}
         toastOptions={{
           duration: 5000,
-          className: 'mt-20',
         }}
       />
       <BrowserRouter>
@@ -78,7 +80,13 @@ const App = () => {
           >
             <Route index element={<Wallet />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="wallet" element={<Wallet />} />
+            <Route path="wallet">
+              <Route index element={<Wallet />} />
+              <Route path="telegram">
+                <Route index element={<TelegramNumberVerification />} />
+                <Route path="verify" element={<TelegramCodeVerification />} />
+              </Route>
+            </Route>
             <Route path="settings" element={<Settings />}>
               <Route index element={<PasswordChange />} />
               <Route path="change-password" element={<PasswordChange />} />
