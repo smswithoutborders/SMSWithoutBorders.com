@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useVerifyTokenStorageMutation } from "services";
@@ -22,6 +22,13 @@ const CodeVerification = () => {
     useVerifyTokenStorageMutation();
   const auth = useSelector(authSelector);
 
+  // check if phone number is present
+  useEffect(() => {
+    if (!location.state?.phone_number) {
+      navigate("../");
+    }
+  }, [location.state, navigate]);
+
   async function handleCodeVerification(evt) {
     // prevent default form action
     evt.preventDefault();
@@ -39,13 +46,15 @@ const CodeVerification = () => {
 
     try {
       const response = await verifyTokenStorage(data).unwrap();
-      switch (response.code) {
+      switch (response.body.code) {
         case 202:
           toast.success(
             "You do not have a telegram account, please fill the form to create one"
           );
           // send user to telegram registration
-          // navigate("../register");
+          navigate("../../register", {
+            state: { phone_number: location.state.phone_number },
+          });
           break;
         default:
           // 200 success

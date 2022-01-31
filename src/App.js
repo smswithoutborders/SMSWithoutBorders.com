@@ -17,6 +17,7 @@ import {
   AccountDeletion,
   WalletRedirect,
   PasswordChange,
+  TelegramRegistration,
   SignupCodeVerification,
   PhoneNumberVerification,
   TelegramCodeVerification,
@@ -85,6 +86,7 @@ const App = () => {
               <Route path="telegram">
                 <Route index element={<TelegramNumberVerification />} />
                 <Route path="verify" element={<TelegramCodeVerification />} />
+                <Route path="register" element={<TelegramRegistration />} />
               </Route>
             </Route>
             <Route path="settings" element={<Settings />}>

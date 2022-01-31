@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import telegramLogo from "images/telegram-icon.svg";
 import { useStoreTokenMutation } from "services";
@@ -26,6 +26,13 @@ const PhoneNumberVerification = () => {
   // store token
   const [storeToken, { isLoading, isSuccess }] = useStoreTokenMutation();
 
+  // check if url is present
+  useEffect(() => {
+    if (!location.state?.url) {
+      navigate("../../");
+    }
+  }, [location.state, navigate]);
+
   async function handleTokenStorage(evt) {
     // stop default form action
     evt.preventDefault();
@@ -47,7 +54,7 @@ const PhoneNumberVerification = () => {
 
     try {
       const response = await storeToken(data).unwrap();
-      switch (response.code) {
+      switch (response.body) {
         case 201:
           toast.success(
             "A verification code has been sent to your phone. Check code in your sms or email inbox"

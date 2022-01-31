@@ -99,6 +99,24 @@ export const API = createApi({
         },
       }),
     }),
+    createExternalAccount: builder.mutation({
+      query: ({
+        uid,
+        platform,
+        protocol,
+        first_name,
+        last_name,
+        phone_number,
+      }) => ({
+        url: `/users/${uid}/platforms/${platform}/protocols/${protocol}/register`,
+        method: "PUT",
+        body: {
+          first_name,
+          last_name,
+          phone_number,
+        },
+      }),
+    }),
     tokenRevoke: builder.mutation({
       query: (credentials) => ({
         url: "/users/tokens/revoke",
@@ -140,4 +158,5 @@ export const {
   useRecoverPasswordMutation,
   useVerifyRecoveryCodeMutation,
   useVerifyTokenStorageMutation,
+  useCreateExternalAccountMutation,
 } = API;
