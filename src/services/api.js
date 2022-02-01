@@ -16,6 +16,12 @@ export const API = createApi({
         body: credentials,
       }),
     }),
+    logout: builder.mutation({
+      query: ({ uid }) => ({
+        url: `/users/${uid}/logout`,
+        method: "POST",
+      }),
+    }),
     signup: builder.mutation({
       query: (credentials) => ({
         url: "/signup",
@@ -146,6 +152,7 @@ export const API = createApi({
 export const {
   useGetDocsQuery,
   useLoginMutation,
+  useLogoutMutation,
   useSignupMutation,
   useGetProfileQuery,
   useGetPlatformsQuery,

@@ -6,11 +6,12 @@ import logo from "images/logo-icon-light.png";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { profileSelector, resetStore } from "features";
+import { profileSelector, resetStore, authSelector } from "features";
 import { useSelector, useDispatch } from "react-redux";
 import { FiMenu, FiX, FiLogOut, FiUser, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
-import { clearCache, clearPersistedState } from "services";
+import { clearCache, clearPersistedState, useLogoutMutation } from "services";
+import { Loader } from "./Loader";
 import toast from "react-hot-toast";
 
 const NavLink = tw(
@@ -31,22 +32,69 @@ const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white 
 const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5 items-center appearance-none`;
 
 export const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const profile = useSelector(profileSelector);
+  const auth = useSelector(authSelector);
+  const [open, setOpen] = useState(false);
+
+  const [logout, { isLoading, isSuccess }] = useLogoutMutation();
 
   // helper function for menu toggle and logout
   function toggleMenu() {
     setOpen(!open);
   }
 
-  function handleLogOut() {
-    // clear store
-    dispatch(resetStore());
-    // clear local cache if any
-    clearCache();
-    clearPersistedState();
-    toast.success("Logout successfull");
+  async function handleLogOut() {
+    try {
+      await logout(auth).unwrap();
+      toast.success("Logout successfull");
+      // clear store
+      dispatch(resetStore());
+      // clear local cache if any
+      clearCache();
+      clearPersistedState();
+    } catch (error) {
+      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
+      const { status, originalStatus } = error;
+      if (originalStatus) {
+        switch (originalStatus) {
+          case 400:
+            toast.error(
+              "Something went wrong \n We are working to resolve this. Please try again"
+            );
+            break;
+          case 401:
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
+            break;
+          case 403:
+            toast.error(
+              "Forbidden, you are not authorized. please logout and login"
+            );
+            break;
+          case 409:
+            toast.error(
+              "There is a possible duplicate of this account please contact support"
+            );
+            break;
+          case 429:
+            toast.error(
+              "Too many failed attempts please wait a while and try again"
+            );
+            break;
+          case 500:
+            toast.error("A critical error occured. Please contact support");
+            break;
+          default:
+            toast.error(
+              "An error occured, please check your network try again"
+            );
+        }
+      } else if (status === "FETCH_ERROR") {
+        toast.error("An error occured, please check your network try again");
+      }
+    }
   }
 
   const actionLinks = (
@@ -100,6 +148,14 @@ export const Navbar = () => {
       <span>SMSwithoutborders</span>
     </LogoLink>
   );
+
+  /*
+    when making requests show loading indicator
+    Also maintain after request is successfull to update background state
+  */
+  if (isLoading || isSuccess) {
+    return <Loader />;
+  }
 
   return (
     <Fragment>
