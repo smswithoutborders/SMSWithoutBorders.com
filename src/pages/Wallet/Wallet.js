@@ -84,10 +84,14 @@ const Wallet = () => {
             );
             break;
           case 401:
-            toast.error("Forbidden, Account is unauthorized.");
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error(
+              "Forbidden, Sorry you are not authorized. logout and login again"
+            );
             break;
           case 409:
             toast.error(
@@ -139,10 +143,14 @@ const Wallet = () => {
             );
             break;
           case 401:
-            toast.error("Forbidden, Account is unauthorized.");
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error(
+              "Forbidden, Sorry you are not authorized. logout and login again"
+            );
             break;
           case 409:
             toast.error(
@@ -168,7 +176,6 @@ const Wallet = () => {
     }
   }
 
-
   /*
     when making requests show loading indicator
     Also maintain after request is successfull to update background state
@@ -189,7 +196,6 @@ const Wallet = () => {
       </div>
     );
   }
-
 
   return (
     <PageAnimationWrapper>

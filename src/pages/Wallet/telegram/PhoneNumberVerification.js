@@ -79,10 +79,12 @@ const PhoneNumberVerification = () => {
             );
             break;
           case 401:
-            toast.error("Forbidden, Account is unauthorized.");
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error("Forbidden, Invalid number provided");
             break;
           case 409:
             toast.error(

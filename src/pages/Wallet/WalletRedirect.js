@@ -43,10 +43,12 @@ const WalletRedirect = () => {
             );
             break;
           case 401:
-            toast.error("Invalid code provided \n please try again");
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
             break;
           case 403:
-            toast("Account already verified \n Please login");
+            toast.error("Forbidden, Sorry you are not authorized.");
             break;
           case 409:
             toast.error(

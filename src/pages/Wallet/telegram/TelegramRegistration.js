@@ -59,8 +59,7 @@ const TelegramRegistration = () => {
     };
 
     try {
-      const response = await createExternalAccount(request).unwrap();
-      console.log(response);
+      await createExternalAccount(request).unwrap();
       toast.success("Platform stored successfully");
       // navigate to wallet page
       navigate("../../", { replace: true });
@@ -75,10 +74,12 @@ const TelegramRegistration = () => {
             );
             break;
           case 401:
-            toast.error("Invalid code provided please try again");
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error("Forbidden");
             break;
           case 409:
             toast.error(

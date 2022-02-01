@@ -73,10 +73,12 @@ const CodeVerification = () => {
             );
             break;
           case 401:
-            toast.error("Invalid code provided please try again");
+            toast.error(
+              "Sorry you are not authorized. please logout and login"
+            );
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error("Forbidden, Invalid code provided");
             break;
           case 409:
             toast.error(
