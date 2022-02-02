@@ -1,9 +1,9 @@
 import { createAction, configureStore } from "@reduxjs/toolkit";
-// Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { API } from "../services/api";
-import rootReducer from "./reducers";
 import { persistState, getPersistedState } from "services";
+import { sessionExpiryChecker } from "utils";
+import rootReducer from "./reducers";
 
 const persistedState = getPersistedState();
 // action to clear the store
@@ -19,7 +19,7 @@ export const resetStore = createAction("RESET_STORE");
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(API.middleware),
+    getDefaultMiddleware().concat(API.middleware, sessionExpiryChecker),
   devTools: process.env.NODE_ENV !== "production",
   preloadedState: persistedState,
 });
