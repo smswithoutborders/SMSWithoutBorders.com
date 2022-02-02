@@ -35,7 +35,6 @@ const WalletRedirect = () => {
         toast.success("Platform stored successfully");
         navigate("/dashboard/wallet", { replace: true });
       } catch (error) {
-        console.log(error);
         switch (error.status) {
           case 400:
             toast.error(
