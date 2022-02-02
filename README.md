@@ -1,8 +1,10 @@
 # SMSwithoutBorders.com
 
-## Setup Guide
+Here is the interface through which users can manage their accounts and store their credentials
 
-Quick start guide to get the dashboard *running*:
+## Setup
+
+Please follow the instructions below to setup this project
 
 ### Install dependencies
 
@@ -10,9 +12,9 @@ Quick start guide to get the dashboard *running*:
 npm install
 ```
 
-### Set env variables
+### Configure environment variables
 
-Create dev and production .env configs from the env.example template
+Create development and production .env configuration files from the env.example template
 
 ```bash
 cp env.example .env.development.local
@@ -21,18 +23,19 @@ cp env.example .env.production.local
 
 ```
 
-The .env file(s) contains all modifiable system variables. Below are the defaults
+The .env file(s) contains all modifiable variables for each environment. Below are the defaults
 
-```bash
-PORT=18900  /* local development port */
-REACT_APP_API_URL=http://localhost:9000 /* Backend API URL */
-REACT_APP_ROUTER_URL="http://localhost:6969" /* Router URL */
-REACT_APP_DOCS_URL= "" /* docs markdown file url */
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), which specifies variable naming conventions
 
-HTTPS=false /* specify HTTPS */
-SSL_CRT_FILE=
-SSL_KEY_FILE=
-```
+* PORT -> development port
+* REACT_APP_API_URL ->  Backend API URL
+* REACT_APP_API_URL -> Backend API URL
+* REACT_APP_ROUTER_URL ->  Router URL
+* REACT_APP_DOCS_URL -> Link to hosted privacy policy markdown file
+* HTTPS -> enable or disable https
+* SSL_CRT_FILE -> Location of SSL CRT file
+* SSL_KEY_FILE -> Location of SSL Key file
+
 
 ### Start development server
 
@@ -52,10 +55,8 @@ You will also see any lint errors in the console.
 npm run build
 ```
 
-Builds the app for production to the `build` folder using esbuild and Babel.
+Builds the app for production. Check the `build` folder for deployable files once complete.
 
-### Accounts Setup
+## Licensing
 
-- Signup for a new account
-
-- Login with created account details
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
