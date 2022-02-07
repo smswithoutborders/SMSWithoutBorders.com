@@ -90,13 +90,13 @@ const CodeVerification = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="px-6 py-20 mx-auto text-center md:px-8 md:w-2/3 lg:w-1/3">
+      <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
         <h1 className="mb-4 text-3xl font-bold">Enter verification code</h1>
         <p className="mt-8">A verification code has been sent to your phone</p>
 
-        <small className="my-2">Lorem Ipsum Dolor consecutar eh errrhhh</small>
+        <small className="my-4">Lorem Ipsum Dolor consecutar eh errrhhh</small>
 
-        <div className="flex-1 w-full mt-8">
+        <div className="max-w-md mx-auto mt-12">
           <form
             className="px-4 mx-auto sm:px-3"
             onSubmit={(evt) => handleCodeVerification(evt)}
