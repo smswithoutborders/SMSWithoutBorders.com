@@ -124,10 +124,12 @@ export const API = createApi({
       }),
     }),
     tokenRevoke: builder.mutation({
-      query: (credentials) => ({
-        url: "/users/tokens/revoke",
-        method: "POST",
-        body: credentials,
+      query: ({ uid, url, password }) => ({
+        url: `/users/${uid}${url}`,
+        method: "DELETE",
+        body: {
+          password: password,
+        },
       }),
     }),
     getPlatforms: builder.query({

@@ -27,10 +27,7 @@ const Wallet = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState("");
   // save the platform to be revoked
-  const [details, setDetails] = useState({
-    id: "",
-    name: "",
-  });
+  const [revokeURL, setRevokeURL] = useState("");
   const navigate = useNavigate();
   const auth = useSelector(authSelector);
   // fetch platforms with rtk query
@@ -52,8 +49,7 @@ const Wallet = () => {
   const [storeToken, { isLoading: loadingB, isSuccess: successB }] =
     useStoreTokenMutation();
   // token revoke
-  const [tokenRevoke, { isLoading: loadingC, isSuccess: successC }] =
-    useTokenRevokeMutation();
+  const [tokenRevoke, { isLoading: loadingC }] = useTokenRevokeMutation();
 
   // where logos are stored
   const LOGO_HOST = process.env.REACT_APP_API_URL;
@@ -121,15 +117,13 @@ const Wallet = () => {
     // build request body
     let data = {
       ...auth,
-      ...details,
+      url: revokeURL,
       password: password,
     };
 
     try {
       await tokenRevoke(data).unwrap();
-      toast.success(
-        "Token deleted successfully \n Please wait while we update your information"
-      );
+      toast.success("Token deleted successfully");
       // reload providers
       refetch();
     } catch (error) {
@@ -180,7 +174,7 @@ const Wallet = () => {
     when making requests show loading indicator
     Also maintain after request is successfull to update background state
   */
-  if (isLoading || isFetching || loadingB || successB || loadingC || successC) {
+  if (isLoading || isFetching || loadingB || successB || loadingC) {
     return <Loader />;
   }
 
@@ -317,10 +311,7 @@ const Wallet = () => {
                             <Button
                               className="bg-red-500 hover:bg-red-700"
                               onClick={() => {
-                                setDetails({
-                                  id: item.id,
-                                  name: item.name,
-                                });
+                                setRevokeURL(item.initialization_url);
                                 setIsOpen(true);
                               }}
                             >
@@ -367,8 +358,11 @@ const Wallet = () => {
               </Button>
               <Button
                 className="ml-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300"
-                disabled={password.length > 8 ? false : true}
-                onClick={() => handleTokenRevoke()}
+                disabled={password.length >= 8 ? false : true}
+                onClick={() => {
+                  handleTokenRevoke();
+                  setIsOpen(false);
+                }}
               >
                 confirm revoke
               </Button>
