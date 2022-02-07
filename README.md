@@ -4,7 +4,11 @@ Here is the interface through which users can manage their accounts and store th
 
 ## Building
 
-- [Getting Started](docs/CONFIGURATIONS.md)
+- [Setup guide](docs/CONFIGURATIONS.md)
+
+## Contributing
+
+- [Getting Started](docs/CONTRIBUTING.md)
 
 ## Licensing
 
