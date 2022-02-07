@@ -16,7 +16,7 @@ Register for an SMSWithoutBorders account by filling the form on the [signup](ht
 
 ## Token storage
 
-Logged in users can access the [wallet page](http://localhost:18000/dashboard/wallet) to save tokens for all supported platforms(Gmail, Twitter and Telegram). Each platform's token can be saved by clicking the save button under its description
+Authenticated users can access the [wallet page](http://localhost:18000/dashboard/wallet) to save tokens for all supported platforms(Gmail, Twitter and Telegram). Each platform's token can be saved by clicking the save button under its description
 
 ![wallet](images/wallet.png)
 
@@ -27,3 +27,9 @@ When saving tokens for Gmail and Twitter, an authorization screen will be displa
 Saving Telegram access requires a phone number to be provided. A verification code will be sent which you have to provide to confirm. If you do not already have a Telegram account you will be prompted to create one.
 
 ![Telegram](images/telegram.png);
+
+## Token Revoke
+
+Authenticated users can delete stored tokens by selecting the revoke button under saved platform's details.
+
+![Token revoke](images/token-revoke.png);
