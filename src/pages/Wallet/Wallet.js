@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
+import { IoMdSync } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { authSelector } from "features";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
 import { Disclosure, Dialog } from "@headlessui/react";
@@ -195,9 +196,18 @@ const Wallet = () => {
     <PageAnimationWrapper>
       <div className="max-w-screen-xl min-h-screen p-8 mx-auto my-10 prose text-gray-900">
         <div className="">
-          <h1 className="inline-flex items-center text-4xl font-bold mb">
-            <IoWalletOutline /> &nbsp; Wallet
-          </h1>
+          <div className="flex justify-between mb-8 ">
+            <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
+              <IoWalletOutline /> &nbsp; Wallet
+            </h1>
+            <Link
+              to="/dashboard/sync"
+              className="inline-flex items-center justify-center px-6 py-2 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none hover:bg-blue-900"
+            >
+              <IoMdSync size={22} />
+              <span className="ml-1">sync</span>
+            </Link>
+          </div>
           <p className="my-0 text-lg">
             Store your token which will be used for authentication on your
             behalf in the event of an internet shutdown.

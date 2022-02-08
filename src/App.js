@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RequireAuth, RequireSession } from "components";
 import { Toaster } from "react-hot-toast";
 import {
+  Sync,
   Contact,
   Privacy,
   Dashboard,
@@ -81,6 +82,7 @@ const App = () => {
           >
             <Route index element={<Wallet />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="sync" element={<Sync />} />
             <Route path="wallet">
               <Route index element={<Wallet />} />
               <Route path="telegram">
