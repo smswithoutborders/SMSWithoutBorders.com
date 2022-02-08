@@ -47,33 +47,43 @@ const PhoneNumberVerification = () => {
       // clear validation creds in state
       dispatch(saveValidationCreds(response));
       // redirect to verification page
-      navigate("verify");
+      navigate("verify", { state: { phone_number: number } });
     } catch (error) {
-      switch (error.status) {
-        case 400:
-          toast.error(
-            "Something went wrong \n We are working to resolve this. Please try again"
-          );
-          break;
-        case 401:
-          toast.error(
-            "Sorry We did not find your account \n please sign up to create one"
-          );
-          break;
-        case 409:
-          toast.error(
-            "An account with this number already exists.Please Log In instead"
-          );
-          break;
-        case 500:
-          toast.error("A critical error occured. Please contact support");
-          break;
-        // custom error thrown by RTK Query https://redux-toolkit.js.org/rtk-query/usage/error-handling
-        case "FETCH_ERROR":
-          toast.error("An error occured, please check your network try again");
-          break;
-        default:
-          toast.error("An error occured, please try again");
+      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
+      const { status, originalStatus } = error;
+      if (originalStatus) {
+        switch (originalStatus) {
+          case 400:
+            toast.error(
+              "Something went wrong \n We are working to resolve this. Please try again"
+            );
+            break;
+          case 401:
+            toast.error("Sorry you are not authorized. please contact support");
+            break;
+          case 403:
+            toast.error("Forbidden, Invalid number provided");
+            break;
+          case 409:
+            toast.error(
+              "There is a possible duplicate of this account please contact support"
+            );
+            break;
+          case 429:
+            toast.error(
+              "Too many failed attempts please wait a while and try again"
+            );
+            break;
+          case 500:
+            toast.error("A critical error occured. Please contact support");
+            break;
+          default:
+            toast.error(
+              "An error occured, please check your network try again"
+            );
+        }
+      } else if (status === "FETCH_ERROR") {
+        toast.error("An error occured, please check your network try again");
       }
     }
   }
@@ -88,11 +98,11 @@ const PhoneNumberVerification = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="px-6 py-20 mx-auto text-center md:px-8 md:w-2/3 lg:w-1/3">
+      <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
         <h1 className="mb-4 text-3xl font-bold">Password Reset</h1>
         <p>Please fill in your phone number to begin</p>
 
-        <div className="flex-1 w-full mt-8">
+        <div className="max-w-md mx-auto mt-12">
           <form
             className="px-4 mx-auto sm:px-3"
             onSubmit={(evt) => handleVerification(evt)}

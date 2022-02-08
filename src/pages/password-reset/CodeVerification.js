@@ -43,12 +43,14 @@ const CodeVerification = () => {
       toast.success(`Success, Code Verified`);
       // save validation creds in state
       dispatch(saveValidationCreds(response));
-      /* 
+      /*
       redirect user to reset password in a route one level up check routing in App.js
       relative routing works like a file system
       https://stackoverflow.com/questions/55858176/go-up-one-level-in-react-router-using-link
       */
-      navigate("../reset");
+      navigate("../reset", {
+        state: { phone_number: location.state?.phone_number },
+      });
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
