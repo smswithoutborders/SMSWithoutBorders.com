@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { BsShieldLock } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useVerifySignupMutation, clearCache } from "services";
 import { validationSelector, clearValidationCreds } from "features";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   PageAnimationWrapper,
   Loader,
@@ -14,10 +15,18 @@ import {
 
 const CodeVerification = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [code, setCode] = useState();
   const [verifySignup, { isLoading, isSuccess }] = useVerifySignupMutation();
   const creds = useSelector(validationSelector);
+
+  // check if phone number is present
+  useEffect(() => {
+    if (!location.state?.phone_number) {
+      navigate("../");
+    }
+  }, [location.state, navigate]);
 
   async function handleCodeVerification(evt) {
     // prevent default form action
@@ -91,10 +100,17 @@ const CodeVerification = () => {
   return (
     <PageAnimationWrapper>
       <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
-        <h1 className="mb-4 text-3xl font-bold">Enter verification code</h1>
-        <p className="mt-8">A verification code has been sent to your phone</p>
+        <h1 className="inline-flex items-center mb-4 text-4xl font-bold">
+          <BsShieldLock /> &nbsp; Verification
+        </h1>
+        <p className="mt-4">
+          A verification code has been sent to your phone. Please enter it below
+        </p>
 
-        <small className="my-4">Lorem Ipsum Dolor consecutar eh errrhhh</small>
+        <p className="block my-4">
+          This process confirms the number provided is active and can be used
+          for communication when the time comes
+        </p>
 
         <div className="max-w-md mx-auto mt-12">
           <form
