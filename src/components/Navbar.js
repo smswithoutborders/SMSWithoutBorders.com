@@ -12,12 +12,10 @@ import { FiMenu, FiX, FiLogOut, FiUser, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
+import { NavLink } from "./NavLink";
 import toast from "react-hot-toast";
 
-const NavLink = tw(
-  Link
-)`flex hocus:outline-none text-gray-900 font-medium hocus:font-bold p-5 items-center appearance-none`;
-const ExtLink = tw.a`flex hocus:outline-none text-gray-900 font-medium hocus:font-bold p-5 items-center appearance-none`;
+const ExtLink = tw.a`flex outline-none text-gray-900 font-medium p-5 items-center appearance-none`;
 const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
 const LogoLink = styled(Link)`
   ${tw`flex items-center text-xl font-bold lg:ml-4`};
@@ -130,7 +128,7 @@ export const Navbar = () => {
       <NavLink onClick={() => toggleMenu()} key="Profile" to="profile">
         <FiUser size={20} /> &nbsp; Profile
       </NavLink>
-      <NavLink onClick={() => toggleMenu()} key="Sync" to="profile">
+      <NavLink onClick={() => toggleMenu()} key="Sync" to="sync">
         <IoMdSync size={20} /> &nbsp; Sync
       </NavLink>
       <NavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">

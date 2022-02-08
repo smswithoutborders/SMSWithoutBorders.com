@@ -10,3 +10,4 @@ export * from "./PasswordInput";
 export * from "./shared";
 export * from "./RequireAuth";
 export * from "./RequireSession";
+export * from "./NavLink";

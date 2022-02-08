@@ -6,11 +6,9 @@ import logo from "images/logo-icon-light.png";
 import { FiMenu, FiLogIn, FiUserPlus, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
+import { NavLink } from "./NavLink";
 
-const NavLink = tw(
-  Link
-)`flex hocus:outline-none text-gray-900 font-medium hocus:font-bold p-5 items-center appearance-none`;
-const ExtLink = tw.a`flex hocus:outline-none text-gray-900 font-medium hocus:font-bold p-5 items-center appearance-none`;
+const ExtLink = tw.a`flex outline-none text-gray-900 font-medium p-5 items-center appearance-none`;
 const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
 const LogoLink = styled(Link)`
   ${tw`flex items-center text-xl font-bold lg:ml-4`};
