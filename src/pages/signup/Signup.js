@@ -90,7 +90,7 @@ const Signup = () => {
       // save 2fa authorization details
       dispatch(saveValidationCreds(response));
       // redirect user to code confirmation page
-      navigate("verify");
+      navigate("verify", { state: { phone_number: data.phone_number } });
     } catch (error) {
       const { status, originalStatus } = error;
       if (originalStatus) {
@@ -109,9 +109,7 @@ const Signup = () => {
             toast.error("Forbidden, check your phonenumber and password");
             break;
           case 409:
-            toast.error(
-              "An account with this number already exists"
-            );
+            toast.error("An account with this number already exists");
             break;
           case 500:
             toast.error("A critical error occured. Please contact support");
