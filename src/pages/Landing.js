@@ -26,7 +26,7 @@ const Landing = () => {
               alt="SMSwithoutborders App"
             />
           </div>
-          <div className="order-first p-8 col-span-full lg:col-span-1 md:order-last">
+          <div className="order-first p-8 col-span-full lg:col-span-1 lg:order-last">
             <h1>Stay Productive</h1>
             <p>
               In this age of communication, keep in touch with your contacts
@@ -34,7 +34,7 @@ const Landing = () => {
               connection. Store your access to your favourite communications
               platforms while online, use them while offline.
             </p>
-            <div className="flex flex-row justify-start w-full mt-4">
+            <div className="flex flex-row justify-center w-full mt-4 lg:justify-start">
               <a
                 className="inline-flex items-center justify-center px-4 py-2 mb-4 mr-2 font-bold no-underline bg-white rounded-lg appearance-none md:mr-4 hover:shadow-xl"
                 href="https://play.google.com/store/apps/details?id=com.afkanerd.sw0b"
