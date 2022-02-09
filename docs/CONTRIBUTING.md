@@ -2,6 +2,8 @@
 
 Thank you for supporting SMSWithoutBorders. Please follow the steps below to get started. This SMSWithoutBorders.com is built with [React](https://reactjs.org/)
 
+Existing features can be found in [FEATURES.md](FEATURES.md);
+
 ## Style Guide
 
 This project was bootstraped with [Create React App](https://github.com/facebook/create-react-app) which specifies environment variable naming conventions.

@@ -33,3 +33,9 @@ Saving Telegram access requires a phone number to be provided. A verification co
 Authenticated users can delete stored tokens by selecting the revoke button under saved platform's details.
 
 ![Token revoke](images/token-revoke.png);
+
+## Password Change
+
+Authenticated users can change their current password from [settings](http://localhost:18000/dashboard/settings/change-password)
+
+![Password change](images/password-change.png);
