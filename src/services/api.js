@@ -65,10 +65,13 @@ export const API = createApi({
       }),
     }),
     changePassword: builder.mutation({
-      query: (credentials) => ({
-        url: "/users/password/new",
+      query: ({ uid, password, new_password }) => ({
+        url: `/users/${uid}/password`,
         method: "POST",
-        body: credentials,
+        body: {
+          password: password,
+          new_password: new_password,
+        },
       }),
     }),
     deleteAccount: builder.mutation({

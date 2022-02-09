@@ -9,13 +9,11 @@ const Settings = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-xl p-6 mx-auto my-10 prose text-gray-900 md:p-8">
+      <div className="max-w-screen-xl min-h-screen p-8 mx-auto my-10 prose text-gray-900">
         <div className="inline-flex items-center mb-12">
           <FiSettings size={56} />
           <div className="ml-4">
-            <h1 className="mb-0 text-4xl font-bold ">
-              Settings
-            </h1>
+            <h1 className="mb-0 text-4xl font-bold ">Settings</h1>
             <p className="my-0 text-lg">Manage your account</p>
           </div>
         </div>
@@ -30,7 +28,7 @@ const Settings = () => {
               }
               to="change-password"
             >
-              <FiUser size={20} className="mr-2" /> Change Password
+              <FiUser size={20} className="mr-2" /> Password Change
             </NavLink>
             <NavLink
               className={({ isActive }) =>
