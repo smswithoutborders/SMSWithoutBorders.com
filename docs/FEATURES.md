@@ -39,3 +39,18 @@ Authenticated users can delete stored tokens by selecting the revoke button unde
 Authenticated users can change their current password from [settings](http://localhost:18000/dashboard/settings/change-password)
 
 ![Password change](images/password-change.png);
+
+## Password Recovery
+
+Users who have forgotten their account password can recover it by clicking the forgot password link on the [login page](http://localhost:18000/login). The phone number associated with the account is to be provided to which an authentication code will be sent for verification.
+
+![Password Recovery Step 1](images/password-recovery-step-1.png);
+
+After the code is successfully verified, the user will be able to set a new password
+
+![Password Recovery Step 2](images/password-recovery-step-2.png);
+
+After setting a new password, The user can resume using their account
+
+![Password Recovery Step 3](images/password-recovery-step-3.png);
+
