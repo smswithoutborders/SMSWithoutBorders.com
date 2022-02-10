@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { RequireAuth, RequireSession } from "components";
+import { RequireAuth } from "components";
 import { Toaster } from "react-hot-toast";
 import {
   Sync,
@@ -53,22 +53,8 @@ const App = () => {
             </Route>
             <Route path="password-reset">
               <Route index element={<PhoneNumberVerification />} />
-              <Route
-                path="verify"
-                element={
-                  <RequireSession>
-                    <PasswordChangeVerification />
-                  </RequireSession>
-                }
-              />
-              <Route
-                path="reset"
-                element={
-                  <RequireSession>
-                    <PasswordReset />
-                  </RequireSession>
-                }
-              />
+              <Route path="verify" element={<PasswordChangeVerification />} />
+              <Route path="reset" element={<PasswordReset />} />
             </Route>
           </Route>
 

@@ -5,9 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { validationSelector, clearValidationCreds } from "features";
-import { useNewPasswordMutation, clearCache } from "services";
+import { useNewPasswordMutation, getCache, clearCache } from "services";
 import {
   Loader,
   Label,
@@ -36,8 +34,6 @@ const PasswordReset = () => {
   useTitle("Password Reset");
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const creds = useSelector(validationSelector);
   const [newPassword, { isLoading, isSuccess }] = useNewPasswordMutation();
   const {
     register,
@@ -56,9 +52,10 @@ const PasswordReset = () => {
   }, [location.state, navigate]);
 
   async function handlePasswordReset(data) {
+    const cache = getCache();
     // build request data
     let request = {
-      auth_key: creds.auth_key,
+      uid: cache.uid,
       new_password: data.password,
     };
 
@@ -67,8 +64,6 @@ const PasswordReset = () => {
       toast.success("Password Changed successfully");
       // remove any cached data
       clearCache();
-      // clear validation creds in state
-      dispatch(clearValidationCreds());
       navigate("/login");
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
@@ -82,11 +77,11 @@ const PasswordReset = () => {
             break;
           case 401:
             toast.error(
-              "Sorry we did not find your account. Please contact support"
+              "Sorry your session expired. Please start over"
             );
             break;
           case 403:
-            toast.error("Forbidden, Invalid number provided");
+            toast.error("Forbidden, please check password");
             break;
           case 409:
             toast.error(

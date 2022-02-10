@@ -45,23 +45,25 @@ export const API = createApi({
     }),
     recoverPassword: builder.mutation({
       query: (data) => ({
-        url: "/users/profiles/password/recovery",
+        url: "/recovery",
         method: "POST",
         body: data,
       }),
     }),
     verifyRecoveryCode: builder.mutation({
-      query: (credentials) => ({
-        url: "/users/profiles/password/recovery/2fa",
-        method: "POST",
-        body: credentials,
+      query: (data) => ({
+        url: "/recovery",
+        method: "PUT",
+        body: data,
       }),
     }),
     newPassword: builder.mutation({
-      query: (credentials) => ({
-        url: "/users/profiles/password/recovery/new",
+      query: ({uid, new_password}) => ({
+        url: `/users/${uid}/recovery`,
         method: "POST",
-        body: credentials,
+        body: {
+          new_password: new_password
+        },
       }),
     }),
     changePassword: builder.mutation({

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useRecoverPasswordMutation } from "services";
-import { saveValidationCreds } from "features";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   PageAnimationWrapper,
@@ -12,12 +10,11 @@ import {
   Button,
   Loader,
   useTitle,
+  Alert,
 } from "components";
 
 const PhoneNumberVerification = () => {
   useTitle("password reset");
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [number, setNumber] = useState();
   const [error, setError] = useState(false);
@@ -42,12 +39,10 @@ const PhoneNumberVerification = () => {
     };
 
     try {
-      const response = await recoverPassword(data).unwrap();
+      await recoverPassword(data).unwrap();
       toast.success("A verification code has been sent to your phone");
-      // clear validation creds in state
-      dispatch(saveValidationCreds(response));
       // redirect to verification page
-      navigate("verify", { state: { phone_number: number } });
+      navigate("verify", { state: { phone_number: number }});
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
@@ -100,7 +95,12 @@ const PhoneNumberVerification = () => {
     <PageAnimationWrapper>
       <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
         <h1 className="mb-4 text-3xl font-bold">Password Reset</h1>
-        <p>Please fill in your phone number to begin</p>
+        <Alert
+          kind="warning"
+          message="This action will delete all currently saved tokens in your wallet"
+          hideCloseButton
+        />
+        <p className="mt-4">Please fill in your phone number to begin</p>
 
         <div className="max-w-md mx-auto mt-12">
           <form

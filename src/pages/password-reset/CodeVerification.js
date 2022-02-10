@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { BsShieldLock } from "react-icons/bs";
-import { useSelector, useDispatch } from "react-redux";
-import { useVerifyRecoveryCodeMutation } from "services";
-import { validationSelector, saveValidationCreds } from "features";
+import { useVerifyRecoveryCodeMutation, setCache } from "services";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   PageAnimationWrapper,
@@ -16,11 +14,9 @@ import {
 const CodeVerification = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [code, setCode] = useState();
   const [verifyRecoveryCode, { isLoading, isSuccess }] =
     useVerifyRecoveryCodeMutation();
-  const creds = useSelector(validationSelector);
 
   // check if phone number is present
   useEffect(() => {
@@ -34,15 +30,13 @@ const CodeVerification = () => {
     evt.preventDefault();
     // build request data
     let data = {
-      ...creds,
       code: code,
     };
 
     try {
       const response = await verifyRecoveryCode(data).unwrap();
       toast.success(`Success, Code Verified`);
-      // save validation creds in state
-      dispatch(saveValidationCreds(response));
+      setCache(response);
       /*
       redirect user to reset password in a route one level up check routing in App.js
       relative routing works like a file system
@@ -63,7 +57,7 @@ const CodeVerification = () => {
             break;
           case 401:
             toast.error(
-              "Sorry you are not authorized. please logout and login"
+              "Sorry your session has expired please start over"
             );
             break;
           case 403:
