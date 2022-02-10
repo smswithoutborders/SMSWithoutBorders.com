@@ -13,13 +13,14 @@ import {
   clearPersistedState,
 } from "services";
 import {
-  Loader,
+  Alert,
   Label,
-  ErrorMessage,
-  FormGroup,
   Button,
-  PasswordInput,
+  Loader,
   useTitle,
+  FormGroup,
+  ErrorMessage,
+  PasswordInput,
 } from "components";
 
 // form schema
@@ -124,6 +125,11 @@ const PasswordChange = () => {
     <div className="max-w-screen-sm py-20 mx-auto text-center lg:py-0 md:px-8">
       <h1 className="mb-4 text-3xl font-bold">Password Change</h1>
       <p className="">Set a new password for your account</p>
+      <Alert
+        kind="warning"
+        message="This action will delete all currently saved tokens in your wallet"
+        hideCloseButton
+      />
       <div className="max-w-md mx-auto mt-12 text-left">
         <form
           className="px-4 mx-auto sm:px-3"
