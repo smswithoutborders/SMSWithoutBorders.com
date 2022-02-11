@@ -4,8 +4,14 @@ import { useDeleteAccountMutation } from "services";
 import { authSelector, resetStore } from "features";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FiTrash2 } from "react-icons/fi";
-import { PasswordInput, FormGroup, Button, Loader, useTitle } from "components";
+import {
+  Alert,
+  Button,
+  Loader,
+  useTitle,
+  FormGroup,
+  PasswordInput,
+} from "components";
 
 const AccountDeletion = () => {
   useTitle("Account Deletion");
@@ -18,7 +24,6 @@ const AccountDeletion = () => {
   async function handleDeletion(evt) {
     // stop default form action
     evt.preventDefault();
-
     // build request body
     const data = {
       ...auth,
@@ -82,10 +87,13 @@ const AccountDeletion = () => {
 
   return (
     <div className="max-w-screen-sm py-20 mx-auto text-center md:px-8">
-      <h1 className="mb-4 text-3xl font-bold text-red-600">Delete Account</h1>
-      <p>
-        This action cannot be reversed. Please enter your password to confirm
-      </p>
+      <h1 className="mb-4 text-3xl font-bold">Delete Account</h1>
+      <Alert
+        kind="negative"
+        message="This action cannot be reversed. All your tokens will be lost"
+        hideCloseButton
+      />
+      <p>Please enter your password to confirm</p>
 
       <div className="max-w-md mx-auto mt-12">
         <form
@@ -103,11 +111,11 @@ const AccountDeletion = () => {
           </FormGroup>
 
           <Button
-            className="bg-red-600 focus:bg-red-700 disabled:bg-gray-300"
+            className="bg-red-600 hover:bg-red-500 focus:bg-red-700 disabled:bg-gray-300"
             type="submit"
             disabled={password?.length >= 8 ? false : true}
           >
-            <FiTrash2 size={20} /> &nbsp; delete
+            continue
           </Button>
         </form>
       </div>

@@ -33,8 +33,8 @@ export const Alert = ({
       className={clsx(
         "flex justify-between px-2 py-4 md:p-4 text-sm md:text-base border-l-4 text-gray-700 rounded",
         kind === "primary" && "bg-blue-200 border-blue-800",
-        kind === "affirmative" && "bg-green-100 border-green-300 ",
-        kind === "negative" && "bg-red-100 border-red-300 ",
+        kind === "affirmative" && "bg-green-100 border-green-500 ",
+        kind === "negative" && "bg-red-100 border-red-500 ",
         kind === "warning" && "bg-yellow-100 border-yellow-400 ",
         !open && "hidden"
       )}
@@ -42,11 +42,11 @@ export const Alert = ({
     >
       <div className="col-span-1">
         {kind === "affirmative" ? (
-          <FiCheckCircle size={24} className="text-green-300" />
+          <FiCheckCircle size={24} className="text-green-500" />
         ) : kind === "warning" ? (
           <FiAlertTriangle size={24} className="text-yellow-500" />
         ) : kind === "negative" ? (
-          <FiXCircle size={24} className="text-red-300" />
+          <FiXCircle size={24} className="text-red-500" />
         ) : (
           <FiAlertCircle size={24} className="text-blue-800" />
         )}

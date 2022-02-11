@@ -58,11 +58,11 @@ export const API = createApi({
       }),
     }),
     newPassword: builder.mutation({
-      query: ({uid, new_password}) => ({
+      query: ({ uid, new_password }) => ({
         url: `/users/${uid}/recovery`,
         method: "POST",
         body: {
-          new_password: new_password
+          new_password: new_password,
         },
       }),
     }),
@@ -77,10 +77,12 @@ export const API = createApi({
       }),
     }),
     deleteAccount: builder.mutation({
-      query: (credentials) => ({
-        url: "users/profiles/delete",
+      query: ({ uid, password }) => ({
+        url: `/users/${uid}`,
         method: "DELETE",
-        body: credentials,
+        body: {
+          password,
+        },
       }),
     }),
     storeToken: builder.mutation({
