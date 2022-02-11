@@ -54,3 +54,8 @@ After setting a new password, The user can resume using their account
 
 ![Password Recovery Step 3](images/password-recovery-step-3.png);
 
+## Account Deletion
+
+Authenticated users can delete their accounts from the [settings page](http://localhost:18000/dashboard/settings) under the [account deletion tab](http://localhost:18000/dashboard/settings/delete-account)
+
+![Account Deletion](images/account-deletion.png);
