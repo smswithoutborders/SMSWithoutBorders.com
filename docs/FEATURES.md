@@ -1,6 +1,6 @@
 # Features
 
-This document contains all working features.
+This document contains all working features and assumes you have a development version of the project setup for testing.
 
 ## Sign Up
 
@@ -59,3 +59,7 @@ After setting a new password, The user can resume using their account
 Authenticated users can delete their accounts from the [settings page](http://localhost:18000/dashboard/settings) under the [account deletion tab](http://localhost:18000/dashboard/settings/delete-account)
 
 ![Account Deletion](images/account-deletion.png);
+
+## Rendering Markdown Files
+
+The [Privacy Policy](http://localhost:18000/privacy-policy) page is loaded from [privacy.md](privacy.md) as markdown into the website. Check [CONFIGURATIONS.md](CONFIGURATIONS.md) on how to link the file.
