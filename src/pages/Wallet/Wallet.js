@@ -360,6 +360,7 @@ const Wallet = () => {
               placeholder="Password"
               minLength="8"
               onChange={(evt) => setPassword(evt.target.value)}
+              showStrength={false}
             />
 
             <div className="flex items-center justify-end mt-8">

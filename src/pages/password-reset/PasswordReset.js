@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
-import PasswordStrengthBar from "react-password-strength-bar";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -38,7 +37,6 @@ const PasswordReset = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -135,7 +133,6 @@ const PasswordReset = () => {
               {errors.password && (
                 <ErrorMessage>{errors.password?.message}</ErrorMessage>
               )}
-              <PasswordStrengthBar password={watch("password")} />
             </FormGroup>
 
             <FormGroup>
@@ -149,7 +146,6 @@ const PasswordReset = () => {
               {errors.confirmPassword && (
                 <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
               )}
-              <PasswordStrengthBar password={watch("confirmPassword")} />
             </FormGroup>
 
             <Button className="w-full">change password</Button>

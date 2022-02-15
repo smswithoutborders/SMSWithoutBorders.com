@@ -107,6 +107,7 @@ const AccountDeletion = () => {
               min={8}
               required
               onChange={(evt) => setPassword(evt.target.value)}
+              showStrength={false}
             />
           </FormGroup>
 

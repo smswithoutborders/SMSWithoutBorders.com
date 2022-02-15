@@ -178,6 +178,7 @@ const Login = () => {
               <Label htmlFor="password">Password</Label>
               <PasswordInput
                 name="password"
+                showStrength={false}
                 {...register("password")}
                 error={errors.password}
               />
