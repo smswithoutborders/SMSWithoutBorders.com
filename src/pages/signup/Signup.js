@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "images/logo.png";
 import toast from "react-hot-toast";
-import PasswordStrengthBar from "react-password-strength-bar";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { FiUserPlus } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
@@ -196,7 +195,6 @@ const Signup = () => {
               {errors.password && (
                 <ErrorMessage>{errors.password?.message}</ErrorMessage>
               )}
-              <PasswordStrengthBar password={watch("password")} />
             </FormGroup>
 
             <FormGroup>
@@ -210,10 +208,9 @@ const Signup = () => {
               {errors.confirmPassword && (
                 <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
               )}
-              <PasswordStrengthBar password={watch("confirmPassword")} />
             </FormGroup>
 
-            <FormGroup className="flex items-start">
+            <FormGroup className="flex items-start mt-8">
               <Controller
                 control={control}
                 name="acceptTerms"
