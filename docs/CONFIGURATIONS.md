@@ -51,3 +51,37 @@ npm run build
 ```
 
 Builds the app for production. Check the `build` folder for deployable files once complete.
+
+
+## Deployment
+
+For a Linux/Ubuntu server running apache2 web server, follow these steps to deploy the site
+
+* Enable rewrite module
+  
+```bash
+sudo a2enmod rewrite
+```
+
+* Open apache configuration file at /etc/apache2/apache2.conf
+* Change the AllowOverride permission from none to all
+
+```bash
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+```
+
+* Copy contents of build folder to server root normally located at /var/www/html. Ensure the .htaccess file is copied over. The .htaccess file is quite important as specified [here](https://create-react-app.dev/docs/deployment/#static-server)
+
+```bash
+sudo cp -r build/. /var/www/html
+```
+
+* restart apache2
+
+```bash
+sudo systemctl restart apache2
+```
