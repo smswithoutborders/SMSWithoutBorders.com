@@ -125,7 +125,7 @@ const PasswordChange = () => {
       <p className="">Set a new password for your account</p>
       <Alert
         kind="warning"
-        message="This action will delete all currently saved tokens in your wallet"
+        message="This action will delete all currently saved tokens in your wallet and you will be logged out"
         hideCloseButton
       />
       <div className="max-w-md mx-auto mt-12 text-left">
