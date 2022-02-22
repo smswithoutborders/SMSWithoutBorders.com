@@ -11,3 +11,4 @@ export * from "./shared";
 export * from "./RequireAuth";
 export * from "./NavLink";
 export * from "./Alert";
+export * from "./QRCode";
