@@ -2,7 +2,6 @@ import React, { useState, forwardRef, Fragment } from "react";
 import { ToggleButton } from "./ToggleButton";
 import { Input } from "./shared";
 import clsx from "clsx";
-import zxcvbn from "zxcvbn";
 import PropTypes from "prop-types";
 
 // Password Input Component
@@ -13,8 +12,14 @@ export const PasswordInput = forwardRef(
 
     function calculateStrength(password) {
       if (password.length > 0) {
-        const result = zxcvbn(password);
-        setStrength(result.score);
+        /* 
+        Dynamic import - rename default import to lib name for clarity
+        https://www.smashingmagazine.com/2022/02/javascript-bundle-performance-code-splitting/
+         */
+        import("zxcvbn").then(({ default: zxcvbn }) => {
+          const result = zxcvbn(password);
+          setStrength(result.score);
+        });
       } else {
         setStrength(null);
       }
