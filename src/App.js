@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RequireAuth } from "components";
 import { Toaster } from "react-hot-toast";
+import { FiSettings } from "react-icons/fi";
 import {
   Sync,
   Contact,
@@ -78,7 +79,19 @@ const App = () => {
               </Route>
             </Route>
             <Route path="settings" element={<Settings />}>
-              <Route index element={<PasswordChange />} />
+              <Route
+                index
+                element={
+                  <div className="grid place-items-center">
+                    <div className="p-8 text-center h-80">
+                      <FiSettings size={100} className="mx-auto mb-4" />
+                      <p className="mb-8 text-base leading-relaxed">
+                        Please select a setting from the menu
+                      </p>
+                    </div>
+                  </div>
+                }
+              />
               <Route path="change-password" element={<PasswordChange />} />
               <Route path="delete-account" element={<AccountDeletion />} />
             </Route>
