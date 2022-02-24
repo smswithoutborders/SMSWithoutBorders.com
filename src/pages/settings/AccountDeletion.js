@@ -1,37 +1,64 @@
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { useDeleteAccountMutation } from "services";
 import { authSelector, resetStore } from "features";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import {
   Alert,
+  Input,
+  Label,
   Button,
   Loader,
   useTitle,
   FormGroup,
+  ErrorMessage,
   PasswordInput,
 } from "components";
+
+const schema = yup.object().shape({
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+  confirmation: yup
+    .string()
+    .oneOf(
+      ["IConfirmThisAction"],
+      "please enter IConfirmThisAction to confirm"
+    ),
+});
 
 const AccountDeletion = () => {
   useTitle("Account Deletion");
   const auth = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [password, setPassword] = useState();
   const [deleteAccount, { isLoading, isSuccess }] = useDeleteAccountMutation();
 
-  async function handleDeletion(evt) {
-    // stop default form action
-    evt.preventDefault();
-    // build request body
-    const data = {
-      ...auth,
-      password: password,
-    };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: "",
+    },
+  });
 
+  async function handleDeletion(data) {
+    // build request body
+    const request = {
+      ...auth,
+      password: data.password,
+    };
+    
     try {
-      await deleteAccount(data).unwrap();
+      await deleteAccount(request).unwrap();
       toast.success("Your account has been deleted. Sad to see you go");
       // clear store/ logout user
       dispatch(resetStore());
@@ -93,28 +120,53 @@ const AccountDeletion = () => {
         message="This action cannot be reversed. All your tokens will be lost"
         hideCloseButton
       />
-      <p>Please enter your password to confirm</p>
+      <p>
+        Please enter <strong>IConfirmThisAction</strong> and your password to
+        proceed
+      </p>
 
-      <div className="max-w-md mx-auto mt-12">
+      <div className="max-w-md mx-auto mt-8">
         <form
-          className="px-4 mx-auto sm:px-3"
-          onSubmit={(evt) => handleDeletion(evt)}
+          className="px-4 mx-auto text-left sm:px-3"
+          onSubmit={handleSubmit(handleDeletion)}
         >
           <FormGroup>
+            <Label htmlFor="name" required>
+              Confirmation
+            </Label>
+            <Input
+              type="text"
+              name="confirmation"
+              placeholder="enter confirmation"
+              {...register("confirmation")}
+              error={errors.name}
+            />
+            {errors.confirmation && (
+              <ErrorMessage>{errors.confirmation.message}</ErrorMessage>
+            )}
+            <small className="block mt-2 text-xs text-gray-600">
+              Enter <strong>IConfirmThisAction</strong>
+            </small>
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password" required>
+              Password
+            </Label>
             <PasswordInput
               name="password"
               placeholder="password"
-              min={8}
-              required
-              onChange={(evt) => setPassword(evt.target.value)}
+              {...register("password")}
+              error={errors.password}
               showStrength={false}
             />
+            {errors.password && (
+              <ErrorMessage>{errors.password.message}</ErrorMessage>
+            )}
           </FormGroup>
 
           <Button
-            className="bg-red-600 hover:bg-red-500 focus:bg-red-700 disabled:bg-gray-300"
             type="submit"
-            disabled={password?.length >= 8 ? false : true}
+            className="w-full bg-red-600 hover:bg-red-500 focus:bg-red-600 disabled:bg-gray-300"
           >
             continue
           </Button>
