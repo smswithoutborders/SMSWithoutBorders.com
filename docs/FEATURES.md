@@ -60,6 +60,12 @@ Authenticated users can delete their accounts from the [settings page](http://lo
 
 ![Account Deletion](images/account-deletion.png);
 
+## User Dashboard
+
+Authenticated users can access their [dashboard](http://localhost:18000/dashboard/metrics)
+
+![Dashboard](images/dashboard.png);
+
 ## Rendering Markdown Files
 
 The [Privacy Policy](http://localhost:18000/privacy-policy) page is loaded from [privacy.md](privacy.md) as markdown into the website. Check [CONFIGURATIONS.md](CONFIGURATIONS.md) on how to link the file.
