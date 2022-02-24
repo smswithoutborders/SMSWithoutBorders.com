@@ -27,7 +27,7 @@ import {
 
 // sign up schema
 const schema = yup.object().shape({
-  name: yup.string().required("please provide an alias"),
+  name: yup.string(),
   phone_number: yup.string().required("Phone Number is required"),
   password: yup
     .string()
@@ -57,6 +57,9 @@ const Signup = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      name: "",
+    },
   });
 
   // Sign up is a three step process with 2fa verification
@@ -77,6 +80,7 @@ const Signup = () => {
      verification codes or signup failed.
      This data will be cleared after code verification
     */
+
     setCache(data);
 
     try {
@@ -144,7 +148,9 @@ const Signup = () => {
           </div>
           <form onSubmit={handleSubmit(handleSignUp)}>
             <FormGroup>
-              <Label htmlFor="phone_number">Phone Number</Label>
+              <Label htmlFor="phone_number" required>
+                Phone Number
+              </Label>
               <Controller
                 control={control}
                 name="phone_number"
@@ -186,7 +192,9 @@ const Signup = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" required>
+                Password
+              </Label>
               <PasswordInput
                 name="password"
                 {...register("password")}
@@ -198,7 +206,9 @@ const Signup = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" required>
+                Confirm Password
+              </Label>
               <PasswordInput
                 name="confirmPassword"
                 placeholder="retype password"

@@ -33,9 +33,18 @@ export const Input = styled.input.attrs((props) => ({
   ),
 }))``;
 
-export const Label = styled.label.attrs({
-  className: "leading-7 text-gray-600",
-})``;
+export const Label = ({ required, children }) => {
+  return (
+    <label className="text-sm leading-8 text-gray-600">
+      <span>{children}</span>
+      {required ? (
+        <span className="ml-1 text-red-600">*</span>
+      ) : (
+        <span className="ml-1">(optional)</span>
+      )}
+    </label>
+  );
+};
 
 export const CheckBox = styled.input.attrs((props) => ({
   type: "checkbox",

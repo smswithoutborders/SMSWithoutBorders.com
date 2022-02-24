@@ -152,7 +152,9 @@ const Login = () => {
           </div>
           <form onSubmit={handleSubmit(handleLogin)}>
             <FormGroup>
-              <Label>Phone Number</Label>
+              <Label htmlFor="phone_number" required>
+                Phone Number
+              </Label>
               <Controller
                 control={control}
                 name="phone_number"
@@ -175,7 +177,9 @@ const Login = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" required>
+                Password
+              </Label>
               <PasswordInput
                 name="password"
                 showStrength={false}
