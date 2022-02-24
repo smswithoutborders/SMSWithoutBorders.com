@@ -4,41 +4,35 @@ import { API } from "services";
 
 // we only extract what is needed. check API Docs for full response body
 const initialState = {
-  id: "",
-  name: "",
-  last_login: "",
-  created: "",
+  createdAt: "",
+  updatedAt: "",
 };
 /* 
      add a matcher to also update profile when the query runs
      https://redux-toolkit.js.org/rtk-query/usage/examples#dispatching-an-action-to-set-the-user-state
 */
-export const profileSlice = createSlice({
-  name: "profile",
+export const metrics = createSlice({
+  name: "metrics",
   initialState,
   reducers: {
     saveProfile: (state, action) => {
-      const { id, name, last_login, created } = action.payload;
+      const { createdAt, updatedAt } = action.payload;
       return {
         ...state,
-        id,
-        name,
-        last_login,
-        created,
+        createdAt,
+        updatedAt,
       };
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      API.endpoints.getProfile.matchFulfilled,
+      API.endpoints.getMetrics.matchFulfilled,
       (state, { payload }) => {
-        const { id, name, last_login, created } = payload;
+        const { createdAt, updatedAt } = payload;
         return {
           ...state,
-          id,
-          name,
-          last_login,
-          created,
+          createdAt,
+          updatedAt,
         };
       }
     );
@@ -46,9 +40,9 @@ export const profileSlice = createSlice({
 });
 
 // Action creators are generated for each reducer function
-export const { saveProfile } = profileSlice.actions;
+export const { saveProfile } = metrics.actions;
 
 // profile selector
-export const profileSelector = (state) => state.profile;
+export const metricsSelector = (state) => state.profile;
 
-export default profileSlice.reducer;
+export default metrics.reducer;

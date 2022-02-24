@@ -6,9 +6,9 @@ import logo from "images/logo-icon-light.png";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { profileSelector, resetStore, authSelector } from "features";
+import { metricsSelector, resetStore, authSelector } from "features";
 import { useSelector, useDispatch } from "react-redux";
-import { FiMenu, FiX, FiLogOut, FiUser, FiSettings } from "react-icons/fi";
+import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
@@ -31,10 +31,9 @@ const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5
 
 export const Navbar = () => {
   const dispatch = useDispatch();
-  const profile = useSelector(profileSelector);
+  const metrics = useSelector(metricsSelector);
   const auth = useSelector(authSelector);
   const [open, setOpen] = useState(false);
-
   const [logout, { isLoading, isSuccess }] = useLogoutMutation();
 
   // helper function for menu toggle and logout
@@ -97,15 +96,15 @@ export const Navbar = () => {
 
   const actionLinks = (
     <UserActions key={2}>
-      {profile.name && (
+      {metrics?.name && (
         <div onClick={() => toggleMenu()}>
           <div className="flex items-center px-4 lg:px-0">
             <div className="flex items-center justify-center mr-2 bg-blue-800 rounded-full w-9 h-9">
               <p className="font-bold text-center text-white">
-                {profile?.name.charAt(0)}
+                {metrics?.name.charAt(0)}
               </p>
             </div>
-            <p className="mr-4 lg:hidden">{profile?.name}</p>
+            <p className="mr-4 lg:hidden">{metrics?.name}</p>
           </div>
         </div>
       )}
@@ -125,8 +124,8 @@ export const Navbar = () => {
       >
         Get Started
       </StartedExtLink>
-      <NavLink onClick={() => toggleMenu()} key="Profile" to="profile">
-        <FiUser size={20} /> &nbsp; Profile
+      <NavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
+        <FiGrid size={20} /> &nbsp; Dashboard
       </NavLink>
       <NavLink onClick={() => toggleMenu()} key="Sync" to="sync">
         <IoMdSync size={20} /> &nbsp; Sync

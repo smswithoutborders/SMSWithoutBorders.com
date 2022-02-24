@@ -11,13 +11,13 @@ import {
   Signup,
   Login,
   Settings,
-  Profile,
   Wallet,
   NotFound,
   Website,
   AccountDeletion,
   WalletRedirect,
   PasswordChange,
+  DashboardLayout,
   TelegramRegistration,
   SignupCodeVerification,
   PhoneNumberVerification,
@@ -62,12 +62,12 @@ const App = () => {
             path="dashboard"
             element={
               <RequireAuth>
-                <Dashboard />
+                <DashboardLayout />
               </RequireAuth>
             }
           >
             <Route index element={<Wallet />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="metrics" element={<Dashboard />} />
             <Route path="sync" element={<Sync />} />
             <Route path="wallet">
               <Route index element={<Wallet />} />

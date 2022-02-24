@@ -2,13 +2,13 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { API } from "../services/api";
 import authReducer from "./auth";
-import profileReducer from "./profile";
+import metricsReducer from "./metrics";
 import validationReducer from "./validation";
 
 // Add the generated reducer as a specific top-level reducer
 const appReducer = combineReducers({
   auth: authReducer,
-  profile: profileReducer,
+  metrics: metricsReducer,
   validation: validationReducer,
   [API.reducerPath]: API.reducer,
 });

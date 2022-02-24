@@ -36,11 +36,10 @@ export const API = createApi({
         body: credentials,
       }),
     }),
-    getProfile: builder.query({
-      query: (credentials) => ({
-        url: "/users/profiles/info",
-        method: "POST",
-        body: credentials,
+    getMetrics: builder.query({
+      query: ({ uid }) => ({
+        url: `/users/${uid}/dashboard`,
+        method: "GET",
       }),
     }),
     recoverPassword: builder.mutation({
@@ -178,12 +177,12 @@ export const API = createApi({
         arg,
         { cacheEntryRemoved, cacheDataLoaded, updateCachedData }
       ) {
-        // create a websocket connection when the cache subscription starts
-        let ws;
         try {
           // wait for the initial query to resolve before proceeding
           const { data } = await cacheDataLoaded;
-          ws = new WebSocket(`ws://${data.syncURL}`);
+          // create a websocket connection when the cache subscription starts
+
+          const ws = new WebSocket(`ws://${data.syncURL}`);
 
           ws.onopen = (evt) => {
             toast.success("Sync started");
@@ -246,7 +245,6 @@ export const API = createApi({
         // cacheEntryRemoved will resolve when the cache subscription is no longer active
         await cacheEntryRemoved;
         // perform cleanup steps once the `cacheEntryRemoved` promise resolves
-        ws.close();
       },
     }),
   }),
@@ -260,7 +258,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useSignupMutation,
-  useGetProfileQuery,
+  useGetMetricsQuery,
   useGetPlatformsQuery,
   useStoreTokenMutation,
   useNewPasswordMutation,
