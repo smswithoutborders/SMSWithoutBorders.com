@@ -5,7 +5,7 @@ import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { metricsSelector, resetStore, authSelector } from "features";
 import { useSelector, useDispatch } from "react-redux";
 import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
@@ -31,6 +31,7 @@ const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5
 
 export const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const metrics = useSelector(metricsSelector);
   const auth = useSelector(authSelector);
   const [open, setOpen] = useState(false);
@@ -44,12 +45,13 @@ export const Navbar = () => {
   async function handleLogOut() {
     try {
       await logout(auth).unwrap();
-      toast.success("Logout successfull");
-      // clear store
-      dispatch(resetStore());
       // clear local cache if any
       clearCache();
       clearPersistedState();
+      // clear store
+      dispatch(resetStore());
+      toast.success("Logout successfull");
+      navigate("/login", { replace: true, state: null });
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;

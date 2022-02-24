@@ -51,12 +51,10 @@ const Login = () => {
   const auth = useSelector(authSelector);
 
   useEffect(() => {
-    // if logged in then redirect to dashboard
-    if (auth.uid) {
-      navigate("/dashboard");
-    }
     // get the stored cache to repopulate
     const cache = getCache();
+    // if logged in then redirect to dashboard
+
     if (cache && cache.auth_key) {
       dispatch(saveAuth(cache));
       navigate("/dashboard");
@@ -68,8 +66,16 @@ const Login = () => {
         shouldValidate: true,
       });
       clearCache();
+    } else if (auth.uid && location.state && location.state.path) {
+      /*
+        redirect users if they initially tried to access a private route
+        without permission
+      */
+      navigate(location.state.path);
+    } else if (auth.uid) {
+      navigate("/dashboard");
     }
-  }, [setValue, dispatch, navigate, auth.uid]);
+  }, [setValue, dispatch, navigate, auth.uid, location.state]);
 
   const handleLogin = async (data) => {
     // cache the data in case we need it later
@@ -81,15 +87,6 @@ const Login = () => {
       dispatch(saveAuth(user));
       // remove any cached data
       clearCache();
-      /*
-        redirect users if they initially tried to access a private route
-        without permission
-      */
-      if (location.state && location.state.path) {
-        navigate(location.state.path);
-      } else {
-        navigate("/dashboard");
-      }
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
