@@ -19,18 +19,18 @@ export const Footer = () => {
         <NavContainer tw="p-0 mb-4 md:mb-0">
           <FooterNavLink to="/">
             <LogoIcon src={Logo} alt="SMSwithoutborders" />
-            <span className="ml-2 text-xl font-bold">SMSwithoutborders</span>
+            <span className="ml-2 text-xl font-bold">SMSWithoutBorders</span>
           </FooterNavLink>
 
           <FooterLink>
-            &copy; {new Date().getFullYear()} Powered by{" "}
+            2021 - {new Date().getFullYear()}
             <DescLink
               tw="text-sm"
-              href="https://afkanerd.com"
+              href="https://github.com/afkanerd"
               target="_blank"
               rel="noreferrer"
             >
-              Afkanerd
+              &nbsp; Afkanerd
             </DescLink>
           </FooterLink>
         </NavContainer>

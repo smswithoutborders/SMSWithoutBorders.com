@@ -144,7 +144,7 @@ export const Navbar = () => {
   const defaultLogoLink = (
     <LogoLink to="/">
       <img src={logo} alt="logo" />
-      <span>SMSwithoutborders</span>
+      <span>SMSWithoutBorders</span>
     </LogoLink>
   );
 
