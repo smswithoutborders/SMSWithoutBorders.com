@@ -25,10 +25,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 * PORT -> development port
 * REACT_APP_API_URL ->  Backend API URL
-* REACT_APP_API_URL -> Backend API URL
+* REACT_APP_API_VERSION -> API version
 * REACT_APP_GATEWAY_SERVER ->  Gateway server url
+* REACT_APP_GATEWAY_SERVER_VERSION -> Gateway server version
 * REACT_APP_DOCS_URL -> Link to hosted privacy policy markdown file
-* HTTPS -> enable or disable https
+* HTTPS -> Enable or disable https
 * SSL_CRT_FILE -> Location of SSL CRT file
 * SSL_KEY_FILE -> Location of SSL Key file
 
@@ -51,7 +52,6 @@ npm run build
 ```
 
 Builds the app for production. Check the `build` folder for deployable files once complete.
-
 
 ## Deployment
 

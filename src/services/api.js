@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export const API = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
+    baseUrl: `${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_VERSION}`,
     credentials: "include",
   }),
   endpoints: (builder) => ({
