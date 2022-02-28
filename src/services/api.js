@@ -157,7 +157,7 @@ export const API = createApi({
     }),
     sync: builder.query({
       query: ({ uid }) => ({
-        url: `${process.env.REACT_APP_GATEWAY_SERVER}/sync/users/${uid}`,
+        url: `${process.env.REACT_APP_GATEWAY_SERVER}/${process.env.REACT_APP_GATEWAY_SERVER_VERSION}/sync/users/${uid}`,
         method: "GET",
         headers: {
           "content-type": "text/plain",
@@ -168,9 +168,7 @@ export const API = createApi({
         return {
           syncURL: response,
           qrLink: "",
-          status: "not connected",
-          connected: false,
-          paused: false,
+          status: "disconnected",
         };
       },
       async onCacheEntryAdded(
@@ -182,14 +180,13 @@ export const API = createApi({
           const { data } = await cacheDataLoaded;
           // create a websocket connection when the cache subscription starts
 
-          const ws = new WebSocket(`ws://${data.syncURL}`);
+          const ws = new WebSocket(data.syncURL);
 
-          ws.onopen = (evt) => {
+          ws.onopen = () => {
             toast.success("Sync started");
             updateCachedData((draft) => {
               return {
                 ...draft,
-                connected: true,
                 status: "connected",
               };
             });
@@ -208,7 +205,7 @@ export const API = createApi({
               updateCachedData((draft) => {
                 return {
                   ...draft,
-                  paused: true,
+                  status: "scanned",
                 };
               });
             } else {
@@ -228,7 +225,6 @@ export const API = createApi({
             updateCachedData((draft) => {
               return {
                 ...draft,
-                connected: false,
                 status: "disconnected",
               };
             });

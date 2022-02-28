@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { IoMdSync } from "react-icons/io";
 import { authSelector } from "features";
 import { useSelector } from "react-redux";
@@ -14,22 +15,16 @@ import {
 const Sync = () => {
   useTitle("Synchronize Accounts");
   const auth = useSelector(authSelector);
-
-  const {
-    qrLink = "",
-    connected = false,
-    status = "not connected",
-    paused = false,
-    isFetching,
-    isLoading,
-  } = useSyncQuery(auth, {
-    selectFromResult: ({ data }) => ({
-      qrLink: data?.qrLink,
-      connected: data?.connected,
-      paused: data?.paused,
-      status: data?.status,
-    }),
+  const { data = {}, isError } = useSyncQuery(auth, {
+    refetchOnMountOrArgChange: true,
   });
+  const { status = "disconnected", qrLink = "" } = data;
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Sorry an error occured please try again");
+    }
+  }, [isError]);
 
   return (
     <PageAnimationWrapper>
@@ -51,21 +46,21 @@ const Sync = () => {
         </div>
 
         <div className="col-span-full lg:col-span-1">
-          {isLoading || isFetching || paused ? (
-            <InlineLoader />
-          ) : connected && qrLink ? (
+          {status === "connected" ? (
             <QRCode
               value={qrLink}
               size={300}
               className="block p-2 mx-auto border rounded-lg shadow"
             />
-          ) : (
+          ) : status === "disconnected" || isError ? (
             <div className="mx-auto border w-[300px] h-[300px] rounded-lg shadow p-2 grid place-items-center">
               <Button className="mt-4" onClick={() => window.location.reload()}>
                 <IoMdSync size={22} />
                 <span className="ml-1">sync</span>
               </Button>
             </div>
+          ) : (
+            <InlineLoader />
           )}
 
           <div className="mx-auto text-center">
@@ -74,6 +69,8 @@ const Sync = () => {
               <span className="font-normal">{status}</span>
             </p>
           </div>
+
+          <span>{isError}</span>
         </div>
       </div>
     </PageAnimationWrapper>
