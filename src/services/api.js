@@ -143,6 +143,12 @@ export const API = createApi({
         url: `/users/${uid}/platforms`,
         method: "GET",
       }),
+      transformResponse: (response) => {
+        return {
+          savedPlatforms: response.saved_platforms,
+          unSavedPlatforms: response.unsaved_platforms,
+        };
+      },
     }),
     getDocs: builder.query({
       query: () => ({

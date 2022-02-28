@@ -33,18 +33,15 @@ const Wallet = () => {
   const auth = useSelector(authSelector);
   // fetch platforms with rtk query
   const {
-    unSavedPlatforms = {},
-    savedPlatforms = {},
+    data = {},
     isLoading,
     isFetching,
     isError,
     refetch,
   } = useGetPlatformsQuery(auth, {
-    selectFromResult: ({ data }) => ({
-      unSavedPlatforms: data?.unsaved_platforms,
-      savedPlatforms: data?.saved_platforms,
-    }),
+    refetchOnMountOrArgChange: true,
   });
+  const { unSavedPlatforms = {}, savedPlatforms = {} } = data;
 
   // store token
   const [storeToken, { isLoading: loadingB, isSuccess: successB }] =
