@@ -11,17 +11,17 @@ import { NavLink } from "./NavLink";
 const ExtLink = tw.a`flex outline-none text-gray-900 font-medium p-5 items-center appearance-none`;
 const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
 const LogoLink = styled(Link)`
-  ${tw`flex items-center text-xl font-bold lg:ml-4`};
+  ${tw`flex items-center text-xl font-bold xl:ml-4`};
   img {
     ${tw`w-10 h-10 mr-3`}
   }
 `;
 const SignUpLink = tw(NavLink)`bg-primary-800 text-white`;
 const LogInLink = tw(NavLink)`text-primary-800`;
-const UserActions = tw.div`lg:(flex items-center)`;
-const NavContainer = tw.div`lg:flex`;
-const MobileNav = tw.nav`lg:hidden z-50 bg-white sticky top-0 shadow-lg`;
-const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white h-16 shadow-lg`;
+const UserActions = tw.div`xl:(flex items-center)`;
+const NavContainer = tw.div`xl:flex`;
+const MobileNav = tw.nav`xl:hidden z-50 bg-white sticky top-0 shadow-lg`;
+const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white h-16 shadow-lg`;
 
 export const MainNavbar = () => {
   const [open, setOpen] = useState(false);

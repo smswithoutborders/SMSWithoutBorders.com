@@ -138,7 +138,7 @@ const Signup = () => {
 
   return (
     <PageAnimationWrapper>
-      <AuthContainer className="bg-gray-100 md:py-20 2xl:py-0 2xl:h-screen lg:grid lg:place-items-center">
+      <AuthContainer className="bg-gray-100 md:py-20 2xl:py-0 2xl:min-h-screen lg:grid lg:place-items-center">
         <div className="container max-w-md p-8 mx-auto bg-white shadow-lg md:rounded-xl lg:my-10">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
