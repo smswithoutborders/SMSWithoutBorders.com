@@ -41,7 +41,7 @@ const Wallet = () => {
   } = useGetPlatformsQuery(auth, {
     refetchOnMountOrArgChange: true,
   });
-  const { unSavedPlatforms = {}, savedPlatforms = {} } = data;
+  const { unSavedPlatforms = [], savedPlatforms = [] } = data;
 
   // store token
   const [storeToken, { isLoading: loadingB, isSuccess: successB }] =
@@ -206,11 +206,11 @@ const Wallet = () => {
             </Link>
           </div>
           <p className="my-0 text-lg">
-            Store your token which will be used for authentication on your
+            Store your tokens which will be used for authentication on your
             behalf in the event of an internet shutdown.
           </p>
           <p className="my-0 text-lg">
-            You can define how this token will be used by setting the scopes of
+            You can define how this tokens will be used by setting the scopes of
             access
           </p>
         </div>
