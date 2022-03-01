@@ -101,16 +101,24 @@ const CodeVerification = () => {
     <PageAnimationWrapper>
       <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
         <h1 className="inline-flex items-center mb-4 text-4xl font-bold">
-          <BsShieldLock /> &nbsp; Verification
+          <BsShieldLock size={48} className="mr-2" /> Verification
         </h1>
-        <p className="mt-4">
-          A verification code has been sent to your phone. Please enter it below
-        </p>
 
-        <p className="block my-4">
-          This process confirms the number provided is active and can be used
-          for communication when the time comes
-        </p>
+        <div className="my-4 prose text-justify">
+          <p>
+            A verification code has been sent to your phone. Please enter it
+            below. This process confirms the number provided is active and can
+            be used for communication when the time comes.
+          </p>
+
+          <p>
+            We also require you to provide the code sent to you by SMS as a
+            means of guaranteeing you have the necessary (own) rights to the
+            required phone number. This will help us prevent actors from using
+            non consented phone numbers to create accounts - preventing the
+            owners from further doing so
+          </p>
+        </div>
 
         <div className="max-w-md mx-auto mt-12">
           <form
