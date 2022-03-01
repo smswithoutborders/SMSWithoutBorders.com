@@ -31,9 +31,14 @@ const Sync = () => {
       <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 py-20 mx-auto prose md:px-8">
         <div className="col-span-full lg:col-span-1">
           <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
-            <IoMdSync /> &nbsp; Synchronize Accounts
+            <IoMdSync size={48} className="mr-2" /> Synchronize Accounts
           </h1>
           <p>This lets you use the SW/OB secure gateway for all messages</p>
+          <p>
+            Synchronization becomes available only after you perform an action
+            that updates your security configurations. An example is storing
+            access in the wallet.
+          </p>
           <p>
             Please follow these steps to sychronize your saved access with
             SMSwithoutborders mobile app.
