@@ -10,7 +10,9 @@ This project was bootstraped with [Create React App](https://github.com/facebook
 
 We use [Redux](https://redux.js.org/) for state management and as such [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for data fetching and API Calls.
 
-Files are grouped [by type ](https://reactjs.org/docs/faq-structure.html) and placed in subfolders under [src](../src). Each subfolder contains an index file for [barrel exports](https://github.com/basarat/typescript-book/blob/master/docs/tips/barrel.md).
+Files are grouped [by type](https://reactjs.org/docs/faq-structure.html) and placed in subfolders under [src](../src). Each subfolder contains an index file for [barrel exports](https://github.com/basarat/typescript-book/blob/master/docs/tips/barrel.md).
+
+We follow the [conventional commits specification](https://www.conventionalcommits.org/en/v1.0.0/) for all commits. Please reference this guide when writting commit messages.
 
 ## Adding features
 
