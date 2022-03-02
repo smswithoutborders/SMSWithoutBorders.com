@@ -462,7 +462,7 @@ const CodeVerifyPage = ({ setPage }) => {
                     switch (error.response.status) {
                         case 400:
                             toaster.danger("An error occured", {
-                                description: "Its not your its Us. Please try again"
+                                description: "It's not you it's us. Please try again"
                             });
                             break;
 
@@ -486,7 +486,7 @@ const CodeVerifyPage = ({ setPage }) => {
 
                         case 500:
                             toaster.danger("An error occured", {
-                                description: "Its not you its Us. We are working to resolve it. Please try again"
+                                description: "It's not you it's us. We are working to resolve it. Please try again"
                             });
                             break;
 
@@ -527,7 +527,7 @@ const CodeVerifyPage = ({ setPage }) => {
                                 name="code"
                                 min={0}
                                 required
-                                placeholder="2FA CODE"
+                                placeholder="SMS Verification Code"
                                 onChange={(evt) => setCode(evt.target.value)}
                             />
                         </FormGroup>
