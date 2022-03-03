@@ -131,7 +131,7 @@ const CodeVerification = () => {
                 name="code"
                 min={0}
                 required
-                placeholder="2FA CODE"
+                placeholder="SMS Verification Code"
                 onChange={(evt) => setCode(evt.target.value)}
               />
             </FormGroup>
