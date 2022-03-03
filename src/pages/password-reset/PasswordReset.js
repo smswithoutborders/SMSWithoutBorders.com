@@ -74,9 +74,7 @@ const PasswordReset = () => {
             );
             break;
           case 401:
-            toast.error(
-              "Sorry your session expired. Please start over"
-            );
+            toast.error("Sorry your session expired. Please start over");
             break;
           case 403:
             toast.error("Forbidden, please check password");
@@ -124,7 +122,9 @@ const PasswordReset = () => {
             onSubmit={handleSubmit(handlePasswordReset)}
           >
             <FormGroup>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" required>
+                Password
+              </Label>
               <PasswordInput
                 name="password"
                 {...register("password")}
@@ -136,7 +136,9 @@ const PasswordReset = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Label htmlFor="confirmPassword" required>
+                Confirm Password
+              </Label>
               <PasswordInput
                 name="confirmPassword"
                 placeholder="retype password"
