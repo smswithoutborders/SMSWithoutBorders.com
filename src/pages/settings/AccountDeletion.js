@@ -113,7 +113,7 @@ const AccountDeletion = () => {
   }
 
   return (
-    <div className="max-w-screen-sm py-20 mx-auto text-center md:px-8">
+    <div className="max-w-screen-sm py-20 mx-auto text-center lg:py-0 md:px-8">
       <h1 className="mb-4 text-3xl font-bold">Delete Account</h1>
       <Alert
         kind="negative"
