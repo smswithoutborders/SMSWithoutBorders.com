@@ -10,11 +10,12 @@ import { useLoginMutation, setCache, getCache, clearCache } from "services";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAuth, authSelector } from "features";
 import {
+  Label,
   Loader,
   Button,
   useTitle,
-  Label,
   FormGroup,
+  ReCAPTCHA,
   ErrorMessage,
   AuthContainer,
   PasswordInput,
@@ -186,6 +187,10 @@ const Login = () => {
               {errors.password && (
                 <ErrorMessage>{errors.password?.message}</ErrorMessage>
               )}
+            </FormGroup>
+
+            <FormGroup>
+              <ReCAPTCHA />
             </FormGroup>
 
             <Button className="w-full">

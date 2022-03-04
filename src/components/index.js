@@ -12,3 +12,4 @@ export * from "./RequireAuth";
 export * from "./NavLink";
 export * from "./Alert";
 export * from "./QRCode";
+export * from "./ReCAPTCHA";

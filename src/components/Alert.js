@@ -31,7 +31,7 @@ export const Alert = ({
   return (
     <div
       className={clsx(
-        "flex justify-between px-2 py-4 md:p-4 text-sm md:text-base border-l-4 text-gray-700 rounded",
+        "flex justify-between px-2 py-4 md:p-4 text-sm  border-l-4 text-gray-600 rounded",
         kind === "primary" && "bg-blue-100 border-blue-800",
         kind === "affirmative" && "bg-green-100 border-green-500 ",
         kind === "negative" && "bg-red-100 border-red-500 ",
