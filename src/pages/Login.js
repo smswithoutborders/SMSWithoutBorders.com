@@ -30,6 +30,9 @@ const schema = yup.object().shape({
     .string()
     .min(8, "Password must be at least 8 characters")
     .required("Please enter your password"),
+  captcha_token: yup
+    .string()
+    .required("Please prove you are not a robot by solving reCAPTCHA"),
 });
 
 const Login = () => {
@@ -40,6 +43,7 @@ const Login = () => {
     control,
     setValue,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -190,10 +194,13 @@ const Login = () => {
             </FormGroup>
 
             <FormGroup>
-              <ReCAPTCHA />
+              <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
+              {errors.captcha_token && (
+                <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
+              )}
             </FormGroup>
 
-            <Button className="w-full">
+            <Button className="w-full" disabled={!watch("captcha_token")}>
               <FiLogIn /> &nbsp; login
             </Button>
           </form>
