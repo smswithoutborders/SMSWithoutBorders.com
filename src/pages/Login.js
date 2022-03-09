@@ -39,11 +39,11 @@ const Login = () => {
   useTitle("login");
 
   const {
-    register,
+    watch,
     control,
+    register,
     setValue,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -93,6 +93,10 @@ const Login = () => {
       // remove any cached data
       clearCache();
     } catch (error) {
+      // reset captcha
+      setValue("captcha_token", "", {
+        shouldValidate: false,
+      });
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
       if (originalStatus) {
