@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Fragment } from "react";
 import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import { Alert } from "./Alert";
+import { InlineLoader } from "./Loader";
+import { Button } from "./shared";
 
 /*
   Implementing reCAPTCHA v2
@@ -13,14 +15,15 @@ import { Alert } from "./Alert";
 
 export const ReCAPTCHA = ({ setValue, fieldName, ...rest }) => {
   const containerRef = useRef(null);
-  const [loaded, setLoaded] = useState(false);
+  // status: pending, loaded, failed
+  const [status, setStatus] = useState("pending");
   const SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
   const RECAPTCHA_API_URL = process.env.REACT_APP_RECAPTCHA_API_URL;
 
   // only display captcha if load is successful
   function handleLoad() {
     try {
-      setLoaded(true);
+      setStatus("loaded");
       window.grecaptcha.render(containerRef.current, {
         "sitekey": SITE_KEY,
       });
@@ -62,30 +65,48 @@ export const ReCAPTCHA = ({ setValue, fieldName, ...rest }) => {
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
+    // load captcha timer
+    const loadTimer = setTimeout(() => {
+      if (status !== "loaded") {
+        setStatus("failed");
+      }
+    }, 60 * 1000);
     return () => {
       document.head.removeChild(script);
+      clearTimeout(loadTimer);
     };
-  }, [RECAPTCHA_API_URL]);
+  }, [RECAPTCHA_API_URL, status]);
 
-  if (!loaded) {
-    return (
-      <Alert
-        kind="negative"
-        message="reCAPTCHA failed to load. Please make sure you have an active internet connection"
-        hideCloseButton
-      />
-    );
-  }
   return (
-    <div
-      ref={containerRef}
-      className="flex items-stretch justify-center w-full"
-      data-sitekey={SITE_KEY}
-      data-callback="handleResponse"
-      data-expired-callback="handleExpired"
-      data-error-callback="handleError"
-      {...rest}
-    ></div>
+    <Fragment>
+      {status === "loaded" ? (
+        <div
+          ref={containerRef}
+          className="flex items-stretch justify-center w-full"
+          data-sitekey={SITE_KEY}
+          data-callback="handleResponse"
+          data-expired-callback="handleExpired"
+          data-error-callback="handleError"
+          {...rest}
+        ></div>
+      ) : status === "failed" ? (
+        <Alert
+          kind="negative"
+          message="reCAPTCHA failed to load. Please make sure you have an active network connection"
+          hideCloseButton
+          actions={
+            <Button type="button" onClick={() => window.location.reload()}>
+              reload
+            </Button>
+          }
+        />
+      ) : (
+        <InlineLoader
+          className="h-40 my-8"
+          message="loading captcha please wait"
+        />
+      )}
+    </Fragment>
   );
 };
 

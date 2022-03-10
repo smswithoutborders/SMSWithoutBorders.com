@@ -29,9 +29,9 @@ export const Loader = ({ message }) => {
   );
 };
 
-export const InlineLoader = ({ message }) => {
+export const InlineLoader = ({ message, className }) => {
   return (
-    <LoadingContainer className="h-80">
+    <LoadingContainer className={clsx("h-80", className)}>
       <div>
         <Spinner className="mx-auto" />
         <p className="mt-2">{message || "processing please wait"}</p>
