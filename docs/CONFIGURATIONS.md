@@ -29,6 +29,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * REACT_APP_GATEWAY_SERVER ->  Gateway server url
 * REACT_APP_GATEWAY_SERVER_VERSION -> Gateway server version
 * REACT_APP_DOCS_URL -> Link to hosted privacy policy markdown file
+* REACT_APP_RECAPTCHA -> Enable or disable recaptcha
 * REACT_APP_RECAPTCHA_SITE_KEY -> reCAPTCHAv2 site key obtained from [google](https://www.google.com/recaptcha/admin)
 * REACT_APP_RECAPTCHA_API_URL -> API script src from reCaptchav2 setup [documentation](https://developers.google.com/recaptcha/docs/display)
 * HTTPS -> Enable or disable https
