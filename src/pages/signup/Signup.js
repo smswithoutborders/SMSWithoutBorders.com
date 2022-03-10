@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { saveValidationCreds } from "features";
 import {
   Input,
+  Alert,
   Label,
   Loader,
   Button,
@@ -26,8 +27,9 @@ import {
   PageAnimationWrapper,
 } from "components";
 
-// sign up schema
-const schema = yup.object().shape({
+// check if recaptcha is enabled and conditionally add validation
+const ENABLE_RECAPTCHA = process.env.REACT_APP_RECAPTCHA;
+let schemaShape = {
   name: yup.string(),
   phone_number: yup.string().required("Phone Number is required"),
   password: yup
@@ -42,10 +44,15 @@ const schema = yup.object().shape({
   acceptTerms: yup
     .bool()
     .oneOf([true], "Please review and accept terms and conditions to proceed"),
-  captcha_token: yup
+};
+
+if (ENABLE_RECAPTCHA) {
+  schemaShape.captcha_token = yup
     .string()
-    .required("Please prove you are not a robot by solving reCAPTCHA"),
-});
+    .required("Please prove you are not a robot by solving reCAPTCHA");
+}
+// final validation schema used by react-hook-form
+const schema = yup.object().shape(schemaShape);
 
 const Signup = () => {
   useTitle("Sign Up");
@@ -245,12 +252,22 @@ const Signup = () => {
               </p>
             </FormGroup>
 
-            <FormGroup>
-              <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
-              {errors.captcha_token && (
-                <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
-              )}
-            </FormGroup>
+            {ENABLE_RECAPTCHA && process.env.NODE_ENV !== "production" ? (
+              <FormGroup>
+                <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
+                {errors.captcha_token && (
+                  <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
+                )}
+              </FormGroup>
+            ) : (
+              <FormGroup>
+                <Alert
+                  kind="primary"
+                  message="reCAPTCHA has been disabled, you can re-enable it in your project's configuration"
+                  hideCloseButton
+                />
+              </FormGroup>
+            )}
 
             <Button className="w-full" disabled={!isValid}>
               <FiUserPlus /> &nbsp; sign up

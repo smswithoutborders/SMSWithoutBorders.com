@@ -10,6 +10,7 @@ import { useLoginMutation } from "services";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAuth, authSelector } from "features";
 import {
+  Alert,
   Label,
   Loader,
   Button,
@@ -23,17 +24,23 @@ import {
   PageAnimationWrapper,
 } from "components";
 
-// login schema used by react-hook-form and yup
-const schema = yup.object().shape({
+// check if recaptcha is enabled and conditionally add validation
+const ENABLE_RECAPTCHA = process.env.REACT_APP_RECAPTCHA;
+let schemaShape = {
   phone_number: yup.string().required("Please Enter your Phone Number"),
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
     .required("Please enter your password"),
-  captcha_token: yup
+};
+
+if (ENABLE_RECAPTCHA) {
+  schemaShape.captcha_token = yup
     .string()
-    .required("Please prove you are not a robot by solving reCAPTCHA"),
-});
+    .required("Please prove you are not a robot by solving reCAPTCHA");
+}
+// final validation schema used by react-hook-form
+const schema = yup.object().shape(schemaShape);
 
 const Login = () => {
   useTitle("login");
@@ -179,12 +186,22 @@ const Login = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
-              <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
-              {errors.captcha_token && (
-                <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
-              )}
-            </FormGroup>
+            {ENABLE_RECAPTCHA && process.env.NODE_ENV !== "production" ? (
+              <FormGroup>
+                <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
+                {errors.captcha_token && (
+                  <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
+                )}
+              </FormGroup>
+            ) : (
+              <FormGroup>
+                <Alert
+                  kind="primary"
+                  message="reCAPTCHA has been disabled, you can re-enable it in your project's configuration"
+                  hideCloseButton
+                />
+              </FormGroup>
+            )}
 
             <Button className="w-full" disabled={!isValid}>
               <FiLogIn /> &nbsp; login
