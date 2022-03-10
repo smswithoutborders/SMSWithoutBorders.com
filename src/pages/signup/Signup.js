@@ -80,14 +80,6 @@ const Signup = () => {
     delete data.acceptTerms;
     delete data.confirmPassword;
 
-    /*
-     cache data in local storage in case we need it later to resend
-     verification codes or signup failed.
-     This data will be cleared after code verification
-    */
-
-    setCache(data);
-
     try {
       const response = await signup(data).unwrap();
       toast.success(
@@ -97,6 +89,13 @@ const Signup = () => {
       );
       // save 2fa authorization details
       dispatch(saveValidationCreds(response));
+      /*
+       cache data in local storage in case we need it later to resend
+       verification codes or signup failed.
+       This data will be cleared after code verification
+      */
+      delete data.password;
+      setCache(data);
       // redirect user to code confirmation page
       navigate("verify", { state: { phone_number: data.phone_number } });
     } catch (error) {
