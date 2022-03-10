@@ -11,13 +11,14 @@ import { useSignupMutation, setCache } from "services";
 import { useDispatch } from "react-redux";
 import { saveValidationCreds } from "features";
 import {
+  Input,
+  Label,
   Loader,
   Button,
-  useTitle,
-  Label,
-  Input,
   CheckBox,
+  useTitle,
   FormGroup,
+  ReCAPTCHA,
   ErrorMessage,
   AuthContainer,
   PasswordInput,
@@ -41,6 +42,9 @@ const schema = yup.object().shape({
   acceptTerms: yup
     .bool()
     .oneOf([true], "Please review and accept terms and conditions to proceed"),
+  captcha_token: yup
+    .string()
+    .required("Please prove you are not a robot by solving reCAPTCHA"),
 });
 
 const Signup = () => {
@@ -50,12 +54,13 @@ const Signup = () => {
   const [signup, { isLoading, isSuccess }] = useSignupMutation();
 
   const {
-    register,
     control,
+    register,
+    setValue,
     handleSubmit,
-    watch,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
+    mode: "onChange",
     resolver: yupResolver(schema),
     defaultValues: {
       name: "",
@@ -241,7 +246,14 @@ const Signup = () => {
               </p>
             </FormGroup>
 
-            <Button className="w-full" disabled={!watch("acceptTerms")}>
+            <FormGroup>
+              <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
+              {errors.captcha_token && (
+                <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
+              )}
+            </FormGroup>
+
+            <Button className="w-full" disabled={!isValid}>
               <FiUserPlus /> &nbsp; sign up
             </Button>
           </form>
