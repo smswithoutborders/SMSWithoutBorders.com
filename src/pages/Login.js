@@ -6,7 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useLoginMutation, setCache, getCache, clearCache } from "services";
+import { useLoginMutation } from "services";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAuth, authSelector } from "features";
 import {
@@ -39,13 +39,13 @@ const Login = () => {
   useTitle("login");
 
   const {
-    watch,
     control,
     register,
     setValue,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
+    mode: "onChange",
     resolver: yupResolver(schema),
   });
 
@@ -56,22 +56,8 @@ const Login = () => {
   const auth = useSelector(authSelector);
 
   useEffect(() => {
-    // get the stored cache to repopulate
-    const cache = getCache();
     // if logged in then redirect to dashboard
-
-    if (cache && cache.auth_key) {
-      dispatch(saveAuth(cache));
-      navigate("/dashboard");
-    } else if (cache && cache.phone_number) {
-      setValue("phone_number", cache.phone_number, {
-        shouldValidate: true,
-      });
-      setValue("password", cache.password, {
-        shouldValidate: true,
-      });
-      clearCache();
-    } else if (auth.uid && location.state && location.state.path) {
+    if (auth.uid && location.state && location.state.path) {
       /*
         redirect users if they initially tried to access a private route
         without permission
@@ -83,19 +69,15 @@ const Login = () => {
   }, [setValue, dispatch, navigate, auth.uid, location.state]);
 
   const handleLogin = async (data) => {
-    // cache the data in case we need it later
-    setCache(data);
     try {
       const user = await login(data).unwrap();
-      // save user credentials to state
       toast.success("Login successful");
+      // save user credentials to state
       dispatch(saveAuth(user));
-      // remove any cached data
-      clearCache();
     } catch (error) {
       // reset captcha
       setValue("captcha_token", "", {
-        shouldValidate: false,
+        shouldValidate: true,
       });
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
@@ -204,7 +186,7 @@ const Login = () => {
               )}
             </FormGroup>
 
-            <Button className="w-full" disabled={!watch("captcha_token")}>
+            <Button className="w-full" disabled={!isValid}>
               <FiLogIn /> &nbsp; login
             </Button>
           </form>
