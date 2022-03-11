@@ -134,7 +134,7 @@ const PasswordChange = () => {
           onSubmit={handleSubmit(handlePasswordChange)}
         >
           <FormGroup>
-            <Label htmlFor="password">Current Password</Label>
+            <Label htmlFor="password" required>Current Password</Label>
             <PasswordInput
               name="password"
               {...register("password")}
@@ -147,7 +147,7 @@ const PasswordChange = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label htmlFor="new_password">New Password</Label>
+            <Label htmlFor="new_password" required>New Password</Label>
             <PasswordInput
               name="new_password"
               {...register("new_password")}
@@ -159,7 +159,7 @@ const PasswordChange = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Label htmlFor="confirmPassword" required>Confirm Password</Label>
             <PasswordInput
               name="confirmPassword"
               placeholder="retype password"
