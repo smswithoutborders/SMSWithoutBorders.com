@@ -4,6 +4,28 @@ Thank you for supporting SMSWithoutBorders. Please follow the steps below to get
 
 Existing features can be found in [FEATURES.md](FEATURES.md);
 
+## Getting started
+
+Create a fork of the [project](https://github.com/smswithoutborders/smswithoutborders.com)
+
+Switch to the dev branch
+
+```bash
+git checkout dev
+```
+
+You can confirm you are on the dev branch by running
+
+```bash
+git branch
+```
+
+ Create the branch you will be working from
+
+ ```bash
+git checkout -b <your branch name here>
+ ```
+
 ## Style Guide
 
 This project was bootstraped with [Create React App](https://github.com/facebook/create-react-app) which specifies environment variable naming conventions.
@@ -27,3 +49,11 @@ All routes are defined in App.js and any new routes can be added there.
 ## Reporting Issues
 
 New issues can be opened on Github. Please check to make sure it has not been reported before.
+
+## Fixing Issues
+
+When writting commit messages for fixes, please reference the issue being solved by adding the issue number in the commit message like below. [learn more](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+
+```bash
+fix:  critical bug in example component, fixes #12
+```

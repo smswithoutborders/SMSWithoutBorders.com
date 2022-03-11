@@ -2,6 +2,10 @@
 
 Here is the interface through which users can manage their accounts and store their credentials
 
+## Features
+
+- [Features list](docs/FEATURES.md)
+
 ## Building
 
 - [Setup guide](docs/CONFIGURATIONS.md)
