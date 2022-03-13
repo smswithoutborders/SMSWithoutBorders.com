@@ -8,8 +8,6 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useSignupMutation, setCache } from "services";
-import { useDispatch } from "react-redux";
-import { saveValidationCreds } from "features";
 import {
   Input,
   Alert,
@@ -57,7 +55,6 @@ const schema = yup.object().shape(schemaShape);
 const Signup = () => {
   useTitle("Sign Up");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [signup, { isLoading, isSuccess }] = useSignupMutation();
 
   const {
@@ -89,18 +86,13 @@ const Signup = () => {
 
     try {
       const response = await signup(data).unwrap();
-      toast.success(
-        `A verification code has been sent to ${
-          data.country_code + data.phone_number
-        } \n Please check and enter it to verify your account`
-      );
-      // save 2fa authorization details
-      dispatch(saveValidationCreds(response));
+      toast.success(`Success your request has been received`);
       /*
        cache data in local storage in case we need it later to resend
        verification codes or signup failed.
        This data will be cleared after code verification
       */
+      data.uid = response.uid;
       delete data.password;
       setCache(data);
       // redirect user to code confirmation page

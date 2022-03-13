@@ -30,10 +30,9 @@ export const API = createApi({
       }),
     }),
     verifySignup: builder.mutation({
-      query: (credentials) => ({
+      query: () => ({
         url: "/signup",
         method: "PUT",
-        body: credentials,
       }),
     }),
     getMetrics: builder.query({
@@ -249,6 +248,24 @@ export const API = createApi({
         // perform cleanup steps once the `cacheEntryRemoved` promise resolves
       },
     }),
+    triggerOTP: builder.query({
+      query: ({ uid, phone_number, country_code }) => ({
+        url: `/users/${uid}/OTP`,
+        method: "POST",
+        body: {
+          phone_number: country_code + phone_number,
+        },
+      }),
+    }),
+    validateOTPCode: builder.mutation({
+      query: (code) => ({
+        url: "/OTP",
+        method: "PUT",
+        body: {
+          code,
+        },
+      }),
+    }),
   }),
 });
 
@@ -261,6 +278,7 @@ export const {
   useLogoutMutation,
   useSignupMutation,
   useGetMetricsQuery,
+  useTriggerOTPQuery,
   useGetPlatformsQuery,
   useStoreTokenMutation,
   useNewPasswordMutation,
@@ -269,6 +287,7 @@ export const {
   useDeleteAccountMutation,
   useChangePasswordMutation,
   useRecoverPasswordMutation,
+  useValidateOTPCodeMutation,
   useVerifyRecoveryCodeMutation,
   useVerifyTokenStorageMutation,
   useCreateExternalAccountMutation,
