@@ -26,7 +26,8 @@ import {
 } from "components";
 
 // check if recaptcha is enabled and conditionally add validation
-const ENABLE_RECAPTCHA = process.env.REACT_APP_RECAPTCHA;
+const ENABLE_RECAPTCHA =
+  process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
 let schemaShape = {
   name: yup.string(),
   phone_number: yup.string().required("Phone Number is required"),
