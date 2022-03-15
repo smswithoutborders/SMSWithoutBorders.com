@@ -1,9 +1,10 @@
 import React, { StrictMode, Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
-import "./styles/index.css";
 import { store } from "./features";
 import { Provider } from "react-redux";
 import { SplashScreen } from "components";
+import "./styles/index.css";
+import "./i18n";
 
 const App = lazy(() => import("App"));
 
