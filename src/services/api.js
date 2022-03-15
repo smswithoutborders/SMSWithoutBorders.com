@@ -6,6 +6,9 @@ export const API = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_API_URL}/${process.env.REACT_APP_API_VERSION}`,
+    headers: {
+      "content-type": "application/json",
+    },
     credentials: "include",
   }),
   endpoints: (builder) => ({
@@ -42,25 +45,20 @@ export const API = createApi({
       }),
     }),
     recoverPassword: builder.mutation({
-      query: (data) => ({
+      query: (phone_number) => ({
         url: "/recovery",
         method: "POST",
-        body: data,
-      }),
-    }),
-    verifyRecoveryCode: builder.mutation({
-      query: (data) => ({
-        url: "/recovery",
-        method: "PUT",
-        body: data,
+        body: {
+          phone_number,
+        },
       }),
     }),
     newPassword: builder.mutation({
       query: ({ uid, new_password }) => ({
         url: `/users/${uid}/recovery`,
-        method: "POST",
+        method: "PUT",
         body: {
-          new_password: new_password,
+          new_password,
         },
       }),
     }),
@@ -288,7 +286,6 @@ export const {
   useChangePasswordMutation,
   useRecoverPasswordMutation,
   useValidateOTPCodeMutation,
-  useVerifyRecoveryCodeMutation,
   useVerifyTokenStorageMutation,
   useCreateExternalAccountMutation,
 } = API;

@@ -31,6 +31,7 @@ const schema = yup.object().shape({
 
 const PasswordReset = () => {
   useTitle("Password Reset");
+  const cache = getCache();
   const location = useLocation();
   const navigate = useNavigate();
   const [newPassword, { isLoading, isSuccess }] = useNewPasswordMutation();
@@ -42,15 +43,14 @@ const PasswordReset = () => {
     resolver: yupResolver(schema),
   });
 
-  // check if phone number is present
+  // check if phone number and cache is present
   useEffect(() => {
-    if (!location.state?.phone_number) {
+    if (!location.state?.phone_number && cache === null) {
       navigate("../");
     }
-  }, [location.state, navigate]);
+  }, [location.state, navigate, cache]);
 
   async function handlePasswordReset(data) {
-    const cache = getCache();
     // build request data
     let request = {
       uid: cache.uid,

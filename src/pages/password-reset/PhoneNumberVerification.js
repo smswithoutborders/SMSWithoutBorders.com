@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useRecoverPasswordMutation } from "services";
+import { parsePhoneNumber } from "react-phone-number-input";
+import { setCache, useRecoverPasswordMutation } from "services";
 import { useNavigate } from "react-router-dom";
 import {
   PageAnimationWrapper,
@@ -34,15 +35,21 @@ const PhoneNumberVerification = () => {
     }
 
     // build request body
-    const data = {
-      phone_number: number,
-    };
 
     try {
-      await recoverPassword(data).unwrap();
-      toast.success("A verification code has been sent to your phone");
+      let response = await recoverPassword(number).unwrap();
+      toast.success("Phone number verified successully");
+      // seperate phone number into tel anc country code
+      const splitNumber = parsePhoneNumber(number);
+      const data = {
+        uid: response.uid,
+        phone_number: splitNumber.nationalNumber,
+        country_code: "+" + splitNumber.countryCallingCode
+      }
+      // cache data to be used on verification page
+      setCache(data);
       // redirect to verification page
-      navigate("verify", { state: { phone_number: number }});
+      navigate("verify", { state: { phone_number: number } });
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
