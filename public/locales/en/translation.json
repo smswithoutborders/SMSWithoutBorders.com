@@ -1,0 +1,440 @@
+{
+  "app-name": "SMSWithoutBorders",
+  "common": {
+    "alert-messages": {
+      "loading": "processing please wait",
+      "recaptcha-loading": "loading reCAPTCHA  please wait",
+      "recaptcha-disabled": "reCAPTCHA has been disabled, you can re-enable it in your project's configuration",
+      "recaptcha-load-error": "reCAPTCHA failed to load. Please make sure you have an active network connection",
+      "code-verified": "Code Verified Successfully",
+      "phone-number-verified": "Phone number verified successully",
+      "password-change": "Password changed successfully",
+      "logout-successful": "Logout successful"
+    },
+    "error-messages": {
+      "general-error-title": "An error occured",
+      "general-error-message": "An error occured please try again",
+      "network-error": "An error occured, please check your network and try again",
+      "invalid-code": "Invalid code provided",
+      "400": "Something went wrong \n We are working to resolve this. Please try again",
+      "401": "Sorry you are not authorized. please logout and login",
+      "403": "Forbidden, Sorry you are not authorized. logout and login again",
+      "404": "Sorry the resource you requested is unavailable or not accessible",
+      "409": "There is a possible duplicate of this account please contact support",
+      "429": "Too many failed attempts please wait a while and try again",
+      "500": "A critical error occured. Please contact support"
+    }
+  },
+  "components": {
+    "menu": {
+      "get-started": "Get Started",
+      "home": "Home",
+      "privacy": "Privacy Policy",
+      "github": "GitHub",
+      "blog": "Blog",
+      "contact": "Contact Us",
+      "login": "Log In",
+      "signup": "Sign Up",
+      "footer-blog": "SWOB Blog",
+      "wallet": "Wallet(Store Access)",
+      "settings": "Settings",
+      "dashboard": "Dashboard",
+      "sync": "Sync",
+      "logout": "Logout"
+    },
+    "labels": {
+      "optional": "optional",
+      "strong": "strong",
+      "good": "good",
+      "average": "average",
+      "weak": "weak",
+      "very weak": "very weak",
+      "back": "back",
+      "retry": "retry",
+      "continue": "continue",
+      "try-again": "try again",
+      "password-change": "change password"
+    }
+  },
+  "landing": {
+    "section-1": {
+      "heading": "Stay Productive",
+      "details": "In this age of communication, keep in touch with your contacts across the internet without access to an active internet connection. Store your access to your favourite communications platforms while online, use them while offline.",
+      "button-cta": "Get SWOB"
+    },
+    "section-2": {
+      "heading": "How it works",
+      "details": "Using SWOB is as easy as authenticating your credentials",
+      "steps": {
+        "step-1": {
+          "heading": "Sign Up",
+          "details": "Signup for a SWOB account"
+        },
+        "step-2": {
+          "heading": "Go to Wallet",
+          "details": "select and store the platform for which you want access for later offline uses"
+        },
+        "step-3": {
+          "heading": "Get the SWOB app from the Playstore",
+          "details": "Goto your SWOB profile online and click on Sync. Use your SWOB app to scan your QR code"
+        },
+        "step-4": {
+          "heading": "Use App",
+          "details": "Enter your password in the app and begin transmitting messages while offline using SMS messages"
+        }
+      }
+    },
+    "section-3": {
+      "heading": "Why use SWOB?",
+      "steps": {
+        "step-1": {
+          "heading": "Accessibility",
+          "details": "SWOB’s mobile app allows users to have offline communication wherever they are. With as simple as having an SMS message smartphone you can maintain communications with your online platforms"
+        },
+        "step-2": {
+          "heading": "Security",
+          "details": "SWOB transmits messages in securely encrypted formats. This secures every communication from being accessed by intermediate parties while in transit."
+        },
+        "step-3": {
+          "heading": "Open source",
+          "details": "Every component of SWOB is open sourced! From the mobile app to the routing mechanisms we use to get your SMS messages to reach your intended platforms"
+        },
+        "step-4": {
+          "heading": "Decentralized",
+          "details": "SWOB is built to work in decentralized models. Anyone can host a SWOB server. It’s as easy as understanding how to use it"
+        }
+      }
+    }
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "details": "Using SWOB is as easy as authenticating your credentials",
+    "email": "Email",
+    "website": "Website",
+    "IRC": "IRC"
+  },
+  "login": {
+    "page-title": "login",
+    "form": {
+      "phone-number": {
+        "label": "Phone Number",
+        "validation-error": "Please enter a phone number"
+      },
+      "password": {
+        "label": "Password",
+        "validation-error": {
+          "min-length": "Password must be at least 8 characters",
+          "required": "Password is required"
+        }
+      },
+      "recaptcha": {
+        "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
+      },
+      "cta-button-text": "login"
+    },
+    "forgot-password": "Forgot Password",
+    "account-status": "Don't have an account?",
+    "signup-link-text": "Sign Up"
+  },
+  "signup": {
+    "registration": {
+      "page-title": "Sign Up",
+      "form": {
+        "phone-number": {
+          "label": "Phone Number",
+          "helper-text": "We will send a one time SMS to this number for confirmation",
+          "validation-error": "Please enter a phone number"
+        },
+        "alias": {
+          "label": "Alias",
+          "helper-text": "Choose a name for this account (could be anything)",
+          "placeholder": "Jane Doe"
+        },
+        "password": {
+          "label": "Password",
+          "validation-error": {
+            "min-length": "Password must be at least 8 characters",
+            "required": "Password is required"
+          }
+        },
+        "confirm-password": {
+          "label": "Confirm Password",
+          "placeholder": "retype password",
+          "validation-error": {
+            "min-length": "Password must be at least 8 characters",
+            "required": "Password is required",
+            "match": "passwords do not match"
+          }
+        },
+        "license-terms": {
+          "label": "I agree to abide by SMSWithoutBorders",
+          "policy-link-text": "privacy policy",
+          "validation-error": "Please review and accept terms and conditions to proceed"
+        },
+        "recaptcha": {
+          "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
+        },
+        "cta-button-text": "sign up"
+      },
+      "account-status": "Already have an account?",
+      "signin-link-text": "Sign In"
+    },
+    "code-verification": {
+      "alerts": {
+        "account-verified": "your account has been created, please login"
+      },
+      "error-messages": {
+        "signup-verification": "Sorry we could not complete your registration. If error persists, please contact support"
+      }
+    }
+  },
+  "wallet": {
+    "heading": "Wallet",
+    "details": "Store your tokens which will be used for authentication on your behalf in the event of an internet shutdown. You can define how this tokens will be used by setting the scopes of access",
+    "cta-button-text": "sync",
+    "section-1": {
+      "heading": "Available Platforms",
+      "cta-button-text": "store"
+    },
+    "section-2": {
+      "heading": "Saved Platforms",
+      "cta-button-text": "revoke"
+    },
+    "revoke-dialog": {
+      "heading": "Revoke Token",
+      "details": "This will permanently remove this token from your account and cannot be reversed. Enter your password to Confirm",
+      "input-placeholder": "password",
+      "cta-button-text": "confirm revoke",
+      "cancel-button-text": "cancel"
+    },
+    "alerts": {
+      "load-error": "Sorry we could not load platforms. If error persists, please contact support",
+      "token-deleted": "Token deleted successfully",
+      "token-stored": "Platform stored successfully"
+    }
+  },
+  "telegram": {
+    "phone-verification": {
+      "page-title": "Store Telegram Access",
+      "heading": "Telegram",
+      "details": "Please fill in your phone number to begin",
+      "logo-alt-text": "telegram logo",
+      "form": {
+        "phone-number": {
+          "label": "Phone Number",
+          "placeholder": "Enter your phone number",
+          "validation-error": "please provide a valid phone number with country code"
+        }
+      },
+      "alerts": {
+        "success-response": "A verification code has been sent to your phone. Check code in your sms or email inbox",
+        "authorization-error": "Sorry, you are not authorized to make this request"
+      }
+    },
+    "code-verification": {
+      "page-title": "Telegram Code Verification",
+      "alerts": {
+        "no-account": "You do not have a telegram account, please fill the form to create one"
+      }
+    },
+    "registration": {
+      "page-title": "Telegram Registration",
+      "heading": "Telegram Registration",
+      "details": "Create a new telegram account",
+      "form": {
+        "first-name": {
+          "label": "First Name",
+          "placeholder": "Jane",
+          "validation-error": "Please enter your first name"
+        },
+        "last-name": {
+          "label": "Last Name",
+          "placeholder": "Doe",
+          "validation-error": "Please enter your last name"
+        },
+        "cta-button-text": "create-account"
+      }
+    }
+  },
+  "code-verification": {
+    "page-title": "Verify your account",
+    "heading": "Verification",
+    "paragraph-1": "A verification code has been sent to your phone. Please enter it below. This process confirms the number provided is active and can be used for communication when the time comes.",
+    "paragraph-2": "We also require you to provide the code sent to you by SMS as a means of guaranteeing you have the necessary (own) rights to the required phone number. This will help us prevent actors from using non consented phone numbers to create accounts - preventing the owners from further doing so",
+    "form": {
+      "code": {
+        "placeholder": "SMS Verification Code"
+      }
+    },
+    "resend-label": "Resend in",
+    "resend-button-text": "resend code",
+    "error-messages": {
+      "otp-request": "Sorry we could not verify your phone number. If error persists, please contact support",
+      "otp-validation": "Sorry we could not verify your code. If error persists, please contact support"
+    }
+  },
+  "sync": {
+    "heading": "Synchronize Accounts",
+    "section-1": {
+      "alert-message": "Sorry it seems you havent stored any tokens",
+      "details": "Please click on the link below to store tokens",
+      "summary": {
+        "caption": "learn more",
+        "details": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet."
+      },
+      "cta-button-text": "Store Access Now"
+    },
+    "section-2": {
+      "paragraph-1": "This lets you use the SW/OB secure gateway for all messages",
+      "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
+      "paragraph-3": "Please follow these steps to sychronize your saved access with SMSwithoutborders mobile app.",
+      "sync-steps": {
+        "one": "Open SMSWithoutBorders app on your phone",
+        "two": "Tap the Synchronize button",
+        "three": "Point your phone to this screen to capture the code"
+      },
+      "status": {
+        "heading": "Status",
+        "connected": "connected",
+        "disconnected": "disconnected",
+        "complete": "complete",
+        "scanned": "scanned"
+      },
+      "cta-button-text": "sync"
+    },
+    "alerts": {
+      "sync-started": "Sync started",
+      "sync-complete": "Sync Complete",
+      "sync-error": "Sorry an error occured while synchronizing, Please try again",
+      "sync-closed": "Sync session closed. please click the sync button to start again"
+    }
+  },
+  "dashboard": {
+    "greeting-1": "Hello!",
+    "greeting-2": "Welcome",
+    "join-date": "Join Date",
+    "last-login": "Last Login",
+    "cta-button-text": "sync",
+    "alerts": {
+      "load-error": "Sorry we could not locate your metrics. If error persists, please contact support"
+    }
+  },
+  "settings": {
+    "page-title": "Settings",
+    "heading": "Settings",
+    "details": "Manage your account",
+    "paragraph": "Please select a setting from the menu",
+    "navigation": {
+      "link-1": "Password Change",
+      "link-2": "Delete Account"
+    }
+  },
+  "password-change": {
+    "page-title": "Password Change",
+    "heading": "Password Change",
+    "details": "Set a new password for your account",
+    "form": {
+      "password": {
+        "label": "Current Password",
+        "validation-error": {
+          "min-length": "Password must be at least 8 characters",
+          "required": "Password is required"
+        }
+      },
+      "new-password": {
+        "label": "New Password",
+        "validation-error": {
+          "min-length": "Password must be at least 8 characters",
+          "required": "Please enter new password"
+        }
+      },
+      "confirm-password": {
+        "label": "Confirm Password",
+        "placeholder": "retype password",
+        "validation-error": {
+          "min-length": "Password must be at least 8 characters",
+          "required": "Please confirm your new password",
+          "match": "passwords do not match"
+        }
+      },
+      "cta-button-text": "change password"
+    },
+    "alerts": {
+      "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out",
+      "password-change": "Password changed successfully"
+    }
+  },
+  "account-deletion": {
+    "page-title": "Account Deletion",
+    "heading": "Delete Account",
+    "details": "Set a new password for your account",
+    "paragraph": {
+      "part-1": "Please enter ",
+      "part-2": "and your password to proceed"
+    },
+    "confirmation-text": "IConfirmThisAction",
+    "form": {
+      "password": {
+        "label": "Current Password",
+        "validation-error": {
+          "min-length": "Password must be at least 8 characters",
+          "required": "Password is required"
+        }
+      },
+      "confirmation": {
+        "label": "Confirmation",
+        "placeholder": "enter confirmation",
+        "helper-text": "Enter",
+        "validation-error": {
+          "required": {
+            "part-1": "please enter",
+            "part-2": "to confirm"
+          }
+        }
+      },
+      "cta-button-text": "change password"
+    },
+    "alerts": {
+      "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out",
+      "account-delete": "Your account has been deleted. Sad to see you go"
+    }
+  },
+  "password-recovery": {
+    "phone-verification": {
+      "page-title": "Reset your password",
+      "heading": "Password Reset",
+      "details": "Please fill in your phone number to begin",
+      "form": {
+        "phone-number": {
+          "label": "Phone Number",
+          "placeholder": "Enter your phone number",
+          "validation-error": "please provide a valid phone number with country code"
+        }
+      }
+    },
+    "password-reset": {
+      "page-title": "Password Reset",
+      "heading": "Password Reset",
+      "details": "Set a new password for your account",
+      "form": {
+        "password": {
+          "label": "Password",
+          "validation-error": {
+            "min-length": "Password must be at least 8 characters",
+            "required": "Password is required"
+          }
+        },
+        "confirm-password": {
+          "label": "Confirm Password",
+          "placeholder": "retype password",
+          "validation-error": {
+            "min-length": "Password must be at least 8 characters",
+            "required": "Please confirm your new password",
+            "match": "passwords do not match"
+          }
+        },
+        "cta-button-text": "change password"
+      }
+    }
+  }
+}
