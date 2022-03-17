@@ -7,9 +7,11 @@ https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds
 import { useEffect, useState } from "react";
 import { useTriggerOTPQuery } from "services";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 //expects a single object as input
 export const useCountDown = ({ uid, phone_number, country_code }) => {
+  const { t } = useTranslation();
   // build request body
   const request = {
     uid,
@@ -34,28 +36,28 @@ export const useCountDown = ({ uid, phone_number, country_code }) => {
     if (OTPRequestError) {
       switch (error.originalStatus) {
         case 400:
-          toast.error(
-            "Something went wrong \n We are working to resolve this. Please try again"
-          );
+          toast.error(t("error-messages.400"));
           break;
         case 401:
-          toast.error(
-            "Forbidden, Account is unauthorized. \n check your phonenumber and password"
-          );
+          toast.error(t("error-messages.401"));
+          break;
+        case 403:
+          toast.error(t("error-messages.403"));
+          break;
+        case 409:
+          toast.error(t("error-messages.409"));
           break;
         case 429:
-          toast.error(
-            "too many codes requested. please wait a while and try again"
-          );
+          toast.error(t("error-messages.429"));
           break;
         case 500:
-          toast.error("A critical error occured. Please contact support");
+          toast.error(t("error-messages.500"));
           break;
         default:
-          toast.error("An error occured, please check your network try again");
+          toast.error(t("error-messages.general-error-message"));
       }
     }
-  }, [data, error, isSuccess, country_code, phone_number, OTPRequestError]);
+  }, [data, error, isSuccess, country_code, phone_number, OTPRequestError, t]);
 
   useEffect(() => {
     // only run when theres time left
