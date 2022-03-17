@@ -14,6 +14,7 @@ import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
 import { NavLink } from "./NavLink";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const ExtLink = tw.a`flex outline-none text-gray-900 font-medium p-5 items-center appearance-none`;
 const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
@@ -30,6 +31,7 @@ const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white 
 const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5 items-center appearance-none`;
 
 export const Navbar = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const metrics = useSelector(metricsSelector);
@@ -50,7 +52,7 @@ export const Navbar = () => {
       clearPersistedState();
       // clear store
       dispatch(resetStore());
-      toast.success("Logout successfull");
+      toast.success(t("alert-messages.logout-successful"));
       navigate("/login", { replace: true, state: null });
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
@@ -58,40 +60,28 @@ export const Navbar = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error(
-              "Forbidden, you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -111,7 +101,7 @@ export const Navbar = () => {
         </div>
       )}
       <NavButton onClick={() => handleLogOut()}>
-        <FiLogOut /> &nbsp; Logout
+        <FiLogOut /> &nbsp; {t("menu.logout")}
       </NavButton>
     </UserActions>
   );
@@ -127,16 +117,16 @@ export const Navbar = () => {
         Get Started
       </StartedExtLink>
       <NavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
-        <FiGrid size={20} /> &nbsp; Dashboard
+        <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
       </NavLink>
       <NavLink onClick={() => toggleMenu()} key="Sync" to="sync">
-        <IoMdSync size={20} /> &nbsp; Sync
+        <IoMdSync size={20} /> &nbsp; {t("menu.sync")}
       </NavLink>
       <NavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">
-        <IoWalletOutline size={20} /> &nbsp; Wallet(Store Access)
+        <IoWalletOutline size={20} /> &nbsp; {t("menu.wallet")}
       </NavLink>
       <NavLink onClick={() => toggleMenu()} key="Settings" to="settings">
-        <FiSettings size={20} /> &nbsp; Settings
+        <FiSettings size={20} /> &nbsp; {t("menu.settings")}
       </NavLink>
     </NavContainer>
   );

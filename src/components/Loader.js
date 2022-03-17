@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import clsx from "clsx";
 import logo from "images/logo-icon-light.png";
+import { useTranslation } from "react-i18next";
 
 const LoadingContainer = styled.div.attrs(({ className }) => ({
   className: clsx(
@@ -19,22 +20,24 @@ const Spinner = styled.div.attrs(({ className }) => ({
 }))``;
 
 export const Loader = ({ message }) => {
+  const { t } = useTranslation();
   return (
     <LoadingContainer className="h-screen">
       <div>
         <Spinner className="mx-auto" />
-        <p className="mt-2">{message || "processing please wait"}</p>
+        <p className="mt-2">{message || t("alert-messages.loading")}</p>
       </div>
     </LoadingContainer>
   );
 };
 
 export const InlineLoader = ({ message, className }) => {
+  const { t } = useTranslation();
   return (
     <LoadingContainer className={clsx("h-80", className)}>
       <div>
         <Spinner className="mx-auto" />
-        <p className="mt-2">{message || "processing please wait"}</p>
+        <p className="mt-2">{message || t("alert-messages.loading")}</p>
       </div>
     </LoadingContainer>
   );

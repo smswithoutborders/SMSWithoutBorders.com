@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Alert } from "./Alert";
 import { InlineLoader } from "./Loader";
 import { Button } from "./shared";
+import { useTranslation } from "react-i18next";
 
 /*
   Implementing reCAPTCHA v2
@@ -14,6 +15,7 @@ import { Button } from "./shared";
 */
 
 export const ReCAPTCHA = ({ setValue, fieldName, ...rest }) => {
+  const { t } = useTranslation();
   const containerRef = useRef(null);
   // status: pending, loaded, failed
   const [status, setStatus] = useState("pending");
@@ -48,9 +50,7 @@ export const ReCAPTCHA = ({ setValue, fieldName, ...rest }) => {
 
   // notify user if error occurs
   function handleError() {
-    toast.error(
-      "reCAPTCHA failed to connect. Please check your network and reload this page"
-    );
+    toast.error(t("alert-messages.recaptcha.connect-error"));
   }
 
   // make callbacks global
@@ -92,7 +92,7 @@ export const ReCAPTCHA = ({ setValue, fieldName, ...rest }) => {
       ) : status === "failed" ? (
         <Alert
           kind="negative"
-          message="reCAPTCHA failed to load. Please make sure you have an active network connection"
+          message={t("alert-messages.recaptcha.load-error")}
           hideCloseButton
           actions={
             <Button type="button" onClick={() => window.location.reload()}>
@@ -103,7 +103,7 @@ export const ReCAPTCHA = ({ setValue, fieldName, ...rest }) => {
       ) : (
         <InlineLoader
           className="h-40 my-8"
-          message="loading captcha please wait"
+          message={t("alert-messages.recaptcha.loading")}
         />
       )}
     </Fragment>

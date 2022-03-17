@@ -1,6 +1,7 @@
 // file for minimal components
 import styled from "styled-components";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 export const Button = styled.button.attrs(
   ({ className, disabled, outline }) => ({
@@ -34,13 +35,14 @@ export const Input = styled.input.attrs((props) => ({
 }))``;
 
 export const Label = ({ required, children }) => {
+  const { t } = useTranslation();
   return (
     <label className="text-sm leading-8 text-gray-600">
       <span>{children}</span>
       {required ? (
         <span className="ml-1 text-red-600">*</span>
       ) : (
-        <span className="ml-1">(optional)</span>
+        <span className="ml-1">({t("labels.optional")})</span>
       )}
     </label>
   );

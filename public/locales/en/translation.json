@@ -1,60 +1,32 @@
 {
   "app-name": "SMSWithoutBorders",
-  "common": {
-    "alert-messages": {
-      "loading": "processing please wait",
-      "recaptcha-loading": "loading reCAPTCHA  please wait",
-      "recaptcha-disabled": "reCAPTCHA has been disabled, you can re-enable it in your project's configuration",
-      "recaptcha-load-error": "reCAPTCHA failed to load. Please make sure you have an active network connection",
-      "code-verified": "Code Verified Successfully",
-      "phone-number-verified": "Phone number verified successully",
-      "password-change": "Password changed successfully",
-      "logout-successful": "Logout successful"
-    },
-    "error-messages": {
-      "general-error-title": "An error occured",
-      "general-error-message": "An error occured please try again",
-      "network-error": "An error occured, please check your network and try again",
-      "invalid-code": "Invalid code provided",
-      "400": "Something went wrong \n We are working to resolve this. Please try again",
-      "401": "Sorry you are not authorized. please logout and login",
-      "403": "Forbidden, Sorry you are not authorized. logout and login again",
-      "404": "Sorry the resource you requested is unavailable or not accessible",
-      "409": "There is a possible duplicate of this account please contact support",
-      "429": "Too many failed attempts please wait a while and try again",
-      "500": "A critical error occured. Please contact support"
-    }
+  "menu": {
+    "get-started": "Get Started",
+    "home": "Home",
+    "privacy": "Privacy Policy",
+    "blog": "Blog",
+    "contact": "Contact Us",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "footer-blog": "SWOB Blog",
+    "wallet": "Wallet(Store Access)",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "sync": "Sync",
+    "logout": "Logout"
   },
-  "components": {
-    "menu": {
-      "get-started": "Get Started",
-      "home": "Home",
-      "privacy": "Privacy Policy",
-      "github": "GitHub",
-      "blog": "Blog",
-      "contact": "Contact Us",
-      "login": "Log In",
-      "signup": "Sign Up",
-      "footer-blog": "SWOB Blog",
-      "wallet": "Wallet(Store Access)",
-      "settings": "Settings",
-      "dashboard": "Dashboard",
-      "sync": "Sync",
-      "logout": "Logout"
-    },
-    "labels": {
-      "optional": "optional",
-      "strong": "strong",
-      "good": "good",
-      "average": "average",
-      "weak": "weak",
-      "very weak": "very weak",
-      "back": "back",
-      "retry": "retry",
-      "continue": "continue",
-      "try-again": "try again",
-      "password-change": "change password"
-    }
+  "labels": {
+    "optional": "optional",
+    "strong": "strong",
+    "good": "good",
+    "average": "average",
+    "weak": "weak",
+    "very-weak": "very weak",
+    "back": "back",
+    "retry": "retry",
+    "continue": "continue",
+    "try-again": "try again",
+    "password-change": "change password"
   },
   "landing": {
     "section-1": {
@@ -436,5 +408,32 @@
         "cta-button-text": "change password"
       }
     }
+  },
+  "alert-messages": {
+    "loading": "processing please wait",
+    "alert-placeholder": "Alert message here",
+    "code-verified": "Code Verified Successfully",
+    "phone-number-verified": "Phone number verified successully",
+    "password-change": "Password changed successfully",
+    "logout-successful": "Logout successful",
+    "recaptcha": {
+      "loading": "loading reCAPTCHA  please wait",
+      "disabled": "reCAPTCHA has been disabled, you can re-enable it in your project's configuration",
+      "load-error": "reCAPTCHA failed to load. Please make sure you have an active network connection",
+      "connect-error": "reCAPTCHA failed to connect. Please check your network and reload this page"
+    }
+  },
+  "error-messages": {
+    "general-error-title": "An error occured",
+    "general-error-message": "An error occured please try again",
+    "network-error": "An error occured, please check your network and try again",
+    "invalid-code": "Invalid code provided",
+    "400": "Something went wrong \n We are working to resolve this. Please try again",
+    "401": "Sorry you are not authorized. please logout and login",
+    "403": "Forbidden. Sorry your session may have expired. Please logout and login again or reload this page",
+    "404": "Sorry the resource you requested is unavailable or not accessible",
+    "409": "There is a possible duplicate of this account please contact support",
+    "429": "Too many failed attempts please wait a while and try again",
+    "500": "A critical error occured. Please contact support"
   }
 }

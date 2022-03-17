@@ -7,6 +7,7 @@ import { FiMenu, FiLogIn, FiUserPlus, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { NavLink } from "./NavLink";
+import { useTranslation } from "react-i18next";
 
 const ExtLink = tw.a`flex outline-none text-gray-900 font-medium p-5 items-center appearance-none`;
 const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
@@ -24,6 +25,7 @@ const MobileNav = tw.nav`xl:hidden z-50 bg-white sticky top-0 shadow-lg`;
 const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white h-16 shadow-lg`;
 
 export const MainNavbar = () => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   function toggleMenu() {
     setOpen(!open);
@@ -36,17 +38,17 @@ export const MainNavbar = () => {
         href="https://smswithoutborders.github.io/docs/intro"
         target="_blank"
       >
-        Get Started
+        {t("menu.get-started")}
       </StartedExtLink>
       <NavLink onClick={() => toggleMenu()} key="/" to="/">
-        Home
+        {t("menu.home")}
       </NavLink>
       <NavLink
         onClick={() => toggleMenu()}
         key="privacy-policy"
         to="/privacy-policy"
       >
-        Privacy Policy
+        {t("menu.privacy")}
       </NavLink>
       <ExtLink
         onClick={() => toggleMenu()}
@@ -54,7 +56,7 @@ export const MainNavbar = () => {
         href="https://github.com/orgs/smswithoutborders/"
         target="_blank"
       >
-        Github
+        GitHub
       </ExtLink>
       <ExtLink
         onClick={() => toggleMenu()}
@@ -62,10 +64,10 @@ export const MainNavbar = () => {
         href="https://smswithoutborders.github.io"
         target="_blank"
       >
-        Blog
+        {t("menu.blog")}
       </ExtLink>
       <NavLink onClick={() => toggleMenu()} key="contact-us" to="/contact-us">
-        Contact Us
+        {t("menu.contact")}
       </NavLink>
     </NavContainer>
   );
@@ -73,10 +75,10 @@ export const MainNavbar = () => {
   const actionLinks = (
     <UserActions key={2}>
       <LogInLink key="login" to="/login" onClick={() => toggleMenu()}>
-        <FiLogIn size={20} /> &nbsp; Log In
+        <FiLogIn size={20} /> &nbsp; {t("menu.login")}
       </LogInLink>
       <SignUpLink key="sign-up" to="/sign-up" onClick={() => toggleMenu()}>
-        <FiUserPlus size={20} /> &nbsp; Sign Up
+        <FiUserPlus size={20} /> &nbsp; {t("menu.signup")}
       </SignUpLink>
     </UserActions>
   );

@@ -8,6 +8,7 @@ import {
   FiCheckCircle,
   FiAlertTriangle,
 } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 export const Alert = ({
   kind,
@@ -19,6 +20,7 @@ export const Alert = ({
   hideCloseButton,
   ...rest
 }) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(isVisible);
   // alert close handler
   function handleClose() {
@@ -53,7 +55,9 @@ export const Alert = ({
       </div>
 
       <div className="mx-2 text-left">
-        <span className="">{message}</span>
+        <span className="">
+          {message || t("alert-message.alert-placeholder")}
+        </span>
         {actions && isValidElement(actions) && (
           <div className="mt-4">{actions}</div>
         )}
@@ -76,7 +80,6 @@ export const Alert = ({
 Alert.defaultProps = {
   kind: "primary",
   role: "alert",
-  message: "Alert message",
   isVisible: true,
   hideCloseButton: false,
 };
