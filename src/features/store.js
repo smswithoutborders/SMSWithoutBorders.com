@@ -19,8 +19,12 @@ export const resetStore = createAction("RESET_STORE");
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(API.middleware, sessionExpiryChecker, RequestErrorHandler),
-  devTools: process.env.NODE_ENV !== "production",
+    getDefaultMiddleware().concat(
+      API.middleware,
+      sessionExpiryChecker,
+      RequestErrorHandler
+    ),
+  devTools: process.env.NODE_ENV !== "production" ? true : false,
   preloadedState: persistedState,
 });
 
