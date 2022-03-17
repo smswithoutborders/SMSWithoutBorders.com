@@ -4,6 +4,7 @@ import telegramLogo from "images/telegram-icon.svg";
 import { useStoreTokenMutation } from "services";
 import { authSelector } from "features";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   PageAnimationWrapper,
@@ -16,7 +17,8 @@ import {
 } from "components";
 
 const PhoneNumberVerification = () => {
-  useTitle("Telegram Access");
+  const { t } = useTranslation();
+  useTitle(t("telegram.phone-verification.page-title"));
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ const PhoneNumberVerification = () => {
     evt.preventDefault();
     // validate phone number
     if (!number) {
-      toast.error("please provide a valid phone number with country code");
+      toast.error(t("forms.phone-number.validation-errors.invalid"));
       setError(true);
       return;
     } else {
@@ -56,15 +58,15 @@ const PhoneNumberVerification = () => {
       const response = await storeToken(data).unwrap();
       switch (response.body) {
         case 201:
-          toast.success(
-            "A verification code has been sent to your phone. Check code in your sms or email inbox"
-          );
+          toast.success(t("telegram.phone-verification.alerts.code-sent"));
           // send user to code verification
           navigate("../verify", { state: { phone_number: number } });
           break;
         default:
           // 200 success
-          toast.error("Sorry, you are not authorized to make this request");
+          toast.error(
+            t("telegram.phone-verification.alerts.authorization-error")
+          );
           // navigate to wallet page
           navigate("../");
       }
@@ -74,38 +76,28 @@ const PhoneNumberVerification = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, Invalid number provided");
+            toast.error(t("error-messages.invalid-number"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -123,12 +115,12 @@ const PhoneNumberVerification = () => {
         <div className="flex items-center justify-center mb-6">
           <img
             src={telegramLogo}
-            alt="telegram logo"
+            alt={t("telegram.phone-verification.logo-alt-text")}
             className="w-12 h-12 my-0 mr-3"
           />
           <h1 className="text-3xl font-bold">Telegram</h1>
         </div>
-        <p>Please fill in your phone number to begin</p>
+        <p>{t("telegram.phone-verification.details")}</p>
 
         <div className="max-w-md mx-auto mt-12">
           <form
@@ -139,7 +131,7 @@ const PhoneNumberVerification = () => {
               <PhoneNumberInput
                 international
                 countryCallingCodeEditable={false}
-                placeholder="Enter your phone number"
+                placeholder={t("forms.phone-number.placeholder")}
                 defaultCountry="CM"
                 value={number}
                 type="tel"
@@ -149,13 +141,13 @@ const PhoneNumberVerification = () => {
               />
               {error && (
                 <ErrorMessage>
-                  please provide a valid phone number with country code
+                  {t("forms.phone-number.validation-errors.invalid")}
                 </ErrorMessage>
               )}
             </FormGroup>
             <div className="flex flex-col mt-8 justify-evenly md:flex-row">
               <Button type="submit" className="flex-1 md:order-1">
-                continue
+                {t("labels.continue")}
               </Button>
               <Button
                 type="button"
@@ -163,7 +155,7 @@ const PhoneNumberVerification = () => {
                 className="flex-1 my-4 md:my-0 md:order-0 md:mr-2"
                 onClick={() => navigate(-1)}
               >
-                back
+                {t("labels.back")}
               </Button>
             </div>
           </form>

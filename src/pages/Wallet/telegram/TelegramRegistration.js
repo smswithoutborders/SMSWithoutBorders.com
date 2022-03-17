@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelector } from "features";
+import { useTranslation } from "react-i18next";
 import { useCreateExternalAccountMutation } from "services";
 import {
   Loader,
@@ -19,19 +20,24 @@ import {
   PageAnimationWrapper,
 } from "components";
 
-// form schema
-const schema = yup.object().shape({
-  first_name: yup.string().required("Please enter your first name"),
-  last_name: yup.string().required("Please enter your last name"),
-});
-
 const TelegramRegistration = () => {
-  useTitle("Telegram Registration");
+  const { t } = useTranslation();
+  useTitle(t("telegram.registration.page-title"));
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useSelector(authSelector);
   const [createExternalAccount, { isLoading, isSuccess }] =
     useCreateExternalAccountMutation();
+
+  // form schema
+  const schema = yup.object().shape({
+    first_name: yup
+      .string()
+      .required(t("telegram.registration.form.first-name.validation-error")),
+    last_name: yup
+      .string()
+      .required(t("telegram.registration.form.last-name.validation-error")),
+  });
   const {
     register,
     handleSubmit,
@@ -60,7 +66,7 @@ const TelegramRegistration = () => {
 
     try {
       await createExternalAccount(request).unwrap();
-      toast.success("Platform stored successfully");
+      toast.success(t("wallet.alerts.platform-stored"));
       // navigate to wallet page
       navigate("../../", { replace: true });
     } catch (error) {
@@ -69,38 +75,28 @@ const TelegramRegistration = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden");
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -123,19 +119,24 @@ const TelegramRegistration = () => {
             className="w-12 h-12 my-0 mr-3"
           />
           <h1 className="text-2xl font-bold md:text-3xl">
-            Telegram Registration
+            {t("telegram.registration.heading")}
           </h1>
         </div>
-        <p className="text-center">create a new telegram account</p>
+        <p className="text-center">{t("telegram.registration.details")}</p>
         <form
           className="max-w-md mx-auto mt-12"
           onSubmit={handleSubmit(handleAccountCreation)}
         >
           <FormGroup>
-            <Label htmlFor="first_name">First Name</Label>
+            <Label htmlFor="first_name">
+              {t("telegram.registration.form.first-name.label")}
+            </Label>
             <Input
               type="text"
               name="first_name"
+              placeholder={t(
+                "telegram.registration.form.first-name.placeholder"
+              )}
               {...register("first_name")}
               error={errors.first_name}
             />
@@ -145,11 +146,15 @@ const TelegramRegistration = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label htmlFor="last_name">Last Name</Label>
+            <Label htmlFor="last_name">
+              {t("telegram.registration.form.last-name.label")}
+            </Label>
             <Input
               type="text"
               name="last_name"
-              placeholder="Last Name"
+              placeholder={t(
+                "telegram.registration.form.last-name.placeholder"
+              )}
               {...register("last_name")}
               error={errors.last_name}
             />
@@ -158,7 +163,9 @@ const TelegramRegistration = () => {
             )}
           </FormGroup>
 
-          <Button className="w-full my-4">create account</Button>
+          <Button className="w-full my-4">
+            {t("telegram.registration.form.cta-button-text")}
+          </Button>
         </form>
       </div>
     </PageAnimationWrapper>

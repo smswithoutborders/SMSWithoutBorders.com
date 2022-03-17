@@ -4,6 +4,7 @@ import { BsShieldLock } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useVerifyTokenStorageMutation } from "services";
 import { authSelector } from "features";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   PageAnimationWrapper,
@@ -15,7 +16,8 @@ import {
 } from "components";
 
 const CodeVerification = () => {
-  useTitle("Telegram Code Verification");
+  const { t } = useTranslation();
+  useTitle(t("telegram.code-verification.page-title"));
   const navigate = useNavigate();
   const location = useLocation();
   const [code, setCode] = useState();
@@ -49,9 +51,7 @@ const CodeVerification = () => {
       const response = await verifyTokenStorage(data).unwrap();
       switch (response.body.code) {
         case 202:
-          toast.success(
-            "You do not have a telegram account, please fill the form to create one"
-          );
+          toast.success(t("telegram.code-verification.alerts.no-account"));
           // send user to telegram registration
           navigate("../../register", {
             state: { phone_number: location.state.phone_number },
@@ -59,7 +59,7 @@ const CodeVerification = () => {
           break;
         default:
           // 200 success
-          toast.success("Platform stored successfully");
+          toast.success(t("wallet.alerts.platform-stored"));
           // navigate to wallet page
           navigate("../../", { replace: true });
       }
@@ -69,38 +69,28 @@ const CodeVerification = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, Invalid code provided");
+            toast.error(t("error-messages.invalid-code"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -117,24 +107,15 @@ const CodeVerification = () => {
     <PageAnimationWrapper>
       <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
         <h1 className="inline-flex items-center mb-4 text-4xl font-bold">
-          <BsShieldLock size={48} className="mr-2" /> Verification
+          <BsShieldLock size={48} className="mr-2" />
+          <span>{t("code-verification.heading")}</span>
         </h1>
 
         <div className="my-4 prose text-justify">
-          <p>
-            A verification code has been sent to your phone. Please enter it
-            below. This process confirms the number provided is active and can
-            be used for communication when the time comes.
-          </p>
-
-          <p>
-            We also require you to provide the code sent to you by SMS as a
-            means of guaranteeing you have the necessary (own) rights to the
-            required phone number. This will help us prevent actors from using
-            non consented phone numbers to create accounts - preventing the
-            owners from further doing so
-          </p>
+          <p>{t("code-verification.paragraph-1")}</p>
+          <p>{t("code-verification.paragraph-2")}</p>
         </div>
+
         <div className="max-w-md mx-auto mt-12">
           <form
             className="px-4 mx-auto sm:px-3"
@@ -146,12 +127,12 @@ const CodeVerification = () => {
                 name="code"
                 min={0}
                 required
-                placeholder="SMS Verification Code"
+                placeholder={t("code-verification.form.code.placeholder")}
                 onChange={(evt) => setCode(evt.target.value)}
               />
             </FormGroup>
             <Button className="mx-auto" type="submit">
-              continue
+              {t("labels.continue")}
             </Button>
           </form>
         </div>

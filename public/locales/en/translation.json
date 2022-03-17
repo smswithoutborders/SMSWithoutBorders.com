@@ -154,8 +154,8 @@
     },
     "alerts": {
       "load-error": "Sorry we could not load platforms. If error persists, please contact support",
-      "token-deleted": "Token deleted successfully",
-      "token-stored": "Platform stored successfully"
+      "platform-deleted": "Token deleted successfully",
+      "platform-stored": "Platform stored successfully"
     }
   },
   "telegram": {
@@ -164,15 +164,8 @@
       "heading": "Telegram",
       "details": "Please fill in your phone number to begin",
       "logo-alt-text": "telegram logo",
-      "form": {
-        "phone-number": {
-          "label": "Phone Number",
-          "placeholder": "Enter your phone number",
-          "validation-errors": "please provide a valid phone number with country code"
-        }
-      },
       "alerts": {
-        "success-response": "A verification code has been sent to your phone. Check code in your sms or email inbox",
+        "code-sent": "A verification code has been sent to your phone. Check code in your sms or email inbox",
         "authorization-error": "Sorry, you are not authorized to make this request"
       }
     },
