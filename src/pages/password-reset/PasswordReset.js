@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNewPasswordMutation, getCache, clearCache } from "services";
+import { useTranslation } from "react-i18next";
 import {
   Loader,
   Label,
@@ -16,25 +17,30 @@ import {
   useTitle,
 } from "components";
 
-// form schema
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Please enter password"),
-  confirmPassword: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Please confirm your password")
-    .oneOf([yup.ref("password"), null], "Passwords do not match"),
-});
-
 const PasswordReset = () => {
-  useTitle("Password Reset");
+  const { t } = useTranslation();
+  useTitle(t("password-recovery.recovery.page-title"));
   const cache = getCache();
   const location = useLocation();
   const navigate = useNavigate();
   const [newPassword, { isLoading, isSuccess }] = useNewPasswordMutation();
+
+  // form schema
+  const schema = yup.object().shape({
+    password: yup
+      .string()
+      .min(8, t("forms.password.validation-errors.min"))
+      .required(t("forms.password.validation-errors.required")),
+    confirmPassword: yup
+      .string()
+      .min(8, t("forms.confirm-password.validation-errors.min"))
+      .required(t("forms.confirm-password.validation-errors.required"))
+      .oneOf(
+        [yup.ref("password"), null],
+        t("forms.confirm-password.validation-errors.match")
+      ),
+  });
+
   const {
     register,
     handleSubmit,
@@ -43,9 +49,9 @@ const PasswordReset = () => {
     resolver: yupResolver(schema),
   });
 
-  // check if phone number and cache is present
+  //check if phone number and cache is present
   useEffect(() => {
-    if (!location.state?.phone_number && cache === null) {
+    if (!location.state?.phone_number || cache === null) {
       navigate("../");
     }
   }, [location.state, navigate, cache]);
@@ -59,7 +65,7 @@ const PasswordReset = () => {
 
     try {
       await newPassword(request).unwrap();
-      toast.success("Password Changed successfully");
+      toast.success(t("alert-messages.password-changed"));
       // remove any cached data
       clearCache();
       navigate("/login");
@@ -69,36 +75,28 @@ const PasswordReset = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error("Sorry your session expired. Please start over");
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, please check password");
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -114,8 +112,10 @@ const PasswordReset = () => {
   return (
     <PageAnimationWrapper>
       <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
-        <h1 className="mb-4 text-3xl font-bold">Pasword Reset</h1>
-        <p className="">Set a new password for your account</p>
+        <h1 className="mb-4 text-3xl font-bold">
+          {t("password-recovery.recovery.heading")}
+        </h1>
+        <p className=""> {t("password-recovery.recovery.details")}</p>
         <div className="max-w-md mx-auto mt-12 text-left">
           <form
             className="px-4 mx-auto sm:px-3"
@@ -123,7 +123,7 @@ const PasswordReset = () => {
           >
             <FormGroup>
               <Label htmlFor="password" required>
-                Password
+                {t("forms.password.label")}
               </Label>
               <PasswordInput
                 name="password"
@@ -137,11 +137,11 @@ const PasswordReset = () => {
 
             <FormGroup>
               <Label htmlFor="confirmPassword" required>
-                Confirm Password
+                {t("forms.confirm-password.label")}
               </Label>
               <PasswordInput
                 name="confirmPassword"
-                placeholder="retype password"
+                placeholder={t("forms.confirm-password.placeholder")}
                 {...register("confirmPassword")}
                 error={errors.confirmPassword}
               />
@@ -150,7 +150,7 @@ const PasswordReset = () => {
               )}
             </FormGroup>
 
-            <Button className="w-full">change password</Button>
+            <Button className="w-full">{t("labels.password-change")}</Button>
           </form>
         </div>
       </div>

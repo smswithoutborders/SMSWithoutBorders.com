@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { setCache, useRecoverPasswordMutation } from "services";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   PageAnimationWrapper,
   PhoneNumberInput,
@@ -15,7 +16,8 @@ import {
 } from "components";
 
 const PhoneNumberVerification = () => {
-  useTitle("password reset");
+  const { t } = useTranslation();
+  useTitle(t("password-recovery.verification.page-title"));
   const navigate = useNavigate();
   const [number, setNumber] = useState();
   const [error, setError] = useState(false);
@@ -27,7 +29,7 @@ const PhoneNumberVerification = () => {
     evt.preventDefault();
     // validate phone number
     if (!number) {
-      toast.error("please provide a valid phone number with country code");
+      toast.error(t("forms.phone-number.validation-errors.invalid"));
       setError(true);
       return;
     } else {
@@ -44,8 +46,8 @@ const PhoneNumberVerification = () => {
       const data = {
         uid: response.uid,
         phone_number: splitNumber.nationalNumber,
-        country_code: "+" + splitNumber.countryCallingCode
-      }
+        country_code: "+" + splitNumber.countryCallingCode,
+      };
       // cache data to be used on verification page
       setCache(data);
       // redirect to verification page
@@ -56,40 +58,31 @@ const PhoneNumberVerification = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error("Sorry you are not authorized. please contact support");
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, Invalid number provided");
+            toast.error(t("error-messages.invalid-number"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
-
   /*
     when making requests show loading indicator
     Also maintain after request is successfull to update background state
@@ -101,13 +94,15 @@ const PhoneNumberVerification = () => {
   return (
     <PageAnimationWrapper>
       <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
-        <h1 className="mb-4 text-3xl font-bold">Password Reset</h1>
+        <h1 className="mb-4 text-3xl font-bold">
+          {t("password-recovery.verification.heading")}
+        </h1>
         <Alert
           kind="warning"
           message="This action will delete all currently saved tokens in your wallet"
           hideCloseButton
         />
-        <p className="mt-4">Please fill in your phone number to begin</p>
+        <p className="mt-4">{t("password-recovery.verification.details")}</p>
 
         <div className="max-w-md mx-auto mt-12">
           <form
@@ -118,7 +113,7 @@ const PhoneNumberVerification = () => {
               <PhoneNumberInput
                 international
                 countryCallingCodeEditable={false}
-                placeholder="Enter your phone number"
+                placeholder={t("forms.phone-number.placeholder")}
                 defaultCountry="CM"
                 value={number}
                 type="tel"
@@ -128,12 +123,12 @@ const PhoneNumberVerification = () => {
               />
               {error && (
                 <ErrorMessage>
-                  please provide a valid phone number with country code
+                  {t("forms.phone-number.validation-errors.invalid")}
                 </ErrorMessage>
               )}
             </FormGroup>
             <div className="flex flex-col justify-evenly md:flex-row">
-              <Button type="submit">continue</Button>
+              <Button type="submit">{t("labels.continue")}</Button>
             </div>
           </form>
         </div>

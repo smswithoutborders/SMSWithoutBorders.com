@@ -90,17 +90,17 @@
     "form": {
       "phone-number": {
         "label": "Phone Number",
-        "validation-error": "Please enter a phone number"
+        "validation-errors": "Please enter a phone number"
       },
       "password": {
         "label": "Password",
-        "validation-error": {
-          "min-length": "Password must be at least 8 characters",
+        "validation-errors": {
+          "min": "Password must be at least 8 characters",
           "required": "Password is required"
         }
       },
       "recaptcha": {
-        "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
+        "validation-errors": "Please prove you are not a robot by solving reCAPTCHA"
       },
       "cta-button-text": "login"
     },
@@ -115,7 +115,7 @@
         "phone-number": {
           "label": "Phone Number",
           "helper-text": "We will send a one time SMS to this number for confirmation",
-          "validation-error": "Please enter a phone number"
+          "validation-errors": "Please enter a phone number"
         },
         "alias": {
           "label": "Alias",
@@ -124,16 +124,16 @@
         },
         "password": {
           "label": "Password",
-          "validation-error": {
-            "min-length": "Password must be at least 8 characters",
+          "validation-errors": {
+            "min": "Password must be at least 8 characters",
             "required": "Password is required"
           }
         },
         "confirm-password": {
           "label": "Confirm Password",
           "placeholder": "retype password",
-          "validation-error": {
-            "min-length": "Password must be at least 8 characters",
+          "validation-errors": {
+            "min": "Password must be at least 8 characters",
             "required": "Password is required",
             "match": "passwords do not match"
           }
@@ -141,10 +141,10 @@
         "license-terms": {
           "label": "I agree to abide by SMSWithoutBorders",
           "policy-link-text": "privacy policy",
-          "validation-error": "Please review and accept terms and conditions to proceed"
+          "validation-errors": "Please review and accept terms and conditions to proceed"
         },
         "recaptcha": {
-          "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
+          "validation-errors": "Please prove you are not a robot by solving reCAPTCHA"
         },
         "cta-button-text": "sign up"
       },
@@ -195,7 +195,7 @@
         "phone-number": {
           "label": "Phone Number",
           "placeholder": "Enter your phone number",
-          "validation-error": "please provide a valid phone number with country code"
+          "validation-errors": "please provide a valid phone number with country code"
         }
       },
       "alerts": {
@@ -217,12 +217,12 @@
         "first-name": {
           "label": "First Name",
           "placeholder": "Jane",
-          "validation-error": "Please enter your first name"
+          "validation-errors": "Please enter your first name"
         },
         "last-name": {
           "label": "Last Name",
           "placeholder": "Doe",
-          "validation-error": "Please enter your last name"
+          "validation-errors": "Please enter your last name"
         },
         "cta-button-text": "create-account"
       }
@@ -308,23 +308,23 @@
     "form": {
       "password": {
         "label": "Current Password",
-        "validation-error": {
-          "min-length": "Password must be at least 8 characters",
+        "validation-errors": {
+          "min": "Password must be at least 8 characters",
           "required": "Password is required"
         }
       },
       "new-password": {
         "label": "New Password",
-        "validation-error": {
-          "min-length": "Password must be at least 8 characters",
+        "validation-errors": {
+          "min": "Password must be at least 8 characters",
           "required": "Please enter new password"
         }
       },
       "confirm-password": {
         "label": "Confirm Password",
         "placeholder": "retype password",
-        "validation-error": {
-          "min-length": "Password must be at least 8 characters",
+        "validation-errors": {
+          "min": "Password must be at least 8 characters",
           "required": "Please confirm your new password",
           "match": "passwords do not match"
         }
@@ -348,8 +348,8 @@
     "form": {
       "password": {
         "label": "Current Password",
-        "validation-error": {
-          "min-length": "Password must be at least 8 characters",
+        "validation-errors": {
+          "min": "Password must be at least 8 characters",
           "required": "Password is required"
         }
       },
@@ -357,7 +357,7 @@
         "label": "Confirmation",
         "placeholder": "enter confirmation",
         "helper-text": "Enter",
-        "validation-error": {
+        "validation-errors": {
           "required": {
             "part-1": "please enter",
             "part-2": "to confirm"
@@ -372,41 +372,15 @@
     }
   },
   "password-recovery": {
-    "phone-verification": {
-      "page-title": "Reset your password",
-      "heading": "Password Reset",
-      "details": "Please fill in your phone number to begin",
-      "form": {
-        "phone-number": {
-          "label": "Phone Number",
-          "placeholder": "Enter your phone number",
-          "validation-error": "please provide a valid phone number with country code"
-        }
-      }
+    "verification": {
+      "page-title": "Recover your password",
+      "heading": "Password Recovery",
+      "details": "Please fill in your phone number to begin"
     },
-    "password-reset": {
-      "page-title": "Password Reset",
-      "heading": "Password Reset",
-      "details": "Set a new password for your account",
-      "form": {
-        "password": {
-          "label": "Password",
-          "validation-error": {
-            "min-length": "Password must be at least 8 characters",
-            "required": "Password is required"
-          }
-        },
-        "confirm-password": {
-          "label": "Confirm Password",
-          "placeholder": "retype password",
-          "validation-error": {
-            "min-length": "Password must be at least 8 characters",
-            "required": "Please confirm your new password",
-            "match": "passwords do not match"
-          }
-        },
-        "cta-button-text": "change password"
-      }
+    "recovery": {
+      "page-title": "Password Recovery",
+      "heading": "Password Recovery",
+      "details": "Set a new password for your account"
     }
   },
   "alert-messages": {
@@ -414,7 +388,7 @@
     "alert-placeholder": "Alert message here",
     "code-verified": "Code Verified Successfully",
     "phone-number-verified": "Phone number verified successully",
-    "password-change": "Password changed successfully",
+    "password-changed": "Password changed successfully",
     "logout-successful": "Logout successful",
     "recaptcha": {
       "loading": "loading reCAPTCHA  please wait",
@@ -428,12 +402,38 @@
     "general-error-message": "An error occured please try again",
     "network-error": "An error occured, please check your network and try again",
     "invalid-code": "Invalid code provided",
+    "invalid-number": "Invalid number provided",
     "400": "Something went wrong \n We are working to resolve this. Please try again",
-    "401": "Sorry you are not authorized. please logout and login",
+    "401": "Sorry you are not authorized to perform this action",
     "403": "Forbidden. Sorry your session may have expired. Please logout and login again or reload this page",
     "404": "Sorry the resource you requested is unavailable or not accessible",
     "409": "There is a possible duplicate of this account please contact support",
     "429": "Too many failed attempts please wait a while and try again",
     "500": "A critical error occured. Please contact support"
+  },
+  "forms": {
+    "phone-number": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number",
+      "validation-errors": {
+        "invalid": "please provide a valid phone number"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "validation-errors": {
+        "min": "Password must be at least 8 characters",
+        "required": "Password is required"
+      }
+    },
+    "confirm-password": {
+      "label": "Confirm Password",
+      "placeholder": "retype password",
+      "validation-errors": {
+        "min": "Password must be at least 8 characters",
+        "required": "Please confirm your password",
+        "match": "passwords do not match"
+      }
+    }
   }
 }
