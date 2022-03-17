@@ -109,54 +109,27 @@
     "signup-link-text": "Sign Up"
   },
   "signup": {
-    "registration": {
-      "page-title": "Sign Up",
-      "form": {
-        "phone-number": {
-          "label": "Phone Number",
-          "helper-text": "We will send a one time SMS to this number for confirmation",
-          "validation-errors": "Please enter a phone number"
-        },
-        "alias": {
-          "label": "Alias",
-          "helper-text": "Choose a name for this account (could be anything)",
-          "placeholder": "Jane Doe"
-        },
-        "password": {
-          "label": "Password",
-          "validation-errors": {
-            "min": "Password must be at least 8 characters",
-            "required": "Password is required"
-          }
-        },
-        "confirm-password": {
-          "label": "Confirm Password",
-          "placeholder": "retype password",
-          "validation-errors": {
-            "min": "Password must be at least 8 characters",
-            "required": "Password is required",
-            "match": "passwords do not match"
-          }
-        },
-        "license-terms": {
-          "label": "I agree to abide by SMSWithoutBorders",
-          "policy-link-text": "privacy policy",
-          "validation-errors": "Please review and accept terms and conditions to proceed"
-        },
-        "recaptcha": {
-          "validation-errors": "Please prove you are not a robot by solving reCAPTCHA"
-        },
-        "cta-button-text": "sign up"
+    "page-title": "Sign Up",
+    "form": {
+      "alias": {
+        "label": "Alias",
+        "helper-text": "Choose a name for this account (could be anything)",
+        "placeholder": "Jane Doe"
       },
-      "account-status": "Already have an account?",
-      "signin-link-text": "Sign In"
+      "license-terms": {
+        "label": "I agree to abide by SMSWithoutBorders",
+        "policy-link": "privacy policy",
+        "validation-error": "Please review and accept terms and conditions to proceed"
+      },
+      "cta-button-text": "sign up"
     },
+    "account-status": "Already have an account?",
+    "login-link": "Sign In",
+
     "code-verification": {
       "alerts": {
-        "account-verified": "your account has been created, please login"
-      },
-      "error-messages": {
-        "signup-verification": "Sorry we could not complete your registration. If error persists, please contact support"
+        "account-created": "your account has been created, please login",
+        "registration-error": "Sorry we could not complete your registration. If error persists, please contact support"
       }
     }
   },
@@ -350,6 +323,7 @@
     "loading": "processing please wait",
     "alert-placeholder": "Alert message here",
     "code-verified": "Code Verified Successfully",
+    "request-received": "Success your request has been received",
     "phone-number-verified": "Phone number verified successully",
     "password-changed": "Password changed successfully",
     "logout-successful": "Logout successful",
@@ -366,6 +340,7 @@
     "network-error": "An error occured, please check your network and try again",
     "invalid-code": "Invalid code provided",
     "invalid-number": "Invalid number provided",
+    "invalid-login": "Forbidden, account is unauthorized. \n check your phonenumber and password",
     "400": "Something went wrong \n We are working to resolve this. Please try again",
     "401": "Sorry you are not authorized to perform this action",
     "403": "Forbidden. Sorry your session may have expired. Please logout and login again or reload this page",
@@ -378,7 +353,9 @@
     "phone-number": {
       "label": "Phone Number",
       "placeholder": "Enter your phone number",
+      "helper-text": "We will send a one time SMS to this number for confirmation",
       "validation-errors": {
+        "required": "please enter a phone number",
         "invalid": "please provide a valid phone number"
       }
     },
@@ -403,6 +380,9 @@
         "required": "Please confirm your password",
         "match": "passwords do not match"
       }
+    },
+    "recaptcha": {
+      "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
     }
   }
 }

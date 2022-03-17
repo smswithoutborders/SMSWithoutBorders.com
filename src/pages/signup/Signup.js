@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useTranslation } from "react-i18next";
 import { useSignupMutation, setCache } from "services";
 import {
   Input,
@@ -25,38 +26,44 @@ import {
   PageAnimationWrapper,
 } from "components";
 
-// check if recaptcha is enabled and conditionally add validation
-const ENABLE_RECAPTCHA =
-  process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
-let schemaShape = {
-  name: yup.string(),
-  phone_number: yup.string().required("Phone Number is required"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
-  confirmPassword: yup
-    .string()
-    .min(8, "password must be at least 8 characters")
-    .required("Please confirm your password")
-    .oneOf([yup.ref("password"), null], "passwords do not match"),
-  acceptTerms: yup
-    .bool()
-    .oneOf([true], "Please review and accept terms and conditions to proceed"),
-};
-
-if (ENABLE_RECAPTCHA) {
-  schemaShape.captcha_token = yup
-    .string()
-    .required("Please prove you are not a robot by solving reCAPTCHA");
-}
-// final validation schema used by react-hook-form
-const schema = yup.object().shape(schemaShape);
-
 const Signup = () => {
-  useTitle("Sign Up");
+  const { t } = useTranslation();
+  useTitle(t("signup.page-title"));
   const navigate = useNavigate();
   const [signup, { isLoading, isSuccess }] = useSignupMutation();
+
+  // check if recaptcha is enabled and conditionally add validation
+  const ENABLE_RECAPTCHA =
+    process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
+  let schemaShape = {
+    name: yup.string(),
+    phone_number: yup
+      .string()
+      .required(t("forms.phone-number.validation-errors.required")),
+    password: yup
+      .string()
+      .min(8, t("forms.password.validation-errors.min"))
+      .required(t("forms.password.validation-errors.required")),
+    confirmPassword: yup
+      .string()
+      .min(8, t("forms.confirm-password.validation-errors.min"))
+      .required(t("forms.confirm-password.validation-errors.required"))
+      .oneOf(
+        [yup.ref("password"), null],
+        t("forms.confirm-password.validation-errors.match")
+      ),
+    acceptTerms: yup
+      .bool()
+      .oneOf([true], t("signup.form.license-terms.validation-error")),
+  };
+
+  if (ENABLE_RECAPTCHA) {
+    schemaShape.captcha_token = yup
+      .string()
+      .required(t("forms.recaptcha.validation-error"));
+  }
+  // final validation schema used by react-hook-form
+  const schema = yup.object().shape(schemaShape);
 
   const {
     control,
@@ -87,7 +94,7 @@ const Signup = () => {
 
     try {
       const response = await signup(data).unwrap();
-      toast.success(`Success your request has been received`);
+      toast.success(t("alert-messages.request-received"));
       /*
        cache data in local storage in case we need it later to resend
        verification codes or signup failed.
@@ -103,31 +110,28 @@ const Signup = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Forbidden, Account is unauthorized. \n check your phonenumber and password"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error("An account with this number already exists");
+            toast.error(t("error-messages.409"));
+            break;
+          case 429:
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   };
@@ -153,7 +157,7 @@ const Signup = () => {
           <form onSubmit={handleSubmit(handleSignUp)}>
             <FormGroup>
               <Label htmlFor="phone_number" required>
-                Phone Number
+                {t("forms.phone-number.label")}
               </Label>
               <Controller
                 control={control}
@@ -162,7 +166,7 @@ const Signup = () => {
                   <PhoneNumberInput
                     international
                     countryCallingCodeEditable={false}
-                    placeholder="Enter your phone number"
+                    placeholder={t("forms.phone-number.placeholder")}
                     defaultCountry="CM"
                     value={value}
                     type="tel"
@@ -175,15 +179,15 @@ const Signup = () => {
                 <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
               )}
               <small className="block text-xs text-gray-600">
-                We will send a one time SMS to this number for confirmation
+                {t("forms.phone-number.helper-text")}
               </small>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="name">Alias</Label>
+              <Label htmlFor="name">{t("signup.form.alias.label")}</Label>
               <Input
                 type="text"
                 name="name"
-                placeholder="e.g Jane Doe"
+                placeholder={t("signup.form.alias.placeholder")}
                 {...register("name")}
                 error={errors.name}
               />
@@ -191,13 +195,13 @@ const Signup = () => {
                 <ErrorMessage>{errors.name.message}</ErrorMessage>
               )}
               <small className="block mt-2 text-xs text-gray-600">
-                Choose a name for this account (could be anything)
+                {t("signup.form.alias.helper-text")}
               </small>
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="password" required>
-                Password
+                {t("forms.password.label")}
               </Label>
               <PasswordInput
                 name="password"
@@ -211,11 +215,11 @@ const Signup = () => {
 
             <FormGroup>
               <Label htmlFor="confirmPassword" required>
-                Confirm Password
+                {t("forms.confirm-password.label")}
               </Label>
               <PasswordInput
                 name="confirmPassword"
-                placeholder="retype password"
+                placeholder={t("forms.confirm-password.placeholder")}
                 {...register("confirmPassword")}
                 error={errors.confirmPassword}
               />
@@ -233,14 +237,14 @@ const Signup = () => {
                 )}
               />
               <p className="mb-4 ml-2 text-sm font-light text-gray-600">
-                <span>I agree to abide by SMSWithoutBorders </span>
+                <span>{t("signup.form.license-terms.label")} </span>
                 <Link
                   to="/privacy-policy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-800 no-underline border-gray-500"
                 >
-                  privacy policy
+                  {t("signup.form.license-terms.policy-link")}
                 </Link>
               </p>
             </FormGroup>
@@ -256,21 +260,22 @@ const Signup = () => {
               <FormGroup>
                 <Alert
                   kind="primary"
-                  message="reCAPTCHA has been disabled, you can re-enable it in your project's configuration"
+                  message={t("alert-messages.recaptcha.disabled")}
                   hideCloseButton
                 />
               </FormGroup>
             )}
 
             <Button className="w-full" disabled={!isValid}>
-              <FiUserPlus /> &nbsp; sign up
+              <FiUserPlus /> &nbsp;
+              <span>{t("signup.form.cta-button-text")}</span>
             </Button>
           </form>
 
           <p className="my-8 text-sm text-center text-gray-600">
-            Already have an account? &nbsp;
+            <span>{t("signup.account-status")}</span> &nbsp;
             <Link to="/login" className="text-blue-800">
-              Sign In
+              {t("signup.login-link")}
             </Link>
           </p>
         </div>

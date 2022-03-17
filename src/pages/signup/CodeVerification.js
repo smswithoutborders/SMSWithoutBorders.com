@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { BsShieldLock } from "react-icons/bs";
 import { useCountDown } from "hooks";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   getCache,
@@ -19,6 +20,7 @@ import {
 } from "components";
 
 const CodeVerification = () => {
+  const { t } = useTranslation();
   const cache = getCache();
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,7 +66,7 @@ const CodeVerification = () => {
     evt.preventDefault();
     try {
       await validateOTPCode(code).unwrap();
-      toast.success("Code verified successfully");
+      toast.success(t("alert-messages.code-verified"));
       await handleSignUpVerification();
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
@@ -72,38 +74,28 @@ const CodeVerification = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, Invalid code provided");
+            toast.error(t("error-messages.invalid-code"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -111,7 +103,7 @@ const CodeVerification = () => {
   async function handleSignUpVerification() {
     try {
       await verifySignup().unwrap();
-      toast.success("your account has been created, please login");
+      toast.success(t("signup.code-verification.alerts.account-created"));
       // remove any cached data
       clearCache();
       // redirect user to login page
@@ -122,38 +114,28 @@ const CodeVerification = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, Invalid code provided");
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -176,40 +158,37 @@ const CodeVerification = () => {
   if (OTPRequestError) {
     return (
       <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>An error occured</h2>
-        <p className="">
-          Sorry we could not verify your phone number. If error persists, please
-          contact support
-        </p>
-        <Button onClick={() => resendOTPCode()}>try again</Button>
+        <h2>{t("error-messages.general-error-title")}</h2>
+        <p className="">{t("code-verification.error-messages.otp-request")}</p>
+        <Button onClick={() => resendOTPCode()}>{t("labels.try-again")}</Button>
       </div>
     );
   }
-
   // if error while validating OTP Code
   else if (OTPValidationError) {
     return (
       <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>An error occured</h2>
+        <h2>{t("error-messages.general-error-title")}</h2>
         <p className="">
-          Sorry we could not verify your code. If error persists, please contact
-          support
+          {t("code-verification.error-messages.otp-validation")}
         </p>
-        <Button onClick={() => handleCodeVerification()}>try again</Button>
+        <Button onClick={() => handleCodeVerification()}>
+          {t("labels.try-again")}
+        </Button>
       </div>
     );
   }
-
-  // if error while validating OTP Code
+  // if error while verifying signup
   else if (signUpVerificationError) {
     return (
       <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>An error occured</h2>
+        <h2>{t("error-messages.general-error-title")}</h2>
         <p className="">
-          Sorry we could not complete your registration. If error persists,
-          please contact support
+          {t("signup.code-verification.alerts.registration-error")}
         </p>
-        <Button onClick={() => handleSignUpVerification()}>try again</Button>
+        <Button onClick={() => handleSignUpVerification()}>
+          {t("labels.try-again")}
+        </Button>
       </div>
     );
   } else {
@@ -217,23 +196,13 @@ const CodeVerification = () => {
       <PageAnimationWrapper>
         <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
           <h1 className="inline-flex items-center mb-4 text-4xl font-bold">
-            <BsShieldLock size={48} className="mr-2" /> Verification
+            <BsShieldLock size={48} className="mr-2" />
+            <span>{t("code-verification.heading")}</span>
           </h1>
 
           <div className="my-4 prose text-justify">
-            <p>
-              A verification code has been sent to your phone. Please enter it
-              below. This process confirms the number provided is active and can
-              be used for communication when the time comes.
-            </p>
-
-            <p>
-              We also require you to provide the code sent to you by SMS as a
-              means of guaranteeing you have the necessary (own) rights to the
-              required phone number. This will help us prevent actors from using
-              non consented phone numbers to create accounts - preventing the
-              owners from further doing so
-            </p>
+            <p>{t("code-verification.paragraph-1")}</p>
+            <p>{t("code-verification.paragraph-2")}</p>
           </div>
 
           <div className="max-w-md mx-auto mt-12">
@@ -247,7 +216,7 @@ const CodeVerification = () => {
                   name="code"
                   min={0}
                   required
-                  placeholder="SMS Verification Code"
+                  placeholder={t("code-verification.form.code.placeholder")}
                   onChange={(evt) => setCode(evt.target.value)}
                 />
               </FormGroup>
@@ -259,18 +228,19 @@ const CodeVerification = () => {
                     className="order-1 mt-3 md:mt-0 md:order-none"
                     onClick={() => resendOTPCode()}
                   >
-                    resend code
+                    {t("code-verification.resend-button-text")}
                   </Button>
                 )}
 
                 {isInitialized && !expired && (
                   <p className="order-1 py-2 mt-3 md:mt-0 md:order-none">
-                    Resend in: <span className="font-bold">{timer}</span>
+                    <span>{t("code-verification.resend-label")} : </span>
+                    <span className="font-bold">{timer}</span>
                   </p>
                 )}
 
                 <Button className="" type="submit">
-                  continue
+                  {t("labels.continue")}
                 </Button>
               </FormGroup>
             </form>
