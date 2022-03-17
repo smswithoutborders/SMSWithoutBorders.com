@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { authSelector, resetStore } from "features";
 import {
@@ -22,30 +23,35 @@ import {
   PasswordInput,
 } from "components";
 
-// form schema
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Please enter current password"),
-  new_password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Please enter new password"),
-  confirmPassword: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Please confirm your password")
-    .oneOf([yup.ref("new_password"), null], "Passwords do not match"),
-});
-
 const PasswordChange = () => {
-  useTitle("Password Change");
+  const { t } = useTranslation();
+  useTitle(t("password-change.page-title"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector(authSelector);
   const [changePassword, { isLoading, isSuccess }] =
     useChangePasswordMutation();
+
+  // form schema
+  const schema = yup.object().shape({
+    password: yup
+      .string()
+      .min(8, t("forms.password.validation-errors.min"))
+      .required(t("forms.password.validation-errors.required")),
+    new_password: yup
+      .string()
+      .min(8, t("forms.password.validation-errors.min"))
+      .required(t("forms.password.validation-errors.required-new")),
+    confirmPassword: yup
+      .string()
+      .min(8, t("forms.confirm-password.validation-errors.min"))
+      .required(t("forms.confirm-password.validation-errors.required"))
+      .oneOf(
+        [yup.ref("new_password"), null],
+        t("forms.confirm-password.validation-errors.match")
+      ),
+  });
+
   const {
     register,
     handleSubmit,
@@ -64,7 +70,7 @@ const PasswordChange = () => {
 
     try {
       await changePassword(request).unwrap();
-      toast.success("Password Changed successfully");
+      toast.success(t("alert-messages.password-changed"));
       // remove any cached data
       clearCache();
       // reset store/logout user
@@ -77,36 +83,28 @@ const PasswordChange = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error("Sorry you are unauthorized. Please login");
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error("Forbidden, current password is invalid");
+            toast.error(t("error-messages.invalid-password"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -121,11 +119,13 @@ const PasswordChange = () => {
 
   return (
     <div className="max-w-screen-sm py-20 mx-auto text-center lg:py-0 md:px-8">
-      <h1 className="mb-4 text-3xl font-bold">Password Change</h1>
-      <p className="">Set a new password for your account</p>
+      <h1 className="mb-4 text-3xl font-bold">
+        {t("password-change.heading")}
+      </h1>
+      <p className="">{t("password-change.details")}</p>
       <Alert
         kind="warning"
-        message="This action will delete all currently saved tokens in your wallet and you will be logged out"
+        message={t("password-change.alerts.warning")}
         hideCloseButton
       />
       <div className="max-w-md mx-auto mt-12 text-left">
@@ -134,7 +134,9 @@ const PasswordChange = () => {
           onSubmit={handleSubmit(handlePasswordChange)}
         >
           <FormGroup>
-            <Label htmlFor="password" required>Current Password</Label>
+            <Label htmlFor="password" required>
+              {t("forms.password.labels.current")}
+            </Label>
             <PasswordInput
               name="password"
               {...register("password")}
@@ -147,7 +149,9 @@ const PasswordChange = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label htmlFor="new_password" required>New Password</Label>
+            <Label htmlFor="new_password" required>
+              {t("forms.password.labels.new")}
+            </Label>
             <PasswordInput
               name="new_password"
               {...register("new_password")}
@@ -159,10 +163,12 @@ const PasswordChange = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label htmlFor="confirmPassword" required>Confirm Password</Label>
+            <Label htmlFor="confirmPassword" required>
+              {t("forms.confirm-password.label")}
+            </Label>
             <PasswordInput
               name="confirmPassword"
-              placeholder="retype password"
+              placeholder={t("forms.confirm-password.placeholder")}
               {...register("confirmPassword")}
               error={errors.confirmPassword}
             />
@@ -171,7 +177,7 @@ const PasswordChange = () => {
             )}
           </FormGroup>
 
-          <Button className="w-full">change password</Button>
+          <Button className="w-full">{t("labels.password-change")}</Button>
         </form>
       </div>
     </div>

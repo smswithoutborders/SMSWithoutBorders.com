@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RequireAuth } from "components";
 import { Toaster } from "react-hot-toast";
 import { FiSettings } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 import {
   Sync,
   Contact,
@@ -31,6 +32,7 @@ import {
 // toast notifications: https://uxdesign.cc/toasts-or-snack-bars-design-organic-system-notifications-1236f2883023
 
 const App = () => {
+  const { t } = useTranslation();
   return (
     <Fragment>
       <Toaster
@@ -86,7 +88,7 @@ const App = () => {
                     <div className="p-8 text-center h-80">
                       <FiSettings size={100} className="mx-auto mb-4" />
                       <p className="mb-8 text-base leading-relaxed">
-                        Please select a setting from the menu
+                        {t("settings.paragraph")}
                       </p>
                     </div>
                   </div>

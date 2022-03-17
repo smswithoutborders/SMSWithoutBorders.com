@@ -296,79 +296,42 @@
     "heading": "Settings",
     "details": "Manage your account",
     "paragraph": "Please select a setting from the menu",
-    "navigation": {
-      "link-1": "Password Change",
-      "link-2": "Delete Account"
+    "menu": {
+      "password-change": "Password Change",
+      "account-deletion": "Delete Account"
     }
   },
   "password-change": {
     "page-title": "Password Change",
     "heading": "Password Change",
     "details": "Set a new password for your account",
-    "form": {
-      "password": {
-        "label": "Current Password",
-        "validation-errors": {
-          "min": "Password must be at least 8 characters",
-          "required": "Password is required"
-        }
-      },
-      "new-password": {
-        "label": "New Password",
-        "validation-errors": {
-          "min": "Password must be at least 8 characters",
-          "required": "Please enter new password"
-        }
-      },
-      "confirm-password": {
-        "label": "Confirm Password",
-        "placeholder": "retype password",
-        "validation-errors": {
-          "min": "Password must be at least 8 characters",
-          "required": "Please confirm your new password",
-          "match": "passwords do not match"
-        }
-      },
-      "cta-button-text": "change password"
-    },
     "alerts": {
-      "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out",
-      "password-change": "Password changed successfully"
+      "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out"
     }
   },
   "account-deletion": {
     "page-title": "Account Deletion",
     "heading": "Delete Account",
     "details": "Set a new password for your account",
+    "confirmation": {
+      "text": "IConfirmThisAction",
+      "validation-error": "Please enter {{confirmation}} and your password to proceed"
+    },
     "paragraph": {
-      "part-1": "Please enter ",
+      "part-1": "Please enter",
       "part-2": "and your password to proceed"
     },
-    "confirmation-text": "IConfirmThisAction",
     "form": {
-      "password": {
-        "label": "Current Password",
-        "validation-errors": {
-          "min": "Password must be at least 8 characters",
-          "required": "Password is required"
-        }
-      },
       "confirmation": {
         "label": "Confirmation",
         "placeholder": "enter confirmation",
-        "helper-text": "Enter",
-        "validation-errors": {
-          "required": {
-            "part-1": "please enter",
-            "part-2": "to confirm"
-          }
-        }
-      },
-      "cta-button-text": "change password"
+        "helper-text": "Enter"
+      }
     },
     "alerts": {
       "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out",
-      "account-delete": "Your account has been deleted. Sad to see you go"
+      "account-deleted": "Your account has been deleted. We are sad to see you go",
+      "invalid-password": "Forbidden, password is invalid"
     }
   },
   "password-recovery": {
@@ -421,9 +384,15 @@
     },
     "password": {
       "label": "Password",
+      "labels": {
+        "current": "Current Password",
+        "new": "New Password"
+      },
+      "placeholder": "password",
       "validation-errors": {
         "min": "Password must be at least 8 characters",
-        "required": "Password is required"
+        "required": "Password is required",
+        "required-new": "Please enter new password"
       }
     },
     "confirm-password": {
