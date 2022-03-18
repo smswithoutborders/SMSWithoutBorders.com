@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { IoMdSync } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { authSelector } from "features";
+import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";
 import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
 import { IoWalletOutline } from "react-icons/io5";
@@ -22,7 +23,8 @@ import {
 } from "services";
 
 const Wallet = () => {
-  useTitle("Wallet (Store Access)");
+  const { t } = useTranslation();
+  useTitle(t("wallet.page-title"));
 
   // used for token revoke
   const [isOpen, setIsOpen] = useState(false);
@@ -73,40 +75,28 @@ const Wallet = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error(
-              "Forbidden, Sorry you are not authorized. logout and login again"
-            );
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -121,7 +111,7 @@ const Wallet = () => {
 
     try {
       await tokenRevoke(data).unwrap();
-      toast.success("Token deleted successfully");
+      toast.success(t("wallet.alerts.platform-deleted"));
       // reload providers
       refetch();
     } catch (error) {
@@ -130,40 +120,30 @@ const Wallet = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Sorry you are not authorized. please logout and login"
-            );
+            toast.error(t("error-messages.401"));
             break;
           case 403:
-            toast.error(
-              "Forbidden, Sorry you are not authorized. logout and login again"
-            );
+            setPassword("");
+            setIsOpen(true);
+            toast.error(t("error-messages.invalid-password"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   }
@@ -178,13 +158,10 @@ const Wallet = () => {
 
   if (isError) {
     return (
-      <div className="p-8 my-24 prose">
-        <h2>An error occured</h2>
-        <p className="">
-          Sorry we could not load platforms. If error persists, please contact
-          support
-        </p>
-        <Button onClick={() => refetch()}>try again</Button>
+      <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
+        <h2>{t("error-messages.general-error-title")}</h2>
+        <p className="">{t("wallet.alerts.load-error")}</p>
+        <Button onClick={() => refetch()}>{t("labels.try-again")}</Button>
       </div>
     );
   }
@@ -195,29 +172,23 @@ const Wallet = () => {
         <div className="">
           <div className="flex justify-between mb-8 ">
             <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
-              <IoWalletOutline /> &nbsp; Wallet
+              <IoWalletOutline size={42} />
+              <span className="ml-2">{t("wallet.heading")}</span>
             </h1>
             <Link
               to="/dashboard/sync"
               className="inline-flex items-center justify-center px-6 py-2 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none hover:bg-blue-900"
             >
               <IoMdSync size={22} />
-              <span className="ml-1">sync</span>
+              <span className="ml-1">{t("labels.sync")}</span>
             </Link>
           </div>
-          <p className="my-0 text-lg">
-            Store your tokens which will be used for authentication on your
-            behalf in the event of an internet shutdown.
-          </p>
-          <p className="my-0 text-lg">
-            You can define how this tokens will be used by setting the scopes of
-            access
-          </p>
+          <p className="my-0 text-lg">{t("wallet.details")}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 lg:gap-8">
           <div className="col-span-full md:col-span-1">
-            <h2>Available Platforms</h2>
+            <h2>{t("wallet.section-1.heading")}</h2>
             {Object.keys(unSavedPlatforms).length ? (
               <Fragment>
                 {unSavedPlatforms.map((item) => (
@@ -252,7 +223,7 @@ const Wallet = () => {
                         <Disclosure.Panel className="p-4 mb-4 shadow">
                           <div className="items-center justify-between md:flex">
                             <div>
-                              <h4>Description</h4>
+                              <h4> {t("wallet.labels.description")}</h4>
                               <p>{item.description}</p>
                             </div>
                             <Button
@@ -263,7 +234,10 @@ const Wallet = () => {
                                 )
                               }
                             >
-                              <FiSave /> &nbsp; store
+                              <FiSave />
+                              <span className="ml-1">
+                                {t("wallet.section-1.cta-button-text")}
+                              </span>
                             </Button>
                           </div>
                         </Disclosure.Panel>
@@ -273,11 +247,11 @@ const Wallet = () => {
                 ))}
               </Fragment>
             ) : (
-              <p>No available platforms</p>
+              <p>{t("wallet.alerts.no-available-platforms")}</p>
             )}
           </div>
           <div className="col-span-full md:col-span-1">
-            <h2>Saved Platforms</h2>
+            <h2>{t("wallet.section-2.heading")}</h2>
             {Object.keys(savedPlatforms).length ? (
               <Fragment>
                 {savedPlatforms.map((item) => (
@@ -312,7 +286,7 @@ const Wallet = () => {
                         <Disclosure.Panel className="p-4 mb-4 shadow">
                           <div className="items-center justify-between md:flex">
                             <div>
-                              <h4>Description</h4>
+                              <h4>{t("wallet.labels.description")}</h4>
                               <p>{item.description}</p>
                             </div>
                             <Button
@@ -322,7 +296,10 @@ const Wallet = () => {
                                 setIsOpen(true);
                               }}
                             >
-                              <FiTrash2 /> &nbsp; revoke
+                              <FiTrash2 />
+                              <span className="ml-1">
+                                {t("wallet.section-2.cta-button-text")}
+                              </span>
                             </Button>
                           </div>
                         </Disclosure.Panel>
@@ -332,7 +309,7 @@ const Wallet = () => {
                 ))}
               </Fragment>
             ) : (
-              <p>No saved platforms</p>
+              <p>{t("wallet.alerts.no-saved-platforms")}</p>
             )}
           </div>
         </div>
@@ -347,14 +324,13 @@ const Wallet = () => {
           <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
 
           <div className="relative max-w-xl p-6 mx-auto prose bg-white rounded-lg">
-            <Dialog.Title>Revoke Token</Dialog.Title>
+            <Dialog.Title>{t("wallet.revoke-dialog.heading")}</Dialog.Title>
             <Dialog.Description>
-              This will permanently remove this token from your account and
-              cannot be reversed. Enter your password to Confirm
+              {t("wallet.revoke-dialog.details")}
             </Dialog.Description>
 
             <PasswordInput
-              placeholder="Password"
+              placeholder={t("forms.password.placeholder")}
               minLength="8"
               onChange={(evt) => setPassword(evt.target.value)}
               showStrength={false}
@@ -362,7 +338,7 @@ const Wallet = () => {
 
             <div className="flex items-center justify-end mt-8">
               <Button outline onClick={() => setIsOpen(false)}>
-                cancel
+                {t("wallet.revoke-dialog.cancel-button-text")}
               </Button>
               <Button
                 className="ml-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300"
@@ -372,7 +348,7 @@ const Wallet = () => {
                   setIsOpen(false);
                 }}
               >
-                confirm revoke
+                {t("wallet.revoke-dialog.cta-button-text")}
               </Button>
             </div>
           </div>

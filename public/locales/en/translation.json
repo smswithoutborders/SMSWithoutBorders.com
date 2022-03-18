@@ -16,6 +16,7 @@
     "logout": "Logout"
   },
   "labels": {
+    "sync": "sync",
     "optional": "optional",
     "strong": "strong",
     "good": "good",
@@ -134,9 +135,12 @@
     }
   },
   "wallet": {
+    "page-title": "Wallet Store Access",
     "heading": "Wallet",
     "details": "Store your tokens which will be used for authentication on your behalf in the event of an internet shutdown. You can define how this tokens will be used by setting the scopes of access",
-    "cta-button-text": "sync",
+    "labels": {
+      "description": "Description"
+    },
     "section-1": {
       "heading": "Available Platforms",
       "cta-button-text": "store"
@@ -154,6 +158,8 @@
     },
     "alerts": {
       "load-error": "Sorry we could not load platforms. If error persists, please contact support",
+      "no-available-platforms": "No available platforms",
+      "no-saved-platforms": "No saved platforms",
       "platform-deleted": "Token deleted successfully",
       "platform-stored": "Platform stored successfully"
     }
@@ -333,6 +339,7 @@
     "network-error": "An error occured, please check your network and try again",
     "invalid-code": "Invalid code provided",
     "invalid-number": "Invalid number provided",
+    "invalid-password": "Invalid password provided",
     "invalid-login": "Forbidden, account is unauthorized. \n check your phonenumber and password",
     "400": "Something went wrong \n We are working to resolve this. Please try again",
     "401": "Sorry you are not authorized to perform this action",
