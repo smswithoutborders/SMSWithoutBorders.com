@@ -204,9 +204,9 @@
     }
   },
   "sync": {
+    "page-title": "Synchronize your account",
     "heading": "Synchronize Accounts",
     "section-1": {
-      "alert-message": "Sorry it seems you havent stored any tokens",
       "details": "Please click on the link below to store tokens",
       "summary": {
         "caption": "learn more",
@@ -219,9 +219,9 @@
       "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
       "paragraph-3": "Please follow these steps to sychronize your saved access with SMSwithoutborders mobile app.",
       "sync-steps": {
-        "one": "Open SMSWithoutBorders app on your phone",
-        "two": "Tap the Synchronize button",
-        "three": "Point your phone to this screen to capture the code"
+        "1": "Open SMSWithoutBorders app on your phone",
+        "2": "Tap the Synchronize button",
+        "3": "Point your phone to this screen to capture the code"
       },
       "status": {
         "heading": "Status",
@@ -235,6 +235,7 @@
     "alerts": {
       "sync-started": "Sync started",
       "sync-complete": "Sync Complete",
+      "no-platforms": "Sorry it seems you havent stored any tokens",
       "sync-error": "Sorry an error occured while synchronizing, Please try again",
       "sync-closed": "Sync session closed. please click the sync button to start again"
     }
