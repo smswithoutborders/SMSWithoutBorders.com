@@ -33,46 +33,48 @@
     "section-1": {
       "heading": "Stay Productive",
       "details": "In this age of communication, keep in touch with your contacts across the internet without access to an active internet connection. Store your access to your favourite communications platforms while online, use them while offline.",
-      "button-cta": "Get SWOB"
+      "cta-button-text": "Get SWOB",
+      "image-caption": "SMSwithoutBorders App"
     },
     "section-2": {
       "heading": "How it works",
       "details": "Using SWOB is as easy as authenticating your credentials",
       "steps": {
-        "step-1": {
+        "1": {
           "heading": "Sign Up",
           "details": "Signup for a SWOB account"
         },
-        "step-2": {
+        "2": {
           "heading": "Go to Wallet",
           "details": "select and store the platform for which you want access for later offline uses"
         },
-        "step-3": {
+        "3": {
           "heading": "Get the SWOB app from the Playstore",
           "details": "Goto your SWOB profile online and click on Sync. Use your SWOB app to scan your QR code"
         },
-        "step-4": {
+        "4": {
           "heading": "Use App",
           "details": "Enter your password in the app and begin transmitting messages while offline using SMS messages"
         }
-      }
+      },
+      "image-caption": "How SMSWithoutBorders works"
     },
     "section-3": {
       "heading": "Why use SWOB?",
       "steps": {
-        "step-1": {
+        "1": {
           "heading": "Accessibility",
           "details": "SWOB’s mobile app allows users to have offline communication wherever they are. With as simple as having an SMS message smartphone you can maintain communications with your online platforms"
         },
-        "step-2": {
+        "2": {
           "heading": "Security",
           "details": "SWOB transmits messages in securely encrypted formats. This secures every communication from being accessed by intermediate parties while in transit."
         },
-        "step-3": {
+        "3": {
           "heading": "Open source",
           "details": "Every component of SWOB is open sourced! From the mobile app to the routing mechanisms we use to get your SMS messages to reach your intended platforms"
         },
-        "step-4": {
+        "4": {
           "heading": "Decentralized",
           "details": "SWOB is built to work in decentralized models. Anyone can host a SWOB server. It’s as easy as understanding how to use it"
         }
@@ -317,6 +319,10 @@
       "heading": "Password Recovery",
       "details": "Set a new password for your account"
     }
+  },
+  "404-page": {
+    "page-tite": "404, page unavailable",
+    "error-message": "Sorry, this page is unavailable at the moment"
   },
   "alert-messages": {
     "loading": "processing please wait",

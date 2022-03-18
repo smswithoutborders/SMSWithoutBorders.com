@@ -1,10 +1,12 @@
 import React from "react";
 import { PageAnimationWrapper, useTitle, Button } from "components";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // 404 page, uses react-router to move the user back 1 step
 const NotFound = () => {
-  useTitle("404 Not Found");
+  const { t } = useTranslation();
+  useTitle(t("404-page.page-title"));
   const navigate = useNavigate();
   return (
     <PageAnimationWrapper>
@@ -14,10 +16,10 @@ const NotFound = () => {
             4<span className="text-blue-800">0</span>4
           </h1>
           <p className="mb-8 text-base leading-relaxed md:text-lg">
-            Sorry this page is unavailable right now
+            {t("404-page.error-message")}
           </p>
           <Button className="mx-auto" onClick={() => navigate(-1)}>
-            Back
+            {t("labels.back")}
           </Button>
         </div>
       </div>
