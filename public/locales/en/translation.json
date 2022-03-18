@@ -89,27 +89,11 @@
     "IRC": "IRC"
   },
   "login": {
-    "page-title": "login",
-    "form": {
-      "phone-number": {
-        "label": "Phone Number",
-        "validation-errors": "Please enter a phone number"
-      },
-      "password": {
-        "label": "Password",
-        "validation-errors": {
-          "min": "Password must be at least 8 characters",
-          "required": "Password is required"
-        }
-      },
-      "recaptcha": {
-        "validation-errors": "Please prove you are not a robot by solving reCAPTCHA"
-      },
-      "cta-button-text": "login"
-    },
+    "page-title": "Account Login",
+    "cta-button-text": "login",
     "forgot-password": "Forgot Password",
     "account-status": "Don't have an account?",
-    "signup-link-text": "Sign Up"
+    "signup-link": "Sign Up"
   },
   "signup": {
     "page-title": "Sign Up",
@@ -331,6 +315,7 @@
     "request-received": "Success your request has been received",
     "phone-number-verified": "Phone number verified successully",
     "password-changed": "Password changed successfully",
+    "login-successful": "Login successful",
     "logout-successful": "Logout successful",
     "recaptcha": {
       "loading": "loading reCAPTCHA  please wait",

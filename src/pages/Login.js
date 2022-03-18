@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useLoginMutation } from "services";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAuth, authSelector } from "features";
 import {
@@ -24,27 +25,31 @@ import {
   PageAnimationWrapper,
 } from "components";
 
-// check if recaptcha is enabled and conditionally add validation
-const ENABLE_RECAPTCHA =
-  process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
-let schemaShape = {
-  phone_number: yup.string().required("Please Enter your Phone Number"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Please enter your password"),
-};
-
-if (ENABLE_RECAPTCHA) {
-  schemaShape.captcha_token = yup
-    .string()
-    .required("Please prove you are not a robot by solving reCAPTCHA");
-}
-// final validation schema used by react-hook-form
-const schema = yup.object().shape(schemaShape);
-
 const Login = () => {
-  useTitle("login");
+  const { t } = useTranslation();
+  useTitle(t("login.page-title"));
+
+  // check if recaptcha is enabled and conditionally add validation
+  const ENABLE_RECAPTCHA =
+    process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
+  let schemaShape = {
+    name: yup.string(),
+    phone_number: yup
+      .string()
+      .required(t("forms.phone-number.validation-errors.required")),
+    password: yup
+      .string()
+      .min(8, t("forms.password.validation-errors.min"))
+      .required(t("forms.password.validation-errors.required")),
+  };
+
+  if (ENABLE_RECAPTCHA) {
+    schemaShape.captcha_token = yup
+      .string()
+      .required(t("forms.recaptcha.validation-error"));
+  }
+  // final validation schema used by react-hook-form
+  const schema = yup.object().shape(schemaShape);
 
   const {
     control,
@@ -79,7 +84,7 @@ const Login = () => {
   const handleLogin = async (data) => {
     try {
       const user = await login(data).unwrap();
-      toast.success("Login successful");
+      toast.success(t("alert-messages.login-successful"));
       // save user credentials to state
       dispatch(saveAuth(user));
     } catch (error) {
@@ -92,38 +97,28 @@ const Login = () => {
       if (originalStatus) {
         switch (originalStatus) {
           case 400:
-            toast.error(
-              "Something went wrong \n We are working to resolve this. Please try again"
-            );
+            toast.error(t("error-messages.400"));
             break;
           case 401:
-            toast.error(
-              "Forbidden, Account is unauthorized. \n check your phonenumber and password"
-            );
+            toast.error(t("error-messages.invalid-login"));
             break;
           case 403:
-            toast.error("Forbidden, check your phonenumber and password");
+            toast.error(t("error-messages.403"));
             break;
           case 409:
-            toast.error(
-              "There is a possible duplicate of this account please contact support"
-            );
+            toast.error(t("error-messages.409"));
             break;
           case 429:
-            toast.error(
-              "Too many failed attempts please wait a while and try again"
-            );
+            toast.error(t("error-messages.429"));
             break;
           case 500:
-            toast.error("A critical error occured. Please contact support");
+            toast.error(t("error-messages.500"));
             break;
           default:
-            toast.error(
-              "An error occured, please check your network try again"
-            );
+            toast.error(t("error-messages.general-error-message"));
         }
       } else if (status === "FETCH_ERROR") {
-        toast.error("An error occured, please check your network try again");
+        toast.error(t("error-messages.network-error"));
       }
     }
   };
@@ -149,7 +144,7 @@ const Login = () => {
           <form onSubmit={handleSubmit(handleLogin)}>
             <FormGroup>
               <Label htmlFor="phone_number" required>
-                Phone Number
+                {t("forms.phone-number.label")}
               </Label>
               <Controller
                 control={control}
@@ -158,7 +153,7 @@ const Login = () => {
                   <PhoneNumberInput
                     international
                     countryCallingCodeEditable={false}
-                    placeholder="Enter your phone number"
+                    placeholder={t("forms.phone-number.placeholder")}
                     defaultCountry="CM"
                     value={value}
                     type="tel"
@@ -170,11 +165,14 @@ const Login = () => {
               {errors.phone_number && (
                 <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
               )}
+              <small className="block text-xs text-gray-600">
+                {t("forms.phone-number.helper-text")}
+              </small>
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="password" required>
-                Password
+                {t("forms.password.label")}
               </Label>
               <PasswordInput
                 name="password"
@@ -187,7 +185,7 @@ const Login = () => {
               )}
             </FormGroup>
 
-            {ENABLE_RECAPTCHA ? (
+            {ENABLE_RECAPTCHA && process.env.NODE_ENV !== "production" ? (
               <FormGroup>
                 <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
                 {errors.captcha_token && (
@@ -198,26 +196,27 @@ const Login = () => {
               <FormGroup>
                 <Alert
                   kind="primary"
-                  message="reCAPTCHA has been disabled, you can re-enable it in your project's configuration"
+                  message={t("alert-messages.recaptcha.disabled")}
                   hideCloseButton
                 />
               </FormGroup>
             )}
 
             <Button className="w-full" disabled={!isValid}>
-              <FiLogIn /> &nbsp; login
+              <FiLogIn />
+              <span className="ml-1">{t("login.cta-button-text")}</span>
             </Button>
           </form>
           <Link
             to="/password-reset"
             className="block mt-4 text-center appearance-none cursor-pointer text-primary-800"
           >
-            Forgot Password
+            {t("login.forgot-password")}
           </Link>
           <p className="mt-4 text-sm text-center text-gray-600">
-            Dont have an account? &nbsp;
+            <span>{t("login.account-status")}</span> &nbsp;
             <Link to="/sign-up" className="text-blue-800">
-              Sign Up
+              {t("login.signup-link")}
             </Link>
           </p>
         </div>
