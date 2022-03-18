@@ -254,11 +254,11 @@
     }
   },
   "dashboard": {
+    "page-title": "Dashboard",
     "greeting-1": "Hello!",
     "greeting-2": "Welcome",
     "join-date": "Join Date",
     "last-login": "Last Login",
-    "cta-button-text": "sync",
     "alerts": {
       "load-error": "Sorry we could not locate your metrics. If error persists, please contact support"
     }
