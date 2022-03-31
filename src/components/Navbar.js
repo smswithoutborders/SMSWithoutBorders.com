@@ -111,7 +111,7 @@ export const Navbar = () => {
       <StartedExtLink
         onClick={() => toggleMenu()}
         key="Get Started"
-        href="https://smswithoutborders.github.io/docs/intro"
+        href={process.env.REACT_APP_TUTORIAL_URL}
         target="_blank"
       >
         Get Started
