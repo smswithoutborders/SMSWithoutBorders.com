@@ -58,14 +58,6 @@ export const MainNavbar = () => {
       >
         GitHub
       </ExtLink>
-      <ExtLink
-        onClick={() => toggleMenu()}
-        key="Blog"
-        href="https://smswithoutborders.github.io"
-        target="_blank"
-      >
-        {t("menu.blog")}
-      </ExtLink>
       <NavLink onClick={() => toggleMenu()} key="contact-us" to="/contact-us">
         {t("menu.contact")}
       </NavLink>

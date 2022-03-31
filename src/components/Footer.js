@@ -3,7 +3,7 @@ import tw from "twin.macro";
 import "styled-components/macro";
 import Logo from "images/logo-icon-light.png";
 import { Link } from "react-router-dom";
-import { FiMail, FiMessageSquare, FiLink2, FiGlobe } from "react-icons/fi";
+import { FiMail, FiMessageSquare, FiLink2 } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
 
@@ -40,13 +40,6 @@ export const Footer = () => {
       </NavContainer>
 
       <NavContainer>
-        <DescLink
-          href="https://smswithoutborders.github.io"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FiGlobe size={20} /> &nbsp; {t("menu.footer-blog")}
-        </DescLink>
         <FooterNavLink
           tw="mb-2 md:mb-4 hocus:text-blue-200"
           to="/privacy-policy"
