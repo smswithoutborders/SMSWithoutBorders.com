@@ -12,7 +12,7 @@ import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
-import { NavLink } from "./NavLink";
+import { NavLink } from "./NavLinks";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 

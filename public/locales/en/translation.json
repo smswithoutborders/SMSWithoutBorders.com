@@ -3,7 +3,7 @@
   "menu": {
     "get-started": "Get Started",
     "home": "Home",
-    "privacy": "Privacy Policy",
+    "privacy": "Privacy",
     "blog": "Blog",
     "contact": "Contact Us",
     "login": "Log In",
@@ -13,10 +13,13 @@
     "settings": "Settings",
     "dashboard": "Dashboard",
     "sync": "Sync",
-    "logout": "Logout"
+    "logout": "Logout",
+    "downloads": "Downloads"
   },
   "labels": {
     "sync": "sync",
+    "download": "Download",
+    "get-started": "Get Started",
     "optional": "optional",
     "strong": "strong",
     "good": "good",
@@ -31,7 +34,7 @@
   },
   "landing": {
     "section-1": {
-      "heading": "Stay Productive",
+      "heading": "Stay Connected",
       "details": "In this age of communication, keep in touch with your contacts across the internet without access to an active internet connection. Store your access to your favourite communications platforms while online, use them while offline.",
       "cta-button-text": "Get SWOB",
       "image-caption": "SMSwithoutBorders App"
