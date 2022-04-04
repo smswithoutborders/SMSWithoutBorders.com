@@ -13,3 +13,4 @@ export * from "./NavLink";
 export * from "./Alert";
 export * from "./QRCode";
 export * from "./ReCAPTCHA";
+export * from "./ScrollToTop";
