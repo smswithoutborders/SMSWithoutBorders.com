@@ -7,7 +7,7 @@ const Contact = () => {
   const { t } = useTranslation();
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-xl p-6 mx-auto my-10 prose text-gray-900 lg:mt-20 md:p-8">
+      <div className="max-w-screen-xl min-h-screen p-6 mx-auto my-10 prose text-gray-900  lg:mt-20 md:p-8">
         <div className="lg:text-center">
           <h1 className="">{t("contact.heading")}</h1>
           <p className="">{t("contact.details")}</p>
