@@ -7,7 +7,6 @@ import { FiMail, FiMessageSquare, FiLink2 } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
 
-const Container = tw.footer`flex flex-col lg:flex-row md:justify-between bg-gray-800 text-white py-8 px-2 md:p-8`;
 const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
 const FooterLink = tw.p`text-gray-100 pl-14`;
 const FooterNavLink = tw(
@@ -19,7 +18,7 @@ const NavContainer = tw.div`flex flex-col p-4 items-start`;
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <Container>
+    <footer className="flex flex-col px-2 py-8 text-white lg:flex-row md:justify-between bg-slate-800 md:p-8">
       <NavContainer tw="p-0 mb-4 md:mb-0">
         <FooterNavLink to="/">
           <LogoIcon src={Logo} alt="SMSwithoutborders" />
@@ -67,6 +66,6 @@ export const Footer = () => {
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
         </DescLink>
       </NavContainer>
-    </Container>
+    </footer>
   );
 };
