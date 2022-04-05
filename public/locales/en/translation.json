@@ -91,6 +91,14 @@
     "website": "Website",
     "IRC": "IRC"
   },
+  "downloads": {
+    "heading": "Downloads",
+    "details": "Stay Connected with our mobile apps and other resources",
+    "section-1": {
+      "heading": "Mobile Apps",
+      "details": "Install applications for Android"
+    }
+  },
   "login": {
     "page-title": "Account Login",
     "cta-button-text": "login",

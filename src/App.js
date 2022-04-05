@@ -16,6 +16,7 @@ import {
   Wallet,
   NotFound,
   Website,
+  Downloads,
   AccountDeletion,
   WalletRedirect,
   PasswordChange,
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/" element={<Website />}>
               <Route index element={<Landing />} />
               <Route path="login" element={<Login />} />
+              <Route path="downloads" element={<Downloads />} />
               <Route path="privacy-policy" element={<Privacy />} />
               <Route path="contact-us" element={<Contact />} />
               <Route path="sign-up">

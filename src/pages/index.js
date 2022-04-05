@@ -7,6 +7,7 @@ export { default as Contact } from "./Contact";
 export { default as Landing } from "./Landing";
 export { default as Website } from "./Website";
 export { default as Sync } from "./Sync";
+export { default as Downloads } from "./Downloads";
 export * from "./Wallet";
 export * from "./signup";
 export * from "./password-reset";
