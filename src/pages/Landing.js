@@ -23,12 +23,11 @@ const Landing = () => {
             <div className="flex flex-row justify-center max-w-md mt-12 space-x-2 lg:justify-start">
               <a
                 className="inline-flex items-center justify-center flex-1 py-3 text-lg no-underline bg-white appearance-none group rounded-3xl"
-                href={process.env.REACT_APP_TUTORIAL_URL}
-                target="_blank"
+                href="#how-it-works"
                 rel="noreferrer"
               >
                 <span className="mr-2 group-hover:mr-4">
-                  {t("labels.get-started")}
+                  {t("labels.learn-more")}
                 </span>
                 <BsArrowRight size={20} />
               </a>
@@ -54,9 +53,9 @@ const Landing = () => {
         </div>
       </div>
 
-      <div className="w-full">
-        <div className="container grid max-w-screen-xl grid-cols-2 mx-auto mb-20 -mt-20 prose bg-white rounded-t-3xl">
-          <div className="px-8 md:px-16 col-span-full">
+      <div className="w-full scroll-mt-8" id="how-it-works">
+        <div className="container grid max-w-screen-xl grid-cols-2 mx-auto mb-20 -mt-12 prose bg-white rounded-t-3xl">
+          <div className="p-8 md:px-16 col-span-full">
             <h2 className="text-3xl font-black">
               {t("landing.section-2.heading")}
             </h2>
@@ -66,13 +65,13 @@ const Landing = () => {
 
             <div className="flex flex-col md:flex-row lg:space-x-4">
               <TutorialCard
-                title="Learn how to setup your your account and app"
+                title={t("landing.section-2.tutorial-1")}
                 link={process.env.REACT_APP_TUTORIAL_URL}
                 caption={t("labels.get-started")}
                 className="flex-1"
               />
               <TutorialCard
-                title="Learn how to setup gateway clients"
+                title={t("landing.section-2.tutorial-1")}
                 link={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
                 caption={t("labels.get-started")}
                 className="flex-1"
