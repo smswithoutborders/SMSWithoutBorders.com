@@ -30,7 +30,8 @@
     "retry": "retry",
     "continue": "continue",
     "try-again": "try again",
-    "password-change": "change password"
+    "password-change": "change password",
+    "tutorial": "Tutorial"
   },
   "landing": {
     "section-1": {

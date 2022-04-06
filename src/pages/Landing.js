@@ -1,6 +1,6 @@
 import React from "react";
 import phone from "images/phone.png";
-import { PageAnimationWrapper } from "components";
+import { PageAnimationWrapper, TutorialCard } from "components";
 import { DiOpensource } from "react-icons/di";
 import { IoAccessibility } from "react-icons/io5";
 import { GiCheckboxTree } from "react-icons/gi";
@@ -65,39 +65,18 @@ const Landing = () => {
             <p>{t("landing.section-2.paragraph-2")}</p>
 
             <div className="flex flex-col md:flex-row lg:space-x-4">
-              <div className="flex-1 p-8 border border-gray-300 shadow-xl lg:py-12 rounded-2xl">
-                <span className="font-light">Tutorial</span>
-                <h3 className="my-4">
-                  Learn how to setup your your account and app
-                </h3>
-                <a
-                  className="flex items-center justify-between py-3 text-lg text-blue-800 no-underline appearance-none group"
-                  href={process.env.REACT_APP_TUTORIAL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="mr-2 group-hover:mr-4">
-                    {t("labels.get-started")}
-                  </span>
-                  <BsArrowRight size={20} />
-                </a>
-              </div>
-
-              <div className="flex-1 p-8 border border-gray-300 shadow-xl lg:py-12 rounded-2xl">
-                <span className="font-light">Tutorial</span>
-                <h3 className="my-4">Learn how to setup gateway clients</h3>
-                <a
-                  className="flex items-center justify-between py-3 text-lg text-blue-800 no-underline appearance-none group"
-                  href={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="mr-2 group-hover:mr-4">
-                    {t("labels.get-started")}
-                  </span>
-                  <BsArrowRight size={20} />
-                </a>
-              </div>
+              <TutorialCard
+                title="Learn how to setup your your account and app"
+                link={process.env.REACT_APP_TUTORIAL_URL}
+                caption={t("labels.get-started")}
+                className="flex-1"
+              />
+              <TutorialCard
+                title="Learn how to setup gateway clients"
+                link={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
+                caption={t("labels.get-started")}
+                className="flex-1"
+              />
             </div>
           </div>
         </div>
