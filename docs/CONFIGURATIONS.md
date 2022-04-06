@@ -32,7 +32,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * REACT_APP_RECAPTCHA -> Enable or disable recaptcha, make sure this setting is also toggled on the API
 * REACT_APP_RECAPTCHA_SITE_KEY -> reCAPTCHAv2 site key obtained from [google](https://www.google.com/recaptcha/admin)
 * REACT_APP_RECAPTCHA_API_URL -> API script src from reCaptchav2 setup [documentation](https://developers.google.com/recaptcha/docs/display)
-REACT_APP_TUTORIAL_URL -> Link to the getting started tutorial
+* REACT_APP_TUTORIAL_URL -> Link to the getting started tutorial
+* REACT_APP_GATEWAY_TUTORIAL_URL -> Link to gateway client setup tutorial
 * HTTPS -> Enable or disable https
 * SSL_CRT_FILE -> Location of SSL CRT file
 * SSL_KEY_FILE -> Location of SSL Key file
