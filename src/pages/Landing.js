@@ -71,7 +71,7 @@ const Landing = () => {
                 className="flex-1"
               />
               <TutorialCard
-                title={t("landing.section-2.tutorial-1")}
+                title={t("landing.section-2.tutorial-2")}
                 link={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
                 caption={t("labels.get-started")}
                 className="flex-1"

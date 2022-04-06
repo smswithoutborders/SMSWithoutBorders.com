@@ -25,8 +25,8 @@ const Settings = () => {
             <NavLink
               className={({ isActive }) =>
                 clsx(
-                  "inline-flex items-center w-full h-16 p-2 mb-2 text-xs font-medium no-underline transition duration-300 bg-gray-100 appearance-none hover:bg-blue-800 hover:outline-none hover:text-white md:text-sm md:p-4",
-                  isActive ? "text-white bg-blue-800" : "text-gray-900"
+                  "inline-flex items-center w-full h-16 p-2 mb-2 text-xs font-medium no-underline transition duration-300 appearance-none hover:bg-blue-800 hover:outline-none hover:text-white md:text-sm md:p-4",
+                  isActive ? "text-white bg-blue-800" : "text-gray-900 bg-gray-100"
                 )
               }
               to="change-password"
@@ -37,8 +37,8 @@ const Settings = () => {
             <NavLink
               className={({ isActive }) =>
                 clsx(
-                  "inline-flex items-center w-full h-16 p-2 mb-2 text-xs font-medium  no-underline transition duration-300 bg-gray-100 appearance-none hover:bg-blue-800 hover:outline-none hover:text-white md:text-sm md:p-4",
-                  isActive ? "text-white bg-blue-800" : "text-gray-900"
+                  "inline-flex items-center w-full h-16 p-2 mb-2 text-xs font-medium  no-underline transition duration-300 appearance-none hover:bg-blue-800 hover:outline-none hover:text-white md:text-sm md:p-4",
+                  isActive ? "text-white bg-blue-800" : "text-gray-900 bg-gray-100"
                 )
               }
               to="delete-account"
