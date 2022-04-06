@@ -103,6 +103,10 @@
     "section-1": {
       "heading": "Mobile Apps",
       "details": "Install applications for Android"
+    },
+    "section-2": {
+      "heading": "Operating Systems",
+      "details": "Custom gateway client OS images for raspberry pi"
     }
   },
   "login": {
