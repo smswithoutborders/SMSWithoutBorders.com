@@ -33,10 +33,17 @@ export const MainNavbar = () => {
       <NavLink onClick={() => toggleMenu()} key="/" to="/">
         {t("menu.home")}
       </NavLink>
-
       <NavLink onClick={() => toggleMenu()} key="downloads" to="/downloads">
         {t("menu.downloads")}
       </NavLink>
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="developers"
+        href="https://developers.smswithoutborders.com"
+        target="_blank"
+      >
+        {t("menu.developers")}
+      </ExternalLink>
       <NavLink
         onClick={() => toggleMenu()}
         key="privacy-policy"
@@ -44,7 +51,6 @@ export const MainNavbar = () => {
       >
         {t("menu.privacy")}
       </NavLink>
-
       <NavLink onClick={() => toggleMenu()} key="contact-us" to="/contact-us">
         {t("menu.contact")}
       </NavLink>

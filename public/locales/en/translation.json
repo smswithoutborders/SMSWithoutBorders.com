@@ -14,7 +14,8 @@
     "dashboard": "Dashboard",
     "sync": "Sync",
     "logout": "Logout",
-    "downloads": "Downloads"
+    "downloads": "Downloads",
+    "developers": "Developers"
   },
   "labels": {
     "sync": "sync",

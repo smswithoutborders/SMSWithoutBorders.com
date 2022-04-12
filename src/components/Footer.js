@@ -3,7 +3,12 @@ import tw from "twin.macro";
 import "styled-components/macro";
 import Logo from "images/logo-icon-light.png";
 import { Link } from "react-router-dom";
-import { FiMail, FiMessageSquare, FiLink2 } from "react-icons/fi";
+import {
+  FiMail,
+  FiMessageSquare,
+  FiLink2,
+  FiExternalLink,
+} from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
 
@@ -12,13 +17,13 @@ const FooterLink = tw.p`text-gray-100 pl-14`;
 const FooterNavLink = tw(
   Link
 )`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
-const DescLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-blue-200`;
+const ExternalLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-blue-200`;
 const NavContainer = tw.div`flex flex-col p-4 items-start`;
 
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="flex flex-col px-2 py-8 text-white lg:flex-row md:justify-between bg-slate-800 md:p-8">
+    <footer className="flex flex-col px-2 py-8 text-white lg:flex-row md:justify-between bg-slate-900 md:p-8">
       <NavContainer tw="p-0 mb-4 md:mb-0">
         <FooterNavLink to="/">
           <LogoIcon src={Logo} alt="SMSwithoutborders" />
@@ -27,14 +32,14 @@ export const Footer = () => {
 
         <FooterLink>
           2021 - {new Date().getFullYear()}
-          <DescLink
+          <ExternalLink
             tw="text-sm"
             href="https://github.com/afkanerd"
             target="_blank"
             rel="noreferrer"
           >
             &nbsp; Afkanerd
-          </DescLink>
+          </ExternalLink>
         </FooterLink>
       </NavContainer>
 
@@ -45,26 +50,33 @@ export const Footer = () => {
         >
           <FiLink2 size={20} /> &nbsp; {t("menu.privacy")}
         </FooterNavLink>
-        <DescLink
+        <ExternalLink
+          href="https://developers.smswithoutborders.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FiExternalLink size={20} /> &nbsp; {t("menu.developers")}
+        </ExternalLink>
+        <ExternalLink
           href="mailto:developers@smswithoutborders.com"
           target="_blank"
           rel="noreferrer"
         >
           <FiMail size={20} /> &nbsp; developers@smswithoutborders.com
-        </DescLink>
+        </ExternalLink>
       </NavContainer>
 
       <NavContainer>
-        <DescLink>
+        <ExternalLink>
           <FiMessageSquare size={20} /> &nbsp; IRC: freenode/#afkanerd
-        </DescLink>
-        <DescLink
+        </ExternalLink>
+        <ExternalLink
           href="https://github.com/smswithoutborders"
           target="_blank"
           rel="noreferrer"
         >
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
-        </DescLink>
+        </ExternalLink>
       </NavContainer>
     </footer>
   );
