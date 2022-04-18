@@ -1,6 +1,10 @@
 import React from "react";
 import phone from "images/phone.png";
-import { PageAnimationWrapper, TutorialCard } from "components";
+import signupIllustration from "images/signup-illustration.svg";
+import accountsIllustration from "images/accounts.svg";
+import mobileIllustration from "images/mobile-app.svg";
+import gatewayIllustration from "images/gateways.svg";
+import { PageAnimationWrapper } from "components";
 import { DiOpensource } from "react-icons/di";
 import { IoAccessibility } from "react-icons/io5";
 import { GiCheckboxTree } from "react-icons/gi";
@@ -13,48 +17,49 @@ const Landing = () => {
   const { t } = useTranslation();
   return (
     <PageAnimationWrapper>
-      <div className="w-full overflow-hidden bg-gradient-to-br from-blue-800 to-blue-400 lg:py-10">
-        <div className="container grid max-w-screen-xl grid-cols-2 gap-4 mx-auto prose text-white place-items-center lg:h-[640px]">
-          <div className="p-8 pt-16 md:pl-16 col-span-full lg:col-span-1">
-            <h1 className="text-white md:text-5xl">
-              {t("landing.section-1.heading")}
-            </h1>
-            <p>{t("landing.section-1.details")}</p>
-            <div className="flex flex-row justify-center max-w-md mt-12 space-x-2 lg:justify-start">
-              <a
-                className="inline-flex items-center justify-center flex-1 py-3 text-lg no-underline bg-white appearance-none group rounded-3xl"
-                href="#how-it-works"
-                rel="noreferrer"
-              >
-                <span className="mr-2 group-hover:mr-4">
-                  {t("labels.learn-more")}
-                </span>
-                <BsArrowRight size={20} />
-              </a>
-              <Link
-                className="inline-flex items-center justify-center flex-1 py-3 text-lg text-white no-underline border appearance-none group rounded-3xl"
-                to="downloads"
-              >
-                <span className="mr-2 group-hover:mr-4">
-                  {t("labels.download")}
-                </span>
-                <FiDownload size={20} />
-              </Link>
-            </div>
+      <div className="container grid max-w-screen-xl grid-cols-2  mx-auto prose text-white place-items-center lg:h-[640px]">
+        <div className="p-8 pt-16 md:pl-16 col-span-full lg:col-span-1">
+          <h1 className="text-white md:text-5xl">
+            {t("landing.section-1.heading")}
+          </h1>
+          <p>{t("landing.section-1.details")}</p>
+          <div className="flex flex-row justify-center max-w-md mt-12 space-x-2 lg:justify-start">
+            <a
+              className="inline-flex items-center justify-center flex-1 py-3 text-lg no-underline bg-white appearance-none group rounded-3xl"
+              href="#how-it-works"
+              rel="noreferrer"
+            >
+              <span className="mr-2 group-hover:mr-4">
+                {t("labels.learn-more")}
+              </span>
+              <BsArrowRight size={20} />
+            </a>
+            <Link
+              className="inline-flex items-center justify-center flex-1 py-3 text-lg text-white no-underline border appearance-none group rounded-3xl"
+              to="downloads"
+            >
+              <span className="mr-2 group-hover:mr-4">
+                {t("labels.download")}
+              </span>
+              <FiDownload size={20} />
+            </Link>
           </div>
+        </div>
 
-          <div className="col-span-full lg:col-span-1">
-            <img
-              src={phone}
-              className="h-[550px] w-[280px] mx-auto lg:-rotate-25 shadow-3xl lg:-mb-16"
-              alt={t("landing.section-1.image-caption")}
-            />
-          </div>
+        <div className="col-span-full lg:col-span-1">
+          <img
+            src={phone}
+            className="h-[550px] w-[280px] mx-auto lg:-rotate-25 shadow-3xl lg:-mb-16"
+            alt={t("landing.section-1.image-caption")}
+          />
         </div>
       </div>
 
-      <div className="w-full scroll-mt-8" id="how-it-works">
-        <div className="container grid max-w-screen-xl grid-cols-2 mx-auto mb-20 -mt-12 prose bg-white rounded-t-3xl">
+      <div className="bg-white mb-14">
+        <div
+          id="how-it-works"
+          className="max-w-screen-xl mx-auto prose bg-white scroll-mt-8"
+        >
           <div className="p-8 md:px-16 col-span-full">
             <h2 className="text-3xl font-black">
               {t("landing.section-2.heading")}
@@ -62,64 +67,152 @@ const Landing = () => {
             <p>{t("landing.section-2.details")}</p>
             <p>{t("landing.section-2.paragraph-1")}</p>
             <p>{t("landing.section-2.paragraph-2")}</p>
+          </div>
+        </div>
 
-            <div className="flex flex-col md:flex-row lg:space-x-4">
-              <TutorialCard
-                title={t("landing.section-2.tutorial-1")}
-                link={process.env.REACT_APP_TUTORIAL_URL}
-                caption={t("labels.get-started")}
-                className="flex-1"
-              />
-              <TutorialCard
-                title={t("landing.section-2.tutorial-2")}
-                link={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
-                caption={t("labels.get-started")}
-                className="flex-1"
-              />
+        <div
+          id="get-started"
+          className="max-w-screen-xl mx-auto prose bg-white"
+        >
+          <div className="p-8 md:px-16 col-span-full">
+            <h2 className="text-3xl font-black text-center">
+              {t("landing.section-3.heading")}
+            </h2>
+            <div className="grid grid-cols-2 place-items-center">
+              <div className="order-1 col-span-full md:col-span-1">
+                <img
+                  src={signupIllustration}
+                  className="mx-auto"
+                  alt={t("landing.section-1.image-caption")}
+                />
+              </div>
+              <div className="order-2 col-span-full md:col-span-1">
+                <h3 className="text-2xl">
+                  {t("landing.section-3.steps.1.heading")}
+                </h3>
+                <p>{t("landing.section-3.steps.1.details")}</p>
+                <Link
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  to="/sign-up"
+                >
+                  <span className="mr-2 group-hover:mr-4">
+                    {t("menu.signup")}
+                  </span>
+                  <BsArrowRight size={20} />
+                </Link>
+              </div>
+              <div className="order-4 md:order-3 col-span-full md:col-span-1">
+                <h3 className="text-2xl">
+                  {t("landing.section-3.steps.2.heading")}
+                </h3>
+                <p>{t("landing.section-3.steps.2.details")}</p>
+                <Link
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  to="/privacy-policy"
+                >
+                  <span className="mr-2 group-hover:mr-4">
+                    {t("labels.learn-more")}
+                  </span>
+                  <BsArrowRight size={20} />
+                </Link>
+              </div>
+              <div className="order-3 md:order-4 col-span-full md:col-span-1">
+                <img
+                  src={accountsIllustration}
+                  className="mx-auto"
+                  alt={t("landing.section-1.image-caption")}
+                />
+              </div>
+              <div className="order-5 col-span-full md:col-span-1">
+                <img
+                  src={mobileIllustration}
+                  className="mx-auto"
+                  alt={t("landing.section-1.image-caption")}
+                />
+              </div>
+              <div className="order-6 col-span-full md:col-span-1">
+                <h3 className="text-2xl">
+                  {t("landing.section-3.steps.3.heading")}
+                </h3>
+                <p>{t("landing.section-3.steps.3.details")}</p>
+                <Link
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  to="/downloads"
+                >
+                  <span className="mr-2 group-hover:mr-4">
+                    {t("labels.download")}
+                  </span>
+                  <FiDownload size={20} />
+                </Link>
+              </div>
+              <div className="order-8 md:order-7 col-span-full md:col-span-1">
+                <h3 className="text-2xl">
+                  {t("landing.section-3.steps.4.heading")}
+                </h3>
+                <p>{t("landing.section-3.steps.4.details")}</p>
+                <a
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  href={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="mr-2 group-hover:mr-4">
+                    {t("labels.learn-more")}
+                  </span>
+                  <BsArrowRight size={20} />
+                </a>
+              </div>
+              <div className="order-7 md:order-8 col-span-full md:col-span-1">
+                <img
+                  src={gatewayIllustration}
+                  className="mx-auto"
+                  alt={t("landing.section-1.image-caption")}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="w-full py-10 bg-gray-100">
-        <div className="container max-w-screen-xl p-8 mx-auto -mt-20 prose bg-gray-100 lg:py-16 rounded-t-3xl">
+      <div className="w-full py-10 bg-white">
+        <div className="max-w-screen-xl p-8 mx-auto -mt-20 prose bg-white lg:py-16 rounded-t-3xl">
           <h2 className="text-3xl font-black text-center">
-            {t("landing.section-3.heading")}
+            {t("landing.section-4.heading")}
           </h2>
           <div>
             <div className="flex items-center justify-between">
-              <div className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:mr-10">
+              <div className="p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:mr-10">
                 <IoAccessibility className="w-7 h-7 lg:w-10 lg:h-10" />
               </div>
               <div className="">
-                <h3> {t("landing.section-3.steps.1.heading")}</h3>
-                <p>{t("landing.section-3.steps.1.details")}</p>
+                <h3> {t("landing.section-4.steps.1.heading")}</h3>
+                <p>{t("landing.section-4.steps.1.details")}</p>
               </div>
             </div>
             <div className="flex items-center justify-between">
               <div className="">
-                <h3> {t("landing.section-3.steps.2.heading")}</h3>
-                <p>{t("landing.section-3.steps.2.details")}</p>
+                <h3> {t("landing.section-4.steps.2.heading")}</h3>
+                <p>{t("landing.section-4.steps.2.details")}</p>
               </div>
-              <div className="order-first p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:ml-10 sm:order-none">
+              <div className="order-first p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:ml-10 sm:order-none">
                 <FiShield className="w-7 h-7 lg:w-10 lg:h-10" />
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:mr-10">
+              <div className="p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:mr-10">
                 <DiOpensource className="w-7 h-7 lg:w-12 lg:h-12" />
               </div>
               <div className="">
-                <h3> {t("landing.section-3.steps.3.heading")}</h3>
-                <p>{t("landing.section-3.steps.3.details")}</p>
+                <h3> {t("landing.section-4.steps.3.heading")}</h3>
+                <p>{t("landing.section-4.steps.3.details")}</p>
               </div>
             </div>
             <div className="flex items-center justify-between">
               <div className="">
-                <h3> {t("landing.section-3.steps.4.heading")}</h3>
-                <p>{t("landing.section-3.steps.4.details")}</p>
+                <h3> {t("landing.section-4.steps.4.heading")}</h3>
+                <p>{t("landing.section-4.steps.4.details")}</p>
               </div>
-              <div className="order-first p-8 mr-4 text-blue-800 bg-white rounded-full shadow-xl sm:ml-10 sm:order-none">
+              <div className="order-first p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:ml-10 sm:order-none">
                 <GiCheckboxTree className="w-7 h-7 lg:w-10 lg:h-10" />
               </div>
             </div>

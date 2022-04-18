@@ -47,29 +47,36 @@
       "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
       "paragraph-1": "We offer a pro-active approach to internet censorship. By setting up your account while you have an internet connection, you can continue to communicate later using SMS when your no longer have internet access",
       "paragraph-2": "Our SMS gateways are freely available. Learn how to set up yours below",
+      "tutorial-1": "Learn how to setup your account and app",
+      "tutorial-2": "Learn how to setup gateway clients",
+      "image-caption": "How SMSWithoutBorders works"
+    },
+    "section-3": {
+      "heading": "Getting Started with SWOB",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
       "steps": {
         "1": {
-          "heading": "Sign Up",
-          "details": "Signup for a SWOB account"
+          "heading": "Signup for an account",
+          "details": "Register for an SMSWithoutBorders account with a valid phone number, thats it. All other details are optional"
         },
         "2": {
-          "heading": "Go to Wallet",
-          "details": "select and store the platform for which you want access for later offline uses"
+          "heading": "Connect Accounts",
+          "details": "Securely Link your accounts on platforms we support like Gmail, twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
         },
         "3": {
-          "heading": "Get the SWOB app from the Playstore",
-          "details": "Goto your SWOB profile online and click on Sync. Use your SWOB app to scan your QR code"
+          "heading": "Synchronize Mobile App",
+          "details": "Synchronize your linked account with the SMSWithoutBorders mobile app. This process ensures your can communicate begin securely over SMS. The app will generate unique keys for obfuscating your messages."
         },
         "4": {
-          "heading": "Use App",
-          "details": "Enter your password in the app and begin transmitting messages while offline using SMS messages"
+          "heading": "Setup Gateways",
+          "details": "SMSWithoutBorders relies on gateways to ensure communication. We maintain some but you can also setup your own. By doing so, you will be helping other users on the network communicate through your gateway. Gateway owners can also use their gateways for bulk messaging."
         }
       },
       "tutorial-1": "Learn how to setup your your account and app",
       "tutorial-2": "Learn how to setup gateway clients",
       "image-caption": "How SMSWithoutBorders works"
     },
-    "section-3": {
+    "section-4": {
       "heading": "Why use SWOB?",
       "steps": {
         "1": {

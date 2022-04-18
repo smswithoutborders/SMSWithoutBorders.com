@@ -9,7 +9,7 @@ export const TutorialCard = ({ title, link, caption, className }) => {
   return (
     <div
       className={clsx(
-        "p-8 border border-gray-300 shadow-xl lg:py-12 rounded-2xl",
+        "p-8 border border-gray-300 shadow my-2 lg:py-12 rounded-2xl",
         className
       )}
     >
