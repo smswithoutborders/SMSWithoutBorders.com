@@ -7,13 +7,13 @@ const Contact = () => {
   const { t } = useTranslation();
   return (
     <PageAnimationWrapper>
-      <div className="min-h-screen">
-        <div className="max-w-full px-8 pt-20 pb-24 mx-auto prose prose-invert md:px-16 bg-gradient-to-br from-blue-800 to-blue-400 ">
-          <h1 className="md:text-5xl">{t("contact.heading")}</h1>
-          <p className="my-0">{t("contact.details")}</p>
-        </div>
+      <div className="max-w-screen-xl px-8 pt-20 pb-24 mx-auto prose prose-invert md:px-16">
+        <h1 className="md:text-5xl">{t("contact.heading")}</h1>
+        <p className="my-0">{t("contact.details")}</p>
+      </div>
 
-        <div className="max-w-screen-xl p-6 -mt-16 prose bg-white md:mx-12 rounded-3xl md:p-12">
+      <div className="w-full min-h-screen pt-8 bg-white">
+        <div className="max-w-screen-xl p-6 -mt-16 prose bg-white lg:mx-auto md:mx-12 rounded-3xl md:p-12">
           <div className="flex items-center">
             <div className="mr-2 text-blue-800 lg:mr-4">
               <FiMail className="w-7 h-7 lg:w-10 lg:h-10" />

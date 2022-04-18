@@ -9,13 +9,13 @@ const Downloads = () => {
   const { t } = useTranslation();
   return (
     <PageAnimationWrapper>
-      <div className="min-h-screen">
-        <div className="max-w-full px-8 pt-20 pb-24 mx-auto prose prose-invert md:px-16 bg-gradient-to-br from-blue-800 to-blue-400 ">
-          <h1 className="md:text-5xl">{t("downloads.heading")}</h1>
-          <p className="">{t("downloads.details")}</p>
-        </div>
+      <div className="max-w-screen-xl px-8 pt-20 pb-24 mx-auto prose prose-invert md:px-16">
+        <h1 className="md:text-5xl">{t("downloads.heading")}</h1>
+        <p className="">{t("downloads.details")}</p>
+      </div>
 
-        <div className="max-w-screen-xl p-6 mx-4 -mt-16 prose bg-white md:mx-12 rounded-3xl md:p-12">
+      <div className="w-full min-h-screen pt-8 bg-white">
+        <div className="max-w-screen-xl p-6 mx-4 -mt-16 prose bg-white md:mx-auto rounded-3xl md:p-12">
           <h2>{t("downloads.section-1.heading")}</h2>
           <p>{t("downloads.section-1.details")}</p>
 

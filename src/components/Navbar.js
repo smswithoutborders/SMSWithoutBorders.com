@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from "react";
 import tw from "twin.macro";
 import "styled-components/macro";
-import styled from "styled-components";
 import logo from "images/logo-icon-light.png";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
@@ -12,20 +11,11 @@ import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
-import { NavLink } from "./NavLinks";
-import toast from "react-hot-toast";
+import { NavLink, ExternalLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
-const ExtLink = tw.a`flex outline-none text-gray-900 font-medium p-5 items-center appearance-none`;
-const StartedExtLink = tw(ExtLink)`text-primary-800 font-medium`;
-const LogoLink = styled(Link)`
-  ${tw`flex items-center text-xl font-bold xl:ml-4`};
-  img {
-    ${tw`w-10 h-10 mr-3`}
-  }
-`;
 const UserActions = tw.div`flex items-center mt-20 justify-between bg-gray-100 xl:(bg-white mt-0)`;
-const NavContainer = tw.div`xl:flex`;
 const MobileNav = tw.nav`xl:hidden z-50 bg-white sticky top-0 shadow-lg`;
 const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white h-16 shadow-lg`;
 const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5 items-center appearance-none`;
@@ -86,7 +76,7 @@ export const Navbar = () => {
     }
   }
 
-  const actionLinks = (
+  const ActionLinks = () => (
     <UserActions key={2}>
       {metrics?.name && (
         <div onClick={() => toggleMenu()}>
@@ -106,16 +96,16 @@ export const Navbar = () => {
     </UserActions>
   );
 
-  const defaultLinks = (
-    <NavContainer>
-      <StartedExtLink
+  const SharedLinks = () => (
+    <div className="xl:flex">
+      <ExternalLink
         onClick={() => toggleMenu()}
         key="Get Started"
         href={process.env.REACT_APP_TUTORIAL_URL}
         target="_blank"
       >
-        Get Started
-      </StartedExtLink>
+        {t("menu.get-started")}
+      </ExternalLink>
       <NavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
         <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
       </NavLink>
@@ -128,14 +118,14 @@ export const Navbar = () => {
       <NavLink onClick={() => toggleMenu()} key="Settings" to="settings">
         <FiSettings size={20} /> &nbsp; {t("menu.settings")}
       </NavLink>
-    </NavContainer>
+    </div>
   );
 
-  const defaultLogoLink = (
-    <LogoLink to="/">
-      <img src={logo} alt="logo" />
-      <span>SMSWithoutBorders</span>
-    </LogoLink>
+  const Logo = () => (
+    <Link to="/" className="flex items-center xl:ml-4">
+      <img src={logo} alt="logo" className="mr-3 w-7 h-7" />
+      <span className="font-bold">SMSWithoutBorders</span>
+    </Link>
   );
 
   /*
@@ -149,13 +139,13 @@ export const Navbar = () => {
   return (
     <Fragment>
       <DesktopNav>
-        {defaultLogoLink}
-        {defaultLinks}
-        {actionLinks}
+        <Logo />
+        <SharedLinks />
+        <ActionLinks />
       </DesktopNav>
       <MobileNav>
         <div className="flex items-center justify-between p-4">
-          {defaultLogoLink}
+          <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>
             {open ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
@@ -173,8 +163,8 @@ export const Navbar = () => {
             leaveTo="opacity-0"
             className="flex flex-col w-full h-screen bg-white"
           >
-            {defaultLinks}
-            {actionLinks}
+            <SharedLinks />
+            <ActionLinks />
           </Transition>
         )}
       </MobileNav>

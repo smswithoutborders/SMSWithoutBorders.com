@@ -1,14 +1,14 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { MainNavbar, Footer } from "components";
 import { Outlet } from "react-router-dom";
 
 const Website = () => {
   return (
-    <Fragment>
+    <div className="bg-fixed bg-gradient-to-br from-blue-800 via-blue-400 to-blue-800">
       <MainNavbar />
       <Outlet />
       <Footer />
-    </Fragment>
+    </div>
   );
 };
 
