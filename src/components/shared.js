@@ -3,20 +3,6 @@ import styled from "styled-components";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
-export const Button = styled.button.attrs(
-  ({ className, disabled, outline }) => ({
-    className: clsx(
-      "px-8 py-2 outline-none rounded-lg focus:outline-none justify-center inline-flex items-center",
-      disabled
-        ? "text-gray-500 bg-gray-200"
-        : outline
-        ? "bg-transparent border border-blue-800 text-blue-800 hover:bg-blue-900 hover:text-white"
-        : "text-white bg-blue-800 hover:bg-blue-900",
-      className
-    ),
-  })
-)``;
-
 export const ErrorMessage = styled.small.attrs({
   className: "text-red-500 mt-2",
 })``;

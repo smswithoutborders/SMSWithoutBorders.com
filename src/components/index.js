@@ -15,3 +15,4 @@ export * from "./Alert";
 export * from "./QRCode";
 export * from "./ReCAPTCHA";
 export * from "./ScrollToTop";
+export * from "./Buttons";

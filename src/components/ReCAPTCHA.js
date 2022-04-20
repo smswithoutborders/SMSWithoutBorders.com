@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import { Alert } from "./Alert";
 import { InlineLoader } from "./Loader";
-import { Button } from "./shared";
+import { Button } from "./Buttons";
 import { useTranslation } from "react-i18next";
 
 /*
