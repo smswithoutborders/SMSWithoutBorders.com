@@ -13,7 +13,7 @@ const Privacy = () => {
   } = useGetDocsQuery();
 
   if (isLoading || isFetching) {
-    return <Loader />;
+    return <Loader light />;
   }
 
   if (isError) {
@@ -30,8 +30,10 @@ const Privacy = () => {
   }
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-xl p-6 mx-auto my-10 prose text-gray-900 md:p-8">
-        <ReactMarkdown>{data}</ReactMarkdown>
+      <div className="p-6 bg-white md:p-8">
+        <div className="max-w-screen-xl mx-auto prose text-gray-900">
+          <ReactMarkdown>{data}</ReactMarkdown>
+        </div>
       </div>
     </PageAnimationWrapper>
   );

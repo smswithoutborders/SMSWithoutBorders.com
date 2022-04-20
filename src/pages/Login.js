@@ -128,7 +128,7 @@ const Login = () => {
     Also maintain after request is successfull to update background state
   */
   if (isLoading || isSuccess) {
-    return <Loader />;
+    return <Loader light/>;
   }
 
   return (
