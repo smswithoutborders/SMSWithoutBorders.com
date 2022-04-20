@@ -23,6 +23,22 @@ export const NavLink = forwardRef(({ scrolled, className, ...props }, ref) => {
   );
 });
 
+export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
+  return (
+    <BaseNavLink
+      ref={ref}
+      {...props}
+      className={({ isActive }) =>
+        clsx(
+          "flex items-center p-5 outline-none appearance-none",
+          isActive && "font-medium border-b-2 border-blue-800 text-blue-800",
+          className
+        )
+      }
+    />
+  );
+});
+
 export const MobileNavLink = forwardRef(
   ({ scrolled, className, ...props }, ref) => {
     return (

@@ -1,5 +1,5 @@
 export * from "./Cards";
-export * from "./Navbar";
+export * from "./DashNavbar";
 export * from "./MainNavbar";
 export * from "./Footer";
 export * from "./ToggleButton";

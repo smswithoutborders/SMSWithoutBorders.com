@@ -11,7 +11,7 @@ import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
-import { NavLink, ExternalLink } from "./NavLinks";
+import { DashNavLink, ExternalLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 
@@ -20,7 +20,7 @@ const MobileNav = tw.nav`xl:hidden z-50 bg-white sticky top-0 shadow-lg`;
 const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white h-16 shadow-lg`;
 const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5 items-center appearance-none`;
 
-export const Navbar = () => {
+export const DashNavbar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -106,18 +106,18 @@ export const Navbar = () => {
       >
         {t("menu.get-started")}
       </ExternalLink>
-      <NavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
+      <DashNavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
         <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
-      </NavLink>
-      <NavLink onClick={() => toggleMenu()} key="Sync" to="sync">
+      </DashNavLink>
+      <DashNavLink onClick={() => toggleMenu()} key="Sync" to="sync">
         <IoMdSync size={20} /> &nbsp; {t("menu.sync")}
-      </NavLink>
-      <NavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">
+      </DashNavLink>
+      <DashNavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">
         <IoWalletOutline size={20} /> &nbsp; {t("menu.wallet")}
-      </NavLink>
-      <NavLink onClick={() => toggleMenu()} key="Settings" to="settings">
+      </DashNavLink>
+      <DashNavLink onClick={() => toggleMenu()} key="Settings" to="settings">
         <FiSettings size={20} /> &nbsp; {t("menu.settings")}
-      </NavLink>
+      </DashNavLink>
     </div>
   );
 
