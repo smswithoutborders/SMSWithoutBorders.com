@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { IoMdSync } from "react-icons/io";
-import { authSelector } from "features";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useSyncQuery, useGetPlatformsQuery } from "services";
+import { authSelector, syncSelector, updateSync } from "features";
+import { useSynchronizeMutation, useGetPlatformsQuery } from "services";
 import {
   Alert,
   QRCode,
@@ -19,23 +19,87 @@ const Sync = () => {
   const { t } = useTranslation();
   useTitle(t("sync.page-title"));
   const auth = useSelector(authSelector);
+  const syncState = useSelector(syncSelector);
+  const dispatch = useDispatch();
+  const [synchronize, { isLoading: fetchingURL }] = useSynchronizeMutation();
   const { data: platforms = {} } = useGetPlatformsQuery(auth);
   const { savedPlatforms = [] } = platforms;
-  //only run if there are saved platforms
-  const { data = {}, isError } = useSyncQuery(auth, {
-    refetchOnMountOrArgChange: true,
-    skip: savedPlatforms.length ? false : true,
-  });
-  const { status = "disconnected", qrLink = "" } = data;
+  const { status, qrLink } = syncState;
+  const hasSavedPlatforms = savedPlatforms.length ? true : false;
 
-  useEffect(() => {
-    if (isError) {
+  const handleSync = useCallback(async () => {
+    try {
+      const response = await synchronize(auth);
+      //using redux matcher to update state on matchFulfilled here
+      if (!response.error) {
+        dispatch(
+          updateSync({
+            status: "loading",
+          })
+        );
+        const { syncURL } = response.data;
+        const ws = new WebSocket(syncURL);
+        ws.onopen = () => {
+          toast.success(t("sync.alerts.sync-started"));
+          dispatch(
+            updateSync({
+              status: "connected",
+            })
+          );
+        };
+        // listen to data sent from the websocket server
+        ws.onmessage = (evt) => {
+          if (evt.data === "200- acked") {
+            toast.success(t("sync.alerts.sync-complete"));
+            dispatch(
+              updateSync({
+                status: "complete",
+              })
+            );
+          } else if (evt.data === "201- paused") {
+            dispatch(
+              updateSync({
+                status: "scanned",
+              })
+            );
+          } else {
+            dispatch(
+              updateSync({
+                qrLink: evt.data,
+              })
+            );
+          }
+        };
+
+        ws.onclose = () => {
+          toast.success(t("sync.alerts.sync-closed"));
+          dispatch(
+            updateSync({
+              status: "disconnected",
+            })
+          );
+        };
+
+        ws.onerror = (err) => {
+          toast.onerror(t("sync.alerts.sync-error"));
+        };
+      } else {
+        toast.error(t("error-messages.general-error-message"));
+      }
+    } catch (error) {
       toast.error(t("error-messages.general-error-message"));
     }
-  }, [isError, t]);
+  }, [auth, synchronize, t, dispatch]);
+
+  useEffect(() => {
+    //only run if there are saved platforms
+    if (hasSavedPlatforms) {
+      handleSync();
+    }
+  }, [hasSavedPlatforms, handleSync]);
 
   // Only allow sync if at least 1 platform is saved
-  if (!savedPlatforms.length) {
+  if (!hasSavedPlatforms) {
     return (
       <PageAnimationWrapper>
         <div className="grid max-w-screen-md min-h-screen grid-cols-2 px-6 py-20 mx-auto prose md:px-8">
@@ -76,10 +140,10 @@ const Sync = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 py-20 mx-auto prose md:px-8">
+      <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 mx-auto my-10 prose md:px-8">
         <div className="col-span-full lg:col-span-1">
-          <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
-            <IoMdSync size={48} className="mr-2" />
+          <h1 className="inline-flex items-center mb-0 text-2xl font-bold md:text-3xl">
+            <IoMdSync size={42} className="mr-2" />
             <span>{t("sync.heading")}</span>
           </h1>
 
@@ -94,22 +158,22 @@ const Sync = () => {
         </div>
 
         <div className="col-span-full lg:col-span-1">
-          {status === "connected" ? (
+          {status === "connected" && (
             <QRCode
               value={qrLink}
               size={300}
               className="block p-2 mx-auto border rounded-lg shadow"
             />
-          ) : status === "disconnected" || isError ? (
-            <div className="mx-auto border w-[300px] h-[300px] rounded-lg shadow p-2 grid place-items-center">
-              <Button className="mt-4" onClick={() => window.location.reload()}>
+          )}
+          {status === "disconnected" && (
+            <div className="mx-auto border border-gray-300  w-[300px] h-[300px] rounded-lg shadow-md p-2 grid place-items-center">
+              <Button className="mt-4" onClick={() => handleSync()}>
                 <IoMdSync size={22} />
                 <span className="ml-1">{t("labels.sync")}</span>
               </Button>
             </div>
-          ) : (
-            <InlineLoader />
           )}
+          {(status === "loading" || fetchingURL) && <InlineLoader />}
 
           <div className="mx-auto text-center">
             <p className="font-bold text-md">

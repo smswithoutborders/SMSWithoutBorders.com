@@ -3,10 +3,12 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { API } from "../services/api";
 import authReducer from "./auth";
 import metricsReducer from "./metrics";
+import syncReducer from "./sync";
 
 // Add the generated reducer as a specific top-level reducer
 const appReducer = combineReducers({
   auth: authReducer,
+  sync: syncReducer,
   metrics: metricsReducer,
   [API.reducerPath]: API.reducer,
 });

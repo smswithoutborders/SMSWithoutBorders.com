@@ -257,7 +257,8 @@
         "connected": "connected",
         "disconnected": "disconnected",
         "complete": "complete",
-        "scanned": "scanned"
+        "scanned": "scanned",
+        "loading": "loading"
       },
       "cta-button-text": "sync"
     },

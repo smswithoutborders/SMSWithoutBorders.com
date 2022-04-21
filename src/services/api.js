@@ -1,6 +1,5 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import toast from "react-hot-toast";
 // Define a service using a base URL and expected endpoints
 export const API = createApi({
   reducerPath: "api",
@@ -158,7 +157,7 @@ export const API = createApi({
         responseHandler: (response) => response.text(), // expect response type to be text/plain
       }),
     }),
-    sync: builder.query({
+    synchronize: builder.mutation({
       query: ({ uid }) => ({
         url: `${process.env.REACT_APP_GATEWAY_SERVER}/${process.env.REACT_APP_GATEWAY_SERVER_VERSION}/sync/users/${uid}`,
         method: "GET",
@@ -170,80 +169,7 @@ export const API = createApi({
       transformResponse: (response) => {
         return {
           syncURL: response,
-          qrLink: "",
-          status: "disconnected",
         };
-      },
-      async onCacheEntryAdded(
-        arg,
-        { cacheEntryRemoved, cacheDataLoaded, updateCachedData }
-      ) {
-        try {
-          // wait for the initial query to resolve before proceeding
-          const { data } = await cacheDataLoaded;
-          // create a websocket connection when the cache subscription starts
-
-          const ws = new WebSocket(data.syncURL);
-
-          ws.onopen = () => {
-            toast.success("Sync started");
-            updateCachedData((draft) => {
-              return {
-                ...draft,
-                status: "connected",
-              };
-            });
-          };
-          // listen to data sent from the websocket server
-          ws.onmessage = (evt) => {
-            if (evt.data === "200- acked") {
-              toast.success("Sync Complete");
-              updateCachedData((draft) => {
-                return {
-                  ...draft,
-                  status: "complete",
-                };
-              });
-            } else if (evt.data === "201- paused") {
-              updateCachedData((draft) => {
-                return {
-                  ...draft,
-                  status: "scanned",
-                };
-              });
-            } else {
-              updateCachedData((draft) => {
-                return {
-                  ...draft,
-                  qrLink: evt.data,
-                };
-              });
-            }
-          };
-
-          ws.onclose = () => {
-            toast.success(
-              "Sync session closed. please click the sync button to start again"
-            );
-            updateCachedData((draft) => {
-              return {
-                ...draft,
-                status: "disconnected",
-              };
-            });
-          };
-
-          ws.onerror = (err) => {
-            toast.error("An error occured Please try again");
-          };
-        } catch (err) {
-          // no-op in case `cacheEntryRemoved` resolves before `cacheDataLoaded`,
-          // in which case `cacheDataLoaded` will throw
-          toast.error("An error occured, please try again");
-        }
-        // cacheEntryRemoved will resolve when the cache subscription is no longer active
-        await cacheEntryRemoved;
-        // perform cleanup steps once the `cacheEntryRemoved` promise resolves
       },
     }),
     triggerOTP: builder.query({
@@ -270,7 +196,6 @@ export const API = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
-  useSyncQuery,
   useGetDocsQuery,
   useLoginMutation,
   useLogoutMutation,
@@ -280,6 +205,7 @@ export const {
   useGetPlatformsQuery,
   useStoreTokenMutation,
   useNewPasswordMutation,
+  useSynchronizeMutation,
   useTokenRevokeMutation,
   useVerifySignupMutation,
   useDeleteAccountMutation,
