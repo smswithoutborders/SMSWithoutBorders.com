@@ -1,0 +1,67 @@
+@import "intro.js/introjs.css";
+
+.introjs-tooltip {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  position: absolute;
+  visibility: visible;
+  background-color: #fff;
+  min-width: 350px;
+  max-width: 450px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 30px rgba(33, 33, 33, 0.3);
+  box-shadow: 0 3px 30px rgba(33, 33, 33, 0.3);
+  -webkit-transition: opacity 0.1s ease-out;
+  -o-transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
+  padding: 1.5rem;
+}
+.introjs-tooltiptext {
+  padding: 0.5rem;
+}
+.introjs-tooltip-title {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  float: left;
+  line-height: 32px;
+  color: #0a41c9;
+}
+
+.introjs-tooltip-header {
+  padding-left: 0.5rem;
+  padding-right: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.introjs-button {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+  overflow: visible;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #1d4ed8;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #fff;
+  font-size: 14px;
+  color: #1d4ed8;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: 0;
+  background-color: transparent;
+  border-radius: 0.8rem;
+  display: inline;
+}
+
+.introjs-button:hover,
+.introjs-button:focus,
+.introjs-button:active {
+  outline: 0;
+  text-decoration: none;
+  border-color: none;
+  background-color: #1d4ed8;
+  color: #fff;
+}

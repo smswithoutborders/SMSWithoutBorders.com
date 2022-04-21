@@ -11,14 +11,14 @@ import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { clearCache, clearPersistedState, useLogoutMutation } from "services";
 import { Loader } from "./Loader";
-import { DashNavLink, ExternalLink } from "./NavLinks";
+import { DashNavLink } from "./NavLinks";
+import { NavButton } from "./Buttons";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 
 const UserActions = tw.div`flex items-center mt-20 justify-between bg-gray-100 xl:(bg-white mt-0)`;
 const MobileNav = tw.nav`xl:hidden z-50 bg-white sticky top-0 shadow-lg`;
 const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white h-16 shadow-lg`;
-const NavButton = tw.button`flex text-gray-900 font-medium hocus:(font-bold) p-5 items-center appearance-none`;
 
 export const DashNavbar = () => {
   const { t } = useTranslation();
@@ -26,12 +26,12 @@ export const DashNavbar = () => {
   const navigate = useNavigate();
   const metrics = useSelector(metricsSelector);
   const auth = useSelector(authSelector);
-  const [open, setOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
   const [logout, { isLoading, isSuccess }] = useLogoutMutation();
 
   // helper function for menu toggle and logout
   function toggleMenu() {
-    setOpen(!open);
+    setNavOpen(!navOpen);
   }
 
   async function handleLogOut() {
@@ -98,14 +98,15 @@ export const DashNavbar = () => {
 
   const SharedLinks = () => (
     <div className="xl:flex">
-      <ExternalLink
-        onClick={() => toggleMenu()}
+      <NavButton
+        onClick={() => {
+          navigate("wallet?tutorial=onboarding");
+          toggleMenu();
+        }}
         key="Get Started"
-        href={process.env.REACT_APP_TUTORIAL_URL}
-        target="_blank"
       >
         {t("menu.get-started")}
-      </ExternalLink>
+      </NavButton>
       <DashNavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
         <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
       </DashNavLink>
@@ -147,13 +148,13 @@ export const DashNavbar = () => {
         <div className="flex items-center justify-between p-4">
           <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>
-            {open ? <FiX size={24} /> : <FiMenu size={24} />}
+            {navOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
 
-        {open && (
+        {navOpen && (
           <Transition
-            show={open}
+            show={navOpen}
             appear={true}
             enter="transition-opacity duration-500"
             enterFrom="opacity-0"

@@ -9,7 +9,7 @@
     "login": "Log In",
     "signup": "Sign Up",
     "footer-blog": "SWOB Blog",
-    "wallet": "Wallet(Store Access)",
+    "wallet": "Store Accounts",
     "settings": "Settings",
     "dashboard": "Dashboard",
     "sync": "Sync",
@@ -150,9 +150,9 @@
     }
   },
   "wallet": {
-    "page-title": "Wallet Store Access",
-    "heading": "Wallet",
-    "details": "Store your tokens which will be used for authentication on your behalf in the event of an internet shutdown. You can define how this tokens will be used by setting the scopes of access",
+    "page-title": "Store Accounts",
+    "heading": "Store Accounts",
+    "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline",
     "labels": {
       "description": "Description"
     },

@@ -10,8 +10,8 @@ export const Button = ({ className, disabled, outline, children, ...rest }) => {
         disabled
           ? "text-gray-500 bg-gray-200"
           : outline
-          ? "bg-transparent border border-blue-800 text-blue-800 hover:bg-blue-900 hover:text-white"
-          : "text-white bg-blue-800 hover:bg-blue-900",
+          ? "bg-transparent border border-blue-800 text-blue-800"
+          : "text-white bg-blue-800 ",
         className
       )}
       {...rest}
@@ -25,7 +25,7 @@ export const NavButton = ({ className, children, ...rest }) => {
   return (
     <button
       className={clsx(
-        "flex items-center p-5 outline-none appearance-none font-medium border-b-2 border-blue-800 text-blue-800",
+        "flex items-center p-5  appearance-none font-medium focus:border-b-2 focus:border-blue-800 focus:text-blue-800",
         className
       )}
       {...rest}
@@ -40,7 +40,7 @@ export const LinkButton = ({ to, className, children, ...rest }) => {
     <Link
       to={to}
       className={clsx(
-        "flex items-center justify-center px-4 py-2 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none hover:bg-blue-900",
+        "flex items-center justify-center px-4 py-2 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none",
         className
       )}
       {...rest}

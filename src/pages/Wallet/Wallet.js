@@ -1,13 +1,13 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { IoMdSync } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { authSelector } from "features";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
-import { IoWalletOutline } from "react-icons/io5";
+import { BsShieldLock } from "react-icons/bs";
 import { Disclosure, Dialog } from "@headlessui/react";
 import {
   Loader,
@@ -15,23 +15,26 @@ import {
   Button,
   PageAnimationWrapper,
   PasswordInput,
+  LinkButton,
 } from "components";
 import {
   useGetPlatformsQuery,
   useStoreTokenMutation,
   useTokenRevokeMutation,
 } from "services";
+import Error from "../Error";
+import OnboardingTutorial from "./OnboardingTutorial";
 
 const Wallet = () => {
   const { t } = useTranslation();
   useTitle(t("wallet.page-title"));
-
-  // used for token revoke
-  const [isOpen, setIsOpen] = useState(false);
-  const [password, setPassword] = useState("");
-  // save the platform to be revoked
   const [revokeURL, setRevokeURL] = useState("");
+  const [showRevokeDialog, setOpenRevokeDialog] = useState(false);
+  const [password, setPassword] = useState("");
+  const [onboarding, setOnboarding] = useState(false);
+
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const auth = useSelector(authSelector);
   // fetch platforms with rtk query
   const {
@@ -53,6 +56,13 @@ const Wallet = () => {
 
   // where logos are stored
   const LOGO_HOST = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    const tutorial = searchParams.get("tutorial");
+    if (tutorial === "onboarding") {
+      setOnboarding(true);
+    }
+  }, [searchParams]);
 
   async function handleTokenStorage(name, url) {
     if (name === "telegram") {
@@ -127,7 +137,7 @@ const Wallet = () => {
             break;
           case 403:
             setPassword("");
-            setIsOpen(true);
+            setOpenRevokeDialog(true);
             toast.error(t("error-messages.invalid-password"));
             break;
           case 409:
@@ -157,37 +167,38 @@ const Wallet = () => {
   }
 
   if (isError) {
-    return (
-      <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>{t("error-messages.general-error-title")}</h2>
-        <p className="">{t("wallet.alerts.load-error")}</p>
-        <Button onClick={() => refetch()}>{t("labels.try-again")}</Button>
-      </div>
-    );
+    return <Error message={t("wallet.alerts.load-error")} callBack={refetch} />;
   }
 
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-xl min-h-screen p-8 mx-auto my-10 prose text-gray-900">
-        <div className="">
-          <div className="flex justify-between mb-8 ">
-            <h1 className="inline-flex items-center mb-0 text-4xl font-bold">
-              <IoWalletOutline size={42} />
-              <span className="ml-2">{t("wallet.heading")}</span>
-            </h1>
-            <Link
+      <div className="max-w-screen-xl min-h-screen p-6 mx-auto prose text-gray-900 md:my-10 onboarding">
+        <div className="flex justify-between mb-8">
+          <h1 className="inline-flex items-center mb-0 space-x-4 text-3xl font-bold">
+            <BsShieldLock size={42} />
+            <span className="ml-2">{t("wallet.heading")}</span>
+          </h1>
+          <div className="flex items-center space-x-2">
+            <Button
+              outline
+              className="hidden md:flex desktop-tutorial-button"
+              onClick={() => setOnboarding(true)}
+            >
+              {t("labels.tutorial")}
+            </Button>
+            <LinkButton
               to="/dashboard/sync"
-              className="inline-flex items-center justify-center px-6 py-2 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none hover:bg-blue-900"
+              className="hidden md:flex desktop-sync-button"
             >
               <IoMdSync size={22} />
               <span className="ml-1">{t("labels.sync")}</span>
-            </Link>
+            </LinkButton>
           </div>
-          <p className="my-0 text-lg">{t("wallet.details")}</p>
         </div>
+        <p className="my-0 text-lg">{t("wallet.details")}</p>
 
         <div className="grid grid-cols-2 gap-4 lg:gap-8">
-          <div className="col-span-full md:col-span-1">
+          <div className="col-span-full md:col-span-1 onboarding-step-1">
             <h2>{t("wallet.section-1.heading")}</h2>
             {Object.keys(unSavedPlatforms).length ? (
               <Fragment>
@@ -293,7 +304,7 @@ const Wallet = () => {
                               className="bg-red-500 hover:bg-red-700"
                               onClick={() => {
                                 setRevokeURL(item.initialization_url);
-                                setIsOpen(true);
+                                setOpenRevokeDialog(true);
                               }}
                             >
                               <FiTrash2 />
@@ -313,11 +324,25 @@ const Wallet = () => {
             )}
           </div>
         </div>
+        <Button
+          outline
+          className="w-full mt-8 md:hidden mobile-tutorial-button"
+          onClick={() => setOnboarding(true)}
+        >
+          {t("labels.tutorial")}
+        </Button>
+        <LinkButton
+          to="/dashboard/sync"
+          className="mt-2 mb-8 md:hidden mobile-sync-button"
+        >
+          <IoMdSync size={22} />
+          <span className="ml-1">{t("labels.sync")}</span>
+        </LinkButton>
       </div>
 
       <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
+        open={showRevokeDialog}
+        onClose={() => setOpenRevokeDialog(false)}
         className="absolute inset-0 z-10 p-4 overflow-y-auto"
       >
         <div className="flex items-center justify-center min-h-screen">
@@ -337,7 +362,7 @@ const Wallet = () => {
             />
 
             <div className="flex items-center justify-end mt-8">
-              <Button outline onClick={() => setIsOpen(false)}>
+              <Button outline onClick={() => setOpenRevokeDialog(false)}>
                 {t("wallet.revoke-dialog.cancel-button-text")}
               </Button>
               <Button
@@ -345,7 +370,7 @@ const Wallet = () => {
                 disabled={password.length >= 8 ? false : true}
                 onClick={() => {
                   handleTokenRevoke();
-                  setIsOpen(false);
+                  setOpenRevokeDialog(false);
                 }}
               >
                 {t("wallet.revoke-dialog.cta-button-text")}
@@ -354,6 +379,8 @@ const Wallet = () => {
           </div>
         </div>
       </Dialog>
+
+      <OnboardingTutorial start={onboarding} stopFunc={setOnboarding} />
     </PageAnimationWrapper>
   );
 };
