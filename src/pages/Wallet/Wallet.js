@@ -23,7 +23,7 @@ import {
   useTokenRevokeMutation,
 } from "services";
 import Error from "../Error";
-import OnboardingTutorial from "./OnboardingTutorial";
+import OnboardingTutorial from "../tutorials/OnboardingTutorial";
 
 const Wallet = () => {
   const { t } = useTranslation();

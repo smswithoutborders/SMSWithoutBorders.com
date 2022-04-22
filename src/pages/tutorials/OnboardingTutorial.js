@@ -6,7 +6,6 @@ import "styles/introjs-theme.css";
 
 const OnboardingTutorial = ({ start, stopFunc }) => {
   const isMobile = useDeviceDetection();
-  console.log(isMobile);
   const steps = [
     {
       title: "Welcome",
