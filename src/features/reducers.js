@@ -4,12 +4,14 @@ import { API } from "../services/api";
 import authReducer from "./auth";
 import metricsReducer from "./metrics";
 import syncReducer from "./sync";
+import tutorialReducer from "./tutorials";
 
 // Add the generated reducer as a specific top-level reducer
 const appReducer = combineReducers({
   auth: authReducer,
   sync: syncReducer,
   metrics: metricsReducer,
+  tutorials: tutorialReducer,
   [API.reducerPath]: API.reducer,
 });
 

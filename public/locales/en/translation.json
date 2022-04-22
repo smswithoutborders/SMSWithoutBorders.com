@@ -33,7 +33,8 @@
     "try-again": "try again",
     "password-change": "change password",
     "tutorial": "Tutorial",
-    "learn-more": "learn more"
+    "learn-more": "learn more",
+    "help": "help"
   },
   "landing": {
     "section-1": {
@@ -265,6 +266,7 @@
     "alerts": {
       "sync-started": "Sync started",
       "sync-complete": "Sync Complete",
+      "sync-scanned": "Code Scanned successfully",
       "no-platforms": "Sorry it seems you havent stored any tokens",
       "sync-error": "Sorry an error occured while synchronizing, Please try again",
       "sync-closed": "Sync session closed. please click the sync button to start again"
