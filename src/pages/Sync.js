@@ -67,14 +67,14 @@ const Sync = () => {
         };
         // listen to data sent from the websocket server
         ws.onmessage = (evt) => {
-          if (evt.data === "200- acked") {
+          if (evt.data === "200- ack") {
             toast.success(t("sync.alerts.sync-complete"));
             dispatch(
               updateSync({
                 status: "complete",
               })
             );
-          } else if (evt.data === "201- paused") {
+          } else if (evt.data === "201- pause") {
             toast.success(t("sync.alerts.sync-scanned"));
             dispatch(
               updateSync({
@@ -100,7 +100,7 @@ const Sync = () => {
         };
 
         ws.onerror = (err) => {
-          toast.onerror(t("sync.alerts.sync-error"));
+          toast.error(t("sync.alerts.sync-error"));
           dispatch(
             updateSync({
               status: "disconnected",
@@ -235,7 +235,9 @@ const Sync = () => {
               </Button>
             </div>
           )}
-          {(status === "loading" || fetchingURL) && <InlineLoader />}
+          {(status === "loading" || status === "scanned" || fetchingURL) && (
+            <InlineLoader />
+          )}
 
           <div className="mx-auto text-center">
             <p className="font-bold text-md">
