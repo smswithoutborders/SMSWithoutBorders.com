@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useCallback, Fragment } from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
 import logo from "images/logo-icon-light.png";
 import { FiMenu, FiX } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
@@ -9,8 +7,6 @@ import { Transition } from "@headlessui/react";
 import { NavLink, MobileNavLink, ExternalLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-
-const UserActions = tw.div`xl:(flex items-center)`;
 
 export const MainNavbar = () => {
   const { t } = useTranslation();
@@ -38,7 +34,7 @@ export const MainNavbar = () => {
   }, [handleScroll]);
 
   const DesktopLinks = () => (
-    <div className="xl:flex">
+    <div className="lg:flex">
       <NavLink scrolled={scrolled} key="/" to="/">
         {t("menu.home")}
       </NavLink>
@@ -63,7 +59,7 @@ export const MainNavbar = () => {
   );
 
   const ActionLinks = () => (
-    <UserActions>
+    <div className="lg:flex lg:items-center">
       <ExternalLink
         key="Github"
         href="https://github.com/orgs/smswithoutborders/"
@@ -78,11 +74,11 @@ export const MainNavbar = () => {
       <NavLink
         key="sign-up"
         to="/sign-up"
-        className="text-white bg-blue-800 xl:px-6 xl:py-2 xl:mr-4 xl:rounded-3xl"
+        className="text-white bg-blue-800 lg:px-6 lg:py-2 lg:mr-4 lg:rounded-3xl"
       >
         <span className="ml-2">{t("menu.signup")}</span>
       </NavLink>
-    </UserActions>
+    </div>
   );
 
   const MobileLinks = () => (
@@ -158,7 +154,7 @@ export const MainNavbar = () => {
   );
 
   const Logo = () => (
-    <Link to="/" className="flex items-center text-xl font-bold xl:ml-4">
+    <Link to="/" className="flex items-center text-xl font-bold lg:ml-4">
       <img src={logo} alt="logo" className="w-8 h-8 mr-3" />
       <span>SMSWithoutBorders</span>
     </Link>
@@ -168,7 +164,7 @@ export const MainNavbar = () => {
     <Fragment>
       <div
         className={clsx(
-          "hidden sticky top-0 z-50 xl:flex justify-between items-center",
+          "hidden sticky top-0 z-50 lg:flex justify-between items-center",
           scrolled ? "bg-white shadow-lg" : "text-white bg-transparent"
         )}
       >
@@ -176,7 +172,7 @@ export const MainNavbar = () => {
         <DesktopLinks />
         <ActionLinks />
       </div>
-      <div className="sticky top-0 z-50 bg-white shadow-lg xl:hidden">
+      <div className="sticky top-0 z-50 bg-white shadow-lg lg:hidden">
         <div className="flex items-center justify-between p-4">
           <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>

@@ -16,9 +16,9 @@ import { NavButton } from "./Buttons";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 
-const UserActions = tw.div`flex items-center mt-20 justify-between bg-gray-100 xl:(bg-white mt-0)`;
-const MobileNav = tw.nav`xl:hidden z-50 bg-white sticky top-0 shadow-lg`;
-const DesktopNav = tw.nav`hidden xl:flex  justify-between items-center bg-white h-16 shadow-lg`;
+const UserActions = tw.div`flex items-center mt-20 justify-between bg-gray-100 lg:(bg-white mt-0)`;
+const MobileNav = tw.nav`lg:hidden z-50 bg-white sticky top-0 shadow-lg`;
+const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white h-16 shadow-lg`;
 
 export const DashNavbar = () => {
   const { t } = useTranslation();
@@ -79,15 +79,13 @@ export const DashNavbar = () => {
   const ActionLinks = () => (
     <UserActions key={2}>
       {metrics?.name && (
-        <div onClick={() => toggleMenu()}>
-          <div className="flex items-center px-4 lg:px-0">
-            <div className="flex items-center justify-center mr-2 bg-blue-800 rounded-full w-9 h-9">
-              <p className="font-bold text-center text-white">
-                {metrics?.name.charAt(0)}
-              </p>
-            </div>
-            <p className="mr-4 lg:hidden">{metrics?.name}</p>
+        <div className="flex items-center px-4 lg:px-0">
+          <div className="flex items-center justify-center mr-2 bg-blue-800 rounded-full w-9 h-9">
+            <p className="font-bold text-center text-white">
+              {metrics?.name.charAt(0)}
+            </p>
           </div>
+          <p className="mr-4 lg:hidden">{metrics?.name}</p>
         </div>
       )}
       <NavButton onClick={() => handleLogOut()}>
@@ -96,8 +94,34 @@ export const DashNavbar = () => {
     </UserActions>
   );
 
-  const SharedLinks = () => (
-    <div className="xl:flex">
+  const DesktopLinks = () => (
+    <div className="lg:flex">
+      <NavButton
+        onClick={() => {
+          navigate("wallet?tutorial=onboarding");
+          toggleMenu();
+        }}
+        key="Get Started"
+      >
+        {t("menu.get-started")}
+      </NavButton>
+      <DashNavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
+        <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
+      </DashNavLink>
+      <DashNavLink onClick={() => toggleMenu()} key="Sync" to="sync">
+        <IoMdSync size={20} /> &nbsp; {t("menu.sync")}
+      </DashNavLink>
+      <DashNavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">
+        <IoWalletOutline size={20} /> &nbsp; {t("menu.wallet")}
+      </DashNavLink>
+      <DashNavLink onClick={() => toggleMenu()} key="Settings" to="settings">
+        <FiSettings size={20} /> &nbsp; {t("menu.settings")}
+      </DashNavLink>
+    </div>
+  );
+
+  const MobileLinks = () => (
+    <div className="lg:flex">
       <NavButton
         onClick={() => {
           navigate("wallet?tutorial=onboarding");
@@ -123,7 +147,7 @@ export const DashNavbar = () => {
   );
 
   const Logo = () => (
-    <Link to="/" className="flex items-center xl:ml-4">
+    <Link to="/" className="flex items-center lg:ml-4">
       <img src={logo} alt="logo" className="mr-3 w-7 h-7" />
       <span className="font-bold">SMSWithoutBorders</span>
     </Link>
@@ -141,7 +165,7 @@ export const DashNavbar = () => {
     <Fragment>
       <DesktopNav>
         <Logo />
-        <SharedLinks />
+        <DesktopLinks />
         <ActionLinks />
       </DesktopNav>
       <MobileNav>
@@ -164,7 +188,7 @@ export const DashNavbar = () => {
             leaveTo="opacity-0"
             className="flex flex-col w-full h-screen bg-white"
           >
-            <SharedLinks />
+            <MobileLinks />
             <ActionLinks />
           </Transition>
         )}
