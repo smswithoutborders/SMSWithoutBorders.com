@@ -19,7 +19,6 @@ import {
   FormGroup,
   ReCAPTCHA,
   ErrorMessage,
-  AuthContainer,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
@@ -128,13 +127,13 @@ const Login = () => {
     Also maintain after request is successfull to update background state
   */
   if (isLoading || isSuccess) {
-    return <Loader light/>;
+    return <Loader light />;
   }
 
   return (
     <PageAnimationWrapper>
-      <AuthContainer className="bg-gray-100 md:py-20 2xl:py-0 2xl:h-screen lg:grid lg:place-items-center">
-        <div className="container max-w-md p-8 mx-auto bg-white shadow-lg md:rounded-xl lg:my-10">
+      <div className="md:min-h-screen md:grid md:place-items-center bg-blend-multiply">
+        <div className="container p-8 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
             <h1 className="text-2xl font-bold text-center">
@@ -220,7 +219,7 @@ const Login = () => {
             </Link>
           </p>
         </div>
-      </AuthContainer>
+      </div>
     </PageAnimationWrapper>
   );
 };

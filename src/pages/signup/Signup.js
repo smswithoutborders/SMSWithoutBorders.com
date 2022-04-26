@@ -20,7 +20,6 @@ import {
   FormGroup,
   ReCAPTCHA,
   ErrorMessage,
-  AuthContainer,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
@@ -146,8 +145,8 @@ const Signup = () => {
 
   return (
     <PageAnimationWrapper>
-      <AuthContainer className="bg-gray-100 md:py-20 2xl:py-0 2xl:min-h-screen lg:grid lg:place-items-center">
-        <div className="container max-w-md p-8 mx-auto bg-white shadow-lg md:rounded-xl lg:my-10">
+      <div className="min-h-screen md:grid md:place-items-center">
+        <div className="container p-8 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
             <h1 className="text-2xl font-bold text-center">
@@ -271,7 +270,6 @@ const Signup = () => {
               <span>{t("signup.form.cta-button-text")}</span>
             </Button>
           </form>
-
           <p className="my-8 text-sm text-center text-gray-600">
             <span>{t("signup.account-status")}</span> &nbsp;
             <Link to="/login" className="text-blue-800">
@@ -279,7 +277,7 @@ const Signup = () => {
             </Link>
           </p>
         </div>
-      </AuthContainer>
+      </div>
     </PageAnimationWrapper>
   );
 };
