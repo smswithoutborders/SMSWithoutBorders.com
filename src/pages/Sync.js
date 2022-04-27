@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, Fragment } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { IoMdSync } from "react-icons/io";
@@ -17,11 +17,13 @@ import {
   Alert,
   QRCode,
   Button,
+  Loader,
   useTitle,
   InlineLoader,
   PageAnimationWrapper,
 } from "components";
 import SyncTutorial from "./tutorials/SyncTutorial";
+import MobileSyncTutorial from "./tutorials/MobileSyncTutorial";
 
 const Sync = () => {
   const { t } = useTranslation();
@@ -59,6 +61,7 @@ const Sync = () => {
         const ws = new WebSocket(syncURL);
         ws.onopen = () => {
           toast.success(t("sync.alerts.sync-started"));
+          window.scrollTo(0, 0);
           dispatch(
             updateSync({
               status: "connected",
@@ -158,99 +161,159 @@ const Sync = () => {
         </div>
       </PageAnimationWrapper>
     );
+  } else if (isMobile) {
+    return (
+      <PageAnimationWrapper>
+        <div className="max-w-screen-md min-h-screen px-6 mx-auto my-10 prose md:px-8">
+          {status !== "connected" &&
+          status !== "loading" &&
+          !tutorial.showButton ? (
+            <Fragment>
+              <h1 className="inline-flex items-center mb-0 text-[1.4rem] font-bold md:text-3xl">
+                <IoMdSync size={42} className="mr-2" />
+                <span>{t("sync.heading")}</span>
+              </h1>
+
+              <div className="tutorial-instructions">
+                <p>{t("sync.section-2.paragraph-1")}</p>
+                <p>{t("sync.section-2.paragraph-2")}</p>
+                <p>{t("sync.section-2.paragraph-3")}</p>
+                <ol>
+                  <li>{t("sync.section-2.sync-steps.1")}</li>
+                  <li>{t("sync.section-2.sync-steps.2")}</li>
+                  <li>{t("sync.section-2.sync-steps.3")}</li>
+                </ol>
+              </div>
+
+              <div className="flex flex-col items-center px-6 my-8 space-y-4 lg:hidden">
+                <Button
+                  className="w-full mobile-sync-button"
+                  onClick={() => handleSync()}
+                >
+                  <IoMdSync size={22} />
+                  <span className="ml-1">{t("labels.sync")}</span>
+                </Button>
+                <Button
+                  outline
+                  className="w-full mobile-tutorial-button"
+                  onClick={() => startTutorial()}
+                >
+                  {t("labels.tutorial")}
+                </Button>
+              </div>
+            </Fragment>
+          ) : status === "loading" || status === "scanned" || fetchingURL ? (
+            <Loader />
+          ) : status === "connected" || tutorial.showButton ? (
+            <div className="text-center mt-36">
+              <h3>Please click on the button below to open the app</h3>
+              <Button
+                className="mt-4 open-app-button"
+                onClick={() => window.location.replace(qrLink)}
+              >
+                <IoMdSync size={22} />
+                <span className="ml-1">{t("labels.open-app")}</span>
+              </Button>
+            </div>
+          ) : null}
+        </div>
+        <MobileSyncTutorial />
+      </PageAnimationWrapper>
+    );
+  } else {
+    return (
+      <PageAnimationWrapper>
+        <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 mx-auto my-10 prose md:px-8">
+          <div className="col-span-full lg:col-span-1">
+            <h1 className="inline-flex items-center mb-0 text-[1.4rem] font-bold md:text-3xl">
+              <IoMdSync size={42} className="mr-2" />
+              <span>{t("sync.heading")}</span>
+            </h1>
+
+            <div className="tutorial-instructions">
+              <p>{t("sync.section-2.paragraph-1")}</p>
+              <p>{t("sync.section-2.paragraph-2")}</p>
+              <p>{t("sync.section-2.paragraph-3")}</p>
+              <ol>
+                <li>{t("sync.section-2.sync-steps.1")}</li>
+                <li>{t("sync.section-2.sync-steps.2")}</li>
+                <li>{t("sync.section-2.sync-steps.3")}</li>
+              </ol>
+            </div>
+
+            {!tutorial.showQR && (
+              <div className="flex flex-col items-center px-6 my-8 space-y-4 lg:hidden">
+                <Button
+                  className="w-full mobile-sync-button"
+                  onClick={() => handleSync()}
+                >
+                  <IoMdSync size={22} />
+                  <span className="ml-1">{t("labels.sync")}</span>
+                </Button>
+                <Button
+                  outline
+                  className="w-full mobile-tutorial-button"
+                  onClick={() => startTutorial()}
+                >
+                  {t("labels.tutorial")}
+                </Button>
+              </div>
+            )}
+          </div>
+
+          <div className="col-span-full lg:col-span-1">
+            {tutorial.showQR && (
+              <QRCode
+                value="tutorial"
+                size={300}
+                className="block p-2 mx-auto border rounded-lg shadow tutorial-qr"
+              />
+            )}
+
+            {status === "connected" && (
+              <QRCode
+                value={qrLink}
+                size={300}
+                className="block p-2 mx-auto border rounded-lg shadow"
+              />
+            )}
+
+            {status === "disconnected" && !tutorial.showQR && !isMobile && (
+              <div className="mx-auto border border-gray-300  w-[300px] h-[300px] rounded-lg shadow-md flex flex-col align-center justify-center px-16 space-y-4">
+                <Button
+                  className="mt-4 desktop-sync-button"
+                  onClick={() => handleSync()}
+                >
+                  <IoMdSync size={22} />
+                  <span className="ml-1">{t("labels.sync")}</span>
+                </Button>
+                <Button
+                  outline
+                  className="desktop-tutorial-button"
+                  onClick={() => startTutorial()}
+                >
+                  {t("labels.tutorial")}
+                </Button>
+              </div>
+            )}
+            {(status === "loading" || status === "scanned" || fetchingURL) && (
+              <InlineLoader />
+            )}
+
+            <div className="mx-auto text-center">
+              <p className="font-bold text-md">
+                <span>{t("sync.section-2.status.heading")} : </span> &nbsp;
+                <span className="font-normal">
+                  {t(`sync.section-2.status.${status}`)}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <SyncTutorial />
+      </PageAnimationWrapper>
+    );
   }
-
-  return (
-    <PageAnimationWrapper>
-      <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 mx-auto my-10 prose md:px-8">
-        <div className="col-span-full lg:col-span-1">
-          <h1 className="inline-flex items-center mb-0 text-xl font-bold md:text-3xl">
-            <IoMdSync size={42} className="mr-2" />
-            <span>{t("sync.heading")}</span>
-          </h1>
-
-          <div className="tutorial-instructions">
-            <p>{t("sync.section-2.paragraph-1")}</p>
-            <p>{t("sync.section-2.paragraph-2")}</p>
-            <p>{t("sync.section-2.paragraph-3")}</p>
-            <ol>
-              <li>{t("sync.section-2.sync-steps.1")}</li>
-              <li>{t("sync.section-2.sync-steps.2")}</li>
-              <li>{t("sync.section-2.sync-steps.3")}</li>
-            </ol>
-          </div>
-
-          {!tutorial.showQR && (
-            <div className="flex flex-col items-center px-6 my-8 space-y-4 lg:hidden">
-              <Button
-                className="w-full mobile-sync-button"
-                onClick={() => handleSync()}
-              >
-                <IoMdSync size={22} />
-                <span className="ml-1">{t("labels.sync")}</span>
-              </Button>
-              <Button
-                outline
-                className="w-full mobile-tutorial-button"
-                onClick={() => startTutorial()}
-              >
-                {t("labels.tutorial")}
-              </Button>
-            </div>
-          )}
-        </div>
-
-        <div className="col-span-full lg:col-span-1">
-          {tutorial.showQR && (
-            <QRCode
-              value="tutorial"
-              size={300}
-              className="block p-2 mx-auto border rounded-lg shadow tutorial-qr"
-            />
-          )}
-
-          {status === "connected" && (
-            <QRCode
-              value={qrLink}
-              size={300}
-              className="block p-2 mx-auto border rounded-lg shadow"
-            />
-          )}
-
-          {status === "disconnected" && !tutorial.showQR && !isMobile && (
-            <div className="mx-auto border border-gray-300  w-[300px] h-[300px] rounded-lg shadow-md flex flex-col align-center justify-center px-16 space-y-4">
-              <Button
-                className="mt-4 desktop-sync-button"
-                onClick={() => handleSync()}
-              >
-                <IoMdSync size={22} />
-                <span className="ml-1">{t("labels.sync")}</span>
-              </Button>
-              <Button
-                outline
-                className="desktop-tutorial-button"
-                onClick={() => startTutorial()}
-              >
-                {t("labels.tutorial")}
-              </Button>
-            </div>
-          )}
-          {(status === "loading" || status === "scanned" || fetchingURL) && (
-            <InlineLoader />
-          )}
-
-          <div className="mx-auto text-center">
-            <p className="font-bold text-md">
-              <span>{t("sync.section-2.status.heading")} : </span> &nbsp;
-              <span className="font-normal">
-                {t(`sync.section-2.status.${status}`)}
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <SyncTutorial />
-    </PageAnimationWrapper>
-  );
 };
+
 export default Sync;

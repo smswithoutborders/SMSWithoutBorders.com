@@ -5,11 +5,12 @@ const initialState = {
   sync: {
     enabled: false,
     showQR: false,
+    showButton: false,
   },
 };
 
 export const tutorialSlice = createSlice({
-  name: "auth",
+  name: "tutorial",
   initialState,
   reducers: {
     updateSyncTutorial: (state, action) => {
