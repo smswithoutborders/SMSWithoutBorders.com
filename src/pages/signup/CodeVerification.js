@@ -106,8 +106,13 @@ const CodeVerification = () => {
       toast.success(t("signup.code-verification.alerts.account-created"));
       // remove any cached data
       clearCache();
-      // redirect user to login page
-      navigate("/login");
+
+      // handle user redirection
+      if (cache.redirectURL) {
+        window.location.replace(cache.redirectURL);
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;

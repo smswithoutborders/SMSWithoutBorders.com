@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "images/logo.png";
 import toast from "react-hot-toast";
 import { parsePhoneNumber } from "react-phone-number-input";
@@ -8,7 +8,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
-import { useSignupMutation, setCache } from "services";
+import { useSignupMutation, setCache, getCache } from "services";
 import {
   Input,
   Alert,
@@ -78,6 +78,14 @@ const Signup = () => {
     },
   });
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const redirectURL = searchParams.get("ari");
+    if (redirectURL) {
+      setCache({ redirectURL });
+    }
+  }, []);
+
   // Sign up is a three step process with 2fa verification
   const handleSignUp = async (data) => {
     // seperate phone number into tel anc country code
@@ -101,7 +109,12 @@ const Signup = () => {
       */
       data.uid = response.uid;
       delete data.password;
-      setCache(data);
+
+      let cache = getCache();
+      setCache({
+        ...data,
+        ...cache,
+      });
       // redirect user to code confirmation page
       navigate("verify", { state: { phone_number: data.phone_number } });
     } catch (error) {
