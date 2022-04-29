@@ -8,6 +8,8 @@ Register for an SMSWithoutBorders account by filling the form on the [signup](ht
 
 ![signup](images/signup.png)
 
+The signup page url accepts an optional parameter `ari` to identify users who chose to signup from the mobile app. The value of this parameter is an intent url which the user will be redirected to after two factor authentication is complete
+
 ## Login
 
 [Login](http://localhost:18000/login) to access your account using the credentials created at signup.
@@ -69,3 +71,17 @@ Authenticated users can access their [dashboard](http://localhost:18000/dashboar
 ## Rendering Markdown Files
 
 The [Privacy Policy](http://localhost:18000/privacy-policy) page is loaded from [privacy.md](privacy.md) as markdown into the website. Check [CONFIGURATIONS.md](CONFIGURATIONS.md) on how to link the file.
+
+
+## Synchronization 
+
+Authenticated users can synchronize their accounts with the mobile app from the [Synchronization](https://localhost:18000/dashboard/sync) page. This process ensures users can communicate securely over sms through the app. 
+
+The sync page uses a background socket connection to enable handshakes. The intial request to obtain the connection url returns a JSON object with two keys 
+
+```JSON
+{
+ "qr_url": "",
+ "mobile_url": "",
+}
+```
