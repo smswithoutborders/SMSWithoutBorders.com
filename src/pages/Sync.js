@@ -36,7 +36,7 @@ const Sync = () => {
   const [synchronize, { isLoading: fetchingURL }] = useSynchronizeMutation();
   const { data: platforms = {} } = useGetPlatformsQuery(auth);
   const { savedPlatforms = [] } = platforms;
-  const { status, qrLink } = syncState;
+  const { status, qrLink, mobileLink } = syncState;
   const hasSavedPlatforms = savedPlatforms.length ? true : false;
 
   function startTutorial() {
@@ -85,9 +85,11 @@ const Sync = () => {
               })
             );
           } else {
+            const { qr_link, mobile_link } = evt.data;
             dispatch(
               updateSync({
-                qrLink: evt.data,
+                qrLink: qr_link,
+                mobileLink: mobile_link,
               })
             );
           }
@@ -209,7 +211,7 @@ const Sync = () => {
               <h3>Please click on the button below to open the app</h3>
               <Button
                 className="mt-4 open-app-button"
-                onClick={() => window.location.replace(qrLink)}
+                onClick={() => window.location.replace(mobileLink)}
               >
                 <IoMdSync size={22} />
                 <span className="ml-1">{t("labels.open-app")}</span>
