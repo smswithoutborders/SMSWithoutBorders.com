@@ -261,7 +261,7 @@ const Signup = () => {
               </p>
             </FormGroup>
 
-            {ENABLE_RECAPTCHA && process.env.NODE_ENV !== "production" ? (
+            {ENABLE_RECAPTCHA ? (
               <FormGroup>
                 <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
                 {errors.captcha_token && (
