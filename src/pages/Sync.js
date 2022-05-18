@@ -85,11 +85,11 @@ const Sync = () => {
               })
             );
           } else {
-            const { qr_link, mobile_link } = evt.data;
+            const { qr_url, mobile_url } = JSON.parse(evt.data);
             dispatch(
               updateSync({
-                qrLink: qr_link,
-                mobileLink: mobile_link,
+                qrLink: qr_url,
+                mobileLink: mobile_url,
               })
             );
           }
@@ -268,7 +268,7 @@ const Sync = () => {
               <QRCode
                 value="tutorial"
                 size={300}
-                className="block p-2 mx-auto border rounded-lg shadow tutorial-qr"
+                className="block mx-auto border rounded-lg shadow tutorial-qr"
               />
             )}
 
@@ -276,7 +276,7 @@ const Sync = () => {
               <QRCode
                 value={qrLink}
                 size={300}
-                className="block p-2 mx-auto border rounded-lg shadow"
+                className="block mx-auto border rounded-lg shadow"
               />
             )}
 
