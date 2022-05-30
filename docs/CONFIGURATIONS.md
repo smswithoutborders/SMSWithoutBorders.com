@@ -5,7 +5,7 @@ Please follow the instructions below to setup this project
 ## Install dependencies
 
 ```bash
-npm install
+yarn install
 ```
 
 ## Configure environment variables
@@ -41,7 +41,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Start development server
 
 ```bash
-npm start
+yarn start
 ```
 
 Open [http://localhost:18000](http://localhost:18000) to view it in the browser.
@@ -53,7 +53,7 @@ You will also see any lint errors in the console.
 ## Create a production build
 
 ```bash
-npm run build
+yarn build
 ```
 
 Builds the app for production. Check the `build` folder for deployable files once complete.
