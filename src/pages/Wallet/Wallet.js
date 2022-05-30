@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
 import { BsShieldLock } from "react-icons/bs";
-import { Disclosure, Dialog } from "@headlessui/react";
+import { Disclosure, Dialog, Transition } from "@headlessui/react";
 import {
   Loader,
   useTitle,
@@ -301,7 +301,7 @@ const Wallet = () => {
                               <p>{item.description}</p>
                             </div>
                             <Button
-                              className="bg-red-500 hover:bg-red-700"
+                              danger
                               onClick={() => {
                                 setRevokeURL(item.initialization_url);
                                 setOpenRevokeDialog(true);
@@ -340,45 +340,71 @@ const Wallet = () => {
         </LinkButton>
       </div>
 
-      <Dialog
-        open={showRevokeDialog}
-        onClose={() => setOpenRevokeDialog(false)}
-        className="absolute inset-0 z-10 p-4 overflow-y-auto"
-      >
-        <div className="flex items-center justify-center min-h-screen">
-          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+      <Transition appear show={showRevokeDialog} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => setOpenRevokeDialog(false)}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
 
-          <div className="relative max-w-xl p-6 mx-auto prose bg-white rounded-lg">
-            <Dialog.Title>{t("wallet.revoke-dialog.heading")}</Dialog.Title>
-            <Dialog.Description>
-              {t("wallet.revoke-dialog.details")}
-            </Dialog.Description>
-
-            <PasswordInput
-              placeholder={t("forms.password.placeholder")}
-              minLength="8"
-              onChange={(evt) => setPassword(evt.target.value)}
-              showStrength={false}
-            />
-
-            <div className="flex items-center justify-end mt-8">
-              <Button outline onClick={() => setOpenRevokeDialog(false)}>
-                {t("wallet.revoke-dialog.cancel-button-text")}
-              </Button>
-              <Button
-                className="ml-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-300"
-                disabled={password.length >= 8 ? false : true}
-                onClick={() => {
-                  handleTokenRevoke();
-                  setOpenRevokeDialog(false);
-                }}
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
               >
-                {t("wallet.revoke-dialog.cta-button-text")}
-              </Button>
+                <Dialog.Panel className="w-full max-w-xl p-6 overflow-hidden prose text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <Dialog.Title as="h3" className="mb-4">
+                    {t("wallet.revoke-dialog.heading")}
+                  </Dialog.Title>
+                  <Dialog.Description>
+                    {t("wallet.revoke-dialog.details")}
+                  </Dialog.Description>
+
+                  <PasswordInput
+                    placeholder={t("forms.password.placeholder")}
+                    minLength="8"
+                    onChange={(evt) => setPassword(evt.target.value)}
+                    showStrength={false}
+                  />
+
+                  <div className="flex items-center justify-end mt-8 space-x-2">
+                    <Button outline onClick={() => setOpenRevokeDialog(false)}>
+                      {t("wallet.revoke-dialog.cancel-button-text")}
+                    </Button>
+                    <Button
+                      danger
+                      disabled={password.length >= 8 ? false : true}
+                      onClick={() => {
+                        handleTokenRevoke();
+                        setOpenRevokeDialog(false);
+                      }}
+                    >
+                      {t("wallet.revoke-dialog.cta-button-text")}
+                    </Button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
             </div>
           </div>
-        </div>
-      </Dialog>
+        </Dialog>
+      </Transition>
 
       <OnboardingTutorial start={onboarding} stopFunc={setOnboarding} />
     </PageAnimationWrapper>

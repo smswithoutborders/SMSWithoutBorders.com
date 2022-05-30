@@ -167,10 +167,10 @@
       "cta-button-text": "revoke"
     },
     "revoke-dialog": {
-      "heading": "Revoke Token",
+      "heading": "Revoke token",
       "details": "This will permanently remove this token from your account and cannot be reversed. Enter your password to Confirm",
       "input-placeholder": "password",
-      "cta-button-text": "confirm revoke",
+      "cta-button-text": "continue",
       "cancel-button-text": "cancel"
     },
     "alerts": {
