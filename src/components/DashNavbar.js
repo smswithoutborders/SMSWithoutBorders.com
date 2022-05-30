@@ -147,7 +147,7 @@ export const DashNavbar = () => {
   );
 
   const Logo = () => (
-    <Link to="/" className="flex items-center lg:ml-4">
+    <Link to="/dashboard" className="flex items-center lg:ml-4">
       <img src={logo} alt="logo" className="mr-3 w-7 h-7" />
       <span className="font-bold">SMSWithoutBorders</span>
     </Link>
