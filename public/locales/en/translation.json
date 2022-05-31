@@ -362,7 +362,7 @@
     "general-error-title": "An error occured",
     "general-error-message": "An error occured please try again",
     "network-error": "An error occured, please check your network and try again",
-    "invalid-code": "Invalid code provided",
+    "invalid-code": "Invalid code provided, please try again",
     "invalid-number": "Invalid number provided",
     "invalid-password": "Invalid password provided",
     "invalid-login": "Forbidden, account is unauthorized. \n check your phonenumber and password",

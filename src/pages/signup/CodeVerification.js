@@ -18,6 +18,7 @@ import {
   Input,
   FormGroup,
 } from "components";
+import Error from "../Error";
 
 const CodeVerification = () => {
   const { t } = useTranslation();
@@ -28,11 +29,7 @@ const CodeVerification = () => {
 
   const [
     validateOTPCode,
-    {
-      isLoading: OTPValidating,
-      isSuccess: OTPValidated,
-      isError: OTPValidationError,
-    },
+    { isLoading: OTPValidating, isSuccess: OTPValidated },
   ] = useValidateOTPCodeMutation();
 
   const [
@@ -162,39 +159,43 @@ const CodeVerification = () => {
   // if error while requesting OTP code
   if (OTPRequestError) {
     return (
-      <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>{t("error-messages.general-error-title")}</h2>
-        <p className="">{t("code-verification.error-messages.otp-request")}</p>
-        <Button onClick={() => resendOTPCode()}>{t("labels.try-again")}</Button>
-      </div>
-    );
-  }
-  // if error while validating OTP Code
-  else if (OTPValidationError) {
-    return (
-      <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>{t("error-messages.general-error-title")}</h2>
-        <p className="">
-          {t("code-verification.error-messages.otp-validation")}
-        </p>
-        <Button onClick={() => handleCodeVerification()}>
-          {t("labels.try-again")}
-        </Button>
-      </div>
+      <PageAnimationWrapper>
+        <div className="max-w-screen-xl min-h-screen p-8 mx-auto prose text-gray-900">
+          <div className="mx-auto my-32">
+            <h1 className="font-bold">
+              {t("error-messages.general-error-title")}
+            </h1>
+            <p className="text-xl">
+              {t("code-verification.error-messages.otp-request")}
+            </p>
+            {isInitialized && expired && (
+              <Button
+                outline
+                className="order-1 mt-3 md:mt-0 md:order-none"
+                onClick={() => resendOTPCode()}
+              >
+                {t("code-verification.resend-button-text")}
+              </Button>
+            )}
+
+            {isInitialized && !expired && (
+              <p className="order-1 py-2 mt-3 md:mt-0 md:order-none">
+                <span>{t("code-verification.resend-label")} : </span>
+                <span className="font-bold">{timer}</span>
+              </p>
+            )}
+          </div>
+        </div>
+      </PageAnimationWrapper>
     );
   }
   // if error while verifying signup
   else if (signUpVerificationError) {
     return (
-      <div className="max-w-screen-xl p-8 mx-auto my-24 prose">
-        <h2>{t("error-messages.general-error-title")}</h2>
-        <p className="">
-          {t("signup.code-verification.alerts.registration-error")}
-        </p>
-        <Button onClick={() => handleSignUpVerification()}>
-          {t("labels.try-again")}
-        </Button>
-      </div>
+      <Error
+        message={t("signup.code-verification.alerts.registration-error")}
+        callBack={handleSignUpVerification}
+      />
     );
   } else {
     return (
