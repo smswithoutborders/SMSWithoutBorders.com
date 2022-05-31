@@ -38,7 +38,6 @@ const Login = () => {
       .required(t("forms.phone-number.validation-errors.required")),
     password: yup
       .string()
-      .min(8, t("forms.password.validation-errors.min"))
       .required(t("forms.password.validation-errors.required")),
   };
 
