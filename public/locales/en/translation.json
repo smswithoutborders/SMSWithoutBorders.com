@@ -406,6 +406,11 @@
         "match": "passwords do not match"
       }
     },
+    "terms": {
+      "validation-errors": {
+        "required": "Please review and accept terms"
+      }
+    },
     "recaptcha": {
       "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
     }

@@ -53,7 +53,8 @@ const Signup = () => {
       ),
     acceptTerms: yup
       .bool()
-      .oneOf([true], t("signup.form.license-terms.validation-error")),
+      .oneOf([true], t("signup.form.license-terms.validation-error"))
+      .required(t("forms.terms.validation-errors.required")),
   };
 
   if (ENABLE_RECAPTCHA) {
