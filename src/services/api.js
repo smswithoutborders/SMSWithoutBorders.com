@@ -93,16 +93,14 @@ export const API = createApi({
         code,
         platform,
         protocol,
-        oauth_token,
-        oauth_verifier,
+        code_verifier,
         phone_number,
       }) => ({
         url: `/users/${uid}/platforms/${platform}/protocols/${protocol}`,
         method: "PUT",
         body: {
           code,
-          oauth_token,
-          oauth_verifier,
+          code_verifier,
           phone_number,
         },
       }),

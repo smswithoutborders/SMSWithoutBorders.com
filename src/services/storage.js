@@ -13,6 +13,19 @@ export const clearCache = () => {
   sessionStorage.removeItem("SWOBCACHE");
 };
 
+// caching temporal data for immediate use
+export const setLocalCache = (state) => {
+  localStorage.setItem("SWOBLOCALCACHE", JSON.stringify(state));
+};
+
+export const getLocalCache = () => {
+  return JSON.parse(localStorage.getItem("SWOBLOCALCACHE"));
+};
+
+export const clearLocalCache = () => {
+  localStorage.removeItem("SWOBLOCALCACHE");
+};
+
 /*
  used for persisting state with sessionStorage
  https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-storage

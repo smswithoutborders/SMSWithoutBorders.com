@@ -343,6 +343,8 @@
     "error-message": "Sorry, this page is unavailable at the moment"
   },
   "alert-messages": {
+    "close": "Please close this window and go back",
+    "redirect": "You will be redirected shortly",
     "loading": "processing please wait",
     "alert-placeholder": "Alert message here",
     "code-verified": "Code Verified Successfully",

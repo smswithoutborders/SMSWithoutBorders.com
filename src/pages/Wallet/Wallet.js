@@ -2,8 +2,8 @@ import React, { useState, Fragment, useEffect } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { IoMdSync } from "react-icons/io";
-import { useSelector } from "react-redux";
-import { authSelector } from "features";
+import { useDispatch, useSelector } from "react-redux";
+import { authSelector, saveAuth } from "features";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
@@ -18,6 +18,7 @@ import {
   LinkButton,
 } from "components";
 import {
+  setLocalCache,
   useGetPlatformsQuery,
   useStoreTokenMutation,
   useTokenRevokeMutation,
@@ -32,8 +33,10 @@ const Wallet = () => {
   const [showRevokeDialog, setOpenRevokeDialog] = useState(false);
   const [password, setPassword] = useState("");
   const [onboarding, setOnboarding] = useState(false);
+  const [isTwitter, setIsTwitter] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const auth = useSelector(authSelector);
   // fetch platforms with rtk query
@@ -45,6 +48,8 @@ const Wallet = () => {
     refetch,
   } = useGetPlatformsQuery(auth, {
     refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
   });
   const { unSavedPlatforms = [], savedPlatforms = [] } = data;
 
@@ -76,9 +81,25 @@ const Wallet = () => {
     };
 
     try {
-      const response = await storeToken(data).unwrap();
+      const { code_verifier, url } = await storeToken(data).unwrap();
       //open authorization window
-      window.open(response.url, "_self");
+      if (name !== "twitter") {
+        window.open(url, "_self");
+      } else {
+        dispatch(
+          saveAuth({
+            ...auth,
+            code_verifier,
+          })
+        );
+        setLocalCache({
+          ...auth,
+          code_verifier,
+        });
+
+        setIsTwitter(true);
+        window.open(url, "SWOB-TWITTER-ACCESS");
+      }
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
@@ -162,7 +183,13 @@ const Wallet = () => {
     when making requests show loading indicator
     Also maintain after request is successfull to update background state
   */
-  if (isLoading || isFetching || loadingB || successB || loadingC) {
+  if (
+    isLoading ||
+    isFetching ||
+    loadingB ||
+    (successB && !isTwitter) ||
+    loadingC
+  ) {
     return <Loader />;
   }
 
