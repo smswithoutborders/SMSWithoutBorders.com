@@ -34,16 +34,15 @@ const WalletRedirect = () => {
   // const cAuth = getLocalCache();
 
   const cAuth = useMemo(() => getLocalCache(), []);
+  
   const handleVerification = useCallback(async () => {
     // build request data
     let data = {
-      uid: cAuth.uid ? cAuth.uid : auth.uid,
+      uid: cAuth ? cAuth.uid : auth.uid,
       code: code,
       platform: platform,
       protocol: protocol,
-      code_verifier: cAuth.code_verifier
-        ? cAuth.code_verifier
-        : auth.code_verifier,
+      code_verifier: cAuth ? cAuth.code_verifier : auth.code_verifier,
     };
 
     try {
@@ -53,7 +52,7 @@ const WalletRedirect = () => {
       if (platform !== "twitter") {
         navigate("/dashboard/wallet", {
           replace: true,
-          state: { uid: cAuth.uid ? cAuth.uid : auth.uid },
+          state: { uid: cAuth ? cAuth.uid : auth.uid },
         });
       } else if (isMobile && platform === "twitter") {
         setOpen(true);
