@@ -56,6 +56,10 @@ New  pages, components and features can be created in their respective folders a
 
 All routes are defined in App.js and any new routes can be added there.
 
+## Testing
+
+Some parts of the project are inter-connected. Whenever a component in this section gets updated, it is advised to test all other components related to it. Please see the [testing guide](TESTING.md)
+
 ## Reporting Issues
 
 New issues can be opened on Github. Please check to make sure it has not been reported before.
