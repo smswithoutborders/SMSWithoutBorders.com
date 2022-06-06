@@ -30,6 +30,8 @@ import {
   PasswordReset,
 } from "pages";
 
+import BetaTesting from "pages/BetaTesting";
+
 // toast notifications: https://uxdesign.cc/toasts-or-snack-bars-design-organic-system-notifications-1236f2883023
 
 const App = () => {
@@ -49,6 +51,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Website />}>
               <Route index element={<Landing />} />
+              <Route path="beta" element={<BetaTesting />} />
               <Route path="login" element={<Login />} />
               <Route path="downloads" element={<Downloads />} />
               <Route path="privacy-policy" element={<Privacy />} />
