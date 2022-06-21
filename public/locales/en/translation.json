@@ -353,6 +353,7 @@
     "password-changed": "Password changed successfully",
     "login-successful": "Login successful",
     "logout-successful": "Logout successful",
+    "coming-soon": "Coming soon ...",
     "recaptcha": {
       "loading": "loading reCAPTCHA  please wait",
       "disabled": "reCAPTCHA has been disabled, you can re-enable it in your project's configuration",

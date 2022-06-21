@@ -3,7 +3,6 @@ import { PageAnimationWrapper } from "components";
 import { useTranslation } from "react-i18next";
 import { GoMarkGithub } from "react-icons/go";
 import PlayStoreLogo from "images/playstore.svg";
-import { FiDisc } from "react-icons/fi";
 
 const Downloads = () => {
   const { t } = useTranslation();
@@ -43,23 +42,7 @@ const Downloads = () => {
           <h2>{t("downloads.section-2.heading")}</h2>
           <p>{t("downloads.section-2.details")}</p>
 
-          <a
-            className="flex flex-row items-center max-w-md my-2 text-blue-800"
-            download
-            href="https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-desktop-amd64.iso"
-          >
-            <FiDisc size={24} />
-            <span className="ml-2">ubuntu-20.04.4-desktop-amd64.iso</span>
-          </a>
-
-          <a
-            className="flex flex-row items-center max-w-md my-2 text-blue-800"
-            download
-            href="https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-desktop-amd64.iso"
-          >
-            <FiDisc size={24} />
-            <span className="ml-2">ubuntu-20.04.4-desktop-amd64.iso</span>
-          </a>
+         <p className="font-bold">{t("alert-messages.coming-soon")}</p>
         </div>
       </div>
     </PageAnimationWrapper>
