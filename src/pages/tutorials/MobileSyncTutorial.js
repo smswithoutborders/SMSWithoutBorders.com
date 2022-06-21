@@ -19,14 +19,14 @@ const MobileSyncTutorial = () => {
   }
 
   function handleChange(nextStepIndex) {
-    if (nextStepIndex === 3) {
+    if (nextStepIndex === 2) {
       dispatch(
         updateSyncTutorial({
           showButton: true,
         })
       );
       stepsRef.current.updateStepElement(nextStepIndex);
-    } else if (nextStepIndex === 5) {
+    } else if (nextStepIndex === 4) {
       dispatch(
         updateSyncTutorial({
           showButton: false,
@@ -45,12 +45,6 @@ const MobileSyncTutorial = () => {
           <p>This tutorial will help you get started</p>
         </div>
       ),
-    },
-    {
-      title: "Instructions",
-      element: ".tutorial-instructions",
-      intro: "Please read through these instructions to understand better",
-      position: "top",
     },
     {
       title: "Get started",
