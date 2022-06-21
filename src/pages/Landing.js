@@ -55,7 +55,7 @@ const Landing = () => {
         </div>
       </div>
 
-      <div className="bg-white mb-14">
+      <div className="bg-white">
         <div
           id="how-it-works"
           className="max-w-screen-xl mx-auto prose bg-white scroll-mt-8"
@@ -175,7 +175,7 @@ const Landing = () => {
       </div>
 
       <div className="w-full py-10 bg-white">
-        <div className="max-w-screen-xl p-8 mx-auto -mt-20 prose bg-white lg:py-16 rounded-t-3xl">
+        <div className="max-w-screen-xl p-8 mx-auto prose bg-white lg:py-16">
           <h2 className="text-3xl font-black text-center">
             {t("landing.section-4.heading")}
           </h2>
