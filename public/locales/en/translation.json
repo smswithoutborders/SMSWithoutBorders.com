@@ -1,0 +1,421 @@
+{
+  "app-name": "SMSWithoutBorders",
+  "menu": {
+    "get-started": "Get Started",
+    "home": "Home",
+    "privacy": "Privacy",
+    "blog": "Blog",
+    "contact": "Contact Us",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "footer-blog": "SWOB Blog",
+    "wallet": "Store Accounts",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "sync": "Sync",
+    "logout": "Logout",
+    "downloads": "Downloads",
+    "developers": "Developers"
+  },
+  "labels": {
+    "sync": "sync",
+    "download": "Download",
+    "get-started": "Get Started",
+    "optional": "optional",
+    "strong": "strong",
+    "good": "good",
+    "average": "average",
+    "weak": "weak",
+    "very-weak": "very weak",
+    "back": "back",
+    "retry": "retry",
+    "continue": "continue",
+    "try-again": "try again",
+    "password-change": "change password",
+    "tutorial": "Tutorial",
+    "learn-more": "learn more",
+    "help": "help",
+    "open-app": "Open App"
+  },
+  "landing": {
+    "section-1": {
+      "heading": "Stay Connected",
+      "details": "In this age of communication, keep in touch with your contacts across the internet without access to an active internet connection. Store your access to your favourite communications platforms while online, use them while offline.",
+      "cta-button-text": "Get SWOB",
+      "image-caption": "SMSwithoutBorders App"
+    },
+    "section-2": {
+      "heading": "How it works",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
+      "paragraph-1": "We offer a pro-active approach to internet censorship. By setting up your account while you have an internet connection, you can continue to communicate later using SMS when your no longer have internet access",
+      "paragraph-2": "Our SMS gateways are freely available. Learn how to set up yours below",
+      "tutorial-1": "Learn how to setup your account and app",
+      "tutorial-2": "Learn how to setup gateway clients",
+      "image-caption": "How SMSWithoutBorders works"
+    },
+    "section-3": {
+      "heading": "Getting Started with SWOB",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
+      "steps": {
+        "1": {
+          "heading": "Signup for an account",
+          "details": "Register for an SMSWithoutBorders account with a valid phone number, thats it. All other details are optional"
+        },
+        "2": {
+          "heading": "Connect Accounts",
+          "details": "Securely Link your accounts on platforms we support like Gmail, twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
+        },
+        "3": {
+          "heading": "Synchronize Mobile App",
+          "details": "Synchronize your linked account with the SMSWithoutBorders mobile app. This process ensures your can communicate begin securely over SMS. The app will generate unique keys for obfuscating your messages."
+        },
+        "4": {
+          "heading": "Setup Gateways",
+          "details": "SMSWithoutBorders relies on gateways to ensure communication. We maintain some but you can also setup your own. By doing so, you will be helping other users on the network communicate through your gateway. Gateway owners can also use their gateways for bulk messaging."
+        }
+      },
+      "tutorial-1": "Learn how to setup your your account and app",
+      "tutorial-2": "Learn how to setup gateway clients",
+      "image-caption": "How SMSWithoutBorders works"
+    },
+    "section-4": {
+      "heading": "Why use SWOB?",
+      "steps": {
+        "1": {
+          "heading": "Accessibility",
+          "details": "SWOB’s mobile app allows users to have offline communication wherever they are. With as simple as having an SMS message smartphone you can maintain communications with your online platforms"
+        },
+        "2": {
+          "heading": "Security",
+          "details": "SWOB transmits messages in securely encrypted formats. This secures every communication from being accessed by intermediate parties while in transit."
+        },
+        "3": {
+          "heading": "Open source",
+          "details": "Every component of SWOB is open sourced! From the mobile app to the routing mechanisms we use to get your SMS messages to reach your intended platforms"
+        },
+        "4": {
+          "heading": "Decentralized",
+          "details": "SWOB is built to work in decentralized models. Anyone can host a SWOB server. It’s as easy as understanding how to use it"
+        }
+      }
+    }
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "details": "Using SWOB is as easy as authenticating your credentials",
+    "email": "Email",
+    "website": "Website",
+    "IRC": "IRC"
+  },
+  "downloads": {
+    "heading": "Downloads",
+    "details": "Stay Connected with our mobile apps and other resources",
+    "section-1": {
+      "heading": "Mobile Apps",
+      "details": "Install applications for Android"
+    },
+    "section-2": {
+      "heading": "Operating Systems",
+      "details": "Custom gateway client OS images for raspberry pi"
+    }
+  },
+  "login": {
+    "page-title": "Account Login",
+    "cta-button-text": "login",
+    "forgot-password": "Forgot Password",
+    "account-status": "Don't have an account?",
+    "signup-link": "Sign Up"
+  },
+  "signup": {
+    "page-title": "Sign Up",
+    "form": {
+      "alias": {
+        "label": "Alias",
+        "helper-text": "Choose a name for this account (could be anything)",
+        "placeholder": "Jane Doe"
+      },
+      "license-terms": {
+        "label": "I agree to abide by SMSWithoutBorders",
+        "policy-link": "privacy policy",
+        "validation-error": "Please review and accept terms and conditions to proceed"
+      },
+      "cta-button-text": "sign up"
+    },
+    "account-status": "Already have an account?",
+    "login-link": "Sign In",
+
+    "code-verification": {
+      "alerts": {
+        "account-created": "your account has been created, please login",
+        "registration-error": "Sorry we could not complete your registration. If error persists, please contact support"
+      }
+    }
+  },
+  "wallet": {
+    "page-title": "Store Accounts",
+    "heading": "Store Accounts",
+    "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline",
+    "labels": {
+      "description": "Description"
+    },
+    "section-1": {
+      "heading": "Available Platforms",
+      "cta-button-text": "store"
+    },
+    "section-2": {
+      "heading": "Saved Platforms",
+      "cta-button-text": "revoke"
+    },
+    "revoke-dialog": {
+      "heading": "Revoke token",
+      "details": "This will permanently remove this token from your account and cannot be reversed. Enter your password to Confirm",
+      "input-placeholder": "password",
+      "cta-button-text": "continue",
+      "cancel-button-text": "cancel"
+    },
+    "alerts": {
+      "load-error": "Sorry we could not load platforms. If error persists, please contact support",
+      "no-available-platforms": "No available platforms",
+      "no-saved-platforms": "No saved platforms",
+      "platform-deleted": "Token deleted successfully",
+      "platform-stored": "Platform stored successfully"
+    }
+  },
+  "telegram": {
+    "phone-verification": {
+      "page-title": "Store Telegram Access",
+      "heading": "Telegram",
+      "details": "Please fill in your phone number to begin",
+      "logo-alt-text": "telegram logo",
+      "alerts": {
+        "code-sent": "A verification code has been sent to your phone. Check code in your sms or email inbox",
+        "authorization-error": "Sorry, you are not authorized to make this request"
+      }
+    },
+    "code-verification": {
+      "page-title": "Telegram Code Verification",
+      "alerts": {
+        "no-account": "You do not have a telegram account, please fill the form to create one"
+      }
+    },
+    "registration": {
+      "page-title": "Telegram Registration",
+      "heading": "Telegram Registration",
+      "details": "Create a new telegram account",
+      "form": {
+        "first-name": {
+          "label": "First Name",
+          "placeholder": "Jane",
+          "validation-errors": "Please enter your first name"
+        },
+        "last-name": {
+          "label": "Last Name",
+          "placeholder": "Doe",
+          "validation-errors": "Please enter your last name"
+        },
+        "cta-button-text": "create-account"
+      }
+    }
+  },
+  "code-verification": {
+    "page-title": "Verify your account",
+    "heading": "Verification",
+    "paragraph-1": "A verification code has been sent to your phone. Please enter it below. This process confirms the number provided is active and can be used for communication when the time comes.",
+    "paragraph-2": "We also require you to provide the code sent to you by SMS as a means of guaranteeing you have the necessary (own) rights to the required phone number. This will help us prevent actors from using non consented phone numbers to create accounts - preventing the owners from further doing so",
+    "form": {
+      "code": {
+        "placeholder": "SMS Verification Code"
+      }
+    },
+    "resend-label": "Resend in",
+    "resend-button-text": "resend code",
+    "error-messages": {
+      "otp-request": "Sorry we could not verify your phone number. If error persists, please contact support",
+      "otp-validation": "Sorry we could not verify your code. If error persists, please contact support"
+    }
+  },
+  "sync": {
+    "page-title": "Synchronize your account",
+    "heading": "Synchronize Accounts",
+    "section-1": {
+      "details": "Please click on the link below to store tokens",
+      "summary": {
+        "caption": "learn more",
+        "details": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet."
+      },
+      "cta-button-text": "Store Access Now"
+    },
+    "section-2": {
+      "paragraph-1": "This lets you use the SW/OB secure gateway for all messages",
+      "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
+      "paragraph-3": "Please follow these steps to sychronize your saved access with SMSwithoutborders mobile app.",
+      "sync-steps": {
+        "1": "Open SMSWithoutBorders app on your phone",
+        "2": "Tap the Synchronize button",
+        "3": "Point your phone to this screen to capture the code"
+      },
+      "status": {
+        "heading": "Status",
+        "connected": "connected",
+        "disconnected": "disconnected",
+        "complete": "complete",
+        "scanned": "scanned",
+        "loading": "loading"
+      },
+      "cta-button-text": "sync"
+    },
+    "alerts": {
+      "sync-started": "Sync started",
+      "sync-complete": "Sync Complete",
+      "sync-scanned": "Code Scanned successfully",
+      "no-platforms": "Sorry it seems you havent stored any tokens",
+      "sync-error": "Sorry an error occured while synchronizing, Please try again",
+      "sync-closed": "Sync session closed. please click the sync button to start again"
+    }
+  },
+  "dashboard": {
+    "page-title": "Dashboard",
+    "greeting-1": "Hello!",
+    "greeting-2": "Welcome",
+    "join-date": "Join Date",
+    "last-login": "Last Login",
+    "alerts": {
+      "load-error": "Sorry we could not locate your metrics. If error persists, please contact support"
+    }
+  },
+  "settings": {
+    "page-title": "Settings",
+    "heading": "Settings",
+    "details": "Manage your account",
+    "paragraph": "Please select a setting from the menu",
+    "menu": {
+      "password-change": "Password Change",
+      "account-deletion": "Delete Account"
+    }
+  },
+  "password-change": {
+    "page-title": "Password Change",
+    "heading": "Password Change",
+    "details": "Set a new password for your account",
+    "alerts": {
+      "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out"
+    }
+  },
+  "account-deletion": {
+    "page-title": "Account Deletion",
+    "heading": "Delete Account",
+    "details": "Set a new password for your account",
+    "confirmation": {
+      "text": "IConfirmThisAction",
+      "validation-error": "Please enter {{confirmation}} and your password to proceed"
+    },
+    "paragraph": {
+      "part-1": "Please enter",
+      "part-2": "and your password to proceed"
+    },
+    "form": {
+      "confirmation": {
+        "label": "Confirmation",
+        "placeholder": "enter confirmation",
+        "helper-text": "Enter"
+      }
+    },
+    "alerts": {
+      "warning": "This action will delete all currently saved tokens in your wallet and you will be logged out",
+      "account-deleted": "Your account has been deleted. We are sad to see you go",
+      "invalid-password": "Forbidden, password is invalid"
+    }
+  },
+  "password-recovery": {
+    "verification": {
+      "page-title": "Recover your password",
+      "heading": "Password Recovery",
+      "details": "Please fill in your phone number to begin"
+    },
+    "recovery": {
+      "page-title": "Password Recovery",
+      "heading": "Password Recovery",
+      "details": "Set a new password for your account"
+    }
+  },
+  "404-page": {
+    "page-tite": "404, page unavailable",
+    "error-message": "Sorry, this page is unavailable at the moment"
+  },
+  "alert-messages": {
+    "close": "Please close this window and go back",
+    "redirect": "You will be redirected shortly",
+    "loading": "processing please wait",
+    "alert-placeholder": "Alert message here",
+    "code-verified": "Code Verified Successfully",
+    "request-received": "Success your request has been received",
+    "phone-number-verified": "Phone number verified successully",
+    "password-changed": "Password changed successfully",
+    "login-successful": "Login successful",
+    "logout-successful": "Logout successful",
+    "coming-soon": "Coming soon ...",
+    "recaptcha": {
+      "loading": "loading reCAPTCHA  please wait",
+      "disabled": "reCAPTCHA has been disabled, you can re-enable it in your project's configuration",
+      "load-error": "reCAPTCHA failed to load. Please make sure you have an active network connection",
+      "connect-error": "reCAPTCHA failed to connect. Please check your network and reload this page"
+    }
+  },
+  "error-messages": {
+    "general-error-title": "An error occured",
+    "general-error-message": "An error occured please try again",
+    "network-error": "An error occured, please check your network and try again",
+    "invalid-code": "Invalid code provided, please try again",
+    "invalid-number": "Invalid number provided",
+    "invalid-password": "Invalid password provided",
+    "invalid-login": "Forbidden, account is unauthorized. \n check your phonenumber and password",
+    "400": "Something went wrong \n We are working to resolve this. Please try again",
+    "401": "Sorry you are not authorized to perform this action",
+    "403": "Forbidden. Sorry your session may have expired. Please logout and login again or reload this page",
+    "404": "Sorry the resource you requested is unavailable or not accessible",
+    "409": "There is a possible duplicate of this account please contact support",
+    "429": "Too many failed attempts please wait a while and try again",
+    "500": "A critical error occured. Please contact support"
+  },
+  "forms": {
+    "phone-number": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number",
+      "helper-text": "We will send a one time SMS to this number for confirmation",
+      "validation-errors": {
+        "required": "please enter a phone number",
+        "invalid": "please provide a valid phone number"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "labels": {
+        "current": "Current Password",
+        "new": "New Password"
+      },
+      "placeholder": "password",
+      "validation-errors": {
+        "min": "Password must be at least 8 characters",
+        "required": "Password is required",
+        "required-new": "Please enter new password"
+      }
+    },
+    "confirm-password": {
+      "label": "Confirm Password",
+      "placeholder": "retype password",
+      "validation-errors": {
+        "min": "Password must be at least 8 characters",
+        "required": "Please confirm your password",
+        "match": "passwords do not match"
+      }
+    },
+    "terms": {
+      "validation-errors": {
+        "required": "Please review and accept terms"
+      }
+    },
+    "recaptcha": {
+      "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
+    }
+  }
+}

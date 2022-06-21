@@ -1,36 +1,79 @@
 {
-  "name": "smswithoutborders_users",
+  "name": "smswithoutborders",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@hookform/resolvers": "^2.6.0",
-    "@tailwindcss/forms": "^0.3.2",
+    "@headlessui/react": "^1.6.4",
+    "@hookform/resolvers": "^2.8.5",
+    "@reduxjs/toolkit": "^1.7.1",
+    "@svgr/plugin-svgo": "^6.2.0",
+    "@svgr/webpack": "^6.2.1",
     "axios": "^0.21.1",
-    "evergreen-ui": "^5.1.2",
-    "framer-motion": "^4.1.13",
-    "qrcode.react": "^1.0.1",
+    "clsx": "^1.1.1",
+    "css-select": "^4.2.1",
+    "framer-motion": "^4.1.17",
+    "i18next": "^21.6.14",
+    "i18next-browser-languagedetector": "^6.1.3",
+    "i18next-http-backend": "^1.4.0",
+    "intro.js": "^5.1.0",
+    "intro.js-react": "^0.6.0",
+    "postcss": "^8.4.5",
+    "prop-types": "^15.8.1",
+    "qrious": "^4.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.9.0",
+    "react-hook-form": "^7.24.0",
+    "react-hot-toast": "^2.2.0",
+    "react-i18next": "^11.15.7",
     "react-icons": "^4.2.0",
-    "react-password-strength-bar": "^0.3.3",
+    "react-markdown": "^7.1.2",
     "react-phone-number-input": "^3.1.23",
-    "react-router-dom": "^5.2.0",
-    "rsuite": "^4.10.1",
-    "styled-components": "^5.3.0",
-    "yup": "^0.32.9"
-  },
-  "scripts": {
-    "start": "vite",
-    "build": "vite build"
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0",
+    "svgo": "^2.8.0",
+    "yup": "^0.32.11",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-refresh": "^1.3.6",
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.14",
-    "tailwindcss": "^2.2.8",
-    "twin.macro": "^2.7.0",
-    "vite": "^2.5.1",
-    "vite-plugin-babel-macros": "^1.0.5"
+    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "async": "^3.2.3",
+    "autoprefixer": "^10.4.2",
+    "jake": "^10.8.5",
+    "minimist": "^1.2.6",
+    "node-forge": "^1.3.1",
+    "styled-components": "^5.3.3",
+    "tailwindcss": "^3.0.15",
+    "twin.macro": "^2.8.2"
+  },
+  "overrides": {
+    "react-scripts": {
+      "@svgr/webpack": "^6.1.2",
+      "css-select": "^4.2.1",
+      "postcss": "^8.4.5",
+      "svgo": "^2.8.0"
+    }
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
