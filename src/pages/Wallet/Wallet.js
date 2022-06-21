@@ -258,26 +258,22 @@ const Wallet = () => {
                             )}
                           />
                         </Disclosure.Button>
-                        <Disclosure.Panel className="p-4 mb-4 shadow">
-                          <div className="items-center justify-between md:flex">
-                            <div>
-                              <h4> {t("wallet.labels.description")}</h4>
-                              <p>{item.description}</p>
-                            </div>
-                            <Button
-                              onClick={() =>
-                                handleTokenStorage(
-                                  item.name,
-                                  item.initialization_url
-                                )
-                              }
-                            >
-                              <FiSave />
-                              <span className="ml-1">
-                                {t("wallet.section-1.cta-button-text")}
-                              </span>
-                            </Button>
-                          </div>
+                        <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
+                          <h3> {t("wallet.labels.description")}</h3>
+                          <p>{item.description}</p>
+                          <Button
+                            onClick={() =>
+                              handleTokenStorage(
+                                item.name,
+                                item.initialization_url
+                              )
+                            }
+                          >
+                            <FiSave />
+                            <span className="ml-1">
+                              {t("wallet.section-1.cta-button-text")}
+                            </span>
+                          </Button>
                         </Disclosure.Panel>
                       </Fragment>
                     )}
@@ -321,25 +317,21 @@ const Wallet = () => {
                             )}
                           />
                         </Disclosure.Button>
-                        <Disclosure.Panel className="p-4 mb-4 shadow">
-                          <div className="items-center justify-between md:flex">
-                            <div>
-                              <h4>{t("wallet.labels.description")}</h4>
-                              <p>{item.description}</p>
-                            </div>
-                            <Button
-                              danger
-                              onClick={() => {
-                                setRevokeURL(item.initialization_url);
-                                setOpenRevokeDialog(true);
-                              }}
-                            >
-                              <FiTrash2 />
-                              <span className="ml-1">
-                                {t("wallet.section-2.cta-button-text")}
-                              </span>
-                            </Button>
-                          </div>
+                        <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
+                          <h3>{t("wallet.labels.description")}</h3>
+                          <p>{item.description}</p>
+                          <Button
+                            danger
+                            onClick={() => {
+                              setRevokeURL(item.initialization_url);
+                              setOpenRevokeDialog(true);
+                            }}
+                          >
+                            <FiTrash2 />
+                            <span className="ml-1">
+                              {t("wallet.section-2.cta-button-text")}
+                            </span>
+                          </Button>
                         </Disclosure.Panel>
                       </Fragment>
                     )}
