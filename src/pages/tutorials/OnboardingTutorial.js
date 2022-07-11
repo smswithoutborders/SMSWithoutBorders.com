@@ -1,39 +1,40 @@
 import React from "react";
-import { Steps } from "intro.js-react";
 import PropTypes from "prop-types";
+import { Steps } from "intro.js-react";
 import { useDeviceDetection } from "hooks";
 import "styles/introjs-theme.css";
+import { useTranslation } from "react-i18next";
 
 const OnboardingTutorial = ({ start, stopFunc }) => {
+  const { t } = useTranslation();
   const isMobile = useDeviceDetection();
   const steps = [
     {
-      title: "Welcome",
       element: "onboarding",
+      title: t("tutorials.onboarding.steps.1.title"),
       intro: (
         <div className="prose">
-          <h3>learn how to store accounts</h3>
-          <p>This tutorial will help you get started</p>
+          <h3>{t("tutorials.onboarding.steps.1.heading")}</h3>
+          <p>{t("tutorials.onboarding.steps.1.details")}</p>
         </div>
       ),
     },
     {
-      title: "Available platforms",
       element: ".onboarding-step-1",
-      intro:
-        "Store access for available platforms by clicking on the store button under each platform",
+      title: t("tutorials.onboarding.steps.2.heading"),
+      intro: t("tutorials.onboarding.steps.2.details"),
     },
     {
-      title: "Synchronization",
       element: isMobile ? ".mobile-sync-button" : ".desktop-sync-button",
-      intro: "Synchronize with the mobile app to start communicating securely",
+      title: t("tutorials.onboarding.steps.3.title"),
+      intro: t("tutorials.onboarding.steps.3.details"),
     },
     {
-      title: "Get Help",
       element: isMobile
         ? ".mobile-tutorial-button"
         : ".desktop-tutorial-button",
-      intro: "You can view this tutorial again by clicking here",
+      title: t("tutorials.onboarding.steps.4.title"),
+      intro: t("tutorials.onboarding.steps.4.details"),
     },
   ];
 
