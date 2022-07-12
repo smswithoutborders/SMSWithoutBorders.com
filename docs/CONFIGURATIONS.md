@@ -19,9 +19,11 @@ cp env.example .env.production.local
 
 ```
 
-The .env file(s) contains all modifiable variables for each environment. Below are the defaults
+**.env.development.local** is used in development environments and **.env.production.local** is used when creating production builds.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), which specifies variable naming conventions
+
+Below are the defaults
 
 * PORT -> development port
 * REACT_APP_API_URL ->  Backend API URL
@@ -52,18 +54,20 @@ You will also see any lint errors in the console.
 
 ## Create a production build
 
+Create an optimized production build that can be hosted on servers. This step uses the variables in **.env.production.local**
+
 ```bash
 yarn build
 ```
 
-Builds the app for production. Check the `build` folder for deployable files once complete.
+Check the `build` folder for deployable files once complete.
 
 ## Deployment
 
 For a Linux/Ubuntu server running apache2 web server, follow these steps to deploy the site
 
 * Enable rewrite module
-  
+
 ```bash
 sudo a2enmod rewrite
 ```
