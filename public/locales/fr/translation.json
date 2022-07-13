@@ -1,0 +1,20 @@
+{
+  "app-name": "SMSWithoutBorders",
+  "menu": {
+    "get-started": "Commencez",
+    "home": "Accueil",
+    "privacy": "Confidentialité",
+    "blog": "Blog",
+    "contact": "Nous contacter",
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "footer-blog": "Blog SWOB",
+    "wallet": "Store Accounts",
+    "settings": "Paramètres",
+    "dashboard": "Tableau de bord",
+    "sync": "Synchronisation",
+    "logout": "Déconnexion",
+    "downloads": "Téléchargements",
+    "developers": "Développeurs"
+  }
+}

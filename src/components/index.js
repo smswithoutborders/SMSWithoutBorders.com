@@ -17,3 +17,4 @@ export * from "./ReCAPTCHA";
 export * from "./ScrollToTop";
 export * from "./Buttons";
 export * from "./Announcement";
+export * from "./LanguageSwitcher";
