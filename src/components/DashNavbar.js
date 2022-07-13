@@ -14,6 +14,7 @@ import { Loader } from "./Loader";
 import { DashNavLink } from "./NavLinks";
 import { NavButton } from "./Buttons";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import toast from "react-hot-toast";
 
 const UserActions = tw.div`flex items-center mt-20 justify-between bg-gray-100 lg:(bg-white mt-0)`;
@@ -78,6 +79,7 @@ export const DashNavbar = () => {
 
   const ActionLinks = () => (
     <UserActions key={2}>
+      <LanguageSwitcher />
       {metrics?.name && (
         <div className="flex items-center px-4 lg:px-0">
           <div className="flex items-center justify-center mr-2 bg-blue-800 rounded-full w-9 h-9">

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { NavLink, MobileNavLink, ExternalLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import clsx from "clsx";
 
 export const MainNavbar = () => {
@@ -60,6 +61,7 @@ export const MainNavbar = () => {
 
   const ActionLinks = () => (
     <div className="lg:flex lg:items-center">
+      <LanguageSwitcher />
       <ExternalLink
         key="Github"
         href="https://github.com/orgs/smswithoutborders/"
@@ -74,7 +76,7 @@ export const MainNavbar = () => {
       <NavLink
         key="sign-up"
         to="/sign-up"
-        className="text-white bg-blue-800 lg:px-6 lg:py-2 lg:mr-4 lg:rounded-3xl"
+        className="text-white bg-blue-800 border-none lg:px-6 lg:py-2 lg:mr-4 lg:rounded-3xl"
       >
         <span className="ml-2">{t("menu.signup")}</span>
       </NavLink>
@@ -150,6 +152,7 @@ export const MainNavbar = () => {
       >
         <span className="ml-2">{t("menu.signup")}</span>
       </MobileNavLink>
+      <LanguageSwitcher />
     </div>
   );
 

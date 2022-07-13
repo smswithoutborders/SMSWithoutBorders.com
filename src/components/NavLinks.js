@@ -12,10 +12,10 @@ export const NavLink = forwardRef(({ scrolled, className, ...props }, ref) => {
           "flex items-center p-5 outline-none appearance-none",
           isActive &&
             !scrolled &&
-            "font-medium border-b-2 border-white text-white",
+            "border-b-2 border-white text-white",
           isActive &&
             scrolled &&
-            "font-medium border-b-2 border-blue-800 text-blue-800",
+            "border-b-2 border-blue-800 text-blue-800",
           className
         )
       }
@@ -31,7 +31,7 @@ export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
       className={({ isActive }) =>
         clsx(
           "flex items-center p-5 outline-none appearance-none",
-          isActive && "font-medium border-b-2 border-blue-800 text-blue-800",
+          isActive && "border-b-2 border-blue-800 text-blue-800",
           className
         )
       }
@@ -48,7 +48,7 @@ export const MobileNavLink = forwardRef(
         className={({ isActive }) =>
           clsx(
             "flex items-center p-5 outline-none appearance-none",
-            isActive && "font-medium border-b-2 border-blue-800 text-blue-800",
+            isActive && "border-b-2 border-blue-800 text-blue-800",
             className
           )
         }
@@ -64,7 +64,7 @@ export const ExternalLink = forwardRef(
         ref={ref}
         {...props}
         className={clsx(
-          "flex outline-none font-medium p-5 items-center appearance-none active:font-bold",
+          "flex outline-none p-5 items-center appearance-none active:font-bold",
           className
         )}
       >
