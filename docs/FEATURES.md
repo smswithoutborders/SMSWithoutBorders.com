@@ -85,3 +85,7 @@ The sync page uses a background socket connection to enable handshakes. The inti
  "mobile_url": "",
 }
 ```
+
+## Internationaliztion(i18n)
+
+We now support two languages Enlish and French. Users can select their prefered language by using toggles on the navbars and footers

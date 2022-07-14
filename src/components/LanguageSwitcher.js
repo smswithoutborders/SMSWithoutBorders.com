@@ -4,13 +4,13 @@ import { FiChevronDown } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 
 const languages = [
-  { name: "English", key: "en" },
-  { name: "Français", key: "fr" },
+  { name: "EN", key: "en" },
+  { name: "FR", key: "fr" },
 ];
 
 export const LanguageSwitcher = ({ bordered }) => {
   const { i18n } = useTranslation();
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState(languages[0]);
 
   const changeLanguage = useCallback(
     (lang) => {
@@ -32,14 +32,12 @@ export const LanguageSwitcher = ({ bordered }) => {
       onChange={(lang) => changeLanguage(lang)}
     >
       <div
-        className={`relative mt-1 ${
-          bordered && "md:border md:border-gray-700"
-        }`}
+        className={`relative  ${bordered && "md:border md:border-gray-600"}`}
       >
-        <Listbox.Button className="flex items-center justify-between w-full p-4 space-x-2 rounded-lg cursor-default focus:outline-none">
+        <Listbox.Button className="flex items-center justify-between w-full p-4 space-x-1 rounded-lg cursor-default focus:outline-none">
           {({ open }) => (
             <Fragment>
-              <span className="block font-normal">{selected.name}</span>
+              <span className="block font-normal">{selected?.name}</span>
               <FiChevronDown
                 size={16}
                 className={`pointer-events-none ${open && "rotate-180"}`}
@@ -54,16 +52,16 @@ export const LanguageSwitcher = ({ bordered }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute w-full overflow-auto bg-white divide-y rounded-md shadow-lg focus:outline-none">
+          <Listbox.Options className="absolute w-full overflow-auto bg-white border divide-y rounded-md shadow-xl focus:outline-none">
             {languages.map((lang, id) => (
               <Listbox.Option
                 key={id}
                 value={lang}
-                className="relative px-4 py-3 cursor-default select-none"
+                className="relative cursor-default select-none"
               >
                 {({ selected }) => (
                   <span
-                    className={`block ${
+                    className={`block px-4 py-2 ${
                       selected ? "text-blue-800" : "text-gray-900"
                     }`}
                   >
