@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Last updated: August 5th, 2021
+Last updated: July 14th, 2022
 
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
 
@@ -48,33 +48,8 @@ For the purposes of this Privacy Policy:
 
 For the purposes of registering for this service and subsequently sending and receiving SMS via this service, we will require a phone number. We are not strict on the ownership of the number you choose to use, but we will send an authentication message to the number so as to determine you have the authority to use that number.
 
-For the purposes of providing you information on local Gateways for sending SMS to, we will require the country of the phone number. We do not collect data on the country of the user
+For the purposes of providing you information on local Gateways for sending SMS to, we will require the country of the phone number. We do not collect data on the country of the user.
 
-For the purposes of sending you emails by SMS we store your email address in a hashed format.
-
-Data we require from you:
-
-* Phone number
-* Country of Phone number
-
-### Usage Data
-
-Usage data is collected automatically when using this service.
-
-Usage Data is limited to:
-
-* Country of Gateway requested
-* Timestamps
-* Requested service
-
-Our purpose for collecting this meta data would be to produce meaningful summary data for the general public.
-
-Without you granting access to receive and send SMS from Us, we will not send any SMS either for Advertisement or information. The only SMS we will be sending is in cases of:
-
-* Registration for the platform: This entails sending an authentication code to the used number
-* Recovery of account: This entails sending and authentication code to the used number
-
-In cases of account recovery, all stored data will be deleted and you are expected to redo the process of storing them as you see fit.
 
 ### Information from Third-Party Social Media Services
 
@@ -94,7 +69,7 @@ You can opt out of our service at will. This will trigger a complete deletion of
 
 ## Children's Privacy
 
-Our Service does not address anyone under the age of 13\. We do not knowingly collect personally identifiable information from anyone under the age of 13\. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.
+Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.
 
 If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.
 
