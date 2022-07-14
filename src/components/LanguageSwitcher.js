@@ -22,7 +22,7 @@ export const LanguageSwitcher = ({ bordered }) => {
 
   useEffect(() => {
     const initial = languages.find((lang) => lang.key === i18n.language);
-    setSelected(initial);
+    if (initial) setSelected(initial);
   }, [i18n]);
 
   return (

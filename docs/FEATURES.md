@@ -2,6 +2,10 @@
 
 This document contains all working features and assumes you have a development version of the project setup for testing.
 
+## Internationaliztion(i18n)
+
+We now support two languages Enlish and French. Users can select their prefered language by using toggles on the navbars and footers
+
 ## Sign Up
 
 Register for an SMSWithoutBorders account by filling the form on the [signup](http://localhost:18000/sign-up) page. This is a two step process involving two factor (2fa) authentication of the phone number provided. On successfull submission, you will be redirected to the [verification page](http://localhost:18000/sign-up/verify) to provide the authentication code. Once verified, your account will be created.
@@ -70,14 +74,19 @@ Authenticated users can access their [dashboard](http://localhost:18000/dashboar
 
 ## Rendering Markdown Files
 
-The [Privacy Policy](http://localhost:18000/privacy-policy) page is loaded from [privacy.md](privacy.md) as markdown into the website. Check [CONFIGURATIONS.md](CONFIGURATIONS.md) on how to link the file.
+The [Privacy Policy](http://localhost:18000/privacy-policy) page is loaded from the [privacy-policy](./privacy-policy/) folder as markdown into the website. Check [CONFIGURATIONS.md](CONFIGURATIONS.md) on how to setup the file path.
 
+The website then determines which file to load based on the currently selected locale.
 
-## Synchronization 
+```js
+ /path_to_privacy_policy_files/{locale}.md
+```
 
-Authenticated users can synchronize their accounts with the mobile app from the [Synchronization](https://localhost:18000/dashboard/sync) page. This process ensures users can communicate securely over sms through the app. 
+## Synchronization
 
-The sync page uses a background socket connection to enable handshakes. The intial request to obtain the connection url returns a JSON object with two keys 
+Authenticated users can synchronize their accounts with the mobile app from the [Synchronization](https://localhost:18000/dashboard/sync) page. This process ensures users can communicate securely over sms through the app.
+
+The sync page uses a background socket connection to enable handshakes. The intial request to obtain the connection url returns a JSON object with two keys
 
 ```JSON
 {
@@ -85,7 +94,3 @@ The sync page uses a background socket connection to enable handshakes. The inti
  "mobile_url": "",
 }
 ```
-
-## Internationaliztion(i18n)
-
-We now support two languages Enlish and French. Users can select their prefered language by using toggles on the navbars and footers

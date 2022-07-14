@@ -1,19 +1,21 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { PageAnimationWrapper, Loader } from "components";
-import { useGetDocsQuery } from "services";
+import { useGetPrivacyPolicyQuery } from "services";
 import { useTranslation } from "react-i18next";
 import Error from "./Error";
 
 const Privacy = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     data = "",
     isLoading,
     isFetching,
     isError,
     refetch,
-  } = useGetDocsQuery();
+  } = useGetPrivacyPolicyQuery(i18n.language, {
+    refetchOnMountOrArgChange: true,
+  });
 
   if (isLoading || isFetching) {
     return <Loader light />;

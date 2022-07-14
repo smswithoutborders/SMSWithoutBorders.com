@@ -30,12 +30,12 @@ Below are the defaults
 * REACT_APP_API_VERSION -> API version
 * REACT_APP_GATEWAY_SERVER ->  Gateway server url
 * REACT_APP_GATEWAY_SERVER_VERSION -> Gateway server version
-* REACT_APP_DOCS_URL -> Link to hosted privacy policy markdown file
 * REACT_APP_RECAPTCHA -> Enable or disable recaptcha, make sure this setting is also toggled on the API
 * REACT_APP_RECAPTCHA_SITE_KEY -> reCAPTCHAv2 site key obtained from [google](https://www.google.com/recaptcha/admin)
 * REACT_APP_RECAPTCHA_API_URL -> API script src from reCaptchav2 setup [documentation](https://developers.google.com/recaptcha/docs/display)
 * REACT_APP_TUTORIAL_URL -> Link to the getting started tutorial
 * REACT_APP_GATEWAY_TUTORIAL_URL -> Link to gateway client setup tutorial
+* REACT_APP_PRIVACY_POLICY_URL= Link to hosted  privacy policy markdown file(s)
 * HTTPS -> Enable or disable https
 * SSL_CRT_FILE -> Location of SSL CRT file
 * SSL_KEY_FILE -> Location of SSL Key file
