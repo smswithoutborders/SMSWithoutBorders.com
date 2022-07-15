@@ -2,6 +2,7 @@ import { isRejectedWithValue } from "@reduxjs/toolkit";
 import { resetStore } from "features";
 import { clearCache, clearPersistedState } from "services";
 import toast from "react-hot-toast";
+import i18n from "i18n";
 
 // middleware to check for user session expiry
 export const sessionExpiryChecker = (store) => (next) => (action) => {
@@ -25,9 +26,7 @@ export const RequestErrorHandler = (store) => (next) => (action) => {
   if (isRejectedWithValue(action)) {
     const { originalStatus } = action.payload;
     if (originalStatus === 404) {
-      toast.error(
-        "Sorry the resource you requested is unavailable or not accessible"
-      );
+      toast.error(i18n.t("error-messages.404"));
     }
   }
   return next(action);
