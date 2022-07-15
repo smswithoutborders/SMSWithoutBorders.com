@@ -21,7 +21,7 @@ const OnboardingTutorial = ({ start, stopFunc }) => {
     },
     {
       element: ".onboarding-step-1",
-      title: t("tutorials.onboarding.steps.2.heading"),
+      title: t("tutorials.onboarding.steps.2.title"),
       intro: t("tutorials.onboarding.steps.2.details"),
     },
     {
