@@ -3,7 +3,7 @@ import logo from "images/logo.png";
 import toast from "react-hot-toast";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { FiUserPlus } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -26,9 +26,10 @@ import {
 } from "components";
 
 const Signup = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   useTitle(t("signup.page-title"));
   const navigate = useNavigate();
+  const { lang } = useParams();
   const [signup, { isLoading, isSuccess }] = useSignupMutation();
 
   // check if recaptcha is enabled and conditionally add validation
@@ -80,12 +81,16 @@ const Signup = () => {
   });
 
   useEffect(() => {
+    // check locale
+    if (lang === "fr") {
+      i18n.changeLanguage("fr");
+    }
     const searchParams = new URLSearchParams(window.location.search);
     const redirectURL = searchParams.get("ari");
     if (redirectURL) {
       setCache({ redirectURL });
     }
-  }, []);
+  }, [i18n, lang]);
 
   // Sign up is a three step process with 2fa verification
   const handleSignUp = async (data) => {

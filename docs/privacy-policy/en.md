@@ -6,13 +6,13 @@ This Privacy Policy describes Our policies and procedures on the collection, use
 
 We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.
 
-# Interpretation and Definitions
+## Interpretation and Definitions
 
-## Interpretation
+### Interpretation
 
 The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
 
-## Definitions
+### Definitions
 
 For the purposes of this Privacy Policy:
 
@@ -40,18 +40,17 @@ For the purposes of this Privacy Policy:
 
 * **You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
-# Collecting and Using Your Personal Data
+## Collecting and Using Your Personal Data
 
-## Types of Data Collected
+### Types of Data Collected
 
-### Personal Data
+#### Personal Data
 
 For the purposes of registering for this service and subsequently sending and receiving SMS via this service, we will require a phone number. We are not strict on the ownership of the number you choose to use, but we will send an authentication message to the number so as to determine you have the authority to use that number.
 
 For the purposes of providing you information on local Gateways for sending SMS to, we will require the country of the phone number. We do not collect data on the country of the user.
 
-
-### Information from Third-Party Social Media Services
+#### Information from Third-Party Social Media Services
 
 For the purposes of using third-party platforms, the website will request access to your third-party platforms. The website stores the access you grant us and no other information about the profile of the individual.
 

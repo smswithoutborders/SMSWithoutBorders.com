@@ -23,6 +23,7 @@ export const Button = ({
           : "text-white bg-blue-800 border border-blue-800",
         className
       )}
+      disabled={disabled}
       {...rest}
     >
       {children}

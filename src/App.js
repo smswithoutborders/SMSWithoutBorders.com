@@ -30,7 +30,6 @@ import {
   PasswordReset,
 } from "pages";
 
-
 // toast notifications: https://uxdesign.cc/toasts-or-snack-bars-design-organic-system-notifications-1236f2883023
 
 const App = () => {
@@ -50,12 +49,16 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Website />}>
               <Route index element={<Landing />} />
-              <Route path="login" element={<Login />} />
+              <Route path="login">
+                <Route index element={<Login />} />
+                <Route path=":lang" element={<Login />} />
+              </Route>
               <Route path="downloads" element={<Downloads />} />
               <Route path="privacy-policy" element={<Privacy />} />
               <Route path="contact-us" element={<Contact />} />
               <Route path="sign-up">
                 <Route index element={<Signup />} />
+                <Route path=":lang" element={<Signup />} />
                 <Route path="verify" element={<SignupCodeVerification />} />
               </Route>
               <Route path="password-reset">

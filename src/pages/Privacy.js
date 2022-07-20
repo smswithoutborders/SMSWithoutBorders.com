@@ -1,16 +1,21 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { PageAnimationWrapper, Button, Loader } from "components";
-import { useGetDocsQuery } from "services";
+import { PageAnimationWrapper, Loader } from "components";
+import { useGetPrivacyPolicyQuery } from "services";
+import { useTranslation } from "react-i18next";
+import Error from "./Error";
 
 const Privacy = () => {
+  const { t, i18n } = useTranslation();
   const {
     data = "",
     isLoading,
     isFetching,
     isError,
     refetch,
-  } = useGetDocsQuery();
+  } = useGetPrivacyPolicyQuery(i18n.language, {
+    refetchOnMountOrArgChange: true,
+  });
 
   if (isLoading || isFetching) {
     return <Loader light />;
@@ -18,19 +23,14 @@ const Privacy = () => {
 
   if (isError) {
     return (
-      <div className="p-8 py-12 prose">
-        <h3>An error occured</h3>
-        <p className="">
-          Sorry we could not load the most recent privacy page. If error
-          persists, please contact support
-        </p>
-        <Button onClick={() => refetch()}>reload</Button>
+      <div className="bg-gray-50">
+        <Error message={t("error-messages.network-error")} callBack={refetch} />
       </div>
     );
   }
   return (
     <PageAnimationWrapper>
-      <div className="p-6 bg-white md:p-8">
+      <div className="p-6 bg-white md:p-16">
         <div className="max-w-screen-xl mx-auto prose text-gray-900">
           <ReactMarkdown>{data}</ReactMarkdown>
         </div>

@@ -1,0 +1,477 @@
+{
+  "app-name": "SMSWithoutBorders",
+  "menu": {
+    "get-started": "Commencez",
+    "home": "Accueil",
+    "privacy": "Confidentialité",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "footer-blog": "SWOB Blog",
+    "wallet": "Comptes de magasin",
+    "settings": "Paramètres",
+    "dashboard": "Tableau de bord",
+    "sync": "Sync",
+    "logout": "Déconnexion",
+    "downloads": "Téléchargements",
+    "developers": "Développeurs"
+  },
+  "labels": {
+    "sync": "sync",
+    "download": "Télécharger",
+    "get-started": "Commencez",
+    "optional": "Optionnel",
+    "strong": "fort",
+    "good": "bon",
+    "average": "Moyenne",
+    "weak": "faible",
+    "very-weak": "très faible",
+    "back": "retour",
+    "retry": "réessayer",
+    "continue": "continuer",
+    "try-again": "réessayer",
+    "password-change": "changer le mot de passe",
+    "tutorial": "Tutoriel",
+    "learn-more": "en savoir plus",
+    "help": "aide",
+    "open-app": "Ouvrir l'application"
+  },
+  "landing": {
+    "section-1": {
+      "heading": "Restez connecté",
+      "details": "À l'ère de la communication, restez en contact avec vos contacts à travers l'internet sans avoir accès à une connexion internet active. Stockez l'accès à vos plateformes de communication préférées en ligne, utilisez-les hors connexion.",
+      "cta-button-text": "Obtenir SWOB",
+      "image-caption": "SMSwithoutBorders App"
+    },
+    "section-2": {
+      "heading": "Comment cela fonctionne",
+      "details": "Avec SMSWithoutBorders, vous pouvez envoyer des e-mails, tweeter et chatter sur Telegram sans connexion Internet active. En utilisant notre application, vous pouvez envoyer des messages en toute sécurité via un réseau de passerelles SMS pour rester connecté",
+      "paragraph-1": "Nous proposons une approche proactive de la censure d'Internet. En configurant votre compte lorsque vous disposez d'une connexion Internet, vous pouvez continuer à communiquer par SMS lorsque vous n'avez plus accès à Internet.",
+      "paragraph-2": "Nos passerelles SMS sont disponibles gratuitement. Découvrez comment configurer la vôtre ci-dessous",
+      "tutorial-1": "Découvrez comment configurer votre compte et votre application",
+      "tutorial-2": "Apprenez à configurer les clients de la passerelle",
+      "image-caption": "Comment fonctionne SMSWithoutBorders"
+    },
+    "section-3": {
+      "heading": "Démarrage avec SWOB",
+      "details": "Avec SMSWithoutBorders, vous pouvez envoyer des e-mails, tweeter et chatter sur Telegram sans connexion Internet active. En utilisant notre application, vous pouvez envoyer des messages en toute sécurité via un réseau de passerelles SMS pour rester connecté.",
+      "steps": {
+        "1": {
+          "heading": "S'inscrire à un compte",
+          "details": "Enregistrez-vous pour un compte SMSWithoutBorders avec un numéro de téléphone valide, c'est tout. Tous les autres détails sont optionnels"
+        },
+        "2": {
+          "heading": "Connecter les comptes",
+          "details": "Reliez en toute sécurité vos comptes sur les plateformes que nous prenons en charge, comme Gmail, Twitter et Telegram, à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur ces plateformes lorsque vous êtes hors ligne. Nous ne demandons que le strict minimum de permissions pour que nos services fonctionnent. Vous pouvez en savoir plus dans notre politique de confidentialité"
+        },
+        "3": {
+          "heading": "Synchroniser l'application mobile",
+          "details": "Synchronisez votre compte lié avec l'application mobile SMSWithoutBorders. Ce processus garantit que vous pouvez commencer à communiquer en toute sécurité par SMS. L'application générera des clés uniques pour obscurcir vos messages."
+        },
+        "4": {
+          "heading": "Configurer les passerelles",
+          "details": "SMSWithoutBorders s'appuie sur des passerelles pour assurer la communication. Nous en maintenons certaines, mais vous pouvez également créer les vôtres. En faisant cela, vous aiderez les autres utilisateurs du réseau à communiquer via votre passerelle. Les propriétaires de passerelles peuvent également utiliser leurs passerelles pour la messagerie de masse."
+        }
+      },
+      "tutorial-1": "Découvrez comment configurer votre compte et votre application",
+      "tutorial-2": "Apprenez à configurer les clients de la passerelle",
+      "image-caption": "Comment fonctionne SMSWithoutBorders"
+    },
+    "section-4": {
+      "heading": "Pourquoi utiliser SWOB ?",
+      "steps": {
+        "1": {
+          "heading": "Accessibilité",
+          "details": "L'application mobile de SWOB permet aux utilisateurs d'avoir une communication hors ligne où qu'ils soient. Il suffit de disposer d'un smartphone à message SMS pour maintenir la communication avec vos plateformes en ligne."
+        },
+        "2": {
+          "heading": "Sécurité",
+          "details": "SWOB transmet les messages dans un format crypté sécurisé. Chaque communication est ainsi protégée contre tout accès par des parties intermédiaires pendant son transit."
+        },
+        "3": {
+          "heading": "Source ouverte",
+          "details": "Chaque composant de SWOB est open sourced ! De l'application mobile aux mécanismes de routage que nous utilisons pour que vos messages SMS atteignent les plates-formes prévues."
+        },
+        "4": {
+          "heading": "Décentralisé",
+          "details": "SWOB est conçu pour fonctionner dans des modèles décentralisés. Tout le monde peut héberger un serveur SWOB. Il suffit de comprendre comment l'utiliser."
+        }
+      }
+    }
+  },
+  "contact": {
+    "heading": "Nous contacter",
+    "details": "L'utilisation de SWOB est aussi simple que l'authentification de vos informations d'identification.",
+    "email": "Email",
+    "website": "Site web",
+    "IRC": "IRC"
+  },
+  "downloads": {
+    "heading": "Téléchargements",
+    "details": "Restez connecté grâce à nos applications mobiles et autres ressources",
+    "section-1": {
+      "heading": "Applications mobiles",
+      "details": "Installer des applications pour Android"
+    },
+    "section-2": {
+      "heading": "Systèmes d'exploitation",
+      "details": "Images personnalisées du système d'exploitation du client de la passerelle pour raspberry pi"
+    }
+  },
+  "login": {
+    "page-title": "Connexion au compte",
+    "cta-button-text": "connexion",
+    "forgot-password": "Mot de passe oublié",
+    "account-status": "Vous n'avez pas de compte?",
+    "signup-link": "S'inscrire"
+  },
+  "signup": {
+    "page-title": "S'inscrire",
+    "form": {
+      "alias": {
+        "label": "Alias",
+        "helper-text": "Choisissez un nom pour ce compte (n'importe lequel).",
+        "placeholder": "Jane Doe"
+      },
+      "license-terms": {
+        "label": "J'accepte de respecter le règlement de SMSWithoutBorders.",
+        "policy-link": "politique de confidentialité",
+        "validation-error": "Veuillez examiner et accepter les termes et conditions pour poursuivre"
+      },
+      "cta-button-text": "s'inscrire"
+    },
+    "account-status": "Vous avez déjà un compte ?",
+    "login-link": "Connexion",
+
+    "code-verification": {
+      "alerts": {
+        "account-created": "votre compte a été créé, veuillez vous connecter",
+        "registration-error": "Désolé, nous n'avons pas pu terminer votre inscription. Si l'erreur persiste, veuillez contacter le support"
+      }
+    }
+  },
+  "wallet": {
+    "page-title": "Comptes des magasins",
+    "heading": "Comptes des magasins",
+    "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
+    "labels": {
+      "description": "Description"
+    },
+    "section-1": {
+      "heading": "Plateformes disponibles",
+      "cta-button-text": "Sauvegarder"
+    },
+    "section-2": {
+      "heading": "Plateformes sauvegardées",
+      "cta-button-text": "révoquer"
+    },
+    "revoke-dialog": {
+      "heading": "Révoquer le jeton",
+      "details": "Cette opération supprimera définitivement ce jeton de votre compte et ne pourra pas être annulée. Entrez votre mot de passe pour confirmer",
+      "input-placeholder": "mot de passe",
+      "cta-button-text": "continuer",
+      "cancel-button-text": "annuler"
+    },
+    "alerts": {
+      "load-error": "Désolé, nous n'avons pas pu charger les plateformes. Si l'erreur persiste, veuillez contacter le support",
+      "no-available-platforms": "Aucune plateforme disponible",
+      "no-saved-platforms": "Aucune plateforme sauvegardée",
+      "platform-deleted": "Token supprimé avec succès",
+      "platform-stored": "Plateforme stockée avec succès"
+    }
+  },
+  "telegram": {
+    "phone-verification": {
+      "page-title": "Accès à l'application Telegram",
+      "heading": "Telegram",
+      "details": "Veuillez indiquer votre numéro de téléphone pour commencer",
+      "logo-alt-text": "logo du Telegram",
+      "alerts": {
+        "code-sent": "Un code de vérification a été envoyé sur votre téléphone. Vérifiez le code dans votre boîte de réception de sms ou d'email.",
+        "authorization-error": "Désolé, vous n'êtes pas autorisé à faire cette demande."
+      }
+    },
+    "code-verification": {
+      "page-title": "Vérification du code du Telegram",
+      "alerts": {
+        "no-account": "Vous n'avez pas de compte Telegram, veuillez remplir le formulaire pour en créer un."
+      }
+    },
+    "registration": {
+      "page-title": "Enregistrement sur Telegram",
+      "heading": "Enregistrement sur Telegram",
+      "details": "Créer un nouveau compte Telegram",
+      "form": {
+        "first-name": {
+          "label": "Prénom",
+          "placeholder": "Jane",
+          "validation-errors": "Veuillez entrer votre prénom"
+        },
+        "last-name": {
+          "label": "Nom de famille",
+          "placeholder": "Doe",
+          "validation-errors": "Veuillez entrer votre nom de famille"
+        },
+        "cta-button-text": "créer un compte"
+      }
+    }
+  },
+  "code-verification": {
+    "page-title": "Vérifier votre compte",
+    "heading": "Vérification",
+    "paragraph-1": "Un code de vérification a été envoyé sur votre téléphone. Veuillez le saisir ci-dessous. Ce processus confirme que le numéro fourni est actif et peut être utilisé pour communiquer le moment venu.",
+    "paragraph-2": "Nous vous demandons également de fournir le code qui vous a été envoyé par SMS afin de garantir que vous disposez des droits (propres) nécessaires sur le numéro de téléphone requis. Cela nous aidera à empêcher les acteurs d'utiliser des numéros de téléphone non consentis pour créer des comptes - empêchant ainsi les propriétaires de continuer à le faire",
+    "form": {
+      "code": {
+        "placeholder": "Code de vérification SMS"
+      }
+    },
+    "resend-label": "Renvoyer dans",
+    "resend-button-text": "code de réexpédition",
+    "error-messages": {
+      "otp-request": "Désolé, nous n'avons pas pu vérifier votre numéro de téléphone. Si l'erreur persiste, veuillez contacter le support",
+      "otp-validation": "Désolé, nous n'avons pas pu vérifier votre code. Si l'erreur persiste, veuillez contacter le support"
+    }
+  },
+  "sync": {
+    "page-title": "Synchroniser votre compte",
+    "heading": "Synchroniser les comptes",
+    "section-1": {
+      "details": "Veuillez cliquer sur le lien ci-dessous pour stocker des jetons",
+      "summary": {
+        "caption": "en savoir plus",
+        "details": "La synchronisation ne devient disponible qu'après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est le stockage de l'accès dans le portefeuille."
+      },
+      "cta-button-text": "Accès au magasin maintenant"
+    },
+    "section-2": {
+      "paragraph-1": "Cela vous permet d'utiliser la passerelle sécurisée SW/OB pour tous les messages.",
+      "paragraph-2": "La synchronisation ne devient disponible qu'après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est le stockage de l'accès dans le portefeuille.",
+      "paragraph-3": "Veuillez suivre les étapes suivantes pour synchroniser votre accès enregistré avec l'application mobile SMSwithoutborders.",
+      "sync-steps": {
+        "1": "Ouvrez l'application SMSWithoutBorders sur votre téléphone.",
+        "2": "Appuyez sur le bouton Synchroniser",
+        "3": "Dirigez votre téléphone vers cet écran pour capturer le code."
+      },
+      "status": {
+        "heading": "Statut",
+        "connected": "connecté",
+        "disconnected": "déconnecté",
+        "complete": "complet",
+        "scanned": "scanné",
+        "loading": "chargement"
+      },
+      "cta-button-text": "sync"
+    },
+    "alerts": {
+      "sync-started": "Sync commencée",
+      "sync-complete": "Sync terminée",
+      "sync-scanned": "Code scanné avec succès",
+      "no-platforms": "Désolé, il semble que vous n'ayez pas stocké de jetons.",
+      "sync-error": "Désolé, une erreur s'est produite pendant la synchronisation, veuillez réessayer.",
+      "sync-closed": "La session de synchronisation est fermée. Veuillez cliquer sur le bouton de synchronisation pour recommencer"
+    }
+  },
+  "dashboard": {
+    "page-title": "Tableau de bord",
+    "greeting-1": "Bonjour!",
+    "greeting-2": "Bienvenue",
+    "join-date": "Date d'adhésion",
+    "last-login": "Dernière connexion",
+    "alerts": {
+      "load-error": "Désolé, nous n'avons pas pu localiser vos métriques. Si l'erreur persiste, veuillez contacter le support"
+    }
+  },
+  "settings": {
+    "page-title": "Paramètres",
+    "heading": "Paramètres",
+    "details": "Gérer votre compte",
+    "paragraph": "Veuillez sélectionner un paramètre dans le menu",
+    "menu": {
+      "password-change": "Changement de mot de passe",
+      "account-deletion": "Supprimer le compte"
+    }
+  },
+  "password-change": {
+    "page-title": "Changement de mot de passe",
+    "heading": "Changement du mot de passe",
+    "details": "Définir un nouveau mot de passe pour votre compte",
+    "alerts": {
+      "warning": "Cette action supprimera tous les jetons actuellement enregistrés dans votre portefeuille et vous serez déconnecté."
+    }
+  },
+  "account-deletion": {
+    "page-title": "Suppression du compte",
+    "heading": "Supprimer le compte",
+    "details": "Définissez un nouveau mot de passe pour votre compte",
+    "confirmation": {
+      "text": "IConfirmThisAction",
+      "validation-error": "Veuillez entrer {{confirmation}} et votre mot de passe pour continuer"
+    },
+    "paragraph": {
+      "part-1": "Veuillez entrer",
+      "part-2": "et votre mot de passe pour procéder"
+    },
+    "form": {
+      "confirmation": {
+        "label": "Confirmation",
+        "placeholder": "entrer la confirmation",
+        "helper-text": "Entrez"
+      }
+    },
+    "alerts": {
+      "warning": "Cette action supprimera tous les jetons actuellement enregistrés dans votre portefeuille et vous serez déconnecté.",
+      "account-deleted": "Votre compte a été supprimé. Nous sommes tristes de vous voir partir",
+      "invalid-password": "Interdit, le mot de passe n'est pas valide"
+    }
+  },
+  "password-recovery": {
+    "verification": {
+      "page-title": "Récupérer votre mot de passe",
+      "heading": "Récupération du mot de passe",
+      "details": "Veuillez indiquer votre numéro de téléphone pour commencer"
+    },
+    "recovery": {
+      "page-title": "Récupération du mot de passe",
+      "heading": "Récupération du mot de passe",
+      "details": "Définir un nouveau mot de passe pour votre compte"
+    }
+  },
+  "404-page": {
+    "page-tite": "404, page non disponible",
+    "error-message": "Désolé, cette page n'est pas disponible pour le moment"
+  },
+  "alert-messages": {
+    "close": "Veuillez fermer cette fenêtre et revenir en arrière",
+    "redirect": "Vous allez être redirigé sous peu",
+    "loading": "traitement, veuillez patienter",
+    "alert-placeholder": "Message d'alerte ici",
+    "code-verified": "Code vérifié avec succès",
+    "request-received": "Succès votre demande a été reçue",
+    "phone-number-verified": "Numéro de téléphone vérifié avec succès",
+    "password-changed": "Le mot de passe a été changé avec succès",
+    "login-successful": "Connexion réussie",
+    "logout-successful": "Déconnexion réussie",
+    "coming-soon": "A venir prochainement ...",
+    "recaptcha": {
+      "loading": "chargement du reCAPTCHA, veuillez patienter",
+      "disabled": "reCAPTCHA a été désactivé, vous pouvez le réactiver dans la configuration de votre projet.",
+      "load-error": "Le chargement du reCAPTCHA a échoué. Veuillez vous assurer que vous disposez d'une connexion réseau active",
+      "connect-error": "La connexion au reCAPTCHA a échoué. Veuillez vérifier votre réseau et recharger cette page"
+    }
+  },
+  "error-messages": {
+    "general-error-title": "Une erreur s'est produite",
+    "general-error-message": "Une erreur s'est produite, veuillez réessayer",
+    "network-error": "Une erreur s'est produite, veuillez vérifier votre réseau et réessayer",
+    "invalid-code": "Le code fourni est invalide, veuillez réessayer",
+    "invalid-number": "Le numéro fourni est invalide",
+    "invalid-password": "Mot de passe invalide fourni",
+    "invalid-login": "Interdit, le compte n'est pas autorisé. Vérifiez votre numéro de téléphone et votre mot de passe",
+    "400": "Quelque chose n'a pas fonctionné. Nous travaillons à résoudre ce problème. Veuillez réessayer",
+    "401": "Désolé, vous n'êtes pas autorisé à effectuer cette action",
+    "403": "Interdit. Désolé, votre session a peut-être expiré. Veuillez vous déconnecter et vous reconnecter ou recharger cette page.",
+    "404": "Désolé, la ressource que vous avez demandée est indisponible ou non accessible.",
+    "409": "Il y a une possibilité de duplication de ce compte, veuillez contacter le support.",
+    "429": "Trop de tentatives échouées, veuillez attendre un peu et réessayer.",
+    "500": "Une erreur critique s'est produite. Veuillez contacter le support"
+  },
+  "forms": {
+    "phone-number": {
+      "label": "Numéro de téléphoner",
+      "placeholder": "Entrez votre numéro de téléphone",
+      "helper-text": "Nous enverrons un SMS unique à ce numéro pour confirmation",
+      "validation-errors": {
+        "required": "veuillez entrer un numéro de téléphone",
+        "invalid": "veuillez fournir un numéro de téléphone valide"
+      }
+    },
+    "password": {
+      "label": "Mot de passe",
+      "labels": {
+        "current": "Mot de passe actuel",
+        "new": "Nouveau mot de passe"
+      },
+      "placeholder": "mot de passe",
+      "validation-errors": {
+        "min": "Le mot de passe doit comporter au moins 8 caractères",
+        "required": "Le mot de passe est requis",
+        "required-new": "Veuillez entrer un nouveau mot de passe"
+      }
+    },
+    "confirm-password": {
+      "label": "Confirmer le mot de passe",
+      "placeholder": "Retaper le mot de passe",
+      "validation-errors": {
+        "min": "Le mot de passe doit comporter au moins 8 caractères",
+        "required": "Veuillez confirmer votre mot de passe",
+        "match": "les mots de passe ne correspondent pas"
+      }
+    },
+    "terms": {
+      "validation-errors": {
+        "required": "Veuillez lire et accepter les conditions"
+      }
+    },
+    "recaptcha": {
+      "validation-error": "Veuillez prouver que vous n'êtes pas un robot en résolvant le reCAPTCHA."
+    }
+  },
+  "tutorials": {
+    "onboarding": {
+      "steps": {
+        "1": {
+          "title": "Bienvenue",
+          "heading": "Apprendre à stocker les comptes",
+          "details": "Ce tutoriel vous aidera à démarrer"
+        },
+        "2": {
+          "title": "Plates-formes disponibles",
+          "details": "Accès au magasin pour les plateformes disponibles en cliquant sur le bouton 'Store' sous chaque plateforme."
+        },
+        "3": {
+          "title": "Synchronisation",
+          "details": "Synchronisez-vous avec l'application mobile pour commencer à communiquer en toute sécurité."
+        },
+        "4": {
+          "title": "Obtenir de l'aide",
+          "details": "Vous pouvez revoir ce tutoriel en cliquant ici."
+        }
+      }
+    },
+    "sync": {
+      "steps": {
+        "1": {
+          "title": "Tutoriel",
+          "heading": "Apprenez à synchroniser avec l'application",
+          "details": "Ce tutoriel vous aidera à démarrer"
+        },
+        "2": {
+          "title": "Instructions",
+          "details": "Veuillez lire ces instructions pour mieux comprendre"
+        },
+        "3": {
+          "title": "Commencez",
+          "details": "Cliquez sur le bouton de synchronisation pour commencer le processus"
+        },
+        "4": {
+          "title": "Scanner le code QR",
+          "details": "Utilisez le scanner de l'application pour scanner le code QR généré."
+        },
+        "4-alt": {
+          "title": "Ouvrir l'application",
+          "details": "cliquez sur le bouton pour ouvrir l'application"
+        },
+        "5": {
+          "title": "Entrez le mot de passe",
+          "details": "Entrez votre mot de passe sur l'écran de l'application pour terminer la synchronisation"
+        },
+        "6": {
+          "title": "Obtenir de l'aide",
+          "details": "Vous pouvez revoir ce tutoriel en cliquant ici"
+        }
+      }
+    }
+  }
+}

@@ -417,5 +417,61 @@
     "recaptcha": {
       "validation-error": "Please prove you are not a robot by solving reCAPTCHA"
     }
+  },
+  "tutorials": {
+    "onboarding": {
+      "steps": {
+        "1": {
+          "title": "Welcome",
+          "heading": "Learn how to store accounts",
+          "details": "This tutorial will help you get started"
+        },
+        "2": {
+          "title": "Available platforms",
+          "details": "Store access for available platforms by clicking on the store button under each platform"
+        },
+        "3": {
+          "title": "Synchronization",
+          "details": "Synchronize with the mobile app to start communicating securely"
+        },
+        "4": {
+          "title": "Get Help",
+          "details": "You can view this tutorial again by clicking here"
+        }
+      }
+    },
+    "sync": {
+      "steps": {
+        "1": {
+          "title": "Tutorial",
+          "heading": "Learn how to Synchronize with app",
+          "details": "This tutorial will help you get started"
+        },
+        "2": {
+          "title": "Instructions",
+          "details": "Please read through these instructions to understand better"
+        },
+        "3": {
+          "title": "Get started",
+          "details": "Click the sync button to begin the process"
+        },
+        "4": {
+          "title": "Scan QR code",
+          "details": "Use the app scanner to scan the generated QR code"
+        },
+        "4-alt": {
+          "title": "Open App",
+          "details": "click on the button to open the app"
+        },
+        "5": {
+          "title": "Enter password",
+          "details": "Enter your password on the app screen to complete synchronization"
+        },
+        "6": {
+          "title": "Get Help",
+          "details": "You can view this tutorial again by clicking here"
+        }
+      }
+    }
   }
 }

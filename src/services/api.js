@@ -144,9 +144,9 @@ export const API = createApi({
         };
       },
     }),
-    getDocs: builder.query({
-      query: () => ({
-        url: process.env.REACT_APP_DOCS_URL,
+    getPrivacyPolicy: builder.query({
+      query: (locale) => ({
+        url: `${process.env.REACT_APP_PRIVACY_POLICY_URL}/${locale}.md`,
         method: "GET",
         credentials: "omit",
         headers: {
@@ -194,7 +194,6 @@ export const API = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
-  useGetDocsQuery,
   useLoginMutation,
   useLogoutMutation,
   useSignupMutation,
@@ -207,6 +206,7 @@ export const {
   useTokenRevokeMutation,
   useVerifySignupMutation,
   useDeleteAccountMutation,
+  useGetPrivacyPolicyQuery,
   useChangePasswordMutation,
   useRecoverPasswordMutation,
   useValidateOTPCodeMutation,

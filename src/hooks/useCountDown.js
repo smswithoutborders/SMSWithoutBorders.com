@@ -6,18 +6,19 @@ https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds
 
 import { useEffect, useState } from "react";
 import { useTriggerOTPQuery } from "services";
-import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 //expects a single object as input
-export const useCountDown = ({ uid, phone_number, country_code }) => {
+export const useCountDown = (props) => {
   const { t } = useTranslation();
   // build request body
   const request = {
-    uid,
-    phone_number,
-    country_code,
+    uid: props?.uid,
+    phone_number: props?.phone_number,
+    country_code: props?.country_code,
   };
+
   const {
     data = {},
     error,
@@ -25,13 +26,15 @@ export const useCountDown = ({ uid, phone_number, country_code }) => {
     refetch: resendOTPCode,
     isFetching: isRequesting,
     isError: OTPRequestError,
-  } = useTriggerOTPQuery(request);
+  } = useTriggerOTPQuery(request, {
+    skip: props?.phone_number ? false : true,
+  });
 
   // calculate amount of time left after receiving response
   const [countDown, setCountDown] = useState(0);
   // check and handle errors
   useEffect(() => {
-    const deadline = data.expires - Date.now();
+    const deadline = data ? data.expires - Date.now() : 0;
     setCountDown(deadline);
     if (OTPRequestError) {
       switch (error.originalStatus) {
@@ -57,7 +60,7 @@ export const useCountDown = ({ uid, phone_number, country_code }) => {
           toast.error(t("error-messages.general-error-message"));
       }
     }
-  }, [data, error, isSuccess, country_code, phone_number, OTPRequestError, t]);
+  }, [data, error, isSuccess, OTPRequestError, t]);
 
   useEffect(() => {
     // only run when theres time left

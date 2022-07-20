@@ -11,23 +11,24 @@ import {
 } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
-const FooterLink = tw.p`text-gray-100 pl-14`;
-const FooterNavLink = tw(
-  Link
-)`font-medium inline-flex items-center text-gray-100 hocus:no-underline hocus:text-gray-100`;
-const ExternalLink = tw.a`inline-flex items-center text-base text-gray-100 cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-blue-200`;
+const FooterLink = tw.p`pl-14`;
+const FooterNavLink = tw(Link)`inline-flex items-center  hocus:no-underline`;
+const ExternalLink = tw.a`inline-flex items-center text-base cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-blue-200`;
 const NavContainer = tw.div`flex flex-col p-4 items-start`;
 
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="flex flex-col px-2 py-8 text-white lg:flex-row md:justify-between bg-slate-900 md:p-8">
+    <footer className="flex flex-col px-2 py-8 overflow-y-auto text-gray-300 lg:flex-row md:justify-between bg-slate-900 md:p-8">
       <NavContainer tw="p-0 mb-4 md:mb-0">
         <FooterNavLink to="/">
           <LogoIcon src={Logo} alt="SMSwithoutborders" />
-          <span className="ml-2 text-xl font-bold">SMSWithoutBorders</span>
+          <span className="ml-2 text-xl font-bold text-white">
+            SMSWithoutBorders
+          </span>
         </FooterNavLink>
 
         <FooterLink>
@@ -78,6 +79,9 @@ export const Footer = () => {
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
         </ExternalLink>
       </NavContainer>
+      <div>
+        <LanguageSwitcher bordered />
+      </div>
     </footer>
   );
 };

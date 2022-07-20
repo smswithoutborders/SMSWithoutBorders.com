@@ -25,9 +25,10 @@ import {
 } from "services";
 import Error from "../Error";
 import OnboardingTutorial from "../tutorials/OnboardingTutorial";
+import { capitalize } from "utils";
 
 const Wallet = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   useTitle(t("wallet.page-title"));
   const [revokeURL, setRevokeURL] = useState("");
   const [showRevokeDialog, setOpenRevokeDialog] = useState(false);
@@ -260,7 +261,7 @@ const Wallet = () => {
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
                           <h3> {t("wallet.labels.description")}</h3>
-                          <p>{item.description}</p>
+                          <p>{capitalize(item.description[i18n?.language])}</p>
                           <Button
                             onClick={() =>
                               handleTokenStorage(
@@ -319,7 +320,7 @@ const Wallet = () => {
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
                           <h3>{t("wallet.labels.description")}</h3>
-                          <p>{item.description}</p>
+                          <p>{capitalize(item.description[i18n?.language])}</p>
                           <Button
                             danger
                             onClick={() => {

@@ -2,9 +2,11 @@ import React, { useRef } from "react";
 import { Steps } from "intro.js-react";
 import { useSelector, useDispatch } from "react-redux";
 import { syncTutorialSelector, updateSyncTutorial } from "features";
+import { useTranslation } from "react-i18next";
 import "styles/introjs-theme.css";
 
 const MobileSyncTutorial = () => {
+  const { t } = useTranslation();
   const stepsRef = useRef(null);
   const dispatch = useDispatch();
   const tutorial = useSelector(syncTutorialSelector);
@@ -38,34 +40,33 @@ const MobileSyncTutorial = () => {
 
   const steps = [
     {
-      title: "Tutorial",
+      title: t("tutorials.sync.steps.1.title"),
       intro: (
         <div className="prose">
-          <h3>Learn how to Synchronize with app</h3>
-          <p>This tutorial will help you get started</p>
+          <h3>{t("tutorials.sync.steps.1.heading")}</h3>
+          <p>{t("tutorials.sync.steps.1.details")}</p>
         </div>
       ),
     },
     {
-      title: "Get started",
       element: ".mobile-sync-button",
-      intro: "Click the sync button to begin the process",
+      title: t("tutorials.sync.steps.3.title"),
+      intro: t("tutorials.sync.steps.3.details"),
     },
     {
-      title: "Open App",
       element: ".open-app-button",
-      intro: "click on the button to open the app",
+      title: t("tutorials.sync.steps.4-alt.title"),
+      intro: t("tutorials.sync.steps.4-alt.details"),
       position: "bottom",
     },
     {
-      title: "Enter password",
-      intro:
-        "Enter your password on the app screen to complete synchronization",
+      title: t("tutorials.sync.steps.5.title"),
+      intro: t("tutorials.sync.steps.5.details"),
     },
     {
-      title: "Get Help",
       element: ".mobile-tutorial-button",
-      intro: "You can view this tutorial again by clicking here",
+      title: t("tutorials.sync.steps.6.title"),
+      intro: t("tutorials.sync.steps.6.details"),
     },
   ];
 

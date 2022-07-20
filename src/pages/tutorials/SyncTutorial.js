@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import { Steps } from "intro.js-react";
-import { useDeviceDetection } from "hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { syncTutorialSelector, updateSyncTutorial } from "features";
+import { useTranslation } from "react-i18next";
 import "styles/introjs-theme.css";
 
 const SyncTutorial = () => {
+  const { t } = useTranslation();
   const stepsRef = useRef(null);
-  const isMobile = useDeviceDetection();
   const dispatch = useDispatch();
   const tutorial = useSelector(syncTutorialSelector);
 
@@ -40,42 +40,39 @@ const SyncTutorial = () => {
 
   const steps = [
     {
-      title: "Tutorial",
+      title: t("tutorials.sync.steps.1.title"),
       intro: (
         <div className="prose">
-          <h3>Learn how to Synchronize with app</h3>
-          <p>This tutorial will help you get started</p>
+          <h3>{t("tutorials.sync.steps.1.heading")}</h3>
+          <p>{t("tutorials.sync.steps.1.details")}</p>
         </div>
       ),
     },
     {
-      title: "Instructions",
       element: ".tutorial-instructions",
-      intro: "Please read through these instructions to understand better",
-      position: isMobile ? "top" : "right",
+      title: t("tutorials.sync.steps.2.title"),
+      intro: t("tutorials.sync.steps.2.details"),
+      position: "right",
     },
     {
-      title: "Get started",
-      element: isMobile ? ".mobile-sync-button" : ".desktop-sync-button",
-      intro: "Click the sync button to begin the process",
+      element: ".desktop-sync-button",
+      title: t("tutorials.sync.steps.3.title"),
+      intro: t("tutorials.sync.steps.3.details"),
     },
     {
-      title: "Scan QR code",
       element: ".tutorial-qr",
-      intro: "Use the app scanner to scan the generated QR code",
-      position: isMobile ? "bottom" : "left",
+      title: t("tutorials.sync.steps.4.title"),
+      intro: t("tutorials.sync.steps.4.details"),
+      position: "left",
     },
     {
-      title: "Enter password",
-      intro:
-        "Enter your password on the app screen to complete synchronization",
+      title: t("tutorials.sync.steps.5.title"),
+      intro: t("tutorials.sync.steps.5.details"),
     },
     {
-      title: "Get Help",
-      element: isMobile
-        ? ".mobile-tutorial-button"
-        : ".desktop-tutorial-button",
-      intro: "You can view this tutorial again by clicking here",
+      element: ".desktop-tutorial-button",
+      title: t("tutorials.sync.steps.6.title"),
+      intro: t("tutorials.sync.steps.6.details"),
     },
   ];
 
