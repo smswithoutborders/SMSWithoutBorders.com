@@ -13,7 +13,7 @@ const Privacy = () => {
     isFetching,
     isError,
     refetch,
-  } = useGetPrivacyPolicyQuery(i18n.language, {
+  } = useGetPrivacyPolicyQuery(i18n.resolvedLanguage, {
     refetchOnMountOrArgChange: true,
   });
 
