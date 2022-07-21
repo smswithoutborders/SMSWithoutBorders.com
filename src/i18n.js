@@ -22,7 +22,8 @@ i18n
   .init({
     fallbackLng: "en",
     debug: process.env.NODE_ENV !== "production" ? true : false,
-
+    load: "languageOnly",
+    supportedLngs: ["en", "fr"],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
