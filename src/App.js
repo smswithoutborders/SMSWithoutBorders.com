@@ -1,10 +1,10 @@
 import React, { Fragment, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { RequireAuth, ScrollToTop } from "components";
+import { RequireAuth, ScrollToTop, SplashScreen } from "components";
 import { Toaster } from "react-hot-toast";
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import { Loader } from "components";
+
 
 
 const Sync = lazy(() => import("pages/Sync"));
@@ -45,7 +45,7 @@ const App = () => {
           duration: 5000,
         }}
       />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<SplashScreen />}>
       <BrowserRouter>
         <ScrollToTop>
           <Routes>
