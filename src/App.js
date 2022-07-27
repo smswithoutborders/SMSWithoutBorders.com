@@ -1,34 +1,35 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RequireAuth, ScrollToTop } from "components";
 import { Toaster } from "react-hot-toast";
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import {
-  Sync,
-  Contact,
-  Privacy,
-  Dashboard,
-  Landing,
-  Signup,
-  Login,
-  Settings,
-  Wallet,
-  NotFound,
-  Website,
-  Downloads,
-  AccountDeletion,
-  WalletRedirect,
-  PasswordChange,
-  DashboardLayout,
-  TelegramRegistration,
-  SignupCodeVerification,
-  PhoneNumberVerification,
-  TelegramCodeVerification,
-  TelegramNumberVerification,
-  PasswordChangeVerification,
-  PasswordReset,
-} from "pages";
+import { Loader } from "components";
+
+
+const Sync = lazy(() => import("pages/Sync"));
+const Contact = lazy(() => import("pages/Contact"));
+const Privacy = lazy(() => import("pages/Privacy"));
+const Dashboard = lazy(() => import("pages/Dashboard"));
+const Landing = lazy(() => import("pages/Landing"));
+const Signup = lazy(() => import("pages/signup/Signup"));
+const Login = lazy(() => import("pages/Login"));
+const Settings = lazy(() => import("pages/settings/Settings"));
+const Wallet = lazy(() => import("pages/Wallet/Wallet"));
+const NotFound = lazy(() => import("pages/NotFound"));
+const WalletRedirect = lazy(() => import("pages/Wallet/WalletRedirect"));
+const Website = lazy(() => import("pages/Website"));
+const Downloads = lazy(() => import("pages/Downloads"));
+const AccountDeletion = lazy(() => import("pages/settings/AccountDeletion"));
+const PasswordChange = lazy(() => import("pages/settings/PasswordChange"));
+const DashboardLayout = lazy(() => import("pages/DashboardLayout"));
+const TelegramRegistration = lazy(() => import("pages/Wallet/telegram/TelegramRegistration"));
+const SignupCodeVerification = lazy(() => import("pages/signup/CodeVerification"));
+const PhoneNumberVerification = lazy(() => import("pages/password-reset/PhoneNumberVerification"));
+const TelegramCodeVerification = lazy(() => import("pages/Wallet/telegram/CodeVerification"));
+const TelegramNumberVerification = lazy(() => import("pages/Wallet/telegram/PhoneNumberVerification"));
+const PasswordChangeVerification = lazy(() => import("pages/password-reset/CodeVerification"));
+const PasswordReset = lazy(() => import("pages/password-reset/PasswordReset"));
 
 // toast notifications: https://uxdesign.cc/toasts-or-snack-bars-design-organic-system-notifications-1236f2883023
 
@@ -44,6 +45,7 @@ const App = () => {
           duration: 5000,
         }}
       />
+      <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <ScrollToTop>
           <Routes>
@@ -113,6 +115,7 @@ const App = () => {
           </Routes>
         </ScrollToTop>
       </BrowserRouter>
+      </Suspense>
     </Fragment>
   );
 };
