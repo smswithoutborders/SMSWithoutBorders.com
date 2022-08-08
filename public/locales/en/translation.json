@@ -15,7 +15,9 @@
     "sync": "Sync",
     "logout": "Logout",
     "downloads": "Downloads",
-    "developers": "Developers"
+    "developers": "Developers",
+    "resources": "Resources",
+    "tutorials": "Tutorials"
   },
   "labels": {
     "sync": "sync",
