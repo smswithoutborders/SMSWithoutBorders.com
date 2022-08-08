@@ -4,7 +4,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
-import { NavLink, MobileNavLink, ExternalLink } from "./NavLinks";
+import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import clsx from "clsx";
@@ -39,9 +39,23 @@ export const MainNavbar = () => {
       <NavLink scrolled={scrolled} key="/" to="/">
         {t("menu.home")}
       </NavLink>
-      <NavLink scrolled={scrolled} key="downloads" to="/downloads">
-        {t("menu.downloads")}
-      </NavLink>
+
+      <DropDownLink
+        label={t("menu.resources")}
+        links={[
+          {
+            key: "downloads",
+            path: "downloads",
+            label: t("menu.downloads"),
+          },
+          {
+            external: true,
+            key: "tutorials",
+            path: process.env.REACT_APP_TUTORIAL_URL,
+            label: t("menu.tutorials"),
+          },
+        ]}
+      />
       <ExternalLink
         onClick={() => toggleMenu()}
         key="developers"
@@ -101,6 +115,14 @@ export const MainNavbar = () => {
       >
         {t("menu.downloads")}
       </MobileNavLink>
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="tutorials"
+        href={process.env.REACT_APP_TUTORIAL_URL}
+        target="_blank"
+      >
+        {t("menu.tutorials")}
+      </ExternalLink>
       <ExternalLink
         onClick={() => toggleMenu()}
         key="developers"
