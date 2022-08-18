@@ -261,7 +261,11 @@ const Wallet = () => {
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
                           <h3> {t("wallet.labels.description")}</h3>
-                          <p>{capitalize(item.description[i18n?.language])}</p>
+                          <p>
+                            {capitalize(
+                              item.description[i18n?.resolvedLanguage]
+                            )}
+                          </p>
                           <Button
                             onClick={() =>
                               handleTokenStorage(
@@ -320,7 +324,11 @@ const Wallet = () => {
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
                           <h3>{t("wallet.labels.description")}</h3>
-                          <p>{capitalize(item.description[i18n?.language])}</p>
+                          <p>
+                            {capitalize(
+                              item.description[i18n?.resolvedLanguage]
+                            )}
+                          </p>
                           <Button
                             danger
                             onClick={() => {
