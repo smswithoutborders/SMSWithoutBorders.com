@@ -12,7 +12,9 @@ const Error = ({ title, message, callBack }) => {
           <h1 className="font-bold">
             {title || t("error-messages.general-error-title")}
           </h1>
-          <p className="text-xl">{message}</p>
+          <p className="text-xl">
+            {message || t("error-messages.general-error-message")}
+          </p>
           <Button onClick={() => callBack()}>{t("labels.try-again")}</Button>
         </div>
       </div>

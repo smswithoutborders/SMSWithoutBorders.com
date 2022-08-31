@@ -424,7 +424,7 @@
   },
   "error-messages": {
     "general-error-title": "An error occured",
-    "general-error-message": "An error occured please try again",
+    "general-error-message": "Sorry, an error occured please try again",
     "network-error": "An error occured, please check your network and try again",
     "invalid-code": "Invalid code provided, please try again",
     "invalid-number": "Invalid number provided",
@@ -435,6 +435,7 @@
     "403": "Forbidden. Sorry your session may have expired. Please logout and login again or reload this page",
     "404": "Sorry the resource you requested is unavailable or not accessible",
     "409": "There is a possible duplicate of this account please contact support",
+    "422": "Sorry, we did not receive the permissions we need to send email on your behalf. No worries, please select the option from the authorization screen when prompted",
     "429": "Too many failed attempts please wait a while and try again",
     "500": "A critical error occured. Please contact support"
   },

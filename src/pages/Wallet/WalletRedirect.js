@@ -25,7 +25,8 @@ const WalletRedirect = () => {
   const auth = useSelector(authSelector);
   const navigate = useNavigate();
   const { platform, protocol } = useParams();
-  const [verifyTokenStorage, { isError }] = useVerifyTokenStorageMutation();
+  const [verifyTokenStorage, { isError, error }] =
+    useVerifyTokenStorageMutation();
   const [open, setOpen] = useState(false);
   const isMobile = useDeviceDetection();
   // get the URL parameters which will include the auth token
@@ -81,6 +82,9 @@ const WalletRedirect = () => {
           case 409:
             toast.error(t("error-messages.409"));
             break;
+          case 422:
+            toast.error(t("error-messages.422"));
+            break;
           case 429:
             toast.error(t("error-messages.429"));
             break;
@@ -115,14 +119,20 @@ const WalletRedirect = () => {
     }
   }, [handleVerification, navigate, code]);
 
+  // handle error messages and retries
   if (isError) {
-    return (
-      <Error
-        message={t("wallet.alerts.load-error")}
-        callBack={handleVerification}
-      />
-    );
+    if (error?.originalStatus === 422) {
+      return (
+        <Error
+          message={t("error-messages.422")}
+          callBack={() => navigate(-1)}
+        />
+      );
+    } else {
+      return <Error callBack={handleVerification} />;
+    }
   }
+
   return (
     <Fragment>
       {!open ? (

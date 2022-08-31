@@ -424,7 +424,7 @@
   },
   "error-messages": {
     "general-error-title": "Une erreur s'est produite",
-    "general-error-message": "Une erreur s'est produite, veuillez réessayer",
+    "general-error-message": "Désolé, une erreur s'est produite, veuillez réessayer",
     "network-error": "Une erreur s'est produite, veuillez vérifier votre réseau et réessayer",
     "invalid-code": "Le code fourni est invalide, veuillez réessayer",
     "invalid-number": "Le numéro fourni est invalide",
@@ -435,6 +435,7 @@
     "403": "Interdit. Désolé, votre session a peut-être expiré. Veuillez vous déconnecter et vous reconnecter ou recharger cette page.",
     "404": "Désolé, la ressource que vous avez demandée est indisponible ou non accessible.",
     "409": "Il y a une possibilité de duplication de ce compte, veuillez contacter le support.",
+    "422": "Désolé, nous n'avons pas reçu les autorisations dont nous avons besoin pour envoyer des e-mails en votre nom. Pas d'inquiétude, veuillez sélectionner l'option dans l'écran d'autorisation lorsque vous y êtes invité.",
     "429": "Trop de tentatives échouées, veuillez attendre un peu et réessayer.",
     "500": "Une erreur critique s'est produite. Veuillez contacter le support"
   },
