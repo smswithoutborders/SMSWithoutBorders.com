@@ -31,15 +31,16 @@ const WalletRedirect = () => {
   // get the URL parameters which will include the auth token
   const searchParams = new URLSearchParams(window.location.search);
   const code = searchParams.get("code");
-  // const cAuth = getLocalCache();
+  const scope = searchParams.get("scope");
 
   const cAuth = useMemo(() => getLocalCache(), []);
-  
+
   const handleVerification = useCallback(async () => {
     // build request data
     let data = {
       uid: cAuth ? cAuth.uid : auth.uid,
       code: code,
+      scope: scope,
       platform: platform,
       protocol: protocol,
       code_verifier: cAuth ? cAuth.code_verifier : auth.code_verifier,
@@ -94,15 +95,16 @@ const WalletRedirect = () => {
       }
     }
   }, [
+    t,
+    code,
     auth,
+    cAuth,
+    scope,
+    isMobile,
     platform,
     protocol,
     navigate,
     verifyTokenStorage,
-    t,
-    isMobile,
-    cAuth,
-    code,
   ]);
 
   useEffect(() => {

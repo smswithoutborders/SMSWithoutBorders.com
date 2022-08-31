@@ -91,6 +91,7 @@ export const API = createApi({
       query: ({
         uid,
         code,
+        scope,
         platform,
         protocol,
         code_verifier,
@@ -100,6 +101,7 @@ export const API = createApi({
         method: "PUT",
         body: {
           code,
+          scope,
           code_verifier,
           phone_number,
         },

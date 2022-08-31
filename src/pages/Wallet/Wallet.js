@@ -260,7 +260,7 @@ const Wallet = () => {
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
-                          <h3> {t("wallet.labels.description")}</h3>
+                          <h3 className="mt-0"> {t("wallet.labels.description")}</h3>
                           <p>
                             {capitalize(
                               item.description[i18n?.resolvedLanguage]
@@ -323,7 +323,7 @@ const Wallet = () => {
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
-                          <h3>{t("wallet.labels.description")}</h3>
+                          <h3 className="mt-0">{t("wallet.labels.description")}</h3>
                           <p>
                             {capitalize(
                               item.description[i18n?.resolvedLanguage]
