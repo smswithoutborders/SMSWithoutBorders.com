@@ -115,7 +115,7 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
       >
         <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {links?.map(({ key, path, label, external }) => (
-            <Menu.Item>
+            <Menu.Item key={key}>
               {external ? (
                 <a
                   key={key}

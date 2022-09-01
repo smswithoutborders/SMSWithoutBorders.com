@@ -41,6 +41,7 @@ export const MainNavbar = () => {
       </NavLink>
 
       <DropDownLink
+        key="resources"
         label={t("menu.resources")}
         links={[
           {
