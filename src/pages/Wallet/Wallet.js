@@ -1,20 +1,19 @@
-import React, { useState, Fragment, useEffect } from "react";
-import clsx from "clsx";
+import React, { useState, useEffect, Fragment } from "react";
 import toast from "react-hot-toast";
 import { IoMdSync } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector, saveAuth } from "features";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { FiSave, FiTrash2, FiChevronDown, FiGrid } from "react-icons/fi";
 import { BsShieldLock } from "react-icons/bs";
-import { Disclosure, Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
+
 import {
   Loader,
   useTitle,
   Button,
-  PageAnimationWrapper,
   PasswordInput,
+  PageAnimationWrapper,
   LinkButton,
 } from "components";
 import {
@@ -25,10 +24,10 @@ import {
 } from "services";
 import Error from "../Error";
 import OnboardingTutorial from "../tutorials/OnboardingTutorial";
-import { capitalize } from "utils";
+import { PlatformList } from "./components";
 
 const Wallet = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   useTitle(t("wallet.page-title"));
   const [revokeURL, setRevokeURL] = useState("");
   const [showRevokeDialog, setOpenRevokeDialog] = useState(false);
@@ -59,9 +58,6 @@ const Wallet = () => {
     useStoreTokenMutation();
   // token revoke
   const [tokenRevoke, { isLoading: loadingC }] = useTokenRevokeMutation();
-
-  // where logos are stored
-  const LOGO_HOST = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const tutorial = searchParams.get("tutorial");
@@ -133,6 +129,13 @@ const Wallet = () => {
     }
   }
 
+  /* save revoke token and prompt for confirmation */
+  function initRevoke(url) {
+    setRevokeURL(url);
+    setOpenRevokeDialog(true);
+  }
+
+  /* revoke tokens per platform */
   async function handleTokenRevoke() {
     // build request body
     let data = {
@@ -225,149 +228,45 @@ const Wallet = () => {
         </div>
         <p className="my-0 text-lg">{t("wallet.details")}</p>
 
+        {/* saved and unsaved platforms  */}
         <div className="grid grid-cols-2 gap-4 lg:gap-8">
           <div className="col-span-full md:col-span-1 onboarding-step-1">
             <h2>{t("wallet.section-1.heading")}</h2>
-            {Object.keys(unSavedPlatforms).length ? (
-              <Fragment>
-                {unSavedPlatforms.map((item) => (
-                  <Disclosure key={item.name}>
-                    {({ open }) => (
-                      <Fragment>
-                        <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
-                          <div className="flex flex-row items-center">
-                            {item.logo ? (
-                              <img
-                                src={`${LOGO_HOST}${item.logo}`}
-                                alt={`${item.name} logo`}
-                                className="w-8 h-8 my-0 mr-4"
-                              />
-                            ) : (
-                              <FiGrid
-                                title={`${item.name} logo`}
-                                className="w-8 h-8 my-0 mr-4"
-                              />
-                            )}
-                            <h3 className="my-0 font-normal capitalize">
-                              {item.name}
-                            </h3>
-                          </div>
-                          <FiChevronDown
-                            className={clsx(
-                              "w-5 h-5 text-blue-800",
-                              open && "transform rotate-180"
-                            )}
-                          />
-                        </Disclosure.Button>
-                        <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
-                          <h3 className="mt-0"> {t("wallet.labels.description")}</h3>
-                          <p>
-                            {capitalize(
-                              item.description[i18n?.resolvedLanguage]
-                            )}
-                          </p>
-                          <Button
-                            onClick={() =>
-                              handleTokenStorage(
-                                item.name,
-                                item.initialization_url
-                              )
-                            }
-                          >
-                            <FiSave />
-                            <span className="ml-1">
-                              {t("wallet.section-1.cta-button-text")}
-                            </span>
-                          </Button>
-                        </Disclosure.Panel>
-                      </Fragment>
-                    )}
-                  </Disclosure>
-                ))}
-              </Fragment>
-            ) : (
-              <p>{t("wallet.alerts.no-available-platforms")}</p>
-            )}
+            <PlatformList
+              platforms={unSavedPlatforms}
+              callbackFn={handleTokenStorage}
+            />
           </div>
           <div className="col-span-full md:col-span-1">
             <h2>{t("wallet.section-2.heading")}</h2>
-            {Object.keys(savedPlatforms).length ? (
-              <Fragment>
-                {savedPlatforms.map((item) => (
-                  <Disclosure key={item.name}>
-                    {({ open }) => (
-                      <Fragment>
-                        <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
-                          <div className="flex flex-row items-center">
-                            {item.logo ? (
-                              <img
-                                src={`${LOGO_HOST}${item.logo}`}
-                                alt={`${item.name} logo`}
-                                className="w-8 h-8 my-0 mr-4"
-                              />
-                            ) : (
-                              <FiGrid
-                                title={`${item.name} logo`}
-                                className="w-8 h-8 my-0 mr-4"
-                              />
-                            )}
-                            <h3 className="my-0 font-normal capitalize">
-                              {item.name}
-                            </h3>
-                          </div>
-                          <FiChevronDown
-                            className={clsx(
-                              "w-5 h-5 text-blue-800",
-                              open && "transform rotate-180"
-                            )}
-                          />
-                        </Disclosure.Button>
-                        <Disclosure.Panel className="p-4 mb-4 border border-gray-100 rounded-lg shadow">
-                          <h3 className="mt-0">{t("wallet.labels.description")}</h3>
-                          <p>
-                            {capitalize(
-                              item.description[i18n?.resolvedLanguage]
-                            )}
-                          </p>
-                          <Button
-                            danger
-                            onClick={() => {
-                              setRevokeURL(item.initialization_url);
-                              setOpenRevokeDialog(true);
-                            }}
-                          >
-                            <FiTrash2 />
-                            <span className="ml-1">
-                              {t("wallet.section-2.cta-button-text")}
-                            </span>
-                          </Button>
-                        </Disclosure.Panel>
-                      </Fragment>
-                    )}
-                  </Disclosure>
-                ))}
-              </Fragment>
-            ) : (
-              <p>{t("wallet.alerts.no-saved-platforms")}</p>
-            )}
+            <PlatformList
+              saved
+              platforms={savedPlatforms}
+              callbackFn={initRevoke}
+            />
           </div>
         </div>
-        <Button
-          outline
-          className="w-full mt-8 md:hidden mobile-tutorial-button"
-          onClick={() => setOnboarding(true)}
-        >
-          {t("labels.tutorial")}
-        </Button>
-        <LinkButton
-          to="/dashboard/sync"
-          className="mt-2 mb-8 md:hidden mobile-sync-button"
-        >
-          <IoMdSync size={22} />
-          <span className="ml-1">{t("labels.sync")}</span>
-        </LinkButton>
+
+        {/* show buttons for mobile devices only */}
+        <div className="md:hidden">
+          <Button
+            outline
+            className="w-full mt-8 mobile-tutorial-button"
+            onClick={() => setOnboarding(true)}
+          >
+            {t("labels.tutorial")}
+          </Button>
+          <LinkButton
+            to="/dashboard/sync"
+            className="mt-2 mb-8 mobile-sync-button"
+          >
+            <IoMdSync size={22} />
+            <span className="ml-1">{t("labels.sync")}</span>
+          </LinkButton>
+        </div>
       </div>
 
+      {/* revoke dialog */}
       <Transition appear show={showRevokeDialog} as={Fragment}>
         <Dialog
           as="div"
@@ -434,6 +333,7 @@ const Wallet = () => {
         </Dialog>
       </Transition>
 
+      {/* onboarding */}
       <OnboardingTutorial start={onboarding} stopFunc={setOnboarding} />
     </PageAnimationWrapper>
   );

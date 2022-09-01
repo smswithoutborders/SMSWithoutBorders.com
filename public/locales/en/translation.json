@@ -217,7 +217,11 @@
     "heading": "Store Accounts",
     "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline",
     "labels": {
-      "description": "Description"
+      "description": "Description",
+      "how-to-save": "How to save access"
+    },
+    "info": {
+      "gmail": "On the authorization page, select the option to send email on your behalf"
     },
     "section-1": {
       "heading": "Available Platforms",

@@ -217,7 +217,11 @@
     "heading": "Comptes des magasins",
     "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
     "labels": {
-      "description": "Description"
+      "description": "Description",
+      "how-to-save": "Comment sauvegarder l'accès"
+    },
+    "info": {
+      "gmail": "Sur la page d'autorisation, sélectionnez l'option d'envoi d'e-mail en votre nom"
     },
     "section-1": {
       "heading": "Plateformes disponibles",
