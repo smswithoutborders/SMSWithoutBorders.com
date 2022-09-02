@@ -17,6 +17,8 @@ import {
 } from "services";
 import { useTranslation } from "react-i18next";
 import { useDeviceDetection } from "hooks";
+import { PageAnimationWrapper, Button } from "components";
+import GmailAuthScreen from "images/gmail-auth-screen.png";
 import toast from "react-hot-toast";
 import Error from "../Error";
 
@@ -83,7 +85,9 @@ const WalletRedirect = () => {
             toast.error(t("error-messages.409"));
             break;
           case 422:
-            toast.error(t("error-messages.422"));
+            toast(t("alert-messages.missing-permission"), {
+              icon: "😰",
+            });
             break;
           case 429:
             toast.error(t("error-messages.429"));
@@ -123,10 +127,23 @@ const WalletRedirect = () => {
   if (isError) {
     if (error?.originalStatus === 422) {
       return (
-        <Error
-          message={t("error-messages.422")}
-          callBack={() => navigate(-1)}
-        />
+        <PageAnimationWrapper>
+          <div className="max-w-screen-md min-h-screen p-8 mx-auto prose text-gray-900">
+            <div className="mx-auto my-10">
+              <h1 className="font-bold">
+                {t("alert-messages.missing-permission")}
+              </h1>
+              <p>{t("error-messages.422")}</p>
+
+              <h3>{t("wallet.labels.how-to-save")}</h3>
+              <p>{t("wallet.info.gmail")}</p>
+              <img src={GmailAuthScreen} alt="Gmail auth screen" />
+              <Button onClick={() => navigate(-1)}>
+                {t("labels.try-again")}
+              </Button>
+            </div>
+          </div>
+        </PageAnimationWrapper>
       );
     } else {
       return <Error callBack={handleVerification} />;

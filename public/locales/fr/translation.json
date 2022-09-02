@@ -418,6 +418,7 @@
     "password-changed": "Le mot de passe a été changé avec succès",
     "login-successful": "Connexion réussie",
     "logout-successful": "Déconnexion réussie",
+    "missing-permission": "Oups ! Vous avez manqué quelque chose",
     "coming-soon": "A venir prochainement ...",
     "recaptcha": {
       "loading": "chargement du reCAPTCHA, veuillez patienter",

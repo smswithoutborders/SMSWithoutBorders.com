@@ -418,6 +418,7 @@
     "password-changed": "Password changed successfully",
     "login-successful": "Login successful",
     "logout-successful": "Logout successful",
+    "missing-permission": "Whoops! you missed something",
     "coming-soon": "Coming soon ...",
     "recaptcha": {
       "loading": "loading reCAPTCHA  please wait",
