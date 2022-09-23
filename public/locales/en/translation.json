@@ -17,7 +17,8 @@
     "downloads": "Downloads",
     "developers": "Developers",
     "resources": "Resources",
-    "tutorials": "Tutorials"
+    "tutorials": "Tutorials",
+    "beta-testing": "Beta Testing"
   },
   "labels": {
     "sync": "sync",
@@ -57,7 +58,7 @@
     },
     "section-3": {
       "heading": "Getting Started with SWOB",
-      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on Telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
       "steps": {
         "1": {
           "heading": "Signup for an account",
@@ -65,7 +66,7 @@
         },
         "2": {
           "heading": "Connect Accounts",
-          "details": "Securely Link your accounts on platforms we support like Gmail, twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
+          "details": "Securely Link your accounts on platforms we support like Gmail, Twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
         },
         "3": {
           "heading": "Synchronize Mobile App",
@@ -119,6 +120,64 @@
     "section-2": {
       "heading": "Operating Systems",
       "details": "Custom gateway client OS images for raspberry pi"
+    }
+  },
+  "beta-testing": {
+    "heading": "SWOB v2 Beta testing",
+    "details": "Please follow the instructions below on how to test SMSWithoutBorders",
+    "steps": {
+      "1": {
+        "heading": "Create an account",
+        "details": {
+          "part-1": "Create your account",
+          "part-2": "if you don't have one already",
+          "link-text": "here"
+        }
+      },
+      "2": {
+        "heading": "Login to your account",
+        "details": {
+          "part-1": "Login to your account so that you can add platforms",
+          "link-text": "login here "
+        }
+      },
+      "3": {
+        "heading": "Store platforms",
+        "details": {
+          "part-1": "Store Gmail, Twitter and telegram so that you can use the SWOB app offline. Click on each platform to see the store button",
+          "part-2": "Storing Twitter on your phone may require you to click the store button twice if you have the Twitter app already installed",
+          "caption": "Note"
+        }
+      },
+      "4": {
+        "heading": "Download app",
+        "details": {
+          "part-1": "After storing all the platforms, logout from your account and head over to the playstore to download the app. Click on the button bellow to open playstore",
+          "part-2": "Once there you should see the following screen",
+          "part-3": "If you do not have the (Beta) near the app name, scroll down and select join. This will take some time about 5mins to 30mins to add you to the beta program. After that, you should be able to install the new app. After installing, open the app and confirm you have the screen below to make sure you have the latest version"
+        }
+      },
+      "5": {
+        "heading": "Synchronize your account",
+        "details": {
+          "part-1": "In the app click on the Synchronize button then continue. This will open a page for you to login. After login, scroll down and click/tap on the sync button to access the Synchronization page.",
+          "part-2": "Once on the Synchronization page, scroll down and click sync. This will then open the page below.",
+          "part-3": "Click on open app and enter your password to finish Synchronization."
+        }
+      },
+      "6": {
+        "heading": "Go offline!!!",
+        "details": "You can now use SMSWithoutBorders offline. turn off your internet connection. Activate a text bundle and send messages on all the platforms you have stored. We don't mind if you tag us while you're at it :)"
+      },
+      "7": {
+        "heading": "We need your feedback!",
+        "details": {
+          "part-1": "Thank you so much for taking the time to test the app. We appreciate your time and support",
+          "part-2": "Please answer these",
+          "link-text": "few questions",
+          "part-3": "about your experience"
+        }
+      }
     }
   },
   "login": {

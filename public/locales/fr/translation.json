@@ -17,7 +17,8 @@
     "downloads": "Téléchargements",
     "developers": "Développeurs",
     "resources": "Ressources",
-    "tutorials": "Tutoriels"
+    "tutorials": "Tutoriels",
+    "beta-testing": "Test bêta"
   },
   "labels": {
     "sync": "sync",
@@ -119,6 +120,64 @@
     "section-2": {
       "heading": "Systèmes d'exploitation",
       "details": "Images personnalisées du système d'exploitation du client de la passerelle pour raspberry pi"
+    }
+  },
+  "beta-testing": {
+    "heading": "SWOB v2 Test bêta",
+    "details": "Veuillez suivre les instructions ci-dessous sur la façon de tester SMSWithoutBorders",
+    "steps": {
+      "1": {
+        "heading": "Créer un compte",
+        "details": {
+          "part-1": "Créer votre compte",
+          "part-2": "si vous n'en avez pas déjà un",
+          "link-text": "ici"
+        }
+      },
+      "2": {
+        "heading": "Connexion à votre compte",
+        "details": {
+          "part-1": "Connectez-vous à votre compte afin de pouvoir ajouter des plateformes",
+          "link-text": "connectez-vous ici"
+        }
+      },
+      "3": {
+        "heading": "Sauvegarder les plateformes",
+        "details": {
+          "part-1": "Stockez Gmail, Twitter et Telegram pour que vous puissiez utiliser l'application SWOB hors ligne. Cliquez sur chaque plateforme pour voir le bouton de stockage",
+          "part-2": "Stocker Twitter sur votre téléphone peut vous obliger à cliquer deux fois sur le bouton de stockage si l'application Twitter est déjà installée",
+          "caption": "Attention"
+        }
+      },
+      "4": {
+        "heading": "Télécharger l'application",
+        "details": {
+          "part-1": "Après avoir stocké toutes les plateformes, déconnectez-vous de votre compte et rendez-vous sur le playstore pour télécharger l'application. Cliquez sur le bouton ci-dessous pour ouvrir le playstore",
+          "part-2": "Une fois là, vous devriez voir l'écran suivant",
+          "part-3": "Si vous n'avez pas le (Beta) près du nom de l'application, faites défiler vers le bas et sélectionnez rejoindre. Cela prendra un certain temps, entre 5 et 30 minutes, pour vous ajouter au programme bêta. Après cela, vous devriez être en mesure d'installer la nouvelle application. Après l'installation, ouvrez l'application et confirmez que vous avez l'écran ci-dessous pour vous assurer que vous avez la dernière version"
+        }
+      },
+      "5": {
+        "heading": "Synchroniser votre compte",
+        "details": {
+          "partie-1": "Dans l'application, cliquez sur le bouton Synchroniser puis continuez. Une page s'ouvrira pour vous permettre de vous connecter. Après la connexion, faites défiler vers le bas et cliquez/tapez sur le bouton de synchronisation pour accéder à la page de synchronisation.",
+          "part-2": "Une fois sur la page de Synchronisation, faites défiler vers le bas et cliquez sur sync. Cela ouvrira alors la page ci-dessous.",
+          "part-3": "Cliquez sur ouvrir l'application et entrez votre mot de passe pour terminer la synchronisation"
+        }
+      },
+      "6": {
+        "heading": "Passez hors ligne ! !!",
+        "details": "Vous pouvez désormais utiliser SMSWithoutBorders hors ligne. Coupez votre connexion internet. Activez un forfait texte et envoyez des messages sur toutes les plateformes que vous avez enregistrées. Cela ne nous dérange pas si vous nous taggez pendant que vous y êtes :)"
+      },
+      "7": {
+        "heading": "Nous avons besoin de votre avis !",
+        "details": {
+          "part-1": "Merci beaucoup d'avoir pris le temps de tester l'application. Nous apprécions votre temps et votre soutien",
+          "part-2": "Veuillez répondre à ces questions",
+          "link-text": "quelques questions",
+          "partie-3": "sur votre expérience"
+        }
+      }
     }
   },
   "login": {

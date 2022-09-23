@@ -40,11 +40,13 @@ const PasswordChangeVerification = lazy(() =>
   import("pages/password-reset/CodeVerification")
 );
 const PasswordReset = lazy(() => import("pages/password-reset/PasswordReset"));
+const BetaTesting = lazy(() => import("pages/BetaTesting"));
 
 // toast notifications: https://uxdesign.cc/toasts-or-snack-bars-design-organic-system-notifications-1236f2883023
 
 const App = () => {
   const { t } = useTranslation();
+
   return (
     <Fragment>
       <Toaster
@@ -66,6 +68,7 @@ const App = () => {
                   <Route path=":lang" element={<Login />} />
                 </Route>
                 <Route path="downloads" element={<Downloads />} />
+                <Route path="beta-testing" element={<BetaTesting />} />
                 <Route path="privacy-policy">
                   <Route index element={<Privacy />} />
                   <Route path=":lang" element={<Privacy />} />
