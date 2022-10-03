@@ -3,6 +3,7 @@ import { PageAnimationWrapper } from "components";
 import { useTranslation } from "react-i18next";
 import { GoMarkGithub } from "react-icons/go";
 import PlayStoreLogo from "images/playstore.svg";
+import { FiDisc, FiDownload } from "react-icons/fi";
 
 const Downloads = () => {
   const { t } = useTranslation();
@@ -42,7 +43,14 @@ const Downloads = () => {
           <h2>{t("downloads.section-2.heading")}</h2>
           <p>{t("downloads.section-2.details")}</p>
 
-         <p className="font-bold">{t("alert-messages.coming-soon")}</p>
+          <a
+            download
+            className="flex items-center space-x-2 text-blue-800"
+            href="https://smswithoutborders.com/images/downloads/swobgc-ubuntu-22.04.1-preinstalled-server-arm64+raspi.img.xz"
+          >
+            <FiDownload className="w-20 h-20 md:h-8 md:w-8" />
+            <span>swobgc-ubuntu-22.04.1-preinstalled-server-arm64+raspi</span>
+          </a>
         </div>
       </div>
     </PageAnimationWrapper>
