@@ -221,7 +221,8 @@
       "how-to-save": "Comment sauvegarder l'accès"
     },
     "info": {
-      "gmail": "Sur la page d'autorisation, sélectionnez l'option d'envoi d'e-mail en votre nom"
+      "gmail": "Sur la page d'autorisation, sélectionnez l'option d'envoi d'e-mail en votre nom",
+      "twitter" : "Si l'application Twitter est déjà installée, veuillez l'ouvrir avant de cliquer sur le bouton de la boutique ci-dessous. L'application ne vous demandera l'autorisation que si elle est en cours d'exécution"
     },
     "section-1": {
       "heading": "Plateformes disponibles",

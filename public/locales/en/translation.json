@@ -221,7 +221,8 @@
       "how-to-save": "How to save access"
     },
     "info": {
-      "gmail": "On the authorization page, select the option to send email on your behalf"
+      "gmail": "On the authorization page, select the option to send email on your behalf",
+      "twitter": "If you already have the Twitter app installed, please open it before clicking on the store button below. The app will only prompt you for authorization if it is running"
     },
     "section-1": {
       "heading": "Available Platforms",
