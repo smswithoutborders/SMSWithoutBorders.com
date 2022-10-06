@@ -1,6 +1,4 @@
 import React from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
 import Logo from "images/logo-icon-light.png";
 import { Link } from "react-router-dom";
 import {
@@ -13,72 +11,76 @@ import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-const LogoIcon = tw.img`w-12 h-12 text-white p-2 rounded-full`;
-const FooterLink = tw.p`pl-14`;
-const FooterNavLink = tw(Link)`inline-flex items-center  hocus:no-underline`;
-const ExternalLink = tw.a`inline-flex items-center text-base cursor-pointer mb-2 md:mb-4 hocus:no-underline hocus:text-blue-200`;
-const NavContainer = tw.div`flex flex-col p-4 items-start`;
-
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="flex flex-col px-2 py-8 overflow-y-auto text-gray-300 lg:flex-row md:justify-between bg-slate-900 md:p-8">
-      <NavContainer tw="p-0 mb-4 md:mb-0">
-        <FooterNavLink to="/">
-          <LogoIcon src={Logo} alt="SMSwithoutborders" />
+    <footer className="flex flex-col px-2 py-8 overflow-y-auto text-sm text-gray-300 lg:flex-row md:justify-between bg-slate-900 md:p-8">
+      <div className="flex flex-col p-4 space-y-2">
+        <Link
+          to="/"
+          className="inline-flex items-center appearance-none hover:focus:text-blue-200 focus:no-underline"
+        >
+          <img
+            src={Logo}
+            alt="SMSwithoutborders"
+            className="w-12 h-12 p-2 text-white rounded-full"
+          />
           <span className="ml-2 text-xl font-bold text-white">
             SMSWithoutBorders
           </span>
-        </FooterNavLink>
+        </Link>
 
-        <FooterLink>
+        <p className="pl-14">
           2021 - {new Date().getFullYear()}
-          <ExternalLink
-            tw="text-sm"
+          <a
+            className="inline-flex items-center mb-2 cursor-pointer md:mb-4 focus:hover:text-blue-200"
             href="https://github.com/afkanerd"
             target="_blank"
             rel="noreferrer"
           >
             &nbsp; Afkanerd
-          </ExternalLink>
-        </FooterLink>
-      </NavContainer>
+          </a>
+        </p>
+      </div>
 
-      <NavContainer>
-        <FooterNavLink
-          tw="mb-2 md:mb-4 hocus:text-blue-200"
+      <div className="flex flex-col p-4 space-y-4">
+        <Link
+          className="inline-flex items-center hover:focus:text-blue-200"
           to="/privacy-policy"
         >
           <FiLink2 size={20} /> &nbsp; {t("menu.privacy")}
-        </FooterNavLink>
-        <ExternalLink
+        </Link>
+        <a
+          className="inline-flex items-center hover:focus:text-blue-200"
           href="https://developers.smswithoutborders.com"
           target="_blank"
           rel="noreferrer"
         >
           <FiExternalLink size={20} /> &nbsp; {t("menu.developers")}
-        </ExternalLink>
-        <ExternalLink
+        </a>
+        <a
+          className="inline-flex items-center hover:focus:text-blue-200"
           href="mailto:developers@smswithoutborders.com"
           target="_blank"
           rel="noreferrer"
         >
           <FiMail size={20} /> &nbsp; developers@smswithoutborders.com
-        </ExternalLink>
-      </NavContainer>
+        </a>
+      </div>
 
-      <NavContainer>
-        <ExternalLink>
+      <div className="flex flex-col p-4 space-y-4">
+        <p className="inline-flex items-center hover:focus:text-blue-200">
           <FiMessageSquare size={20} /> &nbsp; IRC: freenode/#afkanerd
-        </ExternalLink>
-        <ExternalLink
+        </p>
+        <a
+          className="inline-flex items-center hover:focus:text-blue-200"
           href="https://github.com/smswithoutborders"
           target="_blank"
           rel="noreferrer"
         >
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
-        </ExternalLink>
-      </NavContainer>
+        </a>
+      </div>
       <div>
         <LanguageSwitcher bordered />
       </div>

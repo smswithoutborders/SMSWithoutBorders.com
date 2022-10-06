@@ -129,6 +129,13 @@ export const MainNavbar = () => {
       >
         {t("menu.tutorials")}
       </ExternalLink>
+      <MobileNavLink
+        onClick={() => toggleMenu()}
+        key="beta-testing"
+        to="beta-testing"
+      >
+        {t("menu.beta-testing")}
+      </MobileNavLink>
       <ExternalLink
         onClick={() => toggleMenu()}
         key="developers"

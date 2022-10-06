@@ -51,7 +51,7 @@ const App = () => {
     <Fragment>
       <Toaster
         position="top-right"
-        containerClassName="mt-20"
+        containerClassName="mt-16 lg:mt-20"
         reverseOrder={false}
         toastOptions={{
           duration: 5000,

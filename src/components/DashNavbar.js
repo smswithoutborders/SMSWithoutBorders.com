@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from "react";
-import tw from "twin.macro";
-import "styled-components/macro";
 import logo from "images/logo-icon-light.png";
+import toast from "react-hot-toast";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,11 +14,6 @@ import { DashNavLink } from "./NavLinks";
 import { NavButton } from "./Buttons";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import toast from "react-hot-toast";
-
-const UserActions = tw.div`flex items-center mt-20 justify-between bg-gray-100 lg:(bg-white mt-0)`;
-const MobileNav = tw.nav`lg:hidden z-50 bg-white sticky top-0 shadow-lg`;
-const DesktopNav = tw.nav`hidden lg:flex  justify-between items-center bg-white h-16 shadow-lg`;
 
 export const DashNavbar = () => {
   const { t } = useTranslation();
@@ -78,7 +72,10 @@ export const DashNavbar = () => {
   }
 
   const ActionLinks = () => (
-    <UserActions key={2}>
+    <div
+      key={2}
+      className="flex items-center justify-between mt-20 bg-gray-100 lg:bg-white lg:mt-0"
+    >
       <LanguageSwitcher />
       {metrics?.name && (
         <div className="flex items-center px-4 lg:px-0">
@@ -93,7 +90,7 @@ export const DashNavbar = () => {
       <NavButton onClick={() => handleLogOut()}>
         <FiLogOut /> &nbsp; {t("menu.logout")}
       </NavButton>
-    </UserActions>
+    </div>
   );
 
   const DesktopLinks = () => (
@@ -165,12 +162,14 @@ export const DashNavbar = () => {
 
   return (
     <Fragment>
-      <DesktopNav>
+      {/* Desktop nav */}
+      <nav className="items-center justify-between hidden h-16 bg-white shadow-lg lg:flex">
         <Logo />
         <DesktopLinks />
         <ActionLinks />
-      </DesktopNav>
-      <MobileNav>
+      </nav>
+      {/* Mobile nav */}
+      <nav className="sticky top-0 z-50 bg-white shadow-lg lg:hidden">
         <div className="flex items-center justify-between p-4">
           <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>
@@ -194,7 +193,7 @@ export const DashNavbar = () => {
             <ActionLinks />
           </Transition>
         )}
-      </MobileNav>
+      </nav>
     </Fragment>
   );
 };

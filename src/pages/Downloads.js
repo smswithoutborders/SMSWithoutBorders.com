@@ -3,7 +3,7 @@ import { PageAnimationWrapper } from "components";
 import { useTranslation } from "react-i18next";
 import { GoMarkGithub } from "react-icons/go";
 import PlayStoreLogo from "images/playstore.svg";
-import { FiDisc, FiDownload } from "react-icons/fi";
+import { FiDownload } from "react-icons/fi";
 
 const Downloads = () => {
   const { t } = useTranslation();
