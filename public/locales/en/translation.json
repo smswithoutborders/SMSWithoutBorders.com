@@ -208,7 +208,8 @@
     "code-verification": {
       "alerts": {
         "account-created": "your account has been created, please login",
-        "registration-error": "Sorry we could not complete your registration. If error persists, please contact support"
+        "registration-error": "Sorry we could not complete your registration. If error persists, please contact support",
+        "app-redirect": "Please click on the button below to open the app"
       }
     }
   },
@@ -329,6 +330,9 @@
         "loading": "loading"
       },
       "cta-button-text": "sync"
+    },
+    "section-3": {
+      "details": "Please click on the button below to open the app"
     },
     "alerts": {
       "sync-started": "Sync started",

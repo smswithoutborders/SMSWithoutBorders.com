@@ -208,7 +208,7 @@ const Sync = () => {
             <Loader />
           ) : status === "connected" || tutorial.showButton ? (
             <div className="text-center mt-36">
-              <h3>Please click on the button below to open the app</h3>
+              <h3>{t("sync.section-3.details")}</h3>
               <Button
                 className="mt-4 open-app-button"
                 onClick={() => window.location.replace(mobileLink)}

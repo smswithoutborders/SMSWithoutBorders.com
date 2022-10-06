@@ -19,6 +19,7 @@ import {
   FormGroup,
 } from "components";
 import Error from "../Error";
+import { FiArrowRightCircle } from "react-icons/fi";
 
 const CodeVerification = () => {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ const CodeVerification = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [code, setCode] = useState();
+  const [verified, setVerified] = useState(false);
 
   const [
     validateOTPCode,
@@ -103,10 +105,10 @@ const CodeVerification = () => {
       toast.success(t("signup.code-verification.alerts.account-created"));
       // remove any cached data
       clearCache();
-
-      // handle user redirection
+      // handle user redirection if they are from app or otherwise
+      // they have to now click on the button because of possible browser blocking intents
       if (cache.redirectURL) {
-        window.location.replace(cache.redirectURL);
+        setVerified(true);
       } else {
         navigate("/login");
       }
@@ -155,9 +157,8 @@ const CodeVerification = () => {
   ) {
     return <Loader />;
   }
-
   // if error while requesting OTP code
-  if (OTPRequestError) {
+  else if (OTPRequestError) {
     return (
       <PageAnimationWrapper>
         <div className="max-w-screen-xl min-h-screen p-8 mx-auto prose text-gray-900">
@@ -189,13 +190,26 @@ const CodeVerification = () => {
       </PageAnimationWrapper>
     );
   }
-  // if error while verifying signup
+  // // if error while verifying signup
   else if (signUpVerificationError) {
     return (
       <Error
         message={t("signup.code-verification.alerts.registration-error")}
         callBack={handleSignUpVerification}
       />
+    );
+  } else if (verified) {
+    return (
+      <div className="h-full max-w-md min-h-screen px-6 mx-auto prose text-center pt-36">
+        <h3>{t("signup.code-verification.alerts.app-redirect")}</h3>
+        <Button
+          className="mt-4 open-app-button"
+          onClick={() => window.location.replace(cache.redirectURL)}
+        >
+          <FiArrowRightCircle size={22} />
+          <span className="ml-1">{t("labels.open-app")}</span>
+        </Button>
+      </div>
     );
   } else {
     return (
