@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import clsx from "clsx";
@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const LoadingContainer = styled.div.attrs(({ className, light }) => ({
   className: clsx(
-    "grid place-items-center mx-auto w-full",
+    "grid place-items-center mx-auto w-full min-h-screen h-full",
     light ? "text-white" : "text-gray-600",
     className
   ),
@@ -23,6 +23,11 @@ const Spinner = styled.div.attrs(({ className, light }) => ({
 
 export const Loader = ({ message, light }) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <LoadingContainer className="h-screen" light={light}>
       <div>
@@ -35,6 +40,11 @@ export const Loader = ({ message, light }) => {
 
 export const InlineLoader = ({ message, className, light }) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <LoadingContainer className={clsx("h-80", className)} light={light}>
       <div>
