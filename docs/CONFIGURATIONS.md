@@ -13,9 +13,17 @@ yarn install
 Create development and production .env configuration files from the env.example template
 
 ```bash
+make config
+```
+
+or
+
+```bash
 cp env.example .env.development.local
 
 cp env.example .env.production.local
+
+or
 
 ```
 
@@ -57,7 +65,7 @@ You will also see any lint errors in the console.
 Create an optimized production build that can be hosted on servers. This step uses the variables in **.env.production.local**
 
 ```bash
-yarn build
+yarn build or make build
 ```
 
 Check the `build` folder for deployable files once complete.
