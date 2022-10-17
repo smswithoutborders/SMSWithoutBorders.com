@@ -15,4 +15,4 @@ build:
 
 deploy:
 	@echo "[!] Deploying built app ..."
-	@cp -r build/* /var/www/html/
+	@cp -r build/. /var/www/html/
