@@ -34,6 +34,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below are the defaults
 
 * PORT -> development port
+* GENERATE_SOURCEMAP -> Generate or ignore sourcemaps
 * REACT_APP_API_URL ->  Backend API URL
 * REACT_APP_API_VERSION -> API version
 * REACT_APP_GATEWAY_SERVER ->  Gateway server url
