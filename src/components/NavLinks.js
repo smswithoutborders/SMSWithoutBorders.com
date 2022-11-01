@@ -1,13 +1,13 @@
 import React, { forwardRef, Fragment } from "react";
 import clsx from "clsx";
 import { NavLink as BaseNavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { Menu, Transition } from "@headlessui/react";
 import { FiChevronDown } from "react-icons/fi";
+import { useScroll } from "hooks";
 
-export const NavLink = forwardRef(({ scrolled, className, ...props }, ref) => {
-  const { i18n } = useTranslation();
-  const isFrench = i18n.language === "fr";
+export const NavLink = forwardRef(({ className, ...props }, ref) => {
+  const scrolled = useScroll();
+
   return (
     <BaseNavLink
       ref={ref}
@@ -15,7 +15,6 @@ export const NavLink = forwardRef(({ scrolled, className, ...props }, ref) => {
       className={({ isActive }) =>
         clsx(
           "flex items-center outline-none appearance-none p-5",
-          isFrench && "md:px-3",
           isActive && !scrolled && "border-b-2 border-white text-white",
           isActive && scrolled && "border-b-2 border-blue-800 text-blue-800",
           className
@@ -26,8 +25,6 @@ export const NavLink = forwardRef(({ scrolled, className, ...props }, ref) => {
 });
 
 export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
-  const { i18n } = useTranslation();
-  const isFrench = i18n.language === "fr";
   return (
     <BaseNavLink
       ref={ref}
@@ -35,7 +32,6 @@ export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
       className={({ isActive }) =>
         clsx(
           "flex items-center outline-none appearance-none p-5",
-          isFrench && "md:px-3",
           isActive && "border-b-2 border-blue-800 text-blue-800",
           className
         )
@@ -44,38 +40,30 @@ export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
   );
 });
 
-export const MobileNavLink = forwardRef(
-  ({ scrolled, className, ...props }, ref) => {
-    const { i18n } = useTranslation();
-    const isFrench = i18n.language === "fr";
-    return (
-      <BaseNavLink
-        ref={ref}
-        {...props}
-        className={({ isActive }) =>
-          clsx(
-            "flex items-center outline-none appearance-none p-5",
-            isFrench && "md:px-3",
-            isActive && "border-b-2 border-blue-800 text-blue-800",
-            className
-          )
-        }
-      />
-    );
-  }
-);
+export const MobileNavLink = forwardRef(({ className, ...props }, ref) => {
+  return (
+    <BaseNavLink
+      ref={ref}
+      {...props}
+      className={({ isActive }) =>
+        clsx(
+          "flex items-center outline-none appearance-none p-5 md:px-3",
+          isActive && "border-b-2 border-blue-800 text-blue-800",
+          className
+        )
+      }
+    />
+  );
+});
 
 export const ExternalLink = forwardRef(
   ({ className, children, ...props }, ref) => {
-    const { i18n } = useTranslation();
-    const isFrench = i18n.language === "fr";
     return (
       <a
         ref={ref}
         {...props}
         className={clsx(
-          "flex outline-none items-center appearance-none active:font-bold p-5",
-          isFrench && "md:px-3",
+          "flex outline-none items-center appearance-none active:font-bold p-5 md:px-3",
           className
         )}
       >
@@ -86,16 +74,9 @@ export const ExternalLink = forwardRef(
 );
 
 export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
-  const { i18n } = useTranslation();
-  const isFrench = i18n.language === "fr";
   return (
     <Menu ref={ref} {...rest} as="div" className="relative">
-      <Menu.Button
-        className={clsx(
-          "flex outline-none items-center space-x-1 appearance-none active:font-bold p-5",
-          isFrench && "md:px-3"
-        )}
-      >
+      <Menu.Button className="flex items-center p-5 space-x-1 outline-none appearance-none active:font-bold md:px-3">
         {({ open }) => (
           <Fragment>
             <span>{label}</span>
@@ -122,10 +103,7 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
                   href={path}
                   rel="noreferrer"
                   target="_blank"
-                  className={clsx(
-                    "flex outline-none items-center appearance-none active:font-bold text-gray-900 p-5",
-                    isFrench && "md:px-3"
-                  )}
+                  className="flex items-center p-5 text-gray-900 outline-none appearance-none active:font-bold md:px-3"
                 >
                   {label}
                 </a>
@@ -135,8 +113,7 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
                   to={`/${path}`}
                   className={({ isActive }) =>
                     clsx(
-                      "flex items-center outline-none appearance-none p-5",
-                      isFrench && "md:px-3",
+                      "flex items-center outline-none appearance-none p-5 md:px-3",
                       isActive
                         ? "border-b-2 border-blue-800 text-blue-800"
                         : "border-b-2 border-white text-gray-900"

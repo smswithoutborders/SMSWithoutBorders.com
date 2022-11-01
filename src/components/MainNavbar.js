@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import logo from "images/logo-icon-light.png";
 import { FiMenu, FiX } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
@@ -7,36 +7,22 @@ import { Transition } from "@headlessui/react";
 import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useScroll } from "hooks";
 import clsx from "clsx";
 
 export const MainNavbar = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+
+  const scrolled = useScroll();
 
   function toggleMenu() {
     setOpen(!open);
   }
 
-  const handleScroll = useCallback(() => {
-    if (window.scrollY >= 80) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [handleScroll]);
-
   const DesktopLinks = () => (
     <div className="lg:flex">
-      <NavLink scrolled={scrolled} key="/" to="/">
+      <NavLink key="/" to="/" end>
         {t("menu.home")}
       </NavLink>
 
@@ -70,10 +56,10 @@ export const MainNavbar = () => {
       >
         {t("menu.developers")}
       </ExternalLink>
-      <NavLink scrolled={scrolled} key="privacy-policy" to="/privacy-policy">
+      <NavLink key="privacy-policy" to="/privacy-policy">
         {t("menu.privacy")}
       </NavLink>
-      <NavLink scrolled={scrolled} key="contact-us" to="/contact-us">
+      <NavLink key="contact-us" to="/contact-us">
         {t("menu.contact")}
       </NavLink>
     </div>
@@ -90,7 +76,7 @@ export const MainNavbar = () => {
         <GoMarkGithub size={20} />
         <span className="ml-2">GitHub</span>
       </ExternalLink>
-      <NavLink scrolled={scrolled} open={open} key="login" to="/login">
+      <NavLink open={open} key="login" to="/login">
         <span className="ml-2">{t("menu.login")}</span>
       </NavLink>
       <NavLink
@@ -104,17 +90,12 @@ export const MainNavbar = () => {
   );
 
   const MobileLinks = () => (
-    <div className="xl:flex">
-      <MobileNavLink
-        scrolled={scrolled}
-        onClick={() => toggleMenu()}
-        key="/"
-        to="/"
-      >
+    <div className="">
+      <LanguageSwitcher />
+      <MobileNavLink onClick={() => toggleMenu()} key="home" to="/" end>
         {t("menu.home")}
       </MobileNavLink>
       <MobileNavLink
-        scrolled={scrolled}
         onClick={() => toggleMenu()}
         key="downloads"
         to="/downloads"
@@ -145,7 +126,6 @@ export const MainNavbar = () => {
         {t("menu.developers")}
       </ExternalLink>
       <MobileNavLink
-        scrolled={scrolled}
         onClick={() => toggleMenu()}
         key="privacy-policy"
         to="/privacy-policy"
@@ -153,7 +133,6 @@ export const MainNavbar = () => {
         {t("menu.privacy")}
       </MobileNavLink>
       <MobileNavLink
-        scrolled={scrolled}
         onClick={() => toggleMenu()}
         key="contact-us"
         to="/contact-us"
@@ -171,7 +150,6 @@ export const MainNavbar = () => {
         <span className="ml-2">GitHub</span>
       </ExternalLink>
       <MobileNavLink
-        scrolled={scrolled}
         open={open}
         key="login"
         to="/login"
@@ -187,7 +165,6 @@ export const MainNavbar = () => {
       >
         <span className="ml-2">{t("menu.signup")}</span>
       </MobileNavLink>
-      <LanguageSwitcher />
     </div>
   );
 
@@ -210,7 +187,12 @@ export const MainNavbar = () => {
         <DesktopLinks />
         <ActionLinks />
       </div>
-      <div className="sticky top-0 z-50 bg-white shadow-lg lg:hidden">
+      <div
+        className={clsx(
+          "bg-white shadow-lg lg:hidden z-50",
+          open ? "fixed inset-0 overflow-y-auto" : "sticky top-0"
+        )}
+      >
         <div className="flex items-center justify-between p-4">
           <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>

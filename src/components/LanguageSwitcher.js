@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { FiChevronDown } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 const languages = [
   { name: "EN", key: "en" },
@@ -34,7 +35,7 @@ export const LanguageSwitcher = ({ bordered }) => {
       <div
         className={`relative  ${bordered && "md:border md:border-gray-600"}`}
       >
-        <Listbox.Button className="flex items-center justify-between w-full p-4 space-x-1 rounded-lg cursor-default focus:outline-none">
+        <Listbox.Button className="flex items-center justify-between w-full p-5 space-x-1 rounded-lg cursor-default focus:outline-none">
           {({ open }) => (
             <Fragment>
               <span className="block font-normal">{selected?.name}</span>
@@ -52,7 +53,7 @@ export const LanguageSwitcher = ({ bordered }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute w-full overflow-auto bg-white border divide-y rounded-md shadow-xl focus:outline-none">
+          <Listbox.Options className="absolute w-full overflow-auto bg-white border divide-y rounded-md lg:shadow-xl focus:outline-none">
             {languages.map((lang, id) => (
               <Listbox.Option
                 key={id}
@@ -61,7 +62,7 @@ export const LanguageSwitcher = ({ bordered }) => {
               >
                 {({ selected }) => (
                   <span
-                    className={`block px-4 py-2 ${
+                    className={`block p-5 lg:py-2 ${
                       selected ? "text-blue-800" : "text-gray-900"
                     }`}
                   >
@@ -75,4 +76,8 @@ export const LanguageSwitcher = ({ bordered }) => {
       </div>
     </Listbox>
   );
+};
+
+LanguageSwitcher.propTypes = {
+  bordered: PropTypes.bool,
 };
