@@ -163,12 +163,20 @@ const CodeVerification = () => {
       <PageAnimationWrapper>
         <div className="max-w-screen-xl min-h-screen p-8 mx-auto prose text-gray-900">
           <div className="mx-auto my-32">
-            <h1 className="font-bold">
-              {t("error-messages.general-error-title")}
-            </h1>
-            <p className="text-xl">
-              {t("code-verification.error-messages.otp-request")}
-            </p>
+            <h1>{t("error-messages.general-error-title")}</h1>
+            <p>{t("code-verification.error-messages.otp-request")}</p>
+
+            {!isInitialized && (
+              <div className="flex max-w-sm space-x-2">
+                <Button outline className="flex-1" onClick={() => navigate(-1)}>
+                  {t("labels.back")}
+                </Button>
+                <Button className="flex-1" onClick={() => resendOTPCode()}>
+                  {t("labels.try-again")}
+                </Button>
+              </div>
+            )}
+
             {isInitialized && expired && (
               <Button
                 outline
