@@ -6,12 +6,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { authSelector, resetStore } from "features";
-import {
-  useChangePasswordMutation,
-  clearCache,
-  clearPersistedState,
-} from "services";
+import { authSelector, logout } from "features";
+import { useChangePasswordMutation } from "services";
 import {
   Alert,
   Label,
@@ -71,11 +67,8 @@ const PasswordChange = () => {
     try {
       await changePassword(request).unwrap();
       toast.success(t("alert-messages.password-changed"));
-      // remove any cached data
-      clearCache();
-      // reset store/logout user
-      dispatch(resetStore());
-      clearPersistedState();
+      // remove any cached data and reset store/logout user
+      dispatch(logout());
       navigate("/login");
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling

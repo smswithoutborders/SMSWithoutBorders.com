@@ -4,11 +4,15 @@ import toast from "react-hot-toast";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoMdSync } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
-import { metricsSelector, resetStore, authSelector } from "features";
+import {
+  metricsSelector,
+  authSelector,
+  logout as logoutAction,
+} from "features";
 import { useSelector, useDispatch } from "react-redux";
 import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
-import { clearCache, clearPersistedState, useLogoutMutation } from "services";
+import { useLogoutMutation } from "services";
 import { Loader } from "./Loader";
 import { DashNavLink } from "./NavLinks";
 import { NavButton } from "./Buttons";
@@ -32,11 +36,9 @@ export const DashNavbar = () => {
   async function handleLogOut() {
     try {
       await logout(auth).unwrap();
-      // clear local cache if any
-      clearCache();
-      clearPersistedState();
-      // clear store
-      dispatch(resetStore());
+      // clear store also handles cache clearing
+      // check in features/reducers
+      dispatch(logoutAction());
       toast.success(t("alert-messages.logout-successful"));
       navigate("/login", { replace: true, state: null });
     } catch (error) {

@@ -1,7 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useDeleteAccountMutation } from "services";
-import { authSelector, resetStore } from "features";
+import { authSelector, logout } from "features";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -63,7 +63,7 @@ const AccountDeletion = () => {
       await deleteAccount(request).unwrap();
       toast.success(t("account-deletion.alerts.account-deleted"));
       // clear store/ logout user
-      dispatch(resetStore());
+      dispatch(logout());
       // redirect to login
       navigate("/login");
     } catch (error) {
