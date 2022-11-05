@@ -240,6 +240,12 @@
       "cta-button-text": "continue",
       "cancel-button-text": "cancel"
     },
+    "prompt-dialog": {
+      "heading": "Do you have the Twitter app installed ?",
+      "details": "If yes, please open the app then return to this page and click continue. The app is known to interfere if installed and not active",
+      "cta-button-text": "continue",
+      "cancel-button-text": "cancel"
+    },
     "alerts": {
       "load-error": "Sorry we could not load platforms. If error persists, please contact support",
       "no-available-platforms": "No available platforms",

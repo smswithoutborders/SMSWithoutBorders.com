@@ -9,12 +9,8 @@ const Error = ({ title, message, callBack }) => {
     <PageAnimationWrapper>
       <div className="max-w-screen-xl min-h-screen p-8 mx-auto prose text-gray-900">
         <div className="mx-auto my-32">
-          <h1 className="font-bold">
-            {title || t("error-messages.general-error-title")}
-          </h1>
-          <p className="text-xl">
-            {message || t("error-messages.general-error-message")}
-          </p>
+          <h2>{title || t("error-messages.general-error-title")}</h2>
+          <p>{message || t("error-messages.general-error-message")}</p>
           <Button onClick={() => callBack()}>{t("labels.try-again")}</Button>
         </div>
       </div>

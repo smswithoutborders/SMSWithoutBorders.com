@@ -35,6 +35,11 @@ export const RequestErrorHandler = (store) => (next) => (action) => {
         case 409:
           toast.error(i18n.t("error-messages.409"));
           break;
+        case 422:
+          toast(i18n.t("alert-messages.missing-permission"), {
+            icon: "😰",
+          });
+          break;
         case 429:
           toast.error(i18n.t("error-messages.429"));
           break;

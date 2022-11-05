@@ -36,6 +36,10 @@ const WalletRedirect = () => {
   const code = searchParams.get("code");
   const scope = searchParams.get("scope");
 
+  /*
+   * Cache auth in localStorage because twitter will use
+   * in-app browser and sessionStorage is not accessible
+   */
   const cAuth = useMemo(() => getLocalCache(), []);
 
   const handleVerification = useCallback(async () => {
@@ -61,46 +65,13 @@ const WalletRedirect = () => {
       } else if (isMobile && platform === "twitter") {
         setOpen(true);
         clearLocalCache();
-        window.close();
       } else {
         toast.success(t("alert-messages.redirect"));
         clearLocalCache();
         window.close();
       }
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.403"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 422:
-            toast(t("alert-messages.missing-permission"), {
-              icon: "😰",
-            });
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }, [
     t,

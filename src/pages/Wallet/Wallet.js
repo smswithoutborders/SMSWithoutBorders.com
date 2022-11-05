@@ -25,6 +25,7 @@ import {
 import Error from "../Error";
 import OnboardingTutorial from "../tutorials/OnboardingTutorial";
 import { PlatformList } from "./components";
+import { useDeviceDetection } from "hooks";
 
 const Wallet = () => {
   const { t } = useTranslation();
@@ -33,12 +34,14 @@ const Wallet = () => {
   const [showRevokeDialog, setOpenRevokeDialog] = useState(false);
   const [password, setPassword] = useState("");
   const [onboarding, setOnboarding] = useState(false);
-  const [isTwitter, setIsTwitter] = useState(false);
+  const [prompt, showPrompt] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const auth = useSelector(authSelector);
+  const isMobile = useDeviceDetection();
+
   // fetch platforms with rtk query
   const {
     data = {},
@@ -51,22 +54,32 @@ const Wallet = () => {
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
+
   const { unSavedPlatforms = [], savedPlatforms = [] } = data;
 
   // store token
-  const [storeToken, { isLoading: loadingB, isSuccess: successB }] =
-    useStoreTokenMutation();
-  // token revoke
-  const [tokenRevoke, { isLoading: loadingC }] = useTokenRevokeMutation();
+  const [
+    storeToken,
+    { data: storeTokenResponse, isLoading: requestingAuthUrl },
+  ] = useStoreTokenMutation();
 
+  // token revoke
+  const [tokenRevoke, { isLoading: revokingToken }] = useTokenRevokeMutation();
+
+  // check and open tutorial
   useEffect(() => {
     const tutorial = searchParams.get("tutorial");
-    if (tutorial === "onboarding") {
+    if (tutorial === "onisErrorboarding") {
       setOnboarding(true);
     }
   }, [searchParams]);
 
+  /*
+   * @param name: string
+   * @param url: string
+   */
   async function handleTokenStorage(name, url) {
+    // handle telegram differently
     if (name === "telegram") {
       navigate("/dashboard/wallet/telegram", { state: { url: url } });
       return;
@@ -79,24 +92,31 @@ const Wallet = () => {
 
     try {
       const { code_verifier, url } = await storeToken(data).unwrap();
-      //open authorization window
-      if (name !== "twitter") {
-        window.open(url, "_self");
-      } else {
-        dispatch(
-          saveAuth({
-            ...auth,
-            code_verifier,
-          })
-        );
-        setLocalCache({
+      // save auth in state for use when redirect
+      dispatch(
+        saveAuth({
           ...auth,
           code_verifier,
-        });
+        })
+      );
 
-        setIsTwitter(true);
-        window.open(url, "SWOB-TWITTER-ACCESS");
+      /*
+       * Cache auth in localStorage because twitter will use
+       * in-app browser and sessionStorage is not accessible
+       */
+
+      setLocalCache({
+        ...auth,
+        code_verifier,
+      });
+
+      // check and handle twitter
+      if (name === "twitter" && isMobile) {
+        showPrompt(true);
+        return;
       }
+      // open auth screen
+      window.open(url, "_self");
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
       const { status, originalStatus } = error;
@@ -127,6 +147,12 @@ const Wallet = () => {
         toast.error(t("error-messages.network-error"));
       }
     }
+  }
+
+  // Helper function to open authorization screen after prompt
+  function openAuthScreen() {
+    // we can access the previous store token response and reuse the url
+    window.open(storeTokenResponse.url, "_self");
   }
 
   /* save revoke token and prompt for confirmation */
@@ -187,18 +213,77 @@ const Wallet = () => {
     when making requests show loading indicator
     Also maintain after request is successfull to update background state
   */
-  if (
-    isLoading ||
-    isFetching ||
-    loadingB ||
-    (successB && !isTwitter) ||
-    loadingC
-  ) {
+  if (isLoading || isFetching || requestingAuthUrl || revokingToken) {
     return <Loader />;
   }
 
+  // handle errors
   if (isError) {
     return <Error message={t("wallet.alerts.load-error")} callBack={refetch} />;
+  }
+
+  /* inform about twitter workaround for mobile devices */
+  if (prompt) {
+    return (
+      <Transition appear show={prompt} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => showPrompt(false)}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-xl p-6 overflow-hidden prose text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <Dialog.Title as="h3" className="mb-4">
+                    {t("wallet.prompt-dialog.heading")}
+                  </Dialog.Title>
+                  <Dialog.Description>
+                    {t("wallet.prompt-dialog.details")}
+                  </Dialog.Description>
+
+                  <div className="flex items-center justify-start mt-8 space-x-2">
+                    <Button
+                      outline
+                      onClick={() => showPrompt(false)}
+                      className="flex-1 md:flex-initial"
+                    >
+                      {t("wallet.prompt-dialog.cancel-button-text")}
+                    </Button>
+                    <Button
+                      className="flex-1 md:flex-initial"
+                      onClick={() => openAuthScreen()}
+                    >
+                      {t("wallet.prompt-dialog.cta-button-text")}
+                    </Button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    );
   }
 
   return (
@@ -282,7 +367,7 @@ const Wallet = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -305,18 +390,24 @@ const Wallet = () => {
                   </Dialog.Description>
 
                   <PasswordInput
+                    autoFocus
                     placeholder={t("forms.password.placeholder")}
                     minLength="8"
                     onChange={(evt) => setPassword(evt.target.value)}
                     showStrength={false}
                   />
 
-                  <div className="flex items-center justify-end mt-8 space-x-2">
-                    <Button outline onClick={() => setOpenRevokeDialog(false)}>
+                  <div className="flex items-center justify-between mt-8 space-x-2 md:justify-end">
+                    <Button
+                      outline
+                      onClick={() => setOpenRevokeDialog(false)}
+                      className="flex-1 md:flex-initial"
+                    >
                       {t("wallet.revoke-dialog.cancel-button-text")}
                     </Button>
                     <Button
                       danger
+                      className="flex-1 md:flex-initial"
                       disabled={password.length >= 8 ? false : true}
                       onClick={() => {
                         handleTokenRevoke();
