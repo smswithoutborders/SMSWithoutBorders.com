@@ -27,7 +27,20 @@ export const RequestErrorHandler = (store) => (next) => (action) => {
           }
           break;
         case 403:
-          toast.error(i18n.t("error-messages.403"));
+          switch (endpointName) {
+            case "storeToken":
+              toast.error(i18n.t("error-messages.invalid-number"));
+              break;
+            case "verifyTokenStorage":
+              toast.error(i18n.t("error-messages.invalid-code"));
+              break;
+            case "tokenRevoke":
+              toast.error(i18n.t("error-messages.invalid-password"));
+              break;
+            default:
+              toast.error(i18n.t("error-messages.403"));
+              break;
+          }
           break;
         case 404:
           toast.error(i18n.t("error-messages.404"));

@@ -286,7 +286,7 @@
           "placeholder": "Doe",
           "validation-errors": "Please enter your last name"
         },
-        "cta-button-text": "create-account"
+        "cta-button-text": "Create account"
       }
     }
   },

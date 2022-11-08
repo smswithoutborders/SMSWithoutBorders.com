@@ -31,7 +31,7 @@ const PhoneNumberVerification = () => {
   // check if url is present
   useEffect(() => {
     if (!location.state?.url) {
-      navigate("../../");
+      navigate("/dashboard/wallet");
     }
   }, [location.state, navigate]);
 
@@ -60,7 +60,9 @@ const PhoneNumberVerification = () => {
         case 201:
           toast.success(t("telegram.phone-verification.alerts.code-sent"));
           // send user to code verification
-          navigate("../verify", { state: { phone_number: number } });
+          navigate("/dashboard/wallet/telegram/verify", {
+            state: { phone_number: number },
+          });
           break;
         default:
           // 200 success
@@ -68,37 +70,10 @@ const PhoneNumberVerification = () => {
             t("telegram.phone-verification.alerts.authorization-error")
           );
           // navigate to wallet page
-          navigate("../");
+          navigate("/dashboard/wallet");
       }
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.invalid-number"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }
   /*

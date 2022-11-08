@@ -118,34 +118,7 @@ const Wallet = () => {
       // open auth screen
       window.open(url, "_self");
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.403"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all other errors in utils/middleware
     }
   }
 
@@ -177,34 +150,9 @@ const Wallet = () => {
       refetch();
     } catch (error) {
       // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            setPassword("");
-            setOpenRevokeDialog(true);
-            toast.error(t("error-messages.invalid-password"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
+      if (error.originalStatus === 403) {
+        setPassword("");
+        setOpenRevokeDialog(true);
       }
     }
   }
