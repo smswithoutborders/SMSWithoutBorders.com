@@ -81,7 +81,7 @@ export const Footer = () => {
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
         </a>
       </div>
-      <div>
+      <div className="mb-40">
         <LanguageSwitcher bordered />
       </div>
     </footer>
