@@ -19,23 +19,23 @@ const Landing = () => {
     <PageAnimationWrapper>
       <div className="container grid max-w-screen-xl grid-cols-2  mx-auto prose text-white place-items-center lg:h-[640px]">
         <div className="p-8 pt-16 md:pl-16 col-span-full lg:col-span-1">
-          <h1 className="text-white md:text-5xl">
+          <h1 className="text-5xl text-white">
             {t("landing.section-1.heading")}
           </h1>
           <p>{t("landing.section-1.details")}</p>
-          <div className="flex flex-row justify-center max-w-md mt-12 space-x-2 lg:justify-start">
+          <div className="flex flex-col max-w-md gap-4 mt-12 md:flex-row">
             <a
-              className="inline-flex items-center justify-center flex-1 py-3 text-lg no-underline bg-white appearance-none group rounded-3xl"
+              className="flex items-center justify-center flex-1 px-8 py-3 text-lg no-underline bg-white rounded-lg appearance-none group"
               href="#how-it-works"
               rel="noreferrer"
             >
-              <span className="mr-2 group-hover:mr-4">
+              <span className="mr-2">
                 {t("labels.learn-more")}
               </span>
-              <BsArrowRight size={20} />
+              <BsArrowRight size={20} className="group-hover:rotate-90" />
             </a>
             <Link
-              className="inline-flex items-center justify-center flex-1 py-3 text-lg text-white no-underline border appearance-none group rounded-3xl"
+              className="flex items-center justify-center flex-1 px-8 py-3 text-lg text-white no-underline border rounded-lg appearance-none group"
               to="downloads"
             >
               <span className="mr-2 group-hover:mr-4">
@@ -92,7 +92,7 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.1.details")}</p>
                 <Link
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none px-9 group"
                   to="/sign-up"
                 >
                   <span className="mr-2 group-hover:mr-4">
@@ -107,7 +107,7 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.2.details")}</p>
                 <Link
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none px-9 group"
                   to="/privacy-policy"
                 >
                   <span className="mr-2 group-hover:mr-4">
@@ -136,7 +136,7 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.3.details")}</p>
                 <Link
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none px-9 group"
                   to="/downloads"
                 >
                   <span className="mr-2 group-hover:mr-4">
@@ -151,7 +151,7 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.4.details")}</p>
                 <a
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none px-9 group"
                   href={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
                   target="_blank"
                   rel="noreferrer"

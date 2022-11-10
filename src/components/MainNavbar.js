@@ -82,7 +82,7 @@ export const MainNavbar = () => {
       <NavLink
         key="sign-up"
         to="/sign-up"
-        className="text-white bg-blue-800 border-none lg:px-6 lg:py-2 lg:mr-4 lg:rounded-3xl"
+        className="text-white bg-blue-800 border-none lg:px-6 lg:py-2 lg:mr-4 lg:rounded-lg"
       >
         <span className="ml-2">{t("menu.signup")}</span>
       </NavLink>
@@ -180,7 +180,9 @@ export const MainNavbar = () => {
       <div
         className={clsx(
           "hidden sticky top-0 z-50 lg:flex justify-between items-center",
-          scrolled ? "bg-white shadow-lg" : "text-white bg-transparent"
+          scrolled
+            ? "bg-white bg-opacity-80 backdrop-blur-xl shadow-lg"
+            : "text-white bg-transparent"
         )}
       >
         <Logo />
@@ -190,7 +192,9 @@ export const MainNavbar = () => {
       <div
         className={clsx(
           "bg-white shadow-lg lg:hidden z-50",
-          open ? "fixed inset-0 overflow-y-auto" : "sticky top-0"
+          open
+            ? "fixed inset-0 overflow-y-auto  bg-opacity-85 backdrop-blur-xl"
+            : "sticky top-0"
         )}
       >
         <div className="flex items-center justify-between p-4">
@@ -210,7 +214,7 @@ export const MainNavbar = () => {
             leave="transition-opacity duration-500"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            className="flex flex-col w-full h-screen bg-white"
+            className="flex flex-col h-screen max-w-md mx-auto"
           >
             <MobileLinks />
           </Transition>

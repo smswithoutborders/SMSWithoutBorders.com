@@ -23,7 +23,7 @@ const Privacy = () => {
 
   if (isError) {
     return (
-      <div className="bg-gray-50">
+      <div className="bg-white">
         <Error message={t("error-messages.network-error")} callBack={refetch} />
       </div>
     );
