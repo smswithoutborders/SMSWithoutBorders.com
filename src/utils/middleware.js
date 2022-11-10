@@ -31,6 +31,12 @@ export const RequestErrorHandler = (store) => (next) => (action) => {
             case "storeToken":
               toast.error(i18n.t("error-messages.invalid-number"));
               break;
+            case "recoverPassword":
+              toast.error(i18n.t("error-messages.invalid-number"));
+              break;
+            case "validateOTPCode":
+              toast.error(i18n.t("error-messages.invalid-code"));
+              break;
             case "verifyTokenStorage":
               toast.error(i18n.t("error-messages.invalid-code"));
               break;

@@ -412,6 +412,9 @@
       "page-title": "Password Recovery",
       "heading": "Password Recovery",
       "details": "Set a new password for your account"
+    },
+    "alert-messages": {
+      "account-verified": "Account verified"
     }
   },
   "404-page": {

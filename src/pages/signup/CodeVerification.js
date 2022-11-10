@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Error from "../Error";
 import { BsShieldLock } from "react-icons/bs";
+import { FiArrowRightCircle } from "react-icons/fi";
 import { useCountDown } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useVerifySignupMutation, useValidateOTPCodeMutation } from "services";
 import {
-  getCache,
-  clearCache,
-  useVerifySignupMutation,
-  useValidateOTPCodeMutation,
-} from "services";
-
-import {
-  PageAnimationWrapper,
   Loader,
   Button,
   Input,
   FormGroup,
+  PageAnimationWrapper,
 } from "components";
-import Error from "../Error";
-import { FiArrowRightCircle } from "react-icons/fi";
 
 const CodeVerification = () => {
   const { t } = useTranslation();
-  const cache = getCache();
   const navigate = useNavigate();
   const location = useLocation();
   const [code, setCode] = useState();
@@ -50,14 +43,7 @@ const CodeVerification = () => {
     isRequesting,
     OTPRequestError,
     resendOTPCode,
-  } = useCountDown(cache);
-
-  // check if phone number and cache is present
-  useEffect(() => {
-    if (!location.state?.phone_number && cache === null) {
-      navigate("../");
-    }
-  }, [location.state, navigate, cache]);
+  } = useCountDown(location.state);
 
   // verify code
   async function handleCodeVerification(evt) {
@@ -68,34 +54,7 @@ const CodeVerification = () => {
       toast.success(t("alert-messages.code-verified"));
       await handleSignUpVerification();
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.invalid-code"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all other errors in utils/middleware
     }
   }
   // verify signup
@@ -103,14 +62,17 @@ const CodeVerification = () => {
     try {
       await verifySignup().unwrap();
       toast.success(t("signup.code-verification.alerts.account-created"));
-      // remove any cached data
-      clearCache();
-      // handle user redirection if they are from app or otherwise
-      // they have to now click on the button because of possible browser blocking intents
-      if (cache.redirectURL) {
+
+      /*
+       * @param ari(app return url)
+       * handle user redirection if they are from app or otherwise
+       * they have to now click on the button because of possible browser blocking intents
+       */
+      if (location.state.ari) {
         setVerified(true);
       } else {
-        navigate("/login");
+        // replace clears all stored url state
+        navigate("/login", {replace: true});
       }
     } catch (error) {
       // handle all api errors in utils/middleware
@@ -131,16 +93,16 @@ const CodeVerification = () => {
     return <Loader />;
   }
   // if error while requesting OTP code
-  else if (OTPRequestError) {
+  if (OTPRequestError) {
     return (
       <PageAnimationWrapper>
         <div className="max-w-screen-xl min-h-screen p-8 mx-auto prose text-gray-900">
           <div className="mx-auto my-32">
-            <h1>{t("error-messages.general-error-title")}</h1>
+            <h2>{t("error-messages.general-error-title")}</h2>
             <p>{t("code-verification.error-messages.otp-request")}</p>
 
             {!isInitialized && (
-              <div className="flex max-w-sm space-x-2">
+              <div className="flex max-w-xs space-x-2">
                 <Button outline className="flex-1" onClick={() => navigate(-1)}>
                   {t("labels.back")}
                 </Button>
@@ -171,85 +133,89 @@ const CodeVerification = () => {
       </PageAnimationWrapper>
     );
   }
-  // // if error while verifying signup
-  else if (signUpVerificationError) {
+  // if error while verifying signup
+  if (signUpVerificationError) {
     return (
       <Error
         message={t("signup.code-verification.alerts.registration-error")}
         callBack={handleSignUpVerification}
       />
     );
-  } else if (verified) {
+  }
+  // after code verification user navigates back to avoid intent blocking from mobile platforms
+  if (verified) {
     return (
       <div className="h-full max-w-md min-h-screen px-6 mx-auto prose text-center pt-36">
         <h3>{t("signup.code-verification.alerts.app-redirect")}</h3>
         <Button
           className="mt-4 open-app-button"
-          onClick={() => window.location.replace(cache.redirectURL)}
+          onClick={() => navigate(location.state.ari, { replace: true })}
         >
           <FiArrowRightCircle size={22} />
           <span className="ml-1">{t("labels.open-app")}</span>
         </Button>
       </div>
     );
-  } else {
-    return (
-      <PageAnimationWrapper>
-        <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
-          <h1 className="inline-flex items-center mb-4 text-4xl font-bold">
-            <BsShieldLock size={48} className="mr-2" />
-            <span>{t("code-verification.heading")}</span>
-          </h1>
-
-          <div className="my-4 prose text-justify">
-            <p>{t("code-verification.paragraph-1")}</p>
-            <p>{t("code-verification.paragraph-2")}</p>
-          </div>
-
-          <div className="max-w-md mx-auto mt-12">
-            <form
-              className="px-4 mx-auto sm:px-3"
-              onSubmit={(evt) => handleCodeVerification(evt)}
-            >
-              <FormGroup>
-                <Input
-                  type="number"
-                  name="code"
-                  min={0}
-                  required
-                  placeholder={t("code-verification.form.code.placeholder")}
-                  onChange={(evt) => setCode(evt.target.value)}
-                />
-              </FormGroup>
-
-              <FormGroup className="flex flex-col justify-evenly md:flex-row">
-                {isInitialized && expired && (
-                  <Button
-                    outline
-                    className="order-1 mt-3 md:mt-0 md:order-none"
-                    onClick={() => resendOTPCode()}
-                  >
-                    {t("code-verification.resend-button-text")}
-                  </Button>
-                )}
-
-                {isInitialized && !expired && (
-                  <p className="order-1 py-2 mt-3 md:mt-0 md:order-none">
-                    <span>{t("code-verification.resend-label")} : </span>
-                    <span className="font-bold">{timer}</span>
-                  </p>
-                )}
-
-                <Button className="" type="submit">
-                  {t("labels.continue")}
-                </Button>
-              </FormGroup>
-            </form>
-          </div>
-        </div>
-      </PageAnimationWrapper>
-    );
   }
+
+  return (
+    <PageAnimationWrapper>
+      <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto prose text-center md:px-8">
+        <h1 className="inline-flex items-center mb-4 font-bold">
+          <BsShieldLock size={48} className="mr-2" />
+          <span>{t("code-verification.heading")}</span>
+        </h1>
+
+        <div className="my-4">
+          <p>{t("code-verification.paragraph-1")}</p>
+          <details>
+            <summary className="text-blue-800 cursor-pointer">
+              {t("labels.learn-more")}
+            </summary>
+            <p>{t("code-verification.paragraph-2")}</p>
+          </details>
+        </div>
+
+        <div className="max-w-md mx-auto mt-8">
+          <form onSubmit={(evt) => handleCodeVerification(evt)}>
+            <FormGroup>
+              <Input
+                type="number"
+                name="code"
+                min={0}
+                required
+                placeholder={t("code-verification.form.code.placeholder")}
+                onChange={(evt) => setCode(evt.target.value)}
+              />
+            </FormGroup>
+
+            <FormGroup className="flex flex-col gap-4 mt-8 justify-evenly md:flex-row">
+              {isInitialized && expired && (
+                <Button
+                  outline
+                  className="flex-1 order-1 md:order-none"
+                  onClick={() => resendOTPCode()}
+                >
+                  {t("code-verification.resend-button-text")}
+                </Button>
+              )}
+
+              {isInitialized && !expired && (
+                <p className="order-1 py-2 my-0 md:order-none">
+                  <span>{t("code-verification.resend-label")} : </span>
+                  <span className="font-bold">{timer}</span>
+                </p>
+              )}
+
+              <Button className="flex-1" type="submit">
+                {t("labels.continue")}
+              </Button>
+            </FormGroup>
+          </form>
+        </div>
+      </div>
+    </PageAnimationWrapper>
+  );
 };
 
 export default CodeVerification;

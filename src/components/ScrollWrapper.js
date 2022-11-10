@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 //ref : https://www.kindacode.com/article/react-router-dom-scroll-to-top-on-route-change/
 //ref : https://github.com/remix-run/react-router/issues/394
-export const ScrollToTop = (props) => {
+export const ScrollWrapper = ({ children }) => {
   const location = useLocation();
   useEffect(() => {
     const { hash } = location;
@@ -17,5 +18,9 @@ export const ScrollToTop = (props) => {
     }
   }, [location]);
 
-  return <>{props.children}</>;
+  return children;
+};
+
+ScrollWrapper.propTypes = {
+  children: PropTypes.node,
 };

@@ -1,14 +1,15 @@
 import React, { Fragment, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  RequireAuth,
-  ScrollToTop,
-  SplashScreen,
-  LanguageWrapper,
-} from "components";
 import { Toaster } from "react-hot-toast";
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
+import {
+  AuthGuard,
+  SplashScreen,
+  ScrollWrapper,
+  LanguageWrapper,
+  VerificationGuard,
+} from "components";
 
 const Sync = lazy(() => import("pages/Sync"));
 const Contact = lazy(() => import("pages/Contact"));
@@ -64,7 +65,7 @@ const App = () => {
       />
       <Suspense fallback={<SplashScreen />}>
         <BrowserRouter>
-          <ScrollToTop>
+          <ScrollWrapper>
             <LanguageWrapper>
               <Routes>
                 <Route path="/" element={<Website />}>
@@ -79,24 +80,42 @@ const App = () => {
                   <Route path="contact-us" element={<Contact />} />
                   <Route path="sign-up">
                     <Route index element={<Signup />} />
-                    <Route path="verify" element={<SignupCodeVerification />} />
+                    <Route
+                      path="verify"
+                      element={
+                        <VerificationGuard required={["phone_number"]}>
+                          <SignupCodeVerification />
+                        </VerificationGuard>
+                      }
+                    />
                   </Route>
                   <Route path="password-reset">
                     <Route index element={<PhoneNumberVerification />} />
                     <Route
                       path="verify"
-                      element={<PasswordChangeVerification />}
+                      element={
+                        <VerificationGuard required={["phone_number"]}>
+                          <PasswordChangeVerification />
+                        </VerificationGuard>
+                      }
                     />
-                    <Route path="reset" element={<PasswordReset />} />
+                    <Route
+                      path="reset"
+                      element={
+                        <VerificationGuard required={["phone_number", "uid"]}>
+                          <PasswordReset />
+                        </VerificationGuard>
+                      }
+                    />
                   </Route>
                 </Route>
 
                 <Route
                   path="dashboard"
                   element={
-                    <RequireAuth>
+                    <AuthGuard>
                       <DashboardLayout />
-                    </RequireAuth>
+                    </AuthGuard>
                   }
                 >
                   <Route index element={<Wallet />} />
@@ -108,7 +127,11 @@ const App = () => {
                       <Route index element={<TelegramNumberVerification />} />
                       <Route
                         path="verify"
-                        element={<TelegramCodeVerification />}
+                        element={
+                          <VerificationGuard required={["phone_number"]}>
+                            <TelegramCodeVerification />
+                          </VerificationGuard>
+                        }
                       />
                       <Route
                         path="register"
@@ -147,7 +170,7 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </LanguageWrapper>
-          </ScrollToTop>
+          </ScrollWrapper>
         </BrowserRouter>
       </Suspense>
     </Fragment>

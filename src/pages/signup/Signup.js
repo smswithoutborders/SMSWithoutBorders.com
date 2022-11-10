@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "images/logo.png";
 import toast from "react-hot-toast";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { FiUserPlus } from "react-icons/fi";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
-import { useSignupMutation, setCache, getCache } from "services";
+import { useSignupMutation } from "services";
 import {
   Input,
   Alert,
@@ -26,10 +26,10 @@ import {
 } from "components";
 
 const Signup = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   useTitle(t("signup.page-title"));
   const navigate = useNavigate();
-  const { lang } = useParams();
+  const [searchParams] = useSearchParams();
   const [signup, { isLoading, isSuccess }] = useSignupMutation();
 
   // check if recaptcha is enabled and conditionally add validation
@@ -80,18 +80,6 @@ const Signup = () => {
     },
   });
 
-  useEffect(() => {
-    // check locale
-    if (lang === "fr") {
-      i18n.changeLanguage("fr");
-    }
-    const searchParams = new URLSearchParams(window.location.search);
-    const redirectURL = searchParams.get("ari");
-    if (redirectURL) {
-      setCache({ redirectURL });
-    }
-  }, [i18n, lang]);
-
   // Sign up is a three step process with 2fa verification
   const handleSignUp = async (data) => {
     // seperate phone number into tel anc country code
@@ -108,21 +96,25 @@ const Signup = () => {
     try {
       const response = await signup(data).unwrap();
       toast.success(t("alert-messages.request-received"));
-      /*
-       cache data in local storage in case we need it later to resend
-       verification codes or signup failed.
-       This data will be cleared after code verification
-      */
+
       data.uid = response.uid;
       delete data.password;
 
-      let cache = getCache();
-      setCache({
-        ...data,
-        ...cache,
+      // attach country code to phone number for OTP
+      data.phone_number = data.country_code + data.phone_number;
+
+      /*
+       * redirect user to code confirmation page with data stored in history object
+       * This data will be cleared after code verification
+       * App may optionally pass return url parameter(ari)
+       */
+
+      navigate("/sign-up/verify", {
+        state: {
+          ...Object.fromEntries(searchParams),
+          ...data,
+        },
       });
-      // redirect user to code confirmation page
-      navigate("verify", { state: { phone_number: data.phone_number } });
     } catch (error) {
       // handle all other errors in utils/middleware
     }

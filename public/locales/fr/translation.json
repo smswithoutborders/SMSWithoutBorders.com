@@ -412,6 +412,9 @@
       "page-title": "Récupération du mot de passe",
       "heading": "Récupération du mot de passe",
       "details": "Définir un nouveau mot de passe pour votre compte"
+    },
+    "alert-messages": {
+      "account-verified": "Compte vérifié"
     }
   },
   "404-page": {

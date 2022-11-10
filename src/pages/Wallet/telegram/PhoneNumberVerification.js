@@ -98,10 +98,7 @@ const PhoneNumberVerification = () => {
         <p>{t("telegram.phone-verification.details")}</p>
 
         <div className="max-w-md mx-auto mt-12">
-          <form
-            className="px-4 mx-auto sm:px-3"
-            onSubmit={(evt) => handleTokenStorage(evt)}
-          >
+          <form onSubmit={(evt) => handleTokenStorage(evt)}>
             <FormGroup>
               <PhoneNumberInput
                 international

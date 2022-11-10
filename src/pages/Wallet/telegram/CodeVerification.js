@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { BsShieldLock } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -24,13 +24,6 @@ const CodeVerification = () => {
   const [verifyTokenStorage, { isLoading, isSuccess }] =
     useVerifyTokenStorageMutation();
   const auth = useSelector(authSelector);
-
-  // check if phone number is present
-  useEffect(() => {
-    if (!location.state?.phone_number) {
-      navigate("/dashboard/wallet/telegram");
-    }
-  }, [location.state, navigate]);
 
   async function handleCodeVerification(evt) {
     // prevent default form action
@@ -78,22 +71,24 @@ const CodeVerification = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto text-center md:px-8">
-        <h1 className="inline-flex items-center mb-4 text-4xl font-bold">
+      <div className="max-w-screen-sm min-h-screen px-6 py-20 mx-auto prose text-center md:px-8">
+        <h1 className="inline-flex items-center mb-4 font-bold">
           <BsShieldLock size={48} className="mr-2" />
           <span>{t("code-verification.heading")}</span>
         </h1>
 
-        <div className="my-4 prose text-justify">
+        <div className="my-4">
           <p>{t("code-verification.paragraph-1")}</p>
-          <p>{t("code-verification.paragraph-2")}</p>
+          <details>
+            <summary className="text-blue-800 cursor-pointer">
+              {t("labels.learn-more")}
+            </summary>
+            <p>{t("code-verification.paragraph-2")}</p>
+          </details>
         </div>
 
-        <div className="max-w-md mx-auto mt-12">
-          <form
-            className="px-4 mx-auto sm:px-3"
-            onSubmit={(evt) => handleCodeVerification(evt)}
-          >
+        <div className="max-w-md mx-auto mt-8">
+          <form onSubmit={(evt) => handleCodeVerification(evt)}>
             <FormGroup>
               <Input
                 type="number"
