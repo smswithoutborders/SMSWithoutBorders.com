@@ -65,36 +65,9 @@ const AccountDeletion = () => {
       // clear store/ logout user
       dispatch(logout());
       // redirect to login
-      navigate("/login");
+      navigate("/login", { replace: true });
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("account-deletion.alerts.invalid-password"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }
 
@@ -122,11 +95,8 @@ const AccountDeletion = () => {
         <span>{t("account-deletion.paragraph.part-2")}</span>
       </p>
 
-      <div className="max-w-md mx-auto mt-8">
-        <form
-          className="px-4 mx-auto text-left sm:px-3"
-          onSubmit={handleSubmit(handleDeletion)}
-        >
+      <div className="max-w-md mx-auto mt-8 text-left">
+        <form onSubmit={handleSubmit(handleDeletion)}>
           <FormGroup>
             <Label htmlFor="name" required>
               {t("account-deletion.form.confirmation.label")}

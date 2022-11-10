@@ -382,7 +382,7 @@
     "heading": "Supprimer le compte",
     "details": "Définissez un nouveau mot de passe pour votre compte",
     "confirmation": {
-      "text": "IConfirmThisAction",
+      "text": "Je confirme",
       "validation-error": "Veuillez entrer {{confirmation}} et votre mot de passe pour continuer"
     },
     "paragraph": {

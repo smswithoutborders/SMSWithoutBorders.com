@@ -43,6 +43,12 @@ export const RequestErrorHandler = (store) => (next) => (action) => {
             case "tokenRevoke":
               toast.error(i18n.t("error-messages.invalid-password"));
               break;
+            case "changePassword":
+              toast.error(i18n.t("error-messages.invalid-password"));
+              break;
+            case "deleteAccount":
+              toast.error(i18n.t("account-deletion.alerts.invalid-password"));
+              break;
             default:
               toast.error(i18n.t("error-messages.403"));
               break;
