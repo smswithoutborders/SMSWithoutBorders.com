@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import { PageAnimationWrapper, Loader } from "components";
 import { useGetPrivacyPolicyQuery } from "services";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 import Error from "./Error";
 
 const Privacy = () => {
   const { t, i18n } = useTranslation();
-  const { lang } = useParams();
   const {
     data = "",
     isLoading,
@@ -18,13 +16,6 @@ const Privacy = () => {
   } = useGetPrivacyPolicyQuery(i18n.resolvedLanguage, {
     refetchOnMountOrArgChange: true,
   });
-
-  useEffect(() => {
-    // check locale
-    if (lang === "fr") {
-      i18n.changeLanguage("fr");
-    }
-  }, [lang, i18n]);
 
   if (isLoading || isFetching) {
     return <Loader light />;
