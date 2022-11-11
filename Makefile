@@ -16,3 +16,7 @@ build:
 deploy:
 	@echo "[!] Deploying built app ..."
 	@cp -r build/. /var/www/html/
+
+container:
+	@echo "[!] Creating docker image ..."
+	@docker build -t swob-fe .
