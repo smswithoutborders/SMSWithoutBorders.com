@@ -33,8 +33,8 @@ const Signup = () => {
   const [signup, { isLoading, isSuccess }] = useSignupMutation();
 
   // check if recaptcha is enabled and conditionally add validation
-  const ENABLE_RECAPTCHA =
-    process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
+  const RECAPTCHA_ENABLE =
+    process.env.REACT_APP_RECAPTCHA_ENABLE === "true" ? true : false;
   let schemaShape = {
     name: yup.string(),
     phone_number: yup
@@ -58,7 +58,7 @@ const Signup = () => {
       .required(t("forms.terms.validation-errors.required")),
   };
 
-  if (ENABLE_RECAPTCHA) {
+  if (RECAPTCHA_ENABLE) {
     schemaShape.captcha_token = yup
       .string()
       .required(t("forms.recaptcha.validation-error"));
@@ -233,7 +233,7 @@ const Signup = () => {
               </p>
             </FormGroup>
 
-            {ENABLE_RECAPTCHA ? (
+            {RECAPTCHA_ENABLE ? (
               <FormGroup>
                 <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
                 {errors.captcha_token && (

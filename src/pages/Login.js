@@ -5,7 +5,7 @@ import { FiLogIn } from "react-icons/fi";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate, useLocation, Link, useParams } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useLoginMutation } from "services";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,13 +25,12 @@ import {
 } from "components";
 
 const Login = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   useTitle(t("login.page-title"));
-  const { lang } = useParams();
 
   // check if recaptcha is enabled and conditionally add validation
-  const ENABLE_RECAPTCHA =
-    process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
+  const RECAPTCHA_ENABLE =
+    process.env.REACT_APP_RECAPTCHA_ENABLE === "true" ? true : false;
   let schemaShape = {
     name: yup.string(),
     phone_number: yup
@@ -42,7 +41,7 @@ const Login = () => {
       .required(t("forms.password.validation-errors.required")),
   };
 
-  if (ENABLE_RECAPTCHA) {
+  if (RECAPTCHA_ENABLE) {
     schemaShape.captcha_token = yup
       .string()
       .required(t("forms.recaptcha.validation-error"));
@@ -68,12 +67,12 @@ const Login = () => {
   const auth = useSelector(authSelector);
 
   useEffect(() => {
-    // check locale
-    if (lang === "fr") {
-      i18n.changeLanguage("fr");
-    }
-    // if logged in then redirect to dashboard
-    else if (auth.uid && location.state && location.state.path) {
+    /*
+     * if logged in then redirect to dashboard else redirect to previous location
+     * path will be available if user previously accessed a protected route
+     * and got redirected here
+     */
+    if (auth.uid && location.state && location.state.path) {
       /*
         redirect users if they initially tried to access a private route
         without permission
@@ -82,7 +81,7 @@ const Login = () => {
     } else if (auth.uid) {
       navigate("/dashboard");
     }
-  }, [setValue, dispatch, navigate, auth.uid, location.state, lang, i18n]);
+  }, [navigate, auth.uid, location.state]);
 
   const handleLogin = async (data) => {
     try {
@@ -161,7 +160,7 @@ const Login = () => {
               )}
             </FormGroup>
 
-            {ENABLE_RECAPTCHA ? (
+            {RECAPTCHA_ENABLE ? (
               <FormGroup>
                 <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
                 {errors.captcha_token && (

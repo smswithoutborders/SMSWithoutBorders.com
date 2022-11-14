@@ -1,11 +1,11 @@
 
 
+
 all: config build deploy
 
 config:
 	@echo "[!] Creating env configs"
-	@cp env.example .env.development.local
-	@cp env.example .env.production.local
+	@bash create_env.sh
 	@echo "[!] Configs created edit them to suit your needs, then build and deploy"
 
 build:
@@ -17,6 +17,11 @@ deploy:
 	@echo "[!] Deploying built app ..."
 	@cp -r build/. /var/www/html/
 
-container:
+image:
 	@echo "[!] Creating docker image ..."
+	@make config
 	@docker build -t swob-fe .
+
+container:
+	@echo "[!] Starting docker container"
+	@docker run -itd --name swob-fe -p 18000:80 swob-fe

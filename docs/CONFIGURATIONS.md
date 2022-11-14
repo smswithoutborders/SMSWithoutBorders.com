@@ -2,6 +2,13 @@
 
 Please follow the instructions below to setup this project
 
+## Requirements
+
+* [Node.js LTS](https://nodejs.org/en/download/) >= v14
+* [Yarn](https://classic.yarnpkg.com/en/docs/install)
+* [GNU make](https://www.gnu.org/software/make/)
+* [Docker](https://www.docker.com/)
+
 ## Install dependencies
 
 ```bash
@@ -10,50 +17,51 @@ yarn install
 
 ## Configure environment variables
 
-Create development and production .env configuration files from the env.example template
+Create development and production .env configuration files with defaults
 
 ```bash
 make config
 ```
 
-or
+SMSWithoutBorders global config variables can also be passed in to override the default config
 
 ```bash
-cp env.example .env.development.local
-
-cp env.example .env.production.local
-
-or
-
+SWOB_BE_HOST=http://localhost:9000 SWOB_RECAPTCHA_ENABLE=true SWOB_RECAPTCHA_SITE_KEY=skfhk123 <command>
 ```
+
+Where command could be any one defined under scripts in package.json or Makefile e.g `yarn start`, `make build`
 
 **.env.development.local** is used in development environments and **.env.production.local** is used when creating production builds.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), which specifies variable naming conventions
 
-Below are the defaults
+Below are the defaults. a reference is also kept in [env.example](../env.example)
 
-* PORT -> development port
-* GENERATE_SOURCEMAP -> Generate or ignore sourcemaps
-* REACT_APP_API_URL ->  Backend API URL
-* REACT_APP_API_VERSION -> API version
-* REACT_APP_GATEWAY_SERVER ->  Gateway server url
-* REACT_APP_GATEWAY_SERVER_VERSION -> Gateway server version
-* REACT_APP_RECAPTCHA -> Enable or disable recaptcha, make sure this setting is also toggled on the API
-* REACT_APP_RECAPTCHA_SITE_KEY -> reCAPTCHAv2 site key obtained from [google](https://www.google.com/recaptcha/admin)
-* REACT_APP_RECAPTCHA_API_URL -> API script src from reCaptchav2 setup [documentation](https://developers.google.com/recaptcha/docs/display)
-* REACT_APP_TUTORIAL_URL -> Link to the getting started tutorial
-* REACT_APP_GATEWAY_TUTORIAL_URL -> Link to gateway client setup tutorial
-* REACT_APP_PRIVACY_POLICY_URL= Link to hosted  privacy policy markdown file(s)
-* HTTPS -> Enable or disable https
-* SSL_CRT_FILE -> Location of SSL CRT file
-* SSL_KEY_FILE -> Location of SSL Key file
+| Variable                         | Description                                                                                                 | Default value                                                                                           | Override                |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------- |
+| PORT                             | development port                                                                                            | 18000                                                                                                   | PORT                    |
+| GENERATE_SOURCEMAP               | Generate or ignore sourcemaps                                                                               | false                                                                                                   | N/A                     |
+| REACT_APP_API_URL                | Backend API URL                                                                                             | <http://localhost:9000>                                                                                 | SWOB_BE_HOST            |
+| REACT_APP_API_VERSION            | Backend API version                                                                                         | v2                                                                                                      | SWOB_BE_VERSION         |
+| REACT_APP_GATEWAY_SERVER         | Gateway server API URL                                                                                      | <http://localhost:15000>                                                                                | SWOB_GS_HOST            |
+| REACT_APP_GATEWAY_SERVER_VERSION | Gateway server version                                                                                      | v2                                                                                                      | SWOB_GS_VERSION         |
+| REACT_APP_RECAPTCHA_ENABLE       | Enable or disable recaptcha, make sure this setting is also toggled on the API                              | false                                                                                                   | SWOB_RECAPTCHA_ENABLE   |
+| REACT_APP_RECAPTCHA_SITE_KEY     | reCAPTCHAv2 site key obtained from [google](https://www.google.com/recaptcha/admin)                         | N/A                                                                                                     | SWOB_RECAPTCHA_SITE_KEY |
+| REACT_APP_RECAPTCHA_API_URL      | API script src from reCaptchav2 setup [documentation](https://developers.google.com/recaptcha/docs/display) | <https://www.google.com/recaptcha/api.js>                                                               | N/A                     |
+| REACT_APP_TUTORIAL_URL           | Link to the getting started tutorial                                                                        | <https://smswithoutborders.github.io/docs/tutorials/getting-started>                                    | N/A                     |
+| REACT_APP_GATEWAY_TUTORIAL_URL   | Link to gateway client setup tutorial                                                                       | <https://github.com/smswithoutborders/SMSWithoutBorders-Gateway-Client/blob/alpha_stable/src/README.md> | N/A                     |
+| REACT_APP_PRIVACY_POLICY_URL     | Link to hosted  privacy policy markdown file(s)                                                             | <https://raw.githubusercontent.com/smswithoutborders/smswithoutborders.com/dev/docs/privacy-policy>     | N/A                     |
+| HTTPS                            | Enable or disable https                                                                                     | false                                                                                                   | SWOB_SSL_ENABLE         |
+| SSL_CRT_FILE                     | Location of SSL CRT file                                                                                    | N/A                                                                                                     | SWOB_SSL_CRT_FILE       |
+| SSL_KEY_FILE                     | Location of SSL Key file                                                                                    | N/A                                                                                                     | SWOB_SSL_KEY_FILE       |
 
 ## Start development server
 
 ```bash
 yarn start
 ```
+
+**Note** configs are checked and regenerated each time yarn start is run. .env.development will not be overriten if it already exists but .env.production will.
 
 Open [http://localhost:18000](http://localhost:18000) to view it in the browser.
 
@@ -62,6 +70,8 @@ The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 ## Create a production build
+
+For docker, see docker section below.
 
 Create an optimized production build that can be hosted on servers. This step uses the variables in **.env.production.local**
 
@@ -72,6 +82,8 @@ yarn build or make build
 Check the `build` folder for deployable files once complete.
 
 ## Deployment
+
+### Standard deployment with apache
 
 For a Linux/Ubuntu server running apache2 web server, follow these steps to deploy the site
 
@@ -103,3 +115,13 @@ sudo cp -r build/. /var/www/html
 ```bash
 sudo systemctl restart apache2
 ```
+
+### Docker
+
+Start by building the docker image. There is a make script you can run. Also, SWOB env overrides can be passed directly to this command. See configuring env variables above.
+
+```bash
+make image
+```
+
+Once complete, a `swob-fe:latest` image is created. you can test it by running `make container` or deploying with your own docker config options
