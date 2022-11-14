@@ -9,10 +9,11 @@ COPY . .
 RUN make build
 
 # serve the build with apache
-FROM httpd:latest
-
+FROM httpd:2.4
+WORKDIR /usr/local/apache2
+# copy custom apache config
+COPY configs/httpd.conf ./conf/httpd.conf
 # import built files
-WORKDIR /usr/local/apache2/htdocs/
-COPY --from=build-stage /app/build .
+COPY --from=build-stage /app/build ./htdocs
 
 EXPOSE 80
