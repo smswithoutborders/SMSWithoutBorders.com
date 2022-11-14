@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader, PageAnimationWrapper, useTitle, Button } from "components";
+import { Loader, PageAnimationWrapper, useTitle } from "components";
 import { IoMdSync } from "react-icons/io";
 import { BsPersonCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { authSelector } from "features";
 import { useTranslation } from "react-i18next";
 import { formatUTCDate } from "utils";
 import { Link } from "react-router-dom";
+import Error from "./Error";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -30,13 +31,7 @@ const Dashboard = () => {
   }
 
   if (isError) {
-    return (
-      <div className="p-8 my-24 prose">
-        <h2>{t("error-messages.general-error-title")}</h2>
-        <p className="">{t("dashboard.alerts.load-error")}</p>
-        <Button onClick={() => refetch()}>{t("labels.try-again")}</Button>
-      </div>
-    );
+    return <Error message={t("dashboard.alerts.load-error")} callBack={refetch} />;
   }
 
   return (
