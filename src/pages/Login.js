@@ -124,6 +124,7 @@ const Login = () => {
                 name="phone_number"
                 render={({ field: { value, onChange } }) => (
                   <PhoneNumberInput
+                    id="phone_number"
                     value={value}
                     onChange={onChange}
                     invalid={errors.phone_number}
@@ -140,6 +141,7 @@ const Login = () => {
                 {t("forms.password.label")}
               </Label>
               <PasswordInput
+                id="password"
                 name="password"
                 showStrength={false}
                 invalid={errors.password}

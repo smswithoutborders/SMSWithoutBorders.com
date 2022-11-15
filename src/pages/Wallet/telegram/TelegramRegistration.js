@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import telegramLogo from "images/telegram-icon.svg";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,6 @@ import {
   Button,
   useTitle,
   FormGroup,
-  ErrorMessage,
   PageAnimationWrapper,
 } from "components";
 
@@ -45,13 +44,6 @@ const TelegramRegistration = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  // check if phone number is present
-  useEffect(() => {
-    if (!location.state?.phone_number) {
-      navigate("../../");
-    }
-  }, [location.state, navigate]);
 
   async function handleAccountCreation(data) {
     // build request data
@@ -106,16 +98,15 @@ const TelegramRegistration = () => {
             </Label>
             <Input
               type="text"
+              id="first_name"
               name="first_name"
               placeholder={t(
                 "telegram.registration.form.first-name.placeholder"
               )}
+              invalid={errors.first_name}
+              invalidText={errors.first_name?.message}
               {...register("first_name")}
-              error={errors.first_name}
             />
-            {errors.first_name && (
-              <ErrorMessage>{errors.first_name?.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <FormGroup>
@@ -124,16 +115,15 @@ const TelegramRegistration = () => {
             </Label>
             <Input
               type="text"
+              id="last_name"
               name="last_name"
               placeholder={t(
                 "telegram.registration.form.last-name.placeholder"
               )}
+              invalid={errors.last_name}
+              invalidText={errors.last_name?.message}
               {...register("last_name")}
-              error={errors.last_name}
             />
-            {errors.last_name && (
-              <ErrorMessage>{errors.last_name.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <Button className="w-full my-4">

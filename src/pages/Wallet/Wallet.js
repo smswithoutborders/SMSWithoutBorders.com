@@ -80,6 +80,7 @@ const Wallet = () => {
    */
   async function handleTokenStorage(name, url) {
     // handle telegram differently
+    // pass platform url to phone verification page
     if (name === "telegram") {
       navigate("/dashboard/wallet/telegram", { state: { url: url } });
       return;

@@ -15,7 +15,6 @@ import {
   Loader,
   useTitle,
   FormGroup,
-  ErrorMessage,
   PasswordInput,
 } from "components";
 
@@ -102,14 +101,13 @@ const PasswordChange = () => {
               {t("forms.password.labels.current")}
             </Label>
             <PasswordInput
+              id="password"
               name="password"
-              {...register("password")}
-              error={errors.password}
               showStrength={false}
+              invalid={errors.password}
+              invalidText={errors.password?.message}
+              {...register("password")}
             />
-            {errors.password && (
-              <ErrorMessage>{errors.password?.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <FormGroup>
@@ -117,13 +115,12 @@ const PasswordChange = () => {
               {t("forms.password.labels.new")}
             </Label>
             <PasswordInput
+              id="new_password"
               name="new_password"
+              invalid={errors.new_password}
+              invalidText={errors.new_password?.message}
               {...register("new_password")}
-              error={errors.new_password}
             />
-            {errors.new_password && (
-              <ErrorMessage>{errors.new_password?.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <FormGroup>
@@ -133,12 +130,10 @@ const PasswordChange = () => {
             <PasswordInput
               name="confirmPassword"
               placeholder={t("forms.confirm-password.placeholder")}
+              invalid={errors.confirmPassword}
+              invalidText={errors.confirmPassword?.message}
               {...register("confirmPassword")}
-              error={errors.confirmPassword}
             />
-            {errors.confirmPassword && (
-              <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <Button className="w-full">{t("labels.password-change")}</Button>

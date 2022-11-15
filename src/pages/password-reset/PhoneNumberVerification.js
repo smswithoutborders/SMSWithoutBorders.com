@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import {
   PageAnimationWrapper,
   PhoneNumberInput,
-  ErrorMessage,
   FormGroup,
   Button,
   Loader,
@@ -28,7 +27,6 @@ const PhoneNumberVerification = () => {
     evt.preventDefault();
     // validate phone number
     if (!number) {
-      toast.error(t("forms.phone-number.validation-errors.invalid"));
       setError(true);
       return;
     } else {
@@ -73,21 +71,13 @@ const PhoneNumberVerification = () => {
           <form onSubmit={(evt) => handleVerification(evt)}>
             <FormGroup>
               <PhoneNumberInput
-                international
-                countryCallingCodeEditable={false}
+                id="phone_number"
                 placeholder={t("forms.phone-number.placeholder")}
-                defaultCountry="CM"
                 value={number}
-                type="tel"
-                required
                 onChange={setNumber}
-                error={error ? "true" : null}
+                invalid={error ? "true" : null}
+                invalidText={t("forms.phone-number.validation-errors.invalid")}
               />
-              {error && (
-                <ErrorMessage>
-                  {t("forms.phone-number.validation-errors.invalid")}
-                </ErrorMessage>
-              )}
             </FormGroup>
             <div className="flex flex-col justify-evenly md:flex-row">
               <Button type="submit">{t("labels.continue")}</Button>

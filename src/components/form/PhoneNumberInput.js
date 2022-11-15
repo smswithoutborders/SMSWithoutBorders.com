@@ -24,7 +24,12 @@ const StyledInput = styled(PhoneInput)`
   }
 `;
 
-export const PhoneNumberInput = ({ invalidText, helperText, ...rest }) => {
+export const PhoneNumberInput = ({
+  invalid,
+  invalidText,
+  helperText,
+  ...rest
+}) => {
   return (
     <Fragment>
       <StyledInput
@@ -33,10 +38,11 @@ export const PhoneNumberInput = ({ invalidText, helperText, ...rest }) => {
         international
         countryCallingCodeEditable={false}
         defaultCountry="CM"
+        invalid={invalid}
         {...rest}
       />
       <div className="flex flex-col mt-2">
-        <small className="text-red-600">{invalidText}</small>
+        {invalid && <small className="text-red-600">{invalidText}</small>}
         <small className="text-gray-500">{helperText}</small>
       </div>
     </Fragment>

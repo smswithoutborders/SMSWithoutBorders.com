@@ -155,6 +155,7 @@ const Signup = () => {
                 name="phone_number"
                 render={({ field: { value, onChange } }) => (
                   <PhoneNumberInput
+                    id="phone_number"
                     value={value}
                     onChange={onChange}
                     invalid={errors.phone_number}

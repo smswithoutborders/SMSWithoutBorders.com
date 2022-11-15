@@ -124,7 +124,14 @@ const App = () => {
                   <Route path="wallet">
                     <Route index element={<Wallet />} />
                     <Route path="telegram">
-                      <Route index element={<TelegramNumberVerification />} />
+                      <Route
+                        index
+                        element={
+                          <VerificationGuard required={["url"]}>
+                            <TelegramNumberVerification />
+                          </VerificationGuard>
+                        }
+                      />
                       <Route
                         path="verify"
                         element={
@@ -135,7 +142,11 @@ const App = () => {
                       />
                       <Route
                         path="register"
-                        element={<TelegramRegistration />}
+                        element={
+                          <VerificationGuard required={["phone_number"]}>
+                            <TelegramRegistration />
+                          </VerificationGuard>
+                        }
                       />
                     </Route>
                   </Route>

@@ -16,7 +16,6 @@ import {
   Loader,
   useTitle,
   FormGroup,
-  ErrorMessage,
   PasswordInput,
 } from "components";
 
@@ -98,19 +97,18 @@ const AccountDeletion = () => {
       <div className="max-w-md mx-auto mt-8 text-left">
         <form onSubmit={handleSubmit(handleDeletion)}>
           <FormGroup>
-            <Label htmlFor="name" required>
+            <Label htmlFor="confirmation" required>
               {t("account-deletion.form.confirmation.label")}
             </Label>
             <Input
               type="text"
+              id="confirmation"
               name="confirmation"
+              invalid={errors.confirmation}
+              invalidText={errors.confirmation?.message}
               placeholder={t("account-deletion.form.confirmation.placeholder")}
               {...register("confirmation")}
-              error={errors.name}
             />
-            {errors.confirmation && (
-              <ErrorMessage>{errors.confirmation.message}</ErrorMessage>
-            )}
             <small className="block mt-2 text-xs text-gray-600">
               <span>{t("account-deletion.form.confirmation.helper-text")}</span>
               <strong> : {t("account-deletion.confirmation.text")}</strong>
@@ -121,20 +119,20 @@ const AccountDeletion = () => {
               {t("forms.password.label")}
             </Label>
             <PasswordInput
+              id="password"
               name="password"
+              showStrength={false}
+              invalid={errors.password}
+              invalidText={errors.password?.message}
               placeholder={t("forms.password.placeholder")}
               {...register("password")}
-              error={errors.password}
-              showStrength={false}
             />
-            {errors.password && (
-              <ErrorMessage>{errors.password.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <Button
             type="submit"
-            className="w-full bg-red-600 hover:bg-red-500 focus:bg-red-600 disabled:bg-gray-300"
+            danger
+            className="w-full"
           >
             {t("labels.continue")}
           </Button>

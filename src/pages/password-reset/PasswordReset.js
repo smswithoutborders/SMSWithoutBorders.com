@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import {
   Loader,
   Label,
-  ErrorMessage,
   FormGroup,
   Button,
   PasswordInput,
@@ -87,13 +86,12 @@ const PasswordReset = () => {
                 {t("forms.password.label")}
               </Label>
               <PasswordInput
+                id="password"
                 name="password"
+                invalid={errors.password}
+                invalidText={errors.password?.message}
                 {...register("password")}
-                error={errors.password}
               />
-              {errors.password && (
-                <ErrorMessage>{errors.password?.message}</ErrorMessage>
-              )}
             </FormGroup>
 
             <FormGroup>
@@ -101,14 +99,13 @@ const PasswordReset = () => {
                 {t("forms.confirm-password.label")}
               </Label>
               <PasswordInput
+                id="confirmPassword"
                 name="confirmPassword"
                 placeholder={t("forms.confirm-password.placeholder")}
                 {...register("confirmPassword")}
-                error={errors.confirmPassword}
+                invalid={errors.confirmPassword}
+                invalidText={errors.confirmPassword?.message}
               />
-              {errors.confirmPassword && (
-                <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-              )}
             </FormGroup>
 
             <Button className="w-full mt-4">

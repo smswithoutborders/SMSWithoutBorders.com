@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import telegramLogo from "images/telegram-icon.svg";
 import { useStoreTokenMutation } from "services";
@@ -9,7 +9,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {
   PageAnimationWrapper,
   PhoneNumberInput,
-  ErrorMessage,
   FormGroup,
   Button,
   Loader,
@@ -28,19 +27,11 @@ const PhoneNumberVerification = () => {
   // store token
   const [storeToken, { isLoading, isSuccess }] = useStoreTokenMutation();
 
-  // check if url is present
-  useEffect(() => {
-    if (!location.state?.url) {
-      navigate("/dashboard/wallet");
-    }
-  }, [location.state, navigate]);
-
   async function handleTokenStorage(evt) {
     // stop default form action
     evt.preventDefault();
     // validate phone number
     if (!number) {
-      toast.error(t("forms.phone-number.validation-errors.invalid"));
       setError(true);
       return;
     } else {
@@ -101,21 +92,13 @@ const PhoneNumberVerification = () => {
           <form onSubmit={(evt) => handleTokenStorage(evt)}>
             <FormGroup>
               <PhoneNumberInput
-                international
-                countryCallingCodeEditable={false}
-                placeholder={t("forms.phone-number.placeholder")}
-                defaultCountry="CM"
-                value={number}
-                type="tel"
                 required
+                placeholder={t("forms.phone-number.placeholder")}
+                value={number}
                 onChange={setNumber}
-                error={error ? "true" : null}
+                invalid={error ? "true" : null}
+                invalidText={t("forms.phone-number.validation-errors.invalid")}
               />
-              {error && (
-                <ErrorMessage>
-                  {t("forms.phone-number.validation-errors.invalid")}
-                </ErrorMessage>
-              )}
             </FormGroup>
             <div className="flex flex-col mt-8 justify-evenly md:flex-row">
               <Button type="submit" className="flex-1 md:order-1">
