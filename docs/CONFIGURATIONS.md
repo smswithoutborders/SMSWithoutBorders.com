@@ -29,7 +29,7 @@ SMSWithoutBorders global config variables can also be passed in to override the 
 SWOB_BE_HOST=http://localhost:9000 SWOB_RECAPTCHA_ENABLE=true SWOB_RECAPTCHA_SITE_KEY=skfhk123 <command>
 ```
 
-Where command could be any one defined under scripts in package.json or Makefile e.g `yarn start`, `make build`
+Where command could be any one defined under scripts in package.json or Makefile target e.g `yarn start`, `make build`
 
 **.env.development.local** is used in development environments and **.env.production.local** is used when creating production builds.
 

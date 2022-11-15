@@ -1,7 +1,7 @@
 
 
 
-all: config build deploy
+all: config build
 
 config:
 	@echo "[!] Creating env configs"
@@ -17,9 +17,8 @@ deploy:
 	@echo "[!] Deploying built app ..."
 	@cp -r build/. /var/www/html/
 
-image:
+image: config
 	@echo "[!] Creating docker image ..."
-	@make config
 	@docker build -t swob-fe .
 
 container:
