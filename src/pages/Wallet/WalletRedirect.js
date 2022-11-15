@@ -57,6 +57,9 @@ const WalletRedirect = () => {
       await verifyTokenStorage(data).unwrap();
       toast.success(t("wallet.alerts.platform-stored"));
 
+      // remove cache
+      clearLocalCache();
+      
       if (platform !== "twitter") {
         navigate("/dashboard/wallet", {
           replace: true,
@@ -64,11 +67,8 @@ const WalletRedirect = () => {
         });
       } else if (isMobile && platform === "twitter") {
         setOpen(true);
-        clearLocalCache();
       } else {
         toast.success(t("alert-messages.redirect"));
-        clearLocalCache();
-        window.close();
       }
     } catch (error) {
       // handle all api errors in utils/middleware

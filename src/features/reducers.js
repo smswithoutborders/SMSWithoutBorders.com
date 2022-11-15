@@ -5,7 +5,7 @@ import authReducer, { logout } from "./auth";
 import metricsReducer from "./metrics";
 import syncReducer from "./sync";
 import tutorialReducer from "./tutorials";
-import { clearCache, clearPersistedState } from "services";
+import { clearCache, clearLocalCache, clearPersistedState } from "services";
 
 // Add the generated reducer as a specific top-level reducer
 const appReducer = combineReducers({
@@ -24,6 +24,7 @@ const appReducer = combineReducers({
 const rootReducer = (state, action) => {
   if (logout.match(action)) {
     clearCache();
+    clearLocalCache();
     clearPersistedState();
     return appReducer(undefined, action);
   }
