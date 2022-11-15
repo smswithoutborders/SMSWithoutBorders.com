@@ -124,4 +124,12 @@ Start by building the docker image. There is a make script you can run. Also, SW
 make image
 ```
 
-Once complete, a `swob-fe:latest` image is created. you can test it by running `make container` or deploying with your own docker config options
+You can also pass SWOB env variable to be used instead of the defaults.
+
+```bash
+SWOB_RECAPTCHA_ENABLE=true SWOB_RECAPTCHA_SITE_KEY=somekeyhere make image
+```
+
+A full list of all env variables can be found under `configure env variables` section above
+
+Once build completes, a `swob-fe:latest` image is created. you can test it by running `make container` or deploying with your own docker config options
