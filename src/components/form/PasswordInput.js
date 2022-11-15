@@ -1,8 +1,8 @@
 import React, { useState, forwardRef, Fragment } from "react";
-import { ToggleButton } from "./ToggleButton";
-import { Input } from "./shared";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { ToggleButton } from "./ToggleButton";
+import { Input } from "./Input";
 import { useTranslation } from "react-i18next";
 
 // Password Input Component
@@ -44,8 +44,8 @@ export const PasswordInput = forwardRef(
             {...rest}
           />
           <ToggleButton
-            className="absolute top-3 right-3"
-            toggleFunc={setToggle}
+            className="absolute top-3.5 right-3"
+            onToggle={setToggle}
             value={toggle}
           />
         </div>
@@ -54,6 +54,7 @@ export const PasswordInput = forwardRef(
           <div className="w-full mt-2 mb-2">
             <div className="grid w-full h-1 grid-cols-4 bg-gray-200 rounded-full">
               <div
+                aria-label="password strength"
                 className={clsx(
                   strength === 4
                     ? "bg-lime-500 col-span-full"

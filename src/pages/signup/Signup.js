@@ -11,15 +11,13 @@ import { useTranslation } from "react-i18next";
 import { useSignupMutation } from "services";
 import {
   Input,
-  Alert,
   Label,
   Loader,
   Button,
-  CheckBox,
+  Checkbox,
   useTitle,
   FormGroup,
   ReCAPTCHA,
-  ErrorMessage,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
@@ -68,10 +66,10 @@ const Signup = () => {
 
   const {
     control,
-    register,
     setValue,
+    register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -116,6 +114,15 @@ const Signup = () => {
         },
       });
     } catch (error) {
+      // reset captcha
+      setValue("captcha_token", "", {
+        shouldValidate: true,
+      });
+
+      //reset terms
+      setValue("acceptTerms", false, {
+        shouldValidate: true,
+      });
       // handle all other errors in utils/middleware
     }
   };
@@ -131,7 +138,7 @@ const Signup = () => {
   return (
     <PageAnimationWrapper>
       <div className="min-h-screen md:grid md:place-items-center">
-        <div className="container p-8 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
+        <div className="container p-6 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
             <h1 className="text-2xl font-bold text-center">
@@ -139,7 +146,7 @@ const Signup = () => {
             </h1>
           </div>
           <form onSubmit={handleSubmit(handleSignUp)}>
-            <FormGroup>
+            <FormGroup legend="phone_number">
               <Label htmlFor="phone_number" required>
                 {t("forms.phone-number.label")}
               </Label>
@@ -148,39 +155,29 @@ const Signup = () => {
                 name="phone_number"
                 render={({ field: { value, onChange } }) => (
                   <PhoneNumberInput
-                    international
-                    countryCallingCodeEditable={false}
-                    placeholder={t("forms.phone-number.placeholder")}
-                    defaultCountry="CM"
                     value={value}
-                    type="tel"
                     onChange={onChange}
-                    error={errors.phone_number}
+                    invalid={errors.phone_number}
+                    invalidText={errors.phone_number?.message}
+                    helperText={t("forms.phone-number.helper-text")}
+                    placeholder={t("forms.phone-number.placeholder")}
                   />
                 )}
               />
-              {errors.phone_number && (
-                <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
-              )}
-              <small className="block text-xs text-gray-600">
-                {t("forms.phone-number.helper-text")}
-              </small>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="name">{t("signup.form.alias.label")}</Label>
               <Input
-                type="text"
+                id="name"
                 name="name"
+                type="text"
+                labelText={t("signup.form.alias.label")}
+                invalid={errors.name}
+                invalidText={errors.name?.message}
+                helperText={t("signup.form.alias.helper-text")}
                 placeholder={t("signup.form.alias.placeholder")}
                 {...register("name")}
-                error={errors.name}
               />
-              {errors.name && (
-                <ErrorMessage>{errors.name.message}</ErrorMessage>
-              )}
-              <small className="block mt-2 text-xs text-gray-600">
-                {t("signup.form.alias.helper-text")}
-              </small>
             </FormGroup>
 
             <FormGroup>
@@ -188,13 +185,12 @@ const Signup = () => {
                 {t("forms.password.label")}
               </Label>
               <PasswordInput
+                id="password"
                 name="password"
+                invalid={errors.password}
+                invalidText={errors.password?.message}
                 {...register("password")}
-                error={errors.password}
               />
-              {errors.password && (
-                <ErrorMessage>{errors.password?.message}</ErrorMessage>
-              )}
             </FormGroup>
 
             <FormGroup>
@@ -202,25 +198,22 @@ const Signup = () => {
                 {t("forms.confirm-password.label")}
               </Label>
               <PasswordInput
+                id="confirmPassword"
                 name="confirmPassword"
+                invalid={errors.confirmPassword}
+                invalidText={errors.confirmPassword?.message}
                 placeholder={t("forms.confirm-password.placeholder")}
                 {...register("confirmPassword")}
-                error={errors.confirmPassword}
               />
-              {errors.confirmPassword && (
-                <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-              )}
             </FormGroup>
 
-            <FormGroup className="flex items-start mt-8">
-              <Controller
+            <FormGroup className="flex items-start gap-2 mt-8">
+              <Checkbox
                 control={control}
                 name="acceptTerms"
-                render={({ field: { value, onChange } }) => (
-                  <CheckBox type="checkbox" value={value} onChange={onChange} />
-                )}
+                aria-label="policy terms"
               />
-              <p className="mb-4 ml-2 text-sm font-light text-gray-600">
+              <p className="text-sm text-gray-600">
                 <span>{t("signup.form.license-terms.label")} </span>
                 <Link
                   to="/privacy-policy"
@@ -233,28 +226,16 @@ const Signup = () => {
               </p>
             </FormGroup>
 
-            {RECAPTCHA_ENABLE ? (
-              <FormGroup>
-                <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
-                {errors.captcha_token && (
-                  <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
-                )}
-              </FormGroup>
-            ) : (
-              <FormGroup>
-                <Alert
-                  kind="primary"
-                  message={t("alert-messages.recaptcha.disabled")}
-                  hideCloseButton
-                />
-              </FormGroup>
-            )}
+            <FormGroup>
+              <ReCAPTCHA control={control} name="captcha_token" />
+            </FormGroup>
 
-            <Button className="w-full" disabled={!isValid}>
+            <Button className="w-full">
               <FiUserPlus /> &nbsp;
               <span>{t("signup.form.cta-button-text")}</span>
             </Button>
           </form>
+
           <p className="my-8 text-sm text-center text-gray-600">
             <span>{t("signup.account-status")}</span> &nbsp;
             <Link to="/login" className="text-blue-800">

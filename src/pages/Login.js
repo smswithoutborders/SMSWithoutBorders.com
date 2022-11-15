@@ -11,14 +11,12 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAuth, authSelector } from "features";
 import {
-  Alert,
   Label,
   Loader,
   Button,
   useTitle,
   FormGroup,
   ReCAPTCHA,
-  ErrorMessage,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
@@ -54,7 +52,7 @@ const Login = () => {
     register,
     setValue,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -109,7 +107,7 @@ const Login = () => {
   return (
     <PageAnimationWrapper>
       <div className="md:min-h-screen md:grid md:place-items-center bg-blend-multiply">
-        <div className="container p-8 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
+        <div className="container p-6 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
             <h1 className="text-2xl font-bold text-center">
@@ -126,23 +124,15 @@ const Login = () => {
                 name="phone_number"
                 render={({ field: { value, onChange } }) => (
                   <PhoneNumberInput
-                    international
-                    countryCallingCodeEditable={false}
-                    placeholder={t("forms.phone-number.placeholder")}
-                    defaultCountry="CM"
                     value={value}
-                    type="tel"
                     onChange={onChange}
-                    error={errors.phone_number}
+                    invalid={errors.phone_number}
+                    invalidText={errors.phone_number?.message}
+                    helperText={t("forms.phone-number.helper-text")}
+                    placeholder={t("forms.phone-number.placeholder")}
                   />
                 )}
               />
-              {errors.phone_number && (
-                <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
-              )}
-              <small className="block text-xs text-gray-600">
-                {t("forms.phone-number.helper-text")}
-              </small>
             </FormGroup>
 
             <FormGroup>
@@ -152,32 +142,17 @@ const Login = () => {
               <PasswordInput
                 name="password"
                 showStrength={false}
+                invalid={errors.password}
+                invalidText={errors.password?.message}
                 {...register("password")}
-                error={errors.password}
               />
-              {errors.password && (
-                <ErrorMessage>{errors.password?.message}</ErrorMessage>
-              )}
             </FormGroup>
 
-            {RECAPTCHA_ENABLE ? (
-              <FormGroup>
-                <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
-                {errors.captcha_token && (
-                  <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
-                )}
-              </FormGroup>
-            ) : (
-              <FormGroup>
-                <Alert
-                  kind="primary"
-                  message={t("alert-messages.recaptcha.disabled")}
-                  hideCloseButton
-                />
-              </FormGroup>
-            )}
+            <FormGroup>
+              <ReCAPTCHA control={control} name="captcha_token" />
+            </FormGroup>
 
-            <Button className="w-full" disabled={!isValid}>
+            <Button className="w-full">
               <FiLogIn />
               <span className="ml-1">{t("login.cta-button-text")}</span>
             </Button>

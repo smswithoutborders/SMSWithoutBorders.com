@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const LoadingContainer = styled.div.attrs(({ className, light }) => ({
   className: clsx(
-    "grid place-items-center mx-auto w-full min-h-screen h-full",
+    "grid place-items-center mx-auto w-full",
     light ? "text-white" : "text-gray-600",
     className
   ),
@@ -15,7 +15,7 @@ const LoadingContainer = styled.div.attrs(({ className, light }) => ({
 
 const Spinner = styled.div.attrs(({ className, light }) => ({
   className: clsx(
-    "animate-spin rounded-full h-16 w-16 border-b-2 mb-4",
+    "animate-spin rounded-full h-16 w-16 border-b-2",
     light ? " border-white" : " border-gray-600",
     className
   ),
@@ -29,7 +29,7 @@ export const Loader = ({ message, light }) => {
   }, []);
 
   return (
-    <LoadingContainer className="h-screen" light={light}>
+    <LoadingContainer className="h-full min-h-screen" light={light}>
       <div>
         <Spinner className="mx-auto" light={light} />
         <p className="mt-2">{message || t("alert-messages.loading")}</p>
@@ -41,15 +41,16 @@ export const Loader = ({ message, light }) => {
 export const InlineLoader = ({ message, className, light }) => {
   const { t } = useTranslation();
 
+  // restore scroll position
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <LoadingContainer className={clsx("h-80", className)} light={light}>
+    <LoadingContainer className={className} light={light}>
       <div>
         <Spinner className="mx-auto" light={light} />
-        <p className="mt-2">{message || t("alert-messages.loading")}</p>
+        <p className="mt-2 text-sm">{message || t("alert-messages.loading")}</p>
       </div>
     </LoadingContainer>
   );
