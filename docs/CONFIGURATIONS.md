@@ -118,13 +118,15 @@ sudo systemctl restart apache2
 
 ### Docker
 
+The SWOB docker image is designed to run in a production environment therefore, SSL keys are required
+
 Start by building the docker image. There is a make script you can run. Also, SWOB env overrides can be passed directly to this command. See configuring env variables above.
 
 ```bash
-make image
+SWOB_SSL_ENABLE=true SWOB_SSL_CRT_FILE=/path/to/server.crt SWOB_SSL_KEY_FILE=/path/to/server.key make image
 ```
 
-You can also pass SWOB env variable to be used instead of the defaults.
+You can also pass other SWOB env variable to be used instead of the defaults.
 
 ```bash
 SWOB_RECAPTCHA_ENABLE=true SWOB_RECAPTCHA_SITE_KEY=somekeyhere make image
@@ -132,4 +134,6 @@ SWOB_RECAPTCHA_ENABLE=true SWOB_RECAPTCHA_SITE_KEY=somekeyhere make image
 
 A full list of all env variables can be found under `configure env variables` section above
 
-Once build completes, a `swob-fe:latest` image is created. you can test it by running `make container` or deploying with your own docker config options
+Once build completes, a `swob-fe:latest` image is created. The image exposes ports `80` and `443` which can be mapped as required
+
+You can test the image by running `make container` and visit `http://localhost:18000`and `https://localhost:18001` in the browser or deploying with your own docker config options
