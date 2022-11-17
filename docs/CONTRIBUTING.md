@@ -58,7 +58,13 @@ All routes are defined in App.js and any new routes can be added there.
 
 ## Testing
 
-Some parts of the project are inter-connected. Whenever a component in this section gets updated, it is advised to test all other components related to it. Please see the [testing guide](TESTING.md)
+Some parts of the project are inter-connected. Whenever a component gets updated, it is good practice to test all other components related to it. Please see the [testing guide](TESTING.md)
+
+### Testing protected pages
+
+All pages in the dashboard area are protected and require certain parameters to access them. Testing these pages could be a bit challenging during development since it becomes combersome to keep filling in required information each time.
+
+A nifty workaround is to comment out the redirection checks in the respective [route guard component](../src/components/guards/). This will give you full access to the page without the checks. Be sure to uncomment them before opening your PR though
 
 ## Reporting Issues
 
