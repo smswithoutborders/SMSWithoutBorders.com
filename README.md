@@ -1,7 +1,9 @@
 
 <img src="https://github.com/smswithoutborders/SMSWithoutBorders-Resources/raw/master/multimedia/img/swob_logo_icon.png" align="right" width="350px"/>
 
-# SMSwithoutBorders.com
+# SMSWithoutBorders.com
+
+The official SMSWithoutBorders website.
 
 Here is the interface through which users can manage their accounts and store their credentials
 
