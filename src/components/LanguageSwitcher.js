@@ -18,8 +18,12 @@ export const LanguageSwitcher = ({ bordered }) => {
   );
 
   useEffect(() => {
+    let root = document.querySelector("html");
     const initial = LANGUAGES.find((lang) => lang.key === i18n.language);
-    if (initial) setSelected(initial);
+    if (initial) {
+      setSelected(initial);
+      root.setAttribute("dir", initial.dir);
+    }
   }, [i18n]);
 
   return (
