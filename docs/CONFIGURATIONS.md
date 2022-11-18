@@ -118,19 +118,44 @@ sudo systemctl restart apache2
 
 ### Docker
 
-The SWOB docker image is designed to run in a production environment therefore, SSL keys are required
+#### Development image
 
-Start by building the docker image. There is a make script you can run. Also, SWOB env overrides can be passed directly to this command. See configuring env variables above.
+There is a make script you can run. Also, SWOB env overrides can be passed directly to this command. See configuring env variables above.
 
 ```bash
-SWOB_SSL_ENABLE=true SWOB_SSL_CRT_FILE=/path/to/server.crt SWOB_SSL_KEY_FILE=/path/to/server.key make image
+make image
 ```
 
 You can also pass other SWOB env variable to be used instead of the defaults.
 
 ```bash
-SWOB_RECAPTCHA_ENABLE=true SWOB_RECAPTCHA_SITE_KEY=somekeyhere make image
+SWOB_RECAPTCHA_ENABLE=true \
+SWOB_RECAPTCHA_SITE_KEY=somekeyhere \
+make image
 ```
+
+#### Production image
+
+In production, SSL keys are required. You can pass them in as build args
+
+```bash
+docker build -t swob-fe \
+--target production \
+--build-arg SWOB_SSL_CRT_FILE=path/to/server.crt \
+--build-arg SWOB_SSL_KEY_FILE=path/to/server.key .
+```
+
+You can also pass other SWOB env variable to be used instead of the defaults.
+
+```bash
+SWOB_RECAPTCHA_ENABLE=true \
+SWOB_RECAPTCHA_SITE_KEY=somekeyhere \
+docker build -t swob-fe \
+--target production \
+--build-arg SWOB_SSL_CRT_FILE=path/to/server.crt \
+--build-arg SWOB_SSL_KEY_FILE=path/to/server.key .
+```
+
 
 A full list of all env variables can be found under `configure env variables` section above
 

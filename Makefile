@@ -19,8 +19,7 @@ deploy:
 
 image: config
 	@echo "[!] Creating docker image ..."
-	@bash scripts/create_ssl.sh
-	@docker build -t swob-fe .
+	@docker build -t swob-fe --target development .
 
 container:
 	@echo "[!] Starting docker container"
