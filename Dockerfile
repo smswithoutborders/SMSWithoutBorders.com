@@ -22,8 +22,8 @@ ARG SWOB_SSL_KEY_FILE
 COPY configs/httpd.ssl.conf ./conf/httpd.conf
 
 # copy ssl keys
-COPY ${SWOB_SSL_CRT_FILE} ./conf/server.crt
-COPY ${SWOB_SSL_KEY_FILE} ./conf/server.key
+# COPY ${SWOB_SSL_CRT_FILE} ./conf/server.crt
+# COPY ${SWOB_SSL_KEY_FILE} ./conf/server.key
 # import built files
 COPY --from=base /app/build ./htdocs
 
