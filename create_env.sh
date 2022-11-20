@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 # config files
 DEV_ENV_FILE=.env.development.local
@@ -23,9 +23,9 @@ CONFIGS="\n
 "
 
 # only recreate dev config if not exist
-if ! [[ -e $DEV_ENV_FILE ]]; then
-    echo -e $CONFIGS > $DEV_ENV_FILE
-fi
+#if ! [[ -e $DEV_ENV_FILE ]]; then
+#    echo -e $CONFIGS > $DEV_ENV_FILE
+#fi
 
 # Always update prod config
 echo -e $CONFIGS > $PROD_ENV_FILE

@@ -6,7 +6,7 @@ RUN apk add make
 WORKDIR /app
 COPY . .
 # build production files
-RUN make build
+RUN make
 
 # base image for apache
 FROM httpd:2.4 as apache

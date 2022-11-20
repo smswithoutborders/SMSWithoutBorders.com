@@ -5,7 +5,7 @@ all: config build
 
 config:
 	@echo "[!] Creating env configs"
-	@bash scripts/create_env.sh
+	${PWD}/scripts/create_env.sh
 	@echo "[!] Configs created edit them to suit your needs, then build and deploy"
 
 build:
