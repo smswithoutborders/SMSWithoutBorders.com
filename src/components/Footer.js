@@ -18,14 +18,15 @@ export const Footer = () => {
       <div className="flex flex-col p-4 space-y-2">
         <Link
           to="/"
-          className="inline-flex items-center appearance-none hover:focus:text-blue-200 focus:no-underline"
+          className="inline-flex items-center gap-2 appearance-none hover:focus:text-blue-200 focus:no-underline"
+          dir="ltr"
         >
           <img
             src={Logo}
             alt="SMSwithoutborders"
-            className="w-12 h-12 p-2 text-white rounded-full"
+            className="w-8 h-8 text-white rounded-full"
           />
-          <span className="ml-2 text-xl font-bold text-white">
+          <span className="text-xl font-bold text-white">
             SMSWithoutBorders
           </span>
         </Link>

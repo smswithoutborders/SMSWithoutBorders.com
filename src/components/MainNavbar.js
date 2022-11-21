@@ -21,7 +21,7 @@ export const MainNavbar = () => {
   }
 
   const DesktopLinks = () => (
-    <div className="lg:flex">
+    <div className="flex flex-wrap gap-2">
       <NavLink key="/" to="/" end>
         {t("menu.home")}
       </NavLink>
@@ -66,7 +66,7 @@ export const MainNavbar = () => {
   );
 
   const ActionLinks = () => (
-    <div className="lg:flex lg:items-center">
+    <div className="flex flex-wrap items-center gap-2">
       <LanguageSwitcher />
       <ExternalLink
         key="Github"
@@ -74,23 +74,23 @@ export const MainNavbar = () => {
         target="_blank"
       >
         <GoMarkGithub size={20} />
-        <span className="ml-2">GitHub</span>
+        <span>GitHub</span>
       </ExternalLink>
       <NavLink open={open} key="login" to="/login">
-        <span className="ml-2">{t("menu.login")}</span>
+        {t("menu.login")}
       </NavLink>
       <NavLink
         key="sign-up"
         to="/sign-up"
-        className="text-white bg-blue-800 border-none lg:px-6 lg:py-2 lg:mr-4 lg:rounded-lg"
+        className="text-white bg-blue-800 border-none rounded-lg lg:px-6 lg:py-2"
       >
-        <span className="ml-2">{t("menu.signup")}</span>
+        {t("menu.signup")}
       </NavLink>
     </div>
   );
 
   const MobileLinks = () => (
-    <div className="">
+    <div className="flex flex-col gap-2 p-4">
       <LanguageSwitcher />
       <MobileNavLink onClick={() => toggleMenu()} key="home" to="/" end>
         {t("menu.home")}
@@ -147,7 +147,7 @@ export const MainNavbar = () => {
         target="_blank"
       >
         <GoMarkGithub size={20} />
-        <span className="ml-2">GitHub</span>
+        <span>GitHub</span>
       </ExternalLink>
       <MobileNavLink
         open={open}
@@ -155,31 +155,36 @@ export const MainNavbar = () => {
         to="/login"
         onClick={() => toggleMenu()}
       >
-        <span className="ml-2">{t("menu.login")}</span>
+        {t("menu.login")}
       </MobileNavLink>
       <MobileNavLink
         key="sign-up"
         to="/sign-up"
         onClick={() => toggleMenu()}
-        className="text-white bg-blue-800 xl:px-6 xl:py-2 xl:mr-4 xl:rounded-3xl"
+        className="text-white bg-blue-800 rounded-lg"
       >
-        <span className="ml-2">{t("menu.signup")}</span>
+        {t("menu.signup")}
       </MobileNavLink>
     </div>
   );
 
   const Logo = () => (
-    <Link to="/" className="flex items-center text-xl font-bold lg:ml-4">
-      <img src={logo} alt="logo" className="w-8 h-8 mr-3" />
+    <Link
+      to="/"
+      dir="ltr"
+      className="flex items-center gap-2 text-xl font-bold"
+    >
+      <img src={logo} alt="logo" className="w-8 h-8" />
       <span>SMSWithoutBorders</span>
     </Link>
   );
 
   return (
     <Fragment>
+      {/* Desktop nav */}
       <div
         className={clsx(
-          "hidden sticky top-0 z-50 lg:flex justify-between items-center",
+          "hidden sticky top-0 z-50 lg:flex justify-evenly items-center",
           scrolled
             ? "bg-white bg-opacity-80 backdrop-blur-xl shadow-lg"
             : "text-white bg-transparent"
@@ -189,6 +194,7 @@ export const MainNavbar = () => {
         <DesktopLinks />
         <ActionLinks />
       </div>
+      {/* Mobile nav */}
       <div
         className={clsx(
           "bg-white shadow-lg lg:hidden z-50",

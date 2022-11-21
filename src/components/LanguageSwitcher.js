@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState, useCallback } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiGlobe } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { LANGUAGES } from "utils/constants";
 import PropTypes from "prop-types";
@@ -35,9 +35,10 @@ export const LanguageSwitcher = ({ bordered }) => {
       <div
         className={`relative  ${bordered && "lg:border md:border-gray-600"}`}
       >
-        <Listbox.Button className="flex items-center justify-between w-full p-5 space-x-1 rounded-lg cursor-default focus:outline-none">
+        <Listbox.Button className="flex items-center justify-between w-full gap-1 p-5 rounded-lg cursor-default focus:outline-none">
           {({ open }) => (
             <Fragment>
+              <FiGlobe size={18} />
               <span className="block font-normal">{selected?.name}</span>
               <FiChevronDown
                 size={16}

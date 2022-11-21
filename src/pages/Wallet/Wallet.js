@@ -211,7 +211,7 @@ const Wallet = () => {
                     {t("wallet.prompt-dialog.details")}
                   </Dialog.Description>
 
-                  <div className="flex items-center justify-start mt-8 space-x-2">
+                  <div className="flex items-center justify-start gap-2 mt-8">
                     <Button
                       outline
                       onClick={() => showPrompt(false)}
@@ -239,11 +239,11 @@ const Wallet = () => {
     <PageAnimationWrapper>
       <div className="max-w-screen-xl min-h-screen p-6 mx-auto prose text-gray-900 md:my-10 onboarding">
         <div className="flex justify-between mb-8">
-          <h1 className="inline-flex items-center mb-0 space-x-4 text-3xl font-bold">
+          <h1 className="inline-flex items-center gap-4 mb-0 text-3xl font-bold">
             <BsShieldLock size={42} />
-            <span className="ml-2">{t("wallet.heading")}</span>
+            <span>{t("wallet.heading")}</span>
           </h1>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <Button
               outline
               className="hidden md:flex desktop-tutorial-button"
@@ -346,7 +346,7 @@ const Wallet = () => {
                     showStrength={false}
                   />
 
-                  <div className="flex items-center justify-between mt-8 space-x-2 md:justify-end">
+                  <div className="flex items-center justify-between gap-2 mt-8 md:justify-end">
                     <Button
                       outline
                       onClick={() => setOpenRevokeDialog(false)}

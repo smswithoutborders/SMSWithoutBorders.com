@@ -107,7 +107,7 @@ const Login = () => {
   return (
     <PageAnimationWrapper>
       <div className="md:min-h-screen md:grid md:place-items-center bg-blend-multiply">
-        <div className="container p-6 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
+        <div className="container p-6 mx-auto bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
             <h1 className="text-2xl font-bold text-center">
@@ -156,7 +156,7 @@ const Login = () => {
 
             <Button className="w-full">
               <FiLogIn />
-              <span className="ml-1">{t("login.cta-button-text")}</span>
+              <span>{t("login.cta-button-text")}</span>
             </Button>
           </form>
           <Link

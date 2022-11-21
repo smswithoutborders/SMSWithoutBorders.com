@@ -131,8 +131,8 @@ const Sync = () => {
       <PageAnimationWrapper>
         <div className="grid max-w-screen-md min-h-screen grid-cols-2 px-6 py-20 mx-auto prose md:px-8">
           <div className="text-center col-span-full">
-            <h1 className="inline-flex items-center mb-0 text-2xl font-bold md:text-3xl">
-              <IoMdSync size={42} className="mr-2" />
+            <h1 className="inline-flex items-center gap-2 mb-0 text-2xl font-bold md:text-3xl">
+              <IoMdSync size={42} />
               <span>{t("sync.heading")}</span>
             </h1>
 

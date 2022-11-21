@@ -10,11 +10,18 @@ import {
   logout as logoutAction,
 } from "features";
 import { useSelector, useDispatch } from "react-redux";
-import { FiMenu, FiX, FiLogOut, FiGrid, FiSettings } from "react-icons/fi";
+import {
+  FiMenu,
+  FiX,
+  FiLogOut,
+  FiGrid,
+  FiSettings,
+  FiExternalLink,
+} from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { useLogoutMutation } from "services";
 import { Loader } from "./Loader";
-import { DashNavLink } from "./NavLinks";
+import { DashNavLink, ExternalLink } from "./NavLinks";
 import { NavButton } from "./Buttons";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -49,7 +56,7 @@ export const DashNavbar = () => {
   const ActionLinks = () => (
     <div
       key={2}
-      className="flex items-center justify-between mt-20 bg-gray-100 lg:bg-white lg:mt-0"
+      className="flex flex-wrap items-center justify-between gap-2 mt-20 bg-gray-100 lg:bg-white lg:mt-0"
     >
       <LanguageSwitcher />
       {metrics?.name && (
@@ -63,48 +70,40 @@ export const DashNavbar = () => {
         </div>
       )}
       <NavButton onClick={() => handleLogOut()}>
-        <FiLogOut /> &nbsp; {t("menu.logout")}
+        <FiLogOut />
+        <span>{t("menu.logout")}</span>
       </NavButton>
     </div>
   );
 
   const DesktopLinks = () => (
     <div className="lg:flex">
-      <NavButton
-        onClick={() => {
-          navigate("wallet?tutorial=onboarding");
-          toggleMenu();
-        }}
-        key="Get Started"
-      >
-        {t("menu.get-started")}
-      </NavButton>
       <DashNavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
-        <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
+        <FiGrid size={20} /> <span>{t("menu.dashboard")}</span>
       </DashNavLink>
       <DashNavLink onClick={() => toggleMenu()} key="Sync" to="sync">
-        <IoMdSync size={20} /> &nbsp; {t("menu.sync")}
+        <IoMdSync size={20} /> <span>{t("menu.sync")}</span>
       </DashNavLink>
       <DashNavLink onClick={() => toggleMenu()} key="Wallet" to="wallet">
-        <IoWalletOutline size={20} /> &nbsp; {t("menu.wallet")}
+        <IoWalletOutline size={20} /> <span>{t("menu.wallet")}</span>
       </DashNavLink>
       <DashNavLink onClick={() => toggleMenu()} key="Settings" to="settings">
-        <FiSettings size={20} /> &nbsp; {t("menu.settings")}
+        <FiSettings size={20} /> <span>{t("menu.settings")}</span>
       </DashNavLink>
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="tutorials"
+        href={process.env.REACT_APP_TUTORIAL_URL}
+        target="_blank"
+      >
+        <FiExternalLink size={20} />
+        <span>{t("menu.tutorials")}</span>
+      </ExternalLink>
     </div>
   );
 
   const MobileLinks = () => (
-    <div className="lg:flex">
-      <NavButton
-        onClick={() => {
-          navigate("wallet?tutorial=onboarding");
-          toggleMenu();
-        }}
-        key="Get Started"
-      >
-        {t("menu.get-started")}
-      </NavButton>
+    <div className="flex flex-col gap-2">
       <DashNavLink onClick={() => toggleMenu()} key="Dashboard" to="metrics">
         <FiGrid size={20} /> &nbsp; {t("menu.dashboard")}
       </DashNavLink>
@@ -117,13 +116,26 @@ export const DashNavbar = () => {
       <DashNavLink onClick={() => toggleMenu()} key="Settings" to="settings">
         <FiSettings size={20} /> &nbsp; {t("menu.settings")}
       </DashNavLink>
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="tutorials"
+        href={process.env.REACT_APP_TUTORIAL_URL}
+        target="_blank"
+      >
+        <FiExternalLink size={20} />
+        <span>{t("menu.tutorials")}</span>
+      </ExternalLink>
     </div>
   );
 
   const Logo = () => (
-    <Link to="/dashboard" className="flex items-center lg:ml-4">
-      <img src={logo} alt="logo" className="mr-3 w-7 h-7" />
-      <span className="font-bold">SMSWithoutBorders</span>
+    <Link
+      to="/"
+      dir="ltr"
+      className="flex items-center gap-2 text-xl font-bold"
+    >
+      <img src={logo} alt="logo" className="w-8 h-8" />
+      <span>SMSWithoutBorders</span>
     </Link>
   );
 
@@ -138,14 +150,14 @@ export const DashNavbar = () => {
   return (
     <Fragment>
       {/* Desktop nav */}
-      <nav className="items-center justify-between hidden h-16 bg-white shadow-lg lg:flex">
+      <nav className="items-center hidden bg-white shadow-lg lg:justify-evenly lg:flex lg:flex-wrap">
         <Logo />
         <DesktopLinks />
         <ActionLinks />
       </nav>
       {/* Mobile nav */}
       <nav className="sticky top-0 z-50 bg-white shadow-lg lg:hidden">
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between p-5">
           <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>
             {navOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -162,7 +174,7 @@ export const DashNavbar = () => {
             leave="transition-opacity duration-500"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            className="flex flex-col w-full h-screen bg-white"
+            className="flex flex-col w-full h-screen p-4 bg-white"
           >
             <MobileLinks />
             <ActionLinks />

@@ -14,7 +14,7 @@ export const NavLink = forwardRef(({ className, ...props }, ref) => {
       {...props}
       className={({ isActive }) =>
         clsx(
-          "flex items-center outline-none appearance-none p-5",
+          "flex items-center outline-none appearance-none p-5 gap-2",
           isActive && !scrolled && "border-b-2 border-white text-white",
           isActive && scrolled && "border-b-2 border-blue-800 text-blue-800",
           className
@@ -31,7 +31,7 @@ export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
       {...props}
       className={({ isActive }) =>
         clsx(
-          "flex items-center outline-none appearance-none p-5",
+          "flex items-center outline-none appearance-none p-5 gap-2",
           isActive && "border-b-2 border-blue-800 text-blue-800",
           className
         )
@@ -47,7 +47,7 @@ export const MobileNavLink = forwardRef(({ className, ...props }, ref) => {
       {...props}
       className={({ isActive }) =>
         clsx(
-          "flex items-center outline-none appearance-none p-5 md:px-3",
+          "flex items-center outline-none appearance-none p-5 lg:p-0 gap-2",
           isActive && "border-b-2 border-blue-800 text-blue-800",
           className
         )
@@ -63,7 +63,7 @@ export const ExternalLink = forwardRef(
         ref={ref}
         {...props}
         className={clsx(
-          "flex outline-none items-center appearance-none active:font-bold p-5 md:px-3",
+          "flex outline-none items-center appearance-none active:font-bold p-5 lg:p-0 gap-2",
           className
         )}
       >
@@ -94,7 +94,7 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-300 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {links?.map(({ key, path, label, external }) => (
             <Menu.Item key={key}>
               {external ? (
@@ -103,7 +103,7 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
                   href={path}
                   rel="noreferrer"
                   target="_blank"
-                  className="flex items-center p-5 text-gray-900 outline-none appearance-none active:font-bold md:px-3"
+                  className="flex items-center p-5 text-gray-900 outline-none appearance-none active:font-bold"
                 >
                   {label}
                 </a>
@@ -113,7 +113,7 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
                   to={`/${path}`}
                   className={({ isActive }) =>
                     clsx(
-                      "flex items-center outline-none appearance-none p-5 md:px-3",
+                      "flex items-center outline-none appearance-none p-5 gap-2",
                       isActive
                         ? "border-b-2 border-blue-800 text-blue-800"
                         : "border-b-2 border-white text-gray-900"
