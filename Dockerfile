@@ -6,7 +6,24 @@ RUN apk add make
 WORKDIR /app
 COPY . .
 # build production files
-RUN make build
+ARG SWOB_BE_HOST
+ARG SWOB_GS_HOST
+ARG SWOB_RECAPTCHA_ENABLE
+ARG SWOB_RECAPTCHA_SITE_KEY
+ARG SWOB_SSL_ENABLE
+ARG SWOB_SSL_CRT_FILE
+ARG SWOB_SSL_KEY_FILE
+
+RUN export SWOB_BE_HOST=${SWOB_BE_HOST} \
+SWOB_GS_HOST=${SWOB_GS_HOST} \
+SWOB_RECAPTCHA_ENABLE=${SWOB_RECAPTCHA_ENABLE} \
+SWOB_RECAPTCHA_SITE_KEY=${SWOB_RECAPTCHA_SITE_KEY} \
+SWOB_SSL_ENABLE=${SWOB_SSL_ENABLE} \
+SWOB_SSL_CRT_FILE=${SWOB_SSL_CRT_FILE} \
+SWOB_SSL_KEY_FILE=${SWOB_SSL_KEY_FILE} \
+SWOB_SSL_ENABLE=${SWOB_SSL_ENABLE} 
+
+RUN make
 
 # base image for apache
 FROM httpd:2.4 as apache
@@ -22,8 +39,8 @@ ARG SWOB_SSL_KEY_FILE
 COPY configs/httpd.ssl.conf ./conf/httpd.conf
 
 # copy ssl keys
-COPY ${SWOB_SSL_CRT_FILE} ./conf/server.crt
-COPY ${SWOB_SSL_KEY_FILE} ./conf/server.key
+# COPY ${SWOB_SSL_CRT_FILE} ./conf/server.crt
+# COPY ${SWOB_SSL_KEY_FILE} ./conf/server.key
 # import built files
 COPY --from=base /app/build ./htdocs
 

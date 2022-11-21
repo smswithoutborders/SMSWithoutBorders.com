@@ -1,9 +1,10 @@
-#! /bin/bash
+#!/bin/sh
 
 # config files
 DEV_ENV_FILE=.env.development.local
 PROD_ENV_FILE=.env.production.local
 
+echo "CREATER HOST: ${SWOB_BE_HOST}"
 CONFIGS="\n
 	PORT=${PORT:-18000}\n
 	GENERATE_SOURCEMAP=false\n
