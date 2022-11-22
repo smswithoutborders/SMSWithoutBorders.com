@@ -6,6 +6,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 export const ToggleButton = ({ value, onToggle, className }) => {
   return (
     <button
+      type="button"
       aria-label={value}
       className={clsx("cursor-pointer text-gray-500", className)}
       onClick={() => onToggle(!value)}
