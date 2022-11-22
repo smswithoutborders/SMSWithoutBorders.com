@@ -7,9 +7,9 @@ import {
   AuthGuard,
   SplashScreen,
   ScrollWrapper,
-  LanguageWrapper,
   VerificationGuard,
 } from "components";
+import { useLanguage } from "hooks";
 
 const Sync = lazy(() => import("pages/Sync"));
 const Contact = lazy(() => import("pages/Contact"));
@@ -52,6 +52,7 @@ const BetaTesting = lazy(() => import("pages/BetaTesting"));
 
 const App = () => {
   const { t } = useTranslation();
+  const { LanguageWrapper } = useLanguage();
 
   return (
     <Fragment>

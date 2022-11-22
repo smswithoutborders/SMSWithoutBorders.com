@@ -1,3 +1,4 @@
-export * from "./useCountDown";
-export * from "./useDeviceDetection";
 export * from "./useScroll";
+export * from "./useCountDown";
+export * from "./useLanguage";
+export * from "./useDeviceDetection";

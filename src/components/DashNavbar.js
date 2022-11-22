@@ -24,10 +24,11 @@ import { Loader } from "./Loader";
 import { DashNavLink, ExternalLink } from "./NavLinks";
 import { NavButton } from "./Buttons";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useLanguage } from "hooks";
 
 export const DashNavbar = () => {
   const { t } = useTranslation();
+  const { LanguageSwitcher } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const metrics = useSelector(metricsSelector);

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { ToggleButton } from "./ToggleButton";
 import { Input } from "./Input";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "hooks";
 
 // Password Input Component
 export const PasswordInput = forwardRef(
@@ -11,6 +12,7 @@ export const PasswordInput = forwardRef(
     const { t } = useTranslation();
     const [toggle, setToggle] = useState(false);
     const [strength, setStrength] = useState(null);
+    const { language } = useLanguage();
 
     function calculateStrength(password) {
       if (password.length > 0) {
@@ -44,7 +46,10 @@ export const PasswordInput = forwardRef(
             {...rest}
           />
           <ToggleButton
-            className="absolute top-3.5 right-3"
+            className={clsx(
+              "absolute top-4",
+              language?.dir === "ltr" ? "right-3" : "left-4"
+            )}
             onToggle={setToggle}
             value={toggle}
           />

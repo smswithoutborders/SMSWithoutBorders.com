@@ -12,6 +12,4 @@ export * from "./Alert";
 export * from "./QRCode";
 export * from "./ScrollWrapper";
 export * from "./Announcement";
-export * from "./LanguageSwitcher";
-export * from "./LanguageWrapper";
 export * from "./form";

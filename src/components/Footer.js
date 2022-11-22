@@ -9,10 +9,11 @@ import {
 } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useLanguage } from "hooks";
 
 export const Footer = () => {
   const { t } = useTranslation();
+  const { LanguageSwitcher } = useLanguage();
   return (
     <footer className="flex flex-col px-2 py-8 overflow-y-auto text-sm text-gray-300 lg:flex-row md:justify-between bg-slate-900 md:p-8">
       <div className="p-4">

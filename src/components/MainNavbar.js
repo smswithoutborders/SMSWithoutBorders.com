@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useScroll } from "hooks";
+import { useScroll, useLanguage } from "hooks";
 import clsx from "clsx";
 
 export const MainNavbar = () => {
   const { t } = useTranslation();
+  const { LanguageSwitcher } = useLanguage();
+
   const [open, setOpen] = useState(false);
 
   const scrolled = useScroll();
