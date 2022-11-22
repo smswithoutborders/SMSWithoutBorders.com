@@ -254,7 +254,7 @@ const Sync = () => {
                 onClick={() => handleSync()}
               >
                 <IoMdSync size={22} />
-                <span className="ml-1">{t("labels.sync")}</span>
+                <span>{t("labels.sync")}</span>
               </Button>
               <Button
                 outline
@@ -291,7 +291,7 @@ const Sync = () => {
                 onClick={() => handleSync()}
               >
                 <IoMdSync size={22} />
-                <span className="ml-1">{t("labels.sync")}</span>
+                <span>{t("labels.sync")}</span>
               </Button>
               <Button
                 outline

@@ -50,7 +50,7 @@ export const LinkButton = ({ to, className, children, ...rest }) => {
     <Link
       to={to}
       className={clsx(
-        "flex items-center gap-2 justify-center px-4 py-2 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none",
+        "flex items-center gap-2 justify-center px-4 py-3 text-white no-underline bg-blue-800 rounded-lg outline-none focus:outline-none",
         className
       )}
       {...rest}

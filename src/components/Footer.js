@@ -15,7 +15,7 @@ export const Footer = () => {
   const { t } = useTranslation();
   return (
     <footer className="flex flex-col px-2 py-8 overflow-y-auto text-sm text-gray-300 lg:flex-row md:justify-between bg-slate-900 md:p-8">
-      <div className="flex flex-col p-4 space-y-2">
+      <div className="p-4">
         <Link
           to="/"
           className="inline-flex items-center gap-2 appearance-none hover:focus:text-blue-200 focus:no-underline"

@@ -256,7 +256,7 @@ const Wallet = () => {
               className="hidden md:flex desktop-sync-button"
             >
               <IoMdSync size={22} />
-              <span className="ml-1">{t("labels.sync")}</span>
+              <span>{t("labels.sync")}</span>
             </LinkButton>
           </div>
         </div>
