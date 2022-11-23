@@ -59,8 +59,8 @@ export const InlineLoader = ({ message, className, light }) => {
 export const SplashScreen = () => {
   return (
     <LoadingContainer className="h-screen">
-      <div className="flex items-center text-xl animate-pulse">
-        <img className="w-12 h-12 mr-3 md:w-20 md:h-20" src={logo} alt="logo" />
+      <div dir="ltr" className="flex items-center text-xl animate-pulse gap-4">
+        <img className="w-12 h-12 md:w-20 md:h-20" src={logo} alt="logo" />
         <h1 className="text-2xl font-black md:text-4xl">SMSWithoutBorders</h1>
       </div>
     </LoadingContainer>
