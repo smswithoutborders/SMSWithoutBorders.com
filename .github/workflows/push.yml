@@ -3,7 +3,7 @@ name: Rebuild the frontend on the server of SWOB
 on:
   push:
     branches:
-    - master
+    - staging
 jobs:
   build:
     name: Build
@@ -12,15 +12,10 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.STAGING_HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /var/www/repos/smswithoutborders.com
-          git checkout master
-          git pull -r
-          rm -rf build
-          yarn install
-          yarn build
-          cp -r build/. /var/www/html/
+           bash /root/staging.sh
+          
