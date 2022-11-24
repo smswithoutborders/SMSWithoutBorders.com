@@ -31,16 +31,9 @@ WORKDIR /usr/local/apache2
 
 # production build with ssl
 FROM apache as production
-
-ARG SWOB_SSL_CRT_FILE
-ARG SWOB_SSL_KEY_FILE
-
 # copy custom apache config with ssl enabled
 COPY configs/httpd.ssl.conf ./conf/httpd.conf
 
-# copy ssl keys
-# COPY ${SWOB_SSL_CRT_FILE} ./conf/server.crt
-# COPY ${SWOB_SSL_KEY_FILE} ./conf/server.key
 # import built files
 COPY --from=base /app/build ./htdocs
 

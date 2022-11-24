@@ -4,7 +4,6 @@
 DEV_ENV_FILE=.env.development.local
 PROD_ENV_FILE=.env.production.local
 
-echo "CREATER HOST: ${SWOB_BE_HOST}"
 CONFIGS="\n
 	PORT=${PORT:-18000}\n
 	GENERATE_SOURCEMAP=false\n
@@ -24,7 +23,7 @@ CONFIGS="\n
 "
 
 # only recreate dev config if not exist
-if ! [[ -e $DEV_ENV_FILE ]]; then
+if ! [ -e $DEV_ENV_FILE ]; then
     echo -e $CONFIGS > $DEV_ENV_FILE
 fi
 
