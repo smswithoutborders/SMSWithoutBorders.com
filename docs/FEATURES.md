@@ -28,7 +28,7 @@ Authenticated users can access the [wallet page](http://localhost:18000/dashboar
 
 When saving tokens for Gmail and Twitter, an authorization screen will be displayed prompting you to grant the requested permissions.
 
-![wallet](images/gmail_authorization.png)  ![wallet](images/twitter_authorization.png)
+![wallet](images/gmail_authorization.png) ![wallet](images/twitter_authorization.png)
 
 Saving Telegram access requires a phone number to be provided. A verification code will be sent which you have to provide to confirm. If you do not already have a Telegram account you will be prompted to create one.
 

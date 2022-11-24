@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export const Button = ({
@@ -31,6 +32,14 @@ export const Button = ({
   );
 };
 
+Button.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  outline: PropTypes.bool,
+  danger: PropTypes.bool,
+  children: PropTypes.node,
+};
+
 export const NavButton = ({ className, children, ...rest }) => {
   return (
     <button
@@ -43,6 +52,11 @@ export const NavButton = ({ className, children, ...rest }) => {
       {children}
     </button>
   );
+};
+
+NavButton.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export const LinkButton = ({ to, className, children, ...rest }) => {
@@ -58,4 +72,10 @@ export const LinkButton = ({ to, className, children, ...rest }) => {
       {children}
     </Link>
   );
+};
+
+LinkButton.propTypes = {
+  to: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.node,
 };

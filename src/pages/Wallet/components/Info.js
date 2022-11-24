@@ -6,7 +6,6 @@ import { useDeviceDetection } from "hooks";
 
 // component for displaying additional platform information
 const Info = ({ platform }) => {
-
   // we only need to show twitter info on mobile devices
   const isMobile = useDeviceDetection();
 

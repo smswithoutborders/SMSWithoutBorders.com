@@ -1,6 +1,7 @@
 // file for minimal components
 import React from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 
 export const ErrorMessage = ({ children, className, ...rest }) => {
   return (
@@ -8,4 +9,9 @@ export const ErrorMessage = ({ children, className, ...rest }) => {
       {children}
     </small>
   );
+};
+
+ErrorMessage.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
 };

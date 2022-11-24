@@ -31,7 +31,9 @@ const Dashboard = () => {
   }
 
   if (isError) {
-    return <Error message={t("dashboard.alerts.load-error")} callBack={refetch} />;
+    return (
+      <Error message={t("dashboard.alerts.load-error")} callBack={refetch} />
+    );
   }
 
   return (

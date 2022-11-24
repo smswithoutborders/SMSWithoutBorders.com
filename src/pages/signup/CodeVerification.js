@@ -72,7 +72,7 @@ const CodeVerification = () => {
         setVerified(true);
       } else {
         // replace clears all stored url state
-        navigate("/login", {replace: true});
+        navigate("/login", { replace: true });
       }
     } catch (error) {
       // handle all api errors in utils/middleware

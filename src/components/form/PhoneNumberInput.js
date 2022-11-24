@@ -50,6 +50,7 @@ export const PhoneNumberInput = ({
 };
 
 PhoneNumberInput.propTypes = {
+  invalid: PropTypes.bool,
   invalidText: PropTypes.string,
   helperText: PropTypes.string,
 };

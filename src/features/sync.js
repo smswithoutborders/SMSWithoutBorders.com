@@ -6,7 +6,7 @@ import { API } from "services";
 const initialState = {
   status: "disconnected",
   qrLink: "",
-  mobileLink:"",
+  mobileLink: "",
   syncURL: "",
 };
 /*

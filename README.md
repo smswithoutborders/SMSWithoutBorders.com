@@ -1,4 +1,3 @@
-
 <img src="https://github.com/smswithoutborders/SMSWithoutBorders-Resources/raw/master/multimedia/img/swob_logo_icon.png" align="right" width="350px"/>
 
 # SMSWithoutBorders.com

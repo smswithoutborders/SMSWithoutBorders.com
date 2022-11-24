@@ -59,7 +59,7 @@ const WalletRedirect = () => {
 
       // remove cache
       clearLocalCache();
-      
+
       if (platform !== "twitter") {
         navigate("/dashboard/wallet", {
           replace: true,

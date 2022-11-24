@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 
 export const Input = forwardRef(
-  (
-    { className, invalid, invalidText, labelText, helperText, ...rest },
-    ref
-  ) => {
+  ({ invalid, invalidText, helperText, ...rest }, ref) => {
     return (
       <Fragment>
         <input
@@ -28,6 +25,9 @@ export const Input = forwardRef(
   }
 );
 
+Input.displayName = "Input";
 Input.propTypes = {
+  invalid: PropTypes.bool,
   invalidText: PropTypes.string,
+  helperText: PropTypes.string,
 };

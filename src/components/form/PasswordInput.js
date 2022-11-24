@@ -93,10 +93,13 @@ export const PasswordInput = forwardRef(
   }
 );
 
+PasswordInput.displayName = "PasswordInput";
+
 PasswordInput.defaultProps = {
   showStrength: true,
 };
 
 PasswordInput.propTypes = {
+  onChange: PropTypes.func,
   showStrength: PropTypes.bool,
 };

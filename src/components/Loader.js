@@ -38,6 +38,11 @@ export const Loader = ({ message, light }) => {
   );
 };
 
+Loader.propTypes = {
+  message: PropTypes.string,
+  light: PropTypes.bool,
+};
+
 export const InlineLoader = ({ message, className, light }) => {
   const { t } = useTranslation();
 
@@ -56,21 +61,19 @@ export const InlineLoader = ({ message, className, light }) => {
   );
 };
 
+InlineLoader.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.string,
+  light: PropTypes.bool,
+};
+
 export const SplashScreen = () => {
   return (
     <LoadingContainer className="h-screen">
-      <div dir="ltr" className="flex items-center text-xl animate-pulse gap-4">
+      <div dir="ltr" className="flex items-center gap-4 text-xl animate-pulse">
         <img className="w-12 h-12 md:w-20 md:h-20" src={logo} alt="logo" />
         <h1 className="text-2xl font-black md:text-4xl">SMSWithoutBorders</h1>
       </div>
     </LoadingContainer>
   );
-};
-
-Loader.propTypes = {
-  message: PropTypes.string,
-};
-
-InlineLoader.propTypes = {
-  message: PropTypes.string,
 };

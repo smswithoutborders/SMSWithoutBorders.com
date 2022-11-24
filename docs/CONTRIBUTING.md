@@ -8,9 +8,9 @@ Existing features can be found in [FEATURES.md](FEATURES.md);
 
 We use three main branches in our workflow: [stable(master)](https://github.com/smswithoutborders/smswithoutborders.com/tree/master), [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) and [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing)
 
-* The [stable](https://github.com/smswithoutborders/smswithoutborders.com/tree/master) branch contains the code for the latest release version of the project
-* [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) is the active development branch. All recent changes and contributions go here
-* [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing) is where we try out newly developed features in prepartion for a release.
+- The [stable](https://github.com/smswithoutborders/smswithoutborders.com/tree/master) branch contains the code for the latest release version of the project
+- [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) is the active development branch. All recent changes and contributions go here
+- [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing) is where we try out newly developed features in prepartion for a release.
 
 In summary, we build, test then deploy
 
@@ -30,11 +30,11 @@ You can confirm you are on the dev branch by running
 git branch
 ```
 
- Create the branch you will be working from
+Create the branch you will be working from
 
- ```bash
+```bash
 git checkout -b <your branch name here>
- ```
+```
 
 ## Style Guide
 
@@ -52,7 +52,7 @@ Please create a new branch to work on a new feature. That way you can easily rol
 
 New features are very welcome but should first be discussed with the team for guidance.
 
-New  pages, components and features can be created in their respective folders and linked accordingly. Helper functions can be defined under utils
+New pages, components and features can be created in their respective folders and linked accordingly. Helper functions can be defined under utils
 
 All routes are defined in App.js and any new routes can be added there.
 

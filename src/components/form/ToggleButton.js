@@ -19,4 +19,5 @@ export const ToggleButton = ({ value, onToggle, className }) => {
 ToggleButton.propTypes = {
   value: PropTypes.bool.isRequired,
   onToggle: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };

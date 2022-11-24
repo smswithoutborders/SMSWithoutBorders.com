@@ -129,11 +129,7 @@ const AccountDeletion = () => {
             />
           </FormGroup>
 
-          <Button
-            type="submit"
-            danger
-            className="w-full"
-          >
+          <Button type="submit" danger className="w-full">
             {t("labels.continue")}
           </Button>
         </form>

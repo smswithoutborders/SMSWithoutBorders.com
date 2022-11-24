@@ -32,6 +32,7 @@ export const Alert = ({
 
   return (
     <div
+      role={role ?? "alert"}
       className={clsx(
         "flex justify-between px-2 py-4 md:p-4 text-sm  border-l-4 text-gray-600 rounded",
         kind === "primary" && "bg-blue-100 border-blue-800",

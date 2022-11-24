@@ -12,4 +12,5 @@ export const FormGroup = ({ className, children, ...rest }) => {
 
 FormGroup.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };

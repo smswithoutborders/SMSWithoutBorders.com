@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useController } from "react-hook-form";
 
-export const Checkbox = ({ name, className, control, ...rest }) => {
+export const Checkbox = ({ name, control, ...rest }) => {
   const {
     field,
     fieldState: { error },
@@ -31,4 +31,5 @@ export const Checkbox = ({ name, className, control, ...rest }) => {
 
 Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
+  control: PropTypes.object,
 };

@@ -35,14 +35,13 @@ export const ReCAPTCHA = ({ name, control, helperText, ...rest }) => {
     defaultValue: "",
   });
 
-
   // make callbacks global
   // only display captcha if load is successful
   window.handleLoad = () => {
     try {
       setStatus("loaded");
       window.grecaptcha.render(containerRef.current, {
-        "sitekey": SITE_KEY,
+        sitekey: SITE_KEY,
       });
     } catch {
       /* library throws an error if the captcha has already been rendered*/

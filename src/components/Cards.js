@@ -32,4 +32,5 @@ TutorialCard.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string,
   caption: PropTypes.string,
+  className: PropTypes.string,
 };

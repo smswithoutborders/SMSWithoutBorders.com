@@ -1,5 +1,6 @@
 import React, { forwardRef, Fragment } from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import { NavLink as BaseNavLink } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { FiChevronDown } from "react-icons/fi";
@@ -24,6 +25,11 @@ export const NavLink = forwardRef(({ className, ...props }, ref) => {
   );
 });
 
+NavLink.displayName = "NavLink";
+NavLink.propTypes = {
+  className: PropTypes.string,
+};
+
 export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
   return (
     <BaseNavLink
@@ -39,6 +45,11 @@ export const DashNavLink = forwardRef(({ className, ...props }, ref) => {
     />
   );
 });
+
+DashNavLink.displayName = "DashNavLink";
+DashNavLink.propTypes = {
+  className: PropTypes.string,
+};
 
 export const MobileNavLink = forwardRef(({ className, ...props }, ref) => {
   return (
@@ -56,6 +67,11 @@ export const MobileNavLink = forwardRef(({ className, ...props }, ref) => {
   );
 });
 
+MobileNavLink.displayName = "MobileNavLink";
+MobileNavLink.propTypes = {
+  className: PropTypes.string,
+};
+
 export const ExternalLink = forwardRef(
   ({ className, children, ...props }, ref) => {
     return (
@@ -72,6 +88,12 @@ export const ExternalLink = forwardRef(
     );
   }
 );
+
+ExternalLink.displayName = "ExternalLink";
+ExternalLink.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
 
 export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
   return (
@@ -130,3 +152,9 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
     </Menu>
   );
 });
+
+DropDownLink.displayName = "DropDownLink";
+DropDownLink.propTypes = {
+  label: PropTypes.string,
+  links: PropTypes.object,
+};

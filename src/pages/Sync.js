@@ -103,7 +103,7 @@ const Sync = () => {
           );
         };
 
-        ws.onerror = (err) => {
+        ws.onerror = () => {
           toast.error(t("sync.alerts.sync-error"));
           dispatch(
             updateSync({

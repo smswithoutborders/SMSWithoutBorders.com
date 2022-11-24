@@ -94,9 +94,7 @@ const Landing = () => {
                   className="inline-flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none group"
                   to="/sign-up"
                 >
-                  <span className="group-hover:mr-4">
-                    {t("menu.signup")}
-                  </span>
+                  <span className="group-hover:mr-4">{t("menu.signup")}</span>
                   <BsArrowRight size={20} />
                 </Link>
               </div>

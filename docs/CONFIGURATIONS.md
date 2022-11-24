@@ -4,10 +4,10 @@ Please follow the instructions below to setup this project
 
 ## Requirements
 
-* [Node.js LTS](https://nodejs.org/en/download/) >= v14
-* [Yarn](https://classic.yarnpkg.com/en/docs/install)
-* [GNU make](https://www.gnu.org/software/make/)
-* [Docker](https://www.docker.com/)
+- [Node.js LTS](https://nodejs.org/en/download/) >= v14
+- [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- [GNU make](https://www.gnu.org/software/make/)
+- [Docker](https://www.docker.com/)
 
 ## Install dependencies
 
@@ -50,7 +50,7 @@ Below are the defaults. a reference is also kept in [env.example](../env.example
 | REACT_APP_RECAPTCHA_API_URL      | API script src from reCaptchav2 setup [documentation](https://developers.google.com/recaptcha/docs/display) | <https://www.google.com/recaptcha/api.js>                                                               | N/A                     |
 | REACT_APP_TUTORIAL_URL           | Link to the getting started tutorial                                                                        | <https://smswithoutborders.github.io/docs/tutorials/getting-started>                                    | N/A                     |
 | REACT_APP_GATEWAY_TUTORIAL_URL   | Link to gateway client setup tutorial                                                                       | <https://github.com/smswithoutborders/SMSWithoutBorders-Gateway-Client/blob/alpha_stable/src/README.md> | N/A                     |
-| REACT_APP_PRIVACY_POLICY_URL     | Link to hosted  privacy policy markdown file(s)                                                             | <https://raw.githubusercontent.com/smswithoutborders/smswithoutborders.com/dev/docs/privacy-policy>     | N/A                     |
+| REACT_APP_PRIVACY_POLICY_URL     | Link to hosted privacy policy markdown file(s)                                                              | <https://raw.githubusercontent.com/smswithoutborders/smswithoutborders.com/dev/docs/privacy-policy>     | N/A                     |
 | HTTPS                            | Enable or disable https                                                                                     | false                                                                                                   | SWOB_SSL_ENABLE         |
 | SSL_CRT_FILE                     | Location of SSL CRT file                                                                                    | N/A                                                                                                     | SWOB_SSL_CRT_FILE       |
 | SSL_KEY_FILE                     | Location of SSL Key file                                                                                    | N/A                                                                                                     | SWOB_SSL_KEY_FILE       |
@@ -87,14 +87,14 @@ Check the `build` folder for deployable files once complete.
 
 For a Linux/Ubuntu server running apache2 web server, follow these steps to deploy the site
 
-* Enable rewrite module
+- Enable rewrite module
 
 ```bash
 sudo a2enmod rewrite
 ```
 
-* Open apache configuration file at /etc/apache2/apache2.conf
-* Change the AllowOverride permission from none to all
+- Open apache configuration file at /etc/apache2/apache2.conf
+- Change the AllowOverride permission from none to all
 
 ```bash
 <Directory /var/www/>
@@ -104,13 +104,13 @@ sudo a2enmod rewrite
 </Directory>
 ```
 
-* Copy contents of build folder to server root normally located at /var/www/html. Ensure the .htaccess file is copied over. The .htaccess file is quite important as specified [here](https://create-react-app.dev/docs/deployment/#static-server)
+- Copy contents of build folder to server root normally located at /var/www/html. Ensure the .htaccess file is copied over. The .htaccess file is quite important as specified [here](https://create-react-app.dev/docs/deployment/#static-server)
 
 ```bash
 sudo cp -r build/. /var/www/html
 ```
 
-* restart apache2
+- restart apache2
 
 ```bash
 sudo systemctl restart apache2
@@ -141,7 +141,7 @@ In production, SSL keys are required. You can pass them in as build args
 ```bash
 docker build -t swob-fe \
 --target production \
---build-arg SWOB_BE_HOST=http://localhost:9000 \ 
+--build-arg SWOB_BE_HOST=http://localhost:9000 \
 --build-arg SWOB_GS_HOST=http://localhost:15000 \
 --build-arg SWOB_RECAPTCHA_ENABLE=true \
 --build-arg SWOB_RECAPTCHA_SITE_KEY= \

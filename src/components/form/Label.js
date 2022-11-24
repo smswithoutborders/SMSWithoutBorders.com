@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 export const Label = ({ required, children, ...rest }) => {
@@ -13,4 +14,9 @@ export const Label = ({ required, children, ...rest }) => {
       )}
     </label>
   );
+};
+
+Label.propTypes = {
+  required: PropTypes.bool,
+  children: PropTypes.node,
 };

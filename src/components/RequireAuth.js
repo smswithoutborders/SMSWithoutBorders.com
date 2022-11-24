@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { authSelector, saveAuth } from "features";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
@@ -19,4 +20,8 @@ export const RequireAuth = ({ children }) => {
   ) : (
     <Navigate to="/login" replace state={{ path: location.pathname }} />
   );
+};
+
+RequireAuth.propTypes = {
+  children: PropTypes.string,
 };
