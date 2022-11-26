@@ -33,6 +33,7 @@ WORKDIR /usr/local/apache2
 FROM apache as production
 # copy custom apache config with ssl enabled
 COPY configs/httpd.ssl.conf ./conf/httpd.conf
+COPY configs/httpd-ssl.conf ./conf/extra/httpd-ssl.conf
 
 # import built files
 COPY --from=base /app/build ./htdocs
