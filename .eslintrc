@@ -2,7 +2,8 @@
   "env": {
     "node": true,
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -17,7 +18,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "import", "jsx-a11y"],
+  "plugins": ["react", "import", "jsx-a11y", "testing-library", "jest-dom"],
   "rules": {
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
