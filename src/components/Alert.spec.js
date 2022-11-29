@@ -3,7 +3,6 @@ import { render, screen, userEvent } from "utils/test-utils";
 import { Alert } from "./Alert";
 
 describe("Alert component", () => {
-
   it("Renders default alert", async () => {
     render(<Alert />);
     expect(screen.getByRole("alert")).toBeInTheDocument();

@@ -156,5 +156,5 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
 DropDownLink.displayName = "DropDownLink";
 DropDownLink.propTypes = {
   label: PropTypes.string,
-  links: PropTypes.object,
+  links: PropTypes.array,
 };

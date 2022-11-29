@@ -183,7 +183,7 @@ export const MainNavbar = () => {
   return (
     <Fragment>
       {/* Desktop nav */}
-      <div
+      <nav
         className={clsx(
           "hidden sticky top-0 z-50 lg:flex justify-evenly items-center",
           scrolled
@@ -194,9 +194,9 @@ export const MainNavbar = () => {
         <Logo />
         <DesktopLinks />
         <ActionLinks />
-      </div>
+      </nav>
       {/* Mobile nav */}
-      <div
+      <nav
         className={clsx(
           "bg-white shadow-lg lg:hidden z-50",
           open
@@ -226,7 +226,7 @@ export const MainNavbar = () => {
             <MobileLinks />
           </Transition>
         )}
-      </div>
+      </nav>
     </Fragment>
   );
 };

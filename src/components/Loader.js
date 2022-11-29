@@ -6,6 +6,8 @@ import logo from "images/logo-icon-light.png";
 import { useTranslation } from "react-i18next";
 
 const LoadingContainer = styled.div.attrs(({ className, light }) => ({
+  role: 'alert',
+  'aria-busy': true,
   className: clsx(
     "grid place-items-center mx-auto w-full",
     light ? "text-white" : "text-gray-600",

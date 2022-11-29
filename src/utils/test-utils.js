@@ -1,24 +1,21 @@
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { render } from "@testing-library/react";
+import { store } from "../features";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
-
-// mocks to clear errors
-jest.mock('react-i18next', () => ({
-    // this mock makes sure any components using the translate hook can use it without a warning being shown
-    useTranslation: () => {
-        return {
-            t: (str) => str,
-            i18n: {
-                changeLanguage: () => new Promise(() => { }),
-            },
-        };
-    },
-}));
 
 // all providers in one place
 const ProvidersWrapper = ({ children }) => {
-    return children
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                {children}
+            </Provider >
+        </BrowserRouter>
+
+    )
 }
 
 // custom renderer using our providers
