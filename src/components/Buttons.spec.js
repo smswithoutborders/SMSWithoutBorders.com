@@ -30,6 +30,6 @@ describe("LinkButton component", () => {
   it("Renders Link button", async () => {
     render(<LinkButton to="/" />);
     expect(screen.getByRole("link")).toBeInTheDocument();
-    expect(screen.getByRole("link").getAttribute("href")).toMatch("/")
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/")
   });
 })

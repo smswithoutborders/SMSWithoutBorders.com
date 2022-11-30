@@ -22,5 +22,5 @@ export const PageAnimationWrapper = ({ children }) => {
 };
 
 PageAnimationWrapper.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
 };
