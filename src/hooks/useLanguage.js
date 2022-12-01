@@ -69,9 +69,8 @@ export const useLanguage = () => {
                 >
                   {({ language }) => (
                     <span
-                      className={`block p-5 lg:py-2 ${
-                        language ? "text-blue-800" : "text-gray-900"
-                      }`}
+                      className={`block p-5 lg:py-2 ${language ? "text-blue-800" : "text-gray-900"
+                        }`}
                     >
                       {lang.name}
                     </span>
@@ -96,7 +95,7 @@ export const useLanguage = () => {
     useEffect(() => {
       const searchParams = new URLSearchParams(search);
       const lang = searchParams.get("lang");
-      if (LANGUAGES.some((item) => item.key === lang)) {
+      if (LANGUAGES.some((item) => item.key === lang) && lang !== i18n?.language) {
         i18n.changeLanguage(lang);
         root.setAttribute("dir", lang.dir);
       }
