@@ -1,5 +1,5 @@
 import React, { Fragment, Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -51,8 +51,8 @@ const BetaTesting = lazy(() => import("pages/BetaTesting"));
 
 const App = () => {
   const { t } = useTranslation();
-  const { LanguageWrapper } = useLanguage();
-  const { ScrollWrapper } = useScroll();
+  useLanguage();
+  useScroll();
   return (
     <Fragment>
       <Toaster
@@ -64,125 +64,119 @@ const App = () => {
         }}
       />
       <Suspense fallback={<SplashScreen />}>
-        <BrowserRouter>
-          <ScrollWrapper>
-            <LanguageWrapper>
-              <Routes>
-                <Route path="/" element={<Website />}>
-                  <Route index element={<Landing />} />
-                  <Route path="login">
-                    <Route index element={<Login />} />
-                    <Route path=":lang" element={<Login />} />
-                  </Route>
-                  <Route path="downloads" element={<Downloads />} />
-                  <Route path="beta-testing" element={<BetaTesting />} />
-                  <Route path="privacy-policy" element={<Privacy />} />
-                  <Route path="contact-us" element={<Contact />} />
-                  <Route path="sign-up">
-                    <Route index element={<Signup />} />
-                    <Route
-                      path="verify"
-                      element={
-                        <VerificationGuard required={["phone_number"]}>
-                          <SignupCodeVerification />
-                        </VerificationGuard>
-                      }
-                    />
-                  </Route>
-                  <Route path="password-reset">
-                    <Route index element={<PhoneNumberVerification />} />
-                    <Route
-                      path="verify"
-                      element={
-                        <VerificationGuard required={["phone_number"]}>
-                          <PasswordChangeVerification />
-                        </VerificationGuard>
-                      }
-                    />
-                    <Route
-                      path="reset"
-                      element={
-                        <VerificationGuard required={["phone_number", "uid"]}>
-                          <PasswordReset />
-                        </VerificationGuard>
-                      }
-                    />
-                  </Route>
-                </Route>
+        <Routes>
+          <Route path="/" element={<Website />}>
+            <Route index element={<Landing />} />
+            <Route path="login">
+              <Route index element={<Login />} />
+              <Route path=":lang" element={<Login />} />
+            </Route>
+            <Route path="downloads" element={<Downloads />} />
+            <Route path="beta-testing" element={<BetaTesting />} />
+            <Route path="privacy-policy" element={<Privacy />} />
+            <Route path="contact-us" element={<Contact />} />
+            <Route path="sign-up">
+              <Route index element={<Signup />} />
+              <Route
+                path="verify"
+                element={
+                  <VerificationGuard required={["phone_number"]}>
+                    <SignupCodeVerification />
+                  </VerificationGuard>
+                }
+              />
+            </Route>
+            <Route path="password-reset">
+              <Route index element={<PhoneNumberVerification />} />
+              <Route
+                path="verify"
+                element={
+                  <VerificationGuard required={["phone_number"]}>
+                    <PasswordChangeVerification />
+                  </VerificationGuard>
+                }
+              />
+              <Route
+                path="reset"
+                element={
+                  <VerificationGuard required={["phone_number", "uid"]}>
+                    <PasswordReset />
+                  </VerificationGuard>
+                }
+              />
+            </Route>
+          </Route>
 
+          <Route
+            path="dashboard"
+            element={
+              <AuthGuard>
+                <DashboardLayout />
+              </AuthGuard>
+            }
+          >
+            <Route index element={<Wallet />} />
+            <Route path="metrics" element={<Dashboard />} />
+            <Route path="sync" element={<Sync />} />
+            <Route path="wallet">
+              <Route index element={<Wallet />} />
+              <Route path="telegram">
                 <Route
-                  path="dashboard"
+                  index
                   element={
-                    <AuthGuard>
-                      <DashboardLayout />
-                    </AuthGuard>
+                    <VerificationGuard required={["url"]}>
+                      <TelegramNumberVerification />
+                    </VerificationGuard>
                   }
-                >
-                  <Route index element={<Wallet />} />
-                  <Route path="metrics" element={<Dashboard />} />
-                  <Route path="sync" element={<Sync />} />
-                  <Route path="wallet">
-                    <Route index element={<Wallet />} />
-                    <Route path="telegram">
-                      <Route
-                        index
-                        element={
-                          <VerificationGuard required={["url"]}>
-                            <TelegramNumberVerification />
-                          </VerificationGuard>
-                        }
-                      />
-                      <Route
-                        path="verify"
-                        element={
-                          <VerificationGuard required={["phone_number"]}>
-                            <TelegramCodeVerification />
-                          </VerificationGuard>
-                        }
-                      />
-                      <Route
-                        path="register"
-                        element={
-                          <VerificationGuard required={["phone_number"]}>
-                            <TelegramRegistration />
-                          </VerificationGuard>
-                        }
-                      />
-                    </Route>
-                  </Route>
-                  <Route path="settings" element={<Settings />}>
-                    <Route
-                      index
-                      element={
-                        <div className="grid place-items-center">
-                          <div className="p-8 text-center h-80">
-                            <FiSettings size={100} className="mx-auto mb-4" />
-                            <p className="mb-8 text-base leading-relaxed">
-                              {t("settings.paragraph")}
-                            </p>
-                          </div>
-                        </div>
-                      }
-                    />
-                    <Route
-                      path="change-password"
-                      element={<PasswordChange />}
-                    />
-                    <Route
-                      path="delete-account"
-                      element={<AccountDeletion />}
-                    />
-                  </Route>
-                </Route>
-                <Route
-                  path="platforms/:platform/protocols/:protocol/redirect_codes"
-                  element={<WalletRedirect />}
                 />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </LanguageWrapper>
-          </ScrollWrapper>
-        </BrowserRouter>
+                <Route
+                  path="verify"
+                  element={
+                    <VerificationGuard required={["phone_number"]}>
+                      <TelegramCodeVerification />
+                    </VerificationGuard>
+                  }
+                />
+                <Route
+                  path="register"
+                  element={
+                    <VerificationGuard required={["phone_number"]}>
+                      <TelegramRegistration />
+                    </VerificationGuard>
+                  }
+                />
+              </Route>
+            </Route>
+            <Route path="settings" element={<Settings />}>
+              <Route
+                index
+                element={
+                  <div className="grid place-items-center">
+                    <div className="p-8 text-center h-80">
+                      <FiSettings size={100} className="mx-auto mb-4" />
+                      <p className="mb-8 text-base leading-relaxed">
+                        {t("settings.paragraph")}
+                      </p>
+                    </div>
+                  </div>
+                }
+              />
+              <Route
+                path="change-password"
+                element={<PasswordChange />}
+              />
+              <Route
+                path="delete-account"
+                element={<AccountDeletion />}
+              />
+            </Route>
+          </Route>
+          <Route
+            path="platforms/:platform/protocols/:protocol/redirect_codes"
+            element={<WalletRedirect />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Suspense>
     </Fragment>
   );

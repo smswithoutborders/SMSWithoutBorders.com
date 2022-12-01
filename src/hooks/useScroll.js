@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
 
 export const useScroll = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { hash } = useLocation();
 
   const handleScroll = useCallback(() => {
     if (window.scrollY >= 80) {
@@ -13,6 +13,19 @@ export const useScroll = () => {
     }
   }, []);
 
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView();
+      }
+    } else if (window.scrollY > 400) {
+      window.scrollTo(0, 0);
+    }
+  }, [hash]);
+
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -21,33 +34,7 @@ export const useScroll = () => {
   }, [handleScroll]);
 
 
-  //ref : https://www.kindacode.com/article/react-router-dom-scroll-to-top-on-route-change/
-  //ref : https://github.com/remix-run/react-router/issues/394
 
 
-  const ScrollWrapper = ({ children }) => {
-    const location = useLocation();
-    useEffect(() => {
-      const { hash } = location;
-      if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView();
-        }
-      } else {
-        window.scrollTo(0, 0);
-      }
-    }, [location]);
-
-    return children;
-  };
-
-  ScrollWrapper.propTypes = {
-    children: PropTypes.node,
-  };
-
-  return {
-    ScrollWrapper,
-    scrolled
-  };
+  return scrolled;
 };

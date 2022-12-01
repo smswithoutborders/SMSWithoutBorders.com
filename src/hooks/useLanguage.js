@@ -3,7 +3,6 @@ import { Listbox, Transition } from "@headlessui/react";
 import { FiChevronDown, FiGlobe } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { LANGUAGES } from "utils/constants";
-import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // root element
@@ -23,12 +22,21 @@ export const useLanguage = () => {
   );
 
   useEffect(() => {
+    // check and set initial language
     const initial = LANGUAGES.find((lang) => lang.key === i18n.language);
     if (initial) {
       setLanguage(initial);
       root.setAttribute("dir", initial.dir);
     }
-  }, [i18n]);
+
+    // translate page if language is passed in
+    const searchParams = new URLSearchParams(window.location.search);
+    const lang = searchParams.get("lang");
+    if (LANGUAGES.some((item) => item.key === lang) && lang !== i18n?.language) {
+      i18n.changeLanguage(lang);
+      root.setAttribute("dir", lang.dir);
+    }
+  }, []);
 
   // language switcher component
   const LanguageSwitcher = ({ bordered }) => {
@@ -88,29 +96,9 @@ export const useLanguage = () => {
     bordered: PropTypes.bool,
   };
 
-  // language wrapper component
-  const LanguageWrapper = ({ children }) => {
-    const { search } = useLocation();
-
-    useEffect(() => {
-      const searchParams = new URLSearchParams(search);
-      const lang = searchParams.get("lang");
-      if (LANGUAGES.some((item) => item.key === lang) && lang !== i18n?.language) {
-        i18n.changeLanguage(lang);
-        root.setAttribute("dir", lang.dir);
-      }
-    }, [search]);
-
-    return children;
-  };
-
-  LanguageWrapper.propTypes = {
-    children: PropTypes.node,
-  };
 
   return {
     LanguageSwitcher,
-    LanguageWrapper,
     language,
   };
 };
