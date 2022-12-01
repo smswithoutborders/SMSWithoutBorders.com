@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  PageAnimationWrapper,
-  PhoneNumberInput,
-  FormGroup,
   Button,
   Loader,
-  useTitle,
+  FormGroup,
+  PhoneNumberInput,
+  PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
 
 const PhoneNumberVerification = () => {
   const { t } = useTranslation();

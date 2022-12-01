@@ -13,10 +13,10 @@ import {
   Label,
   Button,
   Loader,
-  useTitle,
   FormGroup,
   PasswordInput,
 } from "components";
+import { useTitle } from "hooks";
 
 const PasswordChange = () => {
   const { t } = useTranslation();

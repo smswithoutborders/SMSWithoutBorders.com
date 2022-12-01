@@ -12,8 +12,8 @@ import {
   Button,
   Input,
   FormGroup,
-  useTitle,
 } from "components";
+import { useTitle } from "hooks";
 
 const CodeVerification = () => {
   const { t } = useTranslation();

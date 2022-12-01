@@ -13,8 +13,9 @@ import {
   Button,
   PasswordInput,
   PageAnimationWrapper,
-  useTitle,
 } from "components";
+import { useTitle } from "hooks";
+
 
 const PasswordReset = () => {
   const { t } = useTranslation();

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 export const useTitle = (title) => {
   useEffect(() => {
@@ -9,4 +10,8 @@ export const useTitle = (title) => {
       document.title = prevTitle;
     };
   }, [title]);
+};
+
+useTitle.propTypes = {
+  title: PropTypes.string.isRequired
 };

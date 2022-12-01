@@ -4,14 +4,15 @@ import { useRecoverPasswordMutation } from "services";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
-  PageAnimationWrapper,
-  PhoneNumberInput,
-  FormGroup,
+
   Button,
   Loader,
-  useTitle,
   Alert,
+  FormGroup,
+  PageAnimationWrapper,
+  PhoneNumberInput,
 } from "components";
+import { useTitle } from "hooks";
 
 const PhoneNumberVerification = () => {
   const { t } = useTranslation();

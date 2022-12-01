@@ -14,10 +14,11 @@ import {
   Label,
   Input,
   Button,
-  useTitle,
   FormGroup,
   PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
+
 
 const TelegramRegistration = () => {
   const { t } = useTranslation();

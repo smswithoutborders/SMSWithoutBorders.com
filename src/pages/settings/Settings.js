@@ -1,9 +1,10 @@
 import React from "react";
 import clsx from "clsx";
 import { FiUser, FiTrash2, FiSettings } from "react-icons/fi";
-import { useTitle, PageAnimationWrapper } from "components";
+import { PageAnimationWrapper } from "components";
 import { Outlet, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "hooks";
 
 const Settings = () => {
   const { t } = useTranslation();

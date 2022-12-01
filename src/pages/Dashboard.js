@@ -1,5 +1,6 @@
 import React from "react";
-import { Loader, PageAnimationWrapper, useTitle } from "components";
+import { useTitle } from "hooks";
+import { Loader, PageAnimationWrapper } from "components";
 import { IoMdSync } from "react-icons/io";
 import { BsPersonCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";

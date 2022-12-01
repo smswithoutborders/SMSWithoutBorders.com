@@ -14,13 +14,13 @@ import {
   Label,
   Loader,
   Button,
-  useTitle,
   FormGroup,
   ReCAPTCHA,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
 
 const Login = () => {
   const { t } = useTranslation();

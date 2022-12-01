@@ -10,7 +10,6 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import {
   Loader,
-  useTitle,
   Button,
   PasswordInput,
   PageAnimationWrapper,
@@ -25,7 +24,7 @@ import {
 import Error from "../Error";
 import OnboardingTutorial from "../tutorials/OnboardingTutorial";
 import { PlatformList } from "./components";
-import { useDeviceDetection } from "hooks";
+import { useTitle, useDeviceDetection } from "hooks";
 
 const Wallet = () => {
   const { t } = useTranslation();

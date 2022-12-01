@@ -15,13 +15,14 @@ import {
   Loader,
   Button,
   Checkbox,
-  useTitle,
   FormGroup,
   ReCAPTCHA,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
+
 
 const Signup = () => {
   const { t } = useTranslation();
