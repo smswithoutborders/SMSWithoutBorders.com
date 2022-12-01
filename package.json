@@ -43,7 +43,6 @@
     "@testing-library/user-event": "^14.4.3",
     "async": "^3.2.3",
     "autoprefixer": "^10.4.13",
-    "canvas": "^2.10.2",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
