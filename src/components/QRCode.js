@@ -13,7 +13,7 @@ export const QRCode = ({ size, value, ...rest }) => {
     });
   }, [value, size, canvasRef]);
 
-  return <canvas ref={canvasRef} {...rest}></canvas>;
+  return <canvas aria-label="qr-code" ref={canvasRef} {...rest}></canvas>;
 };
 
 QRCode.defaultProps = {
