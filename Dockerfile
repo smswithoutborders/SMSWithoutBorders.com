@@ -1,7 +1,16 @@
 # use node alpine as base image
-FROM node:14-alpine as base
+FROM node:16-alpine as base
 # install system build dependencies
-RUN apk add make
+RUN apk add --no-cache \
+    make \
+    python3 \
+    build-base \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev 
+
 # import work files
 WORKDIR /app
 COPY . .
