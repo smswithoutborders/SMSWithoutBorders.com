@@ -7,6 +7,10 @@ import PropTypes from "prop-types";
 
 // root element
 let root = document.querySelector("html");
+// helper function
+function getLanguage(key) {
+  return LANGUAGES.find((lang) => lang.key === key);
+}
 
 export const useLanguage = () => {
   const { i18n } = useTranslation();
@@ -17,27 +21,24 @@ export const useLanguage = () => {
     (lang) => {
       setLanguage(lang);
       i18n.changeLanguage(lang.key);
+      root.setAttribute("dir", lang.dir);
     },
     [i18n]
   );
 
   useEffect(() => {
-    // check and set initial language
-    const initial = LANGUAGES.find((lang) => lang.key === i18n.language);
-    if (initial) {
-      setLanguage(initial);
-      root.setAttribute("dir", initial.dir);
-    }
-
     // translate page if language is passed in
     const searchParams = new URLSearchParams(window.location.search);
-    const lang = searchParams.get("lang");
-    if (
-      LANGUAGES.some((item) => item.key === lang) &&
-      lang !== i18n?.language
-    ) {
-      i18n.changeLanguage(lang);
-      root.setAttribute("dir", lang.dir);
+    const langKey = searchParams.get("lang");
+    const lang = getLanguage(langKey);
+    if (lang && langKey !== i18n?.language) {
+      changeLanguage(lang);
+    }
+
+    // check and set initial language
+    const initial = getLanguage(i18n?.language);
+    if (initial) {
+      changeLanguage(initial);
     }
   }, []);
 
@@ -80,9 +81,8 @@ export const useLanguage = () => {
                 >
                   {({ language }) => (
                     <span
-                      className={`block p-5 lg:py-2 ${
-                        language ? "text-blue-800" : "text-gray-900"
-                      }`}
+                      className={`block p-5 lg:py-2 ${language ? "text-blue-800" : "text-gray-900"
+                        }`}
                     >
                       {lang.name}
                     </span>
