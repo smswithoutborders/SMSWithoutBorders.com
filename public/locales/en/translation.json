@@ -196,7 +196,7 @@
         "placeholder": "Jane Doe"
       },
       "license-terms": {
-        "label": "I agree to abide by SMSWithoutBorders",
+        "label": "I have read the",
         "policy-link": "privacy policy",
         "validation-error": "Please review and accept terms and conditions to proceed"
       },
