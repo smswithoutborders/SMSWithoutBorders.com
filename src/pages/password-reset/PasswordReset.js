@@ -16,7 +16,6 @@ import {
 } from "components";
 import { useTitle } from "hooks";
 
-
 const PasswordReset = () => {
   const { t } = useTranslation();
   useTitle(t("password-recovery.recovery.page-title"));

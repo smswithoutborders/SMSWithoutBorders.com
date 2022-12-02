@@ -19,7 +19,6 @@ import {
 } from "components";
 import { useTitle } from "hooks";
 
-
 const TelegramRegistration = () => {
   const { t } = useTranslation();
   useTitle(t("telegram.registration.page-title"));

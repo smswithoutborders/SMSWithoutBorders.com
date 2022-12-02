@@ -13,7 +13,6 @@ export const useScroll = () => {
     }
   }, []);
 
-
   useEffect(() => {
     if (hash) {
       const element = document.querySelector(hash);
@@ -25,16 +24,12 @@ export const useScroll = () => {
     }
   }, [hash]);
 
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
-
-
-
 
   return scrolled;
 };

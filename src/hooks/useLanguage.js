@@ -32,7 +32,10 @@ export const useLanguage = () => {
     // translate page if language is passed in
     const searchParams = new URLSearchParams(window.location.search);
     const lang = searchParams.get("lang");
-    if (LANGUAGES.some((item) => item.key === lang) && lang !== i18n?.language) {
+    if (
+      LANGUAGES.some((item) => item.key === lang) &&
+      lang !== i18n?.language
+    ) {
       i18n.changeLanguage(lang);
       root.setAttribute("dir", lang.dir);
     }
@@ -77,8 +80,9 @@ export const useLanguage = () => {
                 >
                   {({ language }) => (
                     <span
-                      className={`block p-5 lg:py-2 ${language ? "text-blue-800" : "text-gray-900"
-                        }`}
+                      className={`block p-5 lg:py-2 ${
+                        language ? "text-blue-800" : "text-gray-900"
+                      }`}
                     >
                       {lang.name}
                     </span>
@@ -95,7 +99,6 @@ export const useLanguage = () => {
   LanguageSwitcher.propTypes = {
     bordered: PropTypes.bool,
   };
-
 
   return {
     LanguageSwitcher,

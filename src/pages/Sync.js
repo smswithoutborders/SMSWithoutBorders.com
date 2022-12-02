@@ -172,8 +172,8 @@ const Sync = () => {
       <PageAnimationWrapper>
         <div className="max-w-screen-md min-h-screen px-6 mx-auto my-10 prose md:px-8">
           {status !== "connected" &&
-            status !== "loading" &&
-            !tutorial.showButton ? (
+          status !== "loading" &&
+          !tutorial.showButton ? (
             <Fragment>
               <h1 className="inline-flex items-center mb-0 text-[1.4rem] font-bold md:text-3xl">
                 <IoMdSync size={42} className="mr-2" />

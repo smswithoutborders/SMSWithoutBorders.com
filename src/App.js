@@ -3,11 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import {
-  AuthGuard,
-  SplashScreen,
-  VerificationGuard,
-} from "components";
+import { AuthGuard, SplashScreen, VerificationGuard } from "components";
 import { useLanguage, useScroll } from "hooks";
 
 const Sync = lazy(() => import("pages/Sync"));
@@ -161,14 +157,8 @@ const App = () => {
                   </div>
                 }
               />
-              <Route
-                path="change-password"
-                element={<PasswordChange />}
-              />
-              <Route
-                path="delete-account"
-                element={<AccountDeletion />}
-              />
+              <Route path="change-password" element={<PasswordChange />} />
+              <Route path="delete-account" element={<AccountDeletion />} />
             </Route>
           </Route>
           <Route

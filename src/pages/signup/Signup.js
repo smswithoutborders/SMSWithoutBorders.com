@@ -23,7 +23,6 @@ import {
 } from "components";
 import { useTitle } from "hooks";
 
-
 const Signup = () => {
   const { t } = useTranslation();
   useTitle(t("signup.page-title"));

@@ -13,5 +13,5 @@ export const useTitle = (title) => {
 };
 
 useTitle.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };

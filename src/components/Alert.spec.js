@@ -9,29 +9,29 @@ describe("Alert component", () => {
   });
 
   it("Displays warning", async () => {
-    render(<Alert kind="warning" />)
+    render(<Alert kind="warning" />);
     expect(screen.getByRole("alert")).toHaveClass("bg-yellow-100");
-  })
+  });
 
   it("Displays negative", async () => {
-    render(<Alert kind="negative" />)
+    render(<Alert kind="negative" />);
     expect(screen.getByRole("alert")).toHaveClass("bg-red-100");
-  })
+  });
 
   it("Displays affirmative", async () => {
-    render(<Alert kind="affirmative" />)
+    render(<Alert kind="affirmative" />);
     expect(screen.getByRole("alert")).toHaveClass("bg-green-100");
-  })
+  });
 
   it("Displays correct message", async () => {
     render(<Alert message="Hello there!" />);
     expect(screen.getByText("Hello there!")).toBeInTheDocument();
-  })
+  });
 
   it("Disappears when closed", async () => {
     const user = userEvent.setup();
-    render(<Alert />)
+    render(<Alert />);
     await user.click(screen.getByTitle("close"));
     expect(screen.getByRole("alert")).toHaveClass("hidden");
-  })
+  });
 });

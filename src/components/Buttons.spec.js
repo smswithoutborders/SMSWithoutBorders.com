@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen } from "utils/test-utils";
 import { Button, LinkButton } from "./Buttons";
 
-
 describe("Button component", () => {
   it("Renders default button", async () => {
     render(<Button>click me</Button>);
@@ -30,6 +29,6 @@ describe("LinkButton component", () => {
   it("Renders Link button", async () => {
     render(<LinkButton to="/" />);
     expect(screen.getByRole("link")).toBeInTheDocument();
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/")
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/");
   });
-})
+});
