@@ -321,12 +321,6 @@
     "section-2": {
       "paragraph-1": "This lets you use the SW/OB secure gateway for all messages",
       "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
-      "paragraph-3": "Please follow these steps to sychronize your saved access with SMSwithoutborders mobile app.",
-      "sync-steps": {
-        "1": "Open SMSWithoutBorders app on your phone",
-        "2": "Tap the Synchronize button",
-        "3": "Point your phone to this screen to capture the code"
-      },
       "status": {
         "heading": "Status",
         "connected": "connected",

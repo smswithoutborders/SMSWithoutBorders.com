@@ -170,7 +170,7 @@ const Sync = () => {
   if (isMobile) {
     return (
       <PageAnimationWrapper>
-        <div className="max-w-screen-md min-h-screen px-6 mx-auto my-10 prose md:px-8">
+        <div className="max-w-screen-md min-h-screen px-6 mx-auto my-20 prose md:px-8">
           {status !== "connected" &&
           status !== "loading" &&
           !tutorial.showButton ? (
@@ -183,12 +183,6 @@ const Sync = () => {
               <div className="tutorial-instructions">
                 <p>{t("sync.section-2.paragraph-1")}</p>
                 <p>{t("sync.section-2.paragraph-2")}</p>
-                <p>{t("sync.section-2.paragraph-3")}</p>
-                <ol>
-                  <li>{t("sync.section-2.sync-steps.1")}</li>
-                  <li>{t("sync.section-2.sync-steps.2")}</li>
-                  <li>{t("sync.section-2.sync-steps.3")}</li>
-                </ol>
               </div>
 
               <div className="flex flex-col items-center px-6 my-8 space-y-4 lg:hidden">
@@ -230,7 +224,7 @@ const Sync = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 mx-auto my-10 prose md:px-8">
+      <div className="grid max-w-screen-xl min-h-screen grid-cols-2 px-6 mx-auto my-20 prose md:px-8">
         <div className="col-span-full lg:col-span-1">
           <h1 className="inline-flex items-center mb-0 text-[1.4rem] font-bold md:text-3xl">
             <IoMdSync size={42} className="mr-2" />
@@ -240,12 +234,6 @@ const Sync = () => {
           <div className="tutorial-instructions">
             <p>{t("sync.section-2.paragraph-1")}</p>
             <p>{t("sync.section-2.paragraph-2")}</p>
-            <p>{t("sync.section-2.paragraph-3")}</p>
-            <ol>
-              <li>{t("sync.section-2.sync-steps.1")}</li>
-              <li>{t("sync.section-2.sync-steps.2")}</li>
-              <li>{t("sync.section-2.sync-steps.3")}</li>
-            </ol>
           </div>
 
           {!tutorial.showQR && (
