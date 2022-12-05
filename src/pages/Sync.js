@@ -172,8 +172,8 @@ const Sync = () => {
       <PageAnimationWrapper>
         <div className="max-w-screen-md min-h-screen px-6 mx-auto my-20 prose md:px-8">
           {status !== "connected" &&
-          status !== "loading" &&
-          !tutorial.showButton ? (
+            status !== "loading" &&
+            !tutorial.showButton ? (
             <Fragment>
               <h1 className="inline-flex items-center mb-0 text-[1.4rem] font-bold md:text-3xl">
                 <IoMdSync size={42} className="mr-2" />
@@ -185,17 +185,17 @@ const Sync = () => {
                 <p>{t("sync.section-2.paragraph-2")}</p>
               </div>
 
-              <div className="flex flex-col items-center px-6 my-8 space-y-4 lg:hidden">
+              <div className="flex items-center gap-2 my-8 lg:hidden">
                 <Button
-                  className="w-full mobile-sync-button"
+                  className="flex-1 mobile-sync-button"
                   onClick={() => handleSync()}
                 >
                   <IoMdSync size={22} />
-                  <span className="ml-1">{t("labels.sync")}</span>
+                  <span>{t("labels.sync")}</span>
                 </Button>
                 <Button
                   outline
-                  className="w-full mobile-tutorial-button"
+                  className="flex-1 mobile-tutorial-button"
                   onClick={() => startTutorial()}
                 >
                   {t("labels.tutorial")}
@@ -208,11 +208,11 @@ const Sync = () => {
             <div className="text-center mt-36">
               <h3>{t("sync.section-3.details")}</h3>
               <Button
-                className="mt-4 open-app-button"
+                className="gap-2 mt-4 open-app-button"
                 onClick={() => window.location.replace(mobileLink)}
               >
                 <IoMdSync size={22} />
-                <span className="ml-1">{t("labels.open-app")}</span>
+                <span>{t("labels.open-app")}</span>
               </Button>
             </div>
           ) : null}
@@ -237,9 +237,9 @@ const Sync = () => {
           </div>
 
           {!tutorial.showQR && (
-            <div className="flex flex-col items-center px-6 my-8 space-y-4 lg:hidden">
+            <div className="flex items-center max-w-md gap-2 my-8 lg:hidden">
               <Button
-                className="w-full mobile-sync-button"
+                className="flex-1 mobile-sync-button"
                 onClick={() => handleSync()}
               >
                 <IoMdSync size={22} />
@@ -247,7 +247,7 @@ const Sync = () => {
               </Button>
               <Button
                 outline
-                className="w-full mobile-tutorial-button"
+                className="flex-1 mobile-tutorial-button"
                 onClick={() => startTutorial()}
               >
                 {t("labels.tutorial")}
@@ -274,7 +274,7 @@ const Sync = () => {
           )}
 
           {status === "disconnected" && !tutorial.showQR && !isMobile && (
-            <div className="mx-auto border border-gray-300  w-[300px] h-[300px] rounded-lg shadow-md flex flex-col align-center justify-center px-16 space-y-4">
+            <div className="hidden lg:flex mx-auto border border-gray-300  w-[300px] h-[300px] rounded-lg shadow-md flex-col justify-center px-16 gap-4">
               <Button
                 className="mt-4 desktop-sync-button"
                 onClick={() => handleSync()}
@@ -291,11 +291,12 @@ const Sync = () => {
               </Button>
             </div>
           )}
+
           {(status === "loading" || status === "scanned" || fetchingURL) && (
             <InlineLoader />
           )}
 
-          <div className="mx-auto text-center">
+          <div className="hidden mx-auto text-center lg:block">
             <p className="font-bold text-md">
               <span>{t("sync.section-2.status.heading")} : </span> &nbsp;
               <span className="font-normal">
