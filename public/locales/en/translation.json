@@ -30,7 +30,9 @@
     "average": "average",
     "weak": "weak",
     "very-weak": "very weak",
-    "back": "back",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
     "retry": "retry",
     "continue": "continue",
     "try-again": "try again",
@@ -204,7 +206,6 @@
     },
     "account-status": "Already have an account?",
     "login-link": "Sign In",
-
     "code-verification": {
       "alerts": {
         "account-created": "your account has been created, please login",
@@ -331,16 +332,15 @@
       },
       "cta-button-text": "sync"
     },
-    "section-3": {
-      "details": "Please click on the button below to open the app"
-    },
     "alerts": {
       "sync-started": "Sync started",
       "sync-complete": "Sync Complete",
       "sync-scanned": "Code Scanned successfully",
       "no-platforms": "Sorry it seems you havent stored any tokens",
       "sync-error": "Sorry an error occured while synchronizing, Please try again",
-      "sync-closed": "Sync session closed. please click the sync button to start again"
+      "sync-closed": "Sync session closed. please click the sync button to start again",
+      "click-button": "Please click on the button below to open the app",
+      "scan-code": "Please scan the code below with the mobile app"
     }
   },
   "dashboard": {
@@ -523,26 +523,22 @@
           "details": "This tutorial will help you get started"
         },
         "2": {
-          "title": "Instructions",
-          "details": "Please read through these instructions to understand better"
-        },
-        "3": {
           "title": "Get started",
           "details": "Click the sync button to begin the process"
         },
-        "4": {
+        "3": {
           "title": "Scan QR code",
           "details": "Use the app scanner to scan the generated QR code"
         },
-        "4-alt": {
+        "3-alt": {
           "title": "Open App",
           "details": "click on the button to open the app"
         },
-        "5": {
+        "4": {
           "title": "Enter password",
           "details": "Enter your password on the app screen to complete synchronization"
         },
-        "6": {
+        "5": {
           "title": "Get Help",
           "details": "You can view this tutorial again by clicking here"
         }

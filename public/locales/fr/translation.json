@@ -30,7 +30,9 @@
     "average": "Moyenne",
     "weak": "faible",
     "very-weak": "très faible",
-    "back": "retour",
+    "back": "Retour",
+    "next": "Prochaine",
+    "finish": "Terminer",
     "retry": "réessayer",
     "continue": "continuer",
     "try-again": "réessayer",
@@ -204,7 +206,6 @@
     },
     "account-status": "Vous avez déjà un compte ?",
     "login-link": "Connexion",
-
     "code-verification": {
       "alerts": {
         "account-created": "votre compte a été créé, veuillez vous connecter",
@@ -331,16 +332,15 @@
       },
       "cta-button-text": "sync"
     },
-    "section-3": {
-      "details": "Veuillez cliquer sur le bouton ci-dessous pour ouvrir l'application."
-    },
     "alerts": {
       "sync-started": "Sync commencée",
       "sync-complete": "Sync terminée",
       "sync-scanned": "Code scanné avec succès",
       "no-platforms": "Désolé, il semble que vous n'ayez pas stocké de jetons.",
       "sync-error": "Désolé, une erreur s'est produite pendant la synchronisation, veuillez réessayer.",
-      "sync-closed": "La session de synchronisation est fermée. Veuillez cliquer sur le bouton de synchronisation pour recommencer"
+      "sync-closed": "La session de synchronisation est fermée. Veuillez cliquer sur le bouton de synchronisation pour recommencer",
+      "click-button": "Veuillez cliquer sur le bouton ci-dessous pour ouvrir l'application.",
+      "scan-code": "Veuillez scanner le code ci-dessous avec l'application mobile"
     }
   },
   "dashboard": {
@@ -523,26 +523,22 @@
           "details": "Ce tutoriel vous aidera à démarrer"
         },
         "2": {
-          "title": "Instructions",
-          "details": "Veuillez lire ces instructions pour mieux comprendre"
-        },
-        "3": {
           "title": "Commencez",
           "details": "Cliquez sur le bouton de synchronisation pour commencer le processus"
         },
-        "4": {
+        "3": {
           "title": "Scanner le code QR",
           "details": "Utilisez le scanner de l'application pour scanner le code QR généré."
         },
-        "4-alt": {
+        "3-alt": {
           "title": "Ouvrir l'application",
           "details": "cliquez sur le bouton pour ouvrir l'application"
         },
-        "5": {
+        "4": {
           "title": "Entrez le mot de passe",
           "details": "Entrez votre mot de passe sur l'écran de l'application pour terminer la synchronisation"
         },
-        "6": {
+        "5": {
           "title": "Obtenir de l'aide",
           "details": "Vous pouvez revoir ce tutoriel en cliquant ici"
         }

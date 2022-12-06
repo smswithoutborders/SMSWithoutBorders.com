@@ -6,7 +6,7 @@
   position: absolute;
   visibility: visible;
   background-color: #fff;
-  min-width: 275px;
+  min-width: 300px;
   max-width: 450px;
   border-radius: 5px;
   -webkit-box-shadow: 0 3px 30px rgba(33, 33, 33, 0.3);
@@ -14,11 +14,14 @@
   -webkit-transition: opacity 0.1s ease-out;
   -o-transition: opacity 0.1s ease-out;
   transition: opacity 0.1s ease-out;
-  padding: 1.5rem;
-}
-.introjs-tooltiptext {
   padding: 0.5rem;
 }
+
+.introjs-tooltiptext {
+  padding: 0.5rem;
+  margin-block: 1.5rem;
+}
+
 .introjs-tooltip-title {
   font-size: 18px;
   margin: 0;
@@ -52,7 +55,7 @@
   cursor: pointer;
   outline: 0;
   background-color: transparent;
-  border-radius: 0.8rem;
+  border-radius: 0.375rem;
   display: inline;
 }
 
