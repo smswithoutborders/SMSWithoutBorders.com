@@ -20,7 +20,7 @@ const Error = ({ title, message, callBack }) => {
 
 Error.propTypes = {
   title: PropTypes.string,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
   callBack: PropTypes.func.isRequired,
 };
 

@@ -6,8 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import { Loader } from "components";
-import { useSelector } from "react-redux";
-import { authSelector } from "features";
 import { useParams, useNavigate } from "react-router-dom";
 import { Transition, Dialog } from "@headlessui/react";
 import {
@@ -22,35 +20,35 @@ import GmailAuthScreen from "images/gmail-auth-screen.png";
 import toast from "react-hot-toast";
 import Error from "../Error";
 
+// get the URL parameters which will include the auth token
+const searchParams = new URLSearchParams(window.location.search);
+const code = searchParams.get("code");
+const scope = searchParams.get("scope");
+
 const WalletRedirect = () => {
   const { t } = useTranslation();
-  const auth = useSelector(authSelector);
   const navigate = useNavigate();
   const { platform, protocol } = useParams();
   const [verifyTokenStorage, { isError, error }] =
     useVerifyTokenStorageMutation();
   const [open, setOpen] = useState(false);
   const isMobile = useDeviceDetection();
-  // get the URL parameters which will include the auth token
-  const searchParams = new URLSearchParams(window.location.search);
-  const code = searchParams.get("code");
-  const scope = searchParams.get("scope");
 
   /*
    * Cache auth in localStorage because twitter will use
    * in-app browser and sessionStorage is not accessible
    */
-  const cAuth = useMemo(() => getLocalCache(), []);
+  const auth = useMemo(() => getLocalCache(), []);
 
   const handleVerification = useCallback(async () => {
     // build request data
     let data = {
-      uid: cAuth ? cAuth.uid : auth.uid,
+      uid: auth.uid,
       code: code,
       scope: scope,
       platform: platform,
       protocol: protocol,
-      code_verifier: cAuth ? cAuth.code_verifier : auth.code_verifier,
+      code_verifier: auth.code_verifier,
     };
 
     try {
@@ -60,16 +58,18 @@ const WalletRedirect = () => {
       // remove cache
       clearLocalCache();
 
-      if (platform !== "twitter") {
-        navigate("/dashboard/wallet", {
-          replace: true,
-          state: { uid: cAuth ? cAuth.uid : auth.uid },
-        });
-      } else if (isMobile && platform === "twitter") {
+      if (isMobile && platform === "twitter") {
         setOpen(true);
-      } else {
-        toast.success(t("alert-messages.redirect"));
+        return;
       }
+
+      // node
+      toast.success(t("alert-messages.redirect"));
+      navigate("/dashboard/wallet", {
+        replace: true,
+        state: { uid: auth.uid },
+      });
+
     } catch (error) {
       // handle all api errors in utils/middleware
     }
@@ -77,7 +77,6 @@ const WalletRedirect = () => {
     t,
     code,
     auth,
-    cAuth,
     scope,
     isMobile,
     platform,
@@ -85,7 +84,7 @@ const WalletRedirect = () => {
     navigate,
     verifyTokenStorage,
   ]);
-
+  
   useEffect(() => {
     if (code) {
       handleVerification();

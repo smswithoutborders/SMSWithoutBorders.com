@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import toast from "react-hot-toast";
 import { IoMdSync } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { authSelector, saveAuth } from "features";
+import { useSelector } from "react-redux";
+import { authSelector } from "features";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { BsShieldLock } from "react-icons/bs";
@@ -36,7 +36,6 @@ const Wallet = () => {
   const [prompt, showPrompt] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const auth = useSelector(authSelector);
   const isMobile = useDeviceDetection();
@@ -92,14 +91,6 @@ const Wallet = () => {
 
     try {
       const { code_verifier, url } = await storeToken(data).unwrap();
-      // save auth in state for use when redirect
-      dispatch(
-        saveAuth({
-          ...auth,
-          code_verifier,
-        })
-      );
-
       /*
        * Cache auth in localStorage because twitter will use
        * in-app browser and sessionStorage is not accessible
@@ -117,6 +108,7 @@ const Wallet = () => {
       }
       // open auth screen
       window.open(url, "_self");
+
     } catch (error) {
       // handle all other errors in utils/middleware
     }
@@ -125,7 +117,7 @@ const Wallet = () => {
   // Helper function to open authorization screen after prompt
   function openAuthScreen() {
     // we can access the previous store token response and reuse the url
-    window.open(storeTokenResponse.url, "_self");
+    window.open(storeTokenResponse.url);
   }
 
   /* save revoke token and prompt for confirmation */
