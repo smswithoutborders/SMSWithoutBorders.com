@@ -51,7 +51,7 @@ export const PasswordInput = forwardRef(
               language?.dir === "ltr" ? "right-3" : "left-4"
             )}
             onToggle={setToggle}
-            value={toggle}
+            toggle={toggle}
           />
         </div>
 
@@ -64,12 +64,12 @@ export const PasswordInput = forwardRef(
                   strength === 4
                     ? "bg-lime-500 col-span-full"
                     : strength === 3
-                    ? "bg-indigo-500 col-span-3"
-                    : strength === 2
-                    ? "bg-yellow-500 col-span-2"
-                    : strength === 1
-                    ? "bg-fuchsia-500 col-span-1"
-                    : "bg-red-500"
+                      ? "bg-indigo-500 col-span-3"
+                      : strength === 2
+                        ? "bg-yellow-500 col-span-2"
+                        : strength === 1
+                          ? "bg-fuchsia-500 col-span-1"
+                          : "bg-red-500"
                 )}
               ></div>
             </div>
@@ -78,12 +78,12 @@ export const PasswordInput = forwardRef(
                 {strength === 4
                   ? t("labels.strong")
                   : strength === 3
-                  ? t("labels.good")
-                  : strength === 2
-                  ? t("labels.average")
-                  : strength === 1
-                  ? t("labels.weak")
-                  : t("labels.very-weak")}
+                    ? t("labels.good")
+                    : strength === 2
+                      ? t("labels.average")
+                      : strength === 1
+                        ? t("labels.weak")
+                        : t("labels.very-weak")}
               </span>
             </div>
           </div>

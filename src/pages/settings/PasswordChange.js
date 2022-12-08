@@ -104,7 +104,7 @@ const PasswordChange = () => {
               id="password"
               name="password"
               showStrength={false}
-              invalid={errors.password}
+              invalid={errors.password ? true : false}
               invalidText={errors.password?.message}
               {...register("password")}
             />
@@ -117,7 +117,7 @@ const PasswordChange = () => {
             <PasswordInput
               id="new_password"
               name="new_password"
-              invalid={errors.new_password}
+              invalid={errors.new_password ? true : false}
               invalidText={errors.new_password?.message}
               {...register("new_password")}
             />
@@ -130,7 +130,7 @@ const PasswordChange = () => {
             <PasswordInput
               name="confirmPassword"
               placeholder={t("forms.confirm-password.placeholder")}
-              invalid={errors.confirmPassword}
+              invalid={errors.confirmPassword ? true : false}
               invalidText={errors.confirmPassword?.message}
               {...register("confirmPassword")}
             />

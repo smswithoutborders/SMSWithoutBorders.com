@@ -11,7 +11,6 @@ export const Checkbox = ({ name, control, ...rest }) => {
     name,
     control,
     rules: { required: true },
-    defaultValue: "",
   });
 
   return (

@@ -7,9 +7,11 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 
+// what $ means => https://styled-components.com/docs/api#transient-props
+
 const StyledInput = styled(PhoneInput)`
   ${tw`border-2 border-gray-300 hocus:(border-2 border-blue-800) rounded-md mb-2 px-3 py-0.5`}
-  ${({ invalid }) => invalid && tw`border-red-500`}
+  ${({ $invalid }) => $invalid && tw`border-red-500`}
   .PhoneInputCountrySelect {
     ${tw`border-none hocus:border-none mr-8`}
   }
@@ -38,7 +40,7 @@ export const PhoneNumberInput = ({
         international
         countryCallingCodeEditable={false}
         defaultCountry="CM"
-        invalid={invalid}
+        $invalid={invalid}
         {...rest}
       />
       <div className="flex flex-col mt-2">

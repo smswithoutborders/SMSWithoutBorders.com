@@ -75,7 +75,7 @@ const PhoneNumberVerification = () => {
                 placeholder={t("forms.phone-number.placeholder")}
                 value={number}
                 onChange={setNumber}
-                invalid={error ? "true" : null}
+                invalid={error ? true : false}
                 invalidText={t("forms.phone-number.validation-errors.invalid")}
               />
             </FormGroup>

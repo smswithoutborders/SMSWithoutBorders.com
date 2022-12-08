@@ -158,7 +158,7 @@ const Signup = () => {
                     id="phone_number"
                     value={value}
                     onChange={onChange}
-                    invalid={errors.phone_number}
+                    invalid={errors.phone_number ? true : false}
                     invalidText={errors.phone_number?.message}
                     helperText={t("forms.phone-number.helper-text")}
                     placeholder={t("forms.phone-number.placeholder")}
@@ -172,8 +172,7 @@ const Signup = () => {
                 id="name"
                 name="name"
                 type="text"
-                labelText={t("signup.form.alias.label")}
-                invalid={errors.name}
+                invalid={errors.name ? true : false}
                 invalidText={errors.name?.message}
                 helperText={t("signup.form.alias.helper-text")}
                 placeholder={t("signup.form.alias.placeholder")}
@@ -188,7 +187,7 @@ const Signup = () => {
               <PasswordInput
                 id="password"
                 name="password"
-                invalid={errors.password}
+                invalid={errors.password ? true : false}
                 invalidText={errors.password?.message}
                 {...register("password")}
               />
@@ -201,7 +200,7 @@ const Signup = () => {
               <PasswordInput
                 id="confirmPassword"
                 name="confirmPassword"
-                invalid={errors.confirmPassword}
+                invalid={errors.confirmPassword ? true : false}
                 invalidText={errors.confirmPassword?.message}
                 placeholder={t("forms.confirm-password.placeholder")}
                 {...register("confirmPassword")}

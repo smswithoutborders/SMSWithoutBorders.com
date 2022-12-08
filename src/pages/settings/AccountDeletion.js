@@ -104,7 +104,7 @@ const AccountDeletion = () => {
               type="text"
               id="confirmation"
               name="confirmation"
-              invalid={errors.confirmation}
+              invalid={errors.confirmation ? true : false}
               invalidText={errors.confirmation?.message}
               placeholder={t("account-deletion.form.confirmation.placeholder")}
               {...register("confirmation")}
@@ -122,7 +122,7 @@ const AccountDeletion = () => {
               id="password"
               name="password"
               showStrength={false}
-              invalid={errors.password}
+              invalid={errors.password ? true : false}
               invalidText={errors.password?.message}
               placeholder={t("forms.password.placeholder")}
               {...register("password")}

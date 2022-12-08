@@ -103,7 +103,7 @@ const TelegramRegistration = () => {
               placeholder={t(
                 "telegram.registration.form.first-name.placeholder"
               )}
-              invalid={errors.first_name}
+              invalid={errors.first_name ? true : false}
               invalidText={errors.first_name?.message}
               {...register("first_name")}
             />
@@ -120,7 +120,7 @@ const TelegramRegistration = () => {
               placeholder={t(
                 "telegram.registration.form.last-name.placeholder"
               )}
-              invalid={errors.last_name}
+              invalid={errors.last_name ? true : false}
               invalidText={errors.last_name?.message}
               {...register("last_name")}
             />

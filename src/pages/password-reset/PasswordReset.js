@@ -88,7 +88,7 @@ const PasswordReset = () => {
               <PasswordInput
                 id="password"
                 name="password"
-                invalid={errors.password}
+                invalid={errors.password ? true : false}
                 invalidText={errors.password?.message}
                 {...register("password")}
               />
@@ -103,7 +103,7 @@ const PasswordReset = () => {
                 name="confirmPassword"
                 placeholder={t("forms.confirm-password.placeholder")}
                 {...register("confirmPassword")}
-                invalid={errors.confirmPassword}
+                invalid={errors.confirmPassword ? true : false}
                 invalidText={errors.confirmPassword?.message}
               />
             </FormGroup>

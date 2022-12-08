@@ -127,7 +127,7 @@ const Login = () => {
                     id="phone_number"
                     value={value}
                     onChange={onChange}
-                    invalid={errors.phone_number}
+                    invalid={errors.phone_number ? true : false}
                     invalidText={errors.phone_number?.message}
                     helperText={t("forms.phone-number.helper-text")}
                     placeholder={t("forms.phone-number.placeholder")}
@@ -144,7 +144,7 @@ const Login = () => {
                 id="password"
                 name="password"
                 showStrength={false}
-                invalid={errors.password}
+                invalid={errors.password ? true : false}
                 invalidText={errors.password?.message}
                 {...register("password")}
               />
