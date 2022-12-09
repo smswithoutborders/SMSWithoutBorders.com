@@ -42,7 +42,7 @@ const CodeVerification = () => {
 
     try {
       const response = await verifyTokenStorage(data).unwrap();
-      switch (response.body.code) {
+      switch (response.body) {
         case 202:
           toast.success(t("telegram.code-verification.alerts.no-account"));
           // send user to telegram registration
