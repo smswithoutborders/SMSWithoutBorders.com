@@ -33,7 +33,11 @@ const Wallet = () => {
   const [showRevokeDialog, setOpenRevokeDialog] = useState(false);
   const [password, setPassword] = useState("");
   const [onboarding, setOnboarding] = useState(false);
-  const [prompt, showPrompt] = useState(false);
+  const [prompt, setPrompt] = useState({
+    url: "",
+    open: false,
+    hasApp: false,
+  });
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -56,10 +60,8 @@ const Wallet = () => {
   const { unSavedPlatforms = [], savedPlatforms = [] } = data;
 
   // store token
-  const [
-    storeToken,
-    { data: storeTokenResponse, isLoading: requestingAuthUrl },
-  ] = useStoreTokenMutation();
+  const [storeToken, { isLoading: requestingAuthUrl }] =
+    useStoreTokenMutation();
 
   // token revoke
   const [tokenRevoke, { isLoading: revokingToken }] = useTokenRevokeMutation();
@@ -72,6 +74,22 @@ const Wallet = () => {
     }
   }, [searchParams]);
 
+  // control prompts
+  function closePrompt() {
+    setPrompt({ open: false, hasApp: false, url: "" });
+  }
+
+  /*eslint-disable no-console */
+  // Helper function to open authorization screen after prompt
+  function openAuthScreen() {
+    // we can access the previous store token response and reuse the url
+    if (prompt.hasApp) {
+      window.open(prompt.url, "_blank");
+    } else {
+      window.open(prompt.url, "_self");
+    }
+  }
+
   /*
    * @param name: string
    * @param url: string
@@ -83,6 +101,7 @@ const Wallet = () => {
       navigate("/dashboard/wallet/telegram", { state: { url: url } });
       return;
     }
+
     // build request body
     let data = {
       uid: auth.uid,
@@ -95,7 +114,6 @@ const Wallet = () => {
        * Cache auth in localStorage because twitter will use
        * in-app browser and sessionStorage is not accessible
        */
-
       setLocalCache({
         ...auth,
         code_verifier,
@@ -103,21 +121,15 @@ const Wallet = () => {
 
       // check and handle twitter
       if (name === "twitter" && isMobile) {
-        showPrompt(true);
+        setPrompt({ open: true, hasApp: false, url: url });
         return;
       }
+
       // open auth screen
       window.open(url, "_self");
-
     } catch (error) {
       // handle all other errors in utils/middleware
     }
-  }
-
-  // Helper function to open authorization screen after prompt
-  function openAuthScreen() {
-    // we can access the previous store token response and reuse the url
-    window.open(storeTokenResponse.url);
   }
 
   /* save revoke token and prompt for confirmation */
@@ -163,13 +175,13 @@ const Wallet = () => {
   }
 
   /* inform about twitter workaround for mobile devices */
-  if (prompt) {
+  if (prompt.open) {
     return (
-      <Transition appear show={prompt} as={Fragment}>
+      <Transition appear show as={Fragment}>
         <Dialog
           as="div"
           className="relative z-10"
-          onClose={() => showPrompt(false)}
+          onClose={() => closePrompt()}
         >
           <Transition.Child
             as={Fragment}
@@ -194,29 +206,46 @@ const Wallet = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-xl p-6 overflow-hidden prose text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                  <Dialog.Title as="h3" className="mb-4">
-                    {t("wallet.prompt-dialog.heading")}
-                  </Dialog.Title>
-                  <Dialog.Description>
-                    {t("wallet.prompt-dialog.details")}
-                  </Dialog.Description>
+                <Dialog.Panel className="w-full max-w-xl p-6 overflow-hidden prose align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  {!prompt.hasApp ? (
+                    <Fragment>
+                      <Dialog.Title as="h3" className="mb-4">
+                        {t("wallet.prompt-dialog.heading")}
+                      </Dialog.Title>
+                      <div className="flex items-center justify-start gap-2 mt-8">
+                        <Button
+                          outline
+                          onClick={() => openAuthScreen()}
+                          className="flex-1 md:flex-initial"
+                        >
+                          {t("labels.no")}
+                        </Button>
+                        <Button
+                          className="flex-1 md:flex-initial"
+                          onClick={() =>
+                            setPrompt((current) => {
+                              return {
+                                ...current,
+                                hasApp: true,
+                              };
+                            })
+                          }
+                        >
+                          {t("labels.yes")}
+                        </Button>
+                      </div>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <Dialog.Description>
+                        {t("wallet.prompt-dialog.details")}
+                      </Dialog.Description>
 
-                  <div className="flex items-center justify-start gap-2 mt-8">
-                    <Button
-                      outline
-                      onClick={() => showPrompt(false)}
-                      className="flex-1 md:flex-initial"
-                    >
-                      {t("wallet.prompt-dialog.cancel-button-text")}
-                    </Button>
-                    <Button
-                      className="flex-1 md:flex-initial"
-                      onClick={() => openAuthScreen()}
-                    >
-                      {t("wallet.prompt-dialog.cta-button-text")}
-                    </Button>
-                  </div>
+                      <Button onClick={() => openAuthScreen()}>
+                        {t("wallet.prompt-dialog.cta-button-text")}
+                      </Button>
+                    </Fragment>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

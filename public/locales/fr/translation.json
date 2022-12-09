@@ -40,7 +40,9 @@
     "tutorial": "Tutoriel",
     "learn-more": "en savoir plus",
     "help": "aide",
-    "open-app": "Ouvrir l'application"
+    "open-app": "Ouvrir l'application",
+    "yes": "Oui",
+    "no": "Non"
   },
   "landing": {
     "section-1": {
@@ -243,9 +245,8 @@
     },
     "prompt-dialog": {
       "heading": "Avez-vous l'application Twitter installée ?",
-      "details": "Si oui, veuillez ouvrir l'application puis revenir à cette page et cliquer sur continuer. L'application est connue pour interférer si elle est installée et non active",
-      "cta-button-text": "continuer",
-      "cancel-button-text": "annuler"
+      "details": "Veuillez ouvrir l'application, puis revenir à cette page et cliquer sur Continuer",
+      "cta-button-text": "continuer"
     },
     "alerts": {
       "load-error": "Désolé, nous n'avons pas pu charger les plateformes. Si l'erreur persiste, veuillez contacter le support",

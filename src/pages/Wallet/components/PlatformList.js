@@ -28,17 +28,17 @@ const PlatformList = ({
             {({ open }) => (
               <Fragment>
                 <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center gap-4">
                     {platform.logo ? (
                       <img
                         src={`${LOGO_HOST}${platform.logo}`}
                         alt={`${platform.name} logo`}
-                        className="w-8 h-8 my-0 mr-4"
+                        className="w-8 h-8 my-0"
                       />
                     ) : (
                       <FiGrid
                         title={`${platform.name} logo`}
-                        className="w-8 h-8 my-0 mr-4"
+                        className="w-8 h-8 my-0"
                       />
                     )}
                     <h3 className="my-0 font-normal capitalize">
@@ -82,17 +82,17 @@ const PlatformList = ({
             {({ open }) => (
               <Fragment>
                 <Disclosure.Button className="flex items-center justify-between w-full p-4 mb-4 text-left rounded-lg shadow-md">
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center gap-4">
                     {platform.logo ? (
                       <img
                         src={`${LOGO_HOST}${platform.logo}`}
                         alt={`${platform.name} logo`}
-                        className="w-8 h-8 my-0 mr-4"
+                        className="w-8 h-8 my-0"
                       />
                     ) : (
                       <FiGrid
                         title={`${platform.name} logo`}
-                        className="w-8 h-8 my-0 mr-4"
+                        className="w-8 h-8 my-0"
                       />
                     )}
                     <h3 className="my-0 font-normal capitalize">
