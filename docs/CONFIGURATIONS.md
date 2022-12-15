@@ -51,6 +51,7 @@ Below are the defaults. a reference is also kept in [env.example](../env.example
 | REACT_APP_TUTORIAL_URL           | Link to the getting started tutorial                                                                        | <https://smswithoutborders.github.io/docs/tutorials/getting-started>                                    | N/A                     |
 | REACT_APP_GATEWAY_TUTORIAL_URL   | Link to gateway client setup tutorial                                                                       | <https://github.com/smswithoutborders/SMSWithoutBorders-Gateway-Client/blob/alpha_stable/src/README.md> | N/A                     |
 | REACT_APP_PRIVACY_POLICY_URL     | Link to hosted privacy policy markdown file(s)                                                              | <https://raw.githubusercontent.com/smswithoutborders/smswithoutborders.com/dev/docs/privacy-policy>     | N/A                     |
+| REACT_APP_MAX_IDLE_TIME          | Max user Idle time duration                                                                                 | 720000ms                                                                                                | SWOB_MAX_IDLE_TIME      |
 | HTTPS                            | Enable or disable https                                                                                     | false                                                                                                   | SWOB_SSL_ENABLE         |
 | SSL_CRT_FILE                     | Location of SSL CRT file                                                                                    | N/A                                                                                                     | SWOB_SSL_CRT_FILE       |
 | SSL_KEY_FILE                     | Location of SSL Key file                                                                                    | N/A                                                                                                     | SWOB_SSL_KEY_FILE       |
@@ -145,6 +146,8 @@ docker build -t swob-fe \
 --build-arg SWOB_GS_HOST=http://localhost:15000 \
 --build-arg SWOB_RECAPTCHA_ENABLE=true \
 --build-arg SWOB_RECAPTCHA_SITE_KEY= \
+--build-arg SWOB_SESSION_TIME=2700000 \
+--build-arg SWOB_IDLE_TIME=900000 \
 --build-arg SWOB_SSL_ENABLE=true \
 --build-arg SWOB_SSL_CRT_FILE=path/to/server.crt \
 --build-arg SWOB_SSL_KEY_FILE=path/to/server.key .

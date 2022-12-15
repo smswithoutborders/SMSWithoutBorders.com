@@ -45,7 +45,7 @@ export const Footer = () => {
         </p>
       </div>
 
-      <div className="flex flex-col p-4 space-y-4">
+      <div className="flex flex-col p-4 gap-4">
         <Link
           className="inline-flex items-center hover:focus:text-blue-200"
           to="/privacy-policy"
@@ -70,7 +70,7 @@ export const Footer = () => {
         </a>
       </div>
 
-      <div className="flex flex-col p-4 space-y-4">
+      <div className="flex flex-col p-4 gap-4">
         <p className="inline-flex items-center hover:focus:text-blue-200">
           <FiMessageSquare size={20} /> &nbsp; IRC: freenode/#afkanerd
         </p>
@@ -83,7 +83,7 @@ export const Footer = () => {
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
         </a>
       </div>
-      <div className="mb-40">
+      <div className="mb-40 w-56">
         <LanguageSwitcher bordered />
       </div>
     </footer>
