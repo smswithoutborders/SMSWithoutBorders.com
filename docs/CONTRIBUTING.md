@@ -6,9 +6,9 @@ Existing features can be found in [FEATURES.md](FEATURES.md);
 
 ## Project Structure
 
-We use three main branches in our workflow: [stable(master)](https://github.com/smswithoutborders/smswithoutborders.com/tree/master), [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) and [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing)
+We use three main branches in our workflow: [stable(main)](https://github.com/smswithoutborders/smswithoutborders.com/tree/main), [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) and [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing)
 
-- The [stable](https://github.com/smswithoutborders/smswithoutborders.com/tree/master) branch contains the code for the latest release version of the project
+- The [stable](https://github.com/smswithoutborders/smswithoutborders.com/tree/main) branch contains the code for the latest release version of the project
 - [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) is the active development branch. All recent changes and contributions go here
 - [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing) is where we try out newly developed features in prepartion for a release.
 
