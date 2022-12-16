@@ -1,6 +1,6 @@
 # Testing
 
-We build for people. Physicaly testing each feature to make sure it works is best. Some parts of the project depend on other others or are inter linked. We encourage developers to test these groups as a whole if any one of them is changed.
+We build for people. Physically testing each feature to make sure it works is best. Some parts of the project depend on others or are inter-linked. We encourage developers to test these groups as a whole if any one of them is changed.
 
 ## Storing accounts
 
