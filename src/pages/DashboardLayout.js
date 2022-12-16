@@ -43,7 +43,7 @@ const DashboardLayout = () => {
 
   const { reset } = useIdleTimer({
     timeout: MAX_IDLE_TIME,
-    promptTimeout: MAX_IDLE_TIME,
+    promptTimeout: 1000 * 60,
     debounce: 200,
     onAction: () => reset(),
     onPrompt: () => setOpen(true),
