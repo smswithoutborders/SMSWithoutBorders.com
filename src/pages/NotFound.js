@@ -1,7 +1,8 @@
 import React from "react";
-import { PageAnimationWrapper, useTitle, Button } from "components";
+import { PageAnimationWrapper, Button } from "components";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTitle } from "hooks";
 
 // 404 page, uses react-router to move the user back 1 step
 const NotFound = () => {

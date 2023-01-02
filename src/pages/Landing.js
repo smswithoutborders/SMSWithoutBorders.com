@@ -17,30 +17,27 @@ const Landing = () => {
   const { t } = useTranslation();
   return (
     <PageAnimationWrapper>
+      {/* Hero */}
       <div className="container grid max-w-screen-xl grid-cols-2  mx-auto prose text-white place-items-center lg:h-[640px]">
         <div className="p-8 pt-16 md:pl-16 col-span-full lg:col-span-1">
-          <h1 className="text-white md:text-5xl">
+          <h1 className="text-5xl text-white">
             {t("landing.section-1.heading")}
           </h1>
           <p>{t("landing.section-1.details")}</p>
-          <div className="flex flex-row justify-center max-w-md mt-12 space-x-2 lg:justify-start">
+          <div className="flex flex-col max-w-md gap-4 mt-12 md:flex-row">
             <a
-              className="inline-flex items-center justify-center flex-1 py-3 text-lg no-underline bg-white appearance-none group rounded-3xl"
+              className="flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg no-underline bg-white rounded-lg appearance-none group"
               href="#how-it-works"
               rel="noreferrer"
             >
-              <span className="mr-2 group-hover:mr-4">
-                {t("labels.learn-more")}
-              </span>
-              <BsArrowRight size={20} />
+              <span className="">{t("labels.learn-more")}</span>
+              <BsArrowRight size={20} className="group-hover:rotate-90" />
             </a>
             <Link
-              className="inline-flex items-center justify-center flex-1 py-3 text-lg text-white no-underline border appearance-none group rounded-3xl"
+              className="flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-white no-underline border rounded-lg appearance-none group"
               to="downloads"
             >
-              <span className="mr-2 group-hover:mr-4">
-                {t("labels.download")}
-              </span>
+              <span className="group-hover:mr-4">{t("labels.download")}</span>
               <FiDownload size={20} />
             </Link>
           </div>
@@ -55,6 +52,7 @@ const Landing = () => {
         </div>
       </div>
 
+      {/* How it works  */}
       <div className="bg-white">
         <div
           id="how-it-works"
@@ -70,6 +68,7 @@ const Landing = () => {
           </div>
         </div>
 
+        {/* Getting started  */}
         <div
           id="get-started"
           className="max-w-screen-xl mx-auto prose bg-white"
@@ -92,12 +91,10 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.1.details")}</p>
                 <Link
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none group"
                   to="/sign-up"
                 >
-                  <span className="mr-2 group-hover:mr-4">
-                    {t("menu.signup")}
-                  </span>
+                  <span className="group-hover:mr-4">{t("menu.signup")}</span>
                   <BsArrowRight size={20} />
                 </Link>
               </div>
@@ -107,10 +104,10 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.2.details")}</p>
                 <Link
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none group"
                   to="/privacy-policy"
                 >
-                  <span className="mr-2 group-hover:mr-4">
+                  <span className="group-hover:mr-4">
                     {t("labels.learn-more")}
                   </span>
                   <BsArrowRight size={20} />
@@ -136,10 +133,10 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.3.details")}</p>
                 <Link
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none group"
                   to="/downloads"
                 >
-                  <span className="mr-2 group-hover:mr-4">
+                  <span className="group-hover:mr-4">
                     {t("labels.download")}
                   </span>
                   <FiDownload size={20} />
@@ -151,12 +148,12 @@ const Landing = () => {
                 </h3>
                 <p>{t("landing.section-3.steps.4.details")}</p>
                 <a
-                  className="inline-flex items-center justify-center flex-1 py-3 text-lg text-blue-800 no-underline border border-blue-800 appearance-none px-9 group rounded-3xl"
+                  className="inline-flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none group"
                   href={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span className="mr-2 group-hover:mr-4">
+                  <span className="group-hover:mr-4">
                     {t("labels.learn-more")}
                   </span>
                   <BsArrowRight size={20} />
@@ -174,14 +171,15 @@ const Landing = () => {
         </div>
       </div>
 
+      {/* Why use SWOB */}
       <div className="w-full py-10 bg-white">
-        <div className="max-w-screen-xl p-8 mx-auto prose bg-white lg:py-16">
+        <div className="max-w-screen-xl p-8 mx-auto prose bg-white md:p-16">
           <h2 className="text-3xl font-black text-center">
             {t("landing.section-4.heading")}
           </h2>
           <div>
-            <div className="flex items-center justify-between">
-              <div className="p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:mr-10">
+            <div className="flex items-center justify-between gap-8">
+              <div className="p-8 text-blue-800 bg-white border rounded-full shadow-xl">
                 <IoAccessibility className="w-7 h-7 lg:w-10 lg:h-10" />
               </div>
               <div className="">
@@ -189,17 +187,17 @@ const Landing = () => {
                 <p>{t("landing.section-4.steps.1.details")}</p>
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-8">
               <div className="">
                 <h3> {t("landing.section-4.steps.2.heading")}</h3>
                 <p>{t("landing.section-4.steps.2.details")}</p>
               </div>
-              <div className="order-first p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:ml-10 sm:order-none">
+              <div className="order-first p-8 text-blue-800 bg-white border rounded-full shadow-xl sm:order-none">
                 <FiShield className="w-7 h-7 lg:w-10 lg:h-10" />
               </div>
             </div>
-            <div className="flex items-center justify-between">
-              <div className="p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:mr-10">
+            <div className="flex items-center justify-between gap-8">
+              <div className="p-8 text-blue-800 bg-white border rounded-full shadow-xl">
                 <DiOpensource className="w-7 h-7 lg:w-12 lg:h-12" />
               </div>
               <div className="">
@@ -207,12 +205,12 @@ const Landing = () => {
                 <p>{t("landing.section-4.steps.3.details")}</p>
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-8">
               <div className="">
                 <h3> {t("landing.section-4.steps.4.heading")}</h3>
                 <p>{t("landing.section-4.steps.4.details")}</p>
               </div>
-              <div className="order-first p-8 mr-4 text-blue-800 bg-white border rounded-full shadow-xl sm:ml-10 sm:order-none">
+              <div className="order-first p-8 text-blue-800 bg-white border rounded-full shadow-xl sm:order-none">
                 <GiCheckboxTree className="w-7 h-7 lg:w-10 lg:h-10" />
               </div>
             </div>

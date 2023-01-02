@@ -17,7 +17,8 @@
     "downloads": "Downloads",
     "developers": "Developers",
     "resources": "Resources",
-    "tutorials": "Tutorials"
+    "tutorials": "Tutorials",
+    "beta-testing": "Beta Testing"
   },
   "labels": {
     "sync": "sync",
@@ -29,7 +30,9 @@
     "average": "average",
     "weak": "weak",
     "very-weak": "very weak",
-    "back": "back",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
     "retry": "retry",
     "continue": "continue",
     "try-again": "try again",
@@ -37,7 +40,9 @@
     "tutorial": "Tutorial",
     "learn-more": "learn more",
     "help": "help",
-    "open-app": "Open App"
+    "open-app": "Open App",
+    "yes": "Yes",
+    "no": "No"
   },
   "landing": {
     "section-1": {
@@ -57,7 +62,7 @@
     },
     "section-3": {
       "heading": "Getting Started with SWOB",
-      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on Telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
       "steps": {
         "1": {
           "heading": "Signup for an account",
@@ -65,7 +70,7 @@
         },
         "2": {
           "heading": "Connect Accounts",
-          "details": "Securely Link your accounts on platforms we support like Gmail, twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
+          "details": "Securely Link your accounts on platforms we support like Gmail, Twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
         },
         "3": {
           "heading": "Synchronize Mobile App",
@@ -121,6 +126,64 @@
       "details": "Custom gateway client OS images for raspberry pi"
     }
   },
+  "beta-testing": {
+    "heading": "SWOB v2 Beta testing",
+    "details": "Please follow the instructions below on how to test SMSWithoutBorders",
+    "steps": {
+      "1": {
+        "heading": "Create an account",
+        "details": {
+          "part-1": "Create your account",
+          "part-2": "if you don't have one already",
+          "link-text": "here"
+        }
+      },
+      "2": {
+        "heading": "Login to your account",
+        "details": {
+          "part-1": "Login to your account so that you can add platforms",
+          "link-text": "login here "
+        }
+      },
+      "3": {
+        "heading": "Store platforms",
+        "details": {
+          "part-1": "Store Gmail, Twitter and telegram so that you can use the SWOB app offline. Click on each platform to see the store button",
+          "part-2": "Storing Twitter on your phone may require you to click the store button twice if you have the Twitter app already installed",
+          "caption": "Note"
+        }
+      },
+      "4": {
+        "heading": "Download app",
+        "details": {
+          "part-1": "After storing all the platforms, logout from your account and head over to the playstore to download the app. Click on the button bellow to open playstore",
+          "part-2": "Once there you should see the following screen",
+          "part-3": "If you do not have the (Beta) near the app name, scroll down and select join. This will take some time about 5mins to 30mins to add you to the beta program. After that, you should be able to install the new app. After installing, open the app and confirm you have the screen below to make sure you have the latest version"
+        }
+      },
+      "5": {
+        "heading": "Synchronize your account",
+        "details": {
+          "part-1": "In the app click on the Synchronize button then continue. This will open a page for you to login. After login, scroll down and click/tap on the sync button to access the Synchronization page.",
+          "part-2": "Once on the Synchronization page, scroll down and click sync. This will then open the page below.",
+          "part-3": "Click on open app and enter your password to finish Synchronization."
+        }
+      },
+      "6": {
+        "heading": "Go offline!!!",
+        "details": "You can now use SMSWithoutBorders offline. turn off your internet connection. Activate a text bundle and send messages on all the platforms you have stored. We don't mind if you tag us while you're at it :)"
+      },
+      "7": {
+        "heading": "We need your feedback!",
+        "details": {
+          "part-1": "Thank you so much for taking the time to test the app. We appreciate your time and support",
+          "part-2": "Please answer these",
+          "link-text": "few questions",
+          "part-3": "about your experience"
+        }
+      }
+    }
+  },
   "login": {
     "page-title": "Account Login",
     "cta-button-text": "login",
@@ -137,7 +200,7 @@
         "placeholder": "Jane Doe"
       },
       "license-terms": {
-        "label": "I agree to abide by SMSWithoutBorders",
+        "label": "I have read the",
         "policy-link": "privacy policy",
         "validation-error": "Please review and accept terms and conditions to proceed"
       },
@@ -145,11 +208,11 @@
     },
     "account-status": "Already have an account?",
     "login-link": "Sign In",
-
     "code-verification": {
       "alerts": {
         "account-created": "your account has been created, please login",
-        "registration-error": "Sorry we could not complete your registration. If error persists, please contact support"
+        "registration-error": "Sorry we could not complete your registration. If error persists, please contact support",
+        "app-redirect": "Please click on the button below to open the app"
       }
     }
   },
@@ -158,7 +221,12 @@
     "heading": "Store Accounts",
     "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline",
     "labels": {
-      "description": "Description"
+      "description": "Description",
+      "how-to-save": "How to save access"
+    },
+    "info": {
+      "gmail": "On the authorization page, select the option to send email on your behalf",
+      "twitter": "If you already have the Twitter app installed, please open it before clicking on the store button below. The app will only prompt you for authorization if it is running"
     },
     "section-1": {
       "heading": "Available Platforms",
@@ -174,6 +242,11 @@
       "input-placeholder": "password",
       "cta-button-text": "continue",
       "cancel-button-text": "cancel"
+    },
+    "prompt-dialog": {
+      "heading": "Do you have the Twitter app installed ?",
+      "details": "Please open the app then return to this page and click continue",
+      "cta-button-text": "continue"
     },
     "alerts": {
       "load-error": "Sorry we could not load platforms. If error persists, please contact support",
@@ -215,7 +288,7 @@
           "placeholder": "Doe",
           "validation-errors": "Please enter your last name"
         },
-        "cta-button-text": "create-account"
+        "cta-button-text": "Create account"
       }
     }
   },
@@ -250,12 +323,6 @@
     "section-2": {
       "paragraph-1": "This lets you use the SW/OB secure gateway for all messages",
       "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
-      "paragraph-3": "Please follow these steps to sychronize your saved access with SMSwithoutborders mobile app.",
-      "sync-steps": {
-        "1": "Open SMSWithoutBorders app on your phone",
-        "2": "Tap the Synchronize button",
-        "3": "Point your phone to this screen to capture the code"
-      },
       "status": {
         "heading": "Status",
         "connected": "connected",
@@ -272,7 +339,9 @@
       "sync-scanned": "Code Scanned successfully",
       "no-platforms": "Sorry it seems you havent stored any tokens",
       "sync-error": "Sorry an error occured while synchronizing, Please try again",
-      "sync-closed": "Sync session closed. please click the sync button to start again"
+      "sync-closed": "Sync session closed. please click the sync button to start again",
+      "click-button": "Please click on the button below to open the app",
+      "scan-code": "Please scan the code below with the mobile app"
     }
   },
   "dashboard": {
@@ -282,7 +351,11 @@
     "join-date": "Join Date",
     "last-login": "Last Login",
     "alerts": {
-      "load-error": "Sorry we could not locate your metrics. If error persists, please contact support"
+      "load-error": "Sorry we could not locate your metrics. If error persists, please contact support",
+      "idle": {
+        "heading": "Are you still there ?",
+        "details": "You will be logged out soon for security reasons"
+      }
     }
   },
   "settings": {
@@ -338,6 +411,9 @@
       "page-title": "Password Recovery",
       "heading": "Password Recovery",
       "details": "Set a new password for your account"
+    },
+    "alert-messages": {
+      "account-verified": "Account verified"
     }
   },
   "404-page": {
@@ -355,6 +431,7 @@
     "password-changed": "Password changed successfully",
     "login-successful": "Login successful",
     "logout-successful": "Logout successful",
+    "missing-permission": "Whoops! you missed something",
     "coming-soon": "Coming soon ...",
     "recaptcha": {
       "loading": "loading reCAPTCHA  please wait",
@@ -365,7 +442,7 @@
   },
   "error-messages": {
     "general-error-title": "An error occured",
-    "general-error-message": "An error occured please try again",
+    "general-error-message": "Sorry, an error occured please try again",
     "network-error": "An error occured, please check your network and try again",
     "invalid-code": "Invalid code provided, please try again",
     "invalid-number": "Invalid number provided",
@@ -376,6 +453,7 @@
     "403": "Forbidden. Sorry your session may have expired. Please logout and login again or reload this page",
     "404": "Sorry the resource you requested is unavailable or not accessible",
     "409": "There is a possible duplicate of this account please contact support",
+    "422": "Sorry, we did not receive the permissions we need to send email on your behalf. No worries, please select the option from the authorization screen when prompted",
     "429": "Too many failed attempts please wait a while and try again",
     "500": "A critical error occured. Please contact support"
   },
@@ -450,26 +528,22 @@
           "details": "This tutorial will help you get started"
         },
         "2": {
-          "title": "Instructions",
-          "details": "Please read through these instructions to understand better"
-        },
-        "3": {
           "title": "Get started",
           "details": "Click the sync button to begin the process"
         },
-        "4": {
+        "3": {
           "title": "Scan QR code",
           "details": "Use the app scanner to scan the generated QR code"
         },
-        "4-alt": {
+        "3-alt": {
           "title": "Open App",
           "details": "click on the button to open the app"
         },
-        "5": {
+        "4": {
           "title": "Enter password",
           "details": "Enter your password on the app screen to complete synchronization"
         },
-        "6": {
+        "5": {
           "title": "Get Help",
           "details": "You can view this tutorial again by clicking here"
         }

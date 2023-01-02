@@ -5,33 +5,30 @@ import { FiLogIn } from "react-icons/fi";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate, useLocation, Link, useParams } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useLoginMutation } from "services";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAuth, authSelector } from "features";
 import {
-  Alert,
   Label,
   Loader,
   Button,
-  useTitle,
   FormGroup,
   ReCAPTCHA,
-  ErrorMessage,
   PasswordInput,
   PhoneNumberInput,
   PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
 
 const Login = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   useTitle(t("login.page-title"));
-  const { lang } = useParams();
 
   // check if recaptcha is enabled and conditionally add validation
-  const ENABLE_RECAPTCHA =
-    process.env.REACT_APP_RECAPTCHA === "true" ? true : false;
+  const RECAPTCHA_ENABLE =
+    process.env.REACT_APP_RECAPTCHA_ENABLE === "true" ? true : false;
   let schemaShape = {
     name: yup.string(),
     phone_number: yup
@@ -42,7 +39,7 @@ const Login = () => {
       .required(t("forms.password.validation-errors.required")),
   };
 
-  if (ENABLE_RECAPTCHA) {
+  if (RECAPTCHA_ENABLE) {
     schemaShape.captcha_token = yup
       .string()
       .required(t("forms.recaptcha.validation-error"));
@@ -55,7 +52,7 @@ const Login = () => {
     register,
     setValue,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -68,12 +65,12 @@ const Login = () => {
   const auth = useSelector(authSelector);
 
   useEffect(() => {
-    // check locale
-    if (lang === "fr") {
-      i18n.changeLanguage("fr");
-    }
-    // if logged in then redirect to dashboard
-    else if (auth.uid && location.state && location.state.path) {
+    /*
+     * if logged in then redirect to dashboard else redirect to previous location
+     * path will be available if user previously accessed a protected route
+     * and got redirected here
+     */
+    if (auth.uid && location.state && location.state.path) {
       /*
         redirect users if they initially tried to access a private route
         without permission
@@ -82,7 +79,7 @@ const Login = () => {
     } else if (auth.uid) {
       navigate("/dashboard");
     }
-  }, [setValue, dispatch, navigate, auth.uid, location.state, lang, i18n]);
+  }, [navigate, auth.uid, location.state]);
 
   const handleLogin = async (data) => {
     try {
@@ -95,34 +92,7 @@ const Login = () => {
       setValue("captcha_token", "", {
         shouldValidate: true,
       });
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.invalid-login"));
-            break;
-          case 403:
-            toast.error(t("error-messages.403"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all other errors in utils/middleware
     }
   };
 
@@ -137,7 +107,7 @@ const Login = () => {
   return (
     <PageAnimationWrapper>
       <div className="md:min-h-screen md:grid md:place-items-center bg-blend-multiply">
-        <div className="container p-8 bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
+        <div className="container p-6 mx-auto bg-white md:my-20 md:max-w-md md:shadow-lg md:rounded-xl">
           <div className="mb-8">
             <img src={logo} alt="logo" className="h-32 mx-auto my-6" />
             <h1 className="text-2xl font-bold text-center">
@@ -154,23 +124,16 @@ const Login = () => {
                 name="phone_number"
                 render={({ field: { value, onChange } }) => (
                   <PhoneNumberInput
-                    international
-                    countryCallingCodeEditable={false}
-                    placeholder={t("forms.phone-number.placeholder")}
-                    defaultCountry="CM"
+                    id="phone_number"
                     value={value}
-                    type="tel"
                     onChange={onChange}
-                    error={errors.phone_number}
+                    invalid={errors.phone_number ? true : false}
+                    invalidText={errors.phone_number?.message}
+                    helperText={t("forms.phone-number.helper-text")}
+                    placeholder={t("forms.phone-number.placeholder")}
                   />
                 )}
               />
-              {errors.phone_number && (
-                <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
-              )}
-              <small className="block text-xs text-gray-600">
-                {t("forms.phone-number.helper-text")}
-              </small>
             </FormGroup>
 
             <FormGroup>
@@ -178,36 +141,22 @@ const Login = () => {
                 {t("forms.password.label")}
               </Label>
               <PasswordInput
+                id="password"
                 name="password"
                 showStrength={false}
+                invalid={errors.password ? true : false}
+                invalidText={errors.password?.message}
                 {...register("password")}
-                error={errors.password}
               />
-              {errors.password && (
-                <ErrorMessage>{errors.password?.message}</ErrorMessage>
-              )}
             </FormGroup>
 
-            {ENABLE_RECAPTCHA ? (
-              <FormGroup>
-                <ReCAPTCHA setValue={setValue} fieldName="captcha_token" />
-                {errors.captcha_token && (
-                  <ErrorMessage>{errors.captcha_token?.message}</ErrorMessage>
-                )}
-              </FormGroup>
-            ) : (
-              <FormGroup>
-                <Alert
-                  kind="primary"
-                  message={t("alert-messages.recaptcha.disabled")}
-                  hideCloseButton
-                />
-              </FormGroup>
-            )}
+            <FormGroup>
+              <ReCAPTCHA control={control} name="captcha_token" />
+            </FormGroup>
 
-            <Button className="w-full" disabled={!isValid}>
+            <Button className="w-full">
               <FiLogIn />
-              <span className="ml-1">{t("login.cta-button-text")}</span>
+              <span>{t("login.cta-button-text")}</span>
             </Button>
           </form>
           <Link

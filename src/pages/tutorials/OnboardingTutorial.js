@@ -8,6 +8,17 @@ import { useTranslation } from "react-i18next";
 const OnboardingTutorial = ({ start, stopFunc }) => {
   const { t } = useTranslation();
   const isMobile = useDeviceDetection();
+
+  const options = {
+    nextLabel: t("labels.next"),
+    prevLabel: t("labels.back"),
+    doneLabel: t("labels.finish"),
+    exitOnOverlayClick: false,
+    disableInteraction: true,
+    scrollToElement: true,
+    showBullets: false,
+  };
+
   const steps = [
     {
       element: "onboarding",
@@ -39,22 +50,15 @@ const OnboardingTutorial = ({ start, stopFunc }) => {
   ];
 
   return (
-    <>
-      <Steps
-        enabled={start}
-        steps={steps}
-        initialStep={0}
-        stepsEnabled={true}
-        onExit={() => stopFunc(false)}
-        options={{
-          exitOnOverlayClick: false,
-          disableInteraction: true,
-          scrollToElement: true,
-          showBullets: false,
-          doneLabel: "Finish",
-        }}
-      />
-    </>
+    <Steps
+      enabled={start}
+      steps={steps}
+      initialStep={0}
+      stepsEnabled={true}
+      onExit={() => stopFunc(false)}
+      onComplete={() => stopFunc(false)}
+      options={options}
+    />
   );
 };
 

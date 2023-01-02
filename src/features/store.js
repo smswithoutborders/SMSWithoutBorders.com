@@ -1,14 +1,11 @@
-import { createAction, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { API } from "../services/api";
 import { persistState, getPersistedState } from "services";
-import { sessionExpiryChecker, RequestErrorHandler } from "utils";
+import { RequestErrorHandler } from "utils";
 import rootReducer from "./reducers";
 
 const persistedState = getPersistedState();
-// action to clear the store
-export const resetStore = createAction("RESET_STORE");
-
 /*
  Adding the api middleware enables caching, invalidation, polling,
  and other useful features of `rtk-query`.
@@ -19,11 +16,7 @@ export const resetStore = createAction("RESET_STORE");
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      API.middleware,
-      sessionExpiryChecker,
-      RequestErrorHandler
-    ),
+    getDefaultMiddleware().concat(API.middleware, RequestErrorHandler),
   devTools: process.env.NODE_ENV !== "production" ? true : false,
   preloadedState: persistedState,
 });

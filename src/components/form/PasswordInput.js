@@ -1,9 +1,10 @@
 import React, { useState, forwardRef, Fragment } from "react";
-import { ToggleButton } from "./ToggleButton";
-import { Input } from "./shared";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { ToggleButton } from "./ToggleButton";
+import { Input } from "./Input";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "hooks";
 
 // Password Input Component
 export const PasswordInput = forwardRef(
@@ -11,6 +12,7 @@ export const PasswordInput = forwardRef(
     const { t } = useTranslation();
     const [toggle, setToggle] = useState(false);
     const [strength, setStrength] = useState(null);
+    const { language } = useLanguage();
 
     function calculateStrength(password) {
       if (password.length > 0) {
@@ -44,9 +46,12 @@ export const PasswordInput = forwardRef(
             {...rest}
           />
           <ToggleButton
-            className="absolute top-3 right-3"
-            toggleFunc={setToggle}
-            value={toggle}
+            className={clsx(
+              "absolute top-4",
+              language?.dir === "ltr" ? "right-3" : "left-4"
+            )}
+            onToggle={setToggle}
+            toggle={toggle}
           />
         </div>
 
@@ -54,16 +59,17 @@ export const PasswordInput = forwardRef(
           <div className="w-full mt-2 mb-2">
             <div className="grid w-full h-1 grid-cols-4 bg-gray-200 rounded-full">
               <div
+                aria-label="password strength"
                 className={clsx(
                   strength === 4
                     ? "bg-lime-500 col-span-full"
                     : strength === 3
-                    ? "bg-indigo-500 col-span-3"
-                    : strength === 2
-                    ? "bg-yellow-500 col-span-2"
-                    : strength === 1
-                    ? "bg-fuchsia-500 col-span-1"
-                    : "bg-red-500"
+                      ? "bg-indigo-500 col-span-3"
+                      : strength === 2
+                        ? "bg-yellow-500 col-span-2"
+                        : strength === 1
+                          ? "bg-fuchsia-500 col-span-1"
+                          : "bg-red-500"
                 )}
               ></div>
             </div>
@@ -72,12 +78,12 @@ export const PasswordInput = forwardRef(
                 {strength === 4
                   ? t("labels.strong")
                   : strength === 3
-                  ? t("labels.good")
-                  : strength === 2
-                  ? t("labels.average")
-                  : strength === 1
-                  ? t("labels.weak")
-                  : t("labels.very-weak")}
+                    ? t("labels.good")
+                    : strength === 2
+                      ? t("labels.average")
+                      : strength === 1
+                        ? t("labels.weak")
+                        : t("labels.very-weak")}
               </span>
             </div>
           </div>
@@ -87,10 +93,13 @@ export const PasswordInput = forwardRef(
   }
 );
 
+PasswordInput.displayName = "PasswordInput";
+
 PasswordInput.defaultProps = {
   showStrength: true,
 };
 
 PasswordInput.propTypes = {
+  onChange: PropTypes.func,
   showStrength: PropTypes.bool,
 };

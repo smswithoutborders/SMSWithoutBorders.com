@@ -91,6 +91,7 @@ export const API = createApi({
       query: ({
         uid,
         code,
+        scope,
         platform,
         protocol,
         code_verifier,
@@ -100,6 +101,7 @@ export const API = createApi({
         method: "PUT",
         body: {
           code,
+          scope,
           code_verifier,
           phone_number,
         },
@@ -171,11 +173,11 @@ export const API = createApi({
       },
     }),
     triggerOTP: builder.query({
-      query: ({ uid, phone_number, country_code }) => ({
+      query: ({ uid, phone_number }) => ({
         url: `/users/${uid}/OTP`,
         method: "POST",
         body: {
-          phone_number: country_code + phone_number,
+          phone_number,
         },
       }),
     }),

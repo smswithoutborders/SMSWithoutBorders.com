@@ -1,28 +1,22 @@
 /*
-Countdown hook
-https://blog.greenroots.info/how-to-create-a-countdown-timer-using-react-hooks
-https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds-to-hours-min-sec-format-in-javascript
-*/
+ * Countdown hook
+ * https://blog.greenroots.info/how-to-create-a-countdown-timer-using-react-hooks
+ * https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds-to-hours-min-sec-format-in-javascript
+ */
 
 import { useEffect, useState } from "react";
 import { useTriggerOTPQuery } from "services";
-import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
 
 //expects a single object as input
 export const useCountDown = (props) => {
-  const { t } = useTranslation();
   // build request body
   const request = {
     uid: props?.uid,
     phone_number: props?.phone_number,
-    country_code: props?.country_code,
   };
 
   const {
     data = {},
-    error,
-    isSuccess,
     refetch: resendOTPCode,
     isFetching: isRequesting,
     isError: OTPRequestError,
@@ -36,31 +30,7 @@ export const useCountDown = (props) => {
   useEffect(() => {
     const deadline = data ? data.expires - Date.now() : 0;
     setCountDown(deadline);
-    if (OTPRequestError) {
-      switch (error.originalStatus) {
-        case 400:
-          toast.error(t("error-messages.400"));
-          break;
-        case 401:
-          toast.error(t("error-messages.401"));
-          break;
-        case 403:
-          toast.error(t("error-messages.403"));
-          break;
-        case 409:
-          toast.error(t("error-messages.409"));
-          break;
-        case 429:
-          toast.error(t("error-messages.429"));
-          break;
-        case 500:
-          toast.error(t("error-messages.500"));
-          break;
-        default:
-          toast.error(t("error-messages.general-error-message"));
-      }
-    }
-  }, [data, error, isSuccess, OTPRequestError, t]);
+  }, [data]);
 
   useEffect(() => {
     // only run when theres time left

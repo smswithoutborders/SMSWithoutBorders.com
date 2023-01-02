@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import telegramLogo from "images/telegram-icon.svg";
 import { useForm } from "react-hook-form";
@@ -14,11 +14,10 @@ import {
   Label,
   Input,
   Button,
-  useTitle,
   FormGroup,
-  ErrorMessage,
   PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
 
 const TelegramRegistration = () => {
   const { t } = useTranslation();
@@ -46,13 +45,6 @@ const TelegramRegistration = () => {
     resolver: yupResolver(schema),
   });
 
-  // check if phone number is present
-  useEffect(() => {
-    if (!location.state?.phone_number) {
-      navigate("../../");
-    }
-  }, [location.state, navigate]);
-
   async function handleAccountCreation(data) {
     // build request data
     let request = {
@@ -68,36 +60,9 @@ const TelegramRegistration = () => {
       await createExternalAccount(request).unwrap();
       toast.success(t("wallet.alerts.platform-stored"));
       // navigate to wallet page
-      navigate("../../", { replace: true });
+      navigate("/dashboard/wallet", { replace: true });
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.403"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }
 
@@ -133,16 +98,15 @@ const TelegramRegistration = () => {
             </Label>
             <Input
               type="text"
+              id="first_name"
               name="first_name"
               placeholder={t(
                 "telegram.registration.form.first-name.placeholder"
               )}
+              invalid={errors.first_name ? true : false}
+              invalidText={errors.first_name?.message}
               {...register("first_name")}
-              error={errors.first_name}
             />
-            {errors.first_name && (
-              <ErrorMessage>{errors.first_name?.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <FormGroup>
@@ -151,16 +115,15 @@ const TelegramRegistration = () => {
             </Label>
             <Input
               type="text"
+              id="last_name"
               name="last_name"
               placeholder={t(
                 "telegram.registration.form.last-name.placeholder"
               )}
+              invalid={errors.last_name ? true : false}
+              invalidText={errors.last_name?.message}
               {...register("last_name")}
-              error={errors.last_name}
             />
-            {errors.last_name && (
-              <ErrorMessage>{errors.last_name.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <Button className="w-full my-4">

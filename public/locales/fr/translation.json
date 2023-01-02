@@ -17,7 +17,8 @@
     "downloads": "Téléchargements",
     "developers": "Développeurs",
     "resources": "Ressources",
-    "tutorials": "Tutoriels"
+    "tutorials": "Tutoriels",
+    "beta-testing": "Test bêta"
   },
   "labels": {
     "sync": "sync",
@@ -29,7 +30,9 @@
     "average": "Moyenne",
     "weak": "faible",
     "very-weak": "très faible",
-    "back": "retour",
+    "back": "Retour",
+    "next": "Prochaine",
+    "finish": "Terminer",
     "retry": "réessayer",
     "continue": "continuer",
     "try-again": "réessayer",
@@ -37,7 +40,9 @@
     "tutorial": "Tutoriel",
     "learn-more": "en savoir plus",
     "help": "aide",
-    "open-app": "Ouvrir l'application"
+    "open-app": "Ouvrir l'application",
+    "yes": "Oui",
+    "no": "Non"
   },
   "landing": {
     "section-1": {
@@ -121,6 +126,64 @@
       "details": "Images personnalisées du système d'exploitation du client de la passerelle pour raspberry pi"
     }
   },
+  "beta-testing": {
+    "heading": "SWOB v2 Test bêta",
+    "details": "Veuillez suivre les instructions ci-dessous sur la façon de tester SMSWithoutBorders",
+    "steps": {
+      "1": {
+        "heading": "Créer un compte",
+        "details": {
+          "part-1": "Créer votre compte",
+          "part-2": "si vous n'en avez pas déjà un",
+          "link-text": "ici"
+        }
+      },
+      "2": {
+        "heading": "Connexion à votre compte",
+        "details": {
+          "part-1": "Connectez-vous à votre compte afin de pouvoir ajouter des plateformes",
+          "link-text": "connectez-vous ici"
+        }
+      },
+      "3": {
+        "heading": "Sauvegarder les plateformes",
+        "details": {
+          "part-1": "Stockez Gmail, Twitter et Telegram pour que vous puissiez utiliser l'application SWOB hors ligne. Cliquez sur chaque plateforme pour voir le bouton de stockage",
+          "part-2": "Stocker Twitter sur votre téléphone peut vous obliger à cliquer deux fois sur le bouton de stockage si l'application Twitter est déjà installée",
+          "caption": "Attention"
+        }
+      },
+      "4": {
+        "heading": "Télécharger l'application",
+        "details": {
+          "part-1": "Après avoir stocké toutes les plateformes, déconnectez-vous de votre compte et rendez-vous sur le playstore pour télécharger l'application. Cliquez sur le bouton ci-dessous pour ouvrir le playstore",
+          "part-2": "Une fois là, vous devriez voir l'écran suivant",
+          "part-3": "Si vous n'avez pas le (Beta) près du nom de l'application, faites défiler vers le bas et sélectionnez rejoindre. Cela prendra un certain temps, entre 5 et 30 minutes, pour vous ajouter au programme bêta. Après cela, vous devriez être en mesure d'installer la nouvelle application. Après l'installation, ouvrez l'application et confirmez que vous avez l'écran ci-dessous pour vous assurer que vous avez la dernière version"
+        }
+      },
+      "5": {
+        "heading": "Synchroniser votre compte",
+        "details": {
+          "partie-1": "Dans l'application, cliquez sur le bouton Synchroniser puis continuez. Une page s'ouvrira pour vous permettre de vous connecter. Après la connexion, faites défiler vers le bas et cliquez/tapez sur le bouton de synchronisation pour accéder à la page de synchronisation.",
+          "part-2": "Une fois sur la page de Synchronisation, faites défiler vers le bas et cliquez sur sync. Cela ouvrira alors la page ci-dessous.",
+          "part-3": "Cliquez sur ouvrir l'application et entrez votre mot de passe pour terminer la synchronisation"
+        }
+      },
+      "6": {
+        "heading": "Passez hors ligne ! !!",
+        "details": "Vous pouvez désormais utiliser SMSWithoutBorders hors ligne. Coupez votre connexion internet. Activez un forfait texte et envoyez des messages sur toutes les plateformes que vous avez enregistrées. Cela ne nous dérange pas si vous nous taggez pendant que vous y êtes :)"
+      },
+      "7": {
+        "heading": "Nous avons besoin de votre avis !",
+        "details": {
+          "part-1": "Merci beaucoup d'avoir pris le temps de tester l'application. Nous apprécions votre temps et votre soutien",
+          "part-2": "Veuillez répondre à ces questions",
+          "link-text": "quelques questions",
+          "partie-3": "sur votre expérience"
+        }
+      }
+    }
+  },
   "login": {
     "page-title": "Connexion au compte",
     "cta-button-text": "connexion",
@@ -137,7 +200,7 @@
         "placeholder": "Jane Doe"
       },
       "license-terms": {
-        "label": "J'accepte de respecter le règlement de SMSWithoutBorders.",
+        "label": "J'ai lu la",
         "policy-link": "politique de confidentialité",
         "validation-error": "Veuillez examiner et accepter les termes et conditions pour poursuivre"
       },
@@ -145,11 +208,11 @@
     },
     "account-status": "Vous avez déjà un compte ?",
     "login-link": "Connexion",
-
     "code-verification": {
       "alerts": {
         "account-created": "votre compte a été créé, veuillez vous connecter",
-        "registration-error": "Désolé, nous n'avons pas pu terminer votre inscription. Si l'erreur persiste, veuillez contacter le support"
+        "registration-error": "Désolé, nous n'avons pas pu terminer votre inscription. Si l'erreur persiste, veuillez contacter le support",
+        "app-redirect": "Veuillez cliquer sur le bouton ci-dessous pour ouvrir l'application."
       }
     }
   },
@@ -158,7 +221,12 @@
     "heading": "Comptes des magasins",
     "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
     "labels": {
-      "description": "Description"
+      "description": "Description",
+      "how-to-save": "Comment sauvegarder l'accès"
+    },
+    "info": {
+      "gmail": "Sur la page d'autorisation, sélectionnez l'option d'envoi d'e-mail en votre nom",
+      "twitter": "Si l'application Twitter est déjà installée, veuillez l'ouvrir avant de cliquer sur le bouton de la boutique ci-dessous. L'application ne vous demandera l'autorisation que si elle est en cours d'exécution"
     },
     "section-1": {
       "heading": "Plateformes disponibles",
@@ -174,6 +242,11 @@
       "input-placeholder": "mot de passe",
       "cta-button-text": "continuer",
       "cancel-button-text": "annuler"
+    },
+    "prompt-dialog": {
+      "heading": "Avez-vous l'application Twitter installée ?",
+      "details": "Veuillez ouvrir l'application, puis revenir à cette page et cliquer sur Continuer",
+      "cta-button-text": "continuer"
     },
     "alerts": {
       "load-error": "Désolé, nous n'avons pas pu charger les plateformes. Si l'erreur persiste, veuillez contacter le support",
@@ -215,7 +288,7 @@
           "placeholder": "Doe",
           "validation-errors": "Veuillez entrer votre nom de famille"
         },
-        "cta-button-text": "créer un compte"
+        "cta-button-text": "Créer un compte"
       }
     }
   },
@@ -250,12 +323,6 @@
     "section-2": {
       "paragraph-1": "Cela vous permet d'utiliser la passerelle sécurisée SW/OB pour tous les messages.",
       "paragraph-2": "La synchronisation ne devient disponible qu'après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est le stockage de l'accès dans le portefeuille.",
-      "paragraph-3": "Veuillez suivre les étapes suivantes pour synchroniser votre accès enregistré avec l'application mobile SMSwithoutborders.",
-      "sync-steps": {
-        "1": "Ouvrez l'application SMSWithoutBorders sur votre téléphone.",
-        "2": "Appuyez sur le bouton Synchroniser",
-        "3": "Dirigez votre téléphone vers cet écran pour capturer le code."
-      },
       "status": {
         "heading": "Statut",
         "connected": "connecté",
@@ -272,7 +339,9 @@
       "sync-scanned": "Code scanné avec succès",
       "no-platforms": "Désolé, il semble que vous n'ayez pas stocké de jetons.",
       "sync-error": "Désolé, une erreur s'est produite pendant la synchronisation, veuillez réessayer.",
-      "sync-closed": "La session de synchronisation est fermée. Veuillez cliquer sur le bouton de synchronisation pour recommencer"
+      "sync-closed": "La session de synchronisation est fermée. Veuillez cliquer sur le bouton de synchronisation pour recommencer",
+      "click-button": "Veuillez cliquer sur le bouton ci-dessous pour ouvrir l'application.",
+      "scan-code": "Veuillez scanner le code ci-dessous avec l'application mobile"
     }
   },
   "dashboard": {
@@ -282,7 +351,11 @@
     "join-date": "Date d'adhésion",
     "last-login": "Dernière connexion",
     "alerts": {
-      "load-error": "Désolé, nous n'avons pas pu localiser vos métriques. Si l'erreur persiste, veuillez contacter le support"
+      "load-error": "Désolé, nous n'avons pas pu localiser vos métriques. Si l'erreur persiste, veuillez contacter le support",
+      "idle": {
+        "heading": "Vous êtes toujours là ?",
+        "details": "Vous serez bientôt déconnecté pour des raisons de sécurité"
+      }
     }
   },
   "settings": {
@@ -308,7 +381,7 @@
     "heading": "Supprimer le compte",
     "details": "Définissez un nouveau mot de passe pour votre compte",
     "confirmation": {
-      "text": "IConfirmThisAction",
+      "text": "Je confirme",
       "validation-error": "Veuillez entrer {{confirmation}} et votre mot de passe pour continuer"
     },
     "paragraph": {
@@ -338,6 +411,9 @@
       "page-title": "Récupération du mot de passe",
       "heading": "Récupération du mot de passe",
       "details": "Définir un nouveau mot de passe pour votre compte"
+    },
+    "alert-messages": {
+      "account-verified": "Compte vérifié"
     }
   },
   "404-page": {
@@ -355,6 +431,7 @@
     "password-changed": "Le mot de passe a été changé avec succès",
     "login-successful": "Connexion réussie",
     "logout-successful": "Déconnexion réussie",
+    "missing-permission": "Oups ! Vous avez manqué quelque chose",
     "coming-soon": "A venir prochainement ...",
     "recaptcha": {
       "loading": "chargement du reCAPTCHA, veuillez patienter",
@@ -365,7 +442,7 @@
   },
   "error-messages": {
     "general-error-title": "Une erreur s'est produite",
-    "general-error-message": "Une erreur s'est produite, veuillez réessayer",
+    "general-error-message": "Désolé, une erreur s'est produite, veuillez réessayer",
     "network-error": "Une erreur s'est produite, veuillez vérifier votre réseau et réessayer",
     "invalid-code": "Le code fourni est invalide, veuillez réessayer",
     "invalid-number": "Le numéro fourni est invalide",
@@ -376,6 +453,7 @@
     "403": "Interdit. Désolé, votre session a peut-être expiré. Veuillez vous déconnecter et vous reconnecter ou recharger cette page.",
     "404": "Désolé, la ressource que vous avez demandée est indisponible ou non accessible.",
     "409": "Il y a une possibilité de duplication de ce compte, veuillez contacter le support.",
+    "422": "Désolé, nous n'avons pas reçu les autorisations dont nous avons besoin pour envoyer des e-mails en votre nom. Pas d'inquiétude, veuillez sélectionner l'option dans l'écran d'autorisation lorsque vous y êtes invité.",
     "429": "Trop de tentatives échouées, veuillez attendre un peu et réessayer.",
     "500": "Une erreur critique s'est produite. Veuillez contacter le support"
   },
@@ -450,26 +528,22 @@
           "details": "Ce tutoriel vous aidera à démarrer"
         },
         "2": {
-          "title": "Instructions",
-          "details": "Veuillez lire ces instructions pour mieux comprendre"
-        },
-        "3": {
           "title": "Commencez",
           "details": "Cliquez sur le bouton de synchronisation pour commencer le processus"
         },
-        "4": {
+        "3": {
           "title": "Scanner le code QR",
           "details": "Utilisez le scanner de l'application pour scanner le code QR généré."
         },
-        "4-alt": {
+        "3-alt": {
           "title": "Ouvrir l'application",
           "details": "cliquez sur le bouton pour ouvrir l'application"
         },
-        "5": {
+        "4": {
           "title": "Entrez le mot de passe",
           "details": "Entrez votre mot de passe sur l'écran de l'application pour terminer la synchronisation"
         },
-        "6": {
+        "5": {
           "title": "Obtenir de l'aide",
           "details": "Vous pouvez revoir ce tutoriel en cliquant ici"
         }

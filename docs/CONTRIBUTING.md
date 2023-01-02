@@ -6,11 +6,11 @@ Existing features can be found in [FEATURES.md](FEATURES.md);
 
 ## Project Structure
 
-We use three main branches in our workflow: [stable(master)](https://github.com/smswithoutborders/smswithoutborders.com/tree/master), [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) and [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing)
+We use three main branches in our workflow: [stable(main)](https://github.com/smswithoutborders/smswithoutborders.com/tree/main), [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) and [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing)
 
-* The [stable](https://github.com/smswithoutborders/smswithoutborders.com/tree/master) branch contains the code for the latest release version of the project
-* [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) is the active development branch. All recent changes and contributions go here
-* [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing) is where we try out newly developed features in prepartion for a release.
+- The [stable](https://github.com/smswithoutborders/smswithoutborders.com/tree/main) branch contains the code for the latest release version of the project
+- [dev](https://github.com/smswithoutborders/smswithoutborders.com/tree/dev) is the active development branch. All recent changes and contributions go here
+- [testing](https://github.com/smswithoutborders/smswithoutborders.com/tree/testing) is where we try out newly developed features in prepartion for a release.
 
 In summary, we build, test then deploy
 
@@ -30,11 +30,11 @@ You can confirm you are on the dev branch by running
 git branch
 ```
 
- Create the branch you will be working from
+Create the branch you will be working from
 
- ```bash
+```bash
 git checkout -b <your branch name here>
- ```
+```
 
 ## Style Guide
 
@@ -52,13 +52,19 @@ Please create a new branch to work on a new feature. That way you can easily rol
 
 New features are very welcome but should first be discussed with the team for guidance.
 
-New  pages, components and features can be created in their respective folders and linked accordingly. Helper functions can be defined under utils
+New pages, components and features can be created in their respective folders and linked accordingly. Helper functions can be defined under utils
 
 All routes are defined in App.js and any new routes can be added there.
 
 ## Testing
 
-Some parts of the project are inter-connected. Whenever a component in this section gets updated, it is advised to test all other components related to it. Please see the [testing guide](TESTING.md)
+Some parts of the project are inter-connected. Whenever a component gets updated, it is good practice to test all other components related to it. Please see the [testing guide](TESTING.md)
+
+### Testing protected pages
+
+All pages in the dashboard area are protected and require certain parameters to access them. Testing these pages could be a bit challenging during development since it becomes combersome to keep filling in required information each time.
+
+A nifty workaround is to comment out the redirection checks in the respective [route guard component](../src/components/guards/). This will give you full access to the page without the checks. Be sure to uncomment them before opening your PR though
 
 ## Reporting Issues
 

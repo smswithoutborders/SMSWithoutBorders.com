@@ -27,17 +27,26 @@ const MobileSyncTutorial = () => {
           showButton: true,
         })
       );
-      stepsRef.current.updateStepElement(nextStepIndex);
     } else if (nextStepIndex === 4) {
       dispatch(
         updateSyncTutorial({
           showButton: false,
         })
       );
-      stepsRef.current.updateStepElement(nextStepIndex);
     }
+    stepsRef.current.updateStepElement(nextStepIndex);
   }
 
+  const options = {
+    nextLabel: t("labels.next"),
+    prevLabel: t("labels.back"),
+    doneLabel: t("labels.finish"),
+    exitOnOverlayClick: false,
+    disableInteraction: true,
+    scrollToElement: true,
+    showBullets: false,
+  };
+  
   const steps = [
     {
       title: t("tutorials.sync.steps.1.title"),
@@ -50,23 +59,23 @@ const MobileSyncTutorial = () => {
     },
     {
       element: ".mobile-sync-button",
-      title: t("tutorials.sync.steps.3.title"),
-      intro: t("tutorials.sync.steps.3.details"),
+      title: t("tutorials.sync.steps.2.title"),
+      intro: t("tutorials.sync.steps.2.details"),
     },
     {
       element: ".open-app-button",
-      title: t("tutorials.sync.steps.4-alt.title"),
-      intro: t("tutorials.sync.steps.4-alt.details"),
+      title: t("tutorials.sync.steps.3-alt.title"),
+      intro: t("tutorials.sync.steps.3-alt.details"),
       position: "bottom",
     },
     {
-      title: t("tutorials.sync.steps.5.title"),
-      intro: t("tutorials.sync.steps.5.details"),
+      title: t("tutorials.sync.steps.4.title"),
+      intro: t("tutorials.sync.steps.4.details"),
     },
     {
       element: ".mobile-tutorial-button",
-      title: t("tutorials.sync.steps.6.title"),
-      intro: t("tutorials.sync.steps.6.details"),
+      title: t("tutorials.sync.steps.5.title"),
+      intro: t("tutorials.sync.steps.5.details"),
     },
   ];
 
@@ -79,13 +88,7 @@ const MobileSyncTutorial = () => {
       onExit={handleClose}
       onBeforeChange={handleChange}
       ref={stepsRef}
-      options={{
-        exitOnOverlayClick: false,
-        disableInteraction: true,
-        scrollToElement: true,
-        showBullets: false,
-        doneLabel: "Finish",
-      }}
+      options={options}
     />
   );
 };

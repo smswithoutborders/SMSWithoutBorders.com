@@ -1,42 +1,24 @@
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
 import { Steps } from "intro.js-react";
-import { useSelector, useDispatch } from "react-redux";
-import { syncTutorialSelector, updateSyncTutorial } from "features";
+import { useDeviceDetection } from "hooks";
 import { useTranslation } from "react-i18next";
 import "styles/introjs-theme.css";
 
-const SyncTutorial = () => {
+const SyncTutorial = ({ start, stopFunc }) => {
   const { t } = useTranslation();
   const stepsRef = useRef(null);
-  const dispatch = useDispatch();
-  const tutorial = useSelector(syncTutorialSelector);
+  const isMobile = useDeviceDetection();
 
-  function handleClose() {
-    dispatch(
-      updateSyncTutorial({
-        enabled: false,
-        showQR: false,
-      })
-    );
-  }
-
-  function handleChange(nextStepIndex) {
-    if (nextStepIndex === 3) {
-      dispatch(
-        updateSyncTutorial({
-          showQR: true,
-        })
-      );
-      stepsRef.current.updateStepElement(nextStepIndex);
-    } else if (nextStepIndex === 5) {
-      dispatch(
-        updateSyncTutorial({
-          showQR: false,
-        })
-      );
-      stepsRef.current.updateStepElement(nextStepIndex);
-    }
-  }
+  const options = {
+    nextLabel: t("labels.next"),
+    prevLabel: t("labels.back"),
+    doneLabel: t("labels.finish"),
+    exitOnOverlayClick: false,
+    disableInteraction: true,
+    scrollToElement: true,
+    showBullets: false,
+  };
 
   const steps = [
     {
@@ -49,51 +31,43 @@ const SyncTutorial = () => {
       ),
     },
     {
-      element: ".tutorial-instructions",
+      element: ".sync-button",
       title: t("tutorials.sync.steps.2.title"),
       intro: t("tutorials.sync.steps.2.details"),
-      position: "right",
     },
     {
-      element: ".desktop-sync-button",
-      title: t("tutorials.sync.steps.3.title"),
-      intro: t("tutorials.sync.steps.3.details"),
+      element: isMobile ? ".open-app-button" : ".qr-code",
+      title: isMobile ? t("tutorials.sync.steps.3-alt.title") : t("tutorials.sync.steps.3.title"),
+      intro: isMobile ? t("tutorials.sync.steps.3-alt.details") : t("tutorials.sync.steps.3.details"),
     },
     {
-      element: ".tutorial-qr",
       title: t("tutorials.sync.steps.4.title"),
       intro: t("tutorials.sync.steps.4.details"),
-      position: "left",
     },
     {
+      element: ".tutorial-button",
       title: t("tutorials.sync.steps.5.title"),
       intro: t("tutorials.sync.steps.5.details"),
-    },
-    {
-      element: ".desktop-tutorial-button",
-      title: t("tutorials.sync.steps.6.title"),
-      intro: t("tutorials.sync.steps.6.details"),
     },
   ];
 
   return (
     <Steps
-      enabled={tutorial.enabled}
+      enabled={start}
       steps={steps}
       initialStep={0}
       stepsEnabled={true}
-      onExit={handleClose}
-      onBeforeChange={handleChange}
+      onExit={() => stopFunc(false)}
+      onComplete={() => stopFunc(false)}
       ref={stepsRef}
-      options={{
-        exitOnOverlayClick: false,
-        disableInteraction: true,
-        scrollToElement: true,
-        showBullets: false,
-        doneLabel: "Finish",
-      }}
+      options={options}
     />
   );
+};
+
+SyncTutorial.propTypes = {
+  start: PropTypes.bool.isRequired,
+  stopFunc: PropTypes.func.isRequired,
 };
 
 export default SyncTutorial;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import logo from "images/logo-icon-light.png";
 import { FiMenu, FiX } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
@@ -6,41 +6,29 @@ import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useScroll, useLanguage } from "hooks";
 import clsx from "clsx";
 
 export const MainNavbar = () => {
   const { t } = useTranslation();
+  const { LanguageSwitcher } = useLanguage();
+
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+
+  const scrolled = useScroll();
 
   function toggleMenu() {
     setOpen(!open);
   }
 
-  const handleScroll = useCallback(() => {
-    if (window.scrollY >= 80) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [handleScroll]);
-
   const DesktopLinks = () => (
-    <div className="lg:flex">
-      <NavLink scrolled={scrolled} key="/" to="/">
+    <div className="flex flex-wrap gap-2">
+      <NavLink key="/" to="/" end>
         {t("menu.home")}
       </NavLink>
 
       <DropDownLink
+        key="resources"
         label={t("menu.resources")}
         links={[
           {
@@ -54,6 +42,11 @@ export const MainNavbar = () => {
             path: process.env.REACT_APP_TUTORIAL_URL,
             label: t("menu.tutorials"),
           },
+          {
+            key: "beta-testing",
+            path: "beta-testing",
+            label: t("menu.beta-testing"),
+          },
         ]}
       />
       <ExternalLink
@@ -64,17 +57,17 @@ export const MainNavbar = () => {
       >
         {t("menu.developers")}
       </ExternalLink>
-      <NavLink scrolled={scrolled} key="privacy-policy" to="/privacy-policy">
+      <NavLink key="privacy-policy" to="/privacy-policy">
         {t("menu.privacy")}
       </NavLink>
-      <NavLink scrolled={scrolled} key="contact-us" to="/contact-us">
+      <NavLink key="contact-us" to="/contact-us">
         {t("menu.contact")}
       </NavLink>
     </div>
   );
 
   const ActionLinks = () => (
-    <div className="lg:flex lg:items-center">
+    <div className="flex flex-wrap items-center gap-2">
       <LanguageSwitcher />
       <ExternalLink
         key="Github"
@@ -82,33 +75,28 @@ export const MainNavbar = () => {
         target="_blank"
       >
         <GoMarkGithub size={20} />
-        <span className="ml-2">GitHub</span>
+        <span>GitHub</span>
       </ExternalLink>
-      <NavLink scrolled={scrolled} open={open} key="login" to="/login">
-        <span className="ml-2">{t("menu.login")}</span>
+      <NavLink open={open} key="login" to="/login">
+        {t("menu.login")}
       </NavLink>
       <NavLink
         key="sign-up"
         to="/sign-up"
-        className="text-white bg-blue-800 border-none lg:px-6 lg:py-2 lg:mr-4 lg:rounded-3xl"
+        className="text-white bg-blue-800 border-none rounded-lg lg:px-6 lg:py-2"
       >
-        <span className="ml-2">{t("menu.signup")}</span>
+        {t("menu.signup")}
       </NavLink>
     </div>
   );
 
   const MobileLinks = () => (
-    <div className="xl:flex">
-      <MobileNavLink
-        scrolled={scrolled}
-        onClick={() => toggleMenu()}
-        key="/"
-        to="/"
-      >
+    <div className="flex flex-col gap-2 p-4">
+      <LanguageSwitcher />
+      <MobileNavLink onClick={() => toggleMenu()} key="home" to="/" end>
         {t("menu.home")}
       </MobileNavLink>
       <MobileNavLink
-        scrolled={scrolled}
         onClick={() => toggleMenu()}
         key="downloads"
         to="/downloads"
@@ -123,6 +111,13 @@ export const MainNavbar = () => {
       >
         {t("menu.tutorials")}
       </ExternalLink>
+      <MobileNavLink
+        onClick={() => toggleMenu()}
+        key="beta-testing"
+        to="beta-testing"
+      >
+        {t("menu.beta-testing")}
+      </MobileNavLink>
       <ExternalLink
         onClick={() => toggleMenu()}
         key="developers"
@@ -132,7 +127,6 @@ export const MainNavbar = () => {
         {t("menu.developers")}
       </ExternalLink>
       <MobileNavLink
-        scrolled={scrolled}
         onClick={() => toggleMenu()}
         key="privacy-policy"
         to="/privacy-policy"
@@ -140,7 +134,6 @@ export const MainNavbar = () => {
         {t("menu.privacy")}
       </MobileNavLink>
       <MobileNavLink
-        scrolled={scrolled}
         onClick={() => toggleMenu()}
         key="contact-us"
         to="/contact-us"
@@ -155,49 +148,62 @@ export const MainNavbar = () => {
         target="_blank"
       >
         <GoMarkGithub size={20} />
-        <span className="ml-2">GitHub</span>
+        <span>GitHub</span>
       </ExternalLink>
       <MobileNavLink
-        scrolled={scrolled}
         open={open}
         key="login"
         to="/login"
         onClick={() => toggleMenu()}
       >
-        <span className="ml-2">{t("menu.login")}</span>
+        {t("menu.login")}
       </MobileNavLink>
       <MobileNavLink
         key="sign-up"
         to="/sign-up"
         onClick={() => toggleMenu()}
-        className="text-white bg-blue-800 xl:px-6 xl:py-2 xl:mr-4 xl:rounded-3xl"
+        className="text-white bg-blue-800 rounded-lg"
       >
-        <span className="ml-2">{t("menu.signup")}</span>
+        {t("menu.signup")}
       </MobileNavLink>
-      <LanguageSwitcher />
     </div>
   );
 
   const Logo = () => (
-    <Link to="/" className="flex items-center text-xl font-bold lg:ml-4">
-      <img src={logo} alt="logo" className="w-8 h-8 mr-3" />
+    <Link
+      to="/"
+      dir="ltr"
+      className="flex items-center gap-2 text-xl font-bold"
+    >
+      <img src={logo} alt="logo" className="w-8 h-8" />
       <span>SMSWithoutBorders</span>
     </Link>
   );
 
   return (
     <Fragment>
-      <div
+      {/* Desktop nav */}
+      <nav
         className={clsx(
-          "hidden sticky top-0 z-50 lg:flex justify-between items-center",
-          scrolled ? "bg-white shadow-lg" : "text-white bg-transparent"
+          "hidden sticky top-0 z-50 lg:flex justify-evenly items-center",
+          scrolled
+            ? "bg-white bg-opacity-80 backdrop-blur-xl shadow-lg"
+            : "text-white bg-transparent"
         )}
       >
         <Logo />
         <DesktopLinks />
         <ActionLinks />
-      </div>
-      <div className="sticky top-0 z-50 bg-white shadow-lg lg:hidden">
+      </nav>
+      {/* Mobile nav */}
+      <nav
+        className={clsx(
+          "bg-white shadow-lg lg:hidden z-50",
+          open
+            ? "fixed inset-0 overflow-y-auto  bg-opacity-85 backdrop-blur-xl"
+            : "sticky top-0"
+        )}
+      >
         <div className="flex items-center justify-between p-4">
           <Logo />
           <button className="appearance-none" onClick={() => toggleMenu()}>
@@ -215,12 +221,12 @@ export const MainNavbar = () => {
             leave="transition-opacity duration-500"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            className="flex flex-col w-full h-screen bg-white"
+            className="flex flex-col h-screen max-w-md mx-auto"
           >
             <MobileLinks />
           </Transition>
         )}
-      </div>
+      </nav>
     </Fragment>
   );
 };

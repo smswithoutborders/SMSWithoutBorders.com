@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 
 export const PageAnimationWrapper = ({ children }) => {
@@ -18,4 +19,8 @@ export const PageAnimationWrapper = ({ children }) => {
       {children}
     </motion.div>
   );
+};
+
+PageAnimationWrapper.propTypes = {
+  children: PropTypes.node,
 };

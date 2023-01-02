@@ -1,7 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useDeleteAccountMutation } from "services";
-import { authSelector, resetStore } from "features";
+import { authSelector, logout } from "features";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -14,11 +14,10 @@ import {
   Label,
   Button,
   Loader,
-  useTitle,
   FormGroup,
-  ErrorMessage,
   PasswordInput,
 } from "components";
+import { useTitle } from "hooks";
 
 const AccountDeletion = () => {
   const { t } = useTranslation();
@@ -63,38 +62,11 @@ const AccountDeletion = () => {
       await deleteAccount(request).unwrap();
       toast.success(t("account-deletion.alerts.account-deleted"));
       // clear store/ logout user
-      dispatch(resetStore());
+      dispatch(logout());
       // redirect to login
-      navigate("/login");
+      navigate("/login", { replace: true });
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("account-deletion.alerts.invalid-password"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }
 
@@ -122,25 +94,21 @@ const AccountDeletion = () => {
         <span>{t("account-deletion.paragraph.part-2")}</span>
       </p>
 
-      <div className="max-w-md mx-auto mt-8">
-        <form
-          className="px-4 mx-auto text-left sm:px-3"
-          onSubmit={handleSubmit(handleDeletion)}
-        >
+      <div className="max-w-md mx-auto mt-8 text-left">
+        <form onSubmit={handleSubmit(handleDeletion)}>
           <FormGroup>
-            <Label htmlFor="name" required>
+            <Label htmlFor="confirmation" required>
               {t("account-deletion.form.confirmation.label")}
             </Label>
             <Input
               type="text"
+              id="confirmation"
               name="confirmation"
+              invalid={errors.confirmation ? true : false}
+              invalidText={errors.confirmation?.message}
               placeholder={t("account-deletion.form.confirmation.placeholder")}
               {...register("confirmation")}
-              error={errors.name}
             />
-            {errors.confirmation && (
-              <ErrorMessage>{errors.confirmation.message}</ErrorMessage>
-            )}
             <small className="block mt-2 text-xs text-gray-600">
               <span>{t("account-deletion.form.confirmation.helper-text")}</span>
               <strong> : {t("account-deletion.confirmation.text")}</strong>
@@ -151,21 +119,17 @@ const AccountDeletion = () => {
               {t("forms.password.label")}
             </Label>
             <PasswordInput
+              id="password"
               name="password"
+              showStrength={false}
+              invalid={errors.password ? true : false}
+              invalidText={errors.password?.message}
               placeholder={t("forms.password.placeholder")}
               {...register("password")}
-              error={errors.password}
-              showStrength={false}
             />
-            {errors.password && (
-              <ErrorMessage>{errors.password.message}</ErrorMessage>
-            )}
           </FormGroup>
 
-          <Button
-            type="submit"
-            className="w-full bg-red-600 hover:bg-red-500 focus:bg-red-600 disabled:bg-gray-300"
-          >
+          <Button type="submit" danger className="w-full">
             {t("labels.continue")}
           </Button>
         </form>

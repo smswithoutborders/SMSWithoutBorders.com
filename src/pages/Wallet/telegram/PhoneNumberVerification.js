@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import telegramLogo from "images/telegram-icon.svg";
 import { useStoreTokenMutation } from "services";
@@ -7,14 +7,13 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  PageAnimationWrapper,
-  PhoneNumberInput,
-  ErrorMessage,
-  FormGroup,
   Button,
   Loader,
-  useTitle,
+  FormGroup,
+  PhoneNumberInput,
+  PageAnimationWrapper,
 } from "components";
+import { useTitle } from "hooks";
 
 const PhoneNumberVerification = () => {
   const { t } = useTranslation();
@@ -28,19 +27,11 @@ const PhoneNumberVerification = () => {
   // store token
   const [storeToken, { isLoading, isSuccess }] = useStoreTokenMutation();
 
-  // check if url is present
-  useEffect(() => {
-    if (!location.state?.url) {
-      navigate("../../");
-    }
-  }, [location.state, navigate]);
-
   async function handleTokenStorage(evt) {
     // stop default form action
     evt.preventDefault();
     // validate phone number
     if (!number) {
-      toast.error(t("forms.phone-number.validation-errors.invalid"));
       setError(true);
       return;
     } else {
@@ -60,7 +51,9 @@ const PhoneNumberVerification = () => {
         case 201:
           toast.success(t("telegram.phone-verification.alerts.code-sent"));
           // send user to code verification
-          navigate("../verify", { state: { phone_number: number } });
+          navigate("/dashboard/wallet/telegram/verify", {
+            state: { phone_number: number },
+          });
           break;
         default:
           // 200 success
@@ -68,37 +61,10 @@ const PhoneNumberVerification = () => {
             t("telegram.phone-verification.alerts.authorization-error")
           );
           // navigate to wallet page
-          navigate("../");
+          navigate("/dashboard/wallet");
       }
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.invalid-number"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }
   /*
@@ -123,27 +89,16 @@ const PhoneNumberVerification = () => {
         <p>{t("telegram.phone-verification.details")}</p>
 
         <div className="max-w-md mx-auto mt-12">
-          <form
-            className="px-4 mx-auto sm:px-3"
-            onSubmit={(evt) => handleTokenStorage(evt)}
-          >
+          <form onSubmit={(evt) => handleTokenStorage(evt)}>
             <FormGroup>
               <PhoneNumberInput
-                international
-                countryCallingCodeEditable={false}
-                placeholder={t("forms.phone-number.placeholder")}
-                defaultCountry="CM"
-                value={number}
-                type="tel"
                 required
+                placeholder={t("forms.phone-number.placeholder")}
+                value={number}
                 onChange={setNumber}
-                error={error ? "true" : null}
+                invalid={error ? true : false}
+                invalidText={t("forms.phone-number.validation-errors.invalid")}
               />
-              {error && (
-                <ErrorMessage>
-                  {t("forms.phone-number.validation-errors.invalid")}
-                </ErrorMessage>
-              )}
             </FormGroup>
             <div className="flex flex-col mt-8 justify-evenly md:flex-row">
               <Button type="submit" className="flex-1 md:order-1">

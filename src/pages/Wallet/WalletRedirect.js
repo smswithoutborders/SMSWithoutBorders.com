@@ -6,8 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import { Loader } from "components";
-import { useSelector } from "react-redux";
-import { authSelector } from "features";
 import { useParams, useNavigate } from "react-router-dom";
 import { Transition, Dialog } from "@headlessui/react";
 import {
@@ -17,94 +15,76 @@ import {
 } from "services";
 import { useTranslation } from "react-i18next";
 import { useDeviceDetection } from "hooks";
+import { PageAnimationWrapper, Button } from "components";
+import GmailAuthScreen from "images/gmail-auth-screen.png";
 import toast from "react-hot-toast";
 import Error from "../Error";
 
+// get the URL parameters which will include the auth token
+const searchParams = new URLSearchParams(window.location.search);
+const code = searchParams.get("code");
+const scope = searchParams.get("scope");
+
 const WalletRedirect = () => {
   const { t } = useTranslation();
-  const auth = useSelector(authSelector);
   const navigate = useNavigate();
   const { platform, protocol } = useParams();
-  const [verifyTokenStorage, { isError }] = useVerifyTokenStorageMutation();
+  const [verifyTokenStorage, { isError, error }] =
+    useVerifyTokenStorageMutation();
   const [open, setOpen] = useState(false);
   const isMobile = useDeviceDetection();
-  // get the URL parameters which will include the auth token
-  const searchParams = new URLSearchParams(window.location.search);
-  const code = searchParams.get("code");
-  // const cAuth = getLocalCache();
 
-  const cAuth = useMemo(() => getLocalCache(), []);
-  
+  /*
+   * Cache auth in localStorage because twitter will use
+   * in-app browser and sessionStorage is not accessible
+   */
+  const auth = useMemo(() => getLocalCache(), []);
+
   const handleVerification = useCallback(async () => {
     // build request data
     let data = {
-      uid: cAuth ? cAuth.uid : auth.uid,
+      uid: auth.uid,
       code: code,
+      scope: scope,
       platform: platform,
       protocol: protocol,
-      code_verifier: cAuth ? cAuth.code_verifier : auth.code_verifier,
+      code_verifier: auth.code_verifier,
     };
 
     try {
       await verifyTokenStorage(data).unwrap();
       toast.success(t("wallet.alerts.platform-stored"));
 
-      if (platform !== "twitter") {
-        navigate("/dashboard/wallet", {
-          replace: true,
-          state: { uid: cAuth ? cAuth.uid : auth.uid },
-        });
-      } else if (isMobile && platform === "twitter") {
+      // remove cache
+      clearLocalCache();
+
+      if (isMobile && platform === "twitter") {
         setOpen(true);
-        clearLocalCache();
-        window.close();
-      } else {
-        toast.success(t("alert-messages.redirect"));
-        clearLocalCache();
-        window.close();
+        return;
       }
+
+      // node
+      toast.success(t("alert-messages.redirect"));
+      navigate("/dashboard/wallet", {
+        replace: true,
+        state: { uid: auth.uid },
+      });
+
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.403"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }, [
+    t,
+    code,
     auth,
+    scope,
+    isMobile,
     platform,
     protocol,
     navigate,
     verifyTokenStorage,
-    t,
-    isMobile,
-    cAuth,
-    code,
   ]);
-
+  
   useEffect(() => {
     if (code) {
       handleVerification();
@@ -113,14 +93,33 @@ const WalletRedirect = () => {
     }
   }, [handleVerification, navigate, code]);
 
+  // handle error messages and retries
   if (isError) {
-    return (
-      <Error
-        message={t("wallet.alerts.load-error")}
-        callBack={handleVerification}
-      />
-    );
+    if (error?.originalStatus === 422) {
+      return (
+        <PageAnimationWrapper>
+          <div className="max-w-screen-md min-h-screen p-8 mx-auto prose text-gray-900">
+            <div className="mx-auto my-10">
+              <h1 className="font-bold">
+                {t("alert-messages.missing-permission")}
+              </h1>
+              <p>{t("error-messages.422")}</p>
+
+              <h3>{t("wallet.labels.how-to-save")}</h3>
+              <p>{t("wallet.info.gmail")}</p>
+              <img src={GmailAuthScreen} alt="Gmail auth screen" />
+              <Button onClick={() => navigate(-1)}>
+                {t("labels.try-again")}
+              </Button>
+            </div>
+          </div>
+        </PageAnimationWrapper>
+      );
+    } else {
+      return <Error callBack={handleVerification} />;
+    }
   }
+
   return (
     <Fragment>
       {!open ? (

@@ -6,22 +6,17 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { authSelector, resetStore } from "features";
-import {
-  useChangePasswordMutation,
-  clearCache,
-  clearPersistedState,
-} from "services";
+import { authSelector, logout } from "features";
+import { useChangePasswordMutation } from "services";
 import {
   Alert,
   Label,
   Button,
   Loader,
-  useTitle,
   FormGroup,
-  ErrorMessage,
   PasswordInput,
 } from "components";
+import { useTitle } from "hooks";
 
 const PasswordChange = () => {
   const { t } = useTranslation();
@@ -71,41 +66,12 @@ const PasswordChange = () => {
     try {
       await changePassword(request).unwrap();
       toast.success(t("alert-messages.password-changed"));
-      // remove any cached data
-      clearCache();
-      // reset store/logout user
-      dispatch(resetStore());
-      clearPersistedState();
-      navigate("/login");
+      // remove any cached data and reset store/logout user
+      dispatch(logout());
+      //
+      navigate("/login", { replace: true });
     } catch (error) {
-      // https://redux-toolkit.js.org/rtk-query/usage/error-handling
-      const { status, originalStatus } = error;
-      if (originalStatus) {
-        switch (originalStatus) {
-          case 400:
-            toast.error(t("error-messages.400"));
-            break;
-          case 401:
-            toast.error(t("error-messages.401"));
-            break;
-          case 403:
-            toast.error(t("error-messages.invalid-password"));
-            break;
-          case 409:
-            toast.error(t("error-messages.409"));
-            break;
-          case 429:
-            toast.error(t("error-messages.429"));
-            break;
-          case 500:
-            toast.error(t("error-messages.500"));
-            break;
-          default:
-            toast.error(t("error-messages.general-error-message"));
-        }
-      } else if (status === "FETCH_ERROR") {
-        toast.error(t("error-messages.network-error"));
-      }
+      // handle all api errors in utils/middleware
     }
   }
 
@@ -129,23 +95,19 @@ const PasswordChange = () => {
         hideCloseButton
       />
       <div className="max-w-md mx-auto mt-12 text-left">
-        <form
-          className="px-4 mx-auto sm:px-3"
-          onSubmit={handleSubmit(handlePasswordChange)}
-        >
+        <form onSubmit={handleSubmit(handlePasswordChange)}>
           <FormGroup>
             <Label htmlFor="password" required>
               {t("forms.password.labels.current")}
             </Label>
             <PasswordInput
+              id="password"
               name="password"
-              {...register("password")}
-              error={errors.password}
               showStrength={false}
+              invalid={errors.password ? true : false}
+              invalidText={errors.password?.message}
+              {...register("password")}
             />
-            {errors.password && (
-              <ErrorMessage>{errors.password?.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <FormGroup>
@@ -153,13 +115,12 @@ const PasswordChange = () => {
               {t("forms.password.labels.new")}
             </Label>
             <PasswordInput
+              id="new_password"
               name="new_password"
+              invalid={errors.new_password ? true : false}
+              invalidText={errors.new_password?.message}
               {...register("new_password")}
-              error={errors.new_password}
             />
-            {errors.new_password && (
-              <ErrorMessage>{errors.new_password?.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <FormGroup>
@@ -169,12 +130,10 @@ const PasswordChange = () => {
             <PasswordInput
               name="confirmPassword"
               placeholder={t("forms.confirm-password.placeholder")}
+              invalid={errors.confirmPassword ? true : false}
+              invalidText={errors.confirmPassword?.message}
               {...register("confirmPassword")}
-              error={errors.confirmPassword}
             />
-            {errors.confirmPassword && (
-              <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-            )}
           </FormGroup>
 
           <Button className="w-full">{t("labels.password-change")}</Button>

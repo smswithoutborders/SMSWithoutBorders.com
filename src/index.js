@@ -1,20 +1,21 @@
-import React, { StrictMode, Suspense, lazy } from "react";
-import ReactDOM from "react-dom";
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { store } from "./features";
 import { Provider } from "react-redux";
-import { SplashScreen } from "components";
+import { BrowserRouter } from "react-router-dom";
 import "./styles/index.css";
 import "./i18n";
+import App from "./App";
 
-const App = lazy(() => import("App"));
+const container = document.getElementById("root");
+const root = createRoot(container);
 
-ReactDOM.render(
+root.render(
   <StrictMode>
-    <Provider store={store}>
-      <Suspense fallback={<SplashScreen />}>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </Suspense>
-    </Provider>
-  </StrictMode>,
-  document.getElementById("root")
+      </Provider>
+    </BrowserRouter>
+  </StrictMode>
 );

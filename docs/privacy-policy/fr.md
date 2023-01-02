@@ -16,29 +16,29 @@ Les mots dont la lettre initiale est en majuscule ont des significations défini
 
 Aux fins de la présente politique de confidentialité :
 
-* **Compte** désigne un compte unique créé pour Vous afin d'accéder à notre Service ou à certaines parties de notre Service.
+- **Compte** désigne un compte unique créé pour Vous afin d'accéder à notre Service ou à certaines parties de notre Service.
 
-* L'entreprise (désignée par "l'entreprise", "nous", "notre" ou "nos" dans le présent contrat) désigne Afkanerd Ltd, Bamenda.
+- L'entreprise (désignée par "l'entreprise", "nous", "notre" ou "nos" dans le présent contrat) désigne Afkanerd Ltd, Bamenda.
 
-* Les **Cookies** sont de petits fichiers qui sont placés sur votre ordinateur, votre appareil mobile ou tout autre appareil par un site web, contenant les détails de votre historique de navigation sur ce site web parmi ses nombreuses utilisations.
+- Les **Cookies** sont de petits fichiers qui sont placés sur votre ordinateur, votre appareil mobile ou tout autre appareil par un site web, contenant les détails de votre historique de navigation sur ce site web parmi ses nombreuses utilisations.
 
-* **Pays** fait référence à : Cameroun
+- **Pays** fait référence à : Cameroun
 
-* **Appareil** désigne tout appareil pouvant accéder au Service tel qu'un ordinateur, un téléphone portable ou une tablette numérique.
+- **Appareil** désigne tout appareil pouvant accéder au Service tel qu'un ordinateur, un téléphone portable ou une tablette numérique.
 
-* **Données personnelles** désigne toute information qui se rapporte à une personne physique identifiée ou identifiable.
+- **Données personnelles** désigne toute information qui se rapporte à une personne physique identifiée ou identifiable.
 
-* **Service** désigne le site internet.
+- **Service** désigne le site internet.
 
-* **Fournisseur de services** désigne toute personne physique ou morale qui traite les données pour le compte de la Société. Il s'agit de sociétés tierces ou de personnes employées par la Société pour faciliter le Service, pour fournir le Service au nom de la Société, pour exécuter des services liés au Service ou pour aider la Société à analyser la façon dont le Service est utilisé.
+- **Fournisseur de services** désigne toute personne physique ou morale qui traite les données pour le compte de la Société. Il s'agit de sociétés tierces ou de personnes employées par la Société pour faciliter le Service, pour fournir le Service au nom de la Société, pour exécuter des services liés au Service ou pour aider la Société à analyser la façon dont le Service est utilisé.
 
-* **Service de médias sociaux tiers** désigne tout site Web ou tout site Web de réseau social par lequel un utilisateur peut se connecter ou créer un compte pour utiliser le service.
+- **Service de médias sociaux tiers** désigne tout site Web ou tout site Web de réseau social par lequel un utilisateur peut se connecter ou créer un compte pour utiliser le service.
 
-* **Données d'utilisation** désigne les données collectées automatiquement, soit générées par l'utilisation du Service, soit provenant de l'infrastructure du Service elle-même (par exemple, la durée de visite d'une page).
+- **Données d'utilisation** désigne les données collectées automatiquement, soit générées par l'utilisation du Service, soit provenant de l'infrastructure du Service elle-même (par exemple, la durée de visite d'une page).
 
-* **Site web** désigne le site SMSwithoutborders, accessible à partir de <https://smswithoutborders.com>.
+- **Site web** désigne le site SMSwithoutborders, accessible à partir de <https://smswithoutborders.com>.
 
-* **Vous** désigne la personne physique accédant ou utilisant le Service, ou la société, ou toute autre entité juridique au nom de laquelle cette personne physique accède ou utilise le Service, selon le cas.
+- **Vous** désigne la personne physique accédant ou utilisant le Service, ou la société, ou toute autre entité juridique au nom de laquelle cette personne physique accède ou utilise le Service, selon le cas.
 
 ## Collecte et utilisation de vos données personnelles
 
