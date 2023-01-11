@@ -56,6 +56,14 @@ Below are the defaults. a reference is also kept in [env.example](../env.example
 | SSL_CRT_FILE                     | Location of SSL CRT file                                                                                    | N/A                                                                                                     | SWOB_SSL_CRT_FILE       |
 | SSL_KEY_FILE                     | Location of SSL Key file                                                                                    | N/A                                                                                                     | SWOB_SSL_KEY_FILE       |
 
+## Note (Windows users only)
+ - The project uses a **Makefile** to generate configs for the project. For this to work properly, ensure you have **Make** installed via **Chocolatey** on your windows machine, if not,  run the following command in Windows Powershell (admin mode) 
+
+```bash
+choco install make
+```
+- We use Bash and Shell environments from development to production, hence ensure you are using either Windows Command Prompt or Git bash terminal for development
+
 ## Start development server
 
 ```bash
