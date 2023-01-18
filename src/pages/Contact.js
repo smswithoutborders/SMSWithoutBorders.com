@@ -12,7 +12,7 @@ const Contact = () => {
         <p className="my-0">{t("contact.details")}</p>
       </div>
 
-      <div className="w-full min-h-screen pt-8 bg-white">
+      <div className="w-full max-h-screen pt-8 bg-white">
         <div className="max-w-screen-xl p-6 -mt-16 prose bg-white lg:mx-auto md:mx-12 rounded-3xl md:p-12">
           <div className="flex items-center gap-2">
             <div className="text-blue-800 lg:mr-4">
