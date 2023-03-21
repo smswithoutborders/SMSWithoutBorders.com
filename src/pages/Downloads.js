@@ -14,7 +14,7 @@ const Downloads = () => {
         <p className="">{t("downloads.details")}</p>
       </div>
 
-      <div className="w-full min-h-screen pt-8 bg-white">
+      <div className="w-full max-h-screen pt-8 bg-white">
         <div className="max-w-screen-xl p-6 mx-4 -mt-16 prose bg-white md:mx-auto rounded-3xl md:p-12">
           <h2>{t("downloads.section-1.heading")}</h2>
           <p>{t("downloads.section-1.details")}</p>

@@ -54,7 +54,7 @@ For the purposes of providing you information on local Gateways for sending SMS 
 
 For the purposes of using third-party platforms, the website will request access to your third-party platforms. The website stores the access you grant us and no other information about the profile of the individual.
 
-Due to the ability of users to store multiple access for the same third-party platforms we store unique profile handles per platform to aid the user in identifying which account they are currently using.
+Due to the ability of users to save multiple access for the same third-party platforms we store unique profile handles per platform to aid the user in identifying which account they are currently using.
 
 We do not use third-party identifiable information for tracking, identifying or categorizing users.
 
