@@ -156,7 +156,7 @@
       "4": {
         "heading": "Télécharger l'application",
         "details": {
-          "part-1": "Après avoir stocké toutes les plateformes, déconnectez-vous de votre compte et rendez-vous sur le playstore pour télécharger l'application. Cliquez sur le bouton ci-dessous pour ouvrir le playstore",
+          "part-1": "Après avoir enregistré toutes les plateformes, déconnectez-vous de votre compte et rendez-vous sur le Playstore pour télécharger l'application. Cliquez sur le bouton ci-dessous pour ouvrir le Playstore",
           "part-2": "Une fois là, vous devriez voir l'écran suivant",
           "part-3": "Si vous n'avez pas le (Beta) près du nom de l'application, faites défiler vers le bas et sélectionnez rejoindre. Cela prendra un certain temps, entre 5 et 30 minutes, pour vous ajouter au programme bêta. Après cela, vous devriez être en mesure d'installer la nouvelle application. Après l'installation, ouvrez l'application et confirmez que vous avez l'écran ci-dessous pour vous assurer que vous avez la dernière version"
         }
@@ -316,13 +316,13 @@
       "details": "Veuillez cliquer sur le lien ci-dessous pour enregistrer les jetons",
       "summary": {
         "caption": "en savoir plus",
-        "details": "La synchronisation ne devient disponible qu'après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est le stockage de l'accès dans le portefeuille."
+        "details": "La synchronisation devient disponible uniquement après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est la sauvegarde de l'accès dans le portefeuille."
       },
       "cta-button-text": "Enregistrer l'accès maintenant"
     },
     "section-2": {
       "paragraph-1": "Cela vous permet d'utiliser la passerelle sécurisée SW/OB pour tous les messages.",
-      "paragraph-2": "La synchronisation ne devient disponible qu'après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est le stockage de l'accès dans le portefeuille.",
+      "paragraph-2": "La synchronisation devient disponible uniquement après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est la sauvegarde de l'accès dans le portefeuille.",
       "status": {
         "heading": "Statut",
         "connected": "connecté",

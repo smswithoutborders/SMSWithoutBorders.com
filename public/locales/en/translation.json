@@ -156,7 +156,7 @@
       "4": {
         "heading": "Download app",
         "details": {
-          "part-1": "After storing all the platforms, logout from your account and head over to the playstore to download the app. Click on the button bellow to open playstore",
+          "part-1": "After saving all the platforms, logout from your account and head over to the playstore to download the app. Click on the button bellow to open playstore",
           "part-2": "Once there you should see the following screen",
           "part-3": "If you do not have the (Beta) near the app name, scroll down and select join. This will take some time about 5mins to 30mins to add you to the beta program. After that, you should be able to install the new app. After installing, open the app and confirm you have the screen below to make sure you have the latest version"
         }
@@ -316,13 +316,13 @@
       "details": "Please click on the link below to save tokens",
       "summary": {
         "caption": "learn more",
-        "details": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet."
+        "details": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is saving access in the wallet."
       },
       "cta-button-text": "Save Access Now"
     },
     "section-2": {
       "paragraph-1": "This lets you use the SW/OB secure gateway for all messages",
-      "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
+      "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is saving access in the wallet.",
       "status": {
         "heading": "Status",
         "connected": "connected",
