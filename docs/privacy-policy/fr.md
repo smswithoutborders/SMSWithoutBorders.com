@@ -54,7 +54,7 @@ Afin de vous fournir des informations sur les passerelles locales pour l'envoi d
 
 Aux fins de l'utilisation de plateformes tierces, le site web demandera l'accès à vos plateformes tierces. Le site web stocke l'accès que vous nous accordez et aucune autre information sur le profil de l'individu.
 
-En raison de la capacité des utilisateurs à stocker plusieurs accès pour les mêmes plateformes tierces, nous stockons des identifiants de profil uniques par plateforme pour aider l'utilisateur à identifier le compte qu'il utilise actuellement.
+En raison de la capacité des utilisateurs à enregistrer plusieurs accès pour les mêmes plates-formes tierces, nous stockons des identifiants de profil uniques par plate-forme pour aider l'utilisateur à identifier le compte qu'il utilise actuellement.
 
 Nous n'utilisons pas d'informations identifiables par des tiers pour suivre, identifier ou catégoriser les utilisateurs.
 

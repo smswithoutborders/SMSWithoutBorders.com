@@ -9,7 +9,7 @@
     "login": "Connexion",
     "signup": "S'inscrire",
     "footer-blog": "SWOB Blog",
-    "wallet": "Comptes de magasin",
+    "wallet": "Enregistrer les comptes",
     "settings": "Paramètres",
     "dashboard": "Tableau de bord",
     "sync": "Sync",
@@ -47,7 +47,7 @@
   "landing": {
     "section-1": {
       "heading": "Restez connecté",
-      "details": "À l'ère de la communication, restez en contact avec vos contacts à travers l'internet sans avoir accès à une connexion internet active. Stockez l'accès à vos plateformes de communication préférées en ligne, utilisez-les hors connexion.",
+      "details": "À l'ère de la communication, restez en contact avec vos contacts sur Internet sans avoir accès à une connexion Internet active. Enregistrez l'accès à vos plateformes de communication préférées en ligne, utilisez-les hors ligne..",
       "cta-button-text": "Obtenir SWOB",
       "image-caption": "SMSwithoutBorders App"
     },
@@ -148,8 +148,8 @@
       "3": {
         "heading": "Sauvegarder les plateformes",
         "details": {
-          "part-1": "Stockez Gmail, Twitter et Telegram pour que vous puissiez utiliser l'application SWOB hors ligne. Cliquez sur chaque plateforme pour voir le bouton de stockage",
-          "part-2": "Stocker Twitter sur votre téléphone peut vous obliger à cliquer deux fois sur le bouton de stockage si l'application Twitter est déjà installée",
+          "part-1": "Enregistrer Gmail, Twitter et Telegram pour que vous puissiez utiliser l'application SWOB hors ligne. Cliquez sur chaque plateforme pour voir le bouton de stockage",
+          "part-2": "L'enregistrement de Twitter sur votre téléphone peut vous obliger à double-cliquer sur le bouton d'enregistrement si l'application Twitter est déjà installée",
           "caption": "Attention"
         }
       },
@@ -217,8 +217,8 @@
     }
   },
   "wallet": {
-    "page-title": "Comptes des magasins",
-    "heading": "Comptes des magasins",
+    "page-title": "Enregistrer les comptes",
+    "heading": "Enregistrer les comptes",
     "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
     "labels": {
       "description": "Description",
@@ -233,7 +233,7 @@
       "cta-button-text": "Sauvegarder"
     },
     "section-2": {
-      "heading": "Plateformes sauvegardées",
+      "heading": "plates-formes enregistrées",
       "cta-button-text": "révoquer"
     },
     "revoke-dialog": {
@@ -313,12 +313,12 @@
     "page-title": "Synchroniser votre compte",
     "heading": "Synchroniser les comptes",
     "section-1": {
-      "details": "Veuillez cliquer sur le lien ci-dessous pour stocker des jetons",
+      "details": "Veuillez cliquer sur le lien ci-dessous pour enregistrer les jetons",
       "summary": {
         "caption": "en savoir plus",
         "details": "La synchronisation ne devient disponible qu'après avoir effectué une action qui met à jour vos configurations de sécurité. Un exemple est le stockage de l'accès dans le portefeuille."
       },
-      "cta-button-text": "Accès au magasin maintenant"
+      "cta-button-text": "Enregistrer l'accès maintenant"
     },
     "section-2": {
       "paragraph-1": "Cela vous permet d'utiliser la passerelle sécurisée SW/OB pour tous les messages.",
@@ -337,7 +337,7 @@
       "sync-started": "Sync commencée",
       "sync-complete": "Sync terminée",
       "sync-scanned": "Code scanné avec succès",
-      "no-platforms": "Désolé, il semble que vous n'ayez pas stocké de jetons.",
+      "no-platforms": "Désolé, il semble que vous n'ayez enregistré aucun jeton.",
       "sync-error": "Désolé, une erreur s'est produite pendant la synchronisation, veuillez réessayer.",
       "sync-closed": "La session de synchronisation est fermée. Veuillez cliquer sur le bouton de synchronisation pour recommencer",
       "click-button": "Veuillez cliquer sur le bouton ci-dessous pour ouvrir l'application.",
@@ -503,12 +503,12 @@
       "steps": {
         "1": {
           "title": "Bienvenue",
-          "heading": "Apprendre à stocker les comptes",
+          "heading": "Apprendre à enregistrer des comptes",
           "details": "Ce tutoriel vous aidera à démarrer"
         },
         "2": {
           "title": "Plates-formes disponibles",
-          "details": "Accès au magasin pour les plateformes disponibles en cliquant sur le bouton 'Store' sous chaque plateforme."
+          "details": "Enregistrer l'accès aux plateformes disponibles en cliquant sur le bouton Enregistrer sous chaque plateforme."
         },
         "3": {
           "title": "Synchronisation",
