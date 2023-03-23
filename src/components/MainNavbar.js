@@ -37,12 +37,6 @@ export const MainNavbar = () => {
             label: t("menu.downloads"),
           },
           {
-            external: true,
-            key: "tutorials",
-            path: process.env.REACT_APP_TUTORIAL_URL,
-            label: t("menu.tutorials"),
-          },
-          {
             key: "beta-testing",
             path: "beta-testing",
             label: t("menu.beta-testing"),
@@ -57,9 +51,21 @@ export const MainNavbar = () => {
       >
         {t("menu.developers")}
       </ExternalLink>
+
+      <ExternalLink
+        style={{ marginLeft: 7 }}
+        onClick={() => toggleMenu()}
+        key="tutorials"
+        href={process.env.REACT_APP_TUTORIAL_URL}
+        target="_blank"
+      >
+        {t("menu.tutorials")}
+      </ExternalLink>
+
       <NavLink key="privacy-policy" to="/privacy-policy">
         {t("menu.privacy")}
       </NavLink>
+
       <NavLink key="contact-us" to="/contact-us">
         {t("menu.contact")}
       </NavLink>
