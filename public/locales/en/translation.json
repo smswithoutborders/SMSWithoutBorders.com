@@ -9,7 +9,7 @@
     "login": "Log In",
     "signup": "Sign Up",
     "footer-blog": "SWOB Blog",
-    "wallet": "Store Accounts",
+    "wallet": "Save Accounts",
     "settings": "Settings",
     "dashboard": "Dashboard",
     "sync": "Sync",
@@ -47,7 +47,7 @@
   "landing": {
     "section-1": {
       "heading": "Stay Connected",
-      "details": "In this age of communication, keep in touch with your contacts across the internet without access to an active internet connection. Store your access to your favourite communications platforms while online, use them while offline.",
+      "details": "In this age of communication, keep in touch with your contacts across the internet without access to an active internet connection. Save access to your favourite communications platforms while online, use them while offline.",
       "cta-button-text": "Get SWOB",
       "image-caption": "SMSwithoutBorders App"
     },
@@ -146,17 +146,17 @@
         }
       },
       "3": {
-        "heading": "Store platforms",
+        "heading": "Save platforms",
         "details": {
-          "part-1": "Store Gmail, Twitter and telegram so that you can use the SWOB app offline. Click on each platform to see the store button",
-          "part-2": "Storing Twitter on your phone may require you to click the store button twice if you have the Twitter app already installed",
+          "part-1": "Save Gmail, Twitter and telegram so that you can use the SWOB app offline. Click on each platform to see the save button",
+          "part-2": "Saving Twitter on your phone may require you to click the save button twice if you have the Twitter app already installed",
           "caption": "Note"
         }
       },
       "4": {
         "heading": "Download app",
         "details": {
-          "part-1": "After storing all the platforms, logout from your account and head over to the playstore to download the app. Click on the button bellow to open playstore",
+          "part-1": "After saving all the platforms, logout from your account and head over to the playstore to download the app. Click on the button bellow to open playstore",
           "part-2": "Once there you should see the following screen",
           "part-3": "If you do not have the (Beta) near the app name, scroll down and select join. This will take some time about 5mins to 30mins to add you to the beta program. After that, you should be able to install the new app. After installing, open the app and confirm you have the screen below to make sure you have the latest version"
         }
@@ -171,7 +171,7 @@
       },
       "6": {
         "heading": "Go offline!!!",
-        "details": "You can now use SMSWithoutBorders offline. turn off your internet connection. Activate a text bundle and send messages on all the platforms you have stored. We don't mind if you tag us while you're at it :)"
+        "details": "You can now use SMSWithoutBorders offline. turn off your internet connection. Activate a text bundle and send messages on all the platforms you have saved. We don't mind if you tag us while you're at it :)"
       },
       "7": {
         "heading": "We need your feedback!",
@@ -217,8 +217,8 @@
     }
   },
   "wallet": {
-    "page-title": "Store Accounts",
-    "heading": "Store Accounts",
+    "page-title": "Save Accounts",
+    "heading": "Save Accounts",
     "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline",
     "labels": {
       "description": "Description",
@@ -226,11 +226,11 @@
     },
     "info": {
       "gmail": "On the authorization page, select the option to send email on your behalf",
-      "twitter": "If you already have the Twitter app installed, please open it before clicking on the store button below. The app will only prompt you for authorization if it is running"
+      "twitter": "If you already have the Twitter app installed, please open it before clicking on the save button below. The app will only prompt you for authorization if it is running"
     },
     "section-1": {
       "heading": "Available Platforms",
-      "cta-button-text": "store"
+      "cta-button-text": "save"
     },
     "section-2": {
       "heading": "Saved Platforms",
@@ -253,12 +253,12 @@
       "no-available-platforms": "No available platforms",
       "no-saved-platforms": "No saved platforms",
       "platform-deleted": "Token deleted successfully",
-      "platform-stored": "Platform stored successfully"
+      "platform-stored": "Platform saved successfully"
     }
   },
   "telegram": {
     "phone-verification": {
-      "page-title": "Store Telegram Access",
+      "page-title": "Save Telegram Access",
       "heading": "Telegram",
       "details": "Please fill in your phone number to begin",
       "logo-alt-text": "telegram logo",
@@ -313,16 +313,16 @@
     "page-title": "Synchronize your account",
     "heading": "Synchronize Accounts",
     "section-1": {
-      "details": "Please click on the link below to store tokens",
+      "details": "Please click on the link below to save tokens",
       "summary": {
         "caption": "learn more",
-        "details": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet."
+        "details": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is saving access in the wallet."
       },
-      "cta-button-text": "Store Access Now"
+      "cta-button-text": "Save Access Now"
     },
     "section-2": {
       "paragraph-1": "This lets you use the SW/OB secure gateway for all messages",
-      "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is storing access in the wallet.",
+      "paragraph-2": "Synchronization becomes available only after you perform an action that updates your security configurations. An example is saving access in the wallet.",
       "status": {
         "heading": "Status",
         "connected": "connected",
@@ -337,7 +337,7 @@
       "sync-started": "Sync started",
       "sync-complete": "Sync Complete",
       "sync-scanned": "Code Scanned successfully",
-      "no-platforms": "Sorry it seems you havent stored any tokens",
+      "no-platforms": "Sorry it seems you havent saved any tokens",
       "sync-error": "Sorry an error occured while synchronizing, Please try again",
       "sync-closed": "Sync session closed. please click the sync button to start again",
       "click-button": "Please click on the button below to open the app",
@@ -503,12 +503,12 @@
       "steps": {
         "1": {
           "title": "Welcome",
-          "heading": "Learn how to store accounts",
+          "heading": "Learn how to save accounts",
           "details": "This tutorial will help you get started"
         },
         "2": {
           "title": "Available platforms",
-          "details": "Store access for available platforms by clicking on the store button under each platform"
+          "details": "Save access for available platforms by clicking on the save button under each platform"
         },
         "3": {
           "title": "Synchronization",
