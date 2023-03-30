@@ -6,6 +6,9 @@ import {
   FiMessageSquare,
   FiLink2,
   FiExternalLink,
+  FiTwitter,
+  FiFacebook,
+  FiYoutube,
 } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
@@ -68,12 +71,12 @@ export const Footer = () => {
         >
           <FiMail size={20} /> &nbsp; developers@smswithoutborders.com
         </a>
-      </div>
-
-      <div className="flex flex-col p-4 gap-4">
         <p className="inline-flex items-center hover:focus:text-blue-200">
           <FiMessageSquare size={20} /> &nbsp; IRC: freenode/#afkanerd
         </p>
+      </div>
+
+      <div className="flex flex-col p-4 gap-4">
         <a
           className="inline-flex items-center hover:focus:text-blue-200"
           href="https://github.com/smswithoutborders"
@@ -81,6 +84,33 @@ export const Footer = () => {
           rel="noreferrer"
         >
           <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
+        </a>
+
+        <a
+          className="inline-flex items-center hover:focus:text-blue-200"
+          href="https://www.facebook.com/SMSWithoutBorders"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FiFacebook size={20} /> &nbsp; @SMSWithoutBorders
+        </a>
+
+        <a
+          className="inline-flex items-center hover:focus:text-blue-200"
+          href="https://twitter.com/SwobOutreach"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FiTwitter size={20} /> &nbsp; @SwobOutreach
+        </a>
+
+        <a
+          className="inline-flex items-center hover:focus:text-blue-200"
+          href="https://www.youtube.com/@smswithoutborders9162"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FiYoutube size={20} /> &nbsp; @smswithoutborders9162
         </a>
       </div>
       <div className="mb-40 w-56">

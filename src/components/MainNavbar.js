@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import logo from "images/logo-icon-light.png";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiTwitter, FiFacebook } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
@@ -40,6 +40,12 @@ export const MainNavbar = () => {
             key: "beta-testing",
             path: "beta-testing",
             label: t("menu.beta-testing"),
+          },
+          {
+            external: true,
+            key: "blog",
+            path: process.env.REACT_APP_BLOG_URL,
+            label: t("menu.blog"),
           },
         ]}
       />
@@ -81,7 +87,21 @@ export const MainNavbar = () => {
         target="_blank"
       >
         <GoMarkGithub size={20} />
-        <span>GitHub</span>
+      </ExternalLink>
+      <ExternalLink
+        key="Twitter"
+        href="https://twitter.com/SwobOutreach"
+        target="_blank"
+      >
+        <FiTwitter size={20} />
+      </ExternalLink>
+
+      <ExternalLink
+        key="Facebook"
+        href="https://www.facebook.com/SMSWithoutBorders"
+        target="_blank"
+      >
+        <FiFacebook size={20} />
       </ExternalLink>
       <NavLink open={open} key="login" to="/login">
         {t("menu.login")}
@@ -156,6 +176,27 @@ export const MainNavbar = () => {
         <GoMarkGithub size={20} />
         <span>GitHub</span>
       </ExternalLink>
+
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="Twitter"
+        href="https://twitter.com/SwobOutreach"
+        target="_blank"
+      >
+        <FiTwitter size={20} />
+        <span>Twitter</span>
+      </ExternalLink>
+
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="Facebook"
+        href="https://www.facebook.com/SMSWithoutBorders"
+        target="_blank"
+      >
+        <FiFacebook size={20} />
+        <span>Facebook</span>
+      </ExternalLink>
+
       <MobileNavLink
         open={open}
         key="login"

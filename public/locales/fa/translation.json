@@ -112,7 +112,10 @@
     "details": "استفاده از SWOB به آسانی احراز هویت اعتبار شماست",
     "email": "پست الکترونیک",
     "website": "سایت اینترنتی",
-    "IRC": "IRC"
+    "IRC": "IRC",
+    "facebook": "فیس بوک",
+    "twitter": "توییتر",
+    "youtube": "یوتیوب"
   },
   "downloads": {
     "heading": "دانلودها",
