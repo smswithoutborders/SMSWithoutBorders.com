@@ -112,7 +112,10 @@
     "details": "Using SWOB is as easy as authenticating your credentials",
     "email": "Email",
     "website": "Website",
-    "IRC": "IRC"
+    "IRC": "IRC",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "youtube": "YouTube"
   },
   "downloads": {
     "heading": "Downloads",

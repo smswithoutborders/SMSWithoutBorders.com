@@ -112,7 +112,10 @@
     "details": "L'utilisation de SWOB est aussi simple que l'authentification de vos informations d'identification.",
     "email": "Email",
     "website": "Site web",
-    "IRC": "IRC"
+    "IRC": "IRC",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "youtube": "YouTube"
   },
   "downloads": {
     "heading": "Téléchargements",
