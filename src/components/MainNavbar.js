@@ -41,6 +41,12 @@ export const MainNavbar = () => {
             path: "beta-testing",
             label: t("menu.beta-testing"),
           },
+          {
+            external: true,
+            key: "blog",
+            path: process.env.REACT_APP_BLOG_URL,
+            label: t("menu.blog"),
+          },
         ]}
       />
       <ExternalLink
