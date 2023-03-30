@@ -146,6 +146,14 @@ export const MainNavbar = () => {
       </MobileNavLink>
       <ExternalLink
         onClick={() => toggleMenu()}
+        key="blog"
+        href={process.env.REACT_APP_BLOG_URL}
+        target="_blank"
+      >
+        {t("menu.blog")}
+      </ExternalLink>
+      <ExternalLink
+        onClick={() => toggleMenu()}
         key="developers"
         href="https://developers.smswithoutborders.com"
         target="_blank"
