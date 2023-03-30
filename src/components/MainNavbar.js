@@ -22,9 +22,37 @@ export const MainNavbar = () => {
   }
 
   const DesktopLinks = () => (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-4">
       <NavLink key="/" to="/" end>
         {t("menu.home")}
+      </NavLink>
+
+      <ExternalLink
+        style={{ marginLeft: 10 }}
+        onClick={() => toggleMenu()}
+        key="blog"
+        href={process.env.REACT_APP_BLOG_URL}
+        target="_blank"
+      >
+        {t("menu.blog")}
+      </ExternalLink>
+
+      <ExternalLink
+        style={{ marginLeft: 10 }}
+        onClick={() => toggleMenu()}
+        key="tutorials"
+        href={process.env.REACT_APP_TUTORIAL_URL}
+        target="_blank"
+      >
+        {t("menu.tutorials")}
+      </ExternalLink>
+
+      <NavLink key="privacy-policy" to="/privacy-policy">
+        {t("menu.privacy")}
+      </NavLink>
+
+      <NavLink key="contact-us" to="/contact-us">
+        {t("menu.contact")}
       </NavLink>
 
       <DropDownLink
@@ -41,40 +69,8 @@ export const MainNavbar = () => {
             path: "beta-testing",
             label: t("menu.beta-testing"),
           },
-          {
-            external: true,
-            key: "blog",
-            path: process.env.REACT_APP_BLOG_URL,
-            label: t("menu.blog"),
-          },
         ]}
       />
-      <ExternalLink
-        onClick={() => toggleMenu()}
-        key="developers"
-        href="https://developers.smswithoutborders.com"
-        target="_blank"
-      >
-        {t("menu.developers")}
-      </ExternalLink>
-
-      <ExternalLink
-        style={{ marginLeft: 7 }}
-        onClick={() => toggleMenu()}
-        key="tutorials"
-        href={process.env.REACT_APP_TUTORIAL_URL}
-        target="_blank"
-      >
-        {t("menu.tutorials")}
-      </ExternalLink>
-
-      <NavLink key="privacy-policy" to="/privacy-policy">
-        {t("menu.privacy")}
-      </NavLink>
-
-      <NavLink key="contact-us" to="/contact-us">
-        {t("menu.contact")}
-      </NavLink>
     </div>
   );
 
@@ -152,14 +148,7 @@ export const MainNavbar = () => {
       >
         {t("menu.blog")}
       </ExternalLink>
-      <ExternalLink
-        onClick={() => toggleMenu()}
-        key="developers"
-        href="https://developers.smswithoutborders.com"
-        target="_blank"
-      >
-        {t("menu.developers")}
-      </ExternalLink>
+
       <MobileNavLink
         onClick={() => toggleMenu()}
         key="privacy-policy"
