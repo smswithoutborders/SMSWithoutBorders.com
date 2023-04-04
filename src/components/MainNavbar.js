@@ -31,7 +31,7 @@ export const MainNavbar = () => {
         style={{ marginLeft: 10 }}
         onClick={() => toggleMenu()}
         key="blog"
-        href={process.env.REACT_APP_BLOG_URL}
+        href="https://afkanerd.github.io/"
         target="_blank"
       >
         {t("menu.blog")}
@@ -143,7 +143,7 @@ export const MainNavbar = () => {
       <ExternalLink
         onClick={() => toggleMenu()}
         key="blog"
-        href={process.env.REACT_APP_BLOG_URL}
+        href="https://afkanerd.github.io/"
         target="_blank"
       >
         {t("menu.blog")}
