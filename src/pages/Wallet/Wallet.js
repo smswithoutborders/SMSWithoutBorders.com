@@ -258,11 +258,22 @@ const Wallet = () => {
   return (
     <PageAnimationWrapper>
       <div className="max-w-screen-xl min-h-screen p-6 mx-auto prose text-gray-900 md:my-10 onboarding">
+        {/* show buttons for mobile devices only */}
+        <div className="md:hidden">
+          <Button
+            className="w-full mb-8 mt-8 mobile-tutorial-button"
+            onClick={() => setOnboarding(true)}
+          >
+            {t("labels.tutorial")}
+          </Button>
+        </div>
+        {/*  */}
         <div className="flex justify-between mb-8">
           <h1 className="inline-flex items-center gap-4 mb-0 text-3xl font-bold">
             <BsShieldLock size={42} />
             <span>{t("wallet.heading")}</span>
           </h1>
+
           <div className="flex items-center gap-2">
             <Button
               outline
@@ -281,6 +292,7 @@ const Wallet = () => {
           </div>
         </div>
         <p className="my-0 text-lg">{t("wallet.details")}</p>
+        <p className="my-0 text-lg">{t("wallet.instructions1")}</p>
 
         {/* saved and unsaved platforms  */}
         <div className="grid grid-cols-2 gap-4 lg:gap-8">
@@ -291,6 +303,13 @@ const Wallet = () => {
               callbackFn={handleTokenStorage}
             />
           </div>
+          <div className="col-span-full ">
+            <p className="my-0 text-lg">{t("wallet.instructions2")}</p>
+          </div>
+          <div className="col-span-full ">
+            <b className="my-0 text-lg">{t("wallet.note")}</b>
+          </div>
+
           <div className="col-span-full md:col-span-1">
             <h2>{t("wallet.section-2.heading")}</h2>
             <PlatformList
@@ -303,13 +322,6 @@ const Wallet = () => {
 
         {/* show buttons for mobile devices only */}
         <div className="md:hidden">
-          <Button
-            outline
-            className="w-full mt-8 mobile-tutorial-button"
-            onClick={() => setOnboarding(true)}
-          >
-            {t("labels.tutorial")}
-          </Button>
           <LinkButton
             to="/dashboard/sync"
             className="mt-2 mb-8 mobile-sync-button"
@@ -318,6 +330,7 @@ const Wallet = () => {
             <span className="ml-1">{t("labels.sync")}</span>
           </LinkButton>
         </div>
+        {/*  */}
       </div>
 
       {/* revoke dialog */}
