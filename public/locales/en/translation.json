@@ -222,7 +222,10 @@
   "wallet": {
     "page-title": "Save Accounts",
     "heading": "Save Accounts",
-    "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline",
+    "details": "Securely Link your accounts on platforms we support using OAuth2 technology so that you can continue to communicate on them when offline.",
+    "instructions1": "To get started, Pick a platform you want to communicate with offline, and click the save button.",
+    "instructions2": "Now you have successfully saved your tokens, click the sync button below to synchronize with the app.",
+    "note":"Note: Everytime you save a new token or revoke a token you need to sync with your app.",
     "labels": {
       "description": "Description",
       "how-to-save": "How to save access"

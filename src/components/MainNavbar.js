@@ -142,7 +142,7 @@ export const MainNavbar = () => {
       </MobileNavLink>
       <ExternalLink
         onClick={() => toggleMenu()}
-        key="blog"
+        //key="blog"
         href="https://afkanerd.github.io/"
         target="_blank"
       >
