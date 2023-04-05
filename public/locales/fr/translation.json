@@ -223,6 +223,9 @@
     "page-title": "Enregistrer les comptes",
     "heading": "Enregistrer les comptes",
     "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
+    "instructions1": "Pour commencer, choisissez une plate-forme avec laquelle vous souhaitez communiquer hors ligne, puis cliquez sur le bouton Enregistrer.",
+    "instructions2": "Maintenant que vous avez enregistré avec succès vos jetons, cliquez sur le bouton de synchronisation ci-dessous pour synchroniser avec l'application.",
+    "note":"Remarque : Chaque fois que vous enregistrez un nouveau jeton ou révoquez un jeton, vous devez vous synchroniser avec votre application.",
     "labels": {
       "description": "Description",
       "how-to-save": "Comment sauvegarder l'accès"
