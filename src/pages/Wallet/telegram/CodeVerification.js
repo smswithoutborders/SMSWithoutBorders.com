@@ -44,9 +44,9 @@ const CodeVerification = () => {
       const response = await verifyTokenStorage(data).unwrap();
       switch (response.body) {
         case 202:
-          toast.success(t("telegram.code-verification.alerts.no-account"));
+          toast.success(t("telegram.code-verification.alerts.two-steps-verification-enabled"));
           // send user to telegram registration
-          navigate("/dashboard/wallet/telegram/register", {
+          navigate("/dashboard/wallet/telegram/two_steps_verification", {
             state: { phone_number: location.state.phone_number },
           });
           break;
