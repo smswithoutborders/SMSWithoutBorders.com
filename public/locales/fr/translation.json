@@ -276,25 +276,20 @@
     "code-verification": {
       "page-title": "Vérification du code du Telegram",
       "alerts": {
-        "no-account": "Vous n'avez pas de compte Telegram, veuillez remplir le formulaire pour en créer un."
+        "two-steps-verification-enabled": "La vérification en deux étapes est activée sur votre compte Telegram et un mot de passe est requis, veuillez entrer votre mot de passe de vérification en deux étapes Telegram"
       }
     },
-    "registration": {
-      "page-title": "Enregistrement sur Telegram",
-      "heading": "Enregistrement sur Telegram",
-      "details": "Créer un nouveau compte Telegram",
+    "two-steps-verification": {
+      "page-title": "Vérification en deux étapes du télégramme",
+      "heading": "Vérification en deux étapes du télégramme",
+      "paragraph-1": "La vérification en deux étapes est activée sur votre compte Telegram. Veuillez entrer votre mot de passe de vérification en deux étapes de télégramme dans le champ fourni ci-dessous.",
+      "paragraph-2":"Veuillez noter que pour votre confidentialité et votre sécurité, votre mot de passe ne sera ni lu ni stocké par SMSSans Frontières. De plus, nous vous recommandons fortement de changer régulièrement votre mot de passe pour améliorer encore la sécurité de votre compte.",
       "form": {
-        "first-name": {
-          "label": "Prénom",
-          "placeholder": "Jane",
-          "validation-errors": "Veuillez entrer votre prénom"
+        "password": {
+          "label": "Mot de passe de vérification en deux étapes du télégramme",
+          "validation-error": "Veuillez entrer votre mot de passe de vérification en deux étapes de télégramme"
         },
-        "last-name": {
-          "label": "Nom de famille",
-          "placeholder": "Doe",
-          "validation-errors": "Veuillez entrer votre nom de famille"
-        },
-        "cta-button-text": "Créer un compte"
+        "cta-button-text": "Vérifier"
       }
     }
   },
