@@ -276,25 +276,20 @@
     "code-verification": {
       "page-title": "Telegram Code Verification",
       "alerts": {
-        "no-account": "You do not have a telegram account, please fill the form to create one"
+        "two-steps-verification-enabled": "Two-steps verification is enabled on your telegram account and a password is required, please enter your telegram two-steps verification password"
       }
     },
-    "registration": {
-      "page-title": "Telegram Registration",
-      "heading": "Telegram Registration",
-      "details": "Create a new telegram account",
+    "two-steps-verification": {
+      "page-title": "Telegram Two-Steps Verification",
+      "heading": "Telegram Two-Steps Verification",
+      "paragraph-1": "Two-steps verification is enabled on your telegram account. Please enter your telegram two-Steps verification password in the field provided below.",
+      "paragraph-2":"Please note that for your privacy and security, your password will not be read or stored by SMSWithoutBorders. Additionally, we highly recommend that you change your password regularly to further enhance the security of your account.",
       "form": {
-        "first-name": {
-          "label": "First Name",
-          "placeholder": "Jane",
-          "validation-errors": "Please enter your first name"
+        "password": {
+          "label": "Telegram Two-Steps Verification Password",
+          "validation-error": "Please enter your telegram two-Steps verification password"
         },
-        "last-name": {
-          "label": "Last Name",
-          "placeholder": "Doe",
-          "validation-errors": "Please enter your last name"
-        },
-        "cta-button-text": "Create account"
+        "cta-button-text": "Verify"
       }
     }
   },

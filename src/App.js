@@ -22,8 +22,8 @@ const Downloads = lazy(() => import("pages/Downloads"));
 const AccountDeletion = lazy(() => import("pages/settings/AccountDeletion"));
 const PasswordChange = lazy(() => import("pages/settings/PasswordChange"));
 const DashboardLayout = lazy(() => import("pages/DashboardLayout"));
-const TelegramRegistration = lazy(() =>
-  import("pages/Wallet/telegram/TelegramRegistration")
+const TelegramTwoStepsVerification = lazy(() =>
+  import("pages/Wallet/telegram/TelegramTwoStepsVerification")
 );
 const SignupCodeVerification = lazy(() =>
   import("pages/signup/CodeVerification")
@@ -134,10 +134,10 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="register"
+                  path="two_steps_verification"
                   element={
                     <VerificationGuard required={["phone_number"]}>
-                      <TelegramRegistration />
+                      <TelegramTwoStepsVerification />
                     </VerificationGuard>
                   }
                 />

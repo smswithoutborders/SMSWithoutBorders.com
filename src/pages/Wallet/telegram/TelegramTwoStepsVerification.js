@@ -8,34 +8,31 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelector } from "features";
 import { useTranslation } from "react-i18next";
-import { useCreateExternalAccountMutation } from "services";
+import { useTwoStepsVerificationMutation } from "services";
 import {
   Loader,
   Label,
-  Input,
   Button,
   FormGroup,
   PageAnimationWrapper,
+  PasswordInput,
 } from "components";
 import { useTitle } from "hooks";
 
-const TelegramRegistration = () => {
+const TelegramTwoStepsVerification = () => {
   const { t } = useTranslation();
-  useTitle(t("telegram.registration.page-title"));
+  useTitle(t("telegram.two-steps-verification.page-title"));
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useSelector(authSelector);
-  const [createExternalAccount, { isLoading, isSuccess }] =
-    useCreateExternalAccountMutation();
+  const [twoStepsVerification, { isLoading, isSuccess }] =
+    useTwoStepsVerificationMutation();
 
   // form schema
   const schema = yup.object().shape({
-    first_name: yup
+    password: yup
       .string()
-      .required(t("telegram.registration.form.first-name.validation-error")),
-    last_name: yup
-      .string()
-      .required(t("telegram.registration.form.last-name.validation-error")),
+      .required(t("telegram.two-steps-verification.form.password.validation-error")),
   });
   const {
     register,
@@ -45,19 +42,18 @@ const TelegramRegistration = () => {
     resolver: yupResolver(schema),
   });
 
-  async function handleAccountCreation(data) {
+  async function handleTwoStepsVerificationValidation(data) {
     // build request data
     let request = {
       uid: auth.uid,
       platform: "telegram",
       protocol: "twofactor",
-      first_name: data.first_name,
-      last_name: data.last_name,
+      password: data.password,
       phone_number: location.state.phone_number,
     };
 
     try {
-      await createExternalAccount(request).unwrap();
+      await twoStepsVerification(request).unwrap();
       toast.success(t("wallet.alerts.platform-stored"));
       // navigate to wallet page
       navigate("/dashboard/wallet", { replace: true });
@@ -84,50 +80,32 @@ const TelegramRegistration = () => {
             className="w-12 h-12 my-0 mr-3"
           />
           <h1 className="text-2xl font-bold md:text-3xl">
-            {t("telegram.registration.heading")}
+            {t("telegram.two-steps-verification.heading")}
           </h1>
         </div>
-        <p className="text-center">{t("telegram.registration.details")}</p>
+        <p className="text-center">{t("telegram.two-steps-verification.paragraph-1")}</p>
+        <br/>
+        <p className="text-center">{t("telegram.two-steps-verification.paragraph-2")}</p>
         <form
           className="max-w-md mx-auto mt-12"
-          onSubmit={handleSubmit(handleAccountCreation)}
+          onSubmit={handleSubmit(handleTwoStepsVerificationValidation)}
         >
           <FormGroup>
-            <Label htmlFor="first_name">
-              {t("telegram.registration.form.first-name.label")}
+            <Label htmlFor="password">
+              {t("telegram.two-steps-verification.form.password.label")}
             </Label>
-            <Input
-              type="text"
-              id="first_name"
-              name="first_name"
-              placeholder={t(
-                "telegram.registration.form.first-name.placeholder"
-              )}
-              invalid={errors.first_name ? true : false}
-              invalidText={errors.first_name?.message}
-              {...register("first_name")}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label htmlFor="last_name">
-              {t("telegram.registration.form.last-name.label")}
-            </Label>
-            <Input
-              type="text"
-              id="last_name"
-              name="last_name"
-              placeholder={t(
-                "telegram.registration.form.last-name.placeholder"
-              )}
-              invalid={errors.last_name ? true : false}
-              invalidText={errors.last_name?.message}
-              {...register("last_name")}
-            />
+            <PasswordInput
+                id="password"
+                name="password"
+                showStrength={false}
+                invalid={errors.password ? true : false}
+                invalidText={errors.password?.message}
+                {...register("password")}
+              />
           </FormGroup>
 
           <Button className="w-full my-4">
-            {t("telegram.registration.form.cta-button-text")}
+            {t("telegram.two-steps-verification.form.cta-button-text")}
           </Button>
         </form>
       </div>
@@ -135,4 +113,4 @@ const TelegramRegistration = () => {
   );
 };
 
-export default TelegramRegistration;
+export default TelegramTwoStepsVerification;
