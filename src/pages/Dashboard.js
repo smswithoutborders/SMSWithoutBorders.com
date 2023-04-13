@@ -40,13 +40,13 @@ const Dashboard = () => {
 
   return (
     <PageAnimationWrapper>
-      <div className="p-8 mx-auto my-7 prose text-center">
+      <div className="p-8 mx-auto my-5 prose text-center">
         <BsPersonCircle size={96} className="inline-block mb-8" />
         <h1 className="text-3xl">
           <span>{t("dashboard.greeting-1")}, </span>
           <span className="font-medium">{t("dashboard.greeting-2")}</span>
         </h1>
-        <h2>{t("dashboard.start")}</h2>
+        <h3>{t("dashboard.start")}</h3>
         <VerticalLinearStepper />
         <div className="my-8">
           <h3>{t("dashboard.join-date")}</h3>

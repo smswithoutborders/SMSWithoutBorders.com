@@ -143,7 +143,7 @@ const Landing = () => {
                 </Link>
               </div>
               <div className="order-8 md:order-7 col-span-full md:col-span-1">
-                <h3 className="text-2xl">
+                <h3 className="text-xl">
                   {t("landing.section-3.steps.4.heading")}
                 </h3>
                 <p>{t("landing.section-3.steps.4.details")}</p>

@@ -11,24 +11,19 @@ import { useTranslation } from "react-i18next";
 
 const steps = [
   {
-    labelKey: "dashboard.label1",
-    descriptionKey: "dashboard.description1",
-    link: "https://example.com/step1",
-  },
-  {
     labelKey: "dashboard.label2",
     descriptionKey: "dashboard.description2",
-    link: "https://example.com/step2",
+    link: "/dashboard/Wallet",
   },
   {
     labelKey: "dashboard.label3",
     descriptionKey: "dashboard.description3",
-    link: "https://example.com/step3",
+    link: "/downloads",
   },
   {
     labelKey: "dashboard.label4",
     descriptionKey: "dashboard.description4",
-    link: "https://example.com/step4",
+    link: "/dashboard/sync",
   },
 ];
 
@@ -58,18 +53,20 @@ export default function VerticalLinearStepper() {
   };
 
   const handleLinkClick = (link) => {
+    const currentUrl = window.location.href;
+    localStorage.setItem("previousUrl", currentUrl); // Store the current URL
     window.location.href = link;
     handleNext();
   };
 
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box sx={{ maxWidth: 400, margin: "auto" }}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.labelKey}>
             <StepLabel
               optional={
-                index === 3 ? (
+                index === 2 ? (
                   <Typography variant="caption">Last step</Typography>
                 ) : null
               }
