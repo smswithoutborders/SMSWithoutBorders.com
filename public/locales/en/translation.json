@@ -476,16 +476,21 @@
       },
       "placeholder": "password",
       "validation-errors": {
-        "min": "Password must be at least 8 characters",
+        "min": "Password must be at least 8 characters long",
         "required": "Password is required",
-        "required-new": "Please enter new password"
+        "required-new": "Please enter new password",
+        "lowercase-letters": "Password must include at least one lowercase letter",
+        "uppercase-letters": "Password must include at least one uppercase letter",
+        "numbers": "Password must include at least one number",
+        "special-characters": "Password must include at least one of the following special characters: !@#$%^&*()_+-=",
+        "no-compromised-password": "Password has previously been compromised in a data breach. Use another password"
       }
     },
     "confirm-password": {
       "label": "Confirm Password",
       "placeholder": "retype password",
       "validation-errors": {
-        "min": "Password must be at least 8 characters",
+        "min": "Password must be at least 8 characters long",
         "required": "Please confirm your password",
         "match": "passwords do not match"
       }
