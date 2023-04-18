@@ -53,7 +53,7 @@
     },
     "section-2": {
       "heading": "How it works",
-      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on telegram without an active internet connection. By using our andriod app, you can send messages securely through a network of SMS gateways to stay connected",
       "paragraph-1": "By setting up your account while you have an internet connection, you can continue to communicate later using SMS when your no longer have internet access",
       "paragraph-2": "Our SMS gateways are freely available. Learn how to set up yours below",
       "tutorial-1": "Learn how to setup your account and app",
@@ -62,7 +62,7 @@
     },
     "section-3": {
       "heading": "Getting Started with SWOB",
-      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on Telegram without an active internet connection. By using our app, you can send messages securely through a network of SMS gateways to stay connected",
+      "details": "With SMSWithoutBorders, you can send emails, tweet and chat on Telegram without an active internet connection. By using our andriod app, you can send messages securely through a network of SMS gateways to stay connected",
       "steps": {
         "1": {
           "heading": "Signup for an account",
@@ -351,6 +351,20 @@
     "greeting-2": "Welcome",
     "join-date": "Join Date",
     "last-login": "Last Login",
+    "start": " Follow these simple steps to get started:",
+    "label1": "Create an account",
+    "label2": "Link platforms",
+    "label3": "Download App",
+    "label4": "Sync",
+    "description1": "Sign up celebration :)",
+    "description2": "Connect your accounts on supported platforms in a safe way using OAuth2 technology. This lets you stay in touch with others on those platforms even when you're not online. On the 'Save Accounts' page, select your desired platform and click save.",
+    "description3": " The app is the only platform through which you can access the SWOB’s features and functions, it is designed to provide a seamless user experience.",
+    "description4": "Finally synchronize with your mobile App by clicking the sync button and start communicating",
+    "continue":"continue",
+    "back":"back",
+    "reset":"reset",
+    "finish":"Finish",
+    "completed":"Congratulations! You have successfully set up your SWOB account 🎉",
     "alerts": {
       "load-error": "Sorry we could not locate your metrics. If error persists, please contact support",
       "idle": {
