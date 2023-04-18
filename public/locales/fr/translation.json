@@ -490,8 +490,13 @@
       "placeholder": "mot de passe",
       "validation-errors": {
         "min": "Le mot de passe doit comporter au moins 8 caractères",
-        "required": "Le mot de passe est requis",
-        "required-new": "Veuillez entrer un nouveau mot de passe"
+        "required": "Mot de passe requis",
+        "required-new": "Veuillez saisir un nouveau mot de passe",
+        "lowercase-letters": "Le mot de passe doit comporter au moins une lettre minuscule",
+        "uppercase-letters": "Le mot de passe doit comporter au moins une lettre majuscule",
+        "numbers": "Le mot de passe doit inclure au moins un numéro",
+        "special-characters": "Le mot de passe doit contenir au moins un des caractères spéciaux suivants : !@#$%^&*()_+-=",
+        "no-compromised-password": "Le mot de passe a déjà été compromis lors d'une violation de données. Utilisez un autre mot de passe"
       }
     },
     "confirm-password": {
