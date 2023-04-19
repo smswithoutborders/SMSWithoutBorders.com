@@ -269,7 +269,7 @@
       "details": "Veuillez indiquer votre numéro de téléphone pour commencer",
       "logo-alt-text": "logo du Telegram",
       "alerts": {
-        "code-sent": "Un code de vérification a été envoyé sur votre Telegram. Vérifiez le code dans votre boîte de réception de sms ou d'email.",
+        "code-sent": "Un code de vérification a été envoyé à votre Telegram. Vérifiez le code dans votre application de Telegram",
         "authorization-error": "Désolé, vous n'êtes pas autorisé à faire cette demande."
       }
     },

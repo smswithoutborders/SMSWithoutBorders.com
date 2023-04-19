@@ -269,25 +269,25 @@
       "details": "Please fill in your phone number to begin",
       "logo-alt-text": "telegram logo",
       "alerts": {
-        "code-sent": "A verification code has been sent to your telegram. Check code in your sms or email inbox",
+        "code-sent": "A verification code has been sent to your Telegram. Check code in your Telegram app",
         "authorization-error": "Sorry, you are not authorized to make this request"
       }
     },
     "code-verification": {
       "page-title": "Telegram Code Verification",
       "alerts": {
-        "two-steps-verification-enabled": "Two-steps verification is enabled on your telegram account and a password is required, please enter your telegram two-steps verification password"
+        "two-steps-verification-enabled": "Two-steps verification is enabled on your Telegram account and a password is required, please enter your Telegram two-steps verification password"
       }
     },
     "two-steps-verification": {
       "page-title": "Telegram Two-Steps Verification",
       "heading": "Telegram Two-Steps Verification",
-      "paragraph-1": "Two-steps verification is enabled on your telegram account. Please enter your telegram two-Steps verification password in the field provided below.",
+      "paragraph-1": "Two-steps verification is enabled on your Telegram account. Please enter your Telegram two-Steps verification password in the field provided below.",
       "paragraph-2":"Please note that for your privacy and security, your password will not be read or stored by SMSWithoutBorders. Additionally, we highly recommend that you change your password regularly to further enhance the security of your account.",
       "form": {
         "password": {
           "label": "Telegram Two-Steps Verification Password",
-          "validation-error": "Please enter your telegram two-Steps verification password"
+          "validation-error": "Please enter your Telegram two-Steps verification password"
         },
         "cta-button-text": "Verify"
       }
@@ -296,7 +296,7 @@
   "code-verification": {
     "page-title": "Verify your account",
     "heading": "Verification",
-    "paragraph-1": "A verification code has been sent to your telegram. Please enter it below. This process confirms the number provided is active and can be used for communication when the time comes.",
+    "paragraph-1": "A verification code has been sent to your Telegram app. Please enter it below. This process confirms the number provided is active and can be used for communication when the time comes.",
     "paragraph-2": "We also require you to provide the code sent to you by SMS as a means of guaranteeing you have the necessary (own) rights to the required phone number. This will help us prevent actors from using non consented phone numbers to create accounts - preventing the owners from further doing so",
     "form": {
       "code": {
