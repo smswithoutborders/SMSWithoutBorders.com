@@ -97,11 +97,10 @@ const TelegramTwoStepsVerification = () => {
           onSubmit={handleSubmit(handleTwoStepsVerificationValidation)}
         >
           <FormGroup>
-            <Label htmlFor="password">
+            <Label htmlFor="password" required>
               {t("telegram.two-steps-verification.form.password.label")}
             </Label>
             <PasswordInput
-              required
               id="password"
               name="password"
               showStrength={false}
