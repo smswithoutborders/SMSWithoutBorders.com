@@ -32,7 +32,9 @@ const TelegramTwoStepsVerification = () => {
   const schema = yup.object().shape({
     password: yup
       .string()
-      .required(t("telegram.two-steps-verification.form.password.validation-error")),
+      .required(
+        t("telegram.two-steps-verification.form.password.validation-error")
+      ),
   });
   const {
     register,
@@ -83,9 +85,13 @@ const TelegramTwoStepsVerification = () => {
             {t("telegram.two-steps-verification.heading")}
           </h1>
         </div>
-        <p className="text-center">{t("telegram.two-steps-verification.paragraph-1")}</p>
-        <br/>
-        <p className="text-center">{t("telegram.two-steps-verification.paragraph-2")}</p>
+        <p className="text-center">
+          {t("telegram.two-steps-verification.paragraph-1")}
+        </p>
+        <br />
+        <p className="text-center">
+          {t("telegram.two-steps-verification.paragraph-2")}
+        </p>
         <form
           className="max-w-md mx-auto mt-12"
           onSubmit={handleSubmit(handleTwoStepsVerificationValidation)}
@@ -95,13 +101,14 @@ const TelegramTwoStepsVerification = () => {
               {t("telegram.two-steps-verification.form.password.label")}
             </Label>
             <PasswordInput
-                id="password"
-                name="password"
-                showStrength={false}
-                invalid={errors.password ? true : false}
-                invalidText={errors.password?.message}
-                {...register("password")}
-              />
+              required
+              id="password"
+              name="password"
+              showStrength={false}
+              invalid={errors.password ? true : false}
+              invalidText={errors.password?.message}
+              {...register("password")}
+            />
           </FormGroup>
 
           <Button className="w-full my-4">
