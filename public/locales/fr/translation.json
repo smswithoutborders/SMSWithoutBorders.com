@@ -222,10 +222,11 @@
   "wallet": {
     "page-title": "Enregistrer les comptes",
     "heading": "Enregistrer les comptes",
-    "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
+    "details": "Une fois que vous avez enregistré vos comptes, vous pouvez commencer à utiliser l'application pour communiquer via eux comme si vous étiez connecté en ligne. Vous pouvez supprimer et enregistrer des comptes à tout moment, mais vous aurez besoin d'une connexion Internet pour le faire.",
     "instructions1": "Pour commencer, choisissez une plate-forme avec laquelle vous souhaitez communiquer hors ligne, puis cliquez sur le bouton Enregistrer.",
-    "instructions2": "Maintenant que vous avez enregistré avec succès vos jetons, cliquez sur le bouton de synchronisation ci-dessous pour synchroniser avec l'application.",
-    "note":"Remarque : Chaque fois que vous enregistrez un nouveau jeton ou révoquez un jeton, vous devez vous synchroniser avec votre application.",
+    "instructions2": "Vos comptes enregistrés peuvent être révoqués à tout moment. Synchronisez ce compte avec l'application pour commencer à communiquer avec eux.",
+    "instructions3":"Notre liste de plates-formes prises en charge vous permet d'enregistrer pour plusieurs plates-formes. La synchronisation avec l'application est nécessaire pour communiquer hors ligne.",
+    "instructions4":"Nous travaillons sur l'inclusion de plus de plates-formes, veuillez vérifier régulièrement la liste mise à jour des plates-formes prises en charge ou consultez également notre blog.",
     "labels": {
       "description": "Description",
       "how-to-save": "Comment sauvegarder l'accès"
