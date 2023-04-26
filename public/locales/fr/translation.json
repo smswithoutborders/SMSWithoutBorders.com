@@ -225,8 +225,8 @@
     "details": "Une fois que vous avez enregistré vos comptes, vous pouvez commencer à utiliser l'application pour communiquer via eux comme si vous étiez connecté en ligne. Vous pouvez supprimer et enregistrer des comptes à tout moment, mais vous aurez besoin d'une connexion Internet pour le faire.",
     "instructions1": "Pour commencer, choisissez une plate-forme avec laquelle vous souhaitez communiquer hors ligne, puis cliquez sur le bouton Enregistrer.",
     "instructions2": "Vos comptes enregistrés peuvent être révoqués à tout moment. Synchronisez ce compte avec l'application pour commencer à communiquer avec eux.",
-    "instructions3":"Notre liste de plates-formes prises en charge vous permet d'enregistrer pour plusieurs plates-formes. La synchronisation avec l'application est nécessaire pour communiquer hors ligne.",
-    "instructions4":"Nous travaillons sur l'inclusion de plus de plates-formes, veuillez vérifier régulièrement la liste mise à jour des plates-formes prises en charge ou consultez également notre blog.",
+    "instructions3": "Notre liste de plates-formes prises en charge vous permet d'enregistrer pour plusieurs plates-formes. La synchronisation avec l'application est nécessaire pour communiquer hors ligne.",
+    "instructions4": "Nous travaillons à l'inclusion d'autres plateformes, veuillez consulter régulièrement notre site pour obtenir une liste mise à jour des plateformes prises en charge ou consultez également notre <a href='https://afkanerd.github.io/' target='_blank' rel='noreferrer'>blog</a>.",
     "labels": {
       "description": "Description",
       "how-to-save": "Comment sauvegarder l'accès"
@@ -284,7 +284,7 @@
       "page-title": "Vérification en deux étapes du télégramme",
       "heading": "Vérification en deux étapes du télégramme",
       "paragraph-1": "La vérification en deux étapes est activée sur votre compte Telegram. Veuillez entrer votre mot de passe de vérification en deux étapes de télégramme dans le champ fourni ci-dessous.",
-      "paragraph-2":"Veuillez noter que pour votre confidentialité et votre sécurité, votre mot de passe ne sera ni lu ni stocké par SMSSans Frontières. De plus, nous vous recommandons fortement de changer régulièrement votre mot de passe pour améliorer encore la sécurité de votre compte.",
+      "paragraph-2": "Veuillez noter que pour votre confidentialité et votre sécurité, votre mot de passe ne sera ni lu ni stocké par SMSSans Frontières. De plus, nous vous recommandons fortement de changer régulièrement votre mot de passe pour améliorer encore la sécurité de votre compte.",
       "form": {
         "password": {
           "label": "Mot de passe de vérification en deux étapes du télégramme",
@@ -360,11 +360,11 @@
     "description2": "Connectez vos comptes sur les plates-formes prises en charge de manière sécurisée à l'aide de la technologie OAuth2. Cela vous permet de rester en contact avec d'autres personnes sur ces plates-formes même lorsque vous n'êtes pas en ligne. Sur la page 'Enregistrer les comptes', sélectionnez la plate-forme souhaitée et cliquez sur Enregistrer.",
     "description3": "L'application est la seule plate-forme à travers laquelle vous pouvez accéder aux fonctionnalités et fonctions du SWOB, elle est conçue pour offrir une expérience utilisateur transparente.",
     "description4": "Synchronisez enfin avec votre application mobile en cliquant sur le bouton de synchronisation et commencez à communiquer",
-    "continue":"continuer",
-    "back":"dos",
-    "reset":"réinitialiser",
-    "finish":"Finir",
-    "completed":"Toutes nos félicitations! Vous avez configuré avec succès votre compte SWOB 🎉",
+    "continue": "continuer",
+    "back": "dos",
+    "reset": "réinitialiser",
+    "finish": "Finir",
+    "completed": "Toutes nos félicitations! Vous avez configuré avec succès votre compte SWOB 🎉",
     "alerts": {
       "load-error": "Désolé, nous n'avons pas pu localiser vos métriques. Si l'erreur persiste, veuillez contacter le support",
       "idle": {

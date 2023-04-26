@@ -225,8 +225,8 @@
     "details": "Once you save your accounts, you can begin using the app to communicate through them as if you are connected online. You can delete and save accounts at any time, however you will need to have an internet connection to do so.",
     "instructions1": "To get started, Pick a platform you want to communicate with offline, and click the save button.",
     "instructions2": "Your saved accounts can be revoked anytime. Sync this account with the app to start communicating with them.",
-    "instructions3":"Our supported platforms list allows you to save for multiple platforms. Syncing with the app is required to communicate offline.",
-    "instructions4":"We are working on including more platforms, please check regularly for the updated list of supported platforms or also check out our blog.",
+    "instructions3": "Our supported platforms list allows you to save for multiple platforms. Syncing with the app is required to communicate offline.",
+    "instructions4": "We are working on including more platforms, please check regularly for the updated list of supported platforms or also check out our <a href='https://afkanerd.github.io/' target='_blank' rel='noreferrer'>blog</a>",
     "labels": {
       "description": "Description",
       "how-to-save": "How to save access"
@@ -284,7 +284,7 @@
       "page-title": "Telegram Two-Steps Verification",
       "heading": "Telegram Two-Steps Verification",
       "paragraph-1": "Two-steps verification is enabled on your Telegram account. Please enter your Telegram two-Steps verification password in the field provided below.",
-      "paragraph-2":"Please note that for your privacy and security, your password will not be read or stored by SMSWithoutBorders. Additionally, we highly recommend that you change your password regularly to further enhance the security of your account.",
+      "paragraph-2": "Please note that for your privacy and security, your password will not be read or stored by SMSWithoutBorders. Additionally, we highly recommend that you change your password regularly to further enhance the security of your account.",
       "form": {
         "password": {
           "label": "Telegram Two-Steps Verification Password",
@@ -361,11 +361,11 @@
     "description2": "In this step we will save your online accounts, which can be used with the SWOB app offline. You can save as many accounts as you may need to use without an internet connection.",
     "description3": " The app allows you send out messages through your saved platforms using SMS messaging on your mobile device. The app encrypts your messages making them secure while transmitting through SMS. In this step we will download the app on your preferred android device.",
     "description4": "Finally, to begin using the app you need to connect it to this account. We will help you through a simple automated process once you click the synchronization button.",
-    "continue":"continue",
-    "back":"back",
-    "reset":"reset",
-    "finish":"Finish",
-    "completed":"Congratulations! You have successfully set up your SWOB account 🎉Please note you will need an internet connection each time you add a new account, so that you can connect it to the app",
+    "continue": "continue",
+    "back": "back",
+    "reset": "reset",
+    "finish": "Finish",
+    "completed": "Congratulations! You have successfully set up your SWOB account 🎉Please note you will need an internet connection each time you add a new account, so that you can connect it to the app",
     "alerts": {
       "load-error": "Sorry we could not locate your metrics. If error persists, please contact support",
       "idle": {
