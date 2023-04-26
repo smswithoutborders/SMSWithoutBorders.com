@@ -298,20 +298,20 @@ const Wallet = () => {
         <div className="grid grid-cols-2 gap-4 lg:gap-8">
           <div className="col-span-full md:col-span-1 onboarding-step-1">
             <h2>{t("wallet.section-1.heading")}</h2>
+            <p className="my-0 text-lg pb-1">{t("wallet.instructions3")}</p>
+            <i className="my-0 text-lg" style={{ fontSize: "15px" }}>
+              {t("wallet.instructions4")}
+            </i>
             <PlatformList
               platforms={unSavedPlatforms}
               callbackFn={handleTokenStorage}
             />
           </div>
-          <div className="col-span-full ">
-            <p className="my-0 text-lg">{t("wallet.instructions2")}</p>
-          </div>
-          <div className="col-span-full ">
-            <b className="my-0 text-lg">{t("wallet.note")}</b>
-          </div>
 
           <div className="col-span-full md:col-span-1">
             <h2>{t("wallet.section-2.heading")}</h2>
+            <p className="my-0 text-lg">{t("wallet.instructions2")}</p>
+
             <PlatformList
               saved
               platforms={savedPlatforms}
