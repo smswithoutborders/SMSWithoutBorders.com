@@ -6,11 +6,7 @@ import { useDeviceDetection } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { useSynchronizeMutation, useGetPlatformsQuery } from "services";
-import {
-  authSelector,
-  syncSelector,
-  updateSync
-} from "features";
+import { authSelector, syncSelector, updateSync } from "features";
 import {
   Alert,
   QRCode,
@@ -114,7 +110,8 @@ const Sync = () => {
     }
   }, [auth, synchronize, t, dispatch]);
 
-  if (isFetching || status === "loading" || status === "scanned" || fetchingURL) return <Loader />;
+  if (isFetching || status === "loading" || status === "scanned" || fetchingURL)
+    return <Loader />;
   // Only allow sync if at least 1 platform is saved
   if (!savedPlatforms?.length) {
     return (
@@ -166,7 +163,7 @@ const Sync = () => {
         {/* only show instructions if disconnected */}
         {status === "disconnected" && (
           <div className="tutorial-instructions">
-            <p>{t("sync.section-2.paragraph-1")}</p>
+            {/* <p>{t("sync.section-2.paragraph-1")}</p> */}
             <p>{t("sync.section-2.paragraph-2")}</p>
           </div>
         )}
@@ -181,7 +178,9 @@ const Sync = () => {
               className="p-2 mx-auto border rounded-lg shadow qr-code"
             />
             <p className="flex justify-center gap-2 mx-auto text-md">
-              <span className="font-bold">{t("sync.section-2.status.heading")} : </span>
+              <span className="font-bold">
+                {t("sync.section-2.status.heading")} :{" "}
+              </span>
               <span className="font-normal">
                 {t(`sync.section-2.status.${status}`)}
               </span>
@@ -206,10 +205,7 @@ const Sync = () => {
         {/* only show actions if disconnected */}
         {status === "disconnected" && (
           <div className="flex items-center justify-center max-w-md gap-2 mx-auto my-8">
-            <Button
-              className="sync-button"
-              onClick={() => handleSync()}
-            >
+            <Button className="sync-button" onClick={() => handleSync()}>
               <IoMdSync size={22} />
               <span>{t("labels.sync")}</span>
             </Button>
@@ -222,7 +218,6 @@ const Sync = () => {
             </Button>
           </div>
         )}
-
       </div>
       <SyncTutorial start={tutorial} stopFunc={setTutorial} />
     </PageAnimationWrapper>

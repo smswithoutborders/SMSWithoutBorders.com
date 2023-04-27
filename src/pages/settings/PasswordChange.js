@@ -36,7 +36,37 @@ const PasswordChange = () => {
     new_password: yup
       .string()
       .min(8, t("forms.password.validation-errors.min"))
-      .required(t("forms.password.validation-errors.required-new")),
+      .required(t("forms.password.validation-errors.required-new"))
+      .test("lowercase-letters", t("forms.password.validation-errors.lowercase-letters"), (value) => {
+        return /[a-z]/.test(value);
+      })
+      .test("uppercase-letters", t("forms.password.validation-errors.uppercase-letters"), (value) => {
+        return /[A-Z]/.test(value);
+      })
+      .test("numbers", t("forms.password.validation-errors.numbers"), (value) => {
+        return /\d/.test(value);
+      })
+      .test("special-characters", t("forms.password.validation-errors.special-characters"), (value) => {
+        return /[!@#$%^&*()_+\-=]/.test(value);
+      })
+      .test("no-compromised-password", t("forms.password.validation-errors.no-compromised-password"), async (value) => {
+        const passwordHash = (await sha1(value)).toLocaleUpperCase();
+        const prefix = passwordHash.substring(0, 5);
+        const suffix = passwordHash.substring(5);
+        const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+        if (!response.ok) {
+          return true;  
+        }
+        const hashList = await response.text();
+        const hashLines = hashList.split("\n");
+        for (const line of hashLines) {
+          const [hashSuffix, ] = line.split(":");
+          if (hashSuffix === suffix) {
+            return false;
+          }
+        }
+        return true;
+      }),
     confirmPassword: yup
       .string()
       .min(8, t("forms.confirm-password.validation-errors.min"))
@@ -46,6 +76,22 @@ const PasswordChange = () => {
         t("forms.confirm-password.validation-errors.match")
       ),
   });
+
+  async function sha1(input) {
+    const buffer = new TextEncoder().encode(input);
+    const hashBuffer = await crypto.subtle.digest("SHA-1", buffer);
+    return arrayBufferToHex(hashBuffer);
+  }
+  
+  function arrayBufferToHex(buffer) {
+    const byteArray = new Uint8Array(buffer);
+    const hexCodes = [...byteArray].map(value => {
+      const hexCode = value.toString(16);
+      const paddedHexCode = hexCode.padStart(2, "0");
+      return paddedHexCode;
+    });
+    return hexCodes.join("");
+  }
 
   const {
     register,

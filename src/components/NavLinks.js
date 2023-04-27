@@ -132,15 +132,8 @@ export const DropDownLink = forwardRef(({ label, links, ...rest }, ref) => {
               ) : (
                 <BaseNavLink
                   key={key}
-                  to={`/${path}`}
-                  className={({ isActive }) =>
-                    clsx(
-                      "flex items-center outline-none appearance-none p-5 gap-2",
-                      isActive
-                        ? "border-b-2 border-blue-800 text-blue-800"
-                        : "border-b-2 border-white text-gray-900"
-                    )
-                  }
+                  to={path}
+                  className="flex items-center gap-2 p-5 text-gray-900 outline-none appearance-none active:text-blue-800 active:border-b-2 active:border-blue-800"
                 >
                   {label}
                 </BaseNavLink>

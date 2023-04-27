@@ -1,5 +1,12 @@
 import React from "react";
-import { FiMail, FiGlobe, FiMessageSquare } from "react-icons/fi";
+import {
+  FiMail,
+  FiGlobe,
+  FiMessageSquare,
+  FiTwitter,
+  FiFacebook,
+  FiYoutube,
+} from "react-icons/fi";
 import { PageAnimationWrapper } from "components";
 import { useTranslation } from "react-i18next";
 
@@ -49,6 +56,60 @@ const Contact = () => {
                   rel="noreferrer"
                 >
                   https://smswithoutborders.com
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 my-8">
+            <div className="text-blue-800 lg:mr-4">
+              <FiFacebook className="w-7 h-7 lg:w-10 lg:h-10" />
+            </div>
+            <div className="">
+              <p className="my-0">{t("contact.facebook")}</p>
+              <h4 className="my-0">
+                <a
+                  href="https://www.facebook.com/SMSWithoutBorders"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  https://www.facebook.com/SMSWithoutBorders
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 my-8">
+            <div className="text-blue-800 lg:mr-4">
+              <FiTwitter className="w-7 h-7 lg:w-10 lg:h-10" />
+            </div>
+            <div className="">
+              <p className="my-0">{t("contact.twitter")}</p>
+              <h4 className="my-0">
+                <a
+                  href="https://twitter.com/SwobOutreach"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  https://twitter.com/SwobOutreach
+                </a>
+              </h4>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 my-8">
+            <div className="text-blue-800 lg:mr-4">
+              <FiYoutube className="w-7 h-7 lg:w-10 lg:h-10" />
+            </div>
+            <div className="">
+              <p className="my-0">{t("contact.youtube")}</p>
+              <h4 className="my-0">
+                <a
+                  href="https://www.youtube.com/@smswithoutborders9162"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  https://www.youtube.com/@smswithoutborders9162
                 </a>
               </h4>
             </div>

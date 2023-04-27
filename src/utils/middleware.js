@@ -49,6 +49,9 @@ export const RequestErrorHandler = (store) => (next) => (action) => {
             case "deleteAccount":
               toast.error(i18n.t("account-deletion.alerts.invalid-password"));
               break;
+            case "twoStepsVerification":
+              toast.error(i18n.t("error-messages.invalid-password"));
+              break;
             default:
               toast.error(i18n.t("error-messages.403"));
               break;

@@ -107,20 +107,18 @@ export const API = createApi({
         },
       }),
     }),
-    createExternalAccount: builder.mutation({
+    twoStepsVerification: builder.mutation({
       query: ({
         uid,
         platform,
         protocol,
-        first_name,
-        last_name,
+        password,
         phone_number,
       }) => ({
-        url: `/users/${uid}/platforms/${platform}/protocols/${protocol}/register`,
+        url: `/users/${uid}/platforms/${platform}/protocols/${protocol}/password`,
         method: "PUT",
         body: {
-          first_name,
-          last_name,
+          password,
           phone_number,
         },
       }),
@@ -213,5 +211,5 @@ export const {
   useRecoverPasswordMutation,
   useValidateOTPCodeMutation,
   useVerifyTokenStorageMutation,
-  useCreateExternalAccountMutation,
+  useTwoStepsVerificationMutation,
 } = API;
