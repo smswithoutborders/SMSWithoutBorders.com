@@ -1,9 +1,11 @@
 import React from "react";
-import phone from "images/phone.png";
+//import encrypted from "images/encrypted.png";
+import phone3 from "images/phone3.png";
+import afkanerdlogo from "images/afkanerdlogo.png";
 import signupIllustration from "images/signup-illustration.svg";
 import accountsIllustration from "images/accounts.svg";
 import mobileIllustration from "images/mobile-app.svg";
-import gatewayIllustration from "images/gateways.svg";
+//import gatewayIllustration from "images/gateways.svg";
 import { PageAnimationWrapper } from "components";
 import { DiOpensource } from "react-icons/di";
 import { IoAccessibility } from "react-icons/io5";
@@ -12,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { FiDownload, FiShield } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
+//import Box from "@mui/material/Box";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const Landing = () => {
   const { t } = useTranslation();
@@ -45,8 +49,8 @@ const Landing = () => {
 
         <div className="col-span-full lg:col-span-1">
           <img
-            src={phone}
-            className="h-[550px] w-[280px] mx-auto lg:-rotate-25 shadow-3xl lg:-mb-16"
+            src={phone3}
+            className="h-[580px] w-[470px] mx-auto lg:-rotate-25 shadow-3xl lg:-mb-16"
             alt={t("landing.section-1.image-caption")}
           />
         </div>
@@ -142,7 +146,7 @@ const Landing = () => {
                   <FiDownload size={20} />
                 </Link>
               </div>
-              <div className="order-8 md:order-7 col-span-full md:col-span-1">
+              {/* <div className="order-8 md:order-7 col-span-full md:col-span-1">
                 <h3 className="text-xl">
                   {t("landing.section-3.steps.4.heading")}
                 </h3>
@@ -165,7 +169,7 @@ const Landing = () => {
                   className="mx-auto"
                   alt={t("landing.section-1.image-caption")}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -215,6 +219,27 @@ const Landing = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Partners */}
+      <div className="w-full pb-5  bg-white items-center">
+        <div className="max-w-screen-xl  mx-auto prose bg-white md:p-5">
+          <h2 className="text-3xl font-black text-center">
+            {t("partners.heading")}
+          </h2>
+
+          <Grid container justifyContent="center">
+            <Grid xs={12} md={4} p={5}>
+              <img src={afkanerdlogo} className="h-[100px] w-[450px] p-5" />
+            </Grid>
+            <Grid xs={12} md={4} p={5}>
+              <img src={afkanerdlogo} className="h-[100px] w-[450px] p-5" />
+            </Grid>
+            <Grid xs={12} md={4} p={5}>
+              <img src={afkanerdlogo} className="h-[100px] w-[450px] p-5" />
+            </Grid>
+          </Grid>
         </div>
       </div>
     </PageAnimationWrapper>

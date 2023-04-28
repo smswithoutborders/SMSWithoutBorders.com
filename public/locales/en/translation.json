@@ -107,6 +107,13 @@
       }
     }
   },
+
+  "partners": {
+    "heading": "Partners",
+    "partner1": "Afkanerd Technologies",
+    "partner2": "Afkanerd Technologies",
+    "partner3": "Afkanerd Technologies"
+  },
   "contact": {
     "heading": "Contact Us",
     "details": "Using SWOB is as easy as authenticating your credentials",
