@@ -1,7 +1,8 @@
 import React from "react";
-//import encrypted from "images/encrypted.png";
 import phone3 from "images/phone3.png";
 import afkanerdlogo from "images/afkanerdlogo.png";
+import internews from "images/Internews.png";
+import OpenTF from "images/OTF.png";
 import signupIllustration from "images/signup-illustration.svg";
 import accountsIllustration from "images/accounts.svg";
 import mobileIllustration from "images/mobile-app.svg";
@@ -14,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { FiDownload, FiShield } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
-//import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 
 const Landing = () => {
@@ -55,7 +55,6 @@ const Landing = () => {
           />
         </div>
       </div>
-
       {/* How it works  */}
       <div className="bg-white">
         <div
@@ -146,35 +145,10 @@ const Landing = () => {
                   <FiDownload size={20} />
                 </Link>
               </div>
-              {/* <div className="order-8 md:order-7 col-span-full md:col-span-1">
-                <h3 className="text-xl">
-                  {t("landing.section-3.steps.4.heading")}
-                </h3>
-                <p>{t("landing.section-3.steps.4.details")}</p>
-                <a
-                  className="inline-flex items-center justify-center flex-1 gap-2 px-8 py-3 text-lg text-blue-800 no-underline border border-blue-800 rounded-lg appearance-none group"
-                  href={process.env.REACT_APP_GATEWAY_TUTORIAL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="group-hover:mr-4">
-                    {t("labels.learn-more")}
-                  </span>
-                  <BsArrowRight size={20} />
-                </a>
-              </div>
-              <div className="order-7 md:order-8 col-span-full md:col-span-1">
-                <img
-                  src={gatewayIllustration}
-                  className="mx-auto"
-                  alt={t("landing.section-1.image-caption")}
-                />
-              </div> */}
             </div>
           </div>
         </div>
       </div>
-
       {/* Why use SWOB */}
       <div className="w-full py-10 bg-white">
         <div className="max-w-screen-xl p-8 mx-auto prose bg-white md:p-16">
@@ -231,13 +205,13 @@ const Landing = () => {
 
           <Grid container justifyContent="center">
             <Grid xs={12} md={4} p={5}>
-              <img src={afkanerdlogo} className="h-[100px] w-[450px] p-5" />
+              <img src={internews} className="h-[130px] w-[450px] p-5" />
             </Grid>
             <Grid xs={12} md={4} p={5}>
-              <img src={afkanerdlogo} className="h-[100px] w-[450px] p-5" />
+              <img src={afkanerdlogo} className="h-[120px] w-[450px] p-5" />
             </Grid>
             <Grid xs={12} md={4} p={5}>
-              <img src={afkanerdlogo} className="h-[100px] w-[450px] p-5" />
+              <img src={OpenTF} className="h-[130px] w-[450px] p-5" />
             </Grid>
           </Grid>
         </div>
