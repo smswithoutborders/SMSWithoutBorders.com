@@ -107,6 +107,11 @@
       }
     }
   },
+
+  "partners": {
+    "heading": "Partenaires"
+  },
+
   "contact": {
     "heading": "Nous contacter",
     "details": "L'utilisation de SWOB est aussi simple que l'authentification de vos informations d'identification.",
