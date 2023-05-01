@@ -205,13 +205,25 @@ const Landing = () => {
 
           <Grid container justifyContent="center">
             <Grid xs={12} md={4} p={5}>
-              <img src={internews} className="h-[130px] w-[450px] p-5" />
+              <img
+                src={internews}
+                className="h-[130px] w-[450px] p-5"
+                alt="Internews"
+              />
             </Grid>
             <Grid xs={12} md={4} p={5}>
-              <img src={afkanerdlogo} className="h-[120px] w-[450px] p-5" />
+              <img
+                src={afkanerdlogo}
+                className="h-[120px] w-[450px] p-5"
+                alt="Afkanerd"
+              />
             </Grid>
             <Grid xs={12} md={4} p={5}>
-              <img src={OpenTF} className="h-[130px] w-[450px] p-5" />
+              <img
+                src={OpenTF}
+                className="h-[130px] w-[450px] p-5"
+                alt="Open Technology Fund"
+              />
             </Grid>
           </Grid>
         </div>
