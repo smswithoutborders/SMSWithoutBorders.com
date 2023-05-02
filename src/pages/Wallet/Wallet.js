@@ -300,7 +300,9 @@ const Wallet = () => {
             <h2>{t("wallet.section-1.heading")}</h2>
             <p className="my-0 text-lg pb-1">{t("wallet.instructions3")}</p>
             <i className="my-0 text-lg" style={{ fontSize: "15px" }}>
-              {t("wallet.instructions4")}
+              <p
+                dangerouslySetInnerHTML={{ __html: t("wallet.instructions4") }}
+              ></p>
             </i>
             <PlatformList
               platforms={unSavedPlatforms}
