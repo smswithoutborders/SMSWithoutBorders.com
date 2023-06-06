@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import logo from "images/logo-icon-light.png";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiTwitter, FiFacebook } from "react-icons/fi";
 import { GoMarkGithub } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
@@ -22,9 +22,37 @@ export const MainNavbar = () => {
   }
 
   const DesktopLinks = () => (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-4">
       <NavLink key="/" to="/" end>
         {t("menu.home")}
+      </NavLink>
+
+      <ExternalLink
+        style={{ marginLeft: 10 }}
+        onClick={() => toggleMenu()}
+        key="blog"
+        href="https://afkanerd.github.io/"
+        target="_blank"
+      >
+        {t("menu.blog")}
+      </ExternalLink>
+
+      <ExternalLink
+        style={{ marginLeft: 10 }}
+        onClick={() => toggleMenu()}
+        key="tutorials"
+        href={process.env.REACT_APP_TUTORIAL_URL}
+        target="_blank"
+      >
+        {t("menu.tutorials")}
+      </ExternalLink>
+
+      <NavLink key="privacy-policy" to="/privacy-policy">
+        {t("menu.privacy")}
+      </NavLink>
+
+      <NavLink key="contact-us" to="/contact-us">
+        {t("menu.contact")}
       </NavLink>
 
       <DropDownLink
@@ -43,32 +71,6 @@ export const MainNavbar = () => {
           },
         ]}
       />
-      <ExternalLink
-        onClick={() => toggleMenu()}
-        key="developers"
-        href="https://developers.smswithoutborders.com"
-        target="_blank"
-      >
-        {t("menu.developers")}
-      </ExternalLink>
-
-      <ExternalLink
-        style={{ marginLeft: 7 }}
-        onClick={() => toggleMenu()}
-        key="tutorials"
-        href={process.env.REACT_APP_TUTORIAL_URL}
-        target="_blank"
-      >
-        {t("menu.tutorials")}
-      </ExternalLink>
-
-      <NavLink key="privacy-policy" to="/privacy-policy">
-        {t("menu.privacy")}
-      </NavLink>
-
-      <NavLink key="contact-us" to="/contact-us">
-        {t("menu.contact")}
-      </NavLink>
     </div>
   );
 
@@ -81,7 +83,21 @@ export const MainNavbar = () => {
         target="_blank"
       >
         <GoMarkGithub size={20} />
-        <span>GitHub</span>
+      </ExternalLink>
+      <ExternalLink
+        key="Twitter"
+        href="https://twitter.com/SwobOutreach"
+        target="_blank"
+      >
+        <FiTwitter size={20} />
+      </ExternalLink>
+
+      <ExternalLink
+        key="Facebook"
+        href="https://www.facebook.com/SMSWithoutBorders"
+        target="_blank"
+      >
+        <FiFacebook size={20} />
       </ExternalLink>
       <NavLink open={open} key="login" to="/login">
         {t("menu.login")}
@@ -126,12 +142,13 @@ export const MainNavbar = () => {
       </MobileNavLink>
       <ExternalLink
         onClick={() => toggleMenu()}
-        key="developers"
-        href="https://developers.smswithoutborders.com"
+        //key="blog"
+        href="https://afkanerd.github.io/"
         target="_blank"
       >
-        {t("menu.developers")}
+        {t("menu.blog")}
       </ExternalLink>
+
       <MobileNavLink
         onClick={() => toggleMenu()}
         key="privacy-policy"
@@ -156,6 +173,27 @@ export const MainNavbar = () => {
         <GoMarkGithub size={20} />
         <span>GitHub</span>
       </ExternalLink>
+
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="Twitter"
+        href="https://twitter.com/SwobOutreach"
+        target="_blank"
+      >
+        <FiTwitter size={20} />
+        <span>Twitter</span>
+      </ExternalLink>
+
+      <ExternalLink
+        onClick={() => toggleMenu()}
+        key="Facebook"
+        href="https://www.facebook.com/SMSWithoutBorders"
+        target="_blank"
+      >
+        <FiFacebook size={20} />
+        <span>Facebook</span>
+      </ExternalLink>
+
       <MobileNavLink
         open={open}
         key="login"

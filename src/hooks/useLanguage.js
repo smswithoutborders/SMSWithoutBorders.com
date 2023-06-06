@@ -81,8 +81,9 @@ export const useLanguage = () => {
                 >
                   {({ language }) => (
                     <span
-                      className={`block p-5 lg:py-2 ${language ? "text-blue-800" : "text-gray-900"
-                        }`}
+                      className={`block p-5 lg:py-2 ${
+                        language ? "text-blue-800" : "text-gray-900"
+                      }`}
                     >
                       {lang.name}
                     </span>

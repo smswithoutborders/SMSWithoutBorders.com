@@ -107,12 +107,20 @@
       }
     }
   },
+
+  "partners": {
+    "heading": "Partenaires"
+  },
+
   "contact": {
     "heading": "Nous contacter",
     "details": "L'utilisation de SWOB est aussi simple que l'authentification de vos informations d'identification.",
     "email": "Email",
     "website": "Site web",
-    "IRC": "IRC"
+    "IRC": "IRC",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "youtube": "YouTube"
   },
   "downloads": {
     "heading": "Téléchargements",
@@ -219,7 +227,11 @@
   "wallet": {
     "page-title": "Enregistrer les comptes",
     "heading": "Enregistrer les comptes",
-    "details": "Relier de manière sécurisée vos comptes sur les plates-formes que nous prenons en charge à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur celles-ci lorsque vous n'êtes pas connecté.",
+    "details": "Une fois que vous avez enregistré vos comptes, vous pouvez commencer à utiliser l'application pour communiquer via eux comme si vous étiez connecté en ligne. Vous pouvez supprimer et enregistrer des comptes à tout moment, mais vous aurez besoin d'une connexion Internet pour le faire.",
+    "instructions1": "Pour commencer, choisissez une plate-forme avec laquelle vous souhaitez communiquer hors ligne, puis cliquez sur le bouton Enregistrer.",
+    "instructions2": "Vos comptes enregistrés peuvent être révoqués à tout moment. Synchronisez ce compte avec l'application pour commencer à communiquer avec eux.",
+    "instructions3": "Notre liste de plates-formes prises en charge vous permet d'enregistrer pour plusieurs plates-formes. La synchronisation avec l'application est nécessaire pour communiquer hors ligne.",
+    "instructions4": "Nous travaillons à l'inclusion d'autres plateformes, veuillez consulter régulièrement notre site pour obtenir une liste mise à jour des plateformes prises en charge ou consultez également notre <a href='https://afkanerd.github.io/' target='_blank' rel='noreferrer'>blog</a>.",
     "labels": {
       "description": "Description",
       "how-to-save": "Comment sauvegarder l'accès"
@@ -263,39 +275,34 @@
       "details": "Veuillez indiquer votre numéro de téléphone pour commencer",
       "logo-alt-text": "logo du Telegram",
       "alerts": {
-        "code-sent": "Un code de vérification a été envoyé sur votre téléphone. Vérifiez le code dans votre boîte de réception de sms ou d'email.",
+        "code-sent": "Un code de vérification a été envoyé à votre Telegram. Vérifiez le code dans votre application de Telegram",
         "authorization-error": "Désolé, vous n'êtes pas autorisé à faire cette demande."
       }
     },
     "code-verification": {
       "page-title": "Vérification du code du Telegram",
       "alerts": {
-        "no-account": "Vous n'avez pas de compte Telegram, veuillez remplir le formulaire pour en créer un."
+        "two-steps-verification-enabled": "La vérification en deux étapes est activée sur votre compte Telegram et un mot de passe est requis, veuillez entrer votre mot de passe de vérification en deux étapes Telegram"
       }
     },
-    "registration": {
-      "page-title": "Enregistrement sur Telegram",
-      "heading": "Enregistrement sur Telegram",
-      "details": "Créer un nouveau compte Telegram",
+    "two-steps-verification": {
+      "page-title": "Vérification en deux étapes du télégramme",
+      "heading": "Vérification en deux étapes du télégramme",
+      "paragraph-1": "La vérification en deux étapes est activée sur votre compte Telegram. Veuillez entrer votre mot de passe de vérification en deux étapes de télégramme dans le champ fourni ci-dessous.",
+      "paragraph-2": "Veuillez noter que pour votre confidentialité et votre sécurité, votre mot de passe ne sera ni lu ni stocké par SMSSans Frontières. De plus, nous vous recommandons fortement de changer régulièrement votre mot de passe pour améliorer encore la sécurité de votre compte.",
       "form": {
-        "first-name": {
-          "label": "Prénom",
-          "placeholder": "Jane",
-          "validation-errors": "Veuillez entrer votre prénom"
+        "password": {
+          "label": "Mot de passe de vérification en deux étapes du télégramme",
+          "validation-error": "Veuillez entrer votre mot de passe de vérification en deux étapes de télégramme"
         },
-        "last-name": {
-          "label": "Nom de famille",
-          "placeholder": "Doe",
-          "validation-errors": "Veuillez entrer votre nom de famille"
-        },
-        "cta-button-text": "Créer un compte"
+        "cta-button-text": "Vérifier"
       }
     }
   },
   "code-verification": {
     "page-title": "Vérifier votre compte",
     "heading": "Vérification",
-    "paragraph-1": "Un code de vérification a été envoyé sur votre téléphone. Veuillez le saisir ci-dessous. Ce processus confirme que le numéro fourni est actif et peut être utilisé pour communiquer le moment venu.",
+    "paragraph-1": "Un code de vérification a été envoyé sur votre Telegram. Veuillez le saisir ci-dessous. Ce processus confirme que le numéro fourni est actif et peut être utilisé pour communiquer le moment venu.",
     "paragraph-2": "Nous vous demandons également de fournir le code qui vous a été envoyé par SMS afin de garantir que vous disposez des droits (propres) nécessaires sur le numéro de téléphone requis. Cela nous aidera à empêcher les acteurs d'utiliser des numéros de téléphone non consentis pour créer des comptes - empêchant ainsi les propriétaires de continuer à le faire",
     "form": {
       "code": {
@@ -350,6 +357,19 @@
     "greeting-2": "Bienvenue",
     "join-date": "Date d'adhésion",
     "last-login": "Dernière connexion",
+    "start": " Suivez ces étapes simples pour commencer :",
+    "label1": "Créer un compte",
+    "label2": "Plates-formes de liens",
+    "label3": "Télécharger l'application",
+    "label4": "Synchroniser",
+    "description2": "Connectez vos comptes sur les plates-formes prises en charge de manière sécurisée à l'aide de la technologie OAuth2. Cela vous permet de rester en contact avec d'autres personnes sur ces plates-formes même lorsque vous n'êtes pas en ligne. Sur la page 'Enregistrer les comptes', sélectionnez la plate-forme souhaitée et cliquez sur Enregistrer.",
+    "description3": "L'application est la seule plate-forme à travers laquelle vous pouvez accéder aux fonctionnalités et fonctions du SWOB, elle est conçue pour offrir une expérience utilisateur transparente.",
+    "description4": "Synchronisez enfin avec votre application mobile en cliquant sur le bouton de synchronisation et commencez à communiquer",
+    "continue": "continuer",
+    "back": "dos",
+    "reset": "réinitialiser",
+    "finish": "Finir",
+    "completed": "Toutes nos félicitations! Vous avez configuré avec succès votre compte SWOB 🎉",
     "alerts": {
       "load-error": "Désolé, nous n'avons pas pu localiser vos métriques. Si l'erreur persiste, veuillez contacter le support",
       "idle": {
@@ -476,8 +496,13 @@
       "placeholder": "mot de passe",
       "validation-errors": {
         "min": "Le mot de passe doit comporter au moins 8 caractères",
-        "required": "Le mot de passe est requis",
-        "required-new": "Veuillez entrer un nouveau mot de passe"
+        "required": "Mot de passe requis",
+        "required-new": "Veuillez saisir un nouveau mot de passe",
+        "lowercase-letters": "Le mot de passe doit comporter au moins une lettre minuscule",
+        "uppercase-letters": "Le mot de passe doit comporter au moins une lettre majuscule",
+        "numbers": "Le mot de passe doit inclure au moins un numéro",
+        "special-characters": "Le mot de passe doit contenir au moins un des caractères spéciaux suivants : !@#$%^&*()_+-=",
+        "no-compromised-password": "Le mot de passe a déjà été compromis lors d'une violation de données. Utilisez un autre mot de passe"
       }
     },
     "confirm-password": {

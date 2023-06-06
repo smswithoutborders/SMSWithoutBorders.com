@@ -77,7 +77,7 @@ const Login = () => {
       */
       navigate(location.state.path);
     } else if (auth.uid) {
-      navigate("/dashboard");
+      navigate("/dashboard/metrics");
     }
   }, [navigate, auth.uid, location.state]);
 
