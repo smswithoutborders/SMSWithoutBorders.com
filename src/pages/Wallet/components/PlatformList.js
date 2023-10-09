@@ -37,12 +37,14 @@ const PlatformList = ({
                       />
                     ) : (
                       <FiGrid
-                        title={`${platform.name} logo`}
+                        title={`${
+                          platform.name === "twitter" ? "X" : platform.name
+                        } logo`}
                         className="w-8 h-8 my-0"
                       />
                     )}
                     <h3 className="my-0 font-normal capitalize">
-                      {platform.name}
+                      {platform.name === "twitter" ? "X" : platform.name}
                     </h3>
                   </div>
                   <FiChevronDown
@@ -91,12 +93,14 @@ const PlatformList = ({
                       />
                     ) : (
                       <FiGrid
-                        title={`${platform.name} logo`}
+                        title={`${
+                          platform.name === "twitter" ? "X" : platform.name
+                        } logo`}
                         className="w-8 h-8 my-0"
                       />
                     )}
                     <h3 className="my-0 font-normal capitalize">
-                      {platform.name}
+                      {platform.name === "twitter" ? "X" : platform.name}
                     </h3>
                   </div>
                   <FiChevronDown

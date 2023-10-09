@@ -6,11 +6,10 @@ import {
   FiMessageSquare,
   FiLink2,
   FiExternalLink,
-  FiTwitter,
   FiFacebook,
   FiYoutube,
 } from "react-icons/fi";
-import { GoMarkGithub } from "react-icons/go";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "hooks";
 
@@ -83,7 +82,7 @@ export const Footer = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <GoMarkGithub size={20} /> &nbsp; @smswithoutborders
+          <FaGithub size={20} /> &nbsp; @smswithoutborders
         </a>
 
         <a
@@ -101,7 +100,7 @@ export const Footer = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <FiTwitter size={20} /> &nbsp; @SwobOutreach
+          <FaXTwitter size={20} /> &nbsp; @SwobOutreach
         </a>
 
         <a

@@ -70,7 +70,7 @@
         },
         "2": {
           "heading": "Connecter les comptes",
-          "details": "Reliez en toute sécurité vos comptes sur les plateformes que nous prenons en charge, comme Gmail, Twitter et Telegram, à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur ces plateformes lorsque vous êtes hors ligne. Nous ne demandons que le strict minimum de permissions pour que nos services fonctionnent. Vous pouvez en savoir plus dans notre politique de confidentialité"
+          "details": "Reliez en toute sécurité vos comptes sur les plateformes que nous prenons en charge, comme Gmail, X et Telegram, à l'aide de la technologie OAuth2, afin que vous puissiez continuer à communiquer sur ces plateformes lorsque vous êtes hors ligne. Nous ne demandons que le strict minimum de permissions pour que nos services fonctionnent. Vous pouvez en savoir plus dans notre politique de confidentialité"
         },
         "3": {
           "heading": "Synchroniser l'application mobile",
@@ -119,7 +119,7 @@
     "website": "Site web",
     "IRC": "IRC",
     "facebook": "Facebook",
-    "twitter": "Twitter",
+    "twitter": "X",
     "youtube": "YouTube"
   },
   "downloads": {
@@ -156,8 +156,8 @@
       "3": {
         "heading": "Sauvegarder les plateformes",
         "details": {
-          "part-1": "Enregistrer Gmail, Twitter et Telegram pour que vous puissiez utiliser l'application SWOB hors ligne. Cliquez sur chaque plateforme pour voir le bouton de stockage",
-          "part-2": "L'enregistrement de Twitter sur votre téléphone peut vous obliger à double-cliquer sur le bouton d'enregistrement si l'application Twitter est déjà installée",
+          "part-1": "Enregistrer Gmail, X et Telegram pour que vous puissiez utiliser l'application SWOB hors ligne. Cliquez sur chaque plateforme pour voir le bouton de stockage",
+          "part-2": "L'enregistrement de X sur votre téléphone peut vous obliger à double-cliquer sur le bouton d'enregistrement si l'application X est déjà installée",
           "caption": "Attention"
         }
       },
@@ -238,7 +238,7 @@
     },
     "info": {
       "gmail": "Sur la page d'autorisation, sélectionnez l'option d'envoi d'e-mail en votre nom",
-      "twitter": "Si l'application Twitter est déjà installée, veuillez l'ouvrir avant de cliquer sur le bouton de la boutique ci-dessous. L'application ne vous demandera l'autorisation que si elle est en cours d'exécution"
+      "twitter": "Si l'application X est déjà installée, veuillez l'ouvrir avant de cliquer sur le bouton de la boutique ci-dessous. L'application ne vous demandera l'autorisation que si elle est en cours d'exécution"
     },
     "section-1": {
       "heading": "Plateformes disponibles",
@@ -256,7 +256,7 @@
       "cancel-button-text": "annuler"
     },
     "prompt-dialog": {
-      "heading": "Avez-vous l'application Twitter installée ?",
+      "heading": "Avez-vous l'application X installée ?",
       "details": "Veuillez ouvrir l'application, puis revenir à cette page et cliquer sur Continuer",
       "cta-button-text": "continuer"
     },
@@ -306,7 +306,7 @@
     "paragraph-2": "Nous vous demandons également de fournir le code qui vous a été envoyé par SMS afin de garantir que vous disposez des droits (propres) nécessaires sur le numéro de téléphone requis. Cela nous aidera à empêcher les acteurs d'utiliser des numéros de téléphone non consentis pour créer des comptes - empêchant ainsi les propriétaires de continuer à le faire",
     "form": {
       "code": {
-        "placeholder": "Code de vérification SMS"
+        "placeholder": "Le code de vérification"
       }
     },
     "resend-label": "Renvoyer dans",

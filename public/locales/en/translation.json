@@ -70,7 +70,7 @@
         },
         "2": {
           "heading": "Connect Accounts",
-          "details": "Securely Link your accounts on platforms we support like Gmail, Twitter and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
+          "details": "Securely Link your accounts on platforms we support like Gmail, X and telegram using OAuth2 technology so that you can continue to communicate on them when offline. We only request the bare minimum permissions for our services to work. You can learn more in our privacy policy"
         },
         "3": {
           "heading": "Synchronize Mobile App",
@@ -119,7 +119,7 @@
     "website": "Website",
     "IRC": "IRC",
     "facebook": "Facebook",
-    "twitter": "Twitter",
+    "twitter": "X",
     "youtube": "YouTube"
   },
   "downloads": {
@@ -156,8 +156,8 @@
       "3": {
         "heading": "Save platforms",
         "details": {
-          "part-1": "Save Gmail, Twitter and telegram so that you can use the SWOB app offline. Click on each platform to see the save button",
-          "part-2": "Saving Twitter on your phone may require you to click the save button twice if you have the Twitter app already installed",
+          "part-1": "Save Gmail, X and telegram so that you can use the SWOB app offline. Click on each platform to see the save button",
+          "part-2": "Saving X on your phone may require you to click the save button twice if you have the X app already installed",
           "caption": "Note"
         }
       },
@@ -238,7 +238,7 @@
     },
     "info": {
       "gmail": "On the authorization page, select the option to send email on your behalf",
-      "twitter": "If you already have the Twitter app installed, please open it before clicking on the save button below. The app will only prompt you for authorization if it is running"
+      "twitter": "If you already have the X app installed, please open it before clicking on the save button below. The app will only prompt you for authorization if it is running"
     },
     "section-1": {
       "heading": "Available Platforms",
@@ -256,7 +256,7 @@
       "cancel-button-text": "cancel"
     },
     "prompt-dialog": {
-      "heading": "Do you have the Twitter app installed ?",
+      "heading": "Do you have the X app installed ?",
       "details": "Please open the app then return to this page and click continue",
       "cta-button-text": "continue"
     },
@@ -306,7 +306,7 @@
     "paragraph-2": "We also require you to provide the code sent to you by SMS as a means of guaranteeing you have the necessary (own) rights to the required phone number. This will help us prevent actors from using non consented phone numbers to create accounts - preventing the owners from further doing so",
     "form": {
       "code": {
-        "placeholder": "SMS Verification Code"
+        "placeholder": "Verification Code"
       }
     },
     "resend-label": "Resend in",
