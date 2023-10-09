@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from "react";
 import logo from "images/logo-icon-light.png";
-import { FiMenu, FiX, FiTwitter, FiFacebook } from "react-icons/fi";
-import { GoMarkGithub } from "react-icons/go";
+import { FiMenu, FiX, FiFacebook } from "react-icons/fi";
+// import { GoMarkGithub } from "react-icons/go";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
@@ -82,14 +83,14 @@ export const MainNavbar = () => {
         href="https://github.com/orgs/smswithoutborders/"
         target="_blank"
       >
-        <GoMarkGithub size={20} />
+        <FaGithub size={20} />
       </ExternalLink>
       <ExternalLink
         key="Twitter"
         href="https://twitter.com/SwobOutreach"
         target="_blank"
       >
-        <FiTwitter size={20} />
+        <FaXTwitter size={20} />
       </ExternalLink>
 
       <ExternalLink
@@ -170,7 +171,7 @@ export const MainNavbar = () => {
         href="https://github.com/orgs/smswithoutborders/"
         target="_blank"
       >
-        <GoMarkGithub size={20} />
+        <faGithub size={20} />
         <span>GitHub</span>
       </ExternalLink>
 
@@ -180,8 +181,8 @@ export const MainNavbar = () => {
         href="https://twitter.com/SwobOutreach"
         target="_blank"
       >
-        <FiTwitter size={20} />
-        <span>Twitter</span>
+        <FaXTwitter size={20} />
+        <span>X</span>
       </ExternalLink>
 
       <ExternalLink

@@ -1,7 +1,7 @@
 import React from "react";
 import { PageAnimationWrapper } from "components";
 import { useTranslation } from "react-i18next";
-import { GoMarkGithub } from "react-icons/go";
+import { FaGithub } from "react-icons/fa6";
 import PlayStoreLogo from "images/playstore.svg";
 import { FiDownload } from "react-icons/fi";
 
@@ -35,7 +35,7 @@ const Downloads = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <GoMarkGithub size={20} />
+              <FaGithub size={20} />
               <span>{t("labels.download")}</span>
             </a>
           </div>
