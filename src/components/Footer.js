@@ -10,7 +10,6 @@ import {
   FiYoutube,
 } from "react-icons/fi";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
-// import { GoMarkGithub } from "react-icons/go";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "hooks";
 

@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from "react";
 import logo from "images/logo-icon-light.png";
 import { FiMenu, FiX, FiFacebook } from "react-icons/fi";
-// import { GoMarkGithub } from "react-icons/go";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
