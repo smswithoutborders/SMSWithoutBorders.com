@@ -3,10 +3,11 @@ import {
   FiMail,
   FiGlobe,
   FiMessageSquare,
-  FiTwitter,
   FiFacebook,
   FiYoutube,
 } from "react-icons/fi";
+import { FaXTwitter } from "react-icons/fa6";
+
 import { PageAnimationWrapper } from "components";
 import { useTranslation } from "react-i18next";
 
@@ -81,7 +82,7 @@ const Contact = () => {
 
           <div className="flex items-center gap-2 my-8">
             <div className="text-blue-800 lg:mr-4">
-              <FiTwitter className="w-7 h-7 lg:w-10 lg:h-10" />
+              <FaXTwitter className="w-7 h-7 lg:w-10 lg:h-10" />
             </div>
             <div className="">
               <p className="my-0">{t("contact.twitter")}</p>

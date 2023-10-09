@@ -16,6 +16,7 @@ import { FiDownload, FiShield } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
+import { Box } from "@mui/material";
 
 const Landing = () => {
   const { t } = useTranslation();
@@ -48,9 +49,11 @@ const Landing = () => {
         </div>
 
         <div className="col-span-full lg:col-span-1">
-          <img
+          <Box
+            sx={{ height: { md: "580px", xs: "470px" } }}
+            component="img"
             src={phone3}
-            className="h-[580px] w-[470px] mx-auto lg:-rotate-25 shadow-3xl lg:-mb-16"
+            className="  w-[470px] mx-auto lg:-rotate-25 shadow-3xl lg:-mb-16"
             alt={t("landing.section-1.image-caption")}
           />
         </div>
@@ -204,26 +207,57 @@ const Landing = () => {
           </h2>
 
           <Grid container justifyContent="center">
-            <Grid xs={12} md={4} p={5}>
-              <img
-                src={internews}
-                className="h-[130px] w-[450px] p-5"
-                alt="Internews"
-              />
+            <Grid
+              xs={9}
+              md={4}
+              sx={{
+                padding: { xs: 0, md: 5 },
+                mt: { xs: 0, md: 2 },
+                m: { xs: 0 },
+              }}
+            >
+              <a href="https://internews.org/" target="_blank" rel="noreferrer">
+                {" "}
+                <img src={internews} className=" p-5" alt="Internews" />{" "}
+              </a>
             </Grid>
-            <Grid xs={12} md={4} p={5}>
-              <img
-                src={afkanerdlogo}
-                className="h-[120px] w-[450px] p-5"
-                alt="Afkanerd"
-              />
+
+            <Grid
+              xs={9}
+              md={4}
+              sx={{
+                padding: { xs: 0, md: 5 },
+                mt: { xs: 0, md: 0 },
+                m: { xs: 0 },
+              }}
+            >
+              <a
+                href="https://www.opentech.fund/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {" "}
+                <img
+                  src={OpenTF}
+                  className=" p-5"
+                  alt="Open Technology Fund"
+                />{" "}
+              </a>
             </Grid>
-            <Grid xs={12} md={4} p={5}>
-              <img
-                src={OpenTF}
-                className="h-[130px] w-[450px] p-5"
-                alt="Open Technology Fund"
-              />
+
+            <Grid
+              xs={9}
+              md={4}
+              sx={{
+                padding: { xs: 0, md: 5 },
+                mt: { xs: 0, md: 5 },
+                m: { xs: 0 },
+              }}
+            >
+              <a href="https://afkanerd.com/" target="_blank" rel="noreferrer">
+                {" "}
+                <img src={afkanerdlogo} className="p-5" alt="Afkanerd" />{" "}
+              </a>
             </Grid>
           </Grid>
         </div>

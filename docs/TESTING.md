@@ -4,4 +4,4 @@ We build for people. Physically testing each feature to make sure it works is be
 
 ## Storing accounts
 
-We can store Gmail, twitter and telegram tokens currently. Gmail and twitter share the same authorization flow. If an update is made to any one of them then the other(s) need to be tested to make sure everything works as it should.
+We can store Gmail, X and telegram tokens currently. Gmail and X share the same authorization flow. If an update is made to any one of them then the other(s) need to be tested to make sure everything works as it should.

@@ -22,11 +22,11 @@ The signup page url accepts an optional parameter `ari` to identify users who ch
 
 ## Token storage
 
-Authenticated users can access the [wallet page](http://localhost:18000/dashboard/wallet) to save tokens for all supported platforms(Gmail, Twitter and Telegram). Each platform's token can be saved by clicking the save button under its description
+Authenticated users can access the [wallet page](http://localhost:18000/dashboard/wallet) to save tokens for all supported platforms(Gmail, X and Telegram). Each platform's token can be saved by clicking the save button under its description
 
 ![wallet](images/wallet.png)
 
-When saving tokens for Gmail and Twitter, an authorization screen will be displayed prompting you to grant the requested permissions.
+When saving tokens for Gmail and X, an authorization screen will be displayed prompting you to grant the requested permissions.
 
 ![wallet](images/gmail_authorization.png) ![wallet](images/twitter_authorization.png)
 
