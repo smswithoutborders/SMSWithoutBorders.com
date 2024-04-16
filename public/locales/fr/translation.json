@@ -302,7 +302,7 @@
   "code-verification": {
     "page-title": "Vérifier votre compte",
     "heading": "Vérification",
-    "paragraph-1": "Un code de vérification a été envoyé sur votre Telegram. Veuillez le saisir ci-dessous. Ce processus confirme que le numéro fourni est actif et peut être utilisé pour communiquer le moment venu.",
+    "paragraph-1": "Un code de vérification a été envoyé sur votre téléphone (par SMS). Veuillez le saisir ci-dessous. Ce processus confirme que le numéro fourni est actif et peut être utilisé pour la communication le moment venu.",
     "paragraph-2": "Nous vous demandons également de fournir le code qui vous a été envoyé par SMS afin de garantir que vous disposez des droits (propres) nécessaires sur le numéro de téléphone requis. Cela nous aidera à empêcher les acteurs d'utiliser des numéros de téléphone non consentis pour créer des comptes - empêchant ainsi les propriétaires de continuer à le faire",
     "form": {
       "code": {
