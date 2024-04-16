@@ -22,7 +22,7 @@
     "i18next-http-backend": "^1.4.0",
     "intro.js": "^6.0.0",
     "intro.js-react": "^0.7.0",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.31",
     "prop-types": "^15.8.1",
     "qrious": "^4.0.2",
     "react": "^18.2.0",
