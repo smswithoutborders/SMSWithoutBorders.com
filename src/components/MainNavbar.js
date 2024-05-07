@@ -31,7 +31,7 @@ export const MainNavbar = () => {
         style={{ marginLeft: 10 }}
         onClick={() => toggleMenu()}
         key="blog"
-        href="https://afkanerd.github.io/"
+        href="https://blog.smswithoutborders.com/"
         target="_blank"
       >
         {t("menu.blog")}
