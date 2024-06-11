@@ -56,8 +56,10 @@ const DashboardLayout = () => {
     <Fragment>
       <PageAnimationWrapper>
         <DashNavbar />
-        <Outlet />
-        <Footer />
+        <div style={{ paddingTop: "64px" }}> {/* Adjust the top padding as needed */}
+          <Outlet />
+          <Footer />
+        </div>
       </PageAnimationWrapper>
 
       {/* Modal prompt for inactivity */}
