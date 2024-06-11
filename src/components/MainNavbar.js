@@ -8,6 +8,7 @@ import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
 import { useScroll, useLanguage } from "hooks";
 import clsx from "clsx";
+import MyAlert from "./MyAlert";
 
 export const MainNavbar = () => {
   const { t } = useTranslation();
@@ -226,6 +227,7 @@ export const MainNavbar = () => {
 
   return (
     <Fragment>
+      <MyAlert />
       {/* Desktop nav */}
       <nav
         className={clsx(
