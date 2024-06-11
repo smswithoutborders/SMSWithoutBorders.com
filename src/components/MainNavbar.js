@@ -8,6 +8,7 @@ import { NavLink, MobileNavLink, ExternalLink, DropDownLink } from "./NavLinks";
 import { useTranslation } from "react-i18next";
 import { useScroll, useLanguage } from "hooks";
 import clsx from "clsx";
+import MyAlert from "./MyAlert";
 
 export const MainNavbar = () => {
   const { t } = useTranslation();
@@ -31,7 +32,7 @@ export const MainNavbar = () => {
         style={{ marginLeft: 10 }}
         onClick={() => toggleMenu()}
         key="blog"
-        href="https://afkanerd.github.io/"
+        href="https://blog.smswithoutborders.com/"
         target="_blank"
       >
         {t("menu.blog")}
@@ -226,6 +227,7 @@ export const MainNavbar = () => {
 
   return (
     <Fragment>
+      <MyAlert />
       {/* Desktop nav */}
       <nav
         className={clsx(

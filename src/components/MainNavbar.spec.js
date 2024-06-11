@@ -4,7 +4,8 @@ import { MainNavbar } from "./MainNavbar";
 
 describe("MainNavbar component", () => {
   it("Renders MainNavbar", async () => {
-    render(<MainNavbar />);
+    render( 
+    <MainNavbar />);
     expect(screen.getAllByRole("navigation")).toHaveLength(2);
   });
 });
