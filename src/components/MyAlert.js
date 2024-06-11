@@ -32,7 +32,7 @@ const MyAlert = () => {
           fontFamily: "'Roboto', sans-serif",
           fontSize: "1rem",
           fontWeight: 500,
-          marginRight: "8px"
+          marginRight: "18px"
         }}
       >
         We have rebranded! SMSWithoutBorders is now RelaySMS. Visit our new website at{" "}
