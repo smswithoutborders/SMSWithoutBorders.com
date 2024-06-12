@@ -14,41 +14,40 @@ const MyAlert = () => {
       sx={{
         position: "sticky",
         top: 0,
-        background: "linear-gradient(90deg, #ff4081, #f50057)",
-        color: "white",
+        background: "#dbe8e1",
+        color: "#034687",
         padding: "12px 24px",
         textAlign: "center",
         zIndex: 1000,
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "space-between",
+        borderRadius: "8px",
+        border: "2px solid #00478f",
+        maxWidth: "100%",
+        margin: "0 auto",
       }}
     >
-      <Typography 
-        variant="body1" 
-        component="span" 
-        sx={{ 
-          fontFamily: "'Roboto', sans-serif",
+      <Typography
+        variant="body1"
+        component="span"
+        sx={{
           fontSize: "1rem",
           fontWeight: 500,
-          marginRight: "18px"
+          lineHeight: "1.5",
+          marginRight: "12px",
+          flex: "1",
         }}
       >
-        We have rebranded! SMSWithoutBorders is now RelaySMS. Visit our new website at{" "}
-        <Link href="https://relaysms.com" color="inherit" underline="always" target="_blank">
-          relaysms.com
-        </Link>.
+         🎉  🎉  🎉   <strong>  Evolving, not changing!  </strong>   🎉 🎉 🎉  <br />
+        <strong>SMSWithoutBorders </strong> is now <strong>RelaySMS </strong> <Link href="https://blog.smswithoutborders.com/" color="#ff3d33" underline="always" target="_blank">
+          Learn More
+        </Link>
       </Typography>
-      <IconButton 
-        size="small" 
-        onClick={handleClose} 
-        sx={{ 
-          color: "white", 
-          padding: "4px" 
-        }}
-      >
-        <CloseIcon />
+
+      <IconButton size="small" onClick={handleClose}>
+        <CloseIcon sx={{ color: "#090a0e" }} />
       </IconButton>
     </Box>
   ) : null;
