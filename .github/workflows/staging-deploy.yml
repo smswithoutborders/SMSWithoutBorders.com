@@ -1,0 +1,57 @@
+name: Staging Server Build Pipeline
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    name: Deploy to Staging Server
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+    steps:
+      - name: Execute Remote SSH Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            set -e
+
+            echo "============================"
+            echo "Updating repository ..."
+            echo "============================"
+            cd ${{ secrets.ROOT_PATH }}${{ secrets.PROJECT_PATH }}
+            if ! git pull; then
+              echo "❌ Error updating repository!"
+              exit 1
+            fi
+            echo "==============================="
+            echo "✅ Repository update complete"
+            echo "==============================="
+
+            echo "========================="
+            echo "Building project ..."
+            echo "========================="
+            cd ${{ secrets.ROOT_PATH }}
+            if ! ${{ secrets.BUILD_CMD }}; then
+              echo "❌ Error building project!"
+              exit 1
+            fi
+            echo "==========================="
+            echo "✅ Project build complete"
+            echo "==========================="
+
+            echo "============================="
+            echo "Cleaning up staging builds ..."
+            echo "============================="
+            if ! ${{ secrets.CLEANUP_CMD }}; then
+              echo "❌ Error cleaning up builds!"
+              exit 1
+            fi
+            echo "============================="
+            echo "✅ Cleanup complete"
+            echo "============================="
