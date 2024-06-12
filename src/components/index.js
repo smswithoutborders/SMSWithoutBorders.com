@@ -11,3 +11,4 @@ export * from "./Alert";
 export * from "./QRCode";
 export * from "./Announcement";
 export * from "./form";
+export * from "./MyAlert";
